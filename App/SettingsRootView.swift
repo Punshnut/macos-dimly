@@ -254,7 +254,10 @@ struct SettingsRootView: View {
         ]
         let externals = displayManager.displays.filter { $0.isExternal }
         options.append(contentsOf: externals.map { display in
-            DisplayOption(id: .display(id: display.stableIdentity), label: displayName(for: display))
+            DisplayOption(
+                id: .display(id: display.stableIdentity),
+                label: displayOptionLabel(for: display)
+            )
         })
         if case .display(let id) = binding.target,
            options.contains(where: { $0.id == binding.target }) == false {
@@ -362,6 +365,19 @@ struct SettingsRootView: View {
         )
     }
 
+    private func displayOptionLabel(for display: DisplayInfo) -> String {
+        let name = displayName(for: display)
+        let externalIndex = externalIndexMap[display.stableIdentity] ?? 1
+        let internalIndex = internalIndexMap[display.stableIdentity] ?? 1
+        let marker = DisplayLabelResolver.overlayMarker(
+            for: display,
+            externalIndex: externalIndex,
+            internalIndex: internalIndex,
+            internalCount: internalDisplayCount
+        )
+        return String(format: String(localized: "DisplayTypeResolutionFormat"), name, marker)
+    }
+
     private func displayStatus(for display: DisplayInfo) -> String {
         if engine.blackoutManager.activeDisplayIDs.contains(display.stableIdentity) {
             return String(localized: "Blackout")
@@ -379,6 +395,10 @@ struct SettingsRootView: View {
 
     private var internalIndexMap: [String: Int] {
         indexMap(for: displayManager.displays.filter { $0.isBuiltin })
+    }
+
+    private var internalDisplayCount: Int {
+        displayManager.displays.filter { $0.isBuiltin }.count
     }
 
     private func indexMap(for displays: [DisplayInfo]) -> [String: Int] {
