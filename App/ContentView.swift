@@ -1,0 +1,36 @@
+// MARK: - Preview Playground
+// Tiny sample view that keeps Xcode previews alive while the real UI lives elsewhere.
+import SwiftUI
+
+/// Simple placeholder view used by previews to sanity-check the project template.
+struct ContentView: View {
+    /// Tracks how many times the sample button has been tapped.
+    @State private var tapCount = 0
+
+    /// Shows a tiny counter demo so the preview canvas has meaningful content.
+    var body: some View {
+        VStack(spacing: 16) {
+            Text(String(localized: "Welcome to Dimly"))
+                .font(.largeTitle)
+                .bold()
+            Text(String(localized: "This SwiftUI scaffold is ready for your ideas."))
+                .foregroundStyle(.secondary)
+            Button(action: { tapCount += 1 }) {
+                Label(String(localized: "Increase Counter"), systemImage: "plus")
+            }
+            Text(
+                String.localizedStringWithFormat(
+                    String(localized: "Counter: %lld"),
+                    tapCount
+                )
+            )
+                .monospaced()
+        }
+        .frame(minWidth: 360, minHeight: 240)
+        .padding()
+    }
+}
+
+#Preview {
+    ContentView()
+}

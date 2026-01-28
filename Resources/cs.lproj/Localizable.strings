@@ -1,0 +1,221 @@
+/* App Basics */
+"Dimly" = "Dimly";
+"About Dimly" = "O aplikaci Dimly";
+"Settings..." = "Nastavení...";
+"Check for Updates..." = "Zkontrolovat aktualizace...";
+"Quit Dimly" = "Ukončit Dimly";
+"Update could not be verified" = "Aktualizaci se nepodařilo ověřit";
+"Dimly couldn't verify the downloaded update. Please download the latest release directly from GitHub instead." = "Dimly nemohl ověřit staženou aktualizaci. Stáhni prosím nejnovější verzi přímo z GitHubu.";
+"Open GitHub" = "Otevřít GitHub";
+
+/* Intro Window */
+"Welcome to Dimly" = "Vítej v Dimly";
+"Your displays, one click away." = "Tvé displeje na jeden klik.";
+"Dimly lives in the menu bar." = "Dimly sídlí v liště menu.";
+"Look at the top-right of your screen for the display icon." = "Podívej se na ikonu displeje vpravo nahoře.";
+"Got it" = "Rozumím";
+"Menu bar" = "Lišta menu";
+
+/* Menu Bar Overview */
+"DisplayCountFormat" = "%lld displej(ů) připojeno";
+"ExternalCountFormat" = "%lld externí";
+"InternalCountFormat" = "%lld interní";
+"No displays detected" = "Nebyl zjištěn žádný displej";
+"All displays active" = "Všechny displeje aktivní";
+"Ready" = "Připraveno";
+"Blackout On" = "Blackout zapnut";
+
+/* Menu Bar Sections */
+"Quick Actions" = "Rychlé akce";
+"External Displays" = "Externí displeje";
+"Profiles" = "Profily";
+"App" = "Aplikace";
+
+/* Menu Bar Actions */
+"Toggle External Blackout" = "Přepnout externí blackout";
+"Sleep Externals" = "Uspat externí";
+"Wake Externals" = "Probudit externí";
+"Panic: All On" = "Panika: vše zapnout";
+"Show Display Numbers" = "Zobrazit čísla displejů";
+"Restore Display" = "Obnovit displej";
+"Blackout Display" = "Zatemnit displej";
+"Sleep Display" = "Uspat displej";
+"Wake Display" = "Probudit displej";
+"Overlay Only (Never Sleep)" = "Jen překryv (nikdy neuspat)";
+"Rename Display..." = "Přejmenovat displej...";
+"Copy Display ID" = "Kopírovat ID displeje";
+"Save Current Profile" = "Uložit aktuální profil";
+"No profiles yet" = "Zatím žádné profily";
+"Apply Profile" = "Použít profil";
+"Copy Display Report" = "Kopírovat report displeje";
+"Open Diagnostics Log" = "Otevřít diagnostický log";
+
+/* Settings Tabs */
+"General" = "Obecné";
+"Shortcuts" = "Zkratky";
+"Profiles" = "Profily";
+"About" = "O aplikaci";
+
+/* Settings General */
+"Launch at login" = "Spustit při přihlášení";
+"Show menu bar icon" = "Zobrazit ikonu v liště";
+"Show Menu Bar Icon" = "Zobrazit ikonu v liště";
+"Hide Dock icon" = "Skrýt ikonu v Docku";
+"Hide the Dock icon and app switcher entry." = "Skryje ikonu v Docku a položku v přepínači aplikací.";
+"Dimly stays running for hotkeys even when the menu bar icon is hidden." = "Dimly zůstane běžet pro klávesové zkratky i když je ikona skrytá.";
+"Displays" = "Displeje";
+"Fade out on sleep/blackout" = "Při usnutí/blackoutu ztlumit";
+"Fade in on wake/restore" = "Při probuzení/obnovení zesílit";
+"Show display numbers on screens" = "Zobrazit čísla displejů";
+"No active displays detected." = "Žádné aktivní displeje.";
+"Show introduction again" = "Zobrazit úvod znovu";
+
+/* Settings Displays */
+"Internal" = "Interní";
+"External" = "Externí";
+"DisplayTypeResolutionFormat" = "%@ • %@";
+"RefreshRateFormat" = "Obnovovací frekvence: %.0f Hz";
+"DisplayIDFormat" = "ID: %@";
+"DisplaySerialFormat" = "Sériové číslo: %@";
+"DDCStatusFormat" = "DDC: %@";
+"Standby" = "Pohotovost";
+"Wake" = "Probudit";
+"Rename" = "Přejmenovat";
+"Rename Display" = "Přejmenovat displej";
+"Give this display a friendly name." = "Dej tomuto displeji přátelské jméno.";
+
+/* Settings Shortcuts */
+"Add Hotkey" = "Přidat zkratku";
+"No hotkeys set yet" = "Zatím nejsou nastaveny žádné zkratky";
+"Add a hotkey to quickly toggle blackout or sleep/wake." = "Přidejte zkratku pro rychlé přepnutí zatemnění nebo uspání/probuzení.";
+"Display" = "Displej";
+"Action" = "Akce";
+"All External Displays" = "Všechny externí displeje";
+"Toggle Blackout" = "Přepnout zatemnění";
+"Toggle Sleep/Wake" = "Přepnout uspání/probuzení";
+"MissingDisplayFormat" = "Chybějící displej (%@)";
+"Global shortcuts" = "Globální zkratky";
+"Panic hotkey (fixed):" = "Paniková klávesa (pevná):";
+"Not set" = "Nenastaveno";
+"Press keys" = "Stiskni klávesy";
+"Change" = "Změnit";
+
+/* Settings Profiles */
+"Save Current Setup" = "Uložit aktuální nastavení";
+"Profile name" = "Název profilu";
+"No profiles yet. Save the current display setup to create one." = "Zatím žádné profily. Ulož aktuální nastavení displejů pro vytvoření.";
+"Apply" = "Použít";
+"Delete" = "Smazat";
+"ProfileDisplayCountFormat" = "%lld displej(ů)";
+"Rename Profile" = "Přejmenovat profil";
+"Enter a new name for this profile." = "Zadej nový název pro tento profil.";
+"Save" = "Uložit";
+"Cancel" = "Zrušit";
+"Auto-apply profile when an external display connects" = "Automaticky použít profil po připojení externího displeje";
+"Profile to apply" = "Profil k použití";
+"LastAppliedFormat" = "Naposledy použito: %@";
+"ProfileDefaultNameFormat" = "Profil %lld";
+
+/* Display Labels */
+"DisplayNameExternalFormat" = "Externí %lld";
+"DisplayNameInternalFormat" = "Interní %lld";
+"DisplayNameUnknownFormat" = "Displej %d";
+"InternalDisplayMarker" = "INT";
+"ScaledSuffix" = " (škálováno)";
+
+/* Display Status */
+"Blackout" = "Blackout";
+"Sleep requested" = "Režim spánku požadován";
+"Visible" = "Viditelné";
+"DisplayRowStatusFormat" = "%@ • DDC %@ • %@";
+
+/* DDC */
+"Supported" = "Podporováno";
+"Not Supported" = "Nepodporováno";
+"Unknown" = "Neznámé";
+"DDC not supported" = "DDC není podporováno";
+"Display service unavailable" = "Služba displeje nedostupná";
+"DDCOpenFailedFormat" = "Otevření DDC selhalo (0x%@)";
+"DDCRequestFailedFormat" = "Požadavek DDC selhal (0x%@)";
+"Internal panel" = "Interní panel";
+
+/* Display Report */
+"DisplayReportTitle" = "Zpráva displeje Dimly";
+"DisplayReportGeneratedFormat" = "Vygenerováno: %@";
+"DisplayReportLineFormat" = "- %@ (%@)";
+"DisplayReportResolutionFormat" = "  Rozlišení: %@";
+"DisplayReportRefreshFormat" = "  Obnovovací frekvence: %@";
+"DisplayReportRefreshRateFormat" = "%.0f Hz";
+"DisplayReportRefreshNA" = "n/a";
+"DisplayReportDDCFormat" = "  DDC: %@  %@";
+"DisplayReportIDFormat" = "  ID: %@";
+"Blackout Off" = "Blackout vypnut";
+
+/* About */
+"VersionFormat" = "Verze %@ (%@)";
+"© 2026 Jan Feuerbacher" = "© 2026 Jan Feuerbacher";
+"Dimly is a native Swift macOS utility for quickly blacking out external displays and managing sleep/wake." = "Dimly je native Swift utilita pro macOS k rychlému zatemnění externích displejů a správě spánku/probuzení.";
+"Dimly is a native Swift macOS utility. This build includes a simple skeleton with menu bar support, login item toggle, and configurable hotkey." = "Dimly je nativní Swift utilita pro macOS. Toto sestavení obsahuje jednoduchý skelet s podporou lišty menu, přepínačem položky přihlášení a konfigurovatelnou klávesovou zkratkou.";
+"Made in my free time - thanks for the support." = "Vytvořeno ve volném čase – díky za podporu.";
+"GitHub Repo" = "Repozitář na GitHubu";
+"Report an Issue" = "Nahlásit problém";
+"Donate" = "Přispět";
+
+/* Preview/Template */
+"This SwiftUI scaffold is ready for your ideas." = "Tento SwiftUI rámec je připraven na tvé nápady.";
+"Increase Counter" = "Zvýšit čítač";
+"Counter: %lld" = "Čítač: %lld";
+"Run Placeholder Action" = "Spustit ukázkovou akci";
+
+/* Hotkey Labels */
+"Cmd" = "Cmd";
+"Option" = "Option";
+"Shift" = "Shift";
+"Ctrl" = "Ctrl";
+"KeyFormat" = "Key %d";
+"Return" = "Return";
+"Tab" = "Tab";
+"Space" = "Space";
+"Forward Delete" = "Forward Delete";
+"Esc" = "Esc";
+"Help" = "Help";
+"Fn" = "Fn";
+"Home" = "Home";
+"End" = "End";
+"Page Up" = "Page Up";
+"Page Down" = "Page Down";
+"Left Arrow" = "Left Arrow";
+"Right Arrow" = "Right Arrow";
+"Up Arrow" = "Up Arrow";
+"Down Arrow" = "Down Arrow";
+"Keypad 0" = "Keypad 0";
+"Keypad 1" = "Keypad 1";
+"Keypad 2" = "Keypad 2";
+"Keypad 3" = "Keypad 3";
+"Keypad 4" = "Keypad 4";
+"Keypad 5" = "Keypad 5";
+"Keypad 6" = "Keypad 6";
+"Keypad 7" = "Keypad 7";
+"Keypad 8" = "Keypad 8";
+"Keypad 9" = "Keypad 9";
+"Keypad ," = "Keypad ,";
+"Keypad ." = "Keypad .";
+"Keypad Enter" = "Keypad Enter";
+"Keypad +" = "Keypad +";
+"Keypad -" = "Keypad -";
+"Keypad *" = "Keypad *";
+"Keypad /" = "Keypad /";
+"Keypad =" = "Keypad =";
+"Volume Up" = "Volume Up";
+"Volume Down" = "Volume Down";
+"Brightness Up" = "Brightness Up";
+"Brightness Down" = "Brightness Down";
+"Mute" = "Mute";
+"Play/Pause" = "Play/Pause";
+"Next Track" = "Next Track";
+"Previous Track" = "Previous Track";
+"Fast Forward" = "Fast Forward";
+"Rewind" = "Rewind";
+"Keyboard Brightness Up" = "Keyboard Brightness Up";
+"Keyboard Brightness Down" = "Keyboard Brightness Down";
+"Keyboard Brightness Toggle" = "Keyboard Brightness Toggle";

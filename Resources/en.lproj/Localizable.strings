@@ -1,0 +1,221 @@
+/* App Basics */
+"Dimly" = "Dimly";
+"About Dimly" = "About Dimly";
+"Settings..." = "Settings...";
+"Check for Updates..." = "Check for Updates...";
+"Quit Dimly" = "Quit Dimly";
+"Update could not be verified" = "Update could not be verified";
+"Dimly couldn't verify the downloaded update. Please download the latest release directly from GitHub instead." = "Dimly couldn't verify the downloaded update. Please download the latest release directly from GitHub instead.";
+"Open GitHub" = "Open GitHub";
+
+/* Intro Window */
+"Welcome to Dimly" = "Welcome to Dimly";
+"Your displays, one click away." = "Your displays, one click away.";
+"Dimly lives in the menu bar." = "Dimly lives in the menu bar.";
+"Look at the top-right of your screen for the display icon." = "Look at the top-right of your screen for the display icon.";
+"Got it" = "Got it";
+"Menu bar" = "Menu bar";
+
+/* Menu Bar Overview */
+"DisplayCountFormat" = "%lld display(s) connected";
+"ExternalCountFormat" = "%lld external";
+"InternalCountFormat" = "%lld internal";
+"No displays detected" = "No displays detected";
+"All displays active" = "All displays active";
+"Ready" = "Ready";
+"Blackout On" = "Blackout On";
+
+/* Menu Bar Sections */
+"Quick Actions" = "Quick Actions";
+"External Displays" = "External Displays";
+"Profiles" = "Profiles";
+"App" = "App";
+
+/* Menu Bar Actions */
+"Toggle External Blackout" = "Toggle External Blackout";
+"Sleep Externals" = "Sleep Externals";
+"Wake Externals" = "Wake Externals";
+"Panic: All On" = "Panic: All On";
+"Show Display Numbers" = "Show Display Numbers";
+"Restore Display" = "Restore Display";
+"Blackout Display" = "Blackout Display";
+"Sleep Display" = "Sleep Display";
+"Wake Display" = "Wake Display";
+"Overlay Only (Never Sleep)" = "Overlay Only (Never Sleep)";
+"Rename Display..." = "Rename Display...";
+"Copy Display ID" = "Copy Display ID";
+"Save Current Profile" = "Save Current Profile";
+"No profiles yet" = "No profiles yet";
+"Apply Profile" = "Apply Profile";
+"Copy Display Report" = "Copy Display Report";
+"Open Diagnostics Log" = "Open Diagnostics Log";
+
+/* Settings Tabs */
+"General" = "General";
+"Shortcuts" = "Shortcuts";
+"Profiles" = "Profiles";
+"About" = "About";
+
+/* Settings General */
+"Launch at login" = "Launch at login";
+"Show menu bar icon" = "Show menu bar icon";
+"Show Menu Bar Icon" = "Show Menu Bar Icon";
+"Hide Dock icon" = "Hide Dock icon";
+"Hide the Dock icon and app switcher entry." = "Hide the Dock icon and app switcher entry.";
+"Dimly stays running for hotkeys even when the menu bar icon is hidden." = "Dimly stays running for hotkeys even when the menu bar icon is hidden.";
+"Displays" = "Displays";
+"Fade out on sleep/blackout" = "Fade out on sleep/blackout";
+"Fade in on wake/restore" = "Fade in on wake/restore";
+"Show display numbers on screens" = "Show display numbers on screens";
+"No active displays detected." = "No active displays detected.";
+"Show introduction again" = "Show introduction again";
+
+/* Settings Displays */
+"Internal" = "Internal";
+"External" = "External";
+"DisplayTypeResolutionFormat" = "%@ • %@";
+"RefreshRateFormat" = "Refresh: %.0f Hz";
+"DisplayIDFormat" = "ID: %@";
+"DisplaySerialFormat" = "Serial: %@";
+"DDCStatusFormat" = "DDC: %@";
+"Standby" = "Standby";
+"Wake" = "Wake";
+"Rename" = "Rename";
+"Rename Display" = "Rename Display";
+"Give this display a friendly name." = "Give this display a friendly name.";
+
+/* Settings Shortcuts */
+"Global shortcuts" = "Global shortcuts";
+"Add Hotkey" = "Add Hotkey";
+"No hotkeys set yet" = "No hotkeys set yet";
+"Add a hotkey to quickly toggle blackout or sleep/wake." = "Add a hotkey to quickly toggle blackout or sleep/wake.";
+"Display" = "Display";
+"Action" = "Action";
+"All External Displays" = "All External Displays";
+"Toggle Blackout" = "Toggle Blackout";
+"Toggle Sleep/Wake" = "Toggle Sleep/Wake";
+"MissingDisplayFormat" = "Missing display (%@)";
+"Panic hotkey (fixed):" = "Panic hotkey (fixed):";
+"Not set" = "Not set";
+"Press keys" = "Press keys";
+"Change" = "Change";
+
+/* Settings Profiles */
+"Save Current Setup" = "Save Current Setup";
+"Profile name" = "Profile name";
+"No profiles yet. Save the current display setup to create one." = "No profiles yet. Save the current display setup to create one.";
+"Apply" = "Apply";
+"Delete" = "Delete";
+"ProfileDisplayCountFormat" = "%lld display(s)";
+"Rename Profile" = "Rename Profile";
+"Enter a new name for this profile." = "Enter a new name for this profile.";
+"Save" = "Save";
+"Cancel" = "Cancel";
+"Auto-apply profile when an external display connects" = "Auto-apply profile when an external display connects";
+"Profile to apply" = "Profile to apply";
+"LastAppliedFormat" = "Last applied: %@";
+"ProfileDefaultNameFormat" = "Profile %lld";
+
+/* Display Labels */
+"DisplayNameExternalFormat" = "External %lld";
+"DisplayNameInternalFormat" = "Internal %lld";
+"DisplayNameUnknownFormat" = "Display %d";
+"InternalDisplayMarker" = "INT";
+"ScaledSuffix" = " (scaled)";
+
+/* Display Status */
+"Blackout" = "Blackout";
+"Sleep requested" = "Sleep requested";
+"Visible" = "Visible";
+"DisplayRowStatusFormat" = "%@ • DDC %@ • %@";
+
+/* DDC */
+"Supported" = "Supported";
+"Not Supported" = "Not Supported";
+"Unknown" = "Unknown";
+"DDC not supported" = "DDC not supported";
+"Display service unavailable" = "Display service unavailable";
+"DDCOpenFailedFormat" = "DDC open failed (0x%@)";
+"DDCRequestFailedFormat" = "DDC request failed (0x%@)";
+"Internal panel" = "Internal panel";
+
+/* Display Report */
+"DisplayReportTitle" = "Dimly Display Report";
+"DisplayReportGeneratedFormat" = "Generated: %@";
+"DisplayReportLineFormat" = "- %@ (%@)";
+"DisplayReportResolutionFormat" = "  Resolution: %@";
+"DisplayReportRefreshFormat" = "  Refresh: %@";
+"DisplayReportRefreshRateFormat" = "%.0f Hz";
+"DisplayReportRefreshNA" = "n/a";
+"DisplayReportDDCFormat" = "  DDC: %@  %@";
+"DisplayReportIDFormat" = "  ID: %@";
+"Blackout Off" = "Blackout Off";
+
+/* About */
+"VersionFormat" = "Version %@ (%@)";
+"© 2026 Jan Feuerbacher" = "© 2026 Jan Feuerbacher";
+"Dimly is a native Swift macOS utility for quickly blacking out external displays and managing sleep/wake." = "Dimly is a native Swift macOS utility for quickly blacking out external displays and managing sleep/wake.";
+"Dimly is a native Swift macOS utility. This build includes a simple skeleton with menu bar support, login item toggle, and configurable hotkey." = "Dimly is a native Swift macOS utility. This build includes a simple skeleton with menu bar support, login item toggle, and configurable hotkey.";
+"Made in my free time - thanks for the support." = "Made in my free time - thanks for the support.";
+"GitHub Repo" = "GitHub Repo";
+"Report an Issue" = "Report an Issue";
+"Donate" = "Donate";
+
+/* Preview/Template */
+"This SwiftUI scaffold is ready for your ideas." = "This SwiftUI scaffold is ready for your ideas.";
+"Increase Counter" = "Increase Counter";
+"Counter: %lld" = "Counter: %lld";
+"Run Placeholder Action" = "Run Placeholder Action";
+
+/* Hotkey Labels */
+"Cmd" = "Cmd";
+"Option" = "Option";
+"Shift" = "Shift";
+"Ctrl" = "Ctrl";
+"KeyFormat" = "Key %d";
+"Return" = "Return";
+"Tab" = "Tab";
+"Space" = "Space";
+"Forward Delete" = "Forward Delete";
+"Esc" = "Esc";
+"Help" = "Help";
+"Fn" = "Fn";
+"Home" = "Home";
+"End" = "End";
+"Page Up" = "Page Up";
+"Page Down" = "Page Down";
+"Left Arrow" = "Left Arrow";
+"Right Arrow" = "Right Arrow";
+"Up Arrow" = "Up Arrow";
+"Down Arrow" = "Down Arrow";
+"Keypad 0" = "Keypad 0";
+"Keypad 1" = "Keypad 1";
+"Keypad 2" = "Keypad 2";
+"Keypad 3" = "Keypad 3";
+"Keypad 4" = "Keypad 4";
+"Keypad 5" = "Keypad 5";
+"Keypad 6" = "Keypad 6";
+"Keypad 7" = "Keypad 7";
+"Keypad 8" = "Keypad 8";
+"Keypad 9" = "Keypad 9";
+"Keypad ," = "Keypad ,";
+"Keypad ." = "Keypad .";
+"Keypad Enter" = "Keypad Enter";
+"Keypad +" = "Keypad +";
+"Keypad -" = "Keypad -";
+"Keypad *" = "Keypad *";
+"Keypad /" = "Keypad /";
+"Keypad =" = "Keypad =";
+"Volume Up" = "Volume Up";
+"Volume Down" = "Volume Down";
+"Brightness Up" = "Brightness Up";
+"Brightness Down" = "Brightness Down";
+"Mute" = "Mute";
+"Play/Pause" = "Play/Pause";
+"Next Track" = "Next Track";
+"Previous Track" = "Previous Track";
+"Fast Forward" = "Fast Forward";
+"Rewind" = "Rewind";
+"Keyboard Brightness Up" = "Keyboard Brightness Up";
+"Keyboard Brightness Down" = "Keyboard Brightness Down";
+"Keyboard Brightness Toggle" = "Keyboard Brightness Toggle";

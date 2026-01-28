@@ -1,0 +1,221 @@
+/* App Basics */
+"Dimly" = "Dimly";
+"About Dimly" = "Om Dimly";
+"Settings..." = "Inställningar...";
+"Check for Updates..." = "Sök efter uppdateringar...";
+"Quit Dimly" = "Avsluta Dimly";
+"Update could not be verified" = "Uppdateringen kunde inte verifieras";
+"Dimly couldn't verify the downloaded update. Please download the latest release directly from GitHub instead." = "Dimly kunde inte verifiera den nedladdade uppdateringen. Ladda ned den senaste versionen direkt från GitHub.";
+"Open GitHub" = "Öppna GitHub";
+
+/* Intro Window */
+"Welcome to Dimly" = "Välkommen till Dimly";
+"Your displays, one click away." = "Dina skärmar är ett klick bort.";
+"Dimly lives in the menu bar." = "Dimly finns i menyraden.";
+"Look at the top-right of your screen for the display icon." = "Titta uppe till höger efter skärmikonen.";
+"Got it" = "Jag förstår";
+"Menu bar" = "Menyrad";
+
+/* Menu Bar Overview */
+"DisplayCountFormat" = "%lld skärm(ar) anslutna";
+"ExternalCountFormat" = "%lld extern(a)";
+"InternalCountFormat" = "%lld intern(a)";
+"No displays detected" = "Inga skärmar hittades";
+"All displays active" = "Alla skärmar aktiva";
+"Ready" = "Klar";
+"Blackout On" = "Blackout på";
+
+/* Menu Bar Sections */
+"Quick Actions" = "Snabba åtgärder";
+"External Displays" = "Externa skärmar";
+"Profiles" = "Profiler";
+"App" = "App";
+
+/* Menu Bar Actions */
+"Toggle External Blackout" = "Växla extern blackout";
+"Sleep Externals" = "Viloläge för externa";
+"Wake Externals" = "Väck externa";
+"Panic: All On" = "Paniken: allt på";
+"Show Display Numbers" = "Visa skärmnummer";
+"Restore Display" = "Återställ skärm";
+"Blackout Display" = "Mörklägg skärm";
+"Sleep Display" = "Viloläge för skärm";
+"Wake Display" = "Väck skärm";
+"Overlay Only (Never Sleep)" = "Endast overlay (aldrig vila)";
+"Rename Display..." = "Byt namn på skärm...";
+"Copy Display ID" = "Kopiera skärm-ID";
+"Save Current Profile" = "Spara aktuell profil";
+"No profiles yet" = "Inga profiler ännu";
+"Apply Profile" = "Använd profil";
+"Copy Display Report" = "Kopiera skärmrapport";
+"Open Diagnostics Log" = "Öppna diagnostiklogg";
+
+/* Settings Tabs */
+"General" = "Allmänt";
+"Shortcuts" = "Genvägar";
+"Profiles" = "Profiler";
+"About" = "Om";
+
+/* Settings General */
+"Launch at login" = "Starta vid inloggning";
+"Show menu bar icon" = "Visa ikon i menyraden";
+"Show Menu Bar Icon" = "Visa ikon i menyraden";
+"Hide Dock icon" = "Dölj Dock-ikon";
+"Hide the Dock icon and app switcher entry." = "Döljer Dock-ikonen och posten i appväxlaren.";
+"Dimly stays running for hotkeys even when the menu bar icon is hidden." = "Dimly fortsätter köras för snabbkommandon även när ikonen är dold.";
+"Displays" = "Skärmar";
+"Fade out on sleep/blackout" = "Tona ut vid vila/blackout";
+"Fade in on wake/restore" = "Tona in vid väckning/återställning";
+"Show display numbers on screens" = "Visa skärmnummer på skärmar";
+"No active displays detected." = "Inga aktiva skärmar hittades.";
+"Show introduction again" = "Visa introduktion igen";
+
+/* Settings Displays */
+"Internal" = "Intern";
+"External" = "Extern";
+"DisplayTypeResolutionFormat" = "%@ • %@";
+"RefreshRateFormat" = "Uppdatering: %.0f Hz";
+"DisplayIDFormat" = "ID: %@";
+"DisplaySerialFormat" = "Serienummer: %@";
+"DDCStatusFormat" = "DDC: %@";
+"Standby" = "Vänteläge";
+"Wake" = "Väck";
+"Rename" = "Byt namn";
+"Rename Display" = "Byt namn på skärm";
+"Give this display a friendly name." = "Ge den här skärmen ett vänligt namn.";
+
+/* Settings Shortcuts */
+"Add Hotkey" = "Lägg till genväg";
+"No hotkeys set yet" = "Inga genvägar har ställts in ännu";
+"Add a hotkey to quickly toggle blackout or sleep/wake." = "Lägg till en genväg för att snabbt växla svartskärm eller vila/vakna.";
+"Display" = "Skärm";
+"Action" = "Åtgärd";
+"All External Displays" = "Alla externa skärmar";
+"Toggle Blackout" = "Växla svartskärm";
+"Toggle Sleep/Wake" = "Växla vila/vakna";
+"MissingDisplayFormat" = "Saknad skärm (%@)";
+"Global shortcuts" = "Globala genvägar";
+"Panic hotkey (fixed):" = "Panik-hotkey (fast):";
+"Not set" = "Inte inställd";
+"Press keys" = "Tryck tangenter";
+"Change" = "Ändra";
+
+/* Settings Profiles */
+"Save Current Setup" = "Spara aktuell konfiguration";
+"Profile name" = "Profilnamn";
+"No profiles yet. Save the current display setup to create one." = "Inga profiler ännu. Spara den aktuella skärmkonfigurationen för att skapa en.";
+"Apply" = "Använd";
+"Delete" = "Radera";
+"ProfileDisplayCountFormat" = "%lld skärm(ar)";
+"Rename Profile" = "Byt namn på profil";
+"Enter a new name for this profile." = "Ange ett nytt namn för profilen.";
+"Save" = "Spara";
+"Cancel" = "Avbryt";
+"Auto-apply profile when an external display connects" = "Använd profil automatiskt när en extern skärm ansluts";
+"Profile to apply" = "Profil att använda";
+"LastAppliedFormat" = "Senast använd: %@";
+"ProfileDefaultNameFormat" = "Profil %lld";
+
+/* Display Labels */
+"DisplayNameExternalFormat" = "Extern %lld";
+"DisplayNameInternalFormat" = "Intern %lld";
+"DisplayNameUnknownFormat" = "Skärm %d";
+"InternalDisplayMarker" = "INT";
+"ScaledSuffix" = " (skalad)";
+
+/* Display Status */
+"Blackout" = "Blackout";
+"Sleep requested" = "Vila begärd";
+"Visible" = "Synlig";
+"DisplayRowStatusFormat" = "%@ • DDC %@ • %@";
+
+/* DDC */
+"Supported" = "Stöds";
+"Not Supported" = "Stöds inte";
+"Unknown" = "Okänt";
+"DDC not supported" = "DDC stöds inte";
+"Display service unavailable" = "Skärmtjänst ej tillgänglig";
+"DDCOpenFailedFormat" = "Kunde inte öppna DDC (0x%@)";
+"DDCRequestFailedFormat" = "DDC-begäran misslyckades (0x%@)";
+"Internal panel" = "Intern panel";
+
+/* Display Report */
+"DisplayReportTitle" = "Dimly skärmrapport";
+"DisplayReportGeneratedFormat" = "Genererad: %@";
+"DisplayReportLineFormat" = "- %@ (%@)";
+"DisplayReportResolutionFormat" = "  Upplösning: %@";
+"DisplayReportRefreshFormat" = "  Uppdatering: %@";
+"DisplayReportRefreshRateFormat" = "%.0f Hz";
+"DisplayReportRefreshNA" = "n/a";
+"DisplayReportDDCFormat" = "  DDC: %@  %@";
+"DisplayReportIDFormat" = "  ID: %@";
+"Blackout Off" = "Blackout av";
+
+/* About */
+"VersionFormat" = "Version %@ (%@)";
+"© 2026 Jan Feuerbacher" = "© 2026 Jan Feuerbacher";
+"Dimly is a native Swift macOS utility for quickly blacking out external displays and managing sleep/wake." = "Dimly är ett inbyggt Swift-verktyg för macOS för att snabbt mörklägga externa skärmar och hantera vila/väckning.";
+"Dimly is a native Swift macOS utility. This build includes a simple skeleton with menu bar support, login item toggle, and configurable hotkey." = "Dimly är ett inbyggt Swift-verktyg för macOS. Denna build innehåller ett enkelt skelett med stöd för menyrad, växling av inloggningspost och anpassningsbar snabbkommando.";
+"Made in my free time - thanks for the support." = "Gjort på min fritid – tack för stödet.";
+"GitHub Repo" = "GitHub-repo";
+"Report an Issue" = "Rapportera ett problem";
+"Donate" = "Donera";
+
+/* Preview/Template */
+"This SwiftUI scaffold is ready for your ideas." = "Denna SwiftUI-ställning är redo för dina idéer.";
+"Increase Counter" = "Öka räknaren";
+"Counter: %lld" = "Räknare: %lld";
+"Run Placeholder Action" = "Kör platshållaråtgärd";
+
+/* Hotkey Labels */
+"Cmd" = "Cmd";
+"Option" = "Option";
+"Shift" = "Shift";
+"Ctrl" = "Ctrl";
+"KeyFormat" = "Key %d";
+"Return" = "Return";
+"Tab" = "Tab";
+"Space" = "Space";
+"Forward Delete" = "Forward Delete";
+"Esc" = "Esc";
+"Help" = "Help";
+"Fn" = "Fn";
+"Home" = "Home";
+"End" = "End";
+"Page Up" = "Page Up";
+"Page Down" = "Page Down";
+"Left Arrow" = "Left Arrow";
+"Right Arrow" = "Right Arrow";
+"Up Arrow" = "Up Arrow";
+"Down Arrow" = "Down Arrow";
+"Keypad 0" = "Keypad 0";
+"Keypad 1" = "Keypad 1";
+"Keypad 2" = "Keypad 2";
+"Keypad 3" = "Keypad 3";
+"Keypad 4" = "Keypad 4";
+"Keypad 5" = "Keypad 5";
+"Keypad 6" = "Keypad 6";
+"Keypad 7" = "Keypad 7";
+"Keypad 8" = "Keypad 8";
+"Keypad 9" = "Keypad 9";
+"Keypad ," = "Keypad ,";
+"Keypad ." = "Keypad .";
+"Keypad Enter" = "Keypad Enter";
+"Keypad +" = "Keypad +";
+"Keypad -" = "Keypad -";
+"Keypad *" = "Keypad *";
+"Keypad /" = "Keypad /";
+"Keypad =" = "Keypad =";
+"Volume Up" = "Volume Up";
+"Volume Down" = "Volume Down";
+"Brightness Up" = "Brightness Up";
+"Brightness Down" = "Brightness Down";
+"Mute" = "Mute";
+"Play/Pause" = "Play/Pause";
+"Next Track" = "Next Track";
+"Previous Track" = "Previous Track";
+"Fast Forward" = "Fast Forward";
+"Rewind" = "Rewind";
+"Keyboard Brightness Up" = "Keyboard Brightness Up";
+"Keyboard Brightness Down" = "Keyboard Brightness Down";
+"Keyboard Brightness Toggle" = "Keyboard Brightness Toggle";

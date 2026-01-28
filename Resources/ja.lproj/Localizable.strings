@@ -1,0 +1,221 @@
+/* App Basics */
+"Dimly" = "Dimly";
+"About Dimly" = "Dimly について";
+"Settings..." = "設定...";
+"Check for Updates..." = "アップデートを確認...";
+"Quit Dimly" = "Dimly を終了";
+"Update could not be verified" = "アップデートを検証できませんでした";
+"Dimly couldn't verify the downloaded update. Please download the latest release directly from GitHub instead." = "ダウンロードしたアップデートを検証できませんでした。最新リリースを GitHub から直接ダウンロードしてください。";
+"Open GitHub" = "GitHub を開く";
+
+/* Intro Window */
+"Welcome to Dimly" = "Dimly へようこそ";
+"Your displays, one click away." = "あなたのディスプレイがワンクリックで。";
+"Dimly lives in the menu bar." = "Dimly はメニューバーに常駐します。";
+"Look at the top-right of your screen for the display icon." = "画面右上のディスプレイアイコンを確認してください。";
+"Got it" = "了解";
+"Menu bar" = "メニューバー";
+
+/* Menu Bar Overview */
+"DisplayCountFormat" = "%lld 台のディスプレイが接続";
+"ExternalCountFormat" = "%lld 台の外部";
+"InternalCountFormat" = "%lld 台の内蔵";
+"No displays detected" = "ディスプレイが検出されません";
+"All displays active" = "すべてのディスプレイがアクティブ";
+"Ready" = "準備完了";
+"Blackout On" = "ブラックアウト中";
+
+/* Menu Bar Sections */
+"Quick Actions" = "クイックアクション";
+"External Displays" = "外部ディスプレイ";
+"Profiles" = "プロファイル";
+"App" = "アプリ";
+
+/* Menu Bar Actions */
+"Toggle External Blackout" = "外部ブラックアウトを切替";
+"Sleep Externals" = "外部をスリープ";
+"Wake Externals" = "外部を復帰";
+"Panic: All On" = "パニック: すべてオン";
+"Show Display Numbers" = "ディスプレイ番号を表示";
+"Restore Display" = "ディスプレイを復元";
+"Blackout Display" = "ディスプレイを暗転";
+"Sleep Display" = "ディスプレイをスリープ";
+"Wake Display" = "ディスプレイを復帰";
+"Overlay Only (Never Sleep)" = "オーバーレイのみ（スリープなし）";
+"Rename Display..." = "ディスプレイ名を変更...";
+"Copy Display ID" = "ディスプレイ ID をコピー";
+"Save Current Profile" = "現在のプロファイルを保存";
+"No profiles yet" = "プロファイルはまだありません";
+"Apply Profile" = "プロファイルを適用";
+"Copy Display Report" = "ディスプレイレポートをコピー";
+"Open Diagnostics Log" = "診断ログを開く";
+
+/* Settings Tabs */
+"General" = "一般";
+"Shortcuts" = "ショートカット";
+"Profiles" = "プロファイル";
+"About" = "情報";
+
+/* Settings General */
+"Launch at login" = "ログイン時に起動";
+"Show menu bar icon" = "メニューバーアイコンを表示";
+"Show Menu Bar Icon" = "メニューバーアイコンを表示";
+"Hide Dock icon" = "Dock アイコンを隠す";
+"Hide the Dock icon and app switcher entry." = "Dock アイコンとアプリスイッチャーの項目を隠します。";
+"Dimly stays running for hotkeys even when the menu bar icon is hidden." = "メニューバーアイコンが隠れていても、Dimly はホットキーのために動作し続けます。";
+"Displays" = "ディスプレイ";
+"Fade out on sleep/blackout" = "スリープ/ブラックアウト時にフェードアウト";
+"Fade in on wake/restore" = "復帰/復元時にフェードイン";
+"Show display numbers on screens" = "画面にディスプレイ番号を表示";
+"No active displays detected." = "アクティブなディスプレイが検出されませんでした。";
+"Show introduction again" = "イントロを再表示";
+
+/* Settings Displays */
+"Internal" = "内蔵";
+"External" = "外部";
+"DisplayTypeResolutionFormat" = "%@ • %@";
+"RefreshRateFormat" = "リフレッシュ: %.0f Hz";
+"DisplayIDFormat" = "ID: %@";
+"DisplaySerialFormat" = "シリアル: %@";
+"DDCStatusFormat" = "DDC: %@";
+"Standby" = "スタンバイ";
+"Wake" = "復帰";
+"Rename" = "名前を変更";
+"Rename Display" = "ディスプレイ名を変更";
+"Give this display a friendly name." = "このディスプレイに親しみやすい名前を付けてください。";
+
+/* Settings Shortcuts */
+"Add Hotkey" = "ショートカットを追加";
+"No hotkeys set yet" = "まだショートカットが設定されていません";
+"Add a hotkey to quickly toggle blackout or sleep/wake." = "ブラックアウトやスリープ/復帰を素早く切り替えるショートカットを追加します。";
+"Display" = "ディスプレイ";
+"Action" = "アクション";
+"All External Displays" = "すべての外部ディスプレイ";
+"Toggle Blackout" = "ブラックアウトを切り替え";
+"Toggle Sleep/Wake" = "スリープ/復帰を切り替え";
+"MissingDisplayFormat" = "見つからないディスプレイ（%@）";
+"Global shortcuts" = "グローバルショートカット";
+"Panic hotkey (fixed):" = "パニックホットキー（固定）:";
+"Not set" = "未設定";
+"Press keys" = "キーを押してください";
+"Change" = "変更";
+
+/* Settings Profiles */
+"Save Current Setup" = "現在の構成を保存";
+"Profile name" = "プロファイル名";
+"No profiles yet. Save the current display setup to create one." = "まだプロファイルがありません。作成するには現在のディスプレイ構成を保存してください。";
+"Apply" = "適用";
+"Delete" = "削除";
+"ProfileDisplayCountFormat" = "%lld 台のディスプレイ";
+"Rename Profile" = "プロファイル名を変更";
+"Enter a new name for this profile." = "このプロファイルの新しい名前を入力してください。";
+"Save" = "保存";
+"Cancel" = "キャンセル";
+"Auto-apply profile when an external display connects" = "外部ディスプレイ接続時に自動でプロファイルを適用";
+"Profile to apply" = "適用するプロファイル";
+"LastAppliedFormat" = "最終適用: %@";
+"ProfileDefaultNameFormat" = "プロファイル %lld";
+
+/* Display Labels */
+"DisplayNameExternalFormat" = "外部 %lld";
+"DisplayNameInternalFormat" = "内蔵 %lld";
+"DisplayNameUnknownFormat" = "ディスプレイ %d";
+"InternalDisplayMarker" = "INT";
+"ScaledSuffix" = " (スケール)";
+
+/* Display Status */
+"Blackout" = "ブラックアウト";
+"Sleep requested" = "スリープ要求";
+"Visible" = "表示中";
+"DisplayRowStatusFormat" = "%@ • DDC %@ • %@";
+
+/* DDC */
+"Supported" = "対応";
+"Not Supported" = "非対応";
+"Unknown" = "不明";
+"DDC not supported" = "DDC 非対応";
+"Display service unavailable" = "ディスプレイサービス利用不可";
+"DDCOpenFailedFormat" = "DDC のオープンに失敗しました (0x%@)";
+"DDCRequestFailedFormat" = "DDC リクエストに失敗しました (0x%@)";
+"Internal panel" = "内蔵パネル";
+
+/* Display Report */
+"DisplayReportTitle" = "Dimly ディスプレイレポート";
+"DisplayReportGeneratedFormat" = "生成: %@";
+"DisplayReportLineFormat" = "- %@ (%@)";
+"DisplayReportResolutionFormat" = "  解像度: %@";
+"DisplayReportRefreshFormat" = "  リフレッシュ: %@";
+"DisplayReportRefreshRateFormat" = "%.0f Hz";
+"DisplayReportRefreshNA" = "n/a";
+"DisplayReportDDCFormat" = "  DDC: %@  %@";
+"DisplayReportIDFormat" = "  ID: %@";
+"Blackout Off" = "ブラックアウト解除";
+
+/* About */
+"VersionFormat" = "バージョン %@ (%@)";
+"© 2026 Jan Feuerbacher" = "© 2026 Jan Feuerbacher";
+"Dimly is a native Swift macOS utility for quickly blacking out external displays and managing sleep/wake." = "Dimly は外部ディスプレイを素早く暗転し、スリープ/復帰を管理する macOS 向けネイティブ Swift ユーティリティです。";
+"Dimly is a native Swift macOS utility. This build includes a simple skeleton with menu bar support, login item toggle, and configurable hotkey." = "Dimly は macOS 向けのネイティブ Swift ユーティリティです。このビルドにはメニューバー対応、ログイン項目の切替、設定可能なホットキーを備えたシンプルな骨組みが含まれています。";
+"Made in my free time - thanks for the support." = "空き時間に作りました ― サポートに感謝します。";
+"GitHub Repo" = "GitHub リポジトリ";
+"Report an Issue" = "問題を報告";
+"Donate" = "寄付";
+
+/* Preview/Template */
+"This SwiftUI scaffold is ready for your ideas." = "この SwiftUI スキャフォールドはあなたのアイデアを待っています。";
+"Increase Counter" = "カウンターを増やす";
+"Counter: %lld" = "カウンター: %lld";
+"Run Placeholder Action" = "プレースホルダー動作を実行";
+
+/* Hotkey Labels */
+"Cmd" = "Cmd";
+"Option" = "Option";
+"Shift" = "Shift";
+"Ctrl" = "Ctrl";
+"KeyFormat" = "Key %d";
+"Return" = "Return";
+"Tab" = "Tab";
+"Space" = "Space";
+"Forward Delete" = "Forward Delete";
+"Esc" = "Esc";
+"Help" = "Help";
+"Fn" = "Fn";
+"Home" = "Home";
+"End" = "End";
+"Page Up" = "Page Up";
+"Page Down" = "Page Down";
+"Left Arrow" = "Left Arrow";
+"Right Arrow" = "Right Arrow";
+"Up Arrow" = "Up Arrow";
+"Down Arrow" = "Down Arrow";
+"Keypad 0" = "Keypad 0";
+"Keypad 1" = "Keypad 1";
+"Keypad 2" = "Keypad 2";
+"Keypad 3" = "Keypad 3";
+"Keypad 4" = "Keypad 4";
+"Keypad 5" = "Keypad 5";
+"Keypad 6" = "Keypad 6";
+"Keypad 7" = "Keypad 7";
+"Keypad 8" = "Keypad 8";
+"Keypad 9" = "Keypad 9";
+"Keypad ," = "Keypad ,";
+"Keypad ." = "Keypad .";
+"Keypad Enter" = "Keypad Enter";
+"Keypad +" = "Keypad +";
+"Keypad -" = "Keypad -";
+"Keypad *" = "Keypad *";
+"Keypad /" = "Keypad /";
+"Keypad =" = "Keypad =";
+"Volume Up" = "Volume Up";
+"Volume Down" = "Volume Down";
+"Brightness Up" = "Brightness Up";
+"Brightness Down" = "Brightness Down";
+"Mute" = "Mute";
+"Play/Pause" = "Play/Pause";
+"Next Track" = "Next Track";
+"Previous Track" = "Previous Track";
+"Fast Forward" = "Fast Forward";
+"Rewind" = "Rewind";
+"Keyboard Brightness Up" = "Keyboard Brightness Up";
+"Keyboard Brightness Down" = "Keyboard Brightness Down";
+"Keyboard Brightness Toggle" = "Keyboard Brightness Toggle";

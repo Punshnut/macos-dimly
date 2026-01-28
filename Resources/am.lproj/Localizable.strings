@@ -1,0 +1,221 @@
+/* App Basics */
+"Dimly" = "Dimly";
+"About Dimly" = "ስለ Dimly";
+"Settings..." = "ማሰናጃ...";
+"Check for Updates..." = "ዝማኔዎችን ያረጋግጡ...";
+"Quit Dimly" = "Dimly ውጣ";
+"Update could not be verified" = "ዝማኔው ማረጋገጥ አልተቻለም";
+"Dimly couldn't verify the downloaded update. Please download the latest release directly from GitHub instead." = "Dimly የወረደውን ዝማኔ ማረጋገጥ አልቻለም። እባክዎ ቅርጽ ያለውን ልቀት በቀጥታ ከGitHub ያውርዱ።";
+"Open GitHub" = "GitHub ክፈት";
+
+/* Intro Window */
+"Welcome to Dimly" = "እንኳን ወደ Dimly በደህና መጡ";
+"Your displays, one click away." = "የእርስዎ ማሳያዎች በአንድ ጠቅታ ርቀት።";
+"Dimly lives in the menu bar." = "Dimly በሜኑ አሞሌ ውስጥ ይኖራል።";
+"Look at the top-right of your screen for the display icon." = "በገጽታዎ ከፍተኛ ቀኝ የማሳያ አዶን ይፈልጉ።";
+"Got it" = "ተረዳሁ";
+"Menu bar" = "ሜኑ አሞሌ";
+
+/* Menu Bar Overview */
+"DisplayCountFormat" = "%lld ማሳያ(ዎች) ተገናኝተዋል";
+"ExternalCountFormat" = "%lld ውጫዊ";
+"InternalCountFormat" = "%lld ውስጣዊ";
+"No displays detected" = "ምንም ማሳያ አልተገኘም";
+"All displays active" = "ሁሉም ማሳያዎች ንቁ ናቸው";
+"Ready" = "ዝግጁ";
+"Blackout On" = "ጥቁር ተነስቷል";
+
+/* Menu Bar Sections */
+"Quick Actions" = "ፈጣን እርምጃዎች";
+"External Displays" = "ውጫዊ ማሳያዎች";
+"Profiles" = "ፕሮፋይሎች";
+"App" = "መተግበሪያ";
+
+/* Menu Bar Actions */
+"Toggle External Blackout" = "ውጫዊ ጥቁርነት ቀይር";
+"Sleep Externals" = "ውጫዊውን አኛር";
+"Wake Externals" = "ውጫዊውን አስነሳ";
+"Panic: All On" = "ድንጋጤ: ሁሉም በእርስዎ";
+"Show Display Numbers" = "የማሳያ ቁጥሮችን አሳይ";
+"Restore Display" = "ማሳያ መመለስ";
+"Blackout Display" = "ማሳያን ጥቁር አድርግ";
+"Sleep Display" = "ማሳያን አኛር";
+"Wake Display" = "ማሳያን አስነሳ";
+"Overlay Only (Never Sleep)" = "ኦቨርሌይ ብቻ (በፍጹም አትኛር)";
+"Rename Display..." = "ማሳያ እንደገና ሰይም...";
+"Copy Display ID" = "የማሳያ መታወቂያ ቅጂ";
+"Save Current Profile" = "የአሁኑን ፕሮፋይል አስቀምጥ";
+"No profiles yet" = "እስካሁን ፕሮፋይል የለም";
+"Apply Profile" = "ፕሮፋይል ተግብር";
+"Copy Display Report" = "የማሳያ ሪፖርት ቅጂ";
+"Open Diagnostics Log" = "የምርመራ መዝገብ ክፈት";
+
+/* Settings Tabs */
+"General" = "አጠቃላይ";
+"Shortcuts" = "አቋራጮች";
+"Profiles" = "ፕሮፋይሎች";
+"About" = "ስለ";
+
+/* Settings General */
+"Launch at login" = "በመግቢያ ላይ አስጀምር";
+"Show menu bar icon" = "የሜኑ አዶን አሳይ";
+"Show Menu Bar Icon" = "የሜኑ አዶን አሳይ";
+"Hide Dock icon" = "የDock አዶን ደብቅ";
+"Hide the Dock icon and app switcher entry." = "የDock አዶንን እና የመቀየሪያ መግቢያን ደብቅ።";
+"Dimly stays running for hotkeys even when the menu bar icon is hidden." = "የሜኑ አዶ ተደብቆም Dimly ለሙሉ ቁልፎች ይሰራል።";
+"Displays" = "ማሳያዎች";
+"Fade out on sleep/blackout" = "በእንቅልፍ/ጥቁር ላይ ቀስ በቀስ ጠፋ";
+"Fade in on wake/restore" = "በንቃት/መመለስ ላይ ቀስ በቀስ ገባ";
+"Show display numbers on screens" = "በማሳያዎች ላይ ቁጥሮችን አሳይ";
+"No active displays detected." = "ምንም ንቁ ማሳያ አልተገኘም።";
+"Show introduction again" = "እድሜውን እንደገና አሳይ";
+
+/* Settings Displays */
+"Internal" = "ውስጣዊ";
+"External" = "ውጫዊ";
+"DisplayTypeResolutionFormat" = "%@ • %@";
+"RefreshRateFormat" = "የማደስ ፍጥነት: %.0f Hz";
+"DisplayIDFormat" = "መታወቂያ: %@";
+"DisplaySerialFormat" = "ሴሪያል: %@";
+"DDCStatusFormat" = "DDC: %@";
+"Standby" = "ስታንድባይ";
+"Wake" = "አስነሳ";
+"Rename" = "እንደገና ሰይም";
+"Rename Display" = "ማሳያን እንደገና ሰይም";
+"Give this display a friendly name." = "ይህንን ማሳያ የወዳጅ ስም ስጥ።";
+
+/* Settings Shortcuts */
+"Add Hotkey" = "ሆትኪ አክል";
+"No hotkeys set yet" = "እስካሁን ሆትኪ አልተዘጋጀም";
+"Add a hotkey to quickly toggle blackout or sleep/wake." = "በፍጥነት ጥቁርነት ወይም እንቅልፍ/ንቃት ለመቀየር ሆትኪ አክሉ።";
+"Display" = "ማሳያ";
+"Action" = "እርምጃ";
+"All External Displays" = "ሁሉም ውጭ ማሳያዎች";
+"Toggle Blackout" = "ጥቁርነትን ቀይር";
+"Toggle Sleep/Wake" = "እንቅልፍ/ንቃት ቀይር";
+"MissingDisplayFormat" = "የጠፋ ማሳያ (%@)";
+"Global shortcuts" = "አጠቃላይ አቋራጮች";
+"Panic hotkey (fixed):" = "የድንጋጤ ቁልፍ (የተጣራ):";
+"Not set" = "አልተዘጋጀም";
+"Press keys" = "ቁልፎችን ይጫኑ";
+"Change" = "ቀይር";
+
+/* Settings Profiles */
+"Save Current Setup" = "አሁንን ማስተካከያ አስቀምጥ";
+"Profile name" = "የፕሮፋይል ስም";
+"No profiles yet. Save the current display setup to create one." = "እስካሁን ፕሮፋይል የለም። አንድን ለመፍጠር የአሁኑን ማሳያ ማስተካከያ አስቀምጥ።";
+"Apply" = "አፈጻጽም";
+"Delete" = "ሰርዝ";
+"ProfileDisplayCountFormat" = "%lld ማሳያ(ዎች)";
+"Rename Profile" = "ፕሮፋይል እንደገና ሰይም";
+"Enter a new name for this profile." = "ለዚህ ፕሮፋይል አዲስ ስም ያስገቡ።";
+"Save" = "አስቀምጥ";
+"Cancel" = "ሰርዝ";
+"Auto-apply profile when an external display connects" = "ውጫዊ ማሳያ ሲገናኝ ፕሮፋይልን በራስ ተግብር";
+"Profile to apply" = "የሚተገበር ፕሮፋይል";
+"LastAppliedFormat" = "መጨረሻ ተግባር: %@";
+"ProfileDefaultNameFormat" = "ፕሮፋይል %lld";
+
+/* Display Labels */
+"DisplayNameExternalFormat" = "ውጫዊ %lld";
+"DisplayNameInternalFormat" = "ውስጣዊ %lld";
+"DisplayNameUnknownFormat" = "ማሳያ %d";
+"InternalDisplayMarker" = "INT";
+"ScaledSuffix" = " (ተመጣጠነ)";
+
+/* Display Status */
+"Blackout" = "ጥቁር";
+"Sleep requested" = "እንቅልፍ ተጠይቋል";
+"Visible" = "የሚታይ";
+"DisplayRowStatusFormat" = "%@ • DDC %@ • %@";
+
+/* DDC */
+"Supported" = "የተደገፈ";
+"Not Supported" = "አይደገፍም";
+"Unknown" = "ያልታወቀ";
+"DDC not supported" = "DDC አይደገፍም";
+"Display service unavailable" = "የማሳያ አገልግሎት አልተገኘም";
+"DDCOpenFailedFormat" = "DDC መክፈት አልተሳካም (0x%@)";
+"DDCRequestFailedFormat" = "የDDC ጥያቄ አልተሳካም (0x%@)";
+"Internal panel" = "ውስጣዊ ፓነል";
+
+/* Display Report */
+"DisplayReportTitle" = "የDimly የማሳያ ሪፖርት";
+"DisplayReportGeneratedFormat" = "ተፈጥሯል: %@";
+"DisplayReportLineFormat" = "- %@ (%@)";
+"DisplayReportResolutionFormat" = "  ሪዞለሽን: %@";
+"DisplayReportRefreshFormat" = "  ማደስ: %@";
+"DisplayReportRefreshRateFormat" = "%.0f Hz";
+"DisplayReportRefreshNA" = "ም/ይ";
+"DisplayReportDDCFormat" = "  DDC: %@  %@";
+"DisplayReportIDFormat" = "  መታወቂያ: %@";
+"Blackout Off" = "ጥቁር ጠፍቷል";
+
+/* About */
+"VersionFormat" = "ስሪት %@ (%@)";
+"© 2026 Jan Feuerbacher" = "© 2026 Jan Feuerbacher";
+"Dimly is a native Swift macOS utility for quickly blacking out external displays and managing sleep/wake." = "Dimly ውጫዊ ማሳያዎችን በፍጥነት ለመጥቀስ እና እንቅልፍ/ንቃትን ለማስተዳደር የተሰራ የmacOS የSwift መሣሪያ ነው።";
+"Dimly is a native Swift macOS utility. This build includes a simple skeleton with menu bar support, login item toggle, and configurable hotkey." = "Dimly የተፈጠረ የSwift macOS መሣሪያ ነው። ይህ ግንባታ የሜኑ አሞሌ ድጋፍ፣ የመግቢያ ንጥል መቀያየሪያ፣ እና የሚማርከው አንድ ቁልፍ ያለው ቀላል አካል ይዘዋል።";
+"Made in my free time - thanks for the support." = "በነፃ ጊዜዬ ተሰርቷል - ስለ ድጋፉ እናመሰግናለሁ።";
+"GitHub Repo" = "GitHub ማጣቀሻ";
+"Report an Issue" = "ችግኝ ጥቆማ አድርግ";
+"Donate" = "ያቅርቡ";
+
+/* Preview/Template */
+"This SwiftUI scaffold is ready for your ideas." = "ይህ የSwiftUI አወዳድር ለሃሳቦችዎ ዝግጁ ነው።";
+"Increase Counter" = "ቆጣሪውን ጨምር";
+"Counter: %lld" = "ቆጣሪ: %lld";
+"Run Placeholder Action" = "ቦታይ እርምጃ አስኪድ";
+
+/* Hotkey Labels */
+"Cmd" = "Cmd";
+"Option" = "Option";
+"Shift" = "Shift";
+"Ctrl" = "Ctrl";
+"KeyFormat" = "Key %d";
+"Return" = "Return";
+"Tab" = "Tab";
+"Space" = "Space";
+"Forward Delete" = "Forward Delete";
+"Esc" = "Esc";
+"Help" = "Help";
+"Fn" = "Fn";
+"Home" = "Home";
+"End" = "End";
+"Page Up" = "Page Up";
+"Page Down" = "Page Down";
+"Left Arrow" = "Left Arrow";
+"Right Arrow" = "Right Arrow";
+"Up Arrow" = "Up Arrow";
+"Down Arrow" = "Down Arrow";
+"Keypad 0" = "Keypad 0";
+"Keypad 1" = "Keypad 1";
+"Keypad 2" = "Keypad 2";
+"Keypad 3" = "Keypad 3";
+"Keypad 4" = "Keypad 4";
+"Keypad 5" = "Keypad 5";
+"Keypad 6" = "Keypad 6";
+"Keypad 7" = "Keypad 7";
+"Keypad 8" = "Keypad 8";
+"Keypad 9" = "Keypad 9";
+"Keypad ," = "Keypad ,";
+"Keypad ." = "Keypad .";
+"Keypad Enter" = "Keypad Enter";
+"Keypad +" = "Keypad +";
+"Keypad -" = "Keypad -";
+"Keypad *" = "Keypad *";
+"Keypad /" = "Keypad /";
+"Keypad =" = "Keypad =";
+"Volume Up" = "Volume Up";
+"Volume Down" = "Volume Down";
+"Brightness Up" = "Brightness Up";
+"Brightness Down" = "Brightness Down";
+"Mute" = "Mute";
+"Play/Pause" = "Play/Pause";
+"Next Track" = "Next Track";
+"Previous Track" = "Previous Track";
+"Fast Forward" = "Fast Forward";
+"Rewind" = "Rewind";
+"Keyboard Brightness Up" = "Keyboard Brightness Up";
+"Keyboard Brightness Down" = "Keyboard Brightness Down";
+"Keyboard Brightness Toggle" = "Keyboard Brightness Toggle";

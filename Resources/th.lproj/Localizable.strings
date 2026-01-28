@@ -1,0 +1,221 @@
+/* App Basics */
+"Dimly" = "Dimly";
+"About Dimly" = "เกี่ยวกับ Dimly";
+"Settings..." = "การตั้งค่า...";
+"Check for Updates..." = "ตรวจสอบการอัปเดต...";
+"Quit Dimly" = "ออกจาก Dimly";
+"Update could not be verified" = "ไม่สามารถยืนยันการอัปเดตได้";
+"Dimly couldn't verify the downloaded update. Please download the latest release directly from GitHub instead." = "Dimly ไม่สามารถยืนยันการอัปเดตที่ดาวน์โหลด โปรดดาวน์โหลดรุ่นล่าสุดจาก GitHub โดยตรง";
+"Open GitHub" = "เปิด GitHub";
+
+/* Intro Window */
+"Welcome to Dimly" = "ยินดีต้อนรับสู่ Dimly";
+"Your displays, one click away." = "จอของคุณเพียงคลิกเดียว";
+"Dimly lives in the menu bar." = "Dimly อยู่ที่แถบเมนู";
+"Look at the top-right of your screen for the display icon." = "มองที่มุมขวาบนของหน้าจอเพื่อหาสัญลักษณ์จอ";
+"Got it" = "รับทราบ";
+"Menu bar" = "แถบเมนู";
+
+/* Menu Bar Overview */
+"DisplayCountFormat" = "%lld จอเชื่อมต่อ";
+"ExternalCountFormat" = "%lld ภายนอก";
+"InternalCountFormat" = "%lld ภายใน";
+"No displays detected" = "ไม่พบจอ";
+"All displays active" = "จอทั้งหมดทำงาน";
+"Ready" = "พร้อม";
+"Blackout On" = "โหมดมืดเปิด";
+
+/* Menu Bar Sections */
+"Quick Actions" = "การทำงานด่วน";
+"External Displays" = "จอภายนอก";
+"Profiles" = "โปรไฟล์";
+"App" = "แอป";
+
+/* Menu Bar Actions */
+"Toggle External Blackout" = "สลับมืดจอภายนอก";
+"Sleep Externals" = "ทำให้จอภายนอกสลีป";
+"Wake Externals" = "ปลุกจอภายนอก";
+"Panic: All On" = "ฉุกเฉิน: เปิดทั้งหมด";
+"Show Display Numbers" = "แสดงหมายเลขจอ";
+"Restore Display" = "กู้คืนจอ";
+"Blackout Display" = "ทำจอมืด";
+"Sleep Display" = "ทำให้จอสลีป";
+"Wake Display" = "ปลุกจอ";
+"Overlay Only (Never Sleep)" = "เฉพาะโอเวอร์เลย์ (ไม่สลีป)";
+"Rename Display..." = "เปลี่ยนชื่อจอ...";
+"Copy Display ID" = "คัดลอก ID จอ";
+"Save Current Profile" = "บันทึกโปรไฟล์ปัจจุบัน";
+"No profiles yet" = "ยังไม่มีโปรไฟล์";
+"Apply Profile" = "ใช้โปรไฟล์";
+"Copy Display Report" = "คัดลอกรายงานจอ";
+"Open Diagnostics Log" = "เปิดบันทึกการวิเคราะห์";
+
+/* Settings Tabs */
+"General" = "ทั่วไป";
+"Shortcuts" = "ทางลัด";
+"Profiles" = "โปรไฟล์";
+"About" = "เกี่ยวกับ";
+
+/* Settings General */
+"Launch at login" = "เปิดเมื่อเข้าสู่ระบบ";
+"Show menu bar icon" = "แสดงไอคอนบนแถบเมนู";
+"Show Menu Bar Icon" = "แสดงไอคอนบนแถบเมนู";
+"Hide Dock icon" = "ซ่อนไอคอน Dock";
+"Hide the Dock icon and app switcher entry." = "ซ่อนไอคอน Dock และรายการตัวสลับแอป";
+"Dimly stays running for hotkeys even when the menu bar icon is hidden." = "Dimly ยังทำงานสำหรับฮอตคีย์แม้ไอคอนจะถูกซ่อนไว้";
+"Displays" = "จอ";
+"Fade out on sleep/blackout" = "ค่อยๆ มืดเมื่อสลีป/มืดจอ";
+"Fade in on wake/restore" = "ค่อยๆ สว่างเมื่อปลุก/กู้คืน";
+"Show display numbers on screens" = "แสดงหมายเลขจอบนหน้าจอ";
+"No active displays detected." = "ไม่พบจอที่ใช้งาน";
+"Show introduction again" = "แสดงบทนำอีกครั้ง";
+
+/* Settings Displays */
+"Internal" = "ภายใน";
+"External" = "ภายนอก";
+"DisplayTypeResolutionFormat" = "%@ • %@";
+"RefreshRateFormat" = "รีเฟรช: %.0f Hz";
+"DisplayIDFormat" = "ID: %@";
+"DisplaySerialFormat" = "ซีเรียล: %@";
+"DDCStatusFormat" = "DDC: %@";
+"Standby" = "สแตนด์บาย";
+"Wake" = "ปลุก";
+"Rename" = "เปลี่ยนชื่อ";
+"Rename Display" = "เปลี่ยนชื่อจอ";
+"Give this display a friendly name." = "ตั้งชื่อที่จำง่ายให้จอนี้";
+
+/* Settings Shortcuts */
+"Add Hotkey" = "เพิ่มฮอตคีย์";
+"No hotkeys set yet" = "ยังไม่ได้ตั้งฮอตคีย์";
+"Add a hotkey to quickly toggle blackout or sleep/wake." = "เพิ่มฮอตคีย์เพื่อสลับการดับจอหรือสลีป/ปลุกอย่างรวดเร็ว";
+"Display" = "จอภาพ";
+"Action" = "การกระทำ";
+"All External Displays" = "จอภาพภายนอกทั้งหมด";
+"Toggle Blackout" = "สลับการดับจอ";
+"Toggle Sleep/Wake" = "สลับสลีป/ปลุก";
+"MissingDisplayFormat" = "จอภาพที่หายไป (%@)";
+"Global shortcuts" = "ทางลัดทั่วระบบ";
+"Panic hotkey (fixed):" = "ปุ่มฉุกเฉิน (คงที่):";
+"Not set" = "ยังไม่ตั้ง";
+"Press keys" = "กดปุ่ม";
+"Change" = "เปลี่ยน";
+
+/* Settings Profiles */
+"Save Current Setup" = "บันทึกการตั้งค่าปัจจุบัน";
+"Profile name" = "ชื่อโปรไฟล์";
+"No profiles yet. Save the current display setup to create one." = "ยังไม่มีโปรไฟล์ บันทึกการตั้งค่าปัจจุบันเพื่อสร้าง";
+"Apply" = "ใช้";
+"Delete" = "ลบ";
+"ProfileDisplayCountFormat" = "%lld จอ";
+"Rename Profile" = "เปลี่ยนชื่อโปรไฟล์";
+"Enter a new name for this profile." = "กรอกชื่อใหม่สำหรับโปรไฟล์นี้";
+"Save" = "บันทึก";
+"Cancel" = "ยกเลิก";
+"Auto-apply profile when an external display connects" = "ใช้โปรไฟล์อัตโนมัติเมื่อเชื่อมต่อจอภายนอก";
+"Profile to apply" = "โปรไฟล์ที่จะใช้";
+"LastAppliedFormat" = "ใช้ล่าสุด: %@";
+"ProfileDefaultNameFormat" = "โปรไฟล์ %lld";
+
+/* Display Labels */
+"DisplayNameExternalFormat" = "ภายนอก %lld";
+"DisplayNameInternalFormat" = "ภายใน %lld";
+"DisplayNameUnknownFormat" = "จอ %d";
+"InternalDisplayMarker" = "INT";
+"ScaledSuffix" = " (สเกล)";
+
+/* Display Status */
+"Blackout" = "มืดจอ";
+"Sleep requested" = "ร้องขอให้นอน";
+"Visible" = "มองเห็น";
+"DisplayRowStatusFormat" = "%@ • DDC %@ • %@";
+
+/* DDC */
+"Supported" = "รองรับ";
+"Not Supported" = "ไม่รองรับ";
+"Unknown" = "ไม่ทราบ";
+"DDC not supported" = "ไม่รองรับ DDC";
+"Display service unavailable" = "บริการจอไม่พร้อมใช้งาน";
+"DDCOpenFailedFormat" = "เปิด DDC ล้มเหลว (0x%@)";
+"DDCRequestFailedFormat" = "คำขอ DDC ล้มเหลว (0x%@)";
+"Internal panel" = "พาเนลภายใน";
+
+/* Display Report */
+"DisplayReportTitle" = "รายงานจอ Dimly";
+"DisplayReportGeneratedFormat" = "สร้างเมื่อ: %@";
+"DisplayReportLineFormat" = "- %@ (%@)";
+"DisplayReportResolutionFormat" = "  ความละเอียด: %@";
+"DisplayReportRefreshFormat" = "  รีเฟรช: %@";
+"DisplayReportRefreshRateFormat" = "%.0f Hz";
+"DisplayReportRefreshNA" = "ไม่มี";
+"DisplayReportDDCFormat" = "  DDC: %@  %@";
+"DisplayReportIDFormat" = "  ID: %@";
+"Blackout Off" = "มืดจอปิด";
+
+/* About */
+"VersionFormat" = "เวอร์ชัน %@ (%@)";
+"© 2026 Jan Feuerbacher" = "© 2026 Jan Feuerbacher";
+"Dimly is a native Swift macOS utility for quickly blacking out external displays and managing sleep/wake." = "Dimly เป็นยูทิลิตี Swift บน macOS เพื่อทำจอภายนอกให้มืดอย่างรวดเร็วและจัดการโหมดสลีป/ปลุก";
+"Dimly is a native Swift macOS utility. This build includes a simple skeleton with menu bar support, login item toggle, and configurable hotkey." = "Dimly เป็นยูทิลิตี Swift บน macOS รุ่นนี้มีโครงง่ายๆ พร้อมรองรับแถบเมนู สวิตช์ไอเท็มล็อกอิน และฮอตคีย์ที่ตั้งค่าได้.";
+"Made in my free time - thanks for the support." = "ทำในเวลาว่างของฉัน - ขอบคุณสำหรับการสนับสนุน.";
+"GitHub Repo" = "ที่เก็บ GitHub";
+"Report an Issue" = "รายงานปัญหา";
+"Donate" = "บริจาค";
+
+/* Preview/Template */
+"This SwiftUI scaffold is ready for your ideas." = "โครง SwiftUI นี้พร้อมสำหรับไอเดียของคุณ.";
+"Increase Counter" = "เพิ่มตัวนับ";
+"Counter: %lld" = "ตัวนับ: %lld";
+"Run Placeholder Action" = "เรียกใช้การทำงานชั่วคราว";
+
+/* Hotkey Labels */
+"Cmd" = "Cmd";
+"Option" = "Option";
+"Shift" = "Shift";
+"Ctrl" = "Ctrl";
+"KeyFormat" = "Key %d";
+"Return" = "Return";
+"Tab" = "Tab";
+"Space" = "Space";
+"Forward Delete" = "Forward Delete";
+"Esc" = "Esc";
+"Help" = "Help";
+"Fn" = "Fn";
+"Home" = "Home";
+"End" = "End";
+"Page Up" = "Page Up";
+"Page Down" = "Page Down";
+"Left Arrow" = "Left Arrow";
+"Right Arrow" = "Right Arrow";
+"Up Arrow" = "Up Arrow";
+"Down Arrow" = "Down Arrow";
+"Keypad 0" = "Keypad 0";
+"Keypad 1" = "Keypad 1";
+"Keypad 2" = "Keypad 2";
+"Keypad 3" = "Keypad 3";
+"Keypad 4" = "Keypad 4";
+"Keypad 5" = "Keypad 5";
+"Keypad 6" = "Keypad 6";
+"Keypad 7" = "Keypad 7";
+"Keypad 8" = "Keypad 8";
+"Keypad 9" = "Keypad 9";
+"Keypad ," = "Keypad ,";
+"Keypad ." = "Keypad .";
+"Keypad Enter" = "Keypad Enter";
+"Keypad +" = "Keypad +";
+"Keypad -" = "Keypad -";
+"Keypad *" = "Keypad *";
+"Keypad /" = "Keypad /";
+"Keypad =" = "Keypad =";
+"Volume Up" = "Volume Up";
+"Volume Down" = "Volume Down";
+"Brightness Up" = "Brightness Up";
+"Brightness Down" = "Brightness Down";
+"Mute" = "Mute";
+"Play/Pause" = "Play/Pause";
+"Next Track" = "Next Track";
+"Previous Track" = "Previous Track";
+"Fast Forward" = "Fast Forward";
+"Rewind" = "Rewind";
+"Keyboard Brightness Up" = "Keyboard Brightness Up";
+"Keyboard Brightness Down" = "Keyboard Brightness Down";
+"Keyboard Brightness Toggle" = "Keyboard Brightness Toggle";

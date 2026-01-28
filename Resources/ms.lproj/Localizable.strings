@@ -1,0 +1,221 @@
+/* App Basics */
+"Dimly" = "Dimly";
+"About Dimly" = "Perihal Dimly";
+"Settings..." = "Tetapan...";
+"Check for Updates..." = "Semak kemas kini...";
+"Quit Dimly" = "Keluar Dimly";
+"Update could not be verified" = "Kemas kini tidak dapat disahkan";
+"Dimly couldn't verify the downloaded update. Please download the latest release directly from GitHub instead." = "Dimly tidak dapat mengesahkan kemas kini yang dimuat turun. Sila muat turun keluaran terkini terus dari GitHub.";
+"Open GitHub" = "Buka GitHub";
+
+/* Intro Window */
+"Welcome to Dimly" = "Selamat datang ke Dimly";
+"Your displays, one click away." = "Paparan anda, satu klik sahaja.";
+"Dimly lives in the menu bar." = "Dimly berada di bar menu.";
+"Look at the top-right of your screen for the display icon." = "Lihat ikon paparan di penjuru kanan atas skrin.";
+"Got it" = "Faham";
+"Menu bar" = "Bar menu";
+
+/* Menu Bar Overview */
+"DisplayCountFormat" = "%lld paparan disambung";
+"ExternalCountFormat" = "%lld luaran";
+"InternalCountFormat" = "%lld dalaman";
+"No displays detected" = "Tiada paparan dikesan";
+"All displays active" = "Semua paparan aktif";
+"Ready" = "Sedia";
+"Blackout On" = "Blackout aktif";
+
+/* Menu Bar Sections */
+"Quick Actions" = "Tindakan pantas";
+"External Displays" = "Paparan luaran";
+"Profiles" = "Profil";
+"App" = "Apl";
+
+/* Menu Bar Actions */
+"Toggle External Blackout" = "Togol blackout luaran";
+"Sleep Externals" = "Tidurkan luaran";
+"Wake Externals" = "Bangunkan luaran";
+"Panic: All On" = "Panikan: semua hidup";
+"Show Display Numbers" = "Tunjukkan nombor paparan";
+"Restore Display" = "Pulihkan paparan";
+"Blackout Display" = "Blackout paparan";
+"Sleep Display" = "Tidurkan paparan";
+"Wake Display" = "Bangunkan paparan";
+"Overlay Only (Never Sleep)" = "Overlay sahaja (tidak tidur)";
+"Rename Display..." = "Tukar nama paparan...";
+"Copy Display ID" = "Salin ID paparan";
+"Save Current Profile" = "Simpan profil semasa";
+"No profiles yet" = "Belum ada profil";
+"Apply Profile" = "Guna profil";
+"Copy Display Report" = "Salin laporan paparan";
+"Open Diagnostics Log" = "Buka log diagnostik";
+
+/* Settings Tabs */
+"General" = "Am";
+"Shortcuts" = "Pintasan";
+"Profiles" = "Profil";
+"About" = "Perihal";
+
+/* Settings General */
+"Launch at login" = "Lancarkan semasa log masuk";
+"Show menu bar icon" = "Tunjuk ikon bar menu";
+"Show Menu Bar Icon" = "Tunjuk ikon bar menu";
+"Hide Dock icon" = "Sembunyikan ikon Dock";
+"Hide the Dock icon and app switcher entry." = "Menyembunyikan ikon Dock dan entri penukar apl.";
+"Dimly stays running for hotkeys even when the menu bar icon is hidden." = "Dimly terus berjalan untuk hotkey walaupun ikon bar menu tersembunyi.";
+"Displays" = "Paparan";
+"Fade out on sleep/blackout" = "Pudar keluar ketika tidur/blackout";
+"Fade in on wake/restore" = "Pudar masuk ketika bangun/pulih";
+"Show display numbers on screens" = "Tunjukkan nombor paparan pada skrin";
+"No active displays detected." = "Tiada paparan aktif dikesan.";
+"Show introduction again" = "Tunjukkan pengenalan lagi";
+
+/* Settings Displays */
+"Internal" = "Dalaman";
+"External" = "Luaran";
+"DisplayTypeResolutionFormat" = "%@ • %@";
+"RefreshRateFormat" = "Kadar segar semula: %.0f Hz";
+"DisplayIDFormat" = "ID: %@";
+"DisplaySerialFormat" = "Siri: %@";
+"DDCStatusFormat" = "DDC: %@";
+"Standby" = "Siaga";
+"Wake" = "Bangun";
+"Rename" = "Tukar nama";
+"Rename Display" = "Tukar nama paparan";
+"Give this display a friendly name." = "Berikan paparan ini nama mesra.";
+
+/* Settings Shortcuts */
+"Add Hotkey" = "Tambah pintasan";
+"No hotkeys set yet" = "Belum ada pintasan ditetapkan";
+"Add a hotkey to quickly toggle blackout or sleep/wake." = "Tambah pintasan untuk menukar blackout atau tidur/bangun dengan cepat.";
+"Display" = "Paparan";
+"Action" = "Tindakan";
+"All External Displays" = "Semua paparan luaran";
+"Toggle Blackout" = "Tukar blackout";
+"Toggle Sleep/Wake" = "Tukar tidur/bangun";
+"MissingDisplayFormat" = "Paparan hilang (%@)";
+"Global shortcuts" = "Pintasan global";
+"Panic hotkey (fixed):" = "Hotkey panik (tetap):";
+"Not set" = "Belum ditetapkan";
+"Press keys" = "Tekan kekunci";
+"Change" = "Tukar";
+
+/* Settings Profiles */
+"Save Current Setup" = "Simpan tetapan semasa";
+"Profile name" = "Nama profil";
+"No profiles yet. Save the current display setup to create one." = "Belum ada profil. Simpan tetapan paparan semasa untuk membuat satu.";
+"Apply" = "Guna";
+"Delete" = "Padam";
+"ProfileDisplayCountFormat" = "%lld paparan";
+"Rename Profile" = "Tukar nama profil";
+"Enter a new name for this profile." = "Masukkan nama baharu untuk profil ini.";
+"Save" = "Simpan";
+"Cancel" = "Batal";
+"Auto-apply profile when an external display connects" = "Guna profil secara automatik apabila paparan luaran disambung";
+"Profile to apply" = "Profil untuk diguna";
+"LastAppliedFormat" = "Terakhir digunakan: %@";
+"ProfileDefaultNameFormat" = "Profil %lld";
+
+/* Display Labels */
+"DisplayNameExternalFormat" = "Luaran %lld";
+"DisplayNameInternalFormat" = "Dalaman %lld";
+"DisplayNameUnknownFormat" = "Paparan %d";
+"InternalDisplayMarker" = "INT";
+"ScaledSuffix" = " (diskala)";
+
+/* Display Status */
+"Blackout" = "Blackout";
+"Sleep requested" = "Diminta tidur";
+"Visible" = "Kelihatan";
+"DisplayRowStatusFormat" = "%@ • DDC %@ • %@";
+
+/* DDC */
+"Supported" = "Disokong";
+"Not Supported" = "Tidak disokong";
+"Unknown" = "Tidak diketahui";
+"DDC not supported" = "DDC tidak disokong";
+"Display service unavailable" = "Perkhidmatan paparan tidak tersedia";
+"DDCOpenFailedFormat" = "Gagal membuka DDC (0x%@)";
+"DDCRequestFailedFormat" = "Permintaan DDC gagal (0x%@)";
+"Internal panel" = "Panel dalaman";
+
+/* Display Report */
+"DisplayReportTitle" = "Laporan paparan Dimly";
+"DisplayReportGeneratedFormat" = "Dijana: %@";
+"DisplayReportLineFormat" = "- %@ (%@)";
+"DisplayReportResolutionFormat" = "  Resolusi: %@";
+"DisplayReportRefreshFormat" = "  Segar semula: %@";
+"DisplayReportRefreshRateFormat" = "%.0f Hz";
+"DisplayReportRefreshNA" = "t/b";
+"DisplayReportDDCFormat" = "  DDC: %@  %@";
+"DisplayReportIDFormat" = "  ID: %@";
+"Blackout Off" = "Blackout dimatikan";
+
+/* About */
+"VersionFormat" = "Versi %@ (%@)";
+"© 2026 Jan Feuerbacher" = "© 2026 Jan Feuerbacher";
+"Dimly is a native Swift macOS utility for quickly blacking out external displays and managing sleep/wake." = "Dimly ialah utiliti Swift asli macOS untuk memadam pantas paparan luaran dan mengurus tidur/bangun.";
+"Dimly is a native Swift macOS utility. This build includes a simple skeleton with menu bar support, login item toggle, and configurable hotkey." = "Dimly ialah utiliti Swift asli macOS. Binaan ini merangkumi rangka mudah dengan sokongan bar menu, togol item log masuk, dan hotkey boleh suai.";
+"Made in my free time - thanks for the support." = "Dibuat pada masa lapang saya - terima kasih atas sokongan.";
+"GitHub Repo" = "Repo GitHub";
+"Report an Issue" = "Laporkan isu";
+"Donate" = "Derma";
+
+/* Preview/Template */
+"This SwiftUI scaffold is ready for your ideas." = "Rangka SwiftUI ini sedia untuk idea anda.";
+"Increase Counter" = "Tambah kaunter";
+"Counter: %lld" = "Kaunter: %lld";
+"Run Placeholder Action" = "Jalankan tindakan placeholder";
+
+/* Hotkey Labels */
+"Cmd" = "Cmd";
+"Option" = "Option";
+"Shift" = "Shift";
+"Ctrl" = "Ctrl";
+"KeyFormat" = "Key %d";
+"Return" = "Return";
+"Tab" = "Tab";
+"Space" = "Space";
+"Forward Delete" = "Forward Delete";
+"Esc" = "Esc";
+"Help" = "Help";
+"Fn" = "Fn";
+"Home" = "Home";
+"End" = "End";
+"Page Up" = "Page Up";
+"Page Down" = "Page Down";
+"Left Arrow" = "Left Arrow";
+"Right Arrow" = "Right Arrow";
+"Up Arrow" = "Up Arrow";
+"Down Arrow" = "Down Arrow";
+"Keypad 0" = "Keypad 0";
+"Keypad 1" = "Keypad 1";
+"Keypad 2" = "Keypad 2";
+"Keypad 3" = "Keypad 3";
+"Keypad 4" = "Keypad 4";
+"Keypad 5" = "Keypad 5";
+"Keypad 6" = "Keypad 6";
+"Keypad 7" = "Keypad 7";
+"Keypad 8" = "Keypad 8";
+"Keypad 9" = "Keypad 9";
+"Keypad ," = "Keypad ,";
+"Keypad ." = "Keypad .";
+"Keypad Enter" = "Keypad Enter";
+"Keypad +" = "Keypad +";
+"Keypad -" = "Keypad -";
+"Keypad *" = "Keypad *";
+"Keypad /" = "Keypad /";
+"Keypad =" = "Keypad =";
+"Volume Up" = "Volume Up";
+"Volume Down" = "Volume Down";
+"Brightness Up" = "Brightness Up";
+"Brightness Down" = "Brightness Down";
+"Mute" = "Mute";
+"Play/Pause" = "Play/Pause";
+"Next Track" = "Next Track";
+"Previous Track" = "Previous Track";
+"Fast Forward" = "Fast Forward";
+"Rewind" = "Rewind";
+"Keyboard Brightness Up" = "Keyboard Brightness Up";
+"Keyboard Brightness Down" = "Keyboard Brightness Down";
+"Keyboard Brightness Toggle" = "Keyboard Brightness Toggle";

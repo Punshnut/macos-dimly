@@ -1,0 +1,221 @@
+/* App Basics */
+"Dimly" = "Dimly";
+"About Dimly" = "Σχετικά με το Dimly";
+"Settings..." = "Ρυθμίσεις...";
+"Check for Updates..." = "Έλεγχος για ενημερώσεις...";
+"Quit Dimly" = "Έξοδος από το Dimly";
+"Update could not be verified" = "Η ενημέρωση δεν μπόρεσε να επαληθευτεί";
+"Dimly couldn't verify the downloaded update. Please download the latest release directly from GitHub instead." = "Το Dimly δεν μπόρεσε να επαληθεύσει την ενημέρωση. Κατέβασε την πιο πρόσφατη έκδοση απευθείας από το GitHub.";
+"Open GitHub" = "Άνοιγμα GitHub";
+
+/* Intro Window */
+"Welcome to Dimly" = "Καλώς ήρθες στο Dimly";
+"Your displays, one click away." = "Οι οθόνες σου, ένα κλικ μακριά.";
+"Dimly lives in the menu bar." = "Το Dimly βρίσκεται στη γραμμή μενού.";
+"Look at the top-right of your screen for the display icon." = "Δες επάνω δεξιά για το εικονίδιο οθόνης.";
+"Got it" = "Εντάξει";
+"Menu bar" = "Γραμμή μενού";
+
+/* Menu Bar Overview */
+"DisplayCountFormat" = "%lld οθόνη(ες) συνδεδεμένη(ες)";
+"ExternalCountFormat" = "%lld εξωτερική";
+"InternalCountFormat" = "%lld εσωτερική";
+"No displays detected" = "Δεν εντοπίστηκαν οθόνες";
+"All displays active" = "Όλες οι οθόνες ενεργές";
+"Ready" = "Έτοιμο";
+"Blackout On" = "Blackout ενεργό";
+
+/* Menu Bar Sections */
+"Quick Actions" = "Γρήγορες ενέργειες";
+"External Displays" = "Εξωτερικές οθόνες";
+"Profiles" = "Προφίλ";
+"App" = "Εφαρμογή";
+
+/* Menu Bar Actions */
+"Toggle External Blackout" = "Εναλλαγή blackout εξωτερικών";
+"Sleep Externals" = "Ύπνος εξωτερικών";
+"Wake Externals" = "Αφύπνιση εξωτερικών";
+"Panic: All On" = "Πανικός: όλα ενεργά";
+"Show Display Numbers" = "Εμφάνιση αριθμών οθόνης";
+"Restore Display" = "Επαναφορά οθόνης";
+"Blackout Display" = "Σκοτείνιασμα οθόνης";
+"Sleep Display" = "Ύπνος οθόνης";
+"Wake Display" = "Αφύπνιση οθόνης";
+"Overlay Only (Never Sleep)" = "Μόνο επικάλυψη (ποτέ ύπνος)";
+"Rename Display..." = "Μετονομασία οθόνης...";
+"Copy Display ID" = "Αντιγραφή ID οθόνης";
+"Save Current Profile" = "Αποθήκευση τρέχοντος προφίλ";
+"No profiles yet" = "Δεν υπάρχουν προφίλ";
+"Apply Profile" = "Εφαρμογή προφίλ";
+"Copy Display Report" = "Αντιγραφή αναφοράς οθόνης";
+"Open Diagnostics Log" = "Άνοιγμα καταγραφής διαγνωστικών";
+
+/* Settings Tabs */
+"General" = "Γενικά";
+"Shortcuts" = "Συντομεύσεις";
+"Profiles" = "Προφίλ";
+"About" = "Πληροφορίες";
+
+/* Settings General */
+"Launch at login" = "Έναρξη με τη σύνδεση";
+"Show menu bar icon" = "Εμφάνιση εικονιδίου στη γραμμή";
+"Show Menu Bar Icon" = "Εμφάνιση εικονιδίου στη γραμμή";
+"Hide Dock icon" = "Απόκρυψη εικονιδίου Dock";
+"Hide the Dock icon and app switcher entry." = "Απόκρυψη εικονιδίου Dock και της καταχώρησης εναλλαγής εφαρμογών.";
+"Dimly stays running for hotkeys even when the menu bar icon is hidden." = "Το Dimly μένει ενεργό για συντομεύσεις ακόμη κι αν το εικονίδιο είναι κρυφό.";
+"Displays" = "Οθόνες";
+"Fade out on sleep/blackout" = "Σβήσιμο σε ύπνο/blackout";
+"Fade in on wake/restore" = "Άναμμα σε αφύπνιση/επαναφορά";
+"Show display numbers on screens" = "Εμφάνιση αριθμών στις οθόνες";
+"No active displays detected." = "Δεν εντοπίστηκαν ενεργές οθόνες.";
+"Show introduction again" = "Εμφάνιση εισαγωγής ξανά";
+
+/* Settings Displays */
+"Internal" = "Εσωτερική";
+"External" = "Εξωτερική";
+"DisplayTypeResolutionFormat" = "%@ • %@";
+"RefreshRateFormat" = "Ρυθμός ανανέωσης: %.0f Hz";
+"DisplayIDFormat" = "ID: %@";
+"DisplaySerialFormat" = "Σειριακό: %@";
+"DDCStatusFormat" = "DDC: %@";
+"Standby" = "Αναμονή";
+"Wake" = "Αφύπνιση";
+"Rename" = "Μετονομασία";
+"Rename Display" = "Μετονομασία οθόνης";
+"Give this display a friendly name." = "Δώσε σε αυτή την οθόνη ένα φιλικό όνομα.";
+
+/* Settings Shortcuts */
+"Add Hotkey" = "Προσθήκη συντόμευσης";
+"No hotkeys set yet" = "Δεν έχουν οριστεί ακόμη συντομεύσεις";
+"Add a hotkey to quickly toggle blackout or sleep/wake." = "Προσθέστε συντόμευση για γρήγορη εναλλαγή σκοτεινιάς ή ύπνου/αφύπνισης.";
+"Display" = "Οθόνη";
+"Action" = "Ενέργεια";
+"All External Displays" = "Όλες οι εξωτερικές οθόνες";
+"Toggle Blackout" = "Εναλλαγή σκοτεινιάς";
+"Toggle Sleep/Wake" = "Εναλλαγή ύπνου/αφύπνισης";
+"MissingDisplayFormat" = "Λείπει οθόνη (%@)";
+"Global shortcuts" = "Γενικές συντομεύσεις";
+"Panic hotkey (fixed):" = "Πλήκτρο πανικού (σταθερό):";
+"Not set" = "Δεν έχει οριστεί";
+"Press keys" = "Πάτησε πλήκτρα";
+"Change" = "Αλλαγή";
+
+/* Settings Profiles */
+"Save Current Setup" = "Αποθήκευση τρέχουσας διάταξης";
+"Profile name" = "Όνομα προφίλ";
+"No profiles yet. Save the current display setup to create one." = "Δεν υπάρχουν προφίλ. Αποθήκευσε την τρέχουσα διάταξη για να δημιουργήσεις ένα.";
+"Apply" = "Εφαρμογή";
+"Delete" = "Διαγραφή";
+"ProfileDisplayCountFormat" = "%lld οθόνη(ες)";
+"Rename Profile" = "Μετονομασία προφίλ";
+"Enter a new name for this profile." = "Πληκτρολόγησε νέο όνομα για αυτό το προφίλ.";
+"Save" = "Αποθήκευση";
+"Cancel" = "Ακύρωση";
+"Auto-apply profile when an external display connects" = "Αυτόματη εφαρμογή προφίλ όταν συνδέεται εξωτερική οθόνη";
+"Profile to apply" = "Προφίλ προς εφαρμογή";
+"LastAppliedFormat" = "Τελευταία εφαρμογή: %@";
+"ProfileDefaultNameFormat" = "Προφίλ %lld";
+
+/* Display Labels */
+"DisplayNameExternalFormat" = "Εξωτερική %lld";
+"DisplayNameInternalFormat" = "Εσωτερική %lld";
+"DisplayNameUnknownFormat" = "Οθόνη %d";
+"InternalDisplayMarker" = "INT";
+"ScaledSuffix" = " (κλιμακωμένη)";
+
+/* Display Status */
+"Blackout" = "Blackout";
+"Sleep requested" = "Αίτηση ύπνου";
+"Visible" = "Ορατό";
+"DisplayRowStatusFormat" = "%@ • DDC %@ • %@";
+
+/* DDC */
+"Supported" = "Υποστηρίζεται";
+"Not Supported" = "Δεν υποστηρίζεται";
+"Unknown" = "Άγνωστο";
+"DDC not supported" = "Το DDC δεν υποστηρίζεται";
+"Display service unavailable" = "Η υπηρεσία οθόνης δεν είναι διαθέσιμη";
+"DDCOpenFailedFormat" = "Αποτυχία ανοίγματος DDC (0x%@)";
+"DDCRequestFailedFormat" = "Αποτυχία αιτήματος DDC (0x%@)";
+"Internal panel" = "Εσωτερικό πάνελ";
+
+/* Display Report */
+"DisplayReportTitle" = "Αναφορά οθόνης Dimly";
+"DisplayReportGeneratedFormat" = "Δημιουργήθηκε: %@";
+"DisplayReportLineFormat" = "- %@ (%@)";
+"DisplayReportResolutionFormat" = "  Ανάλυση: %@";
+"DisplayReportRefreshFormat" = "  Ρυθμός ανανέωσης: %@";
+"DisplayReportRefreshRateFormat" = "%.0f Hz";
+"DisplayReportRefreshNA" = "μ/δ";
+"DisplayReportDDCFormat" = "  DDC: %@  %@";
+"DisplayReportIDFormat" = "  ID: %@";
+"Blackout Off" = "Blackout ανενεργό";
+
+/* About */
+"VersionFormat" = "Έκδοση %@ (%@)";
+"© 2026 Jan Feuerbacher" = "© 2026 Jan Feuerbacher";
+"Dimly is a native Swift macOS utility for quickly blacking out external displays and managing sleep/wake." = "Το Dimly είναι ένα εγγενές εργαλείο Swift για macOS που σκοτεινιάζει γρήγορα εξωτερικές οθόνες και διαχειρίζεται ύπνο/αφύπνιση.";
+"Dimly is a native Swift macOS utility. This build includes a simple skeleton with menu bar support, login item toggle, and configurable hotkey." = "Το Dimly είναι εγγενές εργαλείο Swift για macOS. Αυτή η έκδοση περιλαμβάνει ένα απλό περίγραμμα με υποστήριξη γραμμής μενού, εναλλαγή στοιχείου σύνδεσης και ρυθμιζόμενο πλήκτρο.";
+"Made in my free time - thanks for the support." = "Φτιαγμένο στον ελεύθερο χρόνο μου - ευχαριστώ για τη στήριξη.";
+"GitHub Repo" = "Αποθετήριο GitHub";
+"Report an Issue" = "Αναφορά προβλήματος";
+"Donate" = "Δωρεά";
+
+/* Preview/Template */
+"This SwiftUI scaffold is ready for your ideas." = "Αυτός ο σκελετός SwiftUI είναι έτοιμος για τις ιδέες σου.";
+"Increase Counter" = "Αύξηση μετρητή";
+"Counter: %lld" = "Μετρητής: %lld";
+"Run Placeholder Action" = "Εκτέλεση δοκιμαστικής ενέργειας";
+
+/* Hotkey Labels */
+"Cmd" = "Cmd";
+"Option" = "Option";
+"Shift" = "Shift";
+"Ctrl" = "Ctrl";
+"KeyFormat" = "Key %d";
+"Return" = "Return";
+"Tab" = "Tab";
+"Space" = "Space";
+"Forward Delete" = "Forward Delete";
+"Esc" = "Esc";
+"Help" = "Help";
+"Fn" = "Fn";
+"Home" = "Home";
+"End" = "End";
+"Page Up" = "Page Up";
+"Page Down" = "Page Down";
+"Left Arrow" = "Left Arrow";
+"Right Arrow" = "Right Arrow";
+"Up Arrow" = "Up Arrow";
+"Down Arrow" = "Down Arrow";
+"Keypad 0" = "Keypad 0";
+"Keypad 1" = "Keypad 1";
+"Keypad 2" = "Keypad 2";
+"Keypad 3" = "Keypad 3";
+"Keypad 4" = "Keypad 4";
+"Keypad 5" = "Keypad 5";
+"Keypad 6" = "Keypad 6";
+"Keypad 7" = "Keypad 7";
+"Keypad 8" = "Keypad 8";
+"Keypad 9" = "Keypad 9";
+"Keypad ," = "Keypad ,";
+"Keypad ." = "Keypad .";
+"Keypad Enter" = "Keypad Enter";
+"Keypad +" = "Keypad +";
+"Keypad -" = "Keypad -";
+"Keypad *" = "Keypad *";
+"Keypad /" = "Keypad /";
+"Keypad =" = "Keypad =";
+"Volume Up" = "Volume Up";
+"Volume Down" = "Volume Down";
+"Brightness Up" = "Brightness Up";
+"Brightness Down" = "Brightness Down";
+"Mute" = "Mute";
+"Play/Pause" = "Play/Pause";
+"Next Track" = "Next Track";
+"Previous Track" = "Previous Track";
+"Fast Forward" = "Fast Forward";
+"Rewind" = "Rewind";
+"Keyboard Brightness Up" = "Keyboard Brightness Up";
+"Keyboard Brightness Down" = "Keyboard Brightness Down";
+"Keyboard Brightness Toggle" = "Keyboard Brightness Toggle";

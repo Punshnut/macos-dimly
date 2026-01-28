@@ -1,0 +1,221 @@
+/* App Basics */
+"Dimly" = "Dimly";
+"About Dimly" = "Tietoja Dimlystä";
+"Settings..." = "Asetukset...";
+"Check for Updates..." = "Tarkista päivitykset...";
+"Quit Dimly" = "Lopeta Dimly";
+"Update could not be verified" = "Päivitystä ei voitu varmistaa";
+"Dimly couldn't verify the downloaded update. Please download the latest release directly from GitHub instead." = "Dimly ei voinut varmistaa ladattua päivitystä. Lataa uusin julkaisu suoraan GitHubista.";
+"Open GitHub" = "Avaa GitHub";
+
+/* Intro Window */
+"Welcome to Dimly" = "Tervetuloa Dimlyyn";
+"Your displays, one click away." = "Näyttösi ovat vain klikkauksen päässä.";
+"Dimly lives in the menu bar." = "Dimly on valikkorivillä.";
+"Look at the top-right of your screen for the display icon." = "Katso näytön oikeaan yläkulmaan näyttökuvaketta.";
+"Got it" = "Selvä";
+"Menu bar" = "Valikkorivi";
+
+/* Menu Bar Overview */
+"DisplayCountFormat" = "%lld näyttö(ä) yhdistetty";
+"ExternalCountFormat" = "%lld ulkoinen";
+"InternalCountFormat" = "%lld sisäinen";
+"No displays detected" = "Näyttöjä ei havaittu";
+"All displays active" = "Kaikki näytöt aktiivisia";
+"Ready" = "Valmis";
+"Blackout On" = "Pimennys päällä";
+
+/* Menu Bar Sections */
+"Quick Actions" = "Pikatoiminnot";
+"External Displays" = "Ulkoiset näytöt";
+"Profiles" = "Profiilit";
+"App" = "Sovellus";
+
+/* Menu Bar Actions */
+"Toggle External Blackout" = "Vaihda ulkoisten pimennystä";
+"Sleep Externals" = "Nukuta ulkoiset";
+"Wake Externals" = "Herätä ulkoiset";
+"Panic: All On" = "Paniikki: kaikki päälle";
+"Show Display Numbers" = "Näytä näyttönumerot";
+"Restore Display" = "Palauta näyttö";
+"Blackout Display" = "Pimennä näyttö";
+"Sleep Display" = "Nukuta näyttö";
+"Wake Display" = "Herätä näyttö";
+"Overlay Only (Never Sleep)" = "Vain peite (ei unta)";
+"Rename Display..." = "Nimeä näyttö uudelleen...";
+"Copy Display ID" = "Kopioi näytön ID";
+"Save Current Profile" = "Tallenna nykyinen profiili";
+"No profiles yet" = "Ei vielä profiileja";
+"Apply Profile" = "Käytä profiilia";
+"Copy Display Report" = "Kopioi näyttöraportti";
+"Open Diagnostics Log" = "Avaa diagnostiikkaloki";
+
+/* Settings Tabs */
+"General" = "Yleiset";
+"Shortcuts" = "Pikanäppäimet";
+"Profiles" = "Profiilit";
+"About" = "Tietoja";
+
+/* Settings General */
+"Launch at login" = "Käynnistä kirjautuessa";
+"Show menu bar icon" = "Näytä valikkorivin kuvake";
+"Show Menu Bar Icon" = "Näytä valikkorivin kuvake";
+"Hide Dock icon" = "Piilota Dock-kuvake";
+"Hide the Dock icon and app switcher entry." = "Piilottaa Dock-kuvakkeen ja sovellusten vaihtajan kohdan.";
+"Dimly stays running for hotkeys even when the menu bar icon is hidden." = "Dimly pysyy käynnissä pikanäppäimiä varten, vaikka kuvake olisi piilossa.";
+"Displays" = "Näytöt";
+"Fade out on sleep/blackout" = "Häivytä unessa/pimennyksessä";
+"Fade in on wake/restore" = "Häivytä esiin herätessä/palauttaessa";
+"Show display numbers on screens" = "Näytä näyttönumerot";
+"No active displays detected." = "Aktiivisia näyttöjä ei havaittu.";
+"Show introduction again" = "Näytä esittely uudelleen";
+
+/* Settings Displays */
+"Internal" = "Sisäinen";
+"External" = "Ulkoinen";
+"DisplayTypeResolutionFormat" = "%@ • %@";
+"RefreshRateFormat" = "Virkistys: %.0f Hz";
+"DisplayIDFormat" = "ID: %@";
+"DisplaySerialFormat" = "Sarjanumero: %@";
+"DDCStatusFormat" = "DDC: %@";
+"Standby" = "Valmiustila";
+"Wake" = "Herätä";
+"Rename" = "Nimeä uudelleen";
+"Rename Display" = "Nimeä näyttö uudelleen";
+"Give this display a friendly name." = "Anna tälle näytölle ystävällinen nimi.";
+
+/* Settings Shortcuts */
+"Add Hotkey" = "Lisää pikanäppäin";
+"No hotkeys set yet" = "Pikanäppäimiä ei ole vielä asetettu";
+"Add a hotkey to quickly toggle blackout or sleep/wake." = "Lisää pikanäppäin, jotta voit vaihtaa nopeasti pimenemistä tai nukkumista/herätystä.";
+"Display" = "Näyttö";
+"Action" = "Toiminto";
+"All External Displays" = "Kaikki ulkoiset näytöt";
+"Toggle Blackout" = "Vaihda pimeneminen";
+"Toggle Sleep/Wake" = "Vaihda nukkuminen/herätys";
+"MissingDisplayFormat" = "Puuttuva näyttö (%@)";
+"Global shortcuts" = "Yleiset pikanäppäimet";
+"Panic hotkey (fixed):" = "Hätäpikanäppäin (kiinteä):";
+"Not set" = "Ei asetettu";
+"Press keys" = "Paina näppäimiä";
+"Change" = "Vaihda";
+
+/* Settings Profiles */
+"Save Current Setup" = "Tallenna nykyinen asetus";
+"Profile name" = "Profiilin nimi";
+"No profiles yet. Save the current display setup to create one." = "Ei profiileja. Tallenna nykyinen näyttöasetus luodaksesi yhden.";
+"Apply" = "Käytä";
+"Delete" = "Poista";
+"ProfileDisplayCountFormat" = "%lld näyttö(ä)";
+"Rename Profile" = "Nimeä profiili";
+"Enter a new name for this profile." = "Anna uusi nimi tälle profiilille.";
+"Save" = "Tallenna";
+"Cancel" = "Peruuta";
+"Auto-apply profile when an external display connects" = "Käytä profiilia automaattisesti kun ulkoinen näyttö kytketään";
+"Profile to apply" = "Käytettävä profiili";
+"LastAppliedFormat" = "Viimeksi käytetty: %@";
+"ProfileDefaultNameFormat" = "Profiili %lld";
+
+/* Display Labels */
+"DisplayNameExternalFormat" = "Ulkoinen %lld";
+"DisplayNameInternalFormat" = "Sisäinen %lld";
+"DisplayNameUnknownFormat" = "Näyttö %d";
+"InternalDisplayMarker" = "INT";
+"ScaledSuffix" = " (skaalattu)";
+
+/* Display Status */
+"Blackout" = "Pimennys";
+"Sleep requested" = "Uni pyydetty";
+"Visible" = "Näkyvissä";
+"DisplayRowStatusFormat" = "%@ • DDC %@ • %@";
+
+/* DDC */
+"Supported" = "Tuettu";
+"Not Supported" = "Ei tuettu";
+"Unknown" = "Tuntematon";
+"DDC not supported" = "DDC ei tuettu";
+"Display service unavailable" = "Näyttöpalvelu ei käytettävissä";
+"DDCOpenFailedFormat" = "DDC-avauksen epäonnistuminen (0x%@)";
+"DDCRequestFailedFormat" = "DDC-pyyntö epäonnistui (0x%@)";
+"Internal panel" = "Sisäinen paneeli";
+
+/* Display Report */
+"DisplayReportTitle" = "Dimly näyttöraportti";
+"DisplayReportGeneratedFormat" = "Luotu: %@";
+"DisplayReportLineFormat" = "- %@ (%@)";
+"DisplayReportResolutionFormat" = "  Tarkkuus: %@";
+"DisplayReportRefreshFormat" = "  Virkistys: %@";
+"DisplayReportRefreshRateFormat" = "%.0f Hz";
+"DisplayReportRefreshNA" = "ei saat.";
+"DisplayReportDDCFormat" = "  DDC: %@  %@";
+"DisplayReportIDFormat" = "  ID: %@";
+"Blackout Off" = "Pimennys pois";
+
+/* About */
+"VersionFormat" = "Versio %@ (%@)";
+"© 2026 Jan Feuerbacher" = "© 2026 Jan Feuerbacher";
+"Dimly is a native Swift macOS utility for quickly blacking out external displays and managing sleep/wake." = "Dimly on macOS:n Swift-työkalu ulkoisten näyttöjen pikaiseen pimennykseen ja uni/herätys-hallintaan.";
+"Dimly is a native Swift macOS utility. This build includes a simple skeleton with menu bar support, login item toggle, and configurable hotkey." = "Dimly on macOS:n natiivin Swiftin työkalu. Tämä versio sisältää yksinkertaisen rungon, jossa on valikkorivituki, kirjautumiskohdan kytkin ja muokattava pikanäppäin.";
+"Made in my free time - thanks for the support." = "Tehty vapaa-ajallani – kiitos tuesta.";
+"GitHub Repo" = "GitHub-repo";
+"Report an Issue" = "Ilmoita ongelmasta";
+"Donate" = "Lahjoita";
+
+/* Preview/Template */
+"This SwiftUI scaffold is ready for your ideas." = "Tämä SwiftUI-ranka on valmis ideoillesi.";
+"Increase Counter" = "Lisää laskuria";
+"Counter: %lld" = "Laskuri: %lld";
+"Run Placeholder Action" = "Suorita mallitoiminto";
+
+/* Hotkey Labels */
+"Cmd" = "Cmd";
+"Option" = "Option";
+"Shift" = "Shift";
+"Ctrl" = "Ctrl";
+"KeyFormat" = "Key %d";
+"Return" = "Return";
+"Tab" = "Tab";
+"Space" = "Space";
+"Forward Delete" = "Forward Delete";
+"Esc" = "Esc";
+"Help" = "Help";
+"Fn" = "Fn";
+"Home" = "Home";
+"End" = "End";
+"Page Up" = "Page Up";
+"Page Down" = "Page Down";
+"Left Arrow" = "Left Arrow";
+"Right Arrow" = "Right Arrow";
+"Up Arrow" = "Up Arrow";
+"Down Arrow" = "Down Arrow";
+"Keypad 0" = "Keypad 0";
+"Keypad 1" = "Keypad 1";
+"Keypad 2" = "Keypad 2";
+"Keypad 3" = "Keypad 3";
+"Keypad 4" = "Keypad 4";
+"Keypad 5" = "Keypad 5";
+"Keypad 6" = "Keypad 6";
+"Keypad 7" = "Keypad 7";
+"Keypad 8" = "Keypad 8";
+"Keypad 9" = "Keypad 9";
+"Keypad ," = "Keypad ,";
+"Keypad ." = "Keypad .";
+"Keypad Enter" = "Keypad Enter";
+"Keypad +" = "Keypad +";
+"Keypad -" = "Keypad -";
+"Keypad *" = "Keypad *";
+"Keypad /" = "Keypad /";
+"Keypad =" = "Keypad =";
+"Volume Up" = "Volume Up";
+"Volume Down" = "Volume Down";
+"Brightness Up" = "Brightness Up";
+"Brightness Down" = "Brightness Down";
+"Mute" = "Mute";
+"Play/Pause" = "Play/Pause";
+"Next Track" = "Next Track";
+"Previous Track" = "Previous Track";
+"Fast Forward" = "Fast Forward";
+"Rewind" = "Rewind";
+"Keyboard Brightness Up" = "Keyboard Brightness Up";
+"Keyboard Brightness Down" = "Keyboard Brightness Down";
+"Keyboard Brightness Toggle" = "Keyboard Brightness Toggle";

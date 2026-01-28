@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rss version="2.0"
+     xmlns:sparkle="http://www.andymatuschak.org/xml-namespaces/sparkle"
+     xmlns:dc="http://purl.org/dc/elements/1.1/">
+  <channel>
+    <title>Dimly Updates</title>
+    <link>https://github.com/Punshnut/dimly</link>
+    <description>Release notes for Dimly</description>
+    <language>en</language>
+
+    <item>
+      <title>Dimly 1.0</title>
+      <pubDate>Wed, 28 Jan 2026 10:53:46 +0100</pubDate>
+      <enclosure
+    url="https://github.com/Punshnut/dimly/releases/latest/download/Dimly.dmg"
+    sparkle:shortVersionString="1.0"
+    sparkle:version="1.0"
+    length="3826770"
+    type="application/octet-stream"
+    sparkle:edSignature="tRN0a9he6l7SlbACzQEK03Hdov7fDBj0RM1jQBb7dzMjV844QFEvelFeUJUgSB9FfqfeP1WcB+oXE7pK6m+qCw==" />
+      <sparkle:minimumSystemVersion>13.0</sparkle:minimumSystemVersion>
+    </item>
+  </channel>
+</rss>

@@ -1,0 +1,221 @@
+/* App Basics */
+"Dimly" = "Dimly";
+"About Dimly" = "Tungkol sa Dimly";
+"Settings..." = "Mga setting...";
+"Check for Updates..." = "Tingnan ang mga update...";
+"Quit Dimly" = "Isara ang Dimly";
+"Update could not be verified" = "Hindi ma-verify ang update";
+"Dimly couldn't verify the downloaded update. Please download the latest release directly from GitHub instead." = "Hindi na-verify ng Dimly ang na-download na update. Mangyaring kunin ang pinakabagong bersyon direkta sa GitHub.";
+"Open GitHub" = "Buksan ang GitHub";
+
+/* Intro Window */
+"Welcome to Dimly" = "Maligayang pagdating sa Dimly";
+"Your displays, one click away." = "Isang click lang ang layo ng iyong mga display.";
+"Dimly lives in the menu bar." = "Matatagpuan ang Dimly sa menu bar.";
+"Look at the top-right of your screen for the display icon." = "Hanapin ang icon ng display sa kanang-itaas ng screen.";
+"Got it" = "Nakuha";
+"Menu bar" = "Menu bar";
+
+/* Menu Bar Overview */
+"DisplayCountFormat" = "%lld display na nakakonekta";
+"ExternalCountFormat" = "%lld panlabas";
+"InternalCountFormat" = "%lld panloob";
+"No displays detected" = "Walang natukoy na display";
+"All displays active" = "Lahat ng display ay aktibo";
+"Ready" = "Handa";
+"Blackout On" = "Blackout naka-on";
+
+/* Menu Bar Sections */
+"Quick Actions" = "Mabilis na aksyon";
+"External Displays" = "Panlabas na display";
+"Profiles" = "Mga profile";
+"App" = "App";
+
+/* Menu Bar Actions */
+"Toggle External Blackout" = "I-toggle ang panlabas na blackout";
+"Sleep Externals" = "Patulugin ang panlabas";
+"Wake Externals" = "Gisingin ang panlabas";
+"Panic: All On" = "Panic: lahat bukas";
+"Show Display Numbers" = "Ipakita ang mga numero ng display";
+"Restore Display" = "Ibalik ang display";
+"Blackout Display" = "Iblackout ang display";
+"Sleep Display" = "Patulugin ang display";
+"Wake Display" = "Gisingin ang display";
+"Overlay Only (Never Sleep)" = "Overlay lang (hindi kailanman sleep)";
+"Rename Display..." = "Palitan ang pangalan ng display...";
+"Copy Display ID" = "Kopyahin ang ID ng display";
+"Save Current Profile" = "I-save ang kasalukuyang profile";
+"No profiles yet" = "Wala pang profile";
+"Apply Profile" = "Ilapat ang profile";
+"Copy Display Report" = "Kopyahin ang ulat ng display";
+"Open Diagnostics Log" = "Buksan ang diagnostics log";
+
+/* Settings Tabs */
+"General" = "Pangkalahatan";
+"Shortcuts" = "Mga shortcut";
+"Profiles" = "Mga profile";
+"About" = "Tungkol";
+
+/* Settings General */
+"Launch at login" = "Buksan sa pag-login";
+"Show menu bar icon" = "Ipakita ang icon sa menu bar";
+"Show Menu Bar Icon" = "Ipakita ang icon sa menu bar";
+"Hide Dock icon" = "Itago ang icon sa Dock";
+"Hide the Dock icon and app switcher entry." = "Itinatago ang icon sa Dock at entry sa app switcher.";
+"Dimly stays running for hotkeys even when the menu bar icon is hidden." = "Patuloy na tumatakbo ang Dimly para sa hotkeys kahit nakatago ang icon sa menu bar.";
+"Displays" = "Mga display";
+"Fade out on sleep/blackout" = "Mag-fade out kapag sleep/blackout";
+"Fade in on wake/restore" = "Mag-fade in kapag wake/restore";
+"Show display numbers on screens" = "Ipakita ang mga numero ng display sa screen";
+"No active displays detected." = "Walang aktibong display na natukoy.";
+"Show introduction again" = "Ipakita muli ang pagpapakilala";
+
+/* Settings Displays */
+"Internal" = "Panloob";
+"External" = "Panlabas";
+"DisplayTypeResolutionFormat" = "%@ • %@";
+"RefreshRateFormat" = "Refresh: %.0f Hz";
+"DisplayIDFormat" = "ID: %@";
+"DisplaySerialFormat" = "Serial: %@";
+"DDCStatusFormat" = "DDC: %@";
+"Standby" = "Standby";
+"Wake" = "Gising";
+"Rename" = "Palitan ang pangalan";
+"Rename Display" = "Palitan ang pangalan ng display";
+"Give this display a friendly name." = "Bigyan ang display na ito ng magiliw na pangalan.";
+
+/* Settings Shortcuts */
+"Add Hotkey" = "Magdagdag ng hotkey";
+"No hotkeys set yet" = "Wala pang naka-set na hotkey";
+"Add a hotkey to quickly toggle blackout or sleep/wake." = "Magdagdag ng hotkey para mabilis na i-toggle ang blackout o sleep/wake.";
+"Display" = "Display";
+"Action" = "Aksyon";
+"All External Displays" = "Lahat ng external na display";
+"Toggle Blackout" = "I-toggle ang blackout";
+"Toggle Sleep/Wake" = "I-toggle ang sleep/wake";
+"MissingDisplayFormat" = "Nawawalang display (%@)";
+"Global shortcuts" = "Pandaigdigang shortcut";
+"Panic hotkey (fixed):" = "Panic hotkey (nakapirmi):";
+"Not set" = "Hindi nakatakda";
+"Press keys" = "Pindutin ang mga key";
+"Change" = "Palitan";
+
+/* Settings Profiles */
+"Save Current Setup" = "I-save ang kasalukuyang setup";
+"Profile name" = "Pangalan ng profile";
+"No profiles yet. Save the current display setup to create one." = "Wala pang profile. I-save ang kasalukuyang setup ng display upang gumawa ng isa.";
+"Apply" = "Ilapat";
+"Delete" = "Tanggalin";
+"ProfileDisplayCountFormat" = "%lld display";
+"Rename Profile" = "Palitan ang pangalan ng profile";
+"Enter a new name for this profile." = "Maglagay ng bagong pangalan para sa profile na ito.";
+"Save" = "I-save";
+"Cancel" = "Kanselahin";
+"Auto-apply profile when an external display connects" = "Awtomatikong ilapat ang profile kapag kumonekta ang panlabas na display";
+"Profile to apply" = "Profile na ilalapat";
+"LastAppliedFormat" = "Huling inilapat: %@";
+"ProfileDefaultNameFormat" = "Profile %lld";
+
+/* Display Labels */
+"DisplayNameExternalFormat" = "Panlabas %lld";
+"DisplayNameInternalFormat" = "Panloob %lld";
+"DisplayNameUnknownFormat" = "Display %d";
+"InternalDisplayMarker" = "INT";
+"ScaledSuffix" = " (scaled)";
+
+/* Display Status */
+"Blackout" = "Blackout";
+"Sleep requested" = "Hiningi ang sleep";
+"Visible" = "Nakikita";
+"DisplayRowStatusFormat" = "%@ • DDC %@ • %@";
+
+/* DDC */
+"Supported" = "Sinusuportahan";
+"Not Supported" = "Hindi sinusuportahan";
+"Unknown" = "Hindi kilala";
+"DDC not supported" = "Hindi sinusuportahan ang DDC";
+"Display service unavailable" = "Hindi magagamit ang serbisyo ng display";
+"DDCOpenFailedFormat" = "Nabigong buksan ang DDC (0x%@)";
+"DDCRequestFailedFormat" = "Nabigong request ng DDC (0x%@)";
+"Internal panel" = "Panloob na panel";
+
+/* Display Report */
+"DisplayReportTitle" = "Ulat ng display ng Dimly";
+"DisplayReportGeneratedFormat" = "Nabuo: %@";
+"DisplayReportLineFormat" = "- %@ (%@)";
+"DisplayReportResolutionFormat" = "  Res: %@";
+"DisplayReportRefreshFormat" = "  Refresh: %@";
+"DisplayReportRefreshRateFormat" = "%.0f Hz";
+"DisplayReportRefreshNA" = "n/a";
+"DisplayReportDDCFormat" = "  DDC: %@  %@";
+"DisplayReportIDFormat" = "  ID: %@";
+"Blackout Off" = "Blackout naka-off";
+
+/* About */
+"VersionFormat" = "Bersyon %@ (%@)";
+"© 2026 Jan Feuerbacher" = "© 2026 Jan Feuerbacher";
+"Dimly is a native Swift macOS utility for quickly blacking out external displays and managing sleep/wake." = "Ang Dimly ay native na Swift na utility sa macOS para mabilis na i-blackout ang panlabas na display at pamahalaan ang sleep/wake.";
+"Dimly is a native Swift macOS utility. This build includes a simple skeleton with menu bar support, login item toggle, and configurable hotkey." = "Ang Dimly ay native na Swift utility sa macOS. Kasama sa build na ito ang simpleng skeleton na may suporta sa menu bar, toggle ng login item, at nako-configure na hotkey.";
+"Made in my free time - thanks for the support." = "Ginawa ko sa libreng oras – salamat sa suporta.";
+"GitHub Repo" = "Repo sa GitHub";
+"Report an Issue" = "I-report ang isyu";
+"Donate" = "Mag-donate";
+
+/* Preview/Template */
+"This SwiftUI scaffold is ready for your ideas." = "Handa na ang SwiftUI scaffold na ito para sa iyong mga ideya.";
+"Increase Counter" = "Dagdagan ang counter";
+"Counter: %lld" = "Counter: %lld";
+"Run Placeholder Action" = "Patakbuhin ang placeholder action";
+
+/* Hotkey Labels */
+"Cmd" = "Cmd";
+"Option" = "Option";
+"Shift" = "Shift";
+"Ctrl" = "Ctrl";
+"KeyFormat" = "Key %d";
+"Return" = "Return";
+"Tab" = "Tab";
+"Space" = "Space";
+"Forward Delete" = "Forward Delete";
+"Esc" = "Esc";
+"Help" = "Help";
+"Fn" = "Fn";
+"Home" = "Home";
+"End" = "End";
+"Page Up" = "Page Up";
+"Page Down" = "Page Down";
+"Left Arrow" = "Left Arrow";
+"Right Arrow" = "Right Arrow";
+"Up Arrow" = "Up Arrow";
+"Down Arrow" = "Down Arrow";
+"Keypad 0" = "Keypad 0";
+"Keypad 1" = "Keypad 1";
+"Keypad 2" = "Keypad 2";
+"Keypad 3" = "Keypad 3";
+"Keypad 4" = "Keypad 4";
+"Keypad 5" = "Keypad 5";
+"Keypad 6" = "Keypad 6";
+"Keypad 7" = "Keypad 7";
+"Keypad 8" = "Keypad 8";
+"Keypad 9" = "Keypad 9";
+"Keypad ," = "Keypad ,";
+"Keypad ." = "Keypad .";
+"Keypad Enter" = "Keypad Enter";
+"Keypad +" = "Keypad +";
+"Keypad -" = "Keypad -";
+"Keypad *" = "Keypad *";
+"Keypad /" = "Keypad /";
+"Keypad =" = "Keypad =";
+"Volume Up" = "Volume Up";
+"Volume Down" = "Volume Down";
+"Brightness Up" = "Brightness Up";
+"Brightness Down" = "Brightness Down";
+"Mute" = "Mute";
+"Play/Pause" = "Play/Pause";
+"Next Track" = "Next Track";
+"Previous Track" = "Previous Track";
+"Fast Forward" = "Fast Forward";
+"Rewind" = "Rewind";
+"Keyboard Brightness Up" = "Keyboard Brightness Up";
+"Keyboard Brightness Down" = "Keyboard Brightness Down";
+"Keyboard Brightness Toggle" = "Keyboard Brightness Toggle";

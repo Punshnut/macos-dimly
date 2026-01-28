@@ -1,0 +1,221 @@
+/* App Basics */
+"Dimly" = "Dimly";
+"About Dimly" = "Game da Dimly";
+"Settings..." = "Saituna...";
+"Check for Updates..." = "Duba sabuntawa...";
+"Quit Dimly" = "Rufe Dimly";
+"Update could not be verified" = "Ba a iya tabbatar da sabuntawar ba";
+"Dimly couldn't verify the downloaded update. Please download the latest release directly from GitHub instead." = "Dimly ba ta iya tabbatar da sabuntawar da aka sauke ba. Don Allah sauke sabon sigar kai tsaye daga GitHub.";
+"Open GitHub" = "Bude GitHub";
+
+/* Intro Window */
+"Welcome to Dimly" = "Barka da zuwa Dimly";
+"Your displays, one click away." = "Nuna-allon ka, danna guda daya kacal.";
+"Dimly lives in the menu bar." = "Dimly yana cikin sandar menu.";
+"Look at the top-right of your screen for the display icon." = "Duba saman dama na allonka don gunkin nunawa.";
+"Got it" = "Na gane";
+"Menu bar" = "Sandar menu";
+
+/* Menu Bar Overview */
+"DisplayCountFormat" = "%lld allo(na) an haɗa";
+"ExternalCountFormat" = "%lld na waje";
+"InternalCountFormat" = "%lld na ciki";
+"No displays detected" = "Ba a gano kowane allo ba";
+"All displays active" = "Dukkan allo suna aiki";
+"Ready" = "Shirye";
+"Blackout On" = "Damarar duhu a kunne";
+
+/* Menu Bar Sections */
+"Quick Actions" = "Ayyuka masu sauri";
+"External Displays" = "Allon waje";
+"Profiles" = "Fayilolin bayanai";
+"App" = "App";
+
+/* Menu Bar Actions */
+"Toggle External Blackout" = "Canja damarar duhun allon waje";
+"Sleep Externals" = "Kwashe allon waje su yi barci";
+"Wake Externals" = "Taso allon waje";
+"Panic: All On" = "Gaggawa: duk a kunne";
+"Show Display Numbers" = "Nuna lambobin allo";
+"Restore Display" = "Mayar da allo";
+"Blackout Display" = "Damarar duhu ga allo";
+"Sleep Display" = "Barcin allo";
+"Wake Display" = "Tasowa allo";
+"Overlay Only (Never Sleep)" = "Overlay kawai (ba barci)";
+"Rename Display..." = "Sake suna na allo...";
+"Copy Display ID" = "Kwafi ID na allo";
+"Save Current Profile" = "Ajiye fayil ɗin yanzu";
+"No profiles yet" = "Babu fayil ɗin bayanai tukuna";
+"Apply Profile" = "Aiwan fayil";
+"Copy Display Report" = "Kwafi rahoton allo";
+"Open Diagnostics Log" = "Bude log na bincike";
+
+/* Settings Tabs */
+"General" = "Janar";
+"Shortcuts" = "Gajerun hanyoyi";
+"Profiles" = "Fayilolin bayanai";
+"About" = "Game da";
+
+/* Settings General */
+"Launch at login" = "Kaddamar lokacin shiga";
+"Show menu bar icon" = "Nuna gunkin sandar menu";
+"Show Menu Bar Icon" = "Nuna gunkin sandar menu";
+"Hide Dock icon" = "Boye gunkin Dock";
+"Hide the Dock icon and app switcher entry." = "Ya ɓoye gunkin Dock da shigar mai musanya apps.";
+"Dimly stays running for hotkeys even when the menu bar icon is hidden." = "Dimly na ci gaba da gudana don gajerun hanyoyi ko da gunkin menu ya ɓoye.";
+"Displays" = "Allo";
+"Fade out on sleep/blackout" = "Raguwa yayin barci/damarar duhu";
+"Fade in on wake/restore" = "Shigowa yayin tashi/dawo";
+"Show display numbers on screens" = "Nuna lambobin allo a kan allo";
+"No active displays detected." = "Ba a gano allo mai aiki ba.";
+"Show introduction again" = "Nuna gabatarwa sake";
+
+/* Settings Displays */
+"Internal" = "Na ciki";
+"External" = "Na waje";
+"DisplayTypeResolutionFormat" = "%@ • %@";
+"RefreshRateFormat" = "Sabuntawa: %.0f Hz";
+"DisplayIDFormat" = "ID: %@";
+"DisplaySerialFormat" = "Lamba: %@";
+"DDCStatusFormat" = "DDC: %@";
+"Standby" = "Jira";
+"Wake" = "Taso";
+"Rename" = "Sake suna";
+"Rename Display" = "Sake suna na allo";
+"Give this display a friendly name." = "Ba wa wannan allo suna mai kyau.";
+
+/* Settings Shortcuts */
+"Add Hotkey" = "Ƙara gajeriyar hanya";
+"No hotkeys set yet" = "Ba a saita gajeriyar hanya ba tukuna";
+"Add a hotkey to quickly toggle blackout or sleep/wake." = "Ƙara gajeriyar hanya don canza blackout ko barci/tashi cikin sauri.";
+"Display" = "Nuni";
+"Action" = "Aiki";
+"All External Displays" = "Duk nuni na waje";
+"Toggle Blackout" = "Canza blackout";
+"Toggle Sleep/Wake" = "Canza barci/tashi";
+"MissingDisplayFormat" = "Nuni da ya ɓace (%@)";
+"Global shortcuts" = "Gajerun hanyoyi na duniya";
+"Panic hotkey (fixed):" = "Maɓallin gaggawa (dindindin):";
+"Not set" = "Ba a saita ba";
+"Press keys" = "Latsa maɓallan";
+"Change" = "Canja";
+
+/* Settings Profiles */
+"Save Current Setup" = "Ajiye saitin yanzu";
+"Profile name" = "Sunan fayil";
+"No profiles yet. Save the current display setup to create one." = "Babu fayil tukuna. Ajiye saitin allo na yanzu don ƙirƙirar ɗaya.";
+"Apply" = "Aiwatar";
+"Delete" = "Share";
+"ProfileDisplayCountFormat" = "%lld allo";
+"Rename Profile" = "Sake suna na fayil";
+"Enter a new name for this profile." = "Shigar da sabon suna ga wannan fayil.";
+"Save" = "Ajiye";
+"Cancel" = "Soke";
+"Auto-apply profile when an external display connects" = "Aiwatar da fayil kai tsaye idan an haɗa allo na waje";
+"Profile to apply" = "Fayil da za a aiwatar";
+"LastAppliedFormat" = "An aiwatar karshe: %@";
+"ProfileDefaultNameFormat" = "Fayil %lld";
+
+/* Display Labels */
+"DisplayNameExternalFormat" = "Na waje %lld";
+"DisplayNameInternalFormat" = "Na ciki %lld";
+"DisplayNameUnknownFormat" = "Allo %d";
+"InternalDisplayMarker" = "INT";
+"ScaledSuffix" = " (da aka sikel)";
+
+/* Display Status */
+"Blackout" = "Damarar duhu";
+"Sleep requested" = "An nemi barci";
+"Visible" = "A bayyane";
+"DisplayRowStatusFormat" = "%@ • DDC %@ • %@";
+
+/* DDC */
+"Supported" = "Ana goyon baya";
+"Not Supported" = "Ba a goyon baya";
+"Unknown" = "Ba a sani ba";
+"DDC not supported" = "Ba a goyon bayan DDC";
+"Display service unavailable" = "Bai samu sabis na allo ba";
+"DDCOpenFailedFormat" = "Buɗe DDC ya kasa (0x%@)";
+"DDCRequestFailedFormat" = "Neman DDC ya kasa (0x%@)";
+"Internal panel" = "Allon ciki";
+
+/* Display Report */
+"DisplayReportTitle" = "Rahoton Allo na Dimly";
+"DisplayReportGeneratedFormat" = "An ƙirƙira: %@";
+"DisplayReportLineFormat" = "- %@ (%@)";
+"DisplayReportResolutionFormat" = "  Ƙuduri: %@";
+"DisplayReportRefreshFormat" = "  Sabuntawa: %@";
+"DisplayReportRefreshRateFormat" = "%.0f Hz";
+"DisplayReportRefreshNA" = "n/a";
+"DisplayReportDDCFormat" = "  DDC: %@  %@";
+"DisplayReportIDFormat" = "  ID: %@";
+"Blackout Off" = "Damarar duhu a kashe";
+
+/* About */
+"VersionFormat" = "Siga %@ (%@)";
+"© 2026 Jan Feuerbacher" = "© 2026 Jan Feuerbacher";
+"Dimly is a native Swift macOS utility for quickly blacking out external displays and managing sleep/wake." = "Dimly kayan aiki ne na Swift a macOS don gaggauta duhun allo na waje da sarrafa barci/tashi.";
+"Dimly is a native Swift macOS utility. This build includes a simple skeleton with menu bar support, login item toggle, and configurable hotkey." = "Dimly kayan aiki ne na Swift a macOS. Wannan gini ya ƙunshi ƙa'ida mai sauƙi tare da tallafin sandar menu, maɓallin shigarwa, da hotkey da za a iya daidaita.";
+"Made in my free time - thanks for the support." = "An yi a lokacina kyauta - na gode da tallafi.";
+"GitHub Repo" = "Repo GitHub";
+"Report an Issue" = "Bayar da rahoton matsala";
+"Donate" = "Ba da gudummawa";
+
+/* Preview/Template */
+"This SwiftUI scaffold is ready for your ideas." = "Wannan tsarin SwiftUI ya shirya don ra'ayoyinku.";
+"Increase Counter" = "Ƙara ƙidaya";
+"Counter: %lld" = "Ƙidaya: %lld";
+"Run Placeholder Action" = "Gudanar da aikin wakili";
+
+/* Hotkey Labels */
+"Cmd" = "Cmd";
+"Option" = "Option";
+"Shift" = "Shift";
+"Ctrl" = "Ctrl";
+"KeyFormat" = "Key %d";
+"Return" = "Return";
+"Tab" = "Tab";
+"Space" = "Space";
+"Forward Delete" = "Forward Delete";
+"Esc" = "Esc";
+"Help" = "Help";
+"Fn" = "Fn";
+"Home" = "Home";
+"End" = "End";
+"Page Up" = "Page Up";
+"Page Down" = "Page Down";
+"Left Arrow" = "Left Arrow";
+"Right Arrow" = "Right Arrow";
+"Up Arrow" = "Up Arrow";
+"Down Arrow" = "Down Arrow";
+"Keypad 0" = "Keypad 0";
+"Keypad 1" = "Keypad 1";
+"Keypad 2" = "Keypad 2";
+"Keypad 3" = "Keypad 3";
+"Keypad 4" = "Keypad 4";
+"Keypad 5" = "Keypad 5";
+"Keypad 6" = "Keypad 6";
+"Keypad 7" = "Keypad 7";
+"Keypad 8" = "Keypad 8";
+"Keypad 9" = "Keypad 9";
+"Keypad ," = "Keypad ,";
+"Keypad ." = "Keypad .";
+"Keypad Enter" = "Keypad Enter";
+"Keypad +" = "Keypad +";
+"Keypad -" = "Keypad -";
+"Keypad *" = "Keypad *";
+"Keypad /" = "Keypad /";
+"Keypad =" = "Keypad =";
+"Volume Up" = "Volume Up";
+"Volume Down" = "Volume Down";
+"Brightness Up" = "Brightness Up";
+"Brightness Down" = "Brightness Down";
+"Mute" = "Mute";
+"Play/Pause" = "Play/Pause";
+"Next Track" = "Next Track";
+"Previous Track" = "Previous Track";
+"Fast Forward" = "Fast Forward";
+"Rewind" = "Rewind";
+"Keyboard Brightness Up" = "Keyboard Brightness Up";
+"Keyboard Brightness Down" = "Keyboard Brightness Down";
+"Keyboard Brightness Toggle" = "Keyboard Brightness Toggle";

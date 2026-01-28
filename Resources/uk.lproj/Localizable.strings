@@ -1,0 +1,221 @@
+/* App Basics */
+"Dimly" = "Dimly";
+"About Dimly" = "Про Dimly";
+"Settings..." = "Налаштування...";
+"Check for Updates..." = "Перевірити оновлення...";
+"Quit Dimly" = "Вийти з Dimly";
+"Update could not be verified" = "Оновлення не вдалося перевірити";
+"Dimly couldn't verify the downloaded update. Please download the latest release directly from GitHub instead." = "Dimly не зміг перевірити завантажене оновлення. Завантажте останній реліз безпосередньо з GitHub.";
+"Open GitHub" = "Відкрити GitHub";
+
+/* Intro Window */
+"Welcome to Dimly" = "Ласкаво просимо до Dimly";
+"Your displays, one click away." = "Ваші дисплеї — в один клік.";
+"Dimly lives in the menu bar." = "Dimly знаходиться в рядку меню.";
+"Look at the top-right of your screen for the display icon." = "Пошукайте іконку дисплея у правому верхньому куті.";
+"Got it" = "Зрозуміло";
+"Menu bar" = "Рядок меню";
+
+/* Menu Bar Overview */
+"DisplayCountFormat" = "%lld дисплей(їв) підключено";
+"ExternalCountFormat" = "%lld зовнішній";
+"InternalCountFormat" = "%lld внутрішній";
+"No displays detected" = "Дисплеї не виявлено";
+"All displays active" = "Усі дисплеї активні";
+"Ready" = "Готово";
+"Blackout On" = "Затемнення увімк.";
+
+/* Menu Bar Sections */
+"Quick Actions" = "Швидкі дії";
+"External Displays" = "Зовнішні дисплеї";
+"Profiles" = "Профілі";
+"App" = "Додаток";
+
+/* Menu Bar Actions */
+"Toggle External Blackout" = "Перемкнути зовнішнє затемнення";
+"Sleep Externals" = "Приспати зовнішні";
+"Wake Externals" = "Пробудити зовнішні";
+"Panic: All On" = "Паніка: все увімкнути";
+"Show Display Numbers" = "Показати номери дисплеїв";
+"Restore Display" = "Відновити дисплей";
+"Blackout Display" = "Затемнити дисплей";
+"Sleep Display" = "Приспати дисплей";
+"Wake Display" = "Пробудити дисплей";
+"Overlay Only (Never Sleep)" = "Лише накладка (без сну)";
+"Rename Display..." = "Перейменувати дисплей...";
+"Copy Display ID" = "Копіювати ID дисплея";
+"Save Current Profile" = "Зберегти поточний профіль";
+"No profiles yet" = "Профілів ще немає";
+"Apply Profile" = "Застосувати профіль";
+"Copy Display Report" = "Копіювати звіт дисплея";
+"Open Diagnostics Log" = "Відкрити журнал діагностики";
+
+/* Settings Tabs */
+"General" = "Загальні";
+"Shortcuts" = "Ярлики";
+"Profiles" = "Профілі";
+"About" = "Про";
+
+/* Settings General */
+"Launch at login" = "Запускати при вході";
+"Show menu bar icon" = "Показувати іконку в меню";
+"Show Menu Bar Icon" = "Показувати іконку в меню";
+"Hide Dock icon" = "Приховати іконку Dock";
+"Hide the Dock icon and app switcher entry." = "Приховує іконку Dock та пункт перемикача програм.";
+"Dimly stays running for hotkeys even when the menu bar icon is hidden." = "Dimly продовжує працювати для гарячих клавіш, навіть якщо іконку приховано.";
+"Displays" = "Дисплеї";
+"Fade out on sleep/blackout" = "Поступово гасити при сні/затемненні";
+"Fade in on wake/restore" = "Поступово вмикати при пробудженні/відновленні";
+"Show display numbers on screens" = "Показувати номери на екранах";
+"No active displays detected." = "Активних дисплеїв не виявлено.";
+"Show introduction again" = "Показати вступ знову";
+
+/* Settings Displays */
+"Internal" = "Внутрішній";
+"External" = "Зовнішній";
+"DisplayTypeResolutionFormat" = "%@ • %@";
+"RefreshRateFormat" = "Оновлення: %.0f Гц";
+"DisplayIDFormat" = "ID: %@";
+"DisplaySerialFormat" = "Серійний: %@";
+"DDCStatusFormat" = "DDC: %@";
+"Standby" = "Очікування";
+"Wake" = "Пробудити";
+"Rename" = "Перейменувати";
+"Rename Display" = "Перейменувати дисплей";
+"Give this display a friendly name." = "Дайте цьому дисплею зрозумілу назву.";
+
+/* Settings Shortcuts */
+"Add Hotkey" = "Додати ярлик";
+"No hotkeys set yet" = "Поки немає встановлених ярликів";
+"Add a hotkey to quickly toggle blackout or sleep/wake." = "Додайте ярлик, щоб швидко перемикати затемнення або сон/пробудження.";
+"Display" = "Дисплей";
+"Action" = "Дія";
+"All External Displays" = "Усі зовнішні дисплеї";
+"Toggle Blackout" = "Перемкнути затемнення";
+"Toggle Sleep/Wake" = "Перемкнути сон/пробудження";
+"MissingDisplayFormat" = "Відсутній дисплей (%@)";
+"Global shortcuts" = "Глобальні ярлики";
+"Panic hotkey (fixed):" = "Клавіша паніки (фікс.):";
+"Not set" = "Не задано";
+"Press keys" = "Натисніть клавіші";
+"Change" = "Змінити";
+
+/* Settings Profiles */
+"Save Current Setup" = "Зберегти поточну схему";
+"Profile name" = "Назва профілю";
+"No profiles yet. Save the current display setup to create one." = "Профілів немає. Збережіть поточну схему дисплеїв, щоб створити.";
+"Apply" = "Застосувати";
+"Delete" = "Видалити";
+"ProfileDisplayCountFormat" = "%lld дисплей(їв)";
+"Rename Profile" = "Перейменувати профіль";
+"Enter a new name for this profile." = "Введіть нову назву для цього профілю.";
+"Save" = "Зберегти";
+"Cancel" = "Скасувати";
+"Auto-apply profile when an external display connects" = "Автозастосувати профіль при підключенні зовнішнього дисплея";
+"Profile to apply" = "Профіль для застосування";
+"LastAppliedFormat" = "Останнє застосування: %@";
+"ProfileDefaultNameFormat" = "Профіль %lld";
+
+/* Display Labels */
+"DisplayNameExternalFormat" = "Зовнішній %lld";
+"DisplayNameInternalFormat" = "Внутрішній %lld";
+"DisplayNameUnknownFormat" = "Дисплей %d";
+"InternalDisplayMarker" = "INT";
+"ScaledSuffix" = " (масштаб.)";
+
+/* Display Status */
+"Blackout" = "Затемнення";
+"Sleep requested" = "Запитано сон";
+"Visible" = "Видимий";
+"DisplayRowStatusFormat" = "%@ • DDC %@ • %@";
+
+/* DDC */
+"Supported" = "Підтримується";
+"Not Supported" = "Не підтримується";
+"Unknown" = "Невідомо";
+"DDC not supported" = "DDC не підтримується";
+"Display service unavailable" = "Сервіс дисплея недоступний";
+"DDCOpenFailedFormat" = "Помилка відкриття DDC (0x%@)";
+"DDCRequestFailedFormat" = "Помилка запиту DDC (0x%@)";
+"Internal panel" = "Внутрішня панель";
+
+/* Display Report */
+"DisplayReportTitle" = "Звіт дисплея Dimly";
+"DisplayReportGeneratedFormat" = "Згенеровано: %@";
+"DisplayReportLineFormat" = "- %@ (%@)";
+"DisplayReportResolutionFormat" = "  Роздільна здатність: %@";
+"DisplayReportRefreshFormat" = "  Оновлення: %@";
+"DisplayReportRefreshRateFormat" = "%.0f Гц";
+"DisplayReportRefreshNA" = "н/д";
+"DisplayReportDDCFormat" = "  DDC: %@  %@";
+"DisplayReportIDFormat" = "  ID: %@";
+"Blackout Off" = "Затемнення вимкнено";
+
+/* About */
+"VersionFormat" = "Версія %@ (%@)";
+"© 2026 Jan Feuerbacher" = "© 2026 Jan Feuerbacher";
+"Dimly is a native Swift macOS utility for quickly blacking out external displays and managing sleep/wake." = "Dimly — нативна утиліта Swift для macOS, що швидко затемнює зовнішні дисплеї та керує сном/пробудженням.";
+"Dimly is a native Swift macOS utility. This build includes a simple skeleton with menu bar support, login item toggle, and configurable hotkey." = "Dimly — нативна утиліта Swift для macOS. У цій збірці є простий каркас із підтримкою рядка меню, перемикачем елемента входу та налаштовуваною гарячою клавішею.";
+"Made in my free time - thanks for the support." = "Зроблено у вільний час — дякую за підтримку.";
+"GitHub Repo" = "Репозиторій GitHub";
+"Report an Issue" = "Повідомити про проблему";
+"Donate" = "Пожертвувати";
+
+/* Preview/Template */
+"This SwiftUI scaffold is ready for your ideas." = "Цей каркас SwiftUI готовий до ваших ідей.";
+"Increase Counter" = "Збільшити лічильник";
+"Counter: %lld" = "Лічильник: %lld";
+"Run Placeholder Action" = "Виконати тестову дію";
+
+/* Hotkey Labels */
+"Cmd" = "Cmd";
+"Option" = "Option";
+"Shift" = "Shift";
+"Ctrl" = "Ctrl";
+"KeyFormat" = "Key %d";
+"Return" = "Return";
+"Tab" = "Tab";
+"Space" = "Space";
+"Forward Delete" = "Forward Delete";
+"Esc" = "Esc";
+"Help" = "Help";
+"Fn" = "Fn";
+"Home" = "Home";
+"End" = "End";
+"Page Up" = "Page Up";
+"Page Down" = "Page Down";
+"Left Arrow" = "Left Arrow";
+"Right Arrow" = "Right Arrow";
+"Up Arrow" = "Up Arrow";
+"Down Arrow" = "Down Arrow";
+"Keypad 0" = "Keypad 0";
+"Keypad 1" = "Keypad 1";
+"Keypad 2" = "Keypad 2";
+"Keypad 3" = "Keypad 3";
+"Keypad 4" = "Keypad 4";
+"Keypad 5" = "Keypad 5";
+"Keypad 6" = "Keypad 6";
+"Keypad 7" = "Keypad 7";
+"Keypad 8" = "Keypad 8";
+"Keypad 9" = "Keypad 9";
+"Keypad ," = "Keypad ,";
+"Keypad ." = "Keypad .";
+"Keypad Enter" = "Keypad Enter";
+"Keypad +" = "Keypad +";
+"Keypad -" = "Keypad -";
+"Keypad *" = "Keypad *";
+"Keypad /" = "Keypad /";
+"Keypad =" = "Keypad =";
+"Volume Up" = "Volume Up";
+"Volume Down" = "Volume Down";
+"Brightness Up" = "Brightness Up";
+"Brightness Down" = "Brightness Down";
+"Mute" = "Mute";
+"Play/Pause" = "Play/Pause";
+"Next Track" = "Next Track";
+"Previous Track" = "Previous Track";
+"Fast Forward" = "Fast Forward";
+"Rewind" = "Rewind";
+"Keyboard Brightness Up" = "Keyboard Brightness Up";
+"Keyboard Brightness Down" = "Keyboard Brightness Down";
+"Keyboard Brightness Toggle" = "Keyboard Brightness Toggle";

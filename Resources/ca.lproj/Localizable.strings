@@ -1,0 +1,221 @@
+/* App Basics */
+"Dimly" = "Dimly";
+"About Dimly" = "Quant a Dimly";
+"Settings..." = "Configuració...";
+"Check for Updates..." = "Comprova actualitzacions...";
+"Quit Dimly" = "Surt de Dimly";
+"Update could not be verified" = "No s'ha pogut verificar l'actualització";
+"Dimly couldn't verify the downloaded update. Please download the latest release directly from GitHub instead." = "Dimly no ha pogut verificar l'actualització baixada. Descarrega la darrera versió directament de GitHub.";
+"Open GitHub" = "Obre GitHub";
+
+/* Intro Window */
+"Welcome to Dimly" = "Benvingut a Dimly";
+"Your displays, one click away." = "Les teves pantalles, a un clic.";
+"Dimly lives in the menu bar." = "Dimly viu a la barra de menú.";
+"Look at the top-right of your screen for the display icon." = "Mira a la part superior dreta per l'icona de pantalla.";
+"Got it" = "Entès";
+"Menu bar" = "Barra de menú";
+
+/* Menu Bar Overview */
+"DisplayCountFormat" = "%lld pantalla(es) connectada(es)";
+"ExternalCountFormat" = "%lld externa(es)";
+"InternalCountFormat" = "%lld interna(es)";
+"No displays detected" = "No s'han detectat pantalles";
+"All displays active" = "Totes les pantalles actives";
+"Ready" = "A punt";
+"Blackout On" = "Blackout activat";
+
+/* Menu Bar Sections */
+"Quick Actions" = "Accions ràpides";
+"External Displays" = "Pantalles externes";
+"Profiles" = "Perfils";
+"App" = "App";
+
+/* Menu Bar Actions */
+"Toggle External Blackout" = "Commuta blackout extern";
+"Sleep Externals" = "Posa les externes en repòs";
+"Wake Externals" = "Desperta les externes";
+"Panic: All On" = "Pànic: tot encès";
+"Show Display Numbers" = "Mostra els números de pantalla";
+"Restore Display" = "Restaura pantalla";
+"Blackout Display" = "Enfosqueix pantalla";
+"Sleep Display" = "Posa pantalla en repòs";
+"Wake Display" = "Desperta pantalla";
+"Overlay Only (Never Sleep)" = "Només superposició (mai repòs)";
+"Rename Display..." = "Reanomena pantalla...";
+"Copy Display ID" = "Copia l'ID de pantalla";
+"Save Current Profile" = "Desa el perfil actual";
+"No profiles yet" = "Encara no hi ha perfils";
+"Apply Profile" = "Aplica perfil";
+"Copy Display Report" = "Copia l'informe de pantalla";
+"Open Diagnostics Log" = "Obre el registre de diagnòstic";
+
+/* Settings Tabs */
+"General" = "General";
+"Shortcuts" = "Dreceres";
+"Profiles" = "Perfils";
+"About" = "Quant a";
+
+/* Settings General */
+"Launch at login" = "Inicia en iniciar sessió";
+"Show menu bar icon" = "Mostra la icona a la barra";
+"Show Menu Bar Icon" = "Mostra la icona a la barra";
+"Hide Dock icon" = "Amaga la icona del Dock";
+"Hide the Dock icon and app switcher entry." = "Amaga la icona del Dock i l'entrada del commutador d'apps.";
+"Dimly stays running for hotkeys even when the menu bar icon is hidden." = "Dimly segueix funcionant per a dreceres encara que la icona estigui oculta.";
+"Displays" = "Pantalles";
+"Fade out on sleep/blackout" = "Esvaeix en repòs/blackout";
+"Fade in on wake/restore" = "Apareix en despertar/restaurar";
+"Show display numbers on screens" = "Mostra números de pantalla";
+"No active displays detected." = "No s'han detectat pantalles actives.";
+"Show introduction again" = "Mostra la introducció de nou";
+
+/* Settings Displays */
+"Internal" = "Interna";
+"External" = "Externa";
+"DisplayTypeResolutionFormat" = "%@ • %@";
+"RefreshRateFormat" = "Frequència: %.0f Hz";
+"DisplayIDFormat" = "ID: %@";
+"DisplaySerialFormat" = "Sèrie: %@";
+"DDCStatusFormat" = "DDC: %@";
+"Standby" = "Repòs";
+"Wake" = "Desperta";
+"Rename" = "Reanomena";
+"Rename Display" = "Reanomena pantalla";
+"Give this display a friendly name." = "Posa un nom amigable a aquesta pantalla.";
+
+/* Settings Shortcuts */
+"Add Hotkey" = "Afegir drecera";
+"No hotkeys set yet" = "Encara no hi ha dreceres configurades";
+"Add a hotkey to quickly toggle blackout or sleep/wake." = "Afegiu una drecera per alternar ràpidament l'apagat o el repòs/activació.";
+"Display" = "Pantalla";
+"Action" = "Acció";
+"All External Displays" = "Totes les pantalles externes";
+"Toggle Blackout" = "Alterna l'apagat";
+"Toggle Sleep/Wake" = "Alterna repòs/activació";
+"MissingDisplayFormat" = "Pantalla absent (%@)";
+"Global shortcuts" = "Dreceres globals";
+"Panic hotkey (fixed):" = "Tecla de pànic (fixa):";
+"Not set" = "Sense definir";
+"Press keys" = "Prem tecles";
+"Change" = "Canvia";
+
+/* Settings Profiles */
+"Save Current Setup" = "Desa la configuració actual";
+"Profile name" = "Nom del perfil";
+"No profiles yet. Save the current display setup to create one." = "Encara no hi ha perfils. Desa la configuració actual per crear-ne un.";
+"Apply" = "Aplica";
+"Delete" = "Elimina";
+"ProfileDisplayCountFormat" = "%lld pantalla(es)";
+"Rename Profile" = "Reanomena perfil";
+"Enter a new name for this profile." = "Introdueix un nom nou per a aquest perfil.";
+"Save" = "Desa";
+"Cancel" = "Cancel·la";
+"Auto-apply profile when an external display connects" = "Aplica el perfil automàticament en connectar una pantalla externa";
+"Profile to apply" = "Perfil a aplicar";
+"LastAppliedFormat" = "Darrera aplicació: %@";
+"ProfileDefaultNameFormat" = "Perfil %lld";
+
+/* Display Labels */
+"DisplayNameExternalFormat" = "Externa %lld";
+"DisplayNameInternalFormat" = "Interna %lld";
+"DisplayNameUnknownFormat" = "Pantalla %d";
+"InternalDisplayMarker" = "INT";
+"ScaledSuffix" = " (escalada)";
+
+/* Display Status */
+"Blackout" = "Blackout";
+"Sleep requested" = "Repòs sol·licitat";
+"Visible" = "Visible";
+"DisplayRowStatusFormat" = "%@ • DDC %@ • %@";
+
+/* DDC */
+"Supported" = "Compatible";
+"Not Supported" = "No compatible";
+"Unknown" = "Desconegut";
+"DDC not supported" = "DDC no compatible";
+"Display service unavailable" = "Servei de pantalla no disponible";
+"DDCOpenFailedFormat" = "Error en obrir DDC (0x%@)";
+"DDCRequestFailedFormat" = "Error en la sol·licitud DDC (0x%@)";
+"Internal panel" = "Panell intern";
+
+/* Display Report */
+"DisplayReportTitle" = "Informe de pantalla Dimly";
+"DisplayReportGeneratedFormat" = "Generat: %@";
+"DisplayReportLineFormat" = "- %@ (%@)";
+"DisplayReportResolutionFormat" = "  Resolució: %@";
+"DisplayReportRefreshFormat" = "  Freqüència: %@";
+"DisplayReportRefreshRateFormat" = "%.0f Hz";
+"DisplayReportRefreshNA" = "n/d";
+"DisplayReportDDCFormat" = "  DDC: %@  %@";
+"DisplayReportIDFormat" = "  ID: %@";
+"Blackout Off" = "Blackout desactivat";
+
+/* About */
+"VersionFormat" = "Versió %@ (%@)";
+"© 2026 Jan Feuerbacher" = "© 2026 Jan Feuerbacher";
+"Dimly is a native Swift macOS utility for quickly blacking out external displays and managing sleep/wake." = "Dimly és una utilitat nativa de Swift per a macOS per enfosquir ràpidament pantalles externes i gestionar repòs/despertar.";
+"Dimly is a native Swift macOS utility. This build includes a simple skeleton with menu bar support, login item toggle, and configurable hotkey." = "Dimly és una utilitat nativa de Swift per a macOS. Aquesta versió inclou un esquelet senzill amb suport de barra de menú, element d'inici de sessió i tecla ràpida configurable.";
+"Made in my free time - thanks for the support." = "Fet en el meu temps lliure - gràcies pel suport.";
+"GitHub Repo" = "Repo a GitHub";
+"Report an Issue" = "Informa d'un problema";
+"Donate" = "Dona";
+
+/* Preview/Template */
+"This SwiftUI scaffold is ready for your ideas." = "Aquest esquelet SwiftUI està llest per a les teves idees.";
+"Increase Counter" = "Augmenta el comptador";
+"Counter: %lld" = "Comptador: %lld";
+"Run Placeholder Action" = "Executa acció de mostra";
+
+/* Hotkey Labels */
+"Cmd" = "Cmd";
+"Option" = "Option";
+"Shift" = "Shift";
+"Ctrl" = "Ctrl";
+"KeyFormat" = "Key %d";
+"Return" = "Return";
+"Tab" = "Tab";
+"Space" = "Space";
+"Forward Delete" = "Forward Delete";
+"Esc" = "Esc";
+"Help" = "Help";
+"Fn" = "Fn";
+"Home" = "Home";
+"End" = "End";
+"Page Up" = "Page Up";
+"Page Down" = "Page Down";
+"Left Arrow" = "Left Arrow";
+"Right Arrow" = "Right Arrow";
+"Up Arrow" = "Up Arrow";
+"Down Arrow" = "Down Arrow";
+"Keypad 0" = "Keypad 0";
+"Keypad 1" = "Keypad 1";
+"Keypad 2" = "Keypad 2";
+"Keypad 3" = "Keypad 3";
+"Keypad 4" = "Keypad 4";
+"Keypad 5" = "Keypad 5";
+"Keypad 6" = "Keypad 6";
+"Keypad 7" = "Keypad 7";
+"Keypad 8" = "Keypad 8";
+"Keypad 9" = "Keypad 9";
+"Keypad ," = "Keypad ,";
+"Keypad ." = "Keypad .";
+"Keypad Enter" = "Keypad Enter";
+"Keypad +" = "Keypad +";
+"Keypad -" = "Keypad -";
+"Keypad *" = "Keypad *";
+"Keypad /" = "Keypad /";
+"Keypad =" = "Keypad =";
+"Volume Up" = "Volume Up";
+"Volume Down" = "Volume Down";
+"Brightness Up" = "Brightness Up";
+"Brightness Down" = "Brightness Down";
+"Mute" = "Mute";
+"Play/Pause" = "Play/Pause";
+"Next Track" = "Next Track";
+"Previous Track" = "Previous Track";
+"Fast Forward" = "Fast Forward";
+"Rewind" = "Rewind";
+"Keyboard Brightness Up" = "Keyboard Brightness Up";
+"Keyboard Brightness Down" = "Keyboard Brightness Down";
+"Keyboard Brightness Toggle" = "Keyboard Brightness Toggle";

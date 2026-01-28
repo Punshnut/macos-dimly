@@ -1,0 +1,221 @@
+/* App Basics */
+"Dimly" = "Dimly";
+"About Dimly" = "حول Dimly";
+"Settings..." = "الإعدادات...";
+"Check for Updates..." = "التحقق من التحديثات...";
+"Quit Dimly" = "إنهاء Dimly";
+"Update could not be verified" = "تعذّر التحقق من التحديث";
+"Dimly couldn't verify the downloaded update. Please download the latest release directly from GitHub instead." = "تعذّر على Dimly التحقق من التحديث الذي تم تنزيله. حمّل أحدث إصدار مباشرة من GitHub.";
+"Open GitHub" = "فتح GitHub";
+
+/* Intro Window */
+"Welcome to Dimly" = "مرحبًا بك في Dimly";
+"Your displays, one click away." = "شاشاتك على بُعد نقرة واحدة.";
+"Dimly lives in the menu bar." = "Dimly يوجد في شريط القوائم.";
+"Look at the top-right of your screen for the display icon." = "ابحث عن أيقونة الشاشة في أعلى يمين الشاشة.";
+"Got it" = "تم";
+"Menu bar" = "شريط القوائم";
+
+/* Menu Bar Overview */
+"DisplayCountFormat" = "%lld شاشة متصلة";
+"ExternalCountFormat" = "%lld خارجية";
+"InternalCountFormat" = "%lld داخلية";
+"No displays detected" = "لم يتم اكتشاف شاشات";
+"All displays active" = "جميع الشاشات نشطة";
+"Ready" = "جاهز";
+"Blackout On" = "تعتيم مفعّل";
+
+/* Menu Bar Sections */
+"Quick Actions" = "إجراءات سريعة";
+"External Displays" = "شاشات خارجية";
+"Profiles" = "ملفات التعريف";
+"App" = "التطبيق";
+
+/* Menu Bar Actions */
+"Toggle External Blackout" = "تبديل تعتيم الشاشات الخارجية";
+"Sleep Externals" = "وضع الشاشات الخارجية في السكون";
+"Wake Externals" = "إيقاظ الشاشات الخارجية";
+"Panic: All On" = "حالة طوارئ: تشغيل الجميع";
+"Show Display Numbers" = "عرض أرقام الشاشات";
+"Restore Display" = "استعادة الشاشة";
+"Blackout Display" = "تعتيم الشاشة";
+"Sleep Display" = "وضع الشاشة في السكون";
+"Wake Display" = "إيقاظ الشاشة";
+"Overlay Only (Never Sleep)" = "تراكب فقط (لا سكون)";
+"Rename Display..." = "إعادة تسمية الشاشة...";
+"Copy Display ID" = "نسخ معرّف الشاشة";
+"Save Current Profile" = "حفظ الملف الحالي";
+"No profiles yet" = "لا توجد ملفات تعريف بعد";
+"Apply Profile" = "تطبيق الملف";
+"Copy Display Report" = "نسخ تقرير الشاشة";
+"Open Diagnostics Log" = "فتح سجل التشخيص";
+
+/* Settings Tabs */
+"General" = "عام";
+"Shortcuts" = "اختصارات";
+"Profiles" = "ملفات التعريف";
+"About" = "حول";
+
+/* Settings General */
+"Launch at login" = "التشغيل عند تسجيل الدخول";
+"Show menu bar icon" = "إظهار أيقونة شريط القوائم";
+"Show Menu Bar Icon" = "إظهار أيقونة شريط القوائم";
+"Hide Dock icon" = "إخفاء أيقونة Dock";
+"Hide the Dock icon and app switcher entry." = "إخفاء أيقونة Dock ومدخل مبدّل التطبيقات.";
+"Dimly stays running for hotkeys even when the menu bar icon is hidden." = "يبقى Dimly قيد التشغيل للاختصارات حتى عند إخفاء الأيقونة.";
+"Displays" = "الشاشات";
+"Fade out on sleep/blackout" = "تلاشي عند السكون/التعتيم";
+"Fade in on wake/restore" = "ظهور تدريجي عند الإيقاظ/الاستعادة";
+"Show display numbers on screens" = "عرض أرقام الشاشات";
+"No active displays detected." = "لا توجد شاشات نشطة.";
+"Show introduction again" = "عرض المقدمة مرة أخرى";
+
+/* Settings Displays */
+"Internal" = "داخلية";
+"External" = "خارجية";
+"DisplayTypeResolutionFormat" = "%@ • %@";
+"RefreshRateFormat" = "معدل التحديث: %.0f هرتز";
+"DisplayIDFormat" = "المعرّف: %@";
+"DisplaySerialFormat" = "الرقم التسلسلي: %@";
+"DDCStatusFormat" = "DDC: %@";
+"Standby" = "استعداد";
+"Wake" = "إيقاظ";
+"Rename" = "إعادة تسمية";
+"Rename Display" = "إعادة تسمية الشاشة";
+"Give this display a friendly name." = "أعط هذه الشاشة اسمًا لطيفًا.";
+
+/* Settings Shortcuts */
+"Add Hotkey" = "إضافة مفتاح اختصار";
+"No hotkeys set yet" = "لا توجد اختصارات مُعينة بعد";
+"Add a hotkey to quickly toggle blackout or sleep/wake." = "أضف مفتاح اختصار لتبديل التعتيم أو السكون/الإيقاظ بسرعة.";
+"Display" = "الشاشة";
+"Action" = "الإجراء";
+"All External Displays" = "كل الشاشات الخارجية";
+"Toggle Blackout" = "تبديل التعتيم";
+"Toggle Sleep/Wake" = "تبديل السكون/الإيقاظ";
+"MissingDisplayFormat" = "شاشة مفقودة (%@)";
+"Global shortcuts" = "اختصارات عامة";
+"Panic hotkey (fixed):" = "مفتاح طوارئ (ثابت):";
+"Not set" = "غير محدد";
+"Press keys" = "اضغط المفاتيح";
+"Change" = "تغيير";
+
+/* Settings Profiles */
+"Save Current Setup" = "حفظ الإعداد الحالي";
+"Profile name" = "اسم الملف";
+"No profiles yet. Save the current display setup to create one." = "لا توجد ملفات تعريف. احفظ الإعداد الحالي للشاشات لإنشاء واحد.";
+"Apply" = "تطبيق";
+"Delete" = "حذف";
+"ProfileDisplayCountFormat" = "%lld شاشة";
+"Rename Profile" = "إعادة تسمية الملف";
+"Enter a new name for this profile." = "أدخل اسمًا جديدًا لهذا الملف.";
+"Save" = "حفظ";
+"Cancel" = "إلغاء";
+"Auto-apply profile when an external display connects" = "تطبيق الملف تلقائيًا عند توصيل شاشة خارجية";
+"Profile to apply" = "الملف المطلوب تطبيقه";
+"LastAppliedFormat" = "آخر تطبيق: %@";
+"ProfileDefaultNameFormat" = "ملف %lld";
+
+/* Display Labels */
+"DisplayNameExternalFormat" = "خارجية %lld";
+"DisplayNameInternalFormat" = "داخلية %lld";
+"DisplayNameUnknownFormat" = "شاشة %d";
+"InternalDisplayMarker" = "INT";
+"ScaledSuffix" = " (مقيّمة)";
+
+/* Display Status */
+"Blackout" = "تعتيم";
+"Sleep requested" = "طُلِب السكون";
+"Visible" = "مرئي";
+"DisplayRowStatusFormat" = "%@ • DDC %@ • %@";
+
+/* DDC */
+"Supported" = "مدعوم";
+"Not Supported" = "غير مدعوم";
+"Unknown" = "غير معروف";
+"DDC not supported" = "DDC غير مدعوم";
+"Display service unavailable" = "خدمة الشاشة غير متاحة";
+"DDCOpenFailedFormat" = "فشل فتح DDC (0x%@)";
+"DDCRequestFailedFormat" = "فشل طلب DDC (0x%@)";
+"Internal panel" = "لوحة داخلية";
+
+/* Display Report */
+"DisplayReportTitle" = "تقرير شاشة Dimly";
+"DisplayReportGeneratedFormat" = "تم الإنشاء: %@";
+"DisplayReportLineFormat" = "- %@ (%@)";
+"DisplayReportResolutionFormat" = "  الدقة: %@";
+"DisplayReportRefreshFormat" = "  معدل التحديث: %@";
+"DisplayReportRefreshRateFormat" = "%.0f هرتز";
+"DisplayReportRefreshNA" = "غير متوفر";
+"DisplayReportDDCFormat" = "  DDC: %@  %@";
+"DisplayReportIDFormat" = "  المعرّف: %@";
+"Blackout Off" = "إيقاف التعتيم";
+
+/* About */
+"VersionFormat" = "الإصدار %@ (%@)";
+"© 2026 Jan Feuerbacher" = "© 2026 Jan Feuerbacher";
+"Dimly is a native Swift macOS utility for quickly blacking out external displays and managing sleep/wake." = "Dimly أداة Swift أصلية لنظام macOS لتعتيم الشاشات الخارجية بسرعة وإدارة السكون/الإيقاظ.";
+"Dimly is a native Swift macOS utility. This build includes a simple skeleton with menu bar support, login item toggle, and configurable hotkey." = "Dimly أداة Swift أصلية لنظام macOS. يتضمن هذا الإصدار هيكلًا بسيطًا بدعم شريط القوائم، تبديل عنصر تسجيل الدخول، ومفتاح اختصار قابل للتهيئة.";
+"Made in my free time - thanks for the support." = "صنع في وقت فراغي - شكرًا على الدعم.";
+"GitHub Repo" = "مستودع GitHub";
+"Report an Issue" = "الإبلاغ عن مشكلة";
+"Donate" = "تبرع";
+
+/* Preview/Template */
+"This SwiftUI scaffold is ready for your ideas." = "هذا الهيكل في SwiftUI جاهز لأفكارك.";
+"Increase Counter" = "زيادة العداد";
+"Counter: %lld" = "العداد: %lld";
+"Run Placeholder Action" = "تشغيل إجراء تجريبي";
+
+/* Hotkey Labels */
+"Cmd" = "Cmd";
+"Option" = "Option";
+"Shift" = "Shift";
+"Ctrl" = "Ctrl";
+"KeyFormat" = "Key %d";
+"Return" = "Return";
+"Tab" = "Tab";
+"Space" = "Space";
+"Forward Delete" = "Forward Delete";
+"Esc" = "Esc";
+"Help" = "Help";
+"Fn" = "Fn";
+"Home" = "Home";
+"End" = "End";
+"Page Up" = "Page Up";
+"Page Down" = "Page Down";
+"Left Arrow" = "Left Arrow";
+"Right Arrow" = "Right Arrow";
+"Up Arrow" = "Up Arrow";
+"Down Arrow" = "Down Arrow";
+"Keypad 0" = "Keypad 0";
+"Keypad 1" = "Keypad 1";
+"Keypad 2" = "Keypad 2";
+"Keypad 3" = "Keypad 3";
+"Keypad 4" = "Keypad 4";
+"Keypad 5" = "Keypad 5";
+"Keypad 6" = "Keypad 6";
+"Keypad 7" = "Keypad 7";
+"Keypad 8" = "Keypad 8";
+"Keypad 9" = "Keypad 9";
+"Keypad ," = "Keypad ,";
+"Keypad ." = "Keypad .";
+"Keypad Enter" = "Keypad Enter";
+"Keypad +" = "Keypad +";
+"Keypad -" = "Keypad -";
+"Keypad *" = "Keypad *";
+"Keypad /" = "Keypad /";
+"Keypad =" = "Keypad =";
+"Volume Up" = "Volume Up";
+"Volume Down" = "Volume Down";
+"Brightness Up" = "Brightness Up";
+"Brightness Down" = "Brightness Down";
+"Mute" = "Mute";
+"Play/Pause" = "Play/Pause";
+"Next Track" = "Next Track";
+"Previous Track" = "Previous Track";
+"Fast Forward" = "Fast Forward";
+"Rewind" = "Rewind";
+"Keyboard Brightness Up" = "Keyboard Brightness Up";
+"Keyboard Brightness Down" = "Keyboard Brightness Down";
+"Keyboard Brightness Toggle" = "Keyboard Brightness Toggle";

@@ -1,0 +1,221 @@
+/* App Basics */
+"Dimly" = "Dimly";
+"About Dimly" = "Nípa Dimly";
+"Settings..." = "Àtúntò...";
+"Check for Updates..." = "Ṣàyẹ̀wò ìmúdójúìwọ́n...";
+"Quit Dimly" = "Pa Dimly";
+"Update could not be verified" = "A kì í ṣe àyẹ̀wò ìmúdójúìwọ́n";
+"Dimly couldn't verify the downloaded update. Please download the latest release directly from GitHub instead." = "Dimly kò lè fidi ìmúdójúìwọ́n tó jẹ́wọ̀ mulẹ. Jọ̀wọ́ ṣe igbasilẹ ìtẹ̀jáde tuntun taara láti GitHub.";
+"Open GitHub" = "Ṣí GitHub";
+
+/* Intro Window */
+"Welcome to Dimly" = "Ẹ káàbọ̀ sí Dimly";
+"Your displays, one click away." = "Àwọn àfihàn rẹ, títí kan títẹ̀ kan.";
+"Dimly lives in the menu bar." = "Dimly wà ní pátákó àkójọ.";
+"Look at the top-right of your screen for the display icon." = "Wo ọ̀tún òkè iboju fún àmì àfihàn.";
+"Got it" = "Mo lóye";
+"Menu bar" = "Pátákó àkójọ";
+
+/* Menu Bar Overview */
+"DisplayCountFormat" = "%lld àfihàn ti so pọ̀";
+"ExternalCountFormat" = "%lld òde";
+"InternalCountFormat" = "%lld inú";
+"No displays detected" = "Kò rí àfihàn kankan";
+"All displays active" = "Gbogbo àfihàn n ṣiṣẹ́";
+"Ready" = "Ṣetan";
+"Blackout On" = "Ìdàmú dudu ti n ṣiṣẹ́";
+
+/* Menu Bar Sections */
+"Quick Actions" = "Ìṣe kíákíá";
+"External Displays" = "Àfihàn òde";
+"Profiles" = "Àwọn profaili";
+"App" = "App";
+
+/* Menu Bar Actions */
+"Toggle External Blackout" = "Pa/Ṣí ìdàmú dudu òde";
+"Sleep Externals" = "Fi àfihàn òde sùn";
+"Wake Externals" = "Jì àfihàn òde";
+"Panic: All On" = "Pánìkì: Gbogbo rẹ̀ ṣiṣẹ́";
+"Show Display Numbers" = "Fi nọ́mbà àfihàn hàn";
+"Restore Display" = "Mú àfihàn padà";
+"Blackout Display" = "Dá àfihàn nù sí dudu";
+"Sleep Display" = "Fi àfihàn sùn";
+"Wake Display" = "Jì àfihàn";
+"Overlay Only (Never Sleep)" = "Àwọ̀lélẹ̀ nìkan (Kò fi sùn rárá)";
+"Rename Display..." = "Ṣàtúnṣe orúkọ àfihàn...";
+"Copy Display ID" = "Dá ID àfihàn pọ̀";
+"Save Current Profile" = "Fipamọ́ profaili lọwọlọwọ";
+"No profiles yet" = "Kò tíì sí profaili";
+"Apply Profile" = "Lo profaili";
+"Copy Display Report" = "Dá ìròyìn àfihàn pọ̀";
+"Open Diagnostics Log" = "Ṣí àkọọlẹ̀ ìtẹ̀síwájú";
+
+/* Settings Tabs */
+"General" = "Gbogbogbo";
+"Shortcuts" = "Ọ̀nà abuja";
+"Profiles" = "Àwọn profaili";
+"About" = "Nípa";
+
+/* Settings General */
+"Launch at login" = "Bẹrẹ ní ìbáwọlé";
+"Show menu bar icon" = "Fi àmì pátákó àkójọ hàn";
+"Show Menu Bar Icon" = "Fi àmì pátákó àkójọ hàn";
+"Hide Dock icon" = "Fi àmì Dock pamọ́";
+"Hide the Dock icon and app switcher entry." = "Fi àmì Dock àti ohun ìyípadà app pamọ́.";
+"Dimly stays running for hotkeys even when the menu bar icon is hidden." = "Dimly máa ń ṣiṣẹ́ fún bọtìnì abuja bó tilẹ̀ jẹ́ pé àmì pátákó àkójọ ti farapamọ́.";
+"Displays" = "Àfihàn";
+"Fade out on sleep/blackout" = "Dín kúrò ní sùúrù ní sùn/ìdàmú dudu";
+"Fade in on wake/restore" = "Dín wọlé ní jí/ìmúlòpadà";
+"Show display numbers on screens" = "Fi nọ́mbà àfihàn hàn lórí iboju";
+"No active displays detected." = "Kò rí àfihàn tó n ṣiṣẹ́.";
+"Show introduction again" = "Fi ìtẹ̀síwájú hàn lẹ́ẹ̀kansi";
+
+/* Settings Displays */
+"Internal" = "Inú";
+"External" = "Òde";
+"DisplayTypeResolutionFormat" = "%@ • %@";
+"RefreshRateFormat" = "Ìtúnṣe: %.0f Hz";
+"DisplayIDFormat" = "ID: %@";
+"DisplaySerialFormat" = "Seri: %@";
+"DDCStatusFormat" = "DDC: %@";
+"Standby" = "Dúró de";
+"Wake" = "Jì";
+"Rename" = "Ṣàtúnṣe orúkọ";
+"Rename Display" = "Ṣàtúnṣe orúkọ àfihàn";
+"Give this display a friendly name." = "Fún àfihàn yìí ní orúkọ tó rọrùn.";
+
+/* Settings Shortcuts */
+"Add Hotkey" = "Fikun bọtìnì abuja";
+"No hotkeys set yet" = "Ko si bọtìnì abuja kankan tí a ti ṣètò";
+"Add a hotkey to quickly toggle blackout or sleep/wake." = "Fikun bọtìnì abuja láti yí blackout tàbí sùn/jí padà ní kánkán.";
+"Display" = "Àfihàn";
+"Action" = "Iṣe";
+"All External Displays" = "Gbogbo àwọn àfihàn òde";
+"Toggle Blackout" = "Yí blackout padà";
+"Toggle Sleep/Wake" = "Yí sùn/jí padà";
+"MissingDisplayFormat" = "Àfihàn tí ó sọnù (%@)";
+"Global shortcuts" = "Ọ̀nà abuja àgbáyé";
+"Panic hotkey (fixed):" = "Bọtìnì pánìkì (àfikún):";
+"Not set" = "A kò ṣètò";
+"Press keys" = "Tẹ́ bọtìnì";
+"Change" = "Ṣàtúnṣe";
+
+/* Settings Profiles */
+"Save Current Setup" = "Fipamọ́ ìtòlẹ́sẹẹsẹ lọwọlọwọ";
+"Profile name" = "Orúkọ profaili";
+"No profiles yet. Save the current display setup to create one." = "Kò tíì sí profaili. Fipamọ́ ìtòlẹ́sẹẹsẹ àfihàn lọwọlọwọ láti dá ọ̀kan ṣẹ̀dá.";
+"Apply" = "Lo";
+"Delete" = "Pa dání";
+"ProfileDisplayCountFormat" = "%lld àfihàn";
+"Rename Profile" = "Ṣàtúnṣe orúkọ profaili";
+"Enter a new name for this profile." = "Tẹ orúkọ tuntun fún profaili yìí.";
+"Save" = "Fipamọ́";
+"Cancel" = "Fagilé";
+"Auto-apply profile when an external display connects" = "Lo profaili laifọwọyi nígbà tí àfihàn òde bá so";
+"Profile to apply" = "Profaili tí a ó lo";
+"LastAppliedFormat" = "Ìmúlò tó gbẹ̀yìn: %@";
+"ProfileDefaultNameFormat" = "Profaili %lld";
+
+/* Display Labels */
+"DisplayNameExternalFormat" = "Òde %lld";
+"DisplayNameInternalFormat" = "Inú %lld";
+"DisplayNameUnknownFormat" = "Àfihàn %d";
+"InternalDisplayMarker" = "INT";
+"ScaledSuffix" = " (tí a ṣe iwọn)";
+
+/* Display Status */
+"Blackout" = "Ìdàmú dudu";
+"Sleep requested" = "A bẹ̀rẹ̀ sùn";
+"Visible" = "Ní hàn";
+"DisplayRowStatusFormat" = "%@ • DDC %@ • %@";
+
+/* DDC */
+"Supported" = "Tí a ń ṣe atilẹyin";
+"Not Supported" = "A kò ṣe atilẹyin";
+"Unknown" = "Aìmọ̀";
+"DDC not supported" = "DDC a kò ṣe atilẹyin";
+"Display service unavailable" = "Ìṣẹ́ ìfihàn kò sí";
+"DDCOpenFailedFormat" = "Àṣiṣe ṣiṣí DDC (0x%@)";
+"DDCRequestFailedFormat" = "Àṣìṣe ìbéèrè DDC (0x%@)";
+"Internal panel" = "Pánẹ́lù inú";
+
+/* Display Report */
+"DisplayReportTitle" = "Ìròyìn Àfihàn Dimly";
+"DisplayReportGeneratedFormat" = "Ṣẹ̀dá: %@";
+"DisplayReportLineFormat" = "- %@ (%@)";
+"DisplayReportResolutionFormat" = "  Ìpinnu: %@";
+"DisplayReportRefreshFormat" = "  Ìtúnṣe: %@";
+"DisplayReportRefreshRateFormat" = "%.0f Hz";
+"DisplayReportRefreshNA" = "kò sí";
+"DisplayReportDDCFormat" = "  DDC: %@  %@";
+"DisplayReportIDFormat" = "  ID: %@";
+"Blackout Off" = "Ìdàmú dudu pípà";
+
+/* About */
+"VersionFormat" = "Ẹ̀dà %@ (%@)";
+"© 2026 Jan Feuerbacher" = "© 2026 Jan Feuerbacher";
+"Dimly is a native Swift macOS utility for quickly blacking out external displays and managing sleep/wake." = "Dimly jẹ́ irinṣẹ́ Swift abinibi lórí macOS fún kíákíá dídàmú dudu àwọn àfihàn òde àti ìṣàkóso sùn/jí.";
+"Dimly is a native Swift macOS utility. This build includes a simple skeleton with menu bar support, login item toggle, and configurable hotkey." = "Dimly jẹ́ irinṣẹ́ Swift abinibi lórí macOS. Ìkọ́lé yìí ní egungun ìlúpọ̀ pẹ̀lú àtìlẹ́yìn pátákó àkójọ, yíyí ohun ìwọlé padà, àti bọtìnì abuja tó lè ṣe àtúnṣe.";
+"Made in my free time - thanks for the support." = "Ṣe ní àkókò àyè mi - ọpẹ́ fún àtìlẹ́yìn.";
+"GitHub Repo" = "Repo GitHub";
+"Report an Issue" = "Jabọ ìṣòro";
+"Donate" = "Fúnni";
+
+/* Preview/Template */
+"This SwiftUI scaffold is ready for your ideas." = "Àpẹẹrẹ SwiftUI yìí ti ṣetán fún àwọn èrò rẹ.";
+"Increase Counter" = "Mú àkójọ pọ̀ si";
+"Counter: %lld" = "Àkójọ: %lld";
+"Run Placeholder Action" = "Ṣiṣẹ̀ ìṣe àfọ́rùkọ";
+
+/* Hotkey Labels */
+"Cmd" = "Cmd";
+"Option" = "Option";
+"Shift" = "Shift";
+"Ctrl" = "Ctrl";
+"KeyFormat" = "Key %d";
+"Return" = "Return";
+"Tab" = "Tab";
+"Space" = "Space";
+"Forward Delete" = "Forward Delete";
+"Esc" = "Esc";
+"Help" = "Help";
+"Fn" = "Fn";
+"Home" = "Home";
+"End" = "End";
+"Page Up" = "Page Up";
+"Page Down" = "Page Down";
+"Left Arrow" = "Left Arrow";
+"Right Arrow" = "Right Arrow";
+"Up Arrow" = "Up Arrow";
+"Down Arrow" = "Down Arrow";
+"Keypad 0" = "Keypad 0";
+"Keypad 1" = "Keypad 1";
+"Keypad 2" = "Keypad 2";
+"Keypad 3" = "Keypad 3";
+"Keypad 4" = "Keypad 4";
+"Keypad 5" = "Keypad 5";
+"Keypad 6" = "Keypad 6";
+"Keypad 7" = "Keypad 7";
+"Keypad 8" = "Keypad 8";
+"Keypad 9" = "Keypad 9";
+"Keypad ," = "Keypad ,";
+"Keypad ." = "Keypad .";
+"Keypad Enter" = "Keypad Enter";
+"Keypad +" = "Keypad +";
+"Keypad -" = "Keypad -";
+"Keypad *" = "Keypad *";
+"Keypad /" = "Keypad /";
+"Keypad =" = "Keypad =";
+"Volume Up" = "Volume Up";
+"Volume Down" = "Volume Down";
+"Brightness Up" = "Brightness Up";
+"Brightness Down" = "Brightness Down";
+"Mute" = "Mute";
+"Play/Pause" = "Play/Pause";
+"Next Track" = "Next Track";
+"Previous Track" = "Previous Track";
+"Fast Forward" = "Fast Forward";
+"Rewind" = "Rewind";
+"Keyboard Brightness Up" = "Keyboard Brightness Up";
+"Keyboard Brightness Down" = "Keyboard Brightness Down";
+"Keyboard Brightness Toggle" = "Keyboard Brightness Toggle";

@@ -1,0 +1,221 @@
+/* App Basics */
+"Dimly" = "Dimly";
+"About Dimly" = "Kuhusu Dimly";
+"Settings..." = "Mipangilio...";
+"Check for Updates..." = "Angalia masasisho...";
+"Quit Dimly" = "Funga Dimly";
+"Update could not be verified" = "Sasisho halikuweza kuthibitishwa";
+"Dimly couldn't verify the downloaded update. Please download the latest release directly from GitHub instead." = "Dimly haikuweza kuthibitisha sasisho lililopakuliwa. Tafadhali pakua toleo jipya moja kwa moja kutoka GitHub.";
+"Open GitHub" = "Fungua GitHub";
+
+/* Intro Window */
+"Welcome to Dimly" = "Karibu Dimly";
+"Your displays, one click away." = "Skrini zako ziko bonyeza moja tu.";
+"Dimly lives in the menu bar." = "Dimly iko kwenye mwambaa wa menyu.";
+"Look at the top-right of your screen for the display icon." = "Tazama kona ya juu kulia ya skrini kuona ikoni ya skrini.";
+"Got it" = "Nimepata";
+"Menu bar" = "Mwambaa wa menyu";
+
+/* Menu Bar Overview */
+"DisplayCountFormat" = "%lld skrini zimeunganishwa";
+"ExternalCountFormat" = "%lld ya nje";
+"InternalCountFormat" = "%lld ya ndani";
+"No displays detected" = "Hakuna skrini zilizogunduliwa";
+"All displays active" = "Skrini zote zinafanya kazi";
+"Ready" = "Tayari";
+"Blackout On" = "Blackout imewashwa";
+
+/* Menu Bar Sections */
+"Quick Actions" = "Vitendo vya haraka";
+"External Displays" = "Skrini za nje";
+"Profiles" = "Profaili";
+"App" = "App";
+
+/* Menu Bar Actions */
+"Toggle External Blackout" = "Badilisha blackout ya nje";
+"Sleep Externals" = "Laza za nje";
+"Wake Externals" = "Amsha za nje";
+"Panic: All On" = "Dharura: zote wazi";
+"Show Display Numbers" = "Onyesha nambari za skrini";
+"Restore Display" = "Rejesha skrini";
+"Blackout Display" = "Zima skrini";
+"Sleep Display" = "Laza skrini";
+"Wake Display" = "Amsha skrini";
+"Overlay Only (Never Sleep)" = "Overlay pekee (hakuna kulala)";
+"Rename Display..." = "Badilisha jina la skrini...";
+"Copy Display ID" = "Nakili ID ya skrini";
+"Save Current Profile" = "Hifadhi profaili ya sasa";
+"No profiles yet" = "Hakuna profaili bado";
+"Apply Profile" = "Tumia profaili";
+"Copy Display Report" = "Nakili ripoti ya skrini";
+"Open Diagnostics Log" = "Fungua logi ya utambuzi";
+
+/* Settings Tabs */
+"General" = "Jumla";
+"Shortcuts" = "Vifupisho";
+"Profiles" = "Profaili";
+"About" = "Kuhusu";
+
+/* Settings General */
+"Launch at login" = "Anzisha unapoingia";
+"Show menu bar icon" = "Onyesha ikoni kwenye mwambaa";
+"Show Menu Bar Icon" = "Onyesha ikoni kwenye mwambaa";
+"Hide Dock icon" = "Ficha ikoni ya Dock";
+"Hide the Dock icon and app switcher entry." = "Huficha ikoni ya Dock na ingizo la kubadilisha app.";
+"Dimly stays running for hotkeys even when the menu bar icon is hidden." = "Dimly inaendelea kwa hotkey hata ikoni ya mwambaa ikifichwa.";
+"Displays" = "Skrini";
+"Fade out on sleep/blackout" = "Fade out ukiweka kulala/blackout";
+"Fade in on wake/restore" = "Fade in unapoamka/kurejesha";
+"Show display numbers on screens" = "Onyesha nambari za skrini";
+"No active displays detected." = "Hakuna skrini hai imegunduliwa.";
+"Show introduction again" = "Onyesha utangulizi tena";
+
+/* Settings Displays */
+"Internal" = "Ya ndani";
+"External" = "Ya nje";
+"DisplayTypeResolutionFormat" = "%@ • %@";
+"RefreshRateFormat" = "Kiwango cha upya: %.0f Hz";
+"DisplayIDFormat" = "ID: %@";
+"DisplaySerialFormat" = "Namba ya serial: %@";
+"DDCStatusFormat" = "DDC: %@";
+"Standby" = "Subiri";
+"Wake" = "Amsha";
+"Rename" = "Badilisha jina";
+"Rename Display" = "Badilisha jina la skrini";
+"Give this display a friendly name." = "Pa skrini hii jina rafiki.";
+
+/* Settings Shortcuts */
+"Add Hotkey" = "Ongeza njia ya mkato";
+"No hotkeys set yet" = "Hakuna njia za mkato zilizowekwa bado";
+"Add a hotkey to quickly toggle blackout or sleep/wake." = "Ongeza njia ya mkato ili kubadilisha blackout au lala/amsha haraka.";
+"Display" = "Skrini";
+"Action" = "Tendo";
+"All External Displays" = "Skrini zote za nje";
+"Toggle Blackout" = "Badilisha blackout";
+"Toggle Sleep/Wake" = "Badilisha lala/amsha";
+"MissingDisplayFormat" = "Skrini haipo (%@)";
+"Global shortcuts" = "Vifupisho vya ulimwengu";
+"Panic hotkey (fixed):" = "Hotkey ya dharura (ya kudumu):";
+"Not set" = "Haijawekwa";
+"Press keys" = "Bonyeza vitufe";
+"Change" = "Badilisha";
+
+/* Settings Profiles */
+"Save Current Setup" = "Hifadhi usanidi wa sasa";
+"Profile name" = "Jina la profaili";
+"No profiles yet. Save the current display setup to create one." = "Bado hakuna profaili. Hifadhi usanidi wa skrini wa sasa ili kuunda.";
+"Apply" = "Tumia";
+"Delete" = "Futa";
+"ProfileDisplayCountFormat" = "%lld skrini";
+"Rename Profile" = "Badilisha jina la profaili";
+"Enter a new name for this profile." = "Weka jina jipya kwa profaili hii.";
+"Save" = "Hifadhi";
+"Cancel" = "Ghairi";
+"Auto-apply profile when an external display connects" = "Tumia profaili kiotomatiki skrini ya nje inapounganishwa";
+"Profile to apply" = "Profaili ya kutumia";
+"LastAppliedFormat" = "Iliyotumika mwisho: %@";
+"ProfileDefaultNameFormat" = "Profaili %lld";
+
+/* Display Labels */
+"DisplayNameExternalFormat" = "Ya nje %lld";
+"DisplayNameInternalFormat" = "Ya ndani %lld";
+"DisplayNameUnknownFormat" = "Skrini %d";
+"InternalDisplayMarker" = "INT";
+"ScaledSuffix" = " (imesawazishwa)";
+
+/* Display Status */
+"Blackout" = "Blackout";
+"Sleep requested" = "Kulala kumeombwa";
+"Visible" = "Inaonekana";
+"DisplayRowStatusFormat" = "%@ • DDC %@ • %@";
+
+/* DDC */
+"Supported" = "Inasaidiwa";
+"Not Supported" = "Haiungwi mkono";
+"Unknown" = "Haijulikani";
+"DDC not supported" = "DDC haiungwi mkono";
+"Display service unavailable" = "Huduma ya skrini haipatikani";
+"DDCOpenFailedFormat" = "Kufungua DDC kumeharibika (0x%@)";
+"DDCRequestFailedFormat" = "Ombi la DDC limeshindwa (0x%@)";
+"Internal panel" = "Paneli ya ndani";
+
+/* Display Report */
+"DisplayReportTitle" = "Ripoti ya skrini ya Dimly";
+"DisplayReportGeneratedFormat" = "Imetengenezwa: %@";
+"DisplayReportLineFormat" = "- %@ (%@)";
+"DisplayReportResolutionFormat" = "  Azimio: %@";
+"DisplayReportRefreshFormat" = "  Upya: %@";
+"DisplayReportRefreshRateFormat" = "%.0f Hz";
+"DisplayReportRefreshNA" = "h/h";
+"DisplayReportDDCFormat" = "  DDC: %@  %@";
+"DisplayReportIDFormat" = "  ID: %@";
+"Blackout Off" = "Blackout imezimwa";
+
+/* About */
+"VersionFormat" = "Toleo %@ (%@)";
+"© 2026 Jan Feuerbacher" = "© 2026 Jan Feuerbacher";
+"Dimly is a native Swift macOS utility for quickly blacking out external displays and managing sleep/wake." = "Dimly ni zana asili ya Swift kwa macOS ya kuzima haraka skrini za nje na kudhibiti kulala/kuamka.";
+"Dimly is a native Swift macOS utility. This build includes a simple skeleton with menu bar support, login item toggle, and configurable hotkey." = "Dimly ni zana asili ya Swift kwa macOS. Ujenzi huu una muundo rahisi wenye msaada wa mwambaa wa menyu, kigeuzi cha kipengee cha kuingia, na hotkey inayoweza kusanidiwa.";
+"Made in my free time - thanks for the support." = "Imetengenezwa wakati wa mapumziko yangu - asante kwa msaada.";
+"GitHub Repo" = "Hifadhi ya GitHub";
+"Report an Issue" = "Ripoti tatizo";
+"Donate" = "Changia";
+
+/* Preview/Template */
+"This SwiftUI scaffold is ready for your ideas." = "Mfumo huu wa SwiftUI uko tayari kwa mawazo yako.";
+"Increase Counter" = "Ongeza kaunta";
+"Counter: %lld" = "Kaunta: %lld";
+"Run Placeholder Action" = "Endesha kitendo cha nafasi";
+
+/* Hotkey Labels */
+"Cmd" = "Cmd";
+"Option" = "Option";
+"Shift" = "Shift";
+"Ctrl" = "Ctrl";
+"KeyFormat" = "Key %d";
+"Return" = "Return";
+"Tab" = "Tab";
+"Space" = "Space";
+"Forward Delete" = "Forward Delete";
+"Esc" = "Esc";
+"Help" = "Help";
+"Fn" = "Fn";
+"Home" = "Home";
+"End" = "End";
+"Page Up" = "Page Up";
+"Page Down" = "Page Down";
+"Left Arrow" = "Left Arrow";
+"Right Arrow" = "Right Arrow";
+"Up Arrow" = "Up Arrow";
+"Down Arrow" = "Down Arrow";
+"Keypad 0" = "Keypad 0";
+"Keypad 1" = "Keypad 1";
+"Keypad 2" = "Keypad 2";
+"Keypad 3" = "Keypad 3";
+"Keypad 4" = "Keypad 4";
+"Keypad 5" = "Keypad 5";
+"Keypad 6" = "Keypad 6";
+"Keypad 7" = "Keypad 7";
+"Keypad 8" = "Keypad 8";
+"Keypad 9" = "Keypad 9";
+"Keypad ," = "Keypad ,";
+"Keypad ." = "Keypad .";
+"Keypad Enter" = "Keypad Enter";
+"Keypad +" = "Keypad +";
+"Keypad -" = "Keypad -";
+"Keypad *" = "Keypad *";
+"Keypad /" = "Keypad /";
+"Keypad =" = "Keypad =";
+"Volume Up" = "Volume Up";
+"Volume Down" = "Volume Down";
+"Brightness Up" = "Brightness Up";
+"Brightness Down" = "Brightness Down";
+"Mute" = "Mute";
+"Play/Pause" = "Play/Pause";
+"Next Track" = "Next Track";
+"Previous Track" = "Previous Track";
+"Fast Forward" = "Fast Forward";
+"Rewind" = "Rewind";
+"Keyboard Brightness Up" = "Keyboard Brightness Up";
+"Keyboard Brightness Down" = "Keyboard Brightness Down";
+"Keyboard Brightness Toggle" = "Keyboard Brightness Toggle";

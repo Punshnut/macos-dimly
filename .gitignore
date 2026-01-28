@@ -1,0 +1,59 @@
+# macOS
+.DS_Store
+
+# Swift Package Manager artifacts
+/.build
+/.swiftpm
+Packages/
+/.derived/
+/.tmp/
+/.module-cache/
+/.modulecache/
+/.clang-cache/
+/.derived/Build/Products/Release/
+/\.derived/Build/Products/Release/generate_keys
+/\.derived/Build/Products/Release/libed25519.a
+/\.derived/Build/Products/Release/ArgumentParser.o
+/\.derived/Build/Products/Release/generate_keys.dSYM/
+/\.derived/Build/Products/Release/generate_keys.swiftmodule/
+/sparkle_signature.txt
+/Package.resolved
+/.sparkle-keys/**
+!/.sparkle-keys/README.md
+.venv/
+tmp.iconset
+
+# Local development tooling metadata
+.vscode/
+.sandbox-home/
+
+# Xcode derived data
+DerivedData/
+xcuserdata/
+*.xcuserstate
+*.moved-aside
+
+# Bundled app artifacts
+Dimly.app/
+Dimly.dmg
+*.dmg
+Dimly Dev Install.dmg
+.notarytool-submissions/
+
+# Signing keys / secrets
+.env
+.env.*
+*.log
+*.xcarchive
+*.xcresult
+*.mobileprovision
+*.p12
+*.p8
+*.pfx
+*.cer
+*.crt
+*.key
+*.pem
+
+# Shell scripts in the repository root
+/*.sh

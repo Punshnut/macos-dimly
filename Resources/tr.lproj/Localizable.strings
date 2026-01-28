@@ -1,0 +1,221 @@
+/* App Basics */
+"Dimly" = "Dimly";
+"About Dimly" = "Dimly Hakkında";
+"Settings..." = "Ayarlar...";
+"Check for Updates..." = "Güncellemeleri denetle...";
+"Quit Dimly" = "Dimly'den çık";
+"Update could not be verified" = "Güncelleme doğrulanamadı";
+"Dimly couldn't verify the downloaded update. Please download the latest release directly from GitHub instead." = "Dimly indirilen güncellemeyi doğrulayamadı. Lütfen en son sürümü GitHub'dan doğrudan indirin.";
+"Open GitHub" = "GitHub'ı aç";
+
+/* Intro Window */
+"Welcome to Dimly" = "Dimly'ye hoş geldin";
+"Your displays, one click away." = "Ekranların bir tık uzakta.";
+"Dimly lives in the menu bar." = "Dimly menü çubuğunda yaşar.";
+"Look at the top-right of your screen for the display icon." = "Ekran simgesi için ekranın sağ üstüne bak.";
+"Got it" = "Anladım";
+"Menu bar" = "Menü çubuğu";
+
+/* Menu Bar Overview */
+"DisplayCountFormat" = "%lld ekran bağlı";
+"ExternalCountFormat" = "%lld harici";
+"InternalCountFormat" = "%lld dahili";
+"No displays detected" = "Ekran bulunamadı";
+"All displays active" = "Tüm ekranlar aktif";
+"Ready" = "Hazır";
+"Blackout On" = "Karartma açık";
+
+/* Menu Bar Sections */
+"Quick Actions" = "Hızlı işlemler";
+"External Displays" = "Harici ekranlar";
+"Profiles" = "Profiller";
+"App" = "Uygulama";
+
+/* Menu Bar Actions */
+"Toggle External Blackout" = "Harici karartmayı aç/kapat";
+"Sleep Externals" = "Haricileri uyut";
+"Wake Externals" = "Haricileri uyandır";
+"Panic: All On" = "Panik: hepsi açık";
+"Show Display Numbers" = "Ekran numaralarını göster";
+"Restore Display" = "Ekranı geri yükle";
+"Blackout Display" = "Ekranı karart";
+"Sleep Display" = "Ekranı uyut";
+"Wake Display" = "Ekranı uyandır";
+"Overlay Only (Never Sleep)" = "Yalnızca örtü (asla uyuma)";
+"Rename Display..." = "Ekranı yeniden adlandır...";
+"Copy Display ID" = "Ekran ID'sini kopyala";
+"Save Current Profile" = "Geçerli profili kaydet";
+"No profiles yet" = "Henüz profil yok";
+"Apply Profile" = "Profili uygula";
+"Copy Display Report" = "Ekran raporunu kopyala";
+"Open Diagnostics Log" = "Tanılama günlüğünü aç";
+
+/* Settings Tabs */
+"General" = "Genel";
+"Shortcuts" = "Kısayollar";
+"Profiles" = "Profiller";
+"About" = "Hakkında";
+
+/* Settings General */
+"Launch at login" = "Girişte başlat";
+"Show menu bar icon" = "Menü çubuğu simgesini göster";
+"Show Menu Bar Icon" = "Menü çubuğu simgesini göster";
+"Hide Dock icon" = "Dock simgesini gizle";
+"Hide the Dock icon and app switcher entry." = "Dock simgesini ve uygulama değiştirici girişini gizler.";
+"Dimly stays running for hotkeys even when the menu bar icon is hidden." = "Menü simgesi gizli olsa bile Dimly kısayollar için çalışır.";
+"Displays" = "Ekranlar";
+"Fade out on sleep/blackout" = "Uyku/karartmada karart";
+"Fade in on wake/restore" = "Uyanış/geri yüklemede aydınlat";
+"Show display numbers on screens" = "Ekran numaralarını ekranda göster";
+"No active displays detected." = "Aktif ekran bulunamadı.";
+"Show introduction again" = "Girişi tekrar göster";
+
+/* Settings Displays */
+"Internal" = "Dahili";
+"External" = "Harici";
+"DisplayTypeResolutionFormat" = "%@ • %@";
+"RefreshRateFormat" = "Yenileme: %.0f Hz";
+"DisplayIDFormat" = "ID: %@";
+"DisplaySerialFormat" = "Seri: %@";
+"DDCStatusFormat" = "DDC: %@";
+"Standby" = "Bekleme";
+"Wake" = "Uyandır";
+"Rename" = "Yeniden adlandır";
+"Rename Display" = "Ekranı yeniden adlandır";
+"Give this display a friendly name." = "Bu ekrana anlaşılır bir ad verin.";
+
+/* Settings Shortcuts */
+"Add Hotkey" = "Kısayol ekle";
+"No hotkeys set yet" = "Henüz kısayol ayarlanmadı";
+"Add a hotkey to quickly toggle blackout or sleep/wake." = "Blackout veya uyku/uyandırmayı hızlıca değiştirmek için kısayol ekleyin.";
+"Display" = "Ekran";
+"Action" = "Eylem";
+"All External Displays" = "Tüm harici ekranlar";
+"Toggle Blackout" = "Blackout’u değiştir";
+"Toggle Sleep/Wake" = "Uyku/uyandırmayı değiştir";
+"MissingDisplayFormat" = "Eksik ekran (%@)";
+"Global shortcuts" = "Genel kısayollar";
+"Panic hotkey (fixed):" = "Panik tuşu (sabit):";
+"Not set" = "Ayarlanmadı";
+"Press keys" = "Tuşlara bas";
+"Change" = "Değiştir";
+
+/* Settings Profiles */
+"Save Current Setup" = "Geçerli kurulumu kaydet";
+"Profile name" = "Profil adı";
+"No profiles yet. Save the current display setup to create one." = "Henüz profil yok. Oluşturmak için geçerli ekran kurulumunu kaydedin.";
+"Apply" = "Uygula";
+"Delete" = "Sil";
+"ProfileDisplayCountFormat" = "%lld ekran";
+"Rename Profile" = "Profili yeniden adlandır";
+"Enter a new name for this profile." = "Bu profil için yeni bir ad girin.";
+"Save" = "Kaydet";
+"Cancel" = "İptal";
+"Auto-apply profile when an external display connects" = "Harici ekran bağlanınca profili otomatik uygula";
+"Profile to apply" = "Uygulanacak profil";
+"LastAppliedFormat" = "Son uygulama: %@";
+"ProfileDefaultNameFormat" = "Profil %lld";
+
+/* Display Labels */
+"DisplayNameExternalFormat" = "Harici %lld";
+"DisplayNameInternalFormat" = "Dahili %lld";
+"DisplayNameUnknownFormat" = "Ekran %d";
+"InternalDisplayMarker" = "INT";
+"ScaledSuffix" = " (ölçekli)";
+
+/* Display Status */
+"Blackout" = "Karartma";
+"Sleep requested" = "Uyku istendi";
+"Visible" = "Görünür";
+"DisplayRowStatusFormat" = "%@ • DDC %@ • %@";
+
+/* DDC */
+"Supported" = "Destekleniyor";
+"Not Supported" = "Desteklenmiyor";
+"Unknown" = "Bilinmiyor";
+"DDC not supported" = "DDC desteklenmiyor";
+"Display service unavailable" = "Ekran servisi kullanılamıyor";
+"DDCOpenFailedFormat" = "DDC açma hatası (0x%@)";
+"DDCRequestFailedFormat" = "DDC isteği başarısız (0x%@)";
+"Internal panel" = "Dahili panel";
+
+/* Display Report */
+"DisplayReportTitle" = "Dimly ekran raporu";
+"DisplayReportGeneratedFormat" = "Oluşturuldu: %@";
+"DisplayReportLineFormat" = "- %@ (%@)";
+"DisplayReportResolutionFormat" = "  Çözünürlük: %@";
+"DisplayReportRefreshFormat" = "  Yenileme: %@";
+"DisplayReportRefreshRateFormat" = "%.0f Hz";
+"DisplayReportRefreshNA" = "yok";
+"DisplayReportDDCFormat" = "  DDC: %@  %@";
+"DisplayReportIDFormat" = "  ID: %@";
+"Blackout Off" = "Karartma kapalı";
+
+/* About */
+"VersionFormat" = "Sürüm %@ (%@)";
+"© 2026 Jan Feuerbacher" = "© 2026 Jan Feuerbacher";
+"Dimly is a native Swift macOS utility for quickly blacking out external displays and managing sleep/wake." = "Dimly, harici ekranları hızla karartmak ve uyku/uyanmayı yönetmek için yerel bir Swift macOS aracıdır.";
+"Dimly is a native Swift macOS utility. This build includes a simple skeleton with menu bar support, login item toggle, and configurable hotkey." = "Dimly, yerel bir Swift macOS aracıdır. Bu yapı menü çubuğu desteği, giriş öğesi anahtarı ve yapılandırılabilir kısayol içeren basit bir iskelet barındırır.";
+"Made in my free time - thanks for the support." = "Boş zamanımda yapıldı - destek için teşekkürler.";
+"GitHub Repo" = "GitHub deposu";
+"Report an Issue" = "Sorun bildir";
+"Donate" = "Bağış yap";
+
+/* Preview/Template */
+"This SwiftUI scaffold is ready for your ideas." = "Bu SwiftUI iskeleti fikirlerinize hazır.";
+"Increase Counter" = "Sayaç artır";
+"Counter: %lld" = "Sayaç: %lld";
+"Run Placeholder Action" = "Yer tutucu işlemi çalıştır";
+
+/* Hotkey Labels */
+"Cmd" = "Cmd";
+"Option" = "Option";
+"Shift" = "Shift";
+"Ctrl" = "Ctrl";
+"KeyFormat" = "Key %d";
+"Return" = "Return";
+"Tab" = "Tab";
+"Space" = "Space";
+"Forward Delete" = "Forward Delete";
+"Esc" = "Esc";
+"Help" = "Help";
+"Fn" = "Fn";
+"Home" = "Home";
+"End" = "End";
+"Page Up" = "Page Up";
+"Page Down" = "Page Down";
+"Left Arrow" = "Left Arrow";
+"Right Arrow" = "Right Arrow";
+"Up Arrow" = "Up Arrow";
+"Down Arrow" = "Down Arrow";
+"Keypad 0" = "Keypad 0";
+"Keypad 1" = "Keypad 1";
+"Keypad 2" = "Keypad 2";
+"Keypad 3" = "Keypad 3";
+"Keypad 4" = "Keypad 4";
+"Keypad 5" = "Keypad 5";
+"Keypad 6" = "Keypad 6";
+"Keypad 7" = "Keypad 7";
+"Keypad 8" = "Keypad 8";
+"Keypad 9" = "Keypad 9";
+"Keypad ," = "Keypad ,";
+"Keypad ." = "Keypad .";
+"Keypad Enter" = "Keypad Enter";
+"Keypad +" = "Keypad +";
+"Keypad -" = "Keypad -";
+"Keypad *" = "Keypad *";
+"Keypad /" = "Keypad /";
+"Keypad =" = "Keypad =";
+"Volume Up" = "Volume Up";
+"Volume Down" = "Volume Down";
+"Brightness Up" = "Brightness Up";
+"Brightness Down" = "Brightness Down";
+"Mute" = "Mute";
+"Play/Pause" = "Play/Pause";
+"Next Track" = "Next Track";
+"Previous Track" = "Previous Track";
+"Fast Forward" = "Fast Forward";
+"Rewind" = "Rewind";
+"Keyboard Brightness Up" = "Keyboard Brightness Up";
+"Keyboard Brightness Down" = "Keyboard Brightness Down";
+"Keyboard Brightness Toggle" = "Keyboard Brightness Toggle";
