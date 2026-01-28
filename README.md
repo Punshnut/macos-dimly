@@ -30,7 +30,10 @@ Dimly is the stealthy menu‑bar switch for external displays. One click (or a h
 </div>
 
 <p align="center">
-  <img src="Media/ScreenshotMenuBarWindow.png" alt="Dimly screenshot" width="600">
+  <details>
+    <summary>Show screenshot</summary>
+    <img src="Media/ScreenshotMenuBarWindow.png" alt="Dimly screenshot" width="600">
+  </details>
 </p>
 
 ## Big hits
