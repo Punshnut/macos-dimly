@@ -16,7 +16,7 @@ Dimly is the stealthy menu‑bar switch for external displays. One click (or a h
 </p>
 
 <p align="center">
-  <img src="Media/Dimly_Logo.png" alt="Dimly logo" width="260">
+  <img src="Media/Dimly_Logo.png" alt="Dimly logo" height="200">
 </p>
 
 <div align="center">
