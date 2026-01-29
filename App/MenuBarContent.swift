@@ -13,8 +13,8 @@ struct MenuBarContentView: View {
     @ObservedObject var profileManager: ProfileManager
     let engine: DimlyEngine
     let updaterController: UpdaterController
-    @State private var draggedDisplayID: String?
     @State private var modifierClickMonitor: Any?
+    @Environment(\.colorScheme) private var colorScheme
 
     var body: some View {
         VStack(alignment: .leading, spacing: 12) {
@@ -280,7 +280,13 @@ struct MenuBarContentView: View {
         let name = displayName(for: display)
         let status = displayStatus(for: display)
         let marker = displayOverlayMarker(for: display)
-        return HStack(alignment: .top, spacing: 10) {
+        let rowBackground: AnyShapeStyle = AnyShapeStyle(.thinMaterial)
+        let previewBackground: AnyShapeStyle = (colorScheme == .dark)
+            ? AnyShapeStyle(Color.black.opacity(0.55))
+            : AnyShapeStyle(.thinMaterial)
+        let previewStrokeOpacity: Double = (colorScheme == .dark) ? 0.08 : 0
+        let rowShape = RoundedRectangle(cornerRadius: 10, style: .continuous)
+        let content = HStack(alignment: .top, spacing: 10) {
             VStack(alignment: .leading, spacing: 2) {
                 Text(name)
                     .font(.subheadline.weight(.semibold))
@@ -295,6 +301,7 @@ struct MenuBarContentView: View {
             }
             Spacer()
             HStack(spacing: 6) {
+                displayOrderButtons(for: display)
                 sleepWakeButton(for: display)
                 Menu {
                     Button(isBlackoutActive ? String(localized: "Restore Display") : String(localized: "Blackout Display")) {
@@ -344,21 +351,11 @@ struct MenuBarContentView: View {
                 .menuIndicator(.hidden)
             }
         }
+        return content
         .padding(8)
-        .background(.thinMaterial)
-        .clipShape(RoundedRectangle(cornerRadius: 10, style: .continuous))
-        .contentShape(RoundedRectangle(cornerRadius: 10, style: .continuous))
-        .onDrag {
-            draggedDisplayID = display.stableIdentity
-            return NSItemProvider(object: display.stableIdentity as NSString)
-        }
-        .onDrop(of: [.text], delegate: DisplayReorderDropDelegate(
-            targetDisplayID: display.stableIdentity,
-            draggedDisplayID: draggedDisplayID,
-            currentOrder: orderedExternalIDs,
-            onMove: moveExternalDisplay,
-            onDropEnded: { draggedDisplayID = nil }
-        ))
+        .background(rowBackground)
+        .clipShape(rowShape)
+        .contentShape(rowShape)
     }
 
     private func sleepWakeButton(for display: DisplayInfo) -> some View {
@@ -371,7 +368,7 @@ struct MenuBarContentView: View {
             ? blackoutManager.activeDisplayIDs.contains(display.stableIdentity)
             : (ddcSupported ? (state.lastCommand == .standby) : fallbackActive)
         let label = isAsleep ? String(localized: "Wake Display") : String(localized: "Sleep Display")
-        let icon = isAsleep ? "sun.max.fill" : "moon.zzz"
+        let icon = isAsleep ? "moon.zzz" : "sun.max.fill"
         let tint: Color = (ddcSupported && !overlayOnly) ? .green : (fallbackActive ? .blue : .secondary)
 
         return Button {
@@ -393,6 +390,37 @@ struct MenuBarContentView: View {
         .buttonStyle(.plain)
         .disabled(!canControl)
         .help(label)
+    }
+
+    private func displayOrderButtons(for display: DisplayInfo) -> some View {
+        let order = orderedExternalIDs()
+        let index = order.firstIndex(of: display.stableIdentity) ?? 0
+        let canMoveUp = index > 0
+        let canMoveDown = index < (order.count - 1)
+
+        return VStack(spacing: 4) {
+            Button {
+                moveExternalDisplayUp(display.stableIdentity)
+            } label: {
+                Image(systemName: "chevron.up")
+                    .font(.system(size: 10, weight: .semibold))
+                    .frame(width: 18, height: 12)
+            }
+            .buttonStyle(.plain)
+            .disabled(!canMoveUp)
+
+            Button {
+                moveExternalDisplayDown(display.stableIdentity)
+            } label: {
+                Image(systemName: "chevron.down")
+                    .font(.system(size: 10, weight: .semibold))
+                    .frame(width: 18, height: 12)
+            }
+            .buttonStyle(.plain)
+            .disabled(!canMoveDown)
+        }
+        .foregroundStyle(.secondary)
+        .help(String(localized: "Reorder Display"))
     }
 
     private var profilesSection: some View {
@@ -576,9 +604,29 @@ struct MenuBarContentView: View {
         guard let fromIndex = order.firstIndex(of: draggedID),
               let toIndex = order.firstIndex(of: targetID),
               fromIndex != toIndex else { return }
-        let nextIndex = toIndex > fromIndex ? fromIndex + 1 : fromIndex - 1
-        guard order.indices.contains(nextIndex) else { return }
-        order.move(fromOffsets: IndexSet(integer: fromIndex), toOffset: nextIndex > fromIndex ? nextIndex + 1 : nextIndex)
+        order.swapAt(fromIndex, toIndex)
+        withAnimation(.spring(response: 0.25, dampingFraction: 0.82)) {
+            settingsStore.update { settings in
+                settings.externalDisplayOrder = order
+            }
+        }
+    }
+
+    private func moveExternalDisplayUp(_ id: String) {
+        var order = orderedExternalIDs()
+        guard let index = order.firstIndex(of: id), index > 0 else { return }
+        order.swapAt(index, index - 1)
+        withAnimation(.spring(response: 0.25, dampingFraction: 0.82)) {
+            settingsStore.update { settings in
+                settings.externalDisplayOrder = order
+            }
+        }
+    }
+
+    private func moveExternalDisplayDown(_ id: String) {
+        var order = orderedExternalIDs()
+        guard let index = order.firstIndex(of: id), index < (order.count - 1) else { return }
+        order.swapAt(index, index + 1)
         withAnimation(.spring(response: 0.25, dampingFraction: 0.82)) {
             settingsStore.update { settings in
                 settings.externalDisplayOrder = order
@@ -648,30 +696,5 @@ struct MenuBarContentView: View {
     private func openDiagnosticsLog() {
         let url = DiagnosticsLogger.shared.logFileURL
         NSWorkspace.shared.activateFileViewerSelecting([url])
-    }
-}
-
-private struct DisplayReorderDropDelegate: DropDelegate {
-    let targetDisplayID: String
-    let draggedDisplayID: String?
-    let currentOrder: () -> [String]
-    let onMove: (String, String) -> Void
-    let onDropEnded: () -> Void
-
-    func dropEntered(info: DropInfo) {
-        guard let draggedDisplayID,
-              draggedDisplayID != targetDisplayID,
-              currentOrder().contains(draggedDisplayID),
-              currentOrder().contains(targetDisplayID) else { return }
-        onMove(draggedDisplayID, targetDisplayID)
-    }
-
-    func dropUpdated(info: DropInfo) -> DropProposal? {
-        DropProposal(operation: .move)
-    }
-
-    func performDrop(info: DropInfo) -> Bool {
-        onDropEnded()
-        return true
     }
 }
