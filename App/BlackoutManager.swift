@@ -17,14 +17,19 @@ final class BlackoutManager: ObservableObject {
     private var persistenceToken: AnyCancellable?
     private var displayChangeToken: AnyCancellable?
     private let persistenceKey = "Blackout.activeDisplayIDs"
+    private let startupRestoreAnimated: Bool
+    private var hasPerformedStartupRestore = false
+    private let startupFadeDelay: TimeInterval = 0.12
+    private var didReplayStartupFade = false
 
-    init(displayManager: DisplayManager) {
+    init(displayManager: DisplayManager, startupRestoreAnimated: Bool) {
         self.displayManager = displayManager
+        self.startupRestoreAnimated = startupRestoreAnimated
+        DiagnosticsLogger.shared.log("BlackoutManager init", category: "blackout")
+        hasPerformedStartupRestore = restorePersistedState(animated: startupRestoreAnimated)
         displayChangeToken = displayManager.$displays.sink { [weak self] displays in
             self?.reconcileDisplays(displays)
         }
-        DiagnosticsLogger.shared.log("BlackoutManager init", category: "blackout")
-        restorePersistedState()
     }
 
     // MARK: - Public API
@@ -37,14 +42,16 @@ final class BlackoutManager: ObservableObject {
         }
     }
 
-    func blackout(_ display: DisplayInfo, animated: Bool) {
+    func blackout(_ display: DisplayInfo, animated: Bool, delay: TimeInterval = 0, deferShow: Bool = false) {
         guard display.isExternal else {
             logger.info("Refusing to blackout non-external display \(display.stableIdentity, privacy: .public)")
             DiagnosticsLogger.shared.log("Skip blackout for non-external \(display.stableIdentity)", category: "blackout")
             return
         }
         if let window = overlays[display.stableIdentity] {
-            window.show(animated: animated)
+            if !deferShow {
+                show(window, animated: animated, delay: delay)
+            }
             activeDisplayIDs.insert(display.stableIdentity)
             persistState()
             logger.notice("Blackout ON for \(display.stableIdentity, privacy: .public)")
@@ -58,7 +65,9 @@ final class BlackoutManager: ObservableObject {
         }
         let window = BlackoutWindow(screen: screen)
         overlays[display.stableIdentity] = window
-        window.show(animated: animated)
+        if !deferShow {
+            show(window, animated: animated, delay: delay)
+        }
         activeDisplayIDs.insert(display.stableIdentity)
         persistState()
         logger.notice("Blackout ON for \(display.stableIdentity, privacy: .public)")
@@ -147,8 +156,16 @@ final class BlackoutManager: ObservableObject {
 
         // Restore blackout for any newly present display that was persisted.
         let persisted = persistedIdentities()
+        let animateRestore = !hasPerformedStartupRestore
+        let deferShow = animateRestore && startupRestoreAnimated
         for display in displays where persisted.contains(display.stableIdentity) && !activeDisplayIDs.contains(display.stableIdentity) {
-            blackout(display, animated: false)
+            blackout(display, animated: animateRestore ? startupRestoreAnimated : false, delay: 0, deferShow: deferShow)
+        }
+        if deferShow {
+            replayStartupFadeIfNeeded()
+        }
+        if !hasPerformedStartupRestore {
+            hasPerformedStartupRestore = true
         }
     }
 
@@ -165,14 +182,30 @@ final class BlackoutManager: ObservableObject {
         UserDefaults.standard.set(Array(activeDisplayIDs), forKey: persistenceKey)
     }
 
-    private func restorePersistedState() {
+    @discardableResult
+    private func restorePersistedState(animated: Bool) -> Bool {
         guard let stored = UserDefaults.standard.array(forKey: persistenceKey) as? [String] else {
             UserDefaults.standard.set([], forKey: persistenceKey)
-            return
+            return false
         }
         let currentDisplays = displayManager.displays
+        var restored = false
+        let deferShow = animated && startupRestoreAnimated
         for display in currentDisplays where stored.contains(display.stableIdentity) {
-            blackout(display, animated: false)
+            blackout(display, animated: animated, delay: 0, deferShow: deferShow)
+            restored = true
+        }
+        return restored
+    }
+
+    private func show(_ window: BlackoutWindow, animated: Bool, delay: TimeInterval) {
+        guard delay > 0, animated else {
+            window.show(animated: animated)
+            return
+        }
+        Task { @MainActor in
+            try? await Task.sleep(nanoseconds: UInt64(delay * 1_000_000_000))
+            window.show(animated: animated)
         }
     }
 
@@ -237,6 +270,19 @@ final class BlackoutManager: ObservableObject {
         persistState()
         logger.notice("Promoted transition overlay to persistent for \(display.stableIdentity, privacy: .public)")
         DiagnosticsLogger.shared.log("Transition promoted for \(display.stableIdentity)", category: "blackout")
+    }
+
+    func replayStartupFadeIfNeeded() {
+        guard startupRestoreAnimated, !didReplayStartupFade else { return }
+        let windows = overlays.values
+        let transitionWindows = transitionOverlays.values
+        guard !windows.isEmpty || !transitionWindows.isEmpty else { return }
+        didReplayStartupFade = true
+        Task { @MainActor in
+            try? await Task.sleep(nanoseconds: UInt64(startupFadeDelay * 1_000_000_000))
+            windows.forEach { $0.show(animated: true) }
+            transitionWindows.forEach { $0.show(animated: true) }
+        }
     }
 }
 

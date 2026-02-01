@@ -12,6 +12,7 @@ final class DimlyEngine {
     private let logger = Logger(subsystem: Bundle.main.bundleIdentifier ?? "Dimly", category: "Engine")
     private var settingsCancellable: AnyCancellable?
     private var hotkeyManagers: [UUID: HotkeyManager] = [:]
+    private let sleepPersistenceKey = "Sleep.activeDisplayIDs"
     let displayManager: DisplayManager
     let blackoutManager: BlackoutManager
     let ddcManager: DDCManager
@@ -23,7 +24,10 @@ final class DimlyEngine {
             descriptor: HotkeyDescriptor.panicDefault
         )
         self.displayManager = displayManager
-        self.blackoutManager = BlackoutManager(displayManager: displayManager)
+        self.blackoutManager = BlackoutManager(
+            displayManager: displayManager,
+            startupRestoreAnimated: settingsStore.settings.fadeOutAnimationEnabled
+        )
         self.ddcManager = DDCManager(displayManager: displayManager)
         self.profileManager = ProfileManager(
             displayManager: displayManager,
@@ -45,6 +49,15 @@ final class DimlyEngine {
             }
 
         profileManager.engine = self
+        restoreStartupSleepState()
+
+        NotificationCenter.default.addObserver(
+            forName: NSApplication.didFinishLaunchingNotification,
+            object: nil,
+            queue: .main
+        ) { [weak self] _ in
+            self?.blackoutManager.replayStartupFadeIfNeeded()
+        }
     }
 
     // MARK: - Public
@@ -111,12 +124,17 @@ final class DimlyEngine {
                 logger.info("DDC standby unsupported; using blackout fallback for \(display.stableIdentity, privacy: .public)")
             }
             blackoutManager.blackout(display, animated: fadeOut)
+            removeSleepPersistence(for: display.stableIdentity)
             DiagnosticsLogger.shared.log("Standby fallback to blackout for \(display.stableIdentity)", category: "engine")
             return
         }
 
         if blackoutManager.hasPersistentOverlay(for: display) {
-            _ = ddcManager.standby(display)
+            if ddcManager.standby(display) {
+                addSleepPersistence(for: display.stableIdentity)
+            } else {
+                removeSleepPersistence(for: display.stableIdentity)
+            }
             return
         }
 
@@ -125,12 +143,16 @@ final class DimlyEngine {
             if self.ddcManager.standby(display) == false {
                 self.logger.info("DDC standby failed; using blackout fallback for \(display.stableIdentity, privacy: .public)")
                 self.blackoutManager.promoteTransitionToPersistent(display: display)
+                self.removeSleepPersistence(for: display.stableIdentity)
                 DiagnosticsLogger.shared.log("Standby failed, fallback to blackout for \(display.stableIdentity)", category: "engine")
+                return
             }
+            self.addSleepPersistence(for: display.stableIdentity)
         }
     }
 
     func wake(display: DisplayInfo) {
+        removeSleepPersistence(for: display.stableIdentity)
         let settings = settingsStore.settings
         let overlayOnly = settings.overlayOnlyDisplayIDs.contains(display.stableIdentity)
         let fadeIn = settings.fadeInAnimationEnabled
@@ -233,4 +255,65 @@ final class DimlyEngine {
     }
 
     // Placeholder notification removed in favor of direct display actions.
+
+    private func restoreStartupSleepState() {
+        let persisted = loadSleepPersistence()
+        guard !persisted.isEmpty else { return }
+
+        let displays = displayManager.displays.filter { persisted.contains($0.stableIdentity) }
+        guard !displays.isEmpty else { return }
+
+        attemptSleepRestore(for: displays, remainingAttempts: 5)
+    }
+
+    private func attemptSleepRestore(for displays: [DisplayInfo], remainingAttempts: Int) {
+        let settings = settingsStore.settings
+        var pending: [DisplayInfo] = []
+
+        for display in displays {
+            let id = display.stableIdentity
+            if settings.overlayOnlyDisplayIDs.contains(id) {
+                blackoutManager.blackout(display, animated: settings.fadeOutAnimationEnabled)
+                removeSleepPersistence(for: id)
+                continue
+            }
+
+            guard let state = ddcManager.states[id]?.status else {
+                pending.append(display)
+                continue
+            }
+
+            switch state {
+            case .supported:
+                standby(display: display)
+            case .notSupported:
+                removeSleepPersistence(for: id)
+            case .unknown:
+                pending.append(display)
+            }
+        }
+
+        guard remainingAttempts > 0, !pending.isEmpty else { return }
+        Task { @MainActor in
+            try? await Task.sleep(nanoseconds: 400_000_000)
+            attemptSleepRestore(for: pending, remainingAttempts: remainingAttempts - 1)
+        }
+    }
+
+    private func loadSleepPersistence() -> Set<String> {
+        let stored = UserDefaults.standard.array(forKey: sleepPersistenceKey) as? [String] ?? []
+        return Set(stored)
+    }
+
+    private func addSleepPersistence(for id: String) {
+        var stored = loadSleepPersistence()
+        stored.insert(id)
+        UserDefaults.standard.set(Array(stored), forKey: sleepPersistenceKey)
+    }
+
+    private func removeSleepPersistence(for id: String) {
+        var stored = loadSleepPersistence()
+        guard stored.remove(id) != nil else { return }
+        UserDefaults.standard.set(Array(stored), forKey: sleepPersistenceKey)
+    }
 }
