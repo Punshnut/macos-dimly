@@ -12,6 +12,7 @@ struct SettingsRootView: View {
     let engine: DimlyEngine
     @State private var introWindowController: IntroWindowController?
 
+    /// Tabbed settings UI.
     var body: some View {
         TabView {
             generalTab
@@ -29,6 +30,7 @@ struct SettingsRootView: View {
 
     // MARK: - Tabs
 
+    /// General preferences: login, menu bar, animations, and per-display options.
     private var generalTab: some View {
         ScrollView {
             VStack(alignment: .leading, spacing: 16) {
@@ -89,6 +91,7 @@ struct SettingsRootView: View {
     }
 
     @ViewBuilder
+    /// Renders a detailed row for a single display in Settings.
     private func displayRow(for display: DisplayInfo) -> some View {
         let name = displayName(for: display)
         let status = displayStatus(for: display)
@@ -163,6 +166,7 @@ struct SettingsRootView: View {
         .padding(.vertical, 6)
     }
 
+    /// Global hotkey configuration tab.
     private var shortcutsTab: some View {
         ScrollView {
             VStack(alignment: .leading, spacing: 16) {
@@ -202,6 +206,7 @@ struct SettingsRootView: View {
         .scrollIndicators(.visible)
     }
 
+    /// Placeholder card shown when no hotkeys are configured.
     private var emptyHotkeysCard: some View {
         VStack(alignment: .leading, spacing: 6) {
             Text(String(localized: "No hotkeys set yet"))
@@ -215,6 +220,7 @@ struct SettingsRootView: View {
         .clipShape(RoundedRectangle(cornerRadius: 12, style: .continuous))
     }
 
+    /// Adds a new hotkey row with default action/target.
     private func addHotkeyBinding() {
         settingsStore.update { settings in
             settings.hotkeyBindings.append(
@@ -227,12 +233,14 @@ struct SettingsRootView: View {
         }
     }
 
+    /// Removes a hotkey binding by ID.
     private func removeHotkeyBinding(_ id: UUID) {
         settingsStore.update { settings in
             settings.hotkeyBindings.removeAll { $0.id == id }
         }
     }
 
+    /// Returns a binding into the settings array for the requested hotkey.
     private func hotkeyBinding(for id: UUID) -> Binding<HotkeyBinding> {
         Binding(
             get: {
@@ -248,6 +256,7 @@ struct SettingsRootView: View {
         )
     }
 
+    /// Builds a list of display targets for a hotkey picker.
     private func displayOptions(for binding: HotkeyBinding) -> [DisplayOption] {
         var options: [DisplayOption] = [
             DisplayOption(id: .allExternalDisplays, label: String(localized: "All External Displays"))
@@ -267,6 +276,7 @@ struct SettingsRootView: View {
         return options
     }
 
+    /// Display profiles tab for saving, applying, and automation.
     private var profilesTab: some View {
         VStack(alignment: .leading, spacing: 12) {
             HStack {
@@ -300,6 +310,7 @@ struct SettingsRootView: View {
     @State private var proposedProfileName: String = ""
 
     @ViewBuilder
+    /// Card-style row for a single saved display profile.
     private func profileRow(_ profile: DisplayProfile) -> some View {
         VStack(alignment: .leading, spacing: 6) {
             HStack {
@@ -326,6 +337,7 @@ struct SettingsRootView: View {
 
     @State private var renameText: String = ""
 
+    /// Forces the intro window to reappear for the current session.
     private func showIntroAgain() {
         UserDefaults.standard.set(false, forKey: AppDelegate.introShownKey)
         if introWindowController == nil {
@@ -338,6 +350,7 @@ struct SettingsRootView: View {
         NSApp.activate(ignoringOtherApps: true)
     }
 
+    /// Prompts the user to rename an existing profile.
     private func renameProfile(_ profile: DisplayProfile) {
         renameText = profile.name
         let alert = NSAlert()
@@ -354,6 +367,7 @@ struct SettingsRootView: View {
         }
     }
 
+    /// Resolves display names using the shared label resolver.
     private func displayName(for display: DisplayInfo) -> String {
         let externalIndex = externalIndexMap[display.stableIdentity] ?? 1
         let internalIndex = internalIndexMap[display.stableIdentity] ?? 1
@@ -365,6 +379,7 @@ struct SettingsRootView: View {
         )
     }
 
+    /// Builds a label for the hotkey target picker.
     private func displayOptionLabel(for display: DisplayInfo) -> String {
         let name = displayName(for: display)
         let externalIndex = externalIndexMap[display.stableIdentity] ?? 1
@@ -378,6 +393,7 @@ struct SettingsRootView: View {
         return String(format: String(localized: "DisplayTypeResolutionFormat"), name, marker)
     }
 
+    /// Computes the human-friendly status text for a display.
     private func displayStatus(for display: DisplayInfo) -> String {
         if engine.blackoutManager.activeDisplayIDs.contains(display.stableIdentity) {
             return String(localized: "Blackout")
@@ -401,6 +417,7 @@ struct SettingsRootView: View {
         displayManager.displays.filter { $0.isBuiltin }.count
     }
 
+    /// Generates a consistent index map for display numbering.
     private func indexMap(for displays: [DisplayInfo]) -> [String: Int] {
         let ordered = displays.sorted { $0.displayID < $1.displayID }
         var mapping: [String: Int] = [:]
@@ -410,6 +427,7 @@ struct SettingsRootView: View {
         return mapping
     }
 
+    /// Prompts to rename a display and persists the alias in settings.
     private func renameDisplay(_ display: DisplayInfo, currentName: String) {
         let alert = NSAlert()
         alert.messageText = String(localized: "Rename Display")
@@ -432,6 +450,7 @@ struct SettingsRootView: View {
         }
     }
 
+    /// Automation settings for applying a profile on external connect.
     private var automationSection: some View {
         VStack(alignment: .leading, spacing: 8) {
             Toggle(String(localized: "Auto-apply profile when an external display connects"), isOn: $profileManager.automationEnabled)
@@ -452,6 +471,7 @@ struct SettingsRootView: View {
         }
     }
 
+    /// About tab showing version info and support links.
     private var aboutTab: some View {
         VStack(alignment: .leading, spacing: 16) {
             let version = Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String ?? ""
@@ -505,16 +525,19 @@ struct SettingsRootView: View {
 
 // MARK: - Hotkey Bindings UI
 
+/// Picker option for mapping hotkeys to a display target.
 private struct DisplayOption: Identifiable, Hashable {
     let id: HotkeyTarget
     let label: String
 }
 
+/// Row UI for a single hotkey binding.
 private struct HotkeyBindingRow: View {
     @Binding var binding: HotkeyBinding
     let displayOptions: [DisplayOption]
     let onDelete: () -> Void
 
+    /// Layout for the hotkey binding row.
     var body: some View {
         HStack(alignment: .center, spacing: 14) {
             VStack(alignment: .leading, spacing: 10) {
@@ -549,11 +572,13 @@ private struct HotkeyBindingRow: View {
 
 // MARK: - Hotkey Recorder
 
+/// Simple recorder surface that captures a new hotkey descriptor.
 private struct HotkeyRecorder: View {
     @Binding var descriptor: HotkeyDescriptor?
     @State private var isRecording = false
     @State private var captureMonitor = HotkeyCaptureMonitor()
 
+    /// Recorder UI that toggles capture and displays current binding.
     var body: some View {
         ZStack {
             RoundedRectangle(cornerRadius: 8, style: .continuous)
@@ -591,11 +616,13 @@ private struct HotkeyRecorder: View {
     }
 }
 
+/// Captures the next key press using local + global event monitors.
 private final class HotkeyCaptureMonitor {
     private var localMonitor: Any?
     private var globalMonitor: Any?
     private var didCapture = false
 
+    /// Starts listening for a single key press, then stops automatically.
     func start(handler: @escaping (NSEvent) -> Void) {
         stop()
         didCapture = false
@@ -614,6 +641,7 @@ private final class HotkeyCaptureMonitor {
         }
     }
 
+    /// Stops all event monitors and resets capture state.
     func stop() {
         if let localMonitor {
             NSEvent.removeMonitor(localMonitor)

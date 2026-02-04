@@ -10,11 +10,13 @@ enum LaunchAtLoginManager {
         subsystem: Bundle.main.bundleIdentifier ?? "Dimly",
         category: "LaunchAtLogin"
     )
+    /// State tracking to avoid redundant or failing login item requests.
     private actor State {
         var lastRequestState: Bool?
         var lastRequestDate: Date?
         var suppressedForSession = false
 
+        /// Returns true when the same request was just attempted.
         func shouldSkipDuplicate(state: Bool, threshold: TimeInterval = 5) -> Bool {
             if let date = lastRequestDate, let last = lastRequestState, last == state,
                Date().timeIntervalSince(date) < threshold {
@@ -23,11 +25,13 @@ enum LaunchAtLoginManager {
             return false
         }
 
+        /// Records a login item request for deduplication.
         func markRequest(state: Bool) {
             lastRequestState = state
             lastRequestDate = Date()
         }
 
+        /// Suppresses further attempts after an EPERM failure.
         func suppressAfterEPERM() {
             suppressedForSession = true
         }
@@ -101,6 +105,7 @@ enum LaunchAtLoginManager {
         }
     }
 
+    /// Determines if the SMAppService state differs from the desired state.
     @available(macOS 13.0, *)
     private static func needsUpdate(targetState: Bool) -> Bool {
         switch SMAppService.mainApp.status {

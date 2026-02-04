@@ -22,6 +22,7 @@ final class BlackoutManager: ObservableObject {
     private let startupFadeDelay: TimeInterval = 0.12
     private var didReplayStartupFade = false
 
+    /// Creates the manager and restores persisted blackout state.
     init(displayManager: DisplayManager, startupRestoreAnimated: Bool) {
         self.displayManager = displayManager
         self.startupRestoreAnimated = startupRestoreAnimated
@@ -34,6 +35,7 @@ final class BlackoutManager: ObservableObject {
 
     // MARK: - Public API
 
+    /// Toggles blackout for a single display.
     func toggle(display: DisplayInfo, fadeOut: Bool, fadeIn: Bool) {
         if activeDisplayIDs.contains(display.stableIdentity) {
             unblackout(display, animated: fadeIn)
@@ -42,6 +44,7 @@ final class BlackoutManager: ObservableObject {
         }
     }
 
+    /// Blackouts a display by showing a fullscreen overlay window.
     func blackout(_ display: DisplayInfo, animated: Bool, delay: TimeInterval = 0, deferShow: Bool = false) {
         guard display.isExternal else {
             logger.info("Refusing to blackout non-external display \(display.stableIdentity, privacy: .public)")
@@ -74,6 +77,7 @@ final class BlackoutManager: ObservableObject {
         DiagnosticsLogger.shared.log("Blackout ON for \(display.stableIdentity)", category: "blackout")
     }
 
+    /// Removes blackout overlay for a display.
     func unblackout(_ display: DisplayInfo, animated: Bool) {
         guard let window = overlays[display.stableIdentity] else { return }
         window.hide(animated: animated)
@@ -83,6 +87,7 @@ final class BlackoutManager: ObservableObject {
         DiagnosticsLogger.shared.log("Blackout OFF for \(display.stableIdentity)", category: "blackout")
     }
 
+    /// Toggles blackout across all external displays.
     func toggleAllExternal(displays: [DisplayInfo], fadeOut: Bool, fadeIn: Bool) {
         let externals = displays.filter { $0.isExternal }
         let anyActive = externals.contains { activeDisplayIDs.contains($0.stableIdentity) }
@@ -131,6 +136,7 @@ final class BlackoutManager: ObservableObject {
 
     // MARK: - Private helpers
 
+    /// Reconciles overlays with the current display inventory.
     private func reconcileDisplays(_ displays: [DisplayInfo]) {
         // Remove overlays for displays that disappeared.
         let liveIDs = Set(displays.map(\.stableIdentity))
@@ -169,6 +175,7 @@ final class BlackoutManager: ObservableObject {
         }
     }
 
+    /// Resolves the NSScreen for a CoreGraphics display ID.
     private func screen(for displayID: CGDirectDisplayID) -> NSScreen? {
         NSScreen.screens.first { screen in
             guard let number = screen.deviceDescription[NSDeviceDescriptionKey("NSScreenNumber")] as? NSNumber else {
@@ -178,10 +185,12 @@ final class BlackoutManager: ObservableObject {
         }
     }
 
+    /// Persists the active blackout display IDs to UserDefaults.
     private func persistState() {
         UserDefaults.standard.set(Array(activeDisplayIDs), forKey: persistenceKey)
     }
 
+    /// Restores blackout overlays from persisted state.
     @discardableResult
     private func restorePersistedState(animated: Bool) -> Bool {
         guard let stored = UserDefaults.standard.array(forKey: persistenceKey) as? [String] else {
@@ -198,6 +207,7 @@ final class BlackoutManager: ObservableObject {
         return restored
     }
 
+    /// Shows the overlay, optionally delayed.
     private func show(_ window: BlackoutWindow, animated: Bool, delay: TimeInterval) {
         guard delay > 0, animated else {
             window.show(animated: animated)
@@ -209,6 +219,7 @@ final class BlackoutManager: ObservableObject {
         }
     }
 
+    /// Reads persisted blackout IDs from UserDefaults.
     private func persistedIdentities() -> Set<String> {
         let stored = UserDefaults.standard.array(forKey: persistenceKey) as? [String] ?? []
         return Set(stored)
@@ -216,10 +227,12 @@ final class BlackoutManager: ObservableObject {
 
     // MARK: - Transition overlays
 
+    /// Returns true when a persistent overlay exists for the display.
     func hasPersistentOverlay(for display: DisplayInfo) -> Bool {
         overlays[display.stableIdentity] != nil
     }
 
+    /// Shows a temporary overlay during DDC transitions.
     func showTransitionOverlay(for display: DisplayInfo, animated: Bool, completion: (() -> Void)? = nil) {
         guard display.isExternal else {
             completion?()
@@ -242,6 +255,7 @@ final class BlackoutManager: ObservableObject {
         window.show(animated: animated, completion: completion)
     }
 
+    /// Hides and disposes a transition overlay.
     func hideTransitionOverlay(for display: DisplayInfo, animated: Bool, delay: TimeInterval = 0) {
         guard let window = transitionOverlays[display.stableIdentity] else { return }
         if delay > 0 {
@@ -260,6 +274,7 @@ final class BlackoutManager: ObservableObject {
         }
     }
 
+    /// Promotes a transition overlay to a persistent blackout overlay.
     func promoteTransitionToPersistent(display: DisplayInfo) {
         guard let window = transitionOverlays.removeValue(forKey: display.stableIdentity) else {
             blackout(display, animated: false)
@@ -272,6 +287,7 @@ final class BlackoutManager: ObservableObject {
         DiagnosticsLogger.shared.log("Transition promoted for \(display.stableIdentity)", category: "blackout")
     }
 
+    /// Replays the startup fade once after restoring persisted overlays.
     func replayStartupFadeIfNeeded() {
         guard startupRestoreAnimated, !didReplayStartupFade else { return }
         let windows = overlays.values
@@ -293,6 +309,7 @@ final class BlackoutWindow: NSWindow {
         static let totalDuration: TimeInterval = 0.55
     }
 
+    /// Plain view that paints a black background.
     private final class BlackoutView: NSView {
         override var wantsUpdateLayer: Bool { true }
 
@@ -304,6 +321,7 @@ final class BlackoutWindow: NSWindow {
     private let blackoutView = BlackoutView()
     private var animationToken: Int = 0
 
+    /// Creates a borderless overlay window for the given screen.
     init(screen: NSScreen) {
         super.init(
             contentRect: screen.frame,
@@ -326,6 +344,7 @@ final class BlackoutWindow: NSWindow {
         setFrame(screen.frame, display: true)
     }
 
+    /// Shows the overlay with an optional fade animation.
     func show(animated: Bool, completion: (() -> Void)? = nil) {
         orderFrontRegardless()
         animationToken += 1
@@ -366,6 +385,7 @@ final class BlackoutWindow: NSWindow {
         CATransaction.commit()
     }
 
+    /// Hides the overlay with an optional fade animation.
     func hide(animated: Bool, completion: (() -> Void)? = nil) {
         animationToken += 1
         let token = animationToken

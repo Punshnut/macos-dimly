@@ -3,9 +3,11 @@
 import AppKit
 import SwiftUI
 
+/// Hosts the first-launch intro SwiftUI view inside an AppKit window.
 final class IntroWindowController: NSWindowController, NSWindowDelegate {
     private let onDismiss: () -> Void
 
+    /// Creates the intro window and wires a dismissal callback.
     init(onDismiss: @escaping () -> Void) {
         self.onDismiss = onDismiss
 
@@ -36,6 +38,7 @@ final class IntroWindowController: NSWindowController, NSWindowDelegate {
         return nil
     }
 
+    /// NSWindowDelegate hook used to notify the owner when the window closes.
     func windowWillClose(_ notification: Notification) {
         onDismiss()
     }

@@ -2,6 +2,7 @@
 // Centralizes naming + numbering rules for displays.
 import Foundation
 
+/// Central place for naming and overlay marker rules.
 struct DisplayLabelResolver {
     /// Resolves a friendly, user-facing name for a display.
     static func displayName(
@@ -37,6 +38,7 @@ struct DisplayLabelResolver {
         return String(display.isExternal ? externalIndex : internalIndex)
     }
 
+    /// Trims whitespace from optional strings.
     private static func trimmed(_ value: String?) -> String? {
         value?.trimmingCharacters(in: .whitespacesAndNewlines)
     }

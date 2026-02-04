@@ -19,20 +19,26 @@ struct DisplayInfo: Identifiable, Equatable {
     let resolution: String
     let refreshRateHz: Double?
 
+    /// Stable identifier used across sessions (UUID, serial, or fallback to display ID).
     var stableIdentity: String {
         if let uuid { return uuid }
         if let serialNumber { return "serial-\(serialNumber)" }
         return "display-\(displayID)"
     }
 
+    /// `Identifiable` conformance uses the stable identity.
     var id: String { stableIdentity }
 }
 
 /// Protocol allowing the display manager to be tested by injecting a fake hardware backend.
 protocol DisplayHardwareProviding: AnyObject, Sendable {
+    /// Returns active CoreGraphics display IDs.
     func activeDisplayIDs() -> [CGDirectDisplayID]
+    /// Builds a `DisplayInfo` for a given display ID.
     func displayInfo(for id: CGDirectDisplayID) -> DisplayInfo
+    /// Registers a callback for display changes and returns an opaque token.
     func registerCallback(_ callback: @escaping (CGDirectDisplayID, CGDisplayChangeSummaryFlags) -> Void) -> AnyObject
+    /// Unregisters a callback token produced by `registerCallback`.
     func unregisterCallback(_ token: AnyObject)
 }
 
@@ -43,6 +49,7 @@ final class DisplayHardware: DisplayHardwareProviding, @unchecked Sendable {
         init(_ handler: @escaping (CGDirectDisplayID, CGDisplayChangeSummaryFlags) -> Void) { self.handler = handler }
     }
 
+    /// Returns the list of active display IDs from CoreGraphics.
     func activeDisplayIDs() -> [CGDirectDisplayID] {
         let maxDisplays: UInt32 = 16
         var activeDisplays = [CGDirectDisplayID](repeating: 0, count: Int(maxDisplays))
@@ -52,6 +59,7 @@ final class DisplayHardware: DisplayHardwareProviding, @unchecked Sendable {
         return Array(activeDisplays.prefix(Int(displayCount)))
     }
 
+    /// Fetches identifying metadata for the given display.
     func displayInfo(for id: CGDirectDisplayID) -> DisplayInfo {
         let uuid = Self.displayUUID(for: id)
         let serial = CGDisplaySerialNumber(id)
@@ -72,6 +80,7 @@ final class DisplayHardware: DisplayHardwareProviding, @unchecked Sendable {
         )
     }
 
+    /// Registers the CGDisplay reconfiguration callback.
     func registerCallback(_ callback: @escaping (CGDirectDisplayID, CGDisplayChangeSummaryFlags) -> Void) -> AnyObject {
         let box = CallbackBox(callback)
         let pointer = UnsafeMutableRawPointer(Unmanaged.passUnretained(box).toOpaque())
@@ -79,6 +88,7 @@ final class DisplayHardware: DisplayHardwareProviding, @unchecked Sendable {
         return box
     }
 
+    /// Removes a previously registered callback.
     func unregisterCallback(_ token: AnyObject) {
         let pointer = UnsafeMutableRawPointer(Unmanaged.passUnretained(token).toOpaque())
         CGDisplayRemoveReconfigurationCallback(Self.reconfigurationCallback, pointer)
@@ -86,6 +96,7 @@ final class DisplayHardware: DisplayHardwareProviding, @unchecked Sendable {
 
     // MARK: - Helpers
 
+    /// Best-effort lookup for a display UUID using private CoreGraphics symbol.
     private static func displayUUID(for id: CGDirectDisplayID) -> UUID? {
         typealias Fn = @convention(c) (CGDirectDisplayID) -> Unmanaged<CFUUID>?
         guard
@@ -104,6 +115,7 @@ final class DisplayHardware: DisplayHardwareProviding, @unchecked Sendable {
         box.handler(displayID, flags)
     }
 
+    /// Returns a localized resolution string (with a scaled suffix if needed).
     private static func resolutionString(for id: CGDirectDisplayID) -> String {
         guard let mode = CGDisplayCopyDisplayMode(id) else { return String(localized: "Unknown") }
         let width = Int(mode.width)
@@ -113,12 +125,14 @@ final class DisplayHardware: DisplayHardwareProviding, @unchecked Sendable {
         return "\(width)×\(height)\(scaleSuffix)"
     }
 
+    /// Returns the refresh rate in Hz if it is meaningful (> 1 Hz).
     private static func refreshRate(for id: CGDirectDisplayID) -> Double? {
         guard let mode = CGDisplayCopyDisplayMode(id) else { return nil }
         let hz = mode.refreshRate
         return hz > 1 ? hz : nil
     }
 
+    /// Attempts to read a user-friendly display name via IOKit/EDID.
     private static func displayName(for id: CGDirectDisplayID) -> String? {
         // Best-effort using IOKit to read the preferred product name from EDID.
         guard let servicePort = ioServicePort(for: id) else { return nil }
@@ -140,6 +154,7 @@ final class DisplayHardware: DisplayHardwareProviding, @unchecked Sendable {
 
     // MARK: - IOService helpers
 
+    /// Finds the matching IODisplay service port for a display ID.
     static func ioServicePort(for displayID: CGDirectDisplayID) -> io_service_t? {
         guard let matching = IOServiceMatching("IODisplayConnect") else { return nil }
         var iterator: io_iterator_t = 0
@@ -167,6 +182,7 @@ final class DisplayHardware: DisplayHardwareProviding, @unchecked Sendable {
         return nil
     }
 
+    /// Reads a UInt32 registry property (or 0 if missing).
     private static func ioRegistryUInt32(_ service: io_service_t, key: CFString) -> UInt32 {
         guard let value = IORegistryEntryCreateCFProperty(service, key, kCFAllocatorDefault, 0)?.takeRetainedValue() else {
             return 0

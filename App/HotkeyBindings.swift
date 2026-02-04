@@ -2,6 +2,7 @@
 // Defines user-configurable hotkey targets and actions.
 import Foundation
 
+/// User-facing actions that can be bound to a hotkey.
 enum HotkeyAction: String, Codable, CaseIterable, Identifiable {
     case toggleBlackout
     case toggleSleepWake
@@ -18,6 +19,7 @@ enum HotkeyAction: String, Codable, CaseIterable, Identifiable {
     }
 }
 
+/// Target selection for a hotkey action.
 enum HotkeyTarget: Hashable, Codable {
     case allExternalDisplays
     case display(id: String)
@@ -56,6 +58,7 @@ enum HotkeyTarget: Hashable, Codable {
     }
 }
 
+/// Persisted hotkey binding (action + target + optional descriptor).
 struct HotkeyBinding: Identifiable, Codable, Equatable {
     let id: UUID
     var action: HotkeyAction

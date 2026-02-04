@@ -32,6 +32,7 @@ final class DiagnosticsLogger: @unchecked Sendable {
         writeHeader()
     }
 
+    /// Starts periodic heartbeat log entries on main and background queues.
     func startHeartbeat(interval: TimeInterval = 5) {
         if uiHeartbeat == nil {
             let timer = DispatchSource.makeTimerSource(queue: .main)
@@ -54,6 +55,7 @@ final class DiagnosticsLogger: @unchecked Sendable {
         }
     }
 
+    /// Writes a timestamped line to the log file.
     func log(_ message: String, category: String = "general") {
         let timestamp = ISO8601DateFormatter().string(from: Date())
         let line = "[\(timestamp)] [\(category)] \(message)\n"
@@ -65,6 +67,7 @@ final class DiagnosticsLogger: @unchecked Sendable {
         }
     }
 
+    /// Writes an app/version header at the start of a log file.
     private func writeHeader() {
         let bundle = Bundle.main
         let version = bundle.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String ?? "?"
@@ -78,6 +81,7 @@ final class DiagnosticsLogger: @unchecked Sendable {
         }
     }
 
+    /// File URL for the current diagnostics log.
     var logFileURL: URL {
         logURL
     }

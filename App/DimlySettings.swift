@@ -29,6 +29,7 @@ struct DimlySettings: Codable, Equatable {
         case externalDisplayOrder
     }
 
+    /// Default settings used on first launch or when decoding fails.
     static let `default` = DimlySettings(
         launchAtLogin: false,
         showMenuBarIcon: true,
@@ -48,6 +49,7 @@ struct DimlySettings: Codable, Equatable {
         externalDisplayOrder: []
     )
 
+    /// Memberwise initializer used by the default factory and decoder.
     init(
         launchAtLogin: Bool,
         showMenuBarIcon: Bool,
@@ -72,6 +74,7 @@ struct DimlySettings: Codable, Equatable {
         self.externalDisplayOrder = externalDisplayOrder
     }
 
+    /// Custom decoder that also handles legacy single-hotkey migration.
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         let launchAtLogin = try container.decodeIfPresent(Bool.self, forKey: .launchAtLogin) ?? DimlySettings.default.launchAtLogin
@@ -113,6 +116,7 @@ struct DimlySettings: Codable, Equatable {
         )
     }
 
+    /// Encodes current settings for persistence.
     func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(launchAtLogin, forKey: .launchAtLogin)
@@ -132,6 +136,7 @@ struct DimlySettings: Codable, Equatable {
 enum DimlySettingsStore {
     private static let settingsKey = "DimlySettings.v1"
 
+    /// Loads settings from `UserDefaults` or falls back to defaults.
     static func load() -> DimlySettings {
         guard let data = UserDefaults.standard.data(forKey: settingsKey) else {
             return .default
@@ -145,6 +150,7 @@ enum DimlySettingsStore {
         }
     }
 
+    /// Persists settings to `UserDefaults`.
     static func save(_ settings: DimlySettings) {
         do {
             let data = try JSONEncoder().encode(settings)

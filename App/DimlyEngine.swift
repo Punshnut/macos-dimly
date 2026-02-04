@@ -18,6 +18,7 @@ final class DimlyEngine {
     let ddcManager: DDCManager
     let profileManager: ProfileManager
 
+    /// Builds all managers and binds settings/hotkeys.
     init(settingsStore: AppSettingsStore, displayManager: DisplayManager = DisplayManager()) {
         self.settingsStore = settingsStore
         self.panicHotkeyManager = HotkeyManager(
@@ -72,6 +73,7 @@ final class DimlyEngine {
         }
     }
 
+    /// Toggles blackout across all external displays.
     func toggleExternalBlackout() {
         DiagnosticsLogger.shared.log("Toggle all external blackout", category: "engine")
         let settings = settingsStore.settings
@@ -82,18 +84,21 @@ final class DimlyEngine {
         )
     }
 
+    /// Requests standby for every external display.
     func sleepExternalDisplays() {
         DiagnosticsLogger.shared.log("Sleep all external displays", category: "engine")
         let externals = displayManager.displays.filter { $0.isExternal }
         externals.forEach { standby(display: $0) }
     }
 
+    /// Wakes every external display.
     func wakeExternalDisplays() {
         DiagnosticsLogger.shared.log("Wake all external displays", category: "engine")
         let externals = displayManager.displays.filter { $0.isExternal }
         externals.forEach { wake(display: $0) }
     }
 
+    /// Toggles sleep/wake across externals based on current state.
     func toggleExternalSleepWake() {
         let externals = displayManager.displays.filter { $0.isExternal }
         guard !externals.isEmpty else { return }
@@ -107,12 +112,14 @@ final class DimlyEngine {
         }
     }
 
+    /// Emergency restore: wake all displays and clear blackout overlays.
     func panicBlackout(animated: Bool) {
         DiagnosticsLogger.shared.log("Panic blackout invoked", category: "engine")
         wakeExternalDisplays()
         blackoutManager.panic(animated: animated)
     }
 
+    /// Puts a display into standby via DDC or blackout fallback.
     func standby(display: DisplayInfo) {
         let settings = settingsStore.settings
         let overlayOnly = settings.overlayOnlyDisplayIDs.contains(display.stableIdentity)
@@ -151,6 +158,7 @@ final class DimlyEngine {
         }
     }
 
+    /// Wakes a display via DDC or removes blackout fallback.
     func wake(display: DisplayInfo) {
         removeSleepPersistence(for: display.stableIdentity)
         let settings = settingsStore.settings
@@ -183,6 +191,7 @@ final class DimlyEngine {
         blackoutManager.hideTransitionOverlay(for: display, animated: fadeIn, delay: delaySeconds)
     }
 
+    /// Releases hotkeys and removes overlays before app termination.
     func cleanupBeforeExit() {
         DiagnosticsLogger.shared.log("Cleanup before exit", category: "engine")
         hotkeyManagers.values.forEach { $0.deactivate() }
@@ -191,11 +200,13 @@ final class DimlyEngine {
 
     // MARK: - Private
 
+    /// Re-applies settings-dependent behaviors (currently hotkeys).
     private func apply(settings: DimlySettings) {
         updateHotkeys(settings.hotkeyBindings)
         panicHotkeyManager.activate()
     }
 
+    /// Registers all configured hotkeys and de-duplicates by descriptor.
     private func updateHotkeys(_ bindings: [HotkeyBinding]) {
         hotkeyManagers.values.forEach { $0.deactivate() }
         hotkeyManagers.removeAll()
@@ -217,6 +228,7 @@ final class DimlyEngine {
         }
     }
 
+    /// Hotkey routing for blackout actions.
     private func toggleBlackout(target: HotkeyTarget) {
         switch target {
         case .allExternalDisplays:
@@ -231,6 +243,7 @@ final class DimlyEngine {
         }
     }
 
+    /// Hotkey routing for sleep/wake actions.
     private func toggleSleepWake(target: HotkeyTarget) {
         switch target {
         case .allExternalDisplays:
@@ -247,6 +260,7 @@ final class DimlyEngine {
         }
     }
 
+    /// Returns true when a display is blacked out or in DDC standby.
     private func isDisplayAsleep(_ display: DisplayInfo) -> Bool {
         if blackoutManager.activeDisplayIDs.contains(display.stableIdentity) {
             return true
@@ -256,6 +270,7 @@ final class DimlyEngine {
 
     // Placeholder notification removed in favor of direct display actions.
 
+    /// Restores any persisted sleep state from the last run.
     private func restoreStartupSleepState() {
         let persisted = loadSleepPersistence()
         guard !persisted.isEmpty else { return }
@@ -266,6 +281,7 @@ final class DimlyEngine {
         attemptSleepRestore(for: displays, remainingAttempts: 5)
     }
 
+    /// Retries sleep restoration while DDC probing is still resolving.
     private func attemptSleepRestore(for displays: [DisplayInfo], remainingAttempts: Int) {
         let settings = settingsStore.settings
         var pending: [DisplayInfo] = []
@@ -300,17 +316,20 @@ final class DimlyEngine {
         }
     }
 
+    /// Loads persisted sleep IDs from UserDefaults.
     private func loadSleepPersistence() -> Set<String> {
         let stored = UserDefaults.standard.array(forKey: sleepPersistenceKey) as? [String] ?? []
         return Set(stored)
     }
 
+    /// Persists that a display was requested to sleep.
     private func addSleepPersistence(for id: String) {
         var stored = loadSleepPersistence()
         stored.insert(id)
         UserDefaults.standard.set(Array(stored), forKey: sleepPersistenceKey)
     }
 
+    /// Clears a display from the persisted sleep list.
     private func removeSleepPersistence(for id: String) {
         var stored = loadSleepPersistence()
         guard stored.remove(id) != nil else { return }

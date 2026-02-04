@@ -112,6 +112,7 @@ struct HotkeyDescriptor: Equatable, Hashable, Codable {
         )
     }
 
+    /// Filters modifier flags to the subset we track.
     static func sanitizedModifiers(for event: NSEvent) -> NSEvent.ModifierFlags {
         filtered(event.modifierFlags)
     }
@@ -171,6 +172,7 @@ struct HotkeyDescriptor: Equatable, Hashable, Codable {
         return unknownKeyLabel(for: keyCode)
     }
 
+    /// Attempts to extract a media key from a system-defined event.
     static func mediaKey(from event: NSEvent) -> MediaKey? {
         guard event.type == .systemDefined, event.subtype.rawValue == 8 else {
             return nil
@@ -282,6 +284,7 @@ struct HotkeyDescriptor: Equatable, Hashable, Codable {
     }
 }
 
+/// Media keys supported for hotkey registration.
 enum MediaKey: UInt16, Codable, CaseIterable {
     case volumeUp = 0
     case volumeDown = 1
@@ -331,7 +334,9 @@ enum MediaKey: UInt16, Codable, CaseIterable {
 
 /// Abstraction describing something that can register/unregister a global hotkey.
 protocol HotkeyRegistering {
+    /// Starts listening for the given descriptor.
     func beginListening(descriptor: HotkeyDescriptor, handler: @escaping () -> Void) -> Bool
+    /// Stops listening and releases system resources.
     func endListening()
 }
 
@@ -345,6 +350,7 @@ final class HotkeyManager {
     /// Invoked whenever the registered hotkey is pressed.
     var onHotkeyPressed: (() -> Void)?
 
+    /// Creates a hotkey manager with the given descriptor and registrar.
     init(descriptor: HotkeyDescriptor? = .toggleLauncher, registrar: HotkeyRegistering = CompositeHotkeyRegistrar()) {
         self.registeredHotkey = descriptor
         self.hotkeyRegistrar = registrar
@@ -412,6 +418,7 @@ final class CarbonHotkeyRegistrar: HotkeyRegistering {
         }
     }
 
+    /// Registers a Carbon hotkey and stores the handler.
     func beginListening(descriptor: HotkeyDescriptor, handler: @escaping () -> Void) -> Bool {
         endListening()
         self.registeredHandler = handler
@@ -509,6 +516,7 @@ final class MediaHotkeyRegistrar: HotkeyRegistering {
     private var registeredDescriptor: HotkeyDescriptor?
     private var registeredHandler: (() -> Void)?
 
+    /// Registers media-key monitors for the given descriptor.
     func beginListening(descriptor: HotkeyDescriptor, handler: @escaping () -> Void) -> Bool {
         guard descriptor.mediaKey != nil else {
             return false
@@ -530,6 +538,7 @@ final class MediaHotkeyRegistrar: HotkeyRegistering {
         return true
     }
 
+    /// Removes event monitors and clears cached state.
     func endListening() {
         if let globalMonitor {
             NSEvent.removeMonitor(globalMonitor)
@@ -543,6 +552,7 @@ final class MediaHotkeyRegistrar: HotkeyRegistering {
         registeredHandler = nil
     }
 
+    /// Filters events to the expected media key + modifiers.
     private func handle(_ event: NSEvent) {
         guard let registeredDescriptor,
               let expectedMediaKey = registeredDescriptor.mediaKey else {
@@ -566,6 +576,7 @@ final class CompositeHotkeyRegistrar: HotkeyRegistering {
     private let mediaRegistrar = MediaHotkeyRegistrar()
     private var isUsingMediaRegistrar = false
 
+    /// Chooses the correct registrar based on the descriptor type.
     func beginListening(descriptor: HotkeyDescriptor, handler: @escaping () -> Void) -> Bool {
         endListening()
         if descriptor.mediaKey != nil {
@@ -576,6 +587,7 @@ final class CompositeHotkeyRegistrar: HotkeyRegistering {
         return carbonRegistrar.beginListening(descriptor: descriptor, handler: handler)
     }
 
+    /// Ends listening on whichever registrar is active.
     func endListening() {
         if isUsingMediaRegistrar {
             mediaRegistrar.endListening()

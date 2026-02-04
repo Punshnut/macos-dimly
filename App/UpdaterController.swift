@@ -66,6 +66,7 @@ final class UpdaterController: NSObject, SPUStandardUserDriverDelegate, SPUUpdat
         }
     }
 
+    /// Detects Sparkle windows by class name prefix.
     private func isSparkleWindow(_ window: NSWindow) -> Bool {
         let className = NSStringFromClass(type(of: window))
         return className.hasPrefix("SPU") || className.hasPrefix("SU")
@@ -98,5 +99,6 @@ final class UpdaterController: NSObject, SPUStandardUserDriverDelegate, SPUUpdat
 }
 
 extension Notification.Name {
+    /// Posted before Sparkle update UI is shown so windows can be prepared.
     static let sparkleWillPresentUpdateUI = Notification.Name("DimlySparkleWillPresentUpdateUI")
 }

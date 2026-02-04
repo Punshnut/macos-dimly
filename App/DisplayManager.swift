@@ -14,6 +14,7 @@ final class DisplayManager: ObservableObject {
     private let logger = Logger(subsystem: Bundle.main.bundleIdentifier ?? "Dimly", category: "DisplayManager")
     private var callbackToken: AnyObject?
 
+    /// Loads initial display inventory and installs change callbacks.
     init(hardware: DisplayHardwareProviding = DisplayHardware()) {
         self.hardware = hardware
         refresh(reason: "initial boot")
@@ -34,6 +35,7 @@ final class DisplayManager: ObservableObject {
 
     // MARK: - Private
 
+    /// Handles CoreGraphics change callbacks and refreshes display state.
     private func handleDisplayChange(displayID: CGDirectDisplayID, flags: CGDisplayChangeSummaryFlags) {
         let changeDesc = flagDescription(flags)
         logger.notice("Display change detected for id \(displayID, privacy: .public): \(changeDesc, privacy: .public)")
@@ -41,6 +43,7 @@ final class DisplayManager: ObservableObject {
         refresh(reason: changeDesc)
     }
 
+    /// Refreshes display info off the main actor.
     private func refresh(reason: String) {
         let previous = displays
         let currentIDs = hardware.activeDisplayIDs()
@@ -53,6 +56,7 @@ final class DisplayManager: ObservableObject {
         }
     }
 
+    /// Applies new display info and logs changes.
     @MainActor
     private func applyDisplays(_ displays: [DisplayInfo], previous: [DisplayInfo], reason: String) {
         self.displays = displays
@@ -61,6 +65,7 @@ final class DisplayManager: ObservableObject {
         DiagnosticsLogger.shared.log("Applied displays: prev=\(previous.count) curr=\(displays.count) reason=\(reason)", category: "display")
     }
 
+    /// Logs display additions/removals.
     private func logDiff(previous: [DisplayInfo], current: [DisplayInfo], reason: String) {
         let prevIDs = Set(previous.map(\.stableIdentity))
         let currIDs = Set(current.map(\.stableIdentity))
@@ -74,6 +79,7 @@ final class DisplayManager: ObservableObject {
         }
     }
 
+    /// Logs a full inventory snapshot for diagnostics.
     private func logInventory(_ displays: [DisplayInfo], reason: String) {
         for display in displays {
             let origin = display.isBuiltin ? "builtin" : "external"
@@ -84,6 +90,7 @@ final class DisplayManager: ObservableObject {
         }
     }
 
+    /// Converts CGDisplay change flags into a readable string.
     private func flagDescription(_ flags: CGDisplayChangeSummaryFlags) -> String {
         var parts: [String] = []
         if flags.contains(.addFlag) { parts.append("add") }

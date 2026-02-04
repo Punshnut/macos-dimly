@@ -4,6 +4,7 @@ import SwiftUI
 import AppKit
 import Combine
 
+/// Controls on-screen numeric overlays used to identify displays.
 @MainActor
 final class DisplayLabelManager {
     private let settingsStore: AppSettingsStore
@@ -12,6 +13,7 @@ final class DisplayLabelManager {
     private var cancellables: Set<AnyCancellable> = []
     private var isEnabled = false
 
+    /// Observes settings and display changes to keep overlays up to date.
     init(settingsStore: AppSettingsStore, displayManager: DisplayManager) {
         self.settingsStore = settingsStore
         self.displayManager = displayManager
@@ -35,6 +37,7 @@ final class DisplayLabelManager {
         refresh()
     }
 
+    /// Rebuilds overlays based on current display inventory and settings.
     private func refresh() {
         guard isEnabled else {
             hideAll()
@@ -82,10 +85,12 @@ final class DisplayLabelManager {
         }
     }
 
+    /// Hides all overlays without destroying them.
     private func hideAll() {
         overlays.values.forEach { $0.hide() }
     }
 
+    /// Stable ordering for numbering internal/external displays.
     private func indexMap(for displays: [DisplayInfo]) -> [String: Int] {
         // Stable, predictable ordering based on displayID.
         let ordered = displays.sorted { $0.displayID < $1.displayID }
@@ -96,6 +101,7 @@ final class DisplayLabelManager {
         return mapping
     }
 
+    /// Finds the NSScreen matching a CoreGraphics display ID.
     private func screen(for displayID: CGDirectDisplayID) -> NSScreen? {
         NSScreen.screens.first { screen in
             guard let number = screen.deviceDescription[NSDeviceDescriptionKey("NSScreenNumber")] as? NSNumber else {
@@ -106,9 +112,11 @@ final class DisplayLabelManager {
     }
 }
 
+/// Borderless window used to host the SwiftUI overlay on a screen.
 private final class DisplayLabelWindow: NSWindow {
     private var hostingView: NSHostingView<DisplayLabelOverlayView>
 
+    /// Creates the window for a specific screen and label.
     init(screen: NSScreen, marker: String, title: String) {
         hostingView = NSHostingView(rootView: DisplayLabelOverlayView(marker: marker, title: title))
         super.init(
@@ -129,24 +137,29 @@ private final class DisplayLabelWindow: NSWindow {
         setFrame(screen.frame, display: true)
     }
 
+    /// Updates the overlay label and resizes to the target screen.
     func update(marker: String, title: String, screen: NSScreen) {
         hostingView.rootView = DisplayLabelOverlayView(marker: marker, title: title)
         setFrame(screen.frame, display: true)
     }
 
+    /// Shows the overlay window.
     func show() {
         orderFrontRegardless()
     }
 
+    /// Hides the overlay window.
     func hide() {
         orderOut(nil)
     }
 }
 
+/// SwiftUI overlay content shown in the label window.
 private struct DisplayLabelOverlayView: View {
     let marker: String
     let title: String
 
+    /// Layout for the overlay marker and display title.
     var body: some View {
         ZStack {
             Color.clear

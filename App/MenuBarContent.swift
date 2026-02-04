@@ -16,6 +16,7 @@ struct MenuBarContentView: View {
     @State private var modifierClickMonitor: Any?
     @Environment(\.colorScheme) private var colorScheme
 
+    /// Primary menu bar layout rendered inside the status item window.
     var body: some View {
         VStack(alignment: .leading, spacing: 12) {
             headerCard
@@ -38,6 +39,7 @@ struct MenuBarContentView: View {
         }
     }
 
+    /// Brings the menu bar popover window forward for better keyboard focus.
     private func activateMenuBarWindowIfNeeded() {
         DispatchQueue.main.async {
             NSApp.activate(ignoringOtherApps: true)
@@ -48,6 +50,7 @@ struct MenuBarContentView: View {
         }
     }
 
+    /// Handles option/control modifier clicks to trigger quick actions.
     private func handleModifierClickIfNeeded() {
         guard let event = NSApp.currentEvent else { return }
         guard event.type == .leftMouseUp || event.type == .leftMouseDown else { return }
@@ -65,6 +68,7 @@ struct MenuBarContentView: View {
         }
     }
 
+    /// Installs a local monitor so modifier clicks work while the menu is open.
     private func installModifierClickMonitor() {
         guard modifierClickMonitor == nil else { return }
         modifierClickMonitor = NSEvent.addLocalMonitorForEvents(matching: [.leftMouseDown, .leftMouseUp]) { event in
@@ -78,6 +82,7 @@ struct MenuBarContentView: View {
         }
     }
 
+    /// Removes the event monitor to avoid leaks when the menu closes.
     private func removeModifierClickMonitor() {
         if let modifierClickMonitor {
             NSEvent.removeMonitor(modifierClickMonitor)
@@ -85,6 +90,7 @@ struct MenuBarContentView: View {
         }
     }
 
+    /// Closes the menu bar window after a modifier-triggered action.
     private func closeMenuBarWindow() {
         DispatchQueue.main.async {
             let candidate = NSApp.windows.first { window in
@@ -95,30 +101,37 @@ struct MenuBarContentView: View {
     }
 
 
+    /// External displays only, as seen by the display manager.
     private var externalDisplays: [DisplayInfo] {
         displayManager.displays.filter { $0.isExternal }
     }
 
+    /// External displays ordered by the user's preference list.
     private var orderedExternalDisplays: [DisplayInfo] {
         orderExternalDisplays(externalDisplays)
     }
 
+    /// Map of display stable IDs to their external index number.
     private var externalIndexMap: [String: Int] {
         indexMap(for: displayManager.displays.filter { $0.isExternal })
     }
 
+    /// Map of display stable IDs to their internal index number.
     private var internalIndexMap: [String: Int] {
         indexMap(for: displayManager.displays.filter { $0.isBuiltin })
     }
 
+    /// Count of internal (built-in) panels.
     private var internalDisplayCount: Int {
         displayManager.displays.filter { $0.isBuiltin }.count
     }
 
+    /// Number of external displays currently blacked out.
     private var blackoutActiveCount: Int {
         externalDisplays.filter { blackoutManager.activeDisplayIDs.contains($0.stableIdentity) }.count
     }
 
+    /// Summary card showing active display count and overall status.
     private var headerCard: some View {
         let count = displayManager.displays.count
         let countText = String(format: NSLocalizedString("DisplayCountFormat", comment: "Menu bar display count"), count)
@@ -148,6 +161,7 @@ struct MenuBarContentView: View {
         .clipShape(RoundedRectangle(cornerRadius: 12, style: .continuous))
     }
 
+    /// One-line summary of internal vs external display counts.
     private var displaySummaryText: String {
         var parts: [String] = []
         let externalCount = externalDisplays.count
@@ -160,6 +174,7 @@ struct MenuBarContentView: View {
         return parts.isEmpty ? String(localized: "No displays detected") : parts.joined(separator: " • ")
     }
 
+    /// Small badge highlighting blackout status.
     private var statusPill: some View {
         let isBlackoutActive = blackoutActiveCount > 0
         return Text(isBlackoutActive ? String(localized: "Blackout On") : String(localized: "Ready"))
@@ -171,6 +186,7 @@ struct MenuBarContentView: View {
             .clipShape(Capsule())
     }
 
+    /// Optional list of non-visible displays (sleep/blackout).
     private var extendedStatusView: some View {
         let rows = extendedStatusRows()
         if rows.isEmpty {
@@ -191,6 +207,7 @@ struct MenuBarContentView: View {
         )
     }
 
+    /// Prominent actions for global blackout/sleep/wake.
     private var quickActionsSection: some View {
         VStack(alignment: .leading, spacing: 8) {
             sectionHeader(String(localized: "Quick Actions"))
@@ -225,6 +242,7 @@ struct MenuBarContentView: View {
         }
     }
 
+    /// Side-by-side sleep and wake buttons for all externals.
     private var suspendAllButtons: some View {
         HStack(spacing: 8) {
             suspendAllButton
@@ -240,6 +258,7 @@ struct MenuBarContentView: View {
         .disabled(externalDisplays.isEmpty)
     }
 
+    /// Sleep button that reflects whether all/partial/none are asleep.
     private var suspendAllButton: some View {
         let state = suspendState
         let tint: Color = state == .full ? .red : .primary
@@ -264,6 +283,7 @@ struct MenuBarContentView: View {
         return AnyView(button.buttonStyle(BorderedButtonStyle()))
     }
 
+    /// Per-display controls and status lines for external displays.
     private var externalDisplaysSection: some View {
         VStack(alignment: .leading, spacing: 8) {
             sectionHeader(String(localized: "External Displays"))
@@ -274,6 +294,7 @@ struct MenuBarContentView: View {
         .animation(.spring(response: 0.25, dampingFraction: 0.82), value: orderedExternalIDs())
     }
 
+    /// Renders a single display row with actions and status.
     private func displayRow(_ display: DisplayInfo) -> some View {
         let isBlackoutActive = blackoutManager.activeDisplayIDs.contains(display.stableIdentity)
         let ddcState = ddcManager.states[display.stableIdentity]?.status.localizedDescription ?? String(localized: "Unknown")
@@ -358,6 +379,7 @@ struct MenuBarContentView: View {
         .contentShape(rowShape)
     }
 
+    /// Builds the sleep/wake button, respecting DDC support and overlay-only settings.
     private func sleepWakeButton(for display: DisplayInfo) -> some View {
         let state = ddcManager.states[display.stableIdentity] ?? DDCState(status: .unknown, lastError: nil, lastCommand: nil, lastCommandAt: nil)
         let canControl = display.isExternal
@@ -392,6 +414,7 @@ struct MenuBarContentView: View {
         .help(label)
     }
 
+    /// Up/down buttons used to reorder external displays.
     private func displayOrderButtons(for display: DisplayInfo) -> some View {
         let order = orderedExternalIDs()
         let index = order.firstIndex(of: display.stableIdentity) ?? 0
@@ -423,6 +446,7 @@ struct MenuBarContentView: View {
         .help(String(localized: "Reorder Display"))
     }
 
+    /// UI to save/apply display profiles.
     private var profilesSection: some View {
         VStack(alignment: .leading, spacing: 8) {
             sectionHeader(String(localized: "Profiles"))
@@ -454,6 +478,7 @@ struct MenuBarContentView: View {
         }
     }
 
+    /// App-level utilities such as settings, diagnostics, and quit.
     private var appControlsSection: some View {
         VStack(alignment: .leading, spacing: 8) {
             sectionHeader(String(localized: "App"))
@@ -504,6 +529,7 @@ struct MenuBarContentView: View {
         }
     }
 
+    /// Standard section header styling used in the popover.
     private func sectionHeader(_ title: String) -> some View {
         Text(title)
             .font(.caption.weight(.semibold))
@@ -511,6 +537,7 @@ struct MenuBarContentView: View {
             .textCase(.uppercase)
     }
 
+    /// Resolves a human-friendly display name using settings and metadata.
     private func displayName(for display: DisplayInfo) -> String {
         let externalIndex = externalIndexMap[display.stableIdentity] ?? 1
         let internalIndex = internalIndexMap[display.stableIdentity] ?? 1
@@ -522,6 +549,7 @@ struct MenuBarContentView: View {
         )
     }
 
+    /// Computes the visibility/sleep/blackout status for a display.
     private func displayStatus(for display: DisplayInfo) -> String {
         if blackoutManager.activeDisplayIDs.contains(display.stableIdentity) {
             return String(localized: "Blackout")
@@ -533,6 +561,7 @@ struct MenuBarContentView: View {
         return String(localized: "Visible")
     }
 
+    /// Determines the overlay label shown on-screen for a display.
     private func displayOverlayMarker(for display: DisplayInfo) -> String {
         let internalCount = displayManager.displays.filter { $0.isBuiltin }.count
         let externalIndex = externalIndexMap[display.stableIdentity] ?? 1
@@ -545,6 +574,7 @@ struct MenuBarContentView: View {
         )
     }
 
+    /// Produces additional status rows for any non-visible displays.
     private func extendedStatusRows() -> [String] {
         let visibleText = String(localized: "Visible")
         return displayManager.displays.compactMap { display in
@@ -560,6 +590,7 @@ struct MenuBarContentView: View {
         case full
     }
 
+    /// Roll-up state used to style the sleep button when some/all are asleep.
     private var suspendState: SuspendState {
         let externals = externalDisplays
         guard externals.isEmpty == false else { return .none }
@@ -569,6 +600,7 @@ struct MenuBarContentView: View {
         return .partial
     }
 
+    /// Returns true when the display is in blackout or DDC standby.
     private func isDisplaySuspended(_ display: DisplayInfo) -> Bool {
         if blackoutManager.activeDisplayIDs.contains(display.stableIdentity) {
             return true
@@ -576,6 +608,7 @@ struct MenuBarContentView: View {
         return ddcManager.states[display.stableIdentity]?.lastCommand == .standby
     }
 
+    /// Creates a stable index map for display numbering.
     private func indexMap(for displays: [DisplayInfo]) -> [String: Int] {
         let ordered = displays.sorted { $0.displayID < $1.displayID }
         var mapping: [String: Int] = [:]
@@ -585,6 +618,7 @@ struct MenuBarContentView: View {
         return mapping
     }
 
+    /// Orders external displays using the persisted sort order.
     private func orderExternalDisplays(_ displays: [DisplayInfo]) -> [DisplayInfo] {
         guard displays.isEmpty == false else { return [] }
         let order = settingsStore.settings.externalDisplayOrder
@@ -595,10 +629,12 @@ struct MenuBarContentView: View {
         return ordered + remaining
     }
 
+    /// Convenience helper returning external display IDs in the current order.
     private func orderedExternalIDs() -> [String] {
         orderedExternalDisplays.map(\.stableIdentity)
     }
 
+    /// Swaps two external displays in the saved order list.
     private func moveExternalDisplay(from draggedID: String, to targetID: String) {
         var order = orderedExternalIDs()
         guard let fromIndex = order.firstIndex(of: draggedID),
@@ -612,6 +648,7 @@ struct MenuBarContentView: View {
         }
     }
 
+    /// Moves the given display one slot up in the saved order.
     private func moveExternalDisplayUp(_ id: String) {
         var order = orderedExternalIDs()
         guard let index = order.firstIndex(of: id), index > 0 else { return }
@@ -623,6 +660,7 @@ struct MenuBarContentView: View {
         }
     }
 
+    /// Moves the given display one slot down in the saved order.
     private func moveExternalDisplayDown(_ id: String) {
         var order = orderedExternalIDs()
         guard let index = order.firstIndex(of: id), index < (order.count - 1) else { return }
@@ -634,17 +672,20 @@ struct MenuBarContentView: View {
         }
     }
 
+    /// Copies a plain-text report of all displays to the clipboard.
     private func copyDisplayReport() {
         let report = buildDisplayReport()
         NSPasteboard.general.clearContents()
         NSPasteboard.general.setString(report, forType: .string)
     }
 
+    /// Copies a single display's stable ID to the clipboard.
     private func copyDisplayID(_ id: String) {
         NSPasteboard.general.clearContents()
         NSPasteboard.general.setString(id, forType: .string)
     }
 
+    /// Presents a prompt to rename the given display.
     private func renameDisplay(_ display: DisplayInfo, currentName: String) {
         let alert = NSAlert()
         alert.messageText = String(localized: "Rename Display")
@@ -667,6 +708,7 @@ struct MenuBarContentView: View {
         }
     }
 
+    /// Builds a human-readable report for troubleshooting.
     private func buildDisplayReport() -> String {
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy-MM-dd HH:mm"
@@ -693,6 +735,7 @@ struct MenuBarContentView: View {
         return lines.joined(separator: "\n")
     }
 
+    /// Opens the diagnostics log in Finder.
     private func openDiagnosticsLog() {
         let url = DiagnosticsLogger.shared.logFileURL
         NSWorkspace.shared.activateFileViewerSelecting([url])

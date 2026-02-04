@@ -6,11 +6,13 @@ import OSLog
 import AppKit
 import CoreGraphics
 
+/// Normalized power state used by display profiles.
 enum DisplayPowerState: String, Codable {
     case visible
     case asleep
 }
 
+/// Snapshot of a single display used inside profiles.
 struct DisplaySnapshot: Codable, Equatable, Identifiable {
     let id: String
     let name: String?
@@ -19,6 +21,7 @@ struct DisplaySnapshot: Codable, Equatable, Identifiable {
     let refreshRateHz: Double?
     let powerState: DisplayPowerState
 
+    /// Builds a snapshot from live display info.
     init(from info: DisplayInfo, powerState: DisplayPowerState) {
         id = info.stableIdentity
         name = info.name
@@ -58,6 +61,7 @@ struct DisplaySnapshot: Codable, Equatable, Identifiable {
     }
 }
 
+/// A named set of display snapshots captured at a point in time.
 struct DisplayProfile: Codable, Identifiable, Equatable {
     let id: UUID
     var name: String
@@ -65,6 +69,7 @@ struct DisplayProfile: Codable, Identifiable, Equatable {
     var displays: [DisplaySnapshot]
 }
 
+/// Persisted profile list + automation settings.
 struct ProfileState: Codable {
     var profiles: [DisplayProfile]
     var automationEnabled: Bool
@@ -92,6 +97,7 @@ final class ProfileManager: ObservableObject {
     private var cancellables: Set<AnyCancellable> = []
     private var previousDisplayIDs: Set<String> = []
 
+    /// Loads profiles and starts observing display changes for automation.
     init(
         displayManager: DisplayManager,
         blackoutManager: BlackoutManager,
@@ -119,6 +125,7 @@ final class ProfileManager: ObservableObject {
 
     // MARK: - Profile CRUD
 
+    /// Captures the current display state into a new named profile.
     func saveCurrentProfile(named name: String) {
         let snapshots = displayManager.displays.map { display in
             DisplaySnapshot(from: display, powerState: currentPowerState(for: display))
@@ -135,6 +142,7 @@ final class ProfileManager: ObservableObject {
         persist()
     }
 
+    /// Applies a profile to current displays, logging missing targets.
     func apply(profile: DisplayProfile) {
         let currentDisplays = displayManager.displays
         let expectedIDs = Set(profile.displays.map(\.id))
@@ -160,12 +168,14 @@ final class ProfileManager: ObservableObject {
         lastAppliedProfileName = profile.name
     }
 
+    /// Renames an existing profile.
     func rename(profile: DisplayProfile, to newName: String) {
         guard let index = profiles.firstIndex(where: { $0.id == profile.id }) else { return }
         profiles[index].name = newName
         persist()
     }
 
+    /// Deletes a profile and clears automation if it was selected.
     func delete(profile: DisplayProfile) {
         profiles.removeAll { $0.id == profile.id }
         if automationProfileID == profile.id {
@@ -176,6 +186,7 @@ final class ProfileManager: ObservableObject {
 
     // MARK: - Automation
 
+    /// Triggers automation when new external displays appear.
     private func handleDisplayChange(_ displays: [DisplayInfo]) {
         let current = Set(displays.map(\.stableIdentity))
         let added = current.subtracting(previousDisplayIDs)
@@ -191,6 +202,7 @@ final class ProfileManager: ObservableObject {
         apply(profile: profile)
     }
 
+    /// Determines current power state using blackout/standby signals.
     private func currentPowerState(for display: DisplayInfo) -> DisplayPowerState {
         if blackoutManager.activeDisplayIDs.contains(display.stableIdentity) {
             return .asleep
@@ -201,6 +213,7 @@ final class ProfileManager: ObservableObject {
         return .visible
     }
 
+    /// Applies a desired power state to a display via the engine.
     private func applyPowerState(_ state: DisplayPowerState, to display: DisplayInfo) {
         guard let engine else {
             logger.error("Cannot apply profile state; engine unavailable")
@@ -216,6 +229,7 @@ final class ProfileManager: ObservableObject {
 
     // MARK: - Persistence
 
+    /// Persists profiles and automation settings to disk.
     private func persist() {
         let state = ProfileState(
             profiles: profiles,
@@ -230,6 +244,7 @@ final class ProfileManager: ObservableObject {
 struct ProfileStore {
     private let filename = "profiles.json"
 
+    /// Loads profiles from disk or returns an empty state.
     func load() -> ProfileState {
         let url = storageURL()
         guard let data = try? Data(contentsOf: url) else {
@@ -242,6 +257,7 @@ struct ProfileStore {
         }
     }
 
+    /// Saves profile state to disk.
     func save(_ state: ProfileState) {
         let url = storageURL()
         try? FileManager.default.createDirectory(at: url.deletingLastPathComponent(), withIntermediateDirectories: true)
@@ -250,6 +266,7 @@ struct ProfileStore {
         }
     }
 
+    /// Resolves the Application Support URL for the profile file.
     private func storageURL() -> URL {
         let appSupport = FileManager.default.urls(for: .applicationSupportDirectory, in: .userDomainMask).first!
         return appSupport.appendingPathComponent("Dimly", isDirectory: true)

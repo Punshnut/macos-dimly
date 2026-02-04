@@ -38,11 +38,13 @@ struct DimlyApp: App {
         }
     }
 
+    /// Defines the menu bar and settings scenes.
     var body: some Scene {
         menuBarScene
         settingsScene
     }
 
+    /// Menu bar extra hosting the main popover UI.
     private var menuBarScene: some Scene {
         // Show/hide without conditional SceneBuilder to avoid compiler crash.
         let showMenuBarBinding = Binding(
@@ -68,6 +70,7 @@ struct DimlyApp: App {
         .menuBarExtraStyle(.window)
     }
 
+    /// Settings window scene.
     private var settingsScene: some Scene {
         Settings {
             SettingsRootView(
@@ -81,12 +84,14 @@ struct DimlyApp: App {
     }
 }
 
+/// AppKit delegate for main menu wiring and first-launch intro.
 @MainActor
 final class AppDelegate: NSObject, NSApplicationDelegate {
     let updaterController = UpdaterController()
     static let introShownKey = "DimlyHasShownIntro.v1"
     private var introWindowController: IntroWindowController?
 
+    /// Establishes the main menu and shows the intro if needed.
     func applicationDidFinishLaunching(_ notification: Notification) {
         configureMainMenu()
         showIntroIfNeeded()
@@ -103,15 +108,18 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
 
 
 
+    /// Shows the intro window on first launch.
     private func showIntroIfNeeded() {
         showIntro(force: false)
     }
 
+    /// Resets the "shown" flag and forces the intro to appear.
     func resetAndShowIntro() {
         UserDefaults.standard.set(false, forKey: Self.introShownKey)
         showIntro(force: true)
     }
 
+    /// Presents the intro window when forced or not yet shown.
     private func showIntro(force: Bool) {
         if UserDefaults.standard.bool(forKey: Self.introShownKey) {
             if !force {
@@ -127,6 +135,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         NSApp.activate(ignoringOtherApps: true)
     }
 
+    /// Builds the application menu (About, Settings, Updates, Quit).
     private func configureMainMenu() {
         let mainMenu = NSMenu()
         let appMenuItem = NSMenuItem()

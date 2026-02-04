@@ -3,7 +3,9 @@
 import SwiftUI
 import AppKit
 
+/// First-launch welcome UI that points users to the menu bar icon.
 struct IntroWindowView: View {
+    /// Called when the user dismisses the intro window.
     let onDismiss: () -> Void
 
     var body: some View {

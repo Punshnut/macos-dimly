@@ -8,6 +8,7 @@ import IOKit.graphics
 import IOKit.i2c
 import OSLog
 
+/// Whether a display appears to support DDC/CI control.
 enum DDCSupportStatus: String {
     case supported = "Supported"
     case notSupported = "Not Supported"
@@ -20,11 +21,13 @@ extension DDCSupportStatus {
     }
 }
 
+/// Last DDC power command issued to a display.
 enum DDCPowerCommand: String, Codable {
     case standby = "Standby"
     case wake = "Wake"
 }
 
+/// Per-display DDC status and last command metadata.
 struct DDCState: Equatable {
     var status: DDCSupportStatus
     var lastError: String?
@@ -40,6 +43,7 @@ final class DDCManager: ObservableObject {
     private let displayManager: DisplayManager
     private let logger = Logger(subsystem: Bundle.main.bundleIdentifier ?? "Dimly", category: "DDC")
 
+    /// Starts probing current displays and listens for changes.
     init(displayManager: DisplayManager) {
         self.displayManager = displayManager
         probeAll()
@@ -52,12 +56,14 @@ final class DDCManager: ObservableObject {
 
     // MARK: - Public API
 
+    /// Probes every current display for DDC support.
     func probeAll() {
         for display in displayManager.displays {
             probe(display)
         }
     }
 
+    /// Attempts to issue a DDC standby command; returns success.
     func standby(_ display: DisplayInfo) -> Bool {
         let result = sendPowerCommand(display, value: 0x04) // VCP 0xD6 power off
         switch result {
@@ -71,6 +77,7 @@ final class DDCManager: ObservableObject {
         }
     }
 
+    /// Attempts to issue a DDC wake command; returns success.
     func wake(_ display: DisplayInfo) -> Bool {
         let result = sendPowerCommand(display, value: 0x01) // VCP 0xD6 power on
         switch result {
@@ -88,6 +95,7 @@ final class DDCManager: ObservableObject {
 
     private var cancellables: Set<AnyCancellable> = []
 
+    /// Probes a single display asynchronously to avoid blocking the main actor.
     private func probe(_ display: DisplayInfo) {
         if display.isBuiltin {
             setState(DDCState(status: .notSupported, lastError: String(localized: "Internal panel"), lastCommand: nil, lastCommandAt: nil), for: display)
@@ -101,6 +109,7 @@ final class DDCManager: ObservableObject {
         }
     }
 
+    /// Synchronous probe used off-main-thread to detect DDC availability.
     nonisolated private static func probeDisplaySynchronously(_ display: DisplayInfo) -> DDCState {
         let openResult = Self.openConnection(for: display.displayID)
         switch openResult {
@@ -112,11 +121,13 @@ final class DDCManager: ObservableObject {
         }
     }
 
+    /// Logs a DDC failure and updates the display state.
     private func handleFailure(_ error: Error, display: DisplayInfo, action: String) {
         logger.error("DDC \(action, privacy: .public) failed for \(display.stableIdentity, privacy: .public): \(error.localizedDescription, privacy: .public)")
         updateState(for: display, status: .notSupported, lastError: error.localizedDescription, lastCommand: nil)
     }
 
+    /// Updates state without clobbering a previously recorded command.
     @MainActor
     private func setState(_ state: DDCState, for display: DisplayInfo) {
         if var existing = states[display.stableIdentity] {
@@ -130,6 +141,7 @@ final class DDCManager: ObservableObject {
         states[display.stableIdentity] = state
     }
 
+    /// Writes status and optional command metadata into the state map.
     private func updateState(for display: DisplayInfo, status: DDCSupportStatus, lastError: String?, lastCommand: DDCPowerCommand?) {
         var updated = states[display.stableIdentity] ?? DDCState(status: status, lastError: lastError, lastCommand: nil, lastCommandAt: nil)
         updated.status = status
@@ -143,6 +155,7 @@ final class DDCManager: ObservableObject {
 
     // MARK: - I2C helpers
 
+    /// Sends a VCP power command (0xD6) to a display.
     private func sendPowerCommand(_ display: DisplayInfo, value: UInt16) -> Result<Void, Error> {
         guard let state = states[display.stableIdentity], state.status == .supported else {
             return .failure(DDCError.notSupported)
@@ -157,6 +170,7 @@ final class DDCManager: ObservableObject {
         }
     }
 
+    /// Opens an I2C connection for a display, if available.
     nonisolated private static func openConnection(for displayID: CGDirectDisplayID) -> Result<IOI2CConnectRef, Error> {
         guard let service = DisplayHardware.ioServicePort(for: displayID) else {
             return .failure(DDCError.serviceUnavailable)
@@ -171,10 +185,12 @@ final class DDCManager: ObservableObject {
         return .success(connect)
     }
 
+    /// Closes an I2C connection.
     nonisolated private static func close(_ connection: IOI2CConnectRef) {
         IOI2CInterfaceClose(connection, IOOptionBits(0))
     }
 
+    /// Sends a raw VCP command payload over I2C.
     nonisolated private static func sendVCPCommand(connection: IOI2CConnectRef, code: UInt8, value: UInt16) -> Result<Void, Error> {
         var request = IOI2CRequest()
         request.commFlags = 0
@@ -208,6 +224,7 @@ final class DDCManager: ObservableObject {
         return sent
     }
 
+    /// Calculates the DDC checksum required by VCP commands.
     nonisolated private static func checksum(for bytes: [UInt8]) -> UInt8 {
         // DDC checksum: sum of slave address (0x6E) + bytes + checksum == 0 (mod 256)
         let sum = 0x6E + bytes.reduce(0) { $0 + Int($1) }
@@ -215,6 +232,7 @@ final class DDCManager: ObservableObject {
     }
 }
 
+/// Errors surfaced while attempting DDC communication.
 enum DDCError: LocalizedError {
     case notSupported
     case serviceUnavailable

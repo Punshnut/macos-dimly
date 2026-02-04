@@ -19,11 +19,13 @@ final class AppSettingsStore: ObservableObject {
     private var lastAppliedSettings: DimlySettings?
     private static let persistenceQueue = DispatchQueue(label: "com.punshnut.dimly.settings.persist", qos: .utility)
 
+    /// Loads persisted settings and applies side effects immediately.
     init(initial: DimlySettings = DimlySettingsStore.load()) {
         self.settings = initial
         applySideEffects(for: initial)
     }
 
+    /// Applies a mutation block while coalescing no-op updates.
     func update(_ edit: (inout DimlySettings) -> Void) {
         var copy = settings
         edit(&copy)
@@ -33,6 +35,7 @@ final class AppSettingsStore: ObservableObject {
 
     // MARK: - Private
 
+    /// Persists settings asynchronously to avoid blocking UI.
     private func persist(_ settings: DimlySettings) {
         let snapshot = settings
         Self.persistenceQueue.async {
@@ -53,6 +56,7 @@ final class AppSettingsStore: ObservableObject {
         logger.debug("Settings applied: launchAtLogin=\(settings.launchAtLogin, privacy: .public) showMenuBarIcon=\(settings.showMenuBarIcon, privacy: .public) hideDockIcon=\(settings.hideDockIcon, privacy: .public)")
     }
 
+    /// Updates app activation policy to show or hide the Dock icon.
     private func applyDockIconVisibility(hidden: Bool) {
         let policy: NSApplication.ActivationPolicy = hidden ? .accessory : .regular
         let app = NSApplication.shared
