@@ -92,6 +92,7 @@
 "Action" = "Tindakan";
 "All External Displays" = "Semua paparan luaran";
 "Toggle Blackout" = "Tukar blackout";
+"Toggle Window" = "Togol tetingkap";
 "Toggle Sleep/Wake" = "Tukar tidur/bangun";
 "MissingDisplayFormat" = "Paparan hilang (%@)";
 "Global shortcuts" = "Pintasan global";

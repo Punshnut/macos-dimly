@@ -92,6 +92,7 @@
 "Action" = "アクション";
 "All External Displays" = "すべての外部ディスプレイ";
 "Toggle Blackout" = "ブラックアウトを切り替え";
+"Toggle Window" = "ウインドウを切り替え";
 "Toggle Sleep/Wake" = "スリープ/復帰を切り替え";
 "MissingDisplayFormat" = "見つからないディスプレイ（%@）";
 "Global shortcuts" = "グローバルショートカット";

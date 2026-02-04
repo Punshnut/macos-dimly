@@ -92,6 +92,7 @@
 "Action" = "చర్య";
 "All External Displays" = "అన్ని బాహ్య డిస్ప్లేలు";
 "Toggle Blackout" = "బ్లాక్‌ఔట్ టాగిల్";
+"Toggle Window" = "విండో టోగిల్ చేయండి";
 "Toggle Sleep/Wake" = "స్లీప్/వేక్ టాగిల్";
 "MissingDisplayFormat" = "కనిపించని డిస్ప్లే (%@)";
 "Global shortcuts" = "గ్లోబల్ షార్ట్‌కట్లు";

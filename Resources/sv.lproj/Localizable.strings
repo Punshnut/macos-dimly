@@ -92,6 +92,7 @@
 "Action" = "Åtgärd";
 "All External Displays" = "Alla externa skärmar";
 "Toggle Blackout" = "Växla svartskärm";
+"Toggle Window" = "Växla fönster";
 "Toggle Sleep/Wake" = "Växla vila/vakna";
 "MissingDisplayFormat" = "Saknad skärm (%@)";
 "Global shortcuts" = "Globala genvägar";

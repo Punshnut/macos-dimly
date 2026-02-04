@@ -93,6 +93,7 @@
 "Action" = "Action";
 "All External Displays" = "All External Displays";
 "Toggle Blackout" = "Toggle Blackout";
+"Toggle Window" = "Toggle Window";
 "Toggle Sleep/Wake" = "Toggle Sleep/Wake";
 "MissingDisplayFormat" = "Missing display (%@)";
 "Panic hotkey (fixed):" = "Panic hotkey (fixed):";

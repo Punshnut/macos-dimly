@@ -92,6 +92,7 @@
 "Action" = "Actie";
 "All External Displays" = "Alle externe schermen";
 "Toggle Blackout" = "Blackout wisselen";
+"Toggle Window" = "Venster wisselen";
 "Toggle Sleep/Wake" = "Slaap/waak wisselen";
 "MissingDisplayFormat" = "Ontbrekend scherm (%@)";
 "Global shortcuts" = "Globale sneltoetsen";

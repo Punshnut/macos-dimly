@@ -17,6 +17,7 @@ final class DimlyEngine {
     let blackoutManager: BlackoutManager
     let ddcManager: DDCManager
     let profileManager: ProfileManager
+    var onToggleWindow: (() -> Void)?
 
     /// Builds all managers and binds settings/hotkeys.
     init(settingsStore: AppSettingsStore, displayManager: DisplayManager = DisplayManager()) {
@@ -66,6 +67,8 @@ final class DimlyEngine {
     /// Invoked when a hotkey binding is pressed.
     func performHotkeyAction(_ action: HotkeyAction, target: HotkeyTarget) {
         switch action {
+        case .toggleWindow:
+            onToggleWindow?()
         case .toggleBlackout:
             toggleBlackout(target: target)
         case .toggleSleepWake:

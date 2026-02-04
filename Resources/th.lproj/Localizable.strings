@@ -92,6 +92,7 @@
 "Action" = "การกระทำ";
 "All External Displays" = "จอภาพภายนอกทั้งหมด";
 "Toggle Blackout" = "สลับการดับจอ";
+"Toggle Window" = "สลับหน้าต่าง";
 "Toggle Sleep/Wake" = "สลับสลีป/ปลุก";
 "MissingDisplayFormat" = "จอภาพที่หายไป (%@)";
 "Global shortcuts" = "ทางลัดทั่วระบบ";

@@ -92,6 +92,7 @@
 "Action" = "क्रिया";
 "All External Displays" = "सभी बाहरी डिस्प्ले";
 "Toggle Blackout" = "ब्लैकआउट टॉगल करें";
+"Toggle Window" = "विंडो टॉगल करें";
 "Toggle Sleep/Wake" = "स्लीप/वेक टॉगल करें";
 "MissingDisplayFormat" = "गुम डिस्प्ले (%@)";
 "Global shortcuts" = "वैश्विक शॉर्टकट";

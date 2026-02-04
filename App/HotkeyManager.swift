@@ -26,9 +26,9 @@ struct HotkeyDescriptor: Equatable, Hashable, Codable {
 
     /// Default shortcut used to toggle the launcher when no preference is stored.
     static let toggleLauncher = HotkeyDescriptor(
-        keyCode: UInt32(kVK_Space),
-        modifierFlags: [.command, .shift],
-        keyRepresentation: "Space"
+        keyCode: UInt32(kVK_ANSI_M),
+        modifierFlags: [.command, .control, .option],
+        keyRepresentation: "M"
     )
 
     /// Default panic shortcut to clear all blackout overlays.

@@ -92,6 +92,7 @@
 "Action" = "Azione";
 "All External Displays" = "Tutti gli schermi esterni";
 "Toggle Blackout" = "Alterna oscuramento";
+"Toggle Window" = "Attiva/disattiva finestra";
 "Toggle Sleep/Wake" = "Alterna sospensione/riattivazione";
 "MissingDisplayFormat" = "Schermo mancante (%@)";
 "Global shortcuts" = "Scorciatoie globali";

@@ -4,6 +4,7 @@ import Foundation
 
 /// User-facing actions that can be bound to a hotkey.
 enum HotkeyAction: String, Codable, CaseIterable, Identifiable {
+    case toggleWindow
     case toggleBlackout
     case toggleSleepWake
 
@@ -11,10 +12,21 @@ enum HotkeyAction: String, Codable, CaseIterable, Identifiable {
 
     var title: String {
         switch self {
+        case .toggleWindow:
+            return String(localized: "Toggle Window")
         case .toggleBlackout:
             return String(localized: "Toggle Blackout")
         case .toggleSleepWake:
             return String(localized: "Toggle Sleep/Wake")
+        }
+    }
+
+    var usesTarget: Bool {
+        switch self {
+        case .toggleWindow:
+            return false
+        case .toggleBlackout, .toggleSleepWake:
+            return true
         }
     }
 }

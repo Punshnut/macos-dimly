@@ -92,6 +92,7 @@
 "Action" = "Aksyon";
 "All External Displays" = "Lahat ng external na display";
 "Toggle Blackout" = "I-toggle ang blackout";
+"Toggle Window" = "I-toggle ang window";
 "Toggle Sleep/Wake" = "I-toggle ang sleep/wake";
 "MissingDisplayFormat" = "Nawawalang display (%@)";
 "Global shortcuts" = "Pandaigdigang shortcut";

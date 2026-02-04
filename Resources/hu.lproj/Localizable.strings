@@ -92,6 +92,7 @@
 "Action" = "Művelet";
 "All External Displays" = "Összes külső kijelző";
 "Toggle Blackout" = "Sötétítés váltása";
+"Toggle Window" = "Ablak váltása";
 "Toggle Sleep/Wake" = "Alvás/ébredés váltása";
 "MissingDisplayFormat" = "Hiányzó kijelző (%@)";
 "Global shortcuts" = "Globális gyorsbillentyűk";

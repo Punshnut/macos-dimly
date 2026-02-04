@@ -92,6 +92,7 @@
 "Action" = "Akce";
 "All External Displays" = "Všechny externí displeje";
 "Toggle Blackout" = "Přepnout zatemnění";
+"Toggle Window" = "Přepnout okno";
 "Toggle Sleep/Wake" = "Přepnout uspání/probuzení";
 "MissingDisplayFormat" = "Chybějící displej (%@)";
 "Global shortcuts" = "Globální zkratky";

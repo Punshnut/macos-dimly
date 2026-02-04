@@ -92,6 +92,7 @@
 "Action" = "اقدام";
 "All External Displays" = "همهٔ نمایشگرهای خارجی";
 "Toggle Blackout" = "تغییر خاموشی";
+"Toggle Window" = "جابجایی پنجره";
 "Toggle Sleep/Wake" = "تغییر خواب/بیداری";
 "MissingDisplayFormat" = "نمایشگر گم‌شده (%@)";
 "Global shortcuts" = "میانبرهای عمومی";

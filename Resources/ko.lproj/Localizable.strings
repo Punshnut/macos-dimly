@@ -92,6 +92,7 @@
 "Action" = "동작";
 "All External Displays" = "모든 외부 디스플레이";
 "Toggle Blackout" = "블랙아웃 전환";
+"Toggle Window" = "창 전환";
 "Toggle Sleep/Wake" = "잠자기/깨우기 전환";
 "MissingDisplayFormat" = "누락된 디스플레이 (%@)";
 "Global shortcuts" = "전역 단축키";

@@ -92,6 +92,7 @@
 "Action" = "Action";
 "All External Displays" = "Tous les écrans externes";
 "Toggle Blackout" = "Basculer l'extinction";
+"Toggle Window" = "Basculer la fenêtre";
 "Toggle Sleep/Wake" = "Basculer veille/réveil";
 "MissingDisplayFormat" = "Écran manquant (%@)";
 "Global shortcuts" = "Raccourcis globaux";

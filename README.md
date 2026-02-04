@@ -73,8 +73,7 @@ Dimly is the stealthy menu‑bar switch for external displays. One click (or a h
 
 ## Keyboard & mouse
 
-- **Show menu bar popover:** click the Dimly icon or set a global shortcut.
-- **Toggle all externals:** default `Cmd` + `Shift` + `Space` (customizable).
+- **Show/hide Dimly window (works even when hidden):** default `Cmd` + `Ctrl` + `Option` + `M` (customizable).
 - **Set your own toggle:** assign a hotkey for Toggle External Blackout / Sleep-Wake in Settings.
 - **Option-click icon:** toggle blackout overlay on all externals.
 - **Control-click icon:** toggle sleep/wake (with blackout fallback).

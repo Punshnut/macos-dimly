@@ -92,6 +92,7 @@
 "Action" = "Действие";
 "All External Displays" = "Все внешние дисплеи";
 "Toggle Blackout" = "Переключить затемнение";
+"Toggle Window" = "Переключить окно";
 "Toggle Sleep/Wake" = "Переключить сон/пробуждение";
 "MissingDisplayFormat" = "Отсутствующий дисплей (%@)";
 "Global shortcuts" = "Глобальные ярлыки";

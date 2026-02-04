@@ -92,6 +92,7 @@
 "Action" = "Hành động";
 "All External Displays" = "Tất cả màn hình ngoài";
 "Toggle Blackout" = "Bật/tắt blackout";
+"Toggle Window" = "Bật/tắt cửa sổ";
 "Toggle Sleep/Wake" = "Bật/tắt ngủ/thức";
 "MissingDisplayFormat" = "Màn hình bị thiếu (%@)";
 "Global shortcuts" = "Phím tắt toàn hệ";

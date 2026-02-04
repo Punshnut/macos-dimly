@@ -92,6 +92,7 @@
 "Action" = "እርምጃ";
 "All External Displays" = "ሁሉም ውጭ ማሳያዎች";
 "Toggle Blackout" = "ጥቁርነትን ቀይር";
+"Toggle Window" = "መስኮት አሳይ/ደብቅ";
 "Toggle Sleep/Wake" = "እንቅልፍ/ንቃት ቀይር";
 "MissingDisplayFormat" = "የጠፋ ማሳያ (%@)";
 "Global shortcuts" = "አጠቃላይ አቋራጮች";

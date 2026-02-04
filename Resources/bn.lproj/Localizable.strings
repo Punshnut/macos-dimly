@@ -92,6 +92,7 @@
 "Action" = "ক্রিয়া";
 "All External Displays" = "সব বাহ্যিক ডিসপ্লে";
 "Toggle Blackout" = "ব্ল্যাকআউট টগল";
+"Toggle Window" = "উইন্ডো টগল করুন";
 "Toggle Sleep/Wake" = "স্লিপ/ওয়েক টগল";
 "MissingDisplayFormat" = "নিখোঁজ ডিসপ্লে (%@)";
 "Global shortcuts" = "গ্লোবাল শর্টকাট";

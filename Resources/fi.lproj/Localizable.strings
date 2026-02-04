@@ -92,6 +92,7 @@
 "Action" = "Toiminto";
 "All External Displays" = "Kaikki ulkoiset näytöt";
 "Toggle Blackout" = "Vaihda pimeneminen";
+"Toggle Window" = "Vaihda ikkunaa";
 "Toggle Sleep/Wake" = "Vaihda nukkuminen/herätys";
 "MissingDisplayFormat" = "Puuttuva näyttö (%@)";
 "Global shortcuts" = "Yleiset pikanäppäimet";

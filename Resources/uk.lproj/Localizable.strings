@@ -92,6 +92,7 @@
 "Action" = "Дія";
 "All External Displays" = "Усі зовнішні дисплеї";
 "Toggle Blackout" = "Перемкнути затемнення";
+"Toggle Window" = "Перемкнути вікно";
 "Toggle Sleep/Wake" = "Перемкнути сон/пробудження";
 "MissingDisplayFormat" = "Відсутній дисплей (%@)";
 "Global shortcuts" = "Глобальні ярлики";

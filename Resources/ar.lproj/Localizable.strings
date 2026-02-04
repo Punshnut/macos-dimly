@@ -92,6 +92,7 @@
 "Action" = "الإجراء";
 "All External Displays" = "كل الشاشات الخارجية";
 "Toggle Blackout" = "تبديل التعتيم";
+"Toggle Window" = "تبديل النافذة";
 "Toggle Sleep/Wake" = "تبديل السكون/الإيقاظ";
 "MissingDisplayFormat" = "شاشة مفقودة (%@)";
 "Global shortcuts" = "اختصارات عامة";

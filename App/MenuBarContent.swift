@@ -6,6 +6,11 @@ import UniformTypeIdentifiers
 
 /// SwiftUI menu bar contents shown when the status item is visible.
 struct MenuBarContentView: View {
+    enum Presentation {
+        case menuBar
+        case window
+    }
+
     @ObservedObject var settingsStore: AppSettingsStore
     @ObservedObject var displayManager: DisplayManager
     @ObservedObject var blackoutManager: BlackoutManager
@@ -13,6 +18,7 @@ struct MenuBarContentView: View {
     @ObservedObject var profileManager: ProfileManager
     let engine: DimlyEngine
     let updaterController: UpdaterController
+    let presentation: Presentation
     @State private var modifierClickMonitor: Any?
     @Environment(\.colorScheme) private var colorScheme
 
@@ -30,9 +36,11 @@ struct MenuBarContentView: View {
         .padding(12)
         .frame(minWidth: 300)
         .onAppear {
-            activateMenuBarWindowIfNeeded()
-            handleModifierClickIfNeeded()
-            installModifierClickMonitor()
+            activateWindowIfNeeded()
+            if presentation == .menuBar {
+                handleModifierClickIfNeeded()
+                installModifierClickMonitor()
+            }
         }
         .onDisappear {
             removeModifierClickMonitor()
@@ -40,12 +48,14 @@ struct MenuBarContentView: View {
     }
 
     /// Brings the menu bar popover window forward for better keyboard focus.
-    private func activateMenuBarWindowIfNeeded() {
+    private func activateWindowIfNeeded() {
         DispatchQueue.main.async {
             NSApp.activate(ignoringOtherApps: true)
-            let candidate = NSApp.windows.first { window in
-                window.level == .statusBar || window.level == .popUpMenu
-            } ?? NSApp.keyWindow
+            let candidate = presentation == .menuBar
+                ? NSApp.windows.first { window in
+                    window.level == .statusBar || window.level == .popUpMenu
+                }
+                : NSApp.keyWindow
             candidate?.makeKeyAndOrderFront(nil)
         }
     }
@@ -57,12 +67,12 @@ struct MenuBarContentView: View {
         let flags = event.modifierFlags
         if flags.contains(.option) {
             engine.toggleExternalBlackout()
-            if event.type == .leftMouseDown {
+            if event.type == .leftMouseDown, presentation == .menuBar {
                 closeMenuBarWindow()
             }
         } else if flags.contains(.control) {
             engine.toggleExternalSleepWake()
-            if event.type == .leftMouseDown {
+            if event.type == .leftMouseDown, presentation == .menuBar {
                 closeMenuBarWindow()
             }
         }
@@ -92,6 +102,7 @@ struct MenuBarContentView: View {
 
     /// Closes the menu bar window after a modifier-triggered action.
     private func closeMenuBarWindow() {
+        guard presentation == .menuBar else { return }
         DispatchQueue.main.async {
             let candidate = NSApp.windows.first { window in
                 window.level == .statusBar || window.level == .popUpMenu

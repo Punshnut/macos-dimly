@@ -92,6 +92,7 @@
 "Action" = "Eylem";
 "All External Displays" = "Tüm harici ekranlar";
 "Toggle Blackout" = "Blackout’u değiştir";
+"Toggle Window" = "Pencereyi değiştir";
 "Toggle Sleep/Wake" = "Uyku/uyandırmayı değiştir";
 "MissingDisplayFormat" = "Eksik ekran (%@)";
 "Global shortcuts" = "Genel kısayollar";

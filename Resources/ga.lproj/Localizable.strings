@@ -92,6 +92,7 @@
 "Action" = "Gníomh";
 "All External Displays" = "Gach taispeáint sheachtrach";
 "Toggle Blackout" = "Athraigh múchadh";
+"Toggle Window" = "Athraigh an fhuinneog";
 "Toggle Sleep/Wake" = "Athraigh codladh/dúiseacht";
 "MissingDisplayFormat" = "Taispeáint ar iarraidh (%@)";
 "Global shortcuts" = "Aicearraí domhanda";

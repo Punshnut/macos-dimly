@@ -92,6 +92,7 @@
 "Action" = "செயல்";
 "All External Displays" = "அனைத்து வெளிப்புற திரைகள்";
 "Toggle Blackout" = "பிளாக்அவுட் மாற்று";
+"Toggle Window" = "சாளரத்தை மாற்று";
 "Toggle Sleep/Wake" = "தூங்கு/எழுப்பு மாற்று";
 "MissingDisplayFormat" = "காணவில்லை திரை (%@)";
 "Global shortcuts" = "உலகளாவிய குறுக்குவழிகள்";

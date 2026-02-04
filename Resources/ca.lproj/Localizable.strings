@@ -92,6 +92,7 @@
 "Action" = "Acció";
 "All External Displays" = "Totes les pantalles externes";
 "Toggle Blackout" = "Alterna l'apagat";
+"Toggle Window" = "Alterna la finestra";
 "Toggle Sleep/Wake" = "Alterna repòs/activació";
 "MissingDisplayFormat" = "Pantalla absent (%@)";
 "Global shortcuts" = "Dreceres globals";

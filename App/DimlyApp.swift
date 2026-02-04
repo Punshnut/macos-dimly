@@ -25,6 +25,11 @@ struct DimlyApp: App {
         self.displayManager = displayManager
         self.engine = DimlyEngine(settingsStore: store, displayManager: displayManager)
         self.displayLabelManager = DisplayLabelManager(settingsStore: store, displayManager: displayManager)
+        appDelegate.configureLauncher(
+            settingsStore: store,
+            displayManager: displayManager,
+            engine: engine
+        )
         DiagnosticsLogger.shared.log("Engine constructed", category: "app")
         NotificationCenter.default.addObserver(
             forName: NSApplication.willTerminateNotification,
@@ -64,7 +69,8 @@ struct DimlyApp: App {
                 ddcManager: engine.ddcManager,
                 profileManager: engine.profileManager,
                 engine: engine,
-                updaterController: appDelegate.updaterController
+                updaterController: appDelegate.updaterController,
+                presentation: .menuBar
             )
         }
         .menuBarExtraStyle(.window)
@@ -90,6 +96,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
     let updaterController = UpdaterController()
     static let introShownKey = "DimlyHasShownIntro.v1"
     private var introWindowController: IntroWindowController?
+    private var launcherWindowController: LauncherWindowController?
 
     /// Establishes the main menu and shows the intro if needed.
     func applicationDidFinishLaunching(_ notification: Notification) {
@@ -103,6 +110,23 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
             Task { @MainActor in
                 self?.configureMainMenu()
             }
+        }
+    }
+
+    func configureLauncher(
+        settingsStore: AppSettingsStore,
+        displayManager: DisplayManager,
+        engine: DimlyEngine
+    ) {
+        guard launcherWindowController == nil else { return }
+        launcherWindowController = LauncherWindowController(
+            settingsStore: settingsStore,
+            displayManager: displayManager,
+            engine: engine,
+            updaterController: updaterController
+        )
+        engine.onToggleWindow = { [weak self] in
+            self?.launcherWindowController?.toggle()
         }
     }
 

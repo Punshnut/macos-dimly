@@ -92,6 +92,7 @@
 "Action" = "လုပ်ဆောင်ချက်";
 "All External Displays" = "အပြင်ပိုင်း မျက်နှာပြင်များအားလုံး";
 "Toggle Blackout" = "အမှောင်ပိတ်ခြင်း ပြောင်းရန်";
+"Toggle Window" = "ဝင်းဒိုး ပြောင်းပါ";
 "Toggle Sleep/Wake" = "အိပ်/နိုး ပြောင်းရန်";
 "MissingDisplayFormat" = "ပျောက်သော မျက်နှာပြင် (%@)";
 "Global shortcuts" = "ကမ္ဘာလုံးဆိုင်ရာ ဖတ်ရှည်";

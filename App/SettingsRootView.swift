@@ -546,6 +546,8 @@ private struct HotkeyBindingRow: View {
                         Text(option.label).tag(option.id)
                     }
                 }
+                .disabled(binding.action.usesTarget == false)
+                .opacity(binding.action.usesTarget ? 1.0 : 0.5)
                 Picker(String(localized: "Action"), selection: $binding.action) {
                     ForEach(HotkeyAction.allCases) { action in
                         Text(action.title).tag(action)
@@ -567,6 +569,11 @@ private struct HotkeyBindingRow: View {
         .padding(12)
         .background(.thinMaterial)
         .clipShape(RoundedRectangle(cornerRadius: 12, style: .continuous))
+        .onChange(of: binding.action) { newValue in
+            if newValue.usesTarget == false {
+                binding.target = .allExternalDisplays
+            }
+        }
     }
 }
 

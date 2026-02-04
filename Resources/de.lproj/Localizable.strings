@@ -92,6 +92,7 @@
 "Action" = "Aktion";
 "All External Displays" = "Alle externen Displays";
 "Toggle Blackout" = "Blackout umschalten";
+"Toggle Window" = "Fenster umschalten";
 "Toggle Sleep/Wake" = "Schlafen/Aufwecken umschalten";
 "MissingDisplayFormat" = "Fehlendes Display (%@)";
 "Global shortcuts" = "Globale Kurzbefehle";

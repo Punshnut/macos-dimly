@@ -92,6 +92,7 @@
 "Action" = "操作";
 "All External Displays" = "所有外接显示器";
 "Toggle Blackout" = "切换黑屏";
+"Toggle Window" = "切换窗口";
 "Toggle Sleep/Wake" = "切换睡眠/唤醒";
 "MissingDisplayFormat" = "缺失的显示器（%@）";
 "Global shortcuts" = "全局快捷键";

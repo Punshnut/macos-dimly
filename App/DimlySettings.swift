@@ -36,7 +36,7 @@ struct DimlySettings: Codable, Equatable {
         hideDockIcon: true,
         hotkeyBindings: [
             HotkeyBinding(
-                action: .toggleBlackout,
+                action: .toggleWindow,
                 target: .allExternalDisplays,
                 descriptor: .toggleLauncher
             )
@@ -88,7 +88,7 @@ struct DimlySettings: Codable, Equatable {
         let fadeInAnimationEnabled = try container.decodeIfPresent(Bool.self, forKey: .fadeInAnimationEnabled) ?? DimlySettings.default.fadeInAnimationEnabled
         let overlayOnlyDisplayIDs = try container.decodeIfPresent([String].self, forKey: .overlayOnlyDisplayIDs) ?? DimlySettings.default.overlayOnlyDisplayIDs
         let externalDisplayOrder = try container.decodeIfPresent([String].self, forKey: .externalDisplayOrder) ?? DimlySettings.default.externalDisplayOrder
-        let resolvedBindings: [HotkeyBinding]
+        var resolvedBindings: [HotkeyBinding]
         if let hotkeyBindings, !hotkeyBindings.isEmpty {
             resolvedBindings = hotkeyBindings
         } else if let legacyPrimaryHotkey {
@@ -101,6 +101,12 @@ struct DimlySettings: Codable, Equatable {
             ]
         } else {
             resolvedBindings = DimlySettings.default.hotkeyBindings
+        }
+
+        if resolvedBindings.count == 1,
+           resolvedBindings[0].action == .toggleBlackout,
+           resolvedBindings[0].descriptor == .toggleLauncher {
+            resolvedBindings[0].action = .toggleWindow
         }
         self.init(
             launchAtLogin: launchAtLogin,

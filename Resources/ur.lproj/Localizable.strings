@@ -92,6 +92,7 @@
 "Action" = "عمل";
 "All External Displays" = "تمام بیرونی ڈسپلے";
 "Toggle Blackout" = "بلیک آؤٹ ٹوگل کریں";
+"Toggle Window" = "ونڈو ٹوگل کریں";
 "Toggle Sleep/Wake" = "سلیپ/ویک ٹوگل کریں";
 "MissingDisplayFormat" = "گم شدہ ڈسپلے (%@)";
 "Global shortcuts" = "گلوبل شارٹ کٹس";

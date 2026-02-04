@@ -92,6 +92,7 @@
 "Action" = "Ενέργεια";
 "All External Displays" = "Όλες οι εξωτερικές οθόνες";
 "Toggle Blackout" = "Εναλλαγή σκοτεινιάς";
+"Toggle Window" = "Εναλλαγή παραθύρου";
 "Toggle Sleep/Wake" = "Εναλλαγή ύπνου/αφύπνισης";
 "MissingDisplayFormat" = "Λείπει οθόνη (%@)";
 "Global shortcuts" = "Γενικές συντομεύσεις";
