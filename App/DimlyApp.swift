@@ -30,6 +30,11 @@ struct DimlyApp: App {
             displayManager: displayManager,
             engine: engine
         )
+        appDelegate.configureSettings(
+            settingsStore: store,
+            displayManager: displayManager,
+            engine: engine
+        )
         DiagnosticsLogger.shared.log("Engine constructed", category: "app")
         NotificationCenter.default.addObserver(
             forName: NSApplication.willTerminateNotification,
@@ -97,6 +102,10 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
     static let introShownKey = "DimlyHasShownIntro.v1"
     private var introWindowController: IntroWindowController?
     private var launcherWindowController: LauncherWindowController?
+    private var settingsWindowController: NSWindowController?
+    private weak var settingsStore: AppSettingsStore?
+    private weak var displayManager: DisplayManager?
+    private weak var settingsEngine: DimlyEngine?
 
     /// Establishes the main menu and shows the intro if needed.
     func applicationDidFinishLaunching(_ notification: Notification) {
@@ -128,6 +137,16 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         engine.onToggleWindow = { [weak self] in
             self?.launcherWindowController?.toggle()
         }
+    }
+
+    func configureSettings(
+        settingsStore: AppSettingsStore,
+        displayManager: DisplayManager,
+        engine: DimlyEngine
+    ) {
+        self.settingsStore = settingsStore
+        self.displayManager = displayManager
+        self.settingsEngine = engine
     }
 
 
@@ -205,6 +224,71 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         appMenu.addItem(quitItem)
 
         NSApp.mainMenu = mainMenu
+    }
+
+    @objc func showSettingsWindow(_ sender: Any?) {
+        guard
+            let settingsStore,
+            let displayManager,
+            let settingsEngine
+        else { return }
+
+        if settingsWindowController == nil {
+            let rootView = SettingsRootView(
+                settingsStore: settingsStore,
+                displayManager: displayManager,
+                profileManager: settingsEngine.profileManager,
+                ddcManager: settingsEngine.ddcManager,
+                engine: settingsEngine
+            )
+            let hostingView = NSHostingView(rootView: rootView)
+            let window = NSWindow(
+                contentRect: NSRect(x: 0, y: 0, width: 900, height: 580),
+                styleMask: [.titled, .closable, .miniaturizable],
+                backing: .buffered,
+                defer: false
+            )
+            window.title = "Settings"
+            window.titlebarAppearsTransparent = true
+            window.titlebarSeparatorStyle = .none
+            window.toolbarStyle = .unifiedCompact
+            window.isMovableByWindowBackground = true
+            window.isReleasedWhenClosed = false
+            window.toolbar = NSToolbar(identifier: "SettingsToolbar")
+            window.contentView = hostingView
+            settingsWindowController = NSWindowController(window: window)
+        }
+
+        guard let window = settingsWindowController?.window else { return }
+        adjustTrafficLights(for: window)
+        center(window: window)
+        window.alphaValue = 0
+        window.makeKeyAndOrderFront(nil)
+        NSApp.activate(ignoringOtherApps: true)
+        NSAnimationContext.runAnimationGroup { context in
+            context.duration = 0.12
+            window.animator().alphaValue = 1
+        }
+    }
+
+    private func center(window: NSWindow) {
+        let mouseLocation = NSEvent.mouseLocation
+        let screen = NSScreen.screens.first { $0.frame.contains(mouseLocation) } ?? NSScreen.main
+        let frame = screen?.visibleFrame ?? NSScreen.main?.visibleFrame ?? .zero
+        let origin = NSPoint(
+            x: frame.midX - window.frame.width / 2,
+            y: frame.midY - window.frame.height / 2
+        )
+        window.setFrameOrigin(origin)
+    }
+
+    private func adjustTrafficLights(for window: NSWindow) {
+        guard let button = window.standardWindowButton(.closeButton),
+              let container = button.superview
+        else { return }
+        var frame = container.frame
+        frame.origin.x += 6
+        container.setFrameOrigin(frame.origin)
     }
 
 }

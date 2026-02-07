@@ -1,9 +1,9 @@
 // MARK: - Settings Window
-// Tabbed SwiftUI surface for global preferences, shortcuts, profiles, and about info.
+// Sidebar-based SwiftUI surface for global preferences, shortcuts, profiles, and about info.
 import SwiftUI
 import AppKit
 
-/// Settings window root with simple tab navigation.
+/// Settings window root with sidebar navigation.
 struct SettingsRootView: View {
     @ObservedObject var settingsStore: AppSettingsStore
     @ObservedObject var displayManager: DisplayManager
@@ -11,331 +11,53 @@ struct SettingsRootView: View {
     @ObservedObject var ddcManager: DDCManager
     let engine: DimlyEngine
     @State private var introWindowController: IntroWindowController?
-
-    /// Tabbed settings UI.
-    var body: some View {
-        TabView {
-            generalTab
-                .tabItem { Label(String(localized: "General"), systemImage: "gearshape") }
-            shortcutsTab
-                .tabItem { Label(String(localized: "Shortcuts"), systemImage: "keyboard") }
-            profilesTab
-                .tabItem { Label(String(localized: "Profiles"), systemImage: "rectangle.3.group") }
-            aboutTab
-                .tabItem { Label(String(localized: "About"), systemImage: "info.circle") }
-        }
-        .padding(20)
-        .frame(minWidth: 320, idealWidth: 400, minHeight: 520)
-    }
-
-    // MARK: - Tabs
-
-    /// General preferences: login, menu bar, animations, and per-display options.
-    private var generalTab: some View {
-        ScrollView {
-            VStack(alignment: .leading, spacing: 16) {
-                Toggle(String(localized: "Launch at login"), isOn: Binding(
-                    get: { settingsStore.settings.launchAtLogin },
-                    set: { newValue in settingsStore.update { $0.launchAtLogin = newValue } }
-                ))
-                Toggle(String(localized: "Show menu bar icon"), isOn: Binding(
-                    get: { settingsStore.settings.showMenuBarIcon },
-                    set: { newValue in settingsStore.update { $0.showMenuBarIcon = newValue } }
-                ))
-                Toggle(String(localized: "Hide Dock icon"), isOn: Binding(
-                    get: { settingsStore.settings.hideDockIcon },
-                    set: { newValue in settingsStore.update { $0.hideDockIcon = newValue } }
-                ))
-                Text(String(localized: "Hide the Dock icon and app switcher entry."))
-                    .foregroundStyle(.secondary)
-                    .padding(.top, 4)
-                Text(String(localized: "Dimly stays running for hotkeys even when the menu bar icon is hidden."))
-                    .foregroundStyle(.secondary)
-                    .padding(.top, 4)
-
-                Text(String(localized: "Displays"))
-                    .font(.headline)
-                    .padding(.top, 8)
-                Toggle(String(localized: "Fade out on sleep/blackout"), isOn: Binding(
-                    get: { settingsStore.settings.fadeOutAnimationEnabled },
-                    set: { newValue in settingsStore.update { $0.fadeOutAnimationEnabled = newValue } }
-                ))
-                Toggle(String(localized: "Fade in on wake/restore"), isOn: Binding(
-                    get: { settingsStore.settings.fadeInAnimationEnabled },
-                    set: { newValue in settingsStore.update { $0.fadeInAnimationEnabled = newValue } }
-                ))
-                Toggle(String(localized: "Show display numbers on screens"), isOn: Binding(
-                    get: { settingsStore.settings.showDisplayNumbers },
-                    set: { newValue in settingsStore.update { $0.showDisplayNumbers = newValue } }
-                ))
-                if displayManager.displays.isEmpty {
-                    Text(String(localized: "No active displays detected."))
-                        .foregroundStyle(.secondary)
-                } else {
-                    ForEach(displayManager.displays) { display in
-                        displayRow(for: display)
-                    }
-                }
-                Divider()
-                    .padding(.top, 8)
-                Button(String(localized: "Show introduction again")) {
-                    showIntroAgain()
-                }
-            }
-            .frame(maxWidth: .infinity, alignment: .leading)
-            .padding(.horizontal, 14)
-            .padding(.top, 16)
-            .padding(.bottom, 20)
-        }
-        .scrollIndicators(.visible)
-    }
-
-    @ViewBuilder
-    /// Renders a detailed row for a single display in Settings.
-    private func displayRow(for display: DisplayInfo) -> some View {
-        let name = displayName(for: display)
-        let status = displayStatus(for: display)
-        VStack(alignment: .leading, spacing: 4) {
-            HStack {
-                Text(name)
-                    .font(.headline)
-                Spacer()
-                Button(String(localized: "Rename")) {
-                    renameDisplay(display, currentName: name)
-                }
-            }
-            let typeLabel = display.isBuiltin ? String(localized: "Internal") : String(localized: "External")
-            Text(String(format: String(localized: "DisplayTypeResolutionFormat"), typeLabel, display.resolution))
-                .foregroundStyle(.secondary)
-            if let hz = display.refreshRateHz {
-                Text(String(format: String(localized: "RefreshRateFormat"), hz))
-                    .foregroundStyle(.secondary)
-            }
-            if let uuid = display.uuid {
-                Text(String(format: String(localized: "DisplayIDFormat"), uuid))
-                    .font(.caption2)
-                    .foregroundStyle(.tertiary)
-            } else if let serial = display.serialNumber {
-                Text(String(format: String(localized: "DisplaySerialFormat"), String(serial)))
-                    .font(.caption2)
-                    .foregroundStyle(.tertiary)
-            }
-            let state = ddcManager.states[display.stableIdentity] ?? DDCState(status: .unknown, lastError: nil, lastCommand: nil, lastCommandAt: nil)
-            let ddcSupported = state.status == .supported
-            let overlayOnly = settingsStore.settings.overlayOnlyDisplayIDs.contains(display.stableIdentity)
-            let fallbackActive = (!ddcSupported || overlayOnly) && engine.blackoutManager.activeDisplayIDs.contains(display.stableIdentity)
-            let controlTint: Color = (ddcSupported && !overlayOnly) ? .green : (fallbackActive ? .blue : .secondary)
-            let canControl = display.isExternal
-            HStack(spacing: 8) {
-                Label(String(format: String(localized: "DDCStatusFormat"), state.status.localizedDescription), systemImage: state.status == .supported ? "antenna.radiowaves.left.and.right" : "nosign")
-                    .foregroundStyle(state.status == .supported ? .green : .secondary)
-                Text(status)
-                    .font(.caption)
-                    .foregroundStyle(.secondary)
-                if let error = state.lastError {
-                    Text(error)
-                        .font(.caption)
-                        .foregroundStyle(.secondary)
-                }
-                Spacer()
-                Button(String(localized: "Standby")) { engine.standby(display: display) }
-                    .tint(controlTint)
-                    .disabled(!canControl)
-                Button(String(localized: "Wake")) { engine.wake(display: display) }
-                    .tint(controlTint)
-                    .disabled(!canControl)
-            }
-            if display.isExternal {
-                Toggle(String(localized: "Overlay Only (Never Sleep)"), isOn: Binding(
-                    get: { settingsStore.settings.overlayOnlyDisplayIDs.contains(display.stableIdentity) },
-                    set: { enabled in
-                        settingsStore.update { settings in
-                            if enabled {
-                                if settings.overlayOnlyDisplayIDs.contains(display.stableIdentity) == false {
-                                    settings.overlayOnlyDisplayIDs.append(display.stableIdentity)
-                                }
-                            } else {
-                                settings.overlayOnlyDisplayIDs.removeAll { $0 == display.stableIdentity }
-                            }
-                        }
-                    }
-                ))
-                .toggleStyle(.switch)
-            }
-        }
-        .padding(.vertical, 6)
-    }
-
-    /// Global hotkey configuration tab.
-    private var shortcutsTab: some View {
-        ScrollView {
-            VStack(alignment: .leading, spacing: 16) {
-                Text(String(localized: "Global shortcuts"))
-                    .font(.headline)
-
-                if settingsStore.settings.hotkeyBindings.isEmpty {
-                    emptyHotkeysCard
-                } else {
-                    ForEach(settingsStore.settings.hotkeyBindings, id: \.id) { binding in
-                        HotkeyBindingRow(
-                            binding: hotkeyBinding(for: binding.id),
-                            displayOptions: displayOptions(for: binding),
-                            onDelete: { removeHotkeyBinding(binding.id) }
-                        )
-                    }
-                }
-
-                Button {
-                    addHotkeyBinding()
-                } label: {
-                    Label(String(localized: "Add Hotkey"), systemImage: "plus.circle")
-                }
-                .buttonStyle(.bordered)
-
-                HStack {
-                    Label(String(localized: "Panic hotkey (fixed):"), systemImage: "bolt.fill")
-                    Text(HotkeyDescriptor.panicDefault.displayString)
-                        .foregroundStyle(.secondary)
-                }
-            }
-            .frame(maxWidth: .infinity, alignment: .leading)
-            .padding(.horizontal, 14)
-            .padding(.top, 16)
-            .padding(.bottom, 20)
-        }
-        .scrollIndicators(.visible)
-    }
-
-    /// Placeholder card shown when no hotkeys are configured.
-    private var emptyHotkeysCard: some View {
-        VStack(alignment: .leading, spacing: 6) {
-            Text(String(localized: "No hotkeys set yet"))
-                .font(.subheadline.weight(.semibold))
-            Text(String(localized: "Add a hotkey to quickly toggle blackout or sleep/wake."))
-                .font(.caption)
-                .foregroundStyle(.secondary)
-        }
-        .padding(12)
-        .background(.thinMaterial)
-        .clipShape(RoundedRectangle(cornerRadius: 12, style: .continuous))
-    }
-
-    /// Adds a new hotkey row with default action/target.
-    private func addHotkeyBinding() {
-        settingsStore.update { settings in
-            settings.hotkeyBindings.append(
-                HotkeyBinding(
-                    action: .toggleBlackout,
-                    target: .allExternalDisplays,
-                    descriptor: nil
-                )
-            )
-        }
-    }
-
-    /// Removes a hotkey binding by ID.
-    private func removeHotkeyBinding(_ id: UUID) {
-        settingsStore.update { settings in
-            settings.hotkeyBindings.removeAll { $0.id == id }
-        }
-    }
-
-    /// Returns a binding into the settings array for the requested hotkey.
-    private func hotkeyBinding(for id: UUID) -> Binding<HotkeyBinding> {
-        Binding(
-            get: {
-                settingsStore.settings.hotkeyBindings.first { $0.id == id }
-                    ?? HotkeyBinding(id: id, action: .toggleBlackout, target: .allExternalDisplays, descriptor: nil)
-            },
-            set: { updated in
-                settingsStore.update { settings in
-                    guard let index = settings.hotkeyBindings.firstIndex(where: { $0.id == id }) else { return }
-                    settings.hotkeyBindings[index] = updated
-                }
-            }
-        )
-    }
-
-    /// Builds a list of display targets for a hotkey picker.
-    private func displayOptions(for binding: HotkeyBinding) -> [DisplayOption] {
-        var options: [DisplayOption] = [
-            DisplayOption(id: .allExternalDisplays, label: String(localized: "All External Displays"))
-        ]
-        let externals = displayManager.displays.filter { $0.isExternal }
-        options.append(contentsOf: externals.map { display in
-            DisplayOption(
-                id: .display(id: display.stableIdentity),
-                label: displayOptionLabel(for: display)
-            )
-        })
-        if case .display(let id) = binding.target,
-           options.contains(where: { $0.id == binding.target }) == false {
-            let label = String(format: String(localized: "MissingDisplayFormat"), id)
-            options.append(DisplayOption(id: binding.target, label: label))
-        }
-        return options
-    }
-
-    /// Display profiles tab for saving, applying, and automation.
-    private var profilesTab: some View {
-        VStack(alignment: .leading, spacing: 12) {
-            HStack {
-                Text(String(localized: "Profiles"))
-                    .font(.headline)
-                Spacer()
-                Button(String(localized: "Save Current Setup")) {
-                    profileManager.saveCurrentProfile(named: proposedProfileName)
-                    proposedProfileName = ""
-                }
-                TextField(String(localized: "Profile name"), text: $proposedProfileName)
-                    .textFieldStyle(.roundedBorder)
-                    .frame(width: 180)
-            }
-            if profileManager.profiles.isEmpty {
-                Text(String(localized: "No profiles yet. Save the current display setup to create one."))
-                    .foregroundStyle(.secondary)
-            } else {
-                ForEach(profileManager.profiles) { profile in
-                    profileRow(profile)
-                }
-            }
-
-            Divider()
-            automationSection
-            Spacer()
-        }
-        .padding(.horizontal, 14)
-    }
-
+    @State private var selection: SettingsDestination = .general
     @State private var proposedProfileName: String = ""
 
-    @ViewBuilder
-    /// Card-style row for a single saved display profile.
-    private func profileRow(_ profile: DisplayProfile) -> some View {
-        VStack(alignment: .leading, spacing: 6) {
-            HStack {
-                Text(profile.name)
-                    .font(.subheadline.bold())
-                Text(profile.createdAt, style: .date)
-                    .foregroundStyle(.secondary)
-                Spacer()
-                Button(String(localized: "Apply")) { profileManager.apply(profile: profile) }
-                Button(String(localized: "Rename")) {
-                    renameProfile(profile)
-                }
-                Button(role: .destructive, action: { profileManager.delete(profile: profile) }) {
-                    Text(String(localized: "Delete"))
-                }
-            }
-            Text(String(format: String(localized: "ProfileDisplayCountFormat"), Int64(profile.displays.count)))
-                .foregroundStyle(.secondary)
-        }
-        .padding(10)
-        .background(.thinMaterial)
-        .clipShape(RoundedRectangle(cornerRadius: 8, style: .continuous))
+    enum SettingsDestination: Hashable {
+        case general
+        case displays
+        case shortcuts
+        case profiles
+        case about
     }
 
-    @State private var renameText: String = ""
+    /// Settings UI with sidebar navigation.
+    var body: some View {
+        NavigationSplitView(columnVisibility: .constant(.all)) {
+            List(selection: $selection) {
+                Section(String(localized: "General")) {
+                    Label(String(localized: "General"), systemImage: "gearshape")
+                        .tag(SettingsDestination.general)
+                    Label(String(localized: "Displays"), systemImage: "display")
+                        .tag(SettingsDestination.displays)
+                    Label(String(localized: "Shortcuts"), systemImage: "keyboard")
+                        .tag(SettingsDestination.shortcuts)
+                    Label(String(localized: "Profiles"), systemImage: "rectangle.3.group")
+                        .tag(SettingsDestination.profiles)
+                    Label(String(localized: "About"), systemImage: "info.circle")
+                        .tag(SettingsDestination.about)
+                }
+            }
+            .listStyle(.sidebar)
+            .frame(minWidth: 210)
+        } detail: {
+            SettingsDetailView(
+                selection: selection,
+                settingsStore: settingsStore,
+                displayManager: displayManager,
+                profileManager: profileManager,
+                ddcManager: ddcManager,
+                engine: engine,
+                proposedProfileName: $proposedProfileName,
+                renameProfile: renameProfile,
+                showIntroAgain: showIntroAgain,
+                displayRow: { display in AnyView(displayRowView(for: display)) }
+            )
+        }
+        .frame(minWidth: 900, minHeight: 580)
+        .hideSettingsToolbar()
+    }
 
     /// Forces the intro window to reappear for the current session.
     private func showIntroAgain() {
@@ -352,13 +74,12 @@ struct SettingsRootView: View {
 
     /// Prompts the user to rename an existing profile.
     private func renameProfile(_ profile: DisplayProfile) {
-        renameText = profile.name
         let alert = NSAlert()
         alert.messageText = String(localized: "Rename Profile")
         alert.informativeText = String(localized: "Enter a new name for this profile.")
         alert.addButton(withTitle: String(localized: "Save"))
         alert.addButton(withTitle: String(localized: "Cancel"))
-        let input = NSTextField(string: renameText)
+        let input = NSTextField(string: profile.name)
         input.frame = NSRect(x: 0, y: 0, width: 240, height: 24)
         alert.accessoryView = input
         let response = alert.runModal()
@@ -377,20 +98,6 @@ struct SettingsRootView: View {
             externalIndex: externalIndex,
             internalIndex: internalIndex
         )
-    }
-
-    /// Builds a label for the hotkey target picker.
-    private func displayOptionLabel(for display: DisplayInfo) -> String {
-        let name = displayName(for: display)
-        let externalIndex = externalIndexMap[display.stableIdentity] ?? 1
-        let internalIndex = internalIndexMap[display.stableIdentity] ?? 1
-        let marker = DisplayLabelResolver.overlayMarker(
-            for: display,
-            externalIndex: externalIndex,
-            internalIndex: internalIndex,
-            internalCount: internalDisplayCount
-        )
-        return String(format: String(localized: "DisplayTypeResolutionFormat"), name, marker)
     }
 
     /// Computes the human-friendly status text for a display.
@@ -450,76 +157,487 @@ struct SettingsRootView: View {
         }
     }
 
-    /// Automation settings for applying a profile on external connect.
-    private var automationSection: some View {
-        VStack(alignment: .leading, spacing: 8) {
-            Toggle(String(localized: "Auto-apply profile when an external display connects"), isOn: $profileManager.automationEnabled)
-            Picker(String(localized: "Profile to apply"), selection: Binding(
-                get: { profileManager.automationProfileID ?? profileManager.profiles.first?.id },
-                set: { profileManager.automationProfileID = $0 }
-            )) {
-                ForEach(profileManager.profiles) { profile in
-                    Text(profile.name).tag(Optional(profile.id))
+    /// Renders a detailed row for a single display in Settings.
+    @ViewBuilder
+    private func displayRowView(for display: DisplayInfo) -> some View {
+        let name = displayName(for: display)
+        let status = displayStatus(for: display)
+        let typeLabel = display.isBuiltin ? String(localized: "Internal") : String(localized: "External")
+        let state = ddcManager.states[display.stableIdentity] ?? DDCState(status: .unknown, lastError: nil, lastCommand: nil, lastCommandAt: nil)
+        let ddcSupported = state.status == .supported
+        let overlayOnly = settingsStore.settings.overlayOnlyDisplayIDs.contains(display.stableIdentity)
+        let fallbackActive = (!ddcSupported || overlayOnly) && engine.blackoutManager.activeDisplayIDs.contains(display.stableIdentity)
+        let controlTint: Color = (ddcSupported && !overlayOnly) ? .green : (fallbackActive ? .blue : .secondary)
+        let canControl = display.isExternal
+
+        HStack(alignment: .top, spacing: 14) {
+            SettingsIcon(systemName: display.isBuiltin ? "laptopcomputer" : "display")
+            VStack(alignment: .leading, spacing: 6) {
+                HStack(alignment: .center, spacing: 10) {
+                    Text(name)
+                        .font(.callout.weight(.semibold))
+                    Spacer()
+                    Button(String(localized: "Rename")) {
+                        renameDisplay(display, currentName: name)
+                    }
+                    .buttonStyle(.bordered)
+                    .controlSize(.small)
+                }
+
+                Text(String(format: String(localized: "DisplayTypeResolutionFormat"), typeLabel, display.resolution))
+                    .font(.caption)
+                    .foregroundStyle(.secondary)
+                if let hz = display.refreshRateHz {
+                    Text(String(format: String(localized: "RefreshRateFormat"), hz))
+                        .font(.caption)
+                        .foregroundStyle(.secondary)
+                }
+                if let uuid = display.uuid {
+                    Text(String(format: String(localized: "DisplayIDFormat"), uuid))
+                        .font(.caption2)
+                        .foregroundStyle(.tertiary)
+                } else if let serial = display.serialNumber {
+                    Text(String(format: String(localized: "DisplaySerialFormat"), String(serial)))
+                        .font(.caption2)
+                        .foregroundStyle(.tertiary)
+                }
+
+                HStack(spacing: 8) {
+                    Label(
+                        String(format: String(localized: "DDCStatusFormat"), state.status.localizedDescription),
+                        systemImage: state.status == .supported ? "antenna.radiowaves.left.and.right" : "nosign"
+                    )
+                    .font(.caption)
+                    .foregroundStyle(state.status == .supported ? .green : .secondary)
+                    Text(status)
+                        .font(.caption)
+                        .foregroundStyle(.secondary)
+                    if let error = state.lastError {
+                        Text(error)
+                            .font(.caption)
+                            .foregroundStyle(.secondary)
+                    }
+                    Spacer()
+                    Button(String(localized: "Standby")) { engine.standby(display: display) }
+                        .tint(controlTint)
+                        .disabled(!canControl)
+                        .buttonStyle(.bordered)
+                        .controlSize(.small)
+                    Button(String(localized: "Wake")) { engine.wake(display: display) }
+                        .tint(controlTint)
+                        .disabled(!canControl)
+                        .buttonStyle(.bordered)
+                        .controlSize(.small)
+                }
+
+                if display.isExternal {
+                    HStack(spacing: 10) {
+                        Text(String(localized: "Overlay Only (Never Sleep)"))
+                            .font(.caption)
+                            .foregroundStyle(.secondary)
+                        Spacer()
+                        Toggle("", isOn: Binding(
+                            get: { settingsStore.settings.overlayOnlyDisplayIDs.contains(display.stableIdentity) },
+                            set: { enabled in
+                                settingsStore.update { settings in
+                                    if enabled {
+                                        if settings.overlayOnlyDisplayIDs.contains(display.stableIdentity) == false {
+                                            settings.overlayOnlyDisplayIDs.append(display.stableIdentity)
+                                        }
+                                    } else {
+                                        settings.overlayOnlyDisplayIDs.removeAll { $0 == display.stableIdentity }
+                                    }
+                                }
+                            }
+                        ))
+                        .labelsHidden()
+                    }
                 }
             }
-            .disabled(profileManager.profiles.isEmpty || profileManager.automationEnabled == false)
-            if let applied = profileManager.lastAppliedProfileName {
-                Text(String(format: String(localized: "LastAppliedFormat"), applied))
+        }
+        .padding(.vertical, 2)
+    }
+
+    // MARK: - Detail Views
+
+    private struct SettingsDetailView: View {
+        let selection: SettingsDestination
+        @ObservedObject var settingsStore: AppSettingsStore
+        @ObservedObject var displayManager: DisplayManager
+        @ObservedObject var profileManager: ProfileManager
+        @ObservedObject var ddcManager: DDCManager
+        let engine: DimlyEngine
+        @Binding var proposedProfileName: String
+        let renameProfile: (DisplayProfile) -> Void
+        let showIntroAgain: () -> Void
+        let displayRow: (DisplayInfo) -> AnyView
+
+        var body: some View {
+            switch selection {
+            case .general:
+                generalDetail
+            case .displays:
+                displaysDetail
+            case .shortcuts:
+                shortcutsDetail
+            case .profiles:
+                profilesDetail
+            case .about:
+                aboutDetail
+            }
+        }
+
+        private var generalDetail: some View {
+            SettingsScrollView(title: String(localized: "General"), subtitle: nil) {
+                SettingsCard(title: String(localized: "General"), subtitle: nil) {
+                    SettingsToggleRow(
+                        title: String(localized: "Launch at login"),
+                        subtitle: nil,
+                        systemImage: "power",
+                        isOn: Binding(
+                            get: { settingsStore.settings.launchAtLogin },
+                            set: { newValue in settingsStore.update { $0.launchAtLogin = newValue } }
+                        )
+                    )
+                    SettingsDivider()
+                    SettingsToggleRow(
+                        title: String(localized: "Show menu bar icon"),
+                        subtitle: nil,
+                        systemImage: "menubar.rectangle",
+                        isOn: Binding(
+                            get: { settingsStore.settings.showMenuBarIcon },
+                            set: { newValue in settingsStore.update { $0.showMenuBarIcon = newValue } }
+                        )
+                    )
+                    SettingsDivider()
+                    SettingsToggleRow(
+                        title: String(localized: "Hide Dock icon"),
+                        subtitle: nil,
+                        systemImage: "dock.rectangle",
+                        isOn: Binding(
+                            get: { settingsStore.settings.hideDockIcon },
+                            set: { newValue in settingsStore.update { $0.hideDockIcon = newValue } }
+                        )
+                    )
+                    SettingsDivider()
+                    VStack(alignment: .leading, spacing: 6) {
+                        Text(String(localized: "Hide the Dock icon and app switcher entry."))
+                            .font(.caption)
+                            .foregroundStyle(.secondary)
+                        Text(String(localized: "Dimly stays running for hotkeys even when the menu bar icon is hidden."))
+                            .font(.caption)
+                            .foregroundStyle(.secondary)
+                    }
+                    SettingsDivider()
+                    Button(String(localized: "Show introduction again")) {
+                        showIntroAgain()
+                    }
+                    .buttonStyle(.bordered)
+                    .controlSize(.small)
+                }
+            }
+        }
+
+        private var displaysDetail: some View {
+            SettingsScrollView(title: String(localized: "Displays"), subtitle: nil) {
+                SettingsCard(title: String(localized: "Displays"), subtitle: nil) {
+                    SettingsToggleRow(
+                        title: String(localized: "Fade out on sleep/blackout"),
+                        subtitle: nil,
+                        systemImage: "moon.zzz",
+                        isOn: Binding(
+                            get: { settingsStore.settings.fadeOutAnimationEnabled },
+                            set: { newValue in settingsStore.update { $0.fadeOutAnimationEnabled = newValue } }
+                        )
+                    )
+                    SettingsDivider()
+                    SettingsToggleRow(
+                        title: String(localized: "Fade in on wake/restore"),
+                        subtitle: nil,
+                        systemImage: "sun.max",
+                        isOn: Binding(
+                            get: { settingsStore.settings.fadeInAnimationEnabled },
+                            set: { newValue in settingsStore.update { $0.fadeInAnimationEnabled = newValue } }
+                        )
+                    )
+                    SettingsDivider()
+                    SettingsToggleRow(
+                        title: String(localized: "Show display numbers on screens"),
+                        subtitle: nil,
+                        systemImage: "number",
+                        isOn: Binding(
+                            get: { settingsStore.settings.showDisplayNumbers },
+                            set: { newValue in settingsStore.update { $0.showDisplayNumbers = newValue } }
+                        )
+                    )
+                    SettingsDivider()
+                    if displayManager.displays.isEmpty {
+                        Text(String(localized: "No active displays detected."))
+                            .font(.caption)
+                            .foregroundStyle(.secondary)
+                    } else {
+                        ForEach(displayManager.displays) { display in
+                            displayRow(display)
+                            if display.id != displayManager.displays.last?.id {
+                                SettingsDivider()
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        private var shortcutsDetail: some View {
+            SettingsScrollView(title: String(localized: "Shortcuts"), subtitle: nil) {
+                SettingsCard(title: String(localized: "Global shortcuts"), subtitle: nil) {
+                    if settingsStore.settings.hotkeyBindings.isEmpty {
+                        emptyHotkeysCard
+                    } else {
+                        ForEach(settingsStore.settings.hotkeyBindings, id: \.id) { binding in
+                            HotkeyBindingRow(
+                                binding: Binding(
+                                    get: {
+                                        settingsStore.settings.hotkeyBindings.first { $0.id == binding.id }
+                                            ?? HotkeyBinding(id: binding.id, action: .toggleBlackout, target: .allExternalDisplays, descriptor: nil)
+                                    },
+                                    set: { updated in
+                                        settingsStore.update { settings in
+                                            guard let index = settings.hotkeyBindings.firstIndex(where: { $0.id == binding.id }) else { return }
+                                            settings.hotkeyBindings[index] = updated
+                                        }
+                                    }
+                                ),
+                                displayOptions: displayOptions(for: binding),
+                                onDelete: { settingsStore.update { settings in
+                                    settings.hotkeyBindings.removeAll { $0.id == binding.id }
+                                } }
+                            )
+                            if binding.id != settingsStore.settings.hotkeyBindings.last?.id {
+                                SettingsDivider()
+                            }
+                        }
+                    }
+
+                    SettingsDivider()
+
+                    Button {
+                        settingsStore.update { settings in
+                            settings.hotkeyBindings.append(
+                                HotkeyBinding(
+                                    action: .toggleBlackout,
+                                    target: .allExternalDisplays,
+                                    descriptor: nil
+                                )
+                            )
+                        }
+                    } label: {
+                        Label(String(localized: "Add Hotkey"), systemImage: "plus.circle")
+                    }
+                    .buttonStyle(.bordered)
+                    .controlSize(.small)
+
+                    SettingsDivider()
+
+                    SettingsRow(
+                        title: String(localized: "Panic hotkey (fixed):"),
+                        subtitle: nil,
+                        systemImage: "bolt.fill"
+                    ) {
+                        Text(HotkeyDescriptor.panicDefault.displayString)
+                            .font(.caption)
+                            .foregroundStyle(.secondary)
+                    }
+                }
+            }
+        }
+
+        private var emptyHotkeysCard: some View {
+            VStack(alignment: .leading, spacing: 6) {
+                Text(String(localized: "No hotkeys set yet"))
+                    .font(.callout.weight(.semibold))
+                Text(String(localized: "Add a hotkey to quickly toggle blackout or sleep/wake."))
                     .font(.caption)
                     .foregroundStyle(.secondary)
             }
         }
-    }
 
-    /// About tab showing version info and support links.
-    private var aboutTab: some View {
-        VStack(alignment: .leading, spacing: 16) {
-            let version = Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String ?? ""
-            let build = Bundle.main.object(forInfoDictionaryKey: "CFBundleVersion") as? String ?? ""
-            HStack(alignment: .center, spacing: 14) {
-                if let icon = NSApp.applicationIconImage {
-                    Image(nsImage: icon)
-                        .resizable()
-                        .frame(width: 56, height: 56)
-                        .clipShape(RoundedRectangle(cornerRadius: 12, style: .continuous))
-                        .shadow(radius: 6, y: 2)
+        private var profilesDetail: some View {
+            SettingsScrollView(title: String(localized: "Profiles"), subtitle: nil) {
+                SettingsCard(title: String(localized: "Profiles"), subtitle: nil) {
+                    HStack(alignment: .center, spacing: 10) {
+                        Button(String(localized: "Save Current Setup")) {
+                            profileManager.saveCurrentProfile(named: proposedProfileName)
+                            proposedProfileName = ""
+                        }
+                        .buttonStyle(.bordered)
+                        .controlSize(.small)
+                        TextField(String(localized: "Profile name"), text: $proposedProfileName)
+                            .textFieldStyle(.roundedBorder)
+                            .frame(width: 180)
+                    }
+
+                    SettingsDivider()
+
+                    if profileManager.profiles.isEmpty {
+                        Text(String(localized: "No profiles yet. Save the current display setup to create one."))
+                            .font(.caption)
+                            .foregroundStyle(.secondary)
+                    } else {
+                        ForEach(profileManager.profiles) { profile in
+                            profileRow(profile)
+                            if profile.id != profileManager.profiles.last?.id {
+                                SettingsDivider()
+                            }
+                        }
+                    }
+
+                    SettingsDivider()
+                    automationSection
                 }
-                VStack(alignment: .leading, spacing: 4) {
-                    Text(String(localized: "Dimly"))
-                        .font(.title2.bold())
-                    Text(String(format: String(localized: "VersionFormat"), version, build))
+            }
+        }
+
+        @ViewBuilder
+        private func profileRow(_ profile: DisplayProfile) -> some View {
+            VStack(alignment: .leading, spacing: 6) {
+                HStack(alignment: .center, spacing: 10) {
+                    Text(profile.name)
+                        .font(.callout.weight(.semibold))
+                    Text(profile.createdAt, style: .date)
+                        .font(.caption)
                         .foregroundStyle(.secondary)
-                    Text(String(localized: "© 2026 Jan Feuerbacher"))
+                    Spacer()
+                    Button(String(localized: "Apply")) { profileManager.apply(profile: profile) }
+                        .buttonStyle(.bordered)
+                        .controlSize(.small)
+                    Button(String(localized: "Rename")) {
+                        renameProfile(profile)
+                    }
+                    .buttonStyle(.bordered)
+                    .controlSize(.small)
+                    Button(role: .destructive, action: { profileManager.delete(profile: profile) }) {
+                        Text(String(localized: "Delete"))
+                    }
+                    .buttonStyle(.bordered)
+                    .controlSize(.small)
+                }
+                Text(String(format: String(localized: "ProfileDisplayCountFormat"), Int64(profile.displays.count)))
+                    .font(.caption)
+                    .foregroundStyle(.secondary)
+            }
+        }
+
+        private var automationSection: some View {
+            VStack(alignment: .leading, spacing: 8) {
+                Toggle(String(localized: "Auto-apply profile when an external display connects"), isOn: $profileManager.automationEnabled)
+                Picker(String(localized: "Profile to apply"), selection: Binding(
+                    get: { profileManager.automationProfileID ?? profileManager.profiles.first?.id },
+                    set: { profileManager.automationProfileID = $0 }
+                )) {
+                    ForEach(profileManager.profiles) { profile in
+                        Text(profile.name).tag(Optional(profile.id))
+                    }
+                }
+                .disabled(profileManager.profiles.isEmpty || profileManager.automationEnabled == false)
+                if let applied = profileManager.lastAppliedProfileName {
+                    Text(String(format: String(localized: "LastAppliedFormat"), applied))
                         .font(.caption)
                         .foregroundStyle(.secondary)
                 }
             }
-            Divider()
-            VStack(alignment: .leading, spacing: 10) {
-                Text(String(localized: "Dimly is a native Swift macOS utility for quickly blacking out external displays and managing sleep/wake."))
-                    .foregroundStyle(.secondary)
-                Text(String(localized: "Made in my free time - thanks for the support."))
-                    .foregroundStyle(.secondary)
-            }
-            HStack(spacing: 12) {
-                Link(destination: URL(string: "https://github.com/Punshnut/dimly")!) {
-                    Label(String(localized: "GitHub Repo"), systemImage: "link")
-                }
-                Link(destination: URL(string: "https://github.com/Punshnut/dimly/issues/new")!) {
-                    Label(String(localized: "Report an Issue"), systemImage: "exclamationmark.bubble")
-                }
-                Link(destination: URL(string: "https://ko-fi.com/janfeuerbacher")!) {
-                    Label(String(localized: "Donate"), systemImage: "heart")
-                }
-            }
-            .padding(.vertical, 10)
-            .padding(.horizontal, 12)
-            .background(.thinMaterial)
-            .clipShape(RoundedRectangle(cornerRadius: 12, style: .continuous))
-            Spacer()
         }
-        .frame(maxWidth: .infinity, alignment: .leading)
-        .padding(.horizontal, 14)
+
+        private var aboutDetail: some View {
+            SettingsScrollView(title: String(localized: "About"), subtitle: nil) {
+                SettingsCard(title: String(localized: "Dimly"), subtitle: nil) {
+                    let version = Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String ?? ""
+                    let build = Bundle.main.object(forInfoDictionaryKey: "CFBundleVersion") as? String ?? ""
+                    HStack(alignment: .center, spacing: 14) {
+                        if let icon = NSApp.applicationIconImage {
+                            Image(nsImage: icon)
+                                .resizable()
+                                .frame(width: 56, height: 56)
+                                .clipShape(RoundedRectangle(cornerRadius: 12, style: .continuous))
+                                .shadow(radius: 6, y: 2)
+                        }
+                        VStack(alignment: .leading, spacing: 4) {
+                            Text(String(localized: "Dimly"))
+                                .font(.title2.bold())
+                            Text(String(format: String(localized: "VersionFormat"), version, build))
+                                .font(.caption)
+                                .foregroundStyle(.secondary)
+                            Text(String(localized: "© 2026 Jan Feuerbacher"))
+                                .font(.caption)
+                                .foregroundStyle(.secondary)
+                        }
+                    }
+
+                    SettingsDivider()
+
+                    VStack(alignment: .leading, spacing: 10) {
+                        Text(String(localized: "Dimly is a native Swift macOS utility for quickly blacking out external displays and managing sleep/wake."))
+                            .font(.caption)
+                            .foregroundStyle(.secondary)
+                        Text(String(localized: "Made in my free time - thanks for the support."))
+                            .font(.caption)
+                            .foregroundStyle(.secondary)
+                    }
+                }
+
+                SettingsCard(title: String(localized: "About"), subtitle: nil) {
+                    HStack(spacing: 12) {
+                        Link(destination: URL(string: "https://github.com/Punshnut/dimly")!) {
+                            Label(String(localized: "GitHub Repo"), systemImage: "link")
+                        }
+                        Link(destination: URL(string: "https://github.com/Punshnut/dimly/issues/new")!) {
+                            Label(String(localized: "Report an Issue"), systemImage: "exclamationmark.bubble")
+                        }
+                        Link(destination: URL(string: "https://ko-fi.com/janfeuerbacher")!) {
+                            Label(String(localized: "Donate"), systemImage: "heart")
+                        }
+                    }
+                }
+            }
+        }
+
+        private func displayOptions(for binding: HotkeyBinding) -> [DisplayOption] {
+            var options: [DisplayOption] = [
+                DisplayOption(id: .allExternalDisplays, label: String(localized: "All External Displays"))
+            ]
+            let externals = displayManager.displays.filter { $0.isExternal }
+            options.append(contentsOf: externals.map { display in
+                DisplayOption(
+                    id: .display(id: display.stableIdentity),
+                    label: displayOptionLabel(for: display)
+                )
+            })
+            if case .display(let id) = binding.target,
+               options.contains(where: { $0.id == binding.target }) == false {
+                let label = String(format: String(localized: "MissingDisplayFormat"), id)
+                options.append(DisplayOption(id: binding.target, label: label))
+            }
+            return options
+        }
+
+        private func displayOptionLabel(for display: DisplayInfo) -> String {
+            let externalIndex = displayManager.displays.filter { $0.isExternal }.sorted { $0.displayID < $1.displayID }
+                .firstIndex(where: { $0.stableIdentity == display.stableIdentity }).map { $0 + 1 } ?? 1
+            let internalIndex = displayManager.displays.filter { $0.isBuiltin }.sorted { $0.displayID < $1.displayID }
+                .firstIndex(where: { $0.stableIdentity == display.stableIdentity }).map { $0 + 1 } ?? 1
+            let marker = DisplayLabelResolver.overlayMarker(
+                for: display,
+                externalIndex: externalIndex,
+                internalIndex: internalIndex,
+                internalCount: displayManager.displays.filter { $0.isBuiltin }.count
+            )
+            let name = DisplayLabelResolver.displayName(
+                for: display,
+                settings: settingsStore.settings,
+                externalIndex: externalIndex,
+                internalIndex: internalIndex
+            )
+            return String(format: String(localized: "DisplayTypeResolutionFormat"), name, marker)
+        }
     }
 }
 
@@ -540,7 +658,8 @@ private struct HotkeyBindingRow: View {
     /// Layout for the hotkey binding row.
     var body: some View {
         HStack(alignment: .center, spacing: 14) {
-            VStack(alignment: .leading, spacing: 10) {
+            SettingsIcon(systemName: "command")
+            VStack(alignment: .leading, spacing: 8) {
                 Picker(String(localized: "Display"), selection: $binding.target) {
                     ForEach(displayOptions) { option in
                         Text(option.label).tag(option.id)
@@ -565,11 +684,10 @@ private struct HotkeyBindingRow: View {
                 Image(systemName: "trash")
             }
             .buttonStyle(.bordered)
+            .controlSize(.small)
         }
-        .padding(12)
-        .background(.thinMaterial)
-        .clipShape(RoundedRectangle(cornerRadius: 12, style: .continuous))
-        .onChange(of: binding.action) { newValue in
+        .padding(.vertical, 2)
+        .onChange(of: binding.action) { _, newValue in
             if newValue.usesTarget == false {
                 binding.target = .allExternalDisplays
             }
@@ -604,7 +722,7 @@ private struct HotkeyRecorder: View {
         .onTapGesture {
             isRecording.toggle()
         }
-        .onChange(of: isRecording) { newValue in
+        .onChange(of: isRecording) { _, newValue in
             if newValue {
                 captureMonitor.start { event in
                     guard let captured = HotkeyDescriptor(event: event) else { return }
