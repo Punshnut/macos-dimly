@@ -30,6 +30,9 @@
 "External Displays" = "ውጫዊ ማሳያዎች";
 "Profiles" = "ፕሮፋይሎች";
 "App" = "መተግበሪያ";
+"Mode" = "ሁኔታ";
+"Simple" = "ቀላል";
+"Advanced" = "የላቀ";
 
 /* Menu Bar Actions */
 "Toggle External Blackout" = "ውጫዊ ጥቁርነት ቀይር";

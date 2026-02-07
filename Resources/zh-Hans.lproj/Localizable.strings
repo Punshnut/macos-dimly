@@ -30,6 +30,9 @@
 "External Displays" = "外接显示器";
 "Profiles" = "配置";
 "App" = "应用";
+"Mode" = "模式";
+"Simple" = "简单";
+"Advanced" = "高级";
 
 /* Menu Bar Actions */
 "Toggle External Blackout" = "切换外接黑屏";

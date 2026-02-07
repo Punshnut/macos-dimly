@@ -30,6 +30,9 @@
 "External Displays" = "బాహ్య డిస్ప్లేలు";
 "Profiles" = "ప్రొఫైళ్లు";
 "App" = "యాప్";
+"Mode" = "మోడ్";
+"Simple" = "సరళం";
+"Advanced" = "అధునాతన";
 
 /* Menu Bar Actions */
 "Toggle External Blackout" = "బాహ్య బ్లాకౌట్ మార్చు";

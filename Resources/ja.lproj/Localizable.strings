@@ -30,6 +30,9 @@
 "External Displays" = "外部ディスプレイ";
 "Profiles" = "プロファイル";
 "App" = "アプリ";
+"Mode" = "モード";
+"Simple" = "シンプル";
+"Advanced" = "詳細";
 
 /* Menu Bar Actions */
 "Toggle External Blackout" = "外部ブラックアウトを切替";

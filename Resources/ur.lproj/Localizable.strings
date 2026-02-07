@@ -30,6 +30,9 @@
 "External Displays" = "بیرونی ڈسپلے";
 "Profiles" = "پروفائلز";
 "App" = "ایپ";
+"Mode" = "موڈ";
+"Simple" = "سادہ";
+"Advanced" = "جدید";
 
 /* Menu Bar Actions */
 "Toggle External Blackout" = "بیرونی بلیک آؤٹ ٹوگل کریں";

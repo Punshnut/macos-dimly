@@ -30,6 +30,9 @@
 "External Displays" = "বাহ্যিক ডিসপ্লে";
 "Profiles" = "প্রোফাইল";
 "App" = "অ্যাপ";
+"Mode" = "মোড";
+"Simple" = "সহজ";
+"Advanced" = "উন্নত";
 
 /* Menu Bar Actions */
 "Toggle External Blackout" = "বাহ্যিক ব্ল্যাকআউট টগল";

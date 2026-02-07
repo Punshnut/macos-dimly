@@ -30,6 +30,9 @@
 "External Displays" = "Màn hình ngoài";
 "Profiles" = "Hồ sơ";
 "App" = "Ứng dụng";
+"Mode" = "Chế độ";
+"Simple" = "Đơn giản";
+"Advanced" = "Nâng cao";
 
 /* Menu Bar Actions */
 "Toggle External Blackout" = "Bật/tắt blackout ngoài";

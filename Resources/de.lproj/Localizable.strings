@@ -30,6 +30,9 @@
 "External Displays" = "Externe Displays";
 "Profiles" = "Profile";
 "App" = "App";
+"Mode" = "Modus";
+"Simple" = "Einfach";
+"Advanced" = "Erweitert";
 
 /* Menu Bar Actions */
 "Toggle External Blackout" = "Externen Blackout umschalten";

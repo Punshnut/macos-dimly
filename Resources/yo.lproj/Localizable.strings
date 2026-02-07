@@ -30,6 +30,9 @@
 "External Displays" = "Àfihàn òde";
 "Profiles" = "Àwọn profaili";
 "App" = "App";
+"Mode" = "Ipo";
+"Simple" = "Rọrun";
+"Advanced" = "Ti ni ilọsiwaju";
 
 /* Menu Bar Actions */
 "Toggle External Blackout" = "Pa/Ṣí ìdàmú dudu òde";

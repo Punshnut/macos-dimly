@@ -39,6 +39,7 @@ Dimly.dmg
 *.dmg
 Dimly Dev Install.dmg
 .notarytool-submissions/
+.cache/
 
 # Signing keys / secrets
 .env

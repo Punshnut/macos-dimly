@@ -30,6 +30,9 @@
 "External Displays" = "Paparan luaran";
 "Profiles" = "Profil";
 "App" = "Apl";
+"Mode" = "Mod";
+"Simple" = "Ringkas";
+"Advanced" = "Lanjutan";
 
 /* Menu Bar Actions */
 "Toggle External Blackout" = "Togol blackout luaran";

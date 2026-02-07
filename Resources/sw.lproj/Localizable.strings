@@ -30,6 +30,9 @@
 "External Displays" = "Skrini za nje";
 "Profiles" = "Profaili";
 "App" = "App";
+"Mode" = "Modi";
+"Simple" = "Rahisi";
+"Advanced" = "Ya Juu";
 
 /* Menu Bar Actions */
 "Toggle External Blackout" = "Badilisha blackout ya nje";

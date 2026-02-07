@@ -30,6 +30,9 @@
 "External Displays" = "Harici ekranlar";
 "Profiles" = "Profiller";
 "App" = "Uygulama";
+"Mode" = "Mod";
+"Simple" = "Basit";
+"Advanced" = "Gelişmiş";
 
 /* Menu Bar Actions */
 "Toggle External Blackout" = "Harici karartmayı aç/kapat";

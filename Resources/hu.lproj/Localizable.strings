@@ -30,6 +30,9 @@
 "External Displays" = "Külső kijelzők";
 "Profiles" = "Profilok";
 "App" = "App";
+"Mode" = "Mód";
+"Simple" = "Egyszerű";
+"Advanced" = "Haladó";
 
 /* Menu Bar Actions */
 "Toggle External Blackout" = "Külső elsötétítés váltása";

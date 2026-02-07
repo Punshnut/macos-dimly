@@ -30,6 +30,9 @@
 "External Displays" = "Externí displeje";
 "Profiles" = "Profily";
 "App" = "Aplikace";
+"Mode" = "Režim";
+"Simple" = "Jednoduchý";
+"Advanced" = "Pokročilý";
 
 /* Menu Bar Actions */
 "Toggle External Blackout" = "Přepnout externí blackout";

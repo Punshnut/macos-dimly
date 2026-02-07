@@ -30,6 +30,9 @@
 "External Displays" = "Внешние дисплеи";
 "Profiles" = "Профили";
 "App" = "Приложение";
+"Mode" = "Режим";
+"Simple" = "Простой";
+"Advanced" = "Расширенный";
 
 /* Menu Bar Actions */
 "Toggle External Blackout" = "Переключить внешний blackout";

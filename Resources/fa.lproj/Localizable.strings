@@ -30,6 +30,9 @@
 "External Displays" = "نمایشگرهای خارجی";
 "Profiles" = "پروفایل‌ها";
 "App" = "برنامه";
+"Mode" = "حالت";
+"Simple" = "ساده";
+"Advanced" = "پیشرفته";
 
 /* Menu Bar Actions */
 "Toggle External Blackout" = "تغییر وضعیت خاموشی خارجی";

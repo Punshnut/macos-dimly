@@ -30,6 +30,9 @@
 "External Displays" = "Panlabas na display";
 "Profiles" = "Mga profile";
 "App" = "App";
+"Mode" = "Mode";
+"Simple" = "Simple";
+"Advanced" = "Advanced";
 
 /* Menu Bar Actions */
 "Toggle External Blackout" = "I-toggle ang panlabas na blackout";

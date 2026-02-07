@@ -30,6 +30,9 @@
 "External Displays" = "Ulkoiset näytöt";
 "Profiles" = "Profiilit";
 "App" = "Sovellus";
+"Mode" = "Tila";
+"Simple" = "Yksinkertainen";
+"Advanced" = "Edistynyt";
 
 /* Menu Bar Actions */
 "Toggle External Blackout" = "Vaihda ulkoisten pimennystä";

@@ -30,6 +30,9 @@
 "External Displays" = "Зовнішні дисплеї";
 "Profiles" = "Профілі";
 "App" = "Додаток";
+"Mode" = "Режим";
+"Simple" = "Простий";
+"Advanced" = "Розширений";
 
 /* Menu Bar Actions */
 "Toggle External Blackout" = "Перемкнути зовнішнє затемнення";

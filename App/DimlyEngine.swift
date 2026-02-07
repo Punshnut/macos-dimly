@@ -58,7 +58,9 @@ final class DimlyEngine {
             object: nil,
             queue: .main
         ) { [weak self] _ in
-            self?.blackoutManager.replayStartupFadeIfNeeded()
+            Task { @MainActor in
+                self?.blackoutManager.replayStartupFadeIfNeeded()
+            }
         }
     }
 

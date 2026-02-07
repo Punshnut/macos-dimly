@@ -30,6 +30,9 @@
 "External Displays" = "Εξωτερικές οθόνες";
 "Profiles" = "Προφίλ";
 "App" = "Εφαρμογή";
+"Mode" = "Λειτουργία";
+"Simple" = "Απλό";
+"Advanced" = "Προηγμένο";
 
 /* Menu Bar Actions */
 "Toggle External Blackout" = "Εναλλαγή blackout εξωτερικών";

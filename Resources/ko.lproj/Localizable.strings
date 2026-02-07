@@ -30,6 +30,9 @@
 "External Displays" = "외부 디스플레이";
 "Profiles" = "프로필";
 "App" = "앱";
+"Mode" = "모드";
+"Simple" = "간단함";
+"Advanced" = "고급";
 
 /* Menu Bar Actions */
 "Toggle External Blackout" = "외부 블랙아웃 전환";

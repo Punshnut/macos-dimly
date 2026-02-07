@@ -20,18 +20,29 @@ struct MenuBarContentView: View {
     let updaterController: UpdaterController
     let presentation: Presentation
     @State private var modifierClickMonitor: Any?
+    @State private var isSimpleMode = false
+    @Namespace private var modeSwitchNamespace
     @Environment(\.colorScheme) private var colorScheme
 
     /// Primary menu bar layout rendered inside the status item window.
     var body: some View {
         VStack(alignment: .leading, spacing: 12) {
-            headerCard
-            quickActionsSection
-            if !externalDisplays.isEmpty {
-                externalDisplaysSection
+            modeSwitchRow
+            if isSimpleMode {
+                quickActionsSection(includeShowNumbers: false)
+                if !externalDisplays.isEmpty {
+                    externalDisplaysSimpleSection
+                }
+                appControlsSimpleSection
+            } else {
+                headerCard
+                quickActionsSection(includeShowNumbers: true)
+                if !externalDisplays.isEmpty {
+                    externalDisplaysSection
+                }
+                profilesSection
+                appControlsSection
             }
-            profilesSection
-            appControlsSection
         }
         .padding(12)
         .frame(minWidth: 300)
@@ -111,6 +122,50 @@ struct MenuBarContentView: View {
         }
     }
 
+    /// Top-level switch between simple and advanced layouts.
+    private var modeSwitchRow: some View {
+        HStack(spacing: 10) {
+            Text(String(localized: "Mode"))
+                .font(.caption.weight(.semibold))
+                .foregroundStyle(.secondary)
+            Spacer()
+            HStack(spacing: 6) {
+                modeSwitchButton(title: String(localized: "Simple"), isActive: isSimpleMode) {
+                    withAnimation(.spring(response: 0.25, dampingFraction: 0.85)) {
+                        isSimpleMode = true
+                    }
+                }
+                modeSwitchButton(title: String(localized: "Advanced"), isActive: !isSimpleMode) {
+                    withAnimation(.spring(response: 0.25, dampingFraction: 0.85)) {
+                        isSimpleMode = false
+                    }
+                }
+            }
+            .padding(4)
+            .background(
+                Capsule()
+                    .fill(Color.secondary.opacity(0.12))
+            )
+        }
+    }
+
+    private func modeSwitchButton(title: String, isActive: Bool, action: @escaping () -> Void) -> some View {
+        Button(action: action) {
+            Text(title)
+                .font(.caption.weight(.semibold))
+                .foregroundStyle(isActive ? .primary : .secondary)
+                .padding(.horizontal, 10)
+                .padding(.vertical, 4)
+                .background(alignment: .center) {
+                    if isActive {
+                        Capsule()
+                            .fill(Color.accentColor.opacity(0.25))
+                            .matchedGeometryEffect(id: "modeSwitch", in: modeSwitchNamespace)
+                    }
+                }
+        }
+        .buttonStyle(.plain)
+    }
 
     /// External displays only, as seen by the display manager.
     private var externalDisplays: [DisplayInfo] {
@@ -219,7 +274,7 @@ struct MenuBarContentView: View {
     }
 
     /// Prominent actions for global blackout/sleep/wake.
-    private var quickActionsSection: some View {
+    private func quickActionsSection(includeShowNumbers: Bool) -> some View {
         VStack(alignment: .leading, spacing: 8) {
             sectionHeader(String(localized: "Quick Actions"))
             Button {
@@ -243,13 +298,15 @@ struct MenuBarContentView: View {
             .controlSize(.regular)
             .tint(.red)
 
-            Toggle(isOn: Binding(
-                get: { settingsStore.settings.showDisplayNumbers },
-                set: { newValue in settingsStore.update { $0.showDisplayNumbers = newValue } }
-            )) {
-                Label(String(localized: "Show Display Numbers"), systemImage: "number.circle")
+            if includeShowNumbers {
+                Toggle(isOn: Binding(
+                    get: { settingsStore.settings.showDisplayNumbers },
+                    set: { newValue in settingsStore.update { $0.showDisplayNumbers = newValue } }
+                )) {
+                    Label(String(localized: "Show Display Numbers"), systemImage: "number.circle")
+                }
+                .toggleStyle(.switch)
             }
-            .toggleStyle(.switch)
         }
     }
 
@@ -305,6 +362,17 @@ struct MenuBarContentView: View {
         .animation(.spring(response: 0.25, dampingFraction: 0.82), value: orderedExternalIDs())
     }
 
+    /// Simplified per-display list for simple mode.
+    private var externalDisplaysSimpleSection: some View {
+        VStack(alignment: .leading, spacing: 8) {
+            sectionHeader(String(localized: "External Displays"))
+            ForEach(orderedExternalDisplays) { display in
+                displayRowSimple(display)
+            }
+        }
+        .animation(.spring(response: 0.25, dampingFraction: 0.82), value: orderedExternalIDs())
+    }
+
     /// Renders a single display row with actions and status.
     private func displayRow(_ display: DisplayInfo) -> some View {
         let isBlackoutActive = blackoutManager.activeDisplayIDs.contains(display.stableIdentity)
@@ -313,10 +381,6 @@ struct MenuBarContentView: View {
         let status = displayStatus(for: display)
         let marker = displayOverlayMarker(for: display)
         let rowBackground: AnyShapeStyle = AnyShapeStyle(.thinMaterial)
-        let previewBackground: AnyShapeStyle = (colorScheme == .dark)
-            ? AnyShapeStyle(Color.black.opacity(0.55))
-            : AnyShapeStyle(.thinMaterial)
-        let previewStrokeOpacity: Double = (colorScheme == .dark) ? 0.08 : 0
         let rowShape = RoundedRectangle(cornerRadius: 10, style: .continuous)
         let content = HStack(alignment: .top, spacing: 10) {
             VStack(alignment: .leading, spacing: 2) {
@@ -384,6 +448,40 @@ struct MenuBarContentView: View {
             }
         }
         return content
+        .padding(8)
+        .background(rowBackground)
+        .clipShape(rowShape)
+        .contentShape(rowShape)
+    }
+
+    /// Simplified display row showing only alignment arrows and toggle button.
+    private func displayRowSimple(_ display: DisplayInfo) -> some View {
+        let ddcState = ddcManager.states[display.stableIdentity]?.status.localizedDescription ?? String(localized: "Unknown")
+        let name = displayName(for: display)
+        let status = displayStatus(for: display)
+        let marker = displayOverlayMarker(for: display)
+        let rowBackground: AnyShapeStyle = AnyShapeStyle(.thinMaterial)
+        let rowShape = RoundedRectangle(cornerRadius: 10, style: .continuous)
+
+        return HStack(alignment: .top, spacing: 10) {
+            VStack(alignment: .leading, spacing: 2) {
+                Text(name)
+                    .font(.subheadline.weight(.semibold))
+                HStack(spacing: 6) {
+                    Text(String(format: String(localized: "DisplayRowStatusFormat"), display.resolution, ddcState, status))
+                        .font(.caption)
+                        .foregroundStyle(.secondary)
+                    Text(marker)
+                        .font(.caption2)
+                        .foregroundStyle(.tertiary)
+                }
+            }
+            Spacer()
+            HStack(spacing: 6) {
+                displayOrderButtons(for: display)
+                sleepWakeButton(for: display)
+            }
+        }
         .padding(8)
         .background(rowBackground)
         .clipShape(rowShape)
@@ -538,6 +636,43 @@ struct MenuBarContentView: View {
                 Label(String(localized: "Quit Dimly"), systemImage: "power")
             }
         }
+    }
+
+    /// Simplified app controls for simple mode.
+    private var appControlsSimpleSection: some View {
+        VStack(alignment: .leading, spacing: 8) {
+            sectionHeader(String(localized: "App"))
+            let columns = [
+                GridItem(.flexible(), spacing: 8),
+                GridItem(.flexible(), spacing: 8)
+            ]
+            LazyVGrid(columns: columns, alignment: .leading, spacing: 8) {
+                SettingsLink {
+                    Label(String(localized: "Settings..."), systemImage: "gearshape")
+                        .lineLimit(1)
+                        .minimumScaleFactor(0.85)
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                }
+                Button {
+                    updaterController.checkForUpdates(nil)
+                } label: {
+                    Label(String(localized: "Check for Updates..."), systemImage: "arrow.triangle.2.circlepath")
+                        .lineLimit(1)
+                        .minimumScaleFactor(0.85)
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                }
+            }
+
+            Divider()
+
+            Button(role: .destructive) {
+                NSApp.terminate(nil)
+            } label: {
+                Label(String(localized: "Quit Dimly"), systemImage: "power")
+            }
+        }
+        .buttonStyle(.bordered)
+        .controlSize(.small)
     }
 
     /// Standard section header styling used in the popover.

@@ -30,6 +30,9 @@
 "External Displays" = "Externa skärmar";
 "Profiles" = "Profiler";
 "App" = "App";
+"Mode" = "Läge";
+"Simple" = "Enkelt";
+"Advanced" = "Avancerat";
 
 /* Menu Bar Actions */
 "Toggle External Blackout" = "Växla extern blackout";

@@ -30,6 +30,9 @@
 "External Displays" = "Taispeántais sheachtracha";
 "Profiles" = "Próifílí";
 "App" = "Aip";
+"Mode" = "Mód";
+"Simple" = "Simplí";
+"Advanced" = "Casta";
 
 /* Menu Bar Actions */
 "Toggle External Blackout" = "Scoránaigh dorchadas seachtrach";

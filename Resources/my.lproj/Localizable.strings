@@ -30,6 +30,9 @@
 "External Displays" = "ပြင်ပပြသမှုများ";
 "Profiles" = "ပရိုဖိုင်များ";
 "App" = "အပ္ပ်";
+"Mode" = "မုဒ်";
+"Simple" = "ရိုးရှင်း";
+"Advanced" = "အဆင့်မြင့်";
 
 /* Menu Bar Actions */
 "Toggle External Blackout" = "ပြင်ပအမည်းဖုံး ပြောင်းရန်";

@@ -30,6 +30,9 @@
 "External Displays" = "Layar eksternal";
 "Profiles" = "Profil";
 "App" = "Aplikasi";
+"Mode" = "Mode";
+"Simple" = "Sederhana";
+"Advanced" = "Lanjutan";
 
 /* Menu Bar Actions */
 "Toggle External Blackout" = "Ubah blackout eksternal";

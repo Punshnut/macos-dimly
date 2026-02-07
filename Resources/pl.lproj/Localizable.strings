@@ -30,6 +30,9 @@
 "External Displays" = "Wyświetlacze zewnętrzne";
 "Profiles" = "Profile";
 "App" = "Aplikacja";
+"Mode" = "Tryb";
+"Simple" = "Prosty";
+"Advanced" = "Zaawansowany";
 
 /* Menu Bar Actions */
 "Toggle External Blackout" = "Przełącz blackout zewnętrzny";

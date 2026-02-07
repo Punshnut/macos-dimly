@@ -30,6 +30,9 @@
 "External Displays" = "வெளிப்புற காட்சிகள்";
 "Profiles" = "சுயவிவரங்கள்";
 "App" = "பயன்பாடு";
+"Mode" = "முறை";
+"Simple" = "எளியது";
+"Advanced" = "மேம்பட்ட";
 
 /* Menu Bar Actions */
 "Toggle External Blackout" = "வெளிப்புற கருமையை மாற்று";

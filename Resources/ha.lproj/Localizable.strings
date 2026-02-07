@@ -30,6 +30,9 @@
 "External Displays" = "Allon waje";
 "Profiles" = "Fayilolin bayanai";
 "App" = "App";
+"Mode" = "Yanayi";
+"Simple" = "Sauƙi";
+"Advanced" = "Na ci gaba";
 
 /* Menu Bar Actions */
 "Toggle External Blackout" = "Canja damarar duhun allon waje";

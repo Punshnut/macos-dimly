@@ -30,6 +30,9 @@
 "External Displays" = "شاشات خارجية";
 "Profiles" = "ملفات التعريف";
 "App" = "التطبيق";
+"Mode" = "الوضع";
+"Simple" = "بسيط";
+"Advanced" = "متقدم";
 
 /* Menu Bar Actions */
 "Toggle External Blackout" = "تبديل تعتيم الشاشات الخارجية";
