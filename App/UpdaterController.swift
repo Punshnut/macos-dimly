@@ -91,7 +91,7 @@ final class UpdaterController: NSObject, SPUStandardUserDriverDelegate, SPUUpdat
 
             let response = alert.runModal()
             if response == .alertFirstButtonReturn,
-               let url = URL(string: "https://github.com/Punshnut/dimly/releases/latest") {
+               let url = URL(string: "https://github.com/Punshnut/macos-dimly/releases/latest") {
                 NSWorkspace.shared.open(url)
             }
         }

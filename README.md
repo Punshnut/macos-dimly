@@ -10,7 +10,7 @@ Dimly is the stealthy menu‑bar switch for external displays. One click (or a h
 </p>
 
 <p align="center">
-    <a href="https://github.com/Punshnut/dimly/releases/latest">
+    <a href="https://github.com/Punshnut/macos-dimly/releases/latest">
     <img src="https://img.shields.io/badge/Download-1.1-blueviolet?style=for-the-badge" alt="Download 1.1">
   </a>
 </p>
@@ -102,7 +102,7 @@ Dimly is the stealthy menu‑bar switch for external displays. One click (or a h
 
 ## Get Dimly
 
-- <a href="https://github.com/Punshnut/dimly/releases/latest">Download the latest release</a> and run it from `/Applications`.
+- <a href="https://github.com/Punshnut/macos-dimly/releases/latest">Download the latest release</a> and run it from `/Applications`.
 - To auto-start, enable “Launch at Login” in Settings.
 
 Supports Intel and Apple Silicon Macs. Requires macOS 14+
@@ -120,4 +120,4 @@ Made with ❤️
 
 ## Star History
 
-[![Star History Chart](https://api.star-history.com/svg?repos=Punshnut/dimly&type=date&legend=top-left)](https://www.star-history.com/#Punshnut/dimly&type=date&legend=top-left)
+[![Star History Chart](https://api.star-history.com/svg?repos=Punshnut/macos-dimly&type=date&legend=top-left)](https://www.star-history.com/#Punshnut/macos-dimly&type=date&legend=top-left)

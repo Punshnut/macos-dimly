@@ -586,10 +586,10 @@ struct SettingsRootView: View {
 
                 SettingsCard(title: String(localized: "About"), subtitle: nil) {
                     HStack(spacing: 12) {
-                        Link(destination: URL(string: "https://github.com/Punshnut/dimly")!) {
+                        Link(destination: URL(string: "https://github.com/Punshnut/macos-dimly")!) {
                             Label(String(localized: "GitHub Repo"), systemImage: "link")
                         }
-                        Link(destination: URL(string: "https://github.com/Punshnut/dimly/issues/new")!) {
+                        Link(destination: URL(string: "https://github.com/Punshnut/macos-dimly/issues/new")!) {
                             Label(String(localized: "Report an Issue"), systemImage: "exclamationmark.bubble")
                         }
                         Link(destination: URL(string: "https://ko-fi.com/janfeuerbacher")!) {

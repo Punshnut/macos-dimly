@@ -84,7 +84,7 @@
 	<key>SUEnableAutomaticChecks</key>
 	<true/>
 	<key>SUFeedURL</key>
-	<string>https://raw.githubusercontent.com/Punshnut/dimly/dev/appcast.xml</string>
+	<string>https://raw.githubusercontent.com/Punshnut/macos-dimly/dev/appcast.xml</string>
 	<key>SUPublicEDKey</key>
 	<string>0cLQL6f2MSv7lqETBkHf8VuLfrCH/RaSeU0GVKvVfBw=</string>
 </dict>
