@@ -35,6 +35,11 @@ final class BlackoutManager: ObservableObject {
 
     // MARK: - Public API
 
+    /// Returns true when any blackout or transition overlay is visible.
+    var hasAnyOverlays: Bool {
+        !overlays.isEmpty || !transitionOverlays.isEmpty
+    }
+
     /// Toggles blackout for a single display.
     func toggle(display: DisplayInfo, fadeOut: Bool, fadeIn: Bool) {
         if activeDisplayIDs.contains(display.stableIdentity) {
@@ -134,6 +139,31 @@ final class BlackoutManager: ObservableObject {
         activeDisplayIDs.removeAll()
     }
 
+    /// Fades out all overlays before quitting, then closes them.
+    func fadeOutAllAndClose(animated: Bool, completion: @escaping () -> Void) {
+        let windows = Array(overlays.values) + Array(transitionOverlays.values)
+        guard !windows.isEmpty else {
+            completion()
+            return
+        }
+        overlays.removeAll()
+        transitionOverlays.removeAll()
+        activeDisplayIDs.removeAll()
+        var remaining = windows.count
+        let finish: () -> Void = {
+            remaining -= 1
+            if remaining == 0 {
+                completion()
+            }
+        }
+        windows.forEach { window in
+            window.hide(animated: animated) {
+                window.close()
+                finish()
+            }
+        }
+    }
+
     // MARK: - Private helpers
 
     /// Reconciles overlays with the current display inventory.
@@ -163,7 +193,8 @@ final class BlackoutManager: ObservableObject {
         // Restore blackout for any newly present display that was persisted.
         let persisted = persistedIdentities()
         let animateRestore = !hasPerformedStartupRestore
-        let deferShow = animateRestore && startupRestoreAnimated
+        let shouldDeferStartupShow = startupRestoreAnimated && !didReplayStartupFade
+        let deferShow = animateRestore ? startupRestoreAnimated : shouldDeferStartupShow
         for display in displays where persisted.contains(display.stableIdentity) && !activeDisplayIDs.contains(display.stableIdentity) {
             blackout(display, animated: animateRestore ? startupRestoreAnimated : false, delay: 0, deferShow: deferShow)
         }
@@ -305,8 +336,7 @@ final class BlackoutManager: ObservableObject {
 /// Simple borderless black window pinned to a display.
 final class BlackoutWindow: NSWindow {
     private enum Animation {
-        static let overlayAlpha: Float = 0.35
-        static let totalDuration: TimeInterval = 0.55
+        static let duration: TimeInterval = 0.45
     }
 
     /// Plain view that paints a black background.
@@ -334,97 +364,57 @@ final class BlackoutWindow: NSWindow {
         isReleasedWhenClosed = false
         isOpaque = false
         backgroundColor = .clear
+        alphaValue = 0
         hasShadow = false
         ignoresMouseEvents = false // blocks clicks; panic hotkey still works
         collectionBehavior = [.canJoinAllSpaces, .fullScreenAuxiliary, .stationary]
         blackoutView.frame = screen.frame
         blackoutView.wantsLayer = true
-        blackoutView.layer?.opacity = 0
+        blackoutView.layer?.opacity = 1
         contentView = blackoutView
         setFrame(screen.frame, display: true)
     }
 
     /// Shows the overlay with an optional fade animation.
     func show(animated: Bool, completion: (() -> Void)? = nil) {
-        orderFrontRegardless()
         animationToken += 1
         let token = animationToken
-        guard let layer = blackoutView.layer else {
-            completion?()
-            return
-        }
-        layer.removeAllAnimations()
         guard animated else {
-            layer.opacity = 1
+            alphaValue = 1
+            orderFrontRegardless()
             completion?()
             return
         }
-        let animation = CAKeyframeAnimation(keyPath: "opacity")
-        animation.values = [
-            NSNumber(value: 0.0),
-            NSNumber(value: Double(Animation.overlayAlpha)),
-            NSNumber(value: 1.0)
-        ]
-        animation.keyTimes = [
-            NSNumber(value: 0.0),
-            NSNumber(value: 0.55),
-            NSNumber(value: 1.0)
-        ]
-        animation.duration = Animation.totalDuration
-        animation.timingFunctions = [
-            CAMediaTimingFunction(name: .easeInEaseOut),
-            CAMediaTimingFunction(name: .easeInEaseOut)
-        ]
-        layer.opacity = 1
-        CATransaction.begin()
-        CATransaction.setCompletionBlock { [weak self] in
+        orderFrontRegardless()
+        alphaValue = 0
+        NSAnimationContext.runAnimationGroup { context in
+            context.duration = Animation.duration
+            context.timingFunction = CAMediaTimingFunction(name: .easeInEaseOut)
+            animator().alphaValue = 1
+        } completionHandler: { [weak self] in
             guard let self, self.animationToken == token else { return }
             completion?()
         }
-        layer.add(animation, forKey: "opacityFadeIn")
-        CATransaction.commit()
     }
 
     /// Hides the overlay with an optional fade animation.
     func hide(animated: Bool, completion: (() -> Void)? = nil) {
         animationToken += 1
         let token = animationToken
-        guard let layer = blackoutView.layer else {
-            orderOut(nil)
-            completion?()
-            return
-        }
-        layer.removeAllAnimations()
         guard animated else {
-            layer.opacity = 0
+            alphaValue = 0
             orderOut(nil)
             completion?()
             return
         }
-        let animation = CAKeyframeAnimation(keyPath: "opacity")
-        animation.values = [
-            NSNumber(value: 1.0),
-            NSNumber(value: Double(Animation.overlayAlpha)),
-            NSNumber(value: 0.0)
-        ]
-        animation.keyTimes = [
-            NSNumber(value: 0.0),
-            NSNumber(value: 0.45),
-            NSNumber(value: 1.0)
-        ]
-        animation.duration = Animation.totalDuration
-        animation.timingFunctions = [
-            CAMediaTimingFunction(name: .easeInEaseOut),
-            CAMediaTimingFunction(name: .easeInEaseOut)
-        ]
-        layer.opacity = 0
-        CATransaction.begin()
-        CATransaction.setCompletionBlock { [weak self] in
+        NSAnimationContext.runAnimationGroup { context in
+            context.duration = Animation.duration
+            context.timingFunction = CAMediaTimingFunction(name: .easeInEaseOut)
+            animator().alphaValue = 0
+        } completionHandler: { [weak self] in
             guard let self, self.animationToken == token else { return }
             self.orderOut(nil)
             completion?()
         }
-        layer.add(animation, forKey: "opacityFadeOut")
-        CATransaction.commit()
     }
 }

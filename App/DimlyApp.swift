@@ -106,6 +106,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
     private weak var settingsStore: AppSettingsStore?
     private weak var displayManager: DisplayManager?
     private weak var settingsEngine: DimlyEngine?
+    private var isHandlingTermination = false
 
     /// Establishes the main menu and shows the intro if needed.
     func applicationDidFinishLaunching(_ notification: Notification) {
@@ -120,6 +121,26 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
                 self?.configureMainMenu()
             }
         }
+    }
+
+    func applicationShouldTerminate(_ sender: NSApplication) -> NSApplication.TerminateReply {
+        guard let settingsEngine else {
+            return .terminateNow
+        }
+        if isHandlingTermination {
+            return .terminateLater
+        }
+        let fadeInEnabled = settingsStore?.settings.fadeInAnimationEnabled ?? true
+        guard settingsEngine.blackoutManager.hasAnyOverlays else {
+            return .terminateNow
+        }
+        isHandlingTermination = true
+        settingsEngine.prepareForExit(animated: fadeInEnabled) {
+            DispatchQueue.main.async {
+                sender.reply(toApplicationShouldTerminate: true)
+            }
+        }
+        return .terminateLater
     }
 
     func configureLauncher(

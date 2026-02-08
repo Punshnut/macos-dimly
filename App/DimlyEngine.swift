@@ -203,6 +203,13 @@ final class DimlyEngine {
         blackoutManager.cleanupBeforeExit()
     }
 
+    /// Prepares for termination, fading out active overlays when requested.
+    func prepareForExit(animated: Bool, completion: @escaping () -> Void) {
+        DiagnosticsLogger.shared.log("Prepare for exit", category: "engine")
+        hotkeyManagers.values.forEach { $0.deactivate() }
+        blackoutManager.fadeOutAllAndClose(animated: animated, completion: completion)
+    }
+
     // MARK: - Private
 
     /// Re-applies settings-dependent behaviors (currently hotkeys).

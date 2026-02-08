@@ -225,7 +225,7 @@ struct SettingsWindowToolbarHider: ViewModifier {
         content
             .toolbar {
                 ToolbarItem(id: "settings.toolbar.placeholder", placement: .automatic) {
-                    Color.clear.frame(width: 1, height: 1)
+                    Color.clear.frame(width: 0, height: 0)
                 }
             }
             .background(SettingsToolbarCleaner())
@@ -302,7 +302,9 @@ private struct SettingsToolbarCleaner: NSViewRepresentable {
         ) -> NSToolbarItem? {
             guard itemIdentifier == placeholderID else { return nil }
             let item = NSToolbarItem(itemIdentifier: itemIdentifier)
-            let view = NSView(frame: NSRect(x: 0, y: 0, width: 1, height: 1))
+            let view = NSView(frame: .zero)
+            item.minSize = .zero
+            item.maxSize = .zero
             item.view = view
             return item
         }
