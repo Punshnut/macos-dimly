@@ -14,6 +14,7 @@ struct DimlySettings: Codable, Equatable {
     var fadeInAnimationEnabled: Bool
     var overlayOnlyDisplayIDs: [String]
     var externalDisplayOrder: [String]
+    var menuBarSimpleMode: Bool
 
     private enum CodingKeys: String, CodingKey {
         case launchAtLogin
@@ -27,6 +28,7 @@ struct DimlySettings: Codable, Equatable {
         case fadeInAnimationEnabled
         case overlayOnlyDisplayIDs
         case externalDisplayOrder
+        case menuBarSimpleMode
     }
 
     /// Default settings used on first launch or when decoding fails.
@@ -46,7 +48,8 @@ struct DimlySettings: Codable, Equatable {
         fadeOutAnimationEnabled: true,
         fadeInAnimationEnabled: true,
         overlayOnlyDisplayIDs: [],
-        externalDisplayOrder: []
+        externalDisplayOrder: [],
+        menuBarSimpleMode: false
     )
 
     /// Memberwise initializer used by the default factory and decoder.
@@ -60,7 +63,8 @@ struct DimlySettings: Codable, Equatable {
         fadeOutAnimationEnabled: Bool,
         fadeInAnimationEnabled: Bool,
         overlayOnlyDisplayIDs: [String],
-        externalDisplayOrder: [String]
+        externalDisplayOrder: [String],
+        menuBarSimpleMode: Bool
     ) {
         self.launchAtLogin = launchAtLogin
         self.showMenuBarIcon = showMenuBarIcon
@@ -72,6 +76,7 @@ struct DimlySettings: Codable, Equatable {
         self.fadeInAnimationEnabled = fadeInAnimationEnabled
         self.overlayOnlyDisplayIDs = overlayOnlyDisplayIDs
         self.externalDisplayOrder = externalDisplayOrder
+        self.menuBarSimpleMode = menuBarSimpleMode
     }
 
     /// Custom decoder that also handles legacy single-hotkey migration.
@@ -88,6 +93,7 @@ struct DimlySettings: Codable, Equatable {
         let fadeInAnimationEnabled = try container.decodeIfPresent(Bool.self, forKey: .fadeInAnimationEnabled) ?? DimlySettings.default.fadeInAnimationEnabled
         let overlayOnlyDisplayIDs = try container.decodeIfPresent([String].self, forKey: .overlayOnlyDisplayIDs) ?? DimlySettings.default.overlayOnlyDisplayIDs
         let externalDisplayOrder = try container.decodeIfPresent([String].self, forKey: .externalDisplayOrder) ?? DimlySettings.default.externalDisplayOrder
+        let menuBarSimpleMode = try container.decodeIfPresent(Bool.self, forKey: .menuBarSimpleMode) ?? DimlySettings.default.menuBarSimpleMode
         var resolvedBindings: [HotkeyBinding]
         if let hotkeyBindings, !hotkeyBindings.isEmpty {
             resolvedBindings = hotkeyBindings
@@ -118,7 +124,8 @@ struct DimlySettings: Codable, Equatable {
             fadeOutAnimationEnabled: fadeOutAnimationEnabled,
             fadeInAnimationEnabled: fadeInAnimationEnabled,
             overlayOnlyDisplayIDs: overlayOnlyDisplayIDs,
-            externalDisplayOrder: externalDisplayOrder
+            externalDisplayOrder: externalDisplayOrder,
+            menuBarSimpleMode: menuBarSimpleMode
         )
     }
 
@@ -135,6 +142,7 @@ struct DimlySettings: Codable, Equatable {
         try container.encode(fadeInAnimationEnabled, forKey: .fadeInAnimationEnabled)
         try container.encode(overlayOnlyDisplayIDs, forKey: .overlayOnlyDisplayIDs)
         try container.encode(externalDisplayOrder, forKey: .externalDisplayOrder)
+        try container.encode(menuBarSimpleMode, forKey: .menuBarSimpleMode)
     }
 }
 

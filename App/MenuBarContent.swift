@@ -20,7 +20,6 @@ struct MenuBarContentView: View {
     let updaterController: UpdaterController
     let presentation: Presentation
     @State private var modifierClickMonitor: Any?
-    @State private var isSimpleMode = false
     @Namespace private var modeSwitchNamespace
     @Environment(\.colorScheme) private var colorScheme
 
@@ -131,14 +130,10 @@ struct MenuBarContentView: View {
             Spacer()
             HStack(spacing: 6) {
                 modeSwitchButton(title: String(localized: "Simple"), isActive: isSimpleMode) {
-                    withAnimation(.spring(response: 0.25, dampingFraction: 0.85)) {
-                        isSimpleMode = true
-                    }
+                    setSimpleMode(true)
                 }
                 modeSwitchButton(title: String(localized: "Advanced"), isActive: !isSimpleMode) {
-                    withAnimation(.spring(response: 0.25, dampingFraction: 0.85)) {
-                        isSimpleMode = false
-                    }
+                    setSimpleMode(false)
                 }
             }
             .padding(4)
@@ -165,6 +160,18 @@ struct MenuBarContentView: View {
                 }
         }
         .buttonStyle(.plain)
+    }
+
+    private var isSimpleMode: Bool {
+        settingsStore.settings.menuBarSimpleMode
+    }
+
+    private func setSimpleMode(_ enabled: Bool) {
+        withAnimation(.spring(response: 0.25, dampingFraction: 0.85)) {
+            settingsStore.update { settings in
+                settings.menuBarSimpleMode = enabled
+            }
+        }
     }
 
     /// External displays only, as seen by the display manager.

@@ -9,15 +9,15 @@
     <language>en</language>
 
     <item>
-      <title>Dimly 1.0</title>
-      <pubDate>Wed, 28 Jan 2026 10:53:46 +0100</pubDate>
+      <title>Dimly 1.1</title>
+      <pubDate>Sun, 08 Feb 2026 10:31:24 +0100</pubDate>
       <enclosure
     url="https://github.com/Punshnut/dimly/releases/latest/download/Dimly.dmg"
-    sparkle:shortVersionString="1.0"
-    sparkle:version="1.0"
-    length="3826770"
+    sparkle:shortVersionString="1.1"
+    sparkle:version="1.1"
+    length="4040171"
     type="application/octet-stream"
-    sparkle:edSignature="tRN0a9he6l7SlbACzQEK03Hdov7fDBj0RM1jQBb7dzMjV844QFEvelFeUJUgSB9FfqfeP1WcB+oXE7pK6m+qCw==" />
+    sparkle:edSignature="YaJ9vhRp6wThAVptas89hfyfuhJeopXellHH6vZU/qKYiTxmIzWtynoqUSZm+MAdob9DgYcQHkfEIIeDcPJ6Dw==" />
       <sparkle:minimumSystemVersion>13.0</sparkle:minimumSystemVersion>
     </item>
   </channel>

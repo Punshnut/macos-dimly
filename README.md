@@ -11,7 +11,7 @@ Dimly is the stealthy menu‑bar switch for external displays. One click (or a h
 
 <p align="center">
     <a href="https://github.com/Punshnut/dimly/releases/latest">
-    <img src="https://img.shields.io/badge/Download-1.0-blueviolet?style=for-the-badge" alt="Download 1.0">
+    <img src="https://img.shields.io/badge/Download-1.1-blueviolet?style=for-the-badge" alt="Download 1.1">
   </a>
 </p>
 
@@ -46,6 +46,9 @@ Dimly is the stealthy menu‑bar switch for external displays. One click (or a h
 - **State that sticks** - Remembers active blackouts and re-applies them after reconnects.
 - **Profiles** - Save snapshots and auto-apply when external monitors appear.
 - **Stealth mode** - Hide menu bar + Dock icons; Dimly keeps working for hotkeys.
+- **Simple ↔︎ advanced view** - Switch between a compact control surface and the full toolkit (and it sticks).
+- **Per-display override** - Force blackout-only behavior even on DDC-capable monitors.
+- **Animation control** - Optional fade in/out on sleep, wake, and restore.
 - **Universal + updates** - Intel/Apple Silicon builds with Sparkle updates and a GitHub fallback.
 
 ## What it actually does (from the code)
@@ -60,6 +63,7 @@ Dimly is the stealthy menu‑bar switch for external displays. One click (or a h
 - **Menu bar actions** - quick actions, per-display menus, rename display, copy display IDs.
 - **Suspend All indicator** - button fills when all externals are suspended and shows a colored border for partial suspension.
 - **Display ordering** - drag to reorder external displays in the menu list.
+- **Targeted hotkeys** - multiple bindings with per-display targets (not just “all externals”).
 - **Diagnostics** - copy a display report and open a local diagnostics log.
 - **Login + stealth** - launch at login, hide Dock icon, keep running when menu icon is hidden.
 - **Updates + fallback** - Sparkle auto-updates with a GitHub download prompt on verify errors.

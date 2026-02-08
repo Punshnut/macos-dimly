@@ -303,8 +303,6 @@ private struct SettingsToolbarCleaner: NSViewRepresentable {
             guard itemIdentifier == placeholderID else { return nil }
             let item = NSToolbarItem(itemIdentifier: itemIdentifier)
             let view = NSView(frame: .zero)
-            item.minSize = .zero
-            item.maxSize = .zero
             item.view = view
             return item
         }

@@ -350,6 +350,7 @@ final class BlackoutWindow: NSWindow {
 
     private let blackoutView = BlackoutView()
     private var animationToken: Int = 0
+    private var pendingCompletions: [Int: () -> Void] = [:]
 
     /// Creates a borderless overlay window for the given screen.
     init(screen: NSScreen) {
@@ -385,6 +386,7 @@ final class BlackoutWindow: NSWindow {
             completion?()
             return
         }
+        enqueueCompletion(completion, token: token)
         orderFrontRegardless()
         alphaValue = 0
         NSAnimationContext.runAnimationGroup { context in
@@ -392,8 +394,9 @@ final class BlackoutWindow: NSWindow {
             context.timingFunction = CAMediaTimingFunction(name: .easeInEaseOut)
             animator().alphaValue = 1
         } completionHandler: { [weak self] in
-            guard let self, self.animationToken == token else { return }
-            completion?()
+            Task { @MainActor in
+                self?.completeAnimation(token: token, shouldOrderOut: false)
+            }
         }
     }
 
@@ -407,14 +410,32 @@ final class BlackoutWindow: NSWindow {
             completion?()
             return
         }
+        enqueueCompletion(completion, token: token)
         NSAnimationContext.runAnimationGroup { context in
             context.duration = Animation.duration
             context.timingFunction = CAMediaTimingFunction(name: .easeInEaseOut)
             animator().alphaValue = 0
         } completionHandler: { [weak self] in
-            guard let self, self.animationToken == token else { return }
-            self.orderOut(nil)
-            completion?()
+            Task { @MainActor in
+                self?.completeAnimation(token: token, shouldOrderOut: true)
+            }
         }
+    }
+
+    private func enqueueCompletion(_ completion: (() -> Void)?, token: Int) {
+        guard let completion else { return }
+        pendingCompletions[token] = completion
+    }
+
+    @MainActor private func completeAnimation(token: Int, shouldOrderOut: Bool) {
+        guard animationToken == token else {
+            pendingCompletions.removeValue(forKey: token)
+            return
+        }
+        if shouldOrderOut {
+            self.orderOut(nil)
+        }
+        let completion = pendingCompletions.removeValue(forKey: token)
+        completion?()
     }
 }
