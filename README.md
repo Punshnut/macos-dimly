@@ -3,7 +3,7 @@
 Dimly is the stealthy menu‑bar switch for external displays. One click (or a hotkey) drops glare instantly - blackout, sleep, or wake, per display or all at once. Keep the icon visible, or hide both the menu bar and Dock icons and let Dimly run quietly in the background.
 
 <p align="center">
-  <img src="https://img.shields.io/badge/platform-macOS-blue" alt="Platform macOS">
+  <img src="https://img.shields.io/badge/macOS-native-000000?style=flat&logo=apple" alt="macOS native">
   <img src="https://img.shields.io/badge/Stage-Beta-yellow" alt="Stage Beta">
   <img src="https://img.shields.io/badge/License-MIT-green.svg" alt="License: MIT">
   <img src="https://img.shields.io/badge/Swift-6.2.1-orange" alt="Swift 6.2.1">
