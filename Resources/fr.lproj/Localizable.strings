@@ -60,6 +60,8 @@
 "About" = "À propos";
 
 /* Settings General */
+"Autostart" = "Démarrage automatique";
+"Start Dimly automatically when you log in." = "Lancer Dimly automatiquement à l'ouverture de session.";
 "Launch at login" = "Lancer à l'ouverture de session";
 "Show menu bar icon" = "Afficher l'icône dans la barre";
 "Show Menu Bar Icon" = "Afficher l'icône de barre";

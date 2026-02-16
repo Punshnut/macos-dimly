@@ -60,6 +60,8 @@
 "About" = "Nípa";
 
 /* Settings General */
+"Autostart" = "Ibẹrẹ laifọwọyi";
+"Start Dimly automatically when you log in." = "Bẹrẹ Dimly laifọwọyi nigbati o ba wọle.";
 "Launch at login" = "Bẹrẹ ní ìbáwọlé";
 "Show menu bar icon" = "Fi àmì pátákó àkójọ hàn";
 "Show Menu Bar Icon" = "Fi àmì pátákó àkójọ hàn";

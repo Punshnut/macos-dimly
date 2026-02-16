@@ -60,6 +60,8 @@
 "About" = "Over";
 
 /* Settings General */
+"Autostart" = "Automatisch starten";
+"Start Dimly automatically when you log in." = "Start Dimly automatisch wanneer je inlogt.";
 "Launch at login" = "Starten bij inloggen";
 "Show menu bar icon" = "Menubalkpictogram tonen";
 "Show Menu Bar Icon" = "Menubalkpictogram tonen";

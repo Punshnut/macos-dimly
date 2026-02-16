@@ -60,6 +60,8 @@
 "About" = "Hakkında";
 
 /* Settings General */
+"Autostart" = "Otomatik başlat";
+"Start Dimly automatically when you log in." = "Giriş yaptığınızda Dimly'yi otomatik başlatın.";
 "Launch at login" = "Girişte başlat";
 "Show menu bar icon" = "Menü çubuğu simgesini göster";
 "Show Menu Bar Icon" = "Menü çubuğu simgesini göster";

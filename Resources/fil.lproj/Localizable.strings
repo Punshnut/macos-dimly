@@ -60,6 +60,8 @@
 "About" = "Tungkol";
 
 /* Settings General */
+"Autostart" = "Awtomatikong pagsisimula";
+"Start Dimly automatically when you log in." = "Awtomatikong buksan ang Dimly kapag nag-login ka.";
 "Launch at login" = "Buksan sa pag-login";
 "Show menu bar icon" = "Ipakita ang icon sa menu bar";
 "Show Menu Bar Icon" = "Ipakita ang icon sa menu bar";

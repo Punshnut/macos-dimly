@@ -60,6 +60,8 @@
 "About" = "အကြောင်း";
 
 /* Settings General */
+"Autostart" = "အလိုအလျောက် စတင်";
+"Start Dimly automatically when you log in." = "သင်ဝင်ရောက်သည့်အခါ Dimly ကို အလိုအလျောက် စတင်ပါ။";
 "Launch at login" = "ဝင်ရောက်ချိန် ဖွင့်";
 "Show menu bar icon" = "မီနူးဘား အိုင်ကွန် ပြ";
 "Show Menu Bar Icon" = "မီနူးဘား အိုင်ကွန် ပြ";

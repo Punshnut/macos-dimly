@@ -60,6 +60,8 @@
 "About" = "Tietoja";
 
 /* Settings General */
+"Autostart" = "Automaattinen käynnistys";
+"Start Dimly automatically when you log in." = "Käynnistä Dimly automaattisesti kirjautumisen yhteydessä.";
 "Launch at login" = "Käynnistä kirjautuessa";
 "Show menu bar icon" = "Näytä valikkorivin kuvake";
 "Show Menu Bar Icon" = "Näytä valikkorivin kuvake";

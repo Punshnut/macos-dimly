@@ -60,6 +60,8 @@
 "About" = "Πληροφορίες";
 
 /* Settings General */
+"Autostart" = "Αυτόματη εκκίνηση";
+"Start Dimly automatically when you log in." = "Εκκίνηση του Dimly αυτόματα κατά τη σύνδεση.";
 "Launch at login" = "Έναρξη με τη σύνδεση";
 "Show menu bar icon" = "Εμφάνιση εικονιδίου στη γραμμή";
 "Show Menu Bar Icon" = "Εμφάνιση εικονιδίου στη γραμμή";

@@ -60,6 +60,8 @@
 "About" = "关于";
 
 /* Settings General */
+"Autostart" = "自动启动";
+"Start Dimly automatically when you log in." = "登录时自动启动 Dimly。";
 "Launch at login" = "登录时启动";
 "Show menu bar icon" = "显示菜单栏图标";
 "Show Menu Bar Icon" = "显示菜单栏图标";

@@ -60,6 +60,8 @@
 "About" = "متعلق";
 
 /* Settings General */
+"Autostart" = "خودکار آغاز";
+"Start Dimly automatically when you log in." = "لاگ اِن کرتے وقت Dimly خودکار طور پر شروع کریں۔";
 "Launch at login" = "لاگ اِن پر شروع کریں";
 "Show menu bar icon" = "مینو بار آئیکن دکھائیں";
 "Show Menu Bar Icon" = "مینو بار آئیکن دکھائیں";

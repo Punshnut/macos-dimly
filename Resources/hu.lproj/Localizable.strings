@@ -60,6 +60,8 @@
 "About" = "Névjegy";
 
 /* Settings General */
+"Autostart" = "Automatikus indítás";
+"Start Dimly automatically when you log in." = "Indítsa el a Dimlyt automatikusan bejelentkezéskor.";
 "Launch at login" = "Indítás bejelentkezéskor";
 "Show menu bar icon" = "Menüsáv ikon megjelenítése";
 "Show Menu Bar Icon" = "Menüsáv ikon megjelenítése";

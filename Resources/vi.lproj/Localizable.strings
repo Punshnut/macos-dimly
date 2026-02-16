@@ -60,6 +60,8 @@
 "About" = "Giới thiệu";
 
 /* Settings General */
+"Autostart" = "Khởi động tự động";
+"Start Dimly automatically when you log in." = "Tự động khởi động Dimly khi đăng nhập.";
 "Launch at login" = "Khởi động khi đăng nhập";
 "Show menu bar icon" = "Hiện biểu tượng trên thanh menu";
 "Show Menu Bar Icon" = "Hiện biểu tượng trên thanh menu";

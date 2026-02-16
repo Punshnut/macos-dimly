@@ -60,6 +60,8 @@
 "About" = "Tentang";
 
 /* Settings General */
+"Autostart" = "Mulai otomatis";
+"Start Dimly automatically when you log in." = "Mulai Dimly secara otomatis saat login.";
 "Launch at login" = "Jalankan saat login";
 "Show menu bar icon" = "Tampilkan ikon bilah menu";
 "Show Menu Bar Icon" = "Tampilkan ikon bilah menu";

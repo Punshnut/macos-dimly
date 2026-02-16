@@ -60,6 +60,8 @@
 "About" = "O aplikaci";
 
 /* Settings General */
+"Autostart" = "Automatické spuštění";
+"Start Dimly automatically when you log in." = "Spustit Dimly automaticky při přihlášení.";
 "Launch at login" = "Spustit při přihlášení";
 "Show menu bar icon" = "Zobrazit ikonu v liště";
 "Show Menu Bar Icon" = "Zobrazit ikonu v liště";

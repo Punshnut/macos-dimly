@@ -60,6 +60,8 @@
 "About" = "เกี่ยวกับ";
 
 /* Settings General */
+"Autostart" = "เริ่มอัตโนมัติ";
+"Start Dimly automatically when you log in." = "เปิด Dimly อัตโนมัติเมื่อเข้าสู่ระบบ";
 "Launch at login" = "เปิดเมื่อเข้าสู่ระบบ";
 "Show menu bar icon" = "แสดงไอคอนบนแถบเมนู";
 "Show Menu Bar Icon" = "แสดงไอคอนบนแถบเมนู";

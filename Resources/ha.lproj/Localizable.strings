@@ -60,6 +60,8 @@
 "About" = "Game da";
 
 /* Settings General */
+"Autostart" = "Farawa ta atomatik";
+"Start Dimly automatically when you log in." = "Fara Dimly ta atomatik idan ka shiga.";
 "Launch at login" = "Kaddamar lokacin shiga";
 "Show menu bar icon" = "Nuna gunkin sandar menu";
 "Show Menu Bar Icon" = "Nuna gunkin sandar menu";

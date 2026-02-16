@@ -60,6 +60,8 @@
 "About" = "Maidir";
 
 /* Settings General */
+"Autostart" = "Uath-thosú";
+"Start Dimly automatically when you log in." = "Tosaigh Dimly go huathoibríoch nuair a logálann tú isteach.";
 "Launch at login" = "Tosaigh ag logáil isteach";
 "Show menu bar icon" = "Taispeáin deilbhín sa bharra";
 "Show Menu Bar Icon" = "Taispeáin deilbhín sa bharra";

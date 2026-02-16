@@ -60,6 +60,8 @@
 "About" = "గురించి";
 
 /* Settings General */
+"Autostart" = "స్వయంచాలక ప్రారంభం";
+"Start Dimly automatically when you log in." = "మీరు లాగిన్ అయినప్పుడు Dimly స్వయంచాలకంగా ప్రారంభించండి.";
 "Launch at login" = "లాగిన్‌లో ప్రారంభించు";
 "Show menu bar icon" = "మెనూ బార్ ఐకాన్ చూపించు";
 "Show Menu Bar Icon" = "మెనూ బార్ ఐకాన్ చూపించు";

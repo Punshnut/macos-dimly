@@ -60,6 +60,8 @@
 "About" = "Kuhusu";
 
 /* Settings General */
+"Autostart" = "Anzisho la kiotomatiki";
+"Start Dimly automatically when you log in." = "Anzisha Dimly kiotomatiki unapoingia.";
 "Launch at login" = "Anzisha unapoingia";
 "Show menu bar icon" = "Onyesha ikoni kwenye mwambaa";
 "Show Menu Bar Icon" = "Onyesha ikoni kwenye mwambaa";

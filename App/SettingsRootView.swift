@@ -291,9 +291,9 @@ struct SettingsRootView: View {
             SettingsScrollView(title: String(localized: "General"), subtitle: nil) {
                 SettingsCard(title: String(localized: "General"), subtitle: nil) {
                     SettingsToggleRow(
-                        title: String(localized: "Launch at login"),
-                        subtitle: nil,
-                        systemImage: "power",
+                        title: String(localized: "Autostart"),
+                        subtitle: String(localized: "Start Dimly automatically when you log in."),
+                        systemImage: "power.circle",
                         isOn: Binding(
                             get: { settingsStore.settings.launchAtLogin },
                             set: { newValue in settingsStore.update { $0.launchAtLogin = newValue } }

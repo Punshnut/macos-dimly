@@ -60,6 +60,8 @@
 "About" = "Om";
 
 /* Settings General */
+"Autostart" = "Autostart";
+"Start Dimly automatically when you log in." = "Starta Dimly automatiskt när du loggar in.";
 "Launch at login" = "Starta vid inloggning";
 "Show menu bar icon" = "Visa ikon i menyraden";
 "Show Menu Bar Icon" = "Visa ikon i menyraden";

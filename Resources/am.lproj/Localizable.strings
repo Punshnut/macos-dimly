@@ -60,6 +60,8 @@
 "About" = "ስለ";
 
 /* Settings General */
+"Autostart" = "ራስ-ጀምር";
+"Start Dimly automatically when you log in." = "ወደ ስርዓት ሲገቡ Dimly በራስ-ሰር ይጀምር.";
 "Launch at login" = "በመግቢያ ላይ አስጀምር";
 "Show menu bar icon" = "የሜኑ አዶን አሳይ";
 "Show Menu Bar Icon" = "የሜኑ አዶን አሳይ";

@@ -60,6 +60,8 @@
 "About" = "情報";
 
 /* Settings General */
+"Autostart" = "自動起動";
+"Start Dimly automatically when you log in." = "ログイン時にDimlyを自動的に起動します。";
 "Launch at login" = "ログイン時に起動";
 "Show menu bar icon" = "メニューバーアイコンを表示";
 "Show Menu Bar Icon" = "メニューバーアイコンを表示";

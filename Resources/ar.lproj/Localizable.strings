@@ -60,6 +60,8 @@
 "About" = "حول";
 
 /* Settings General */
+"Autostart" = "التشغيل التلقائي";
+"Start Dimly automatically when you log in." = "ابدأ Dimly تلقائيًا عند تسجيل الدخول.";
 "Launch at login" = "التشغيل عند تسجيل الدخول";
 "Show menu bar icon" = "إظهار أيقونة شريط القوائم";
 "Show Menu Bar Icon" = "إظهار أيقونة شريط القوائم";
