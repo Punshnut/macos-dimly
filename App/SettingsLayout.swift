@@ -34,6 +34,7 @@ struct SettingsBackdrop: View {
 struct SettingsScrollView<Content: View>: View {
     let title: String
     let subtitle: String?
+    var contentMaxWidth: CGFloat? = nil
     @ViewBuilder let content: () -> Content
 
     var body: some View {
@@ -44,6 +45,8 @@ struct SettingsScrollView<Content: View>: View {
                     SettingsHeader(title: title, subtitle: subtitle)
                     content()
                 }
+                .frame(maxWidth: contentMaxWidth, alignment: .leading)
+                .frame(maxWidth: .infinity, alignment: .leading)
                 .padding(16)
                 .padding(.top, 4)
             }

@@ -2,6 +2,7 @@
 "Dimly" = "Dimly";
 "About Dimly" = "About Dimly";
 "Settings" = "Settings";
+"Dimly settings" = "Dimly settings";
 "Settings..." = "Settings...";
 "Check for Updates..." = "Check for Updates...";
 "Quit Dimly" = "Quit Dimly";
@@ -81,6 +82,26 @@
 "Show display numbers on screens" = "Show display numbers on screens";
 "No active displays detected." = "No active displays detected.";
 "Show introduction again" = "Show introduction again";
+"Settings backup" = "Settings backup";
+"Choose what to import or export." = "Choose what to import or export.";
+"General settings" = "General settings";
+"Monitor settings" = "Monitor settings";
+"BackupGeneralRowDetails" = "app behavior, hotkeys, and interface options";
+"BackupMonitorRowDetails" = "display names, ordering, and monitor-specific options";
+"Import selected settings" = "Import selected settings";
+"Export selected settings" = "Export selected settings";
+"ImportSelectedSettingsDetails" = "Load selected categories from a backup file.";
+"ExportSelectedSettingsDetails" = "Save selected categories to a backup file.";
+"Import" = "Import";
+"Export" = "Export";
+"Select at least one settings category." = "Select at least one settings category.";
+"Could not import settings backup" = "Could not import settings backup";
+"Could not export settings backup" = "Could not export settings backup";
+"Choose a Dimly backup file to import." = "Choose a Dimly backup file to import.";
+"This backup does not include general settings." = "This backup does not include general settings.";
+"This backup does not include monitor settings." = "This backup does not include monitor settings.";
+"Could not decode the selected backup file." = "Could not decode the selected backup file.";
+"Could not save the backup file." = "Could not save the backup file.";
 
 /* Settings Displays */
 "Internal" = "Internal";

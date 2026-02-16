@@ -233,3 +233,26 @@
 "BrightnessPercentFormat" = "%lld%%";
 "Settings" = "Impostazioni";
 "Reorder Display" = "Reorder Display";
+
+"BackupGeneralRowDetails" = "app behavior, hotkeys, and interface options";
+"BackupMonitorRowDetails" = "display names, ordering, and monitor-specific options";
+"Choose a Dimly backup file to import." = "Choose a Dimly backup file to import.";
+"Choose what to import or export." = "Choose what to import or export.";
+"Could not decode the selected backup file." = "Could not decode the selected backup file.";
+"Could not export settings backup" = "Could not export settings backup";
+"Could not import settings backup" = "Could not import settings backup";
+"Could not save the backup file." = "Could not save the backup file.";
+"Export" = "Export";
+"Export selected settings" = "Export selected settings";
+"ExportSelectedSettingsDetails" = "Save selected categories to a backup file.";
+"General settings" = "General settings";
+"Import" = "Import";
+"Import selected settings" = "Import selected settings";
+"ImportSelectedSettingsDetails" = "Load selected categories from a backup file.";
+"Monitor settings" = "Monitor settings";
+"Select at least one settings category." = "Select at least one settings category.";
+"Settings backup" = "Settings backup";
+"This backup does not include general settings." = "This backup does not include general settings.";
+"This backup does not include monitor settings." = "This backup does not include monitor settings.";
+
+"Dimly settings" = "Dimly settings";

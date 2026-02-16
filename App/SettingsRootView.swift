@@ -2,6 +2,7 @@
 // Sidebar-based SwiftUI surface for global preferences, shortcuts, profiles, and about info.
 import SwiftUI
 import AppKit
+import UniformTypeIdentifiers
 
 /// Settings window root with sidebar navigation.
 struct SettingsRootView: View {
@@ -319,6 +320,8 @@ struct SettingsRootView: View {
         let renameProfile: (DisplayProfile) -> Void
         let showIntroAgain: () -> Void
         let displayRow: (DisplayInfo) -> AnyView
+        @State private var includeGeneralSettings = true
+        @State private var includeMonitorSettings = true
 
         var body: some View {
             switch selection {
@@ -336,7 +339,7 @@ struct SettingsRootView: View {
         }
 
         private var generalDetail: some View {
-            SettingsScrollView(title: String(localized: "General"), subtitle: nil) {
+            SettingsScrollView(title: String(localized: "Dimly settings"), subtitle: nil, contentMaxWidth: 980) {
                 SettingsCard(title: String(localized: "General"), subtitle: nil) {
                     SettingsToggleRow(
                         title: String(localized: "Autostart"),
@@ -382,6 +385,46 @@ struct SettingsRootView: View {
                     }
                     .buttonStyle(.bordered)
                     .controlSize(.small)
+                }
+
+                SettingsCard(title: String(localized: "Settings backup"), subtitle: String(localized: "Choose what to import or export.")) {
+                    HStack(alignment: .top, spacing: 10) {
+                        backupSelectionTile(
+                            title: String(localized: "General settings"),
+                            details: String(localized: "BackupGeneralRowDetails"),
+                            systemImage: "gearshape.2",
+                            isOn: $includeGeneralSettings
+                        )
+                        backupSelectionTile(
+                            title: String(localized: "Monitor settings"),
+                            details: String(localized: "BackupMonitorRowDetails"),
+                            systemImage: "display.2",
+                            isOn: $includeMonitorSettings
+                        )
+                    }
+
+                    HStack(alignment: .top, spacing: 10) {
+                        backupActionTile(
+                            title: String(localized: "Import selected settings"),
+                            systemImage: "square.and.arrow.down",
+                            buttonTitle: String(localized: "Import"),
+                            disabled: selectedBackupType == nil,
+                            action: importSelectedSettings
+                        )
+                        backupActionTile(
+                            title: String(localized: "Export selected settings"),
+                            systemImage: "square.and.arrow.up",
+                            buttonTitle: String(localized: "Export"),
+                            disabled: selectedBackupType == nil,
+                            action: exportSelectedSettings
+                        )
+                    }
+
+                    if selectedBackupType == nil {
+                        Text(String(localized: "Select at least one settings category."))
+                            .font(.caption)
+                            .foregroundStyle(.secondary)
+                    }
                 }
             }
         }
@@ -436,7 +479,7 @@ struct SettingsRootView: View {
         }
 
         private var shortcutsDetail: some View {
-            SettingsScrollView(title: String(localized: "Shortcuts"), subtitle: nil) {
+            SettingsScrollView(title: String(localized: "Shortcuts"), subtitle: nil, contentMaxWidth: 980) {
                 SettingsCard(title: String(localized: "Global shortcuts"), subtitle: nil) {
                     if settingsStore.settings.hotkeyBindings.isEmpty {
                         emptyHotkeysCard
@@ -510,7 +553,7 @@ struct SettingsRootView: View {
         }
 
         private var profilesDetail: some View {
-            SettingsScrollView(title: String(localized: "Profiles"), subtitle: nil) {
+            SettingsScrollView(title: String(localized: "Profiles"), subtitle: nil, contentMaxWidth: 980) {
                 SettingsCard(title: String(localized: "Profiles"), subtitle: nil) {
                     HStack(alignment: .center, spacing: 10) {
                         Button(String(localized: "Save Current Setup")) {
@@ -596,7 +639,7 @@ struct SettingsRootView: View {
         }
 
         private var aboutDetail: some View {
-            SettingsScrollView(title: String(localized: "About"), subtitle: nil) {
+            SettingsScrollView(title: String(localized: "About"), subtitle: nil, contentMaxWidth: 980) {
                 SettingsCard(title: String(localized: "Dimly"), subtitle: nil) {
                     let version = Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String ?? ""
                     let build = Bundle.main.object(forInfoDictionaryKey: "CFBundleVersion") as? String ?? ""
@@ -646,6 +689,188 @@ struct SettingsRootView: View {
                     }
                 }
             }
+        }
+
+        private var selectedBackupType: SettingsBackupType? {
+            SettingsBackupType(includeGeneral: includeGeneralSettings, includeMonitor: includeMonitorSettings)
+        }
+
+        private var backupContentType: UTType {
+            UTType(filenameExtension: "backup") ?? .data
+        }
+
+        private static let backupFilenameDateFormatter: DateFormatter = {
+            let formatter = DateFormatter()
+            formatter.calendar = Calendar(identifier: .gregorian)
+            formatter.locale = Locale(identifier: "en_US_POSIX")
+            formatter.timeZone = .current
+            formatter.dateFormat = "yyyyMMdd"
+            return formatter
+        }()
+
+        private func backupFileName(for type: SettingsBackupType, date: Date) -> String {
+            let formattedDate = Self.backupFilenameDateFormatter.string(from: date)
+            return "DimlySettings\(formattedDate)\(type.fileToken).backup"
+        }
+
+        private func backupSelectionTile(
+            title: String,
+            details: String,
+            systemImage: String,
+            isOn: Binding<Bool>
+        ) -> some View {
+            backupTileContainer {
+                HStack(alignment: .center, spacing: 10) {
+                    SettingsIcon(systemName: systemImage)
+                    HStack(alignment: .firstTextBaseline, spacing: 6) {
+                        Text(title)
+                            .font(.callout.weight(.semibold))
+                        Text(details)
+                            .font(.caption)
+                            .foregroundStyle(.secondary)
+                    }
+                    .lineLimit(1)
+                    .minimumScaleFactor(0.82)
+                    Spacer(minLength: 8)
+                    Toggle("", isOn: isOn)
+                        .labelsHidden()
+                        .toggleStyle(.checkbox)
+                }
+            }
+            .frame(maxWidth: .infinity, alignment: .leading)
+        }
+
+        private func backupActionTile(
+            title: String,
+            systemImage: String,
+            buttonTitle: String,
+            disabled: Bool,
+            action: @escaping () -> Void
+        ) -> some View {
+            backupTileContainer {
+                HStack(alignment: .center, spacing: 10) {
+                    SettingsIcon(systemName: systemImage)
+                    Text(title)
+                        .font(.callout.weight(.semibold))
+                        .lineLimit(1)
+                        .minimumScaleFactor(0.86)
+                    Spacer(minLength: 8)
+                    Button(buttonTitle, action: action)
+                        .buttonStyle(.bordered)
+                        .controlSize(.small)
+                        .disabled(disabled)
+                }
+            }
+            .frame(maxWidth: .infinity, alignment: .leading)
+        }
+
+        private func backupTileContainer<Content: View>(
+            @ViewBuilder content: () -> Content
+        ) -> some View {
+            content()
+                .padding(.horizontal, 8)
+                .padding(.vertical, 5)
+                .background(
+                    RoundedRectangle(cornerRadius: 10, style: .continuous)
+                        .fill(Color.primary.opacity(0.04))
+                )
+        }
+
+        private func importSelectedSettings() {
+            guard selectedBackupType != nil else {
+                showBackupAlert(
+                    title: String(localized: "Could not import settings backup"),
+                    message: String(localized: "Select at least one settings category.")
+                )
+                return
+            }
+
+            let panel = NSOpenPanel()
+            panel.canChooseFiles = true
+            panel.canChooseDirectories = false
+            panel.allowsMultipleSelection = false
+            panel.allowedContentTypes = [backupContentType, .json]
+            panel.message = String(localized: "Choose a Dimly backup file to import.")
+
+            guard panel.runModal() == .OK, let url = panel.url else { return }
+
+            do {
+                let data = try Data(contentsOf: url)
+                let backup = try decodeBackup(from: data)
+                let updated = try backup.applying(
+                    to: settingsStore.settings,
+                    includeGeneral: includeGeneralSettings,
+                    includeMonitor: includeMonitorSettings
+                )
+                if updated != settingsStore.settings {
+                    settingsStore.settings = updated
+                }
+            } catch SettingsBackupApplyError.missingGeneralSettings {
+                showBackupAlert(
+                    title: String(localized: "Could not import settings backup"),
+                    message: String(localized: "This backup does not include general settings.")
+                )
+            } catch SettingsBackupApplyError.missingMonitorSettings {
+                showBackupAlert(
+                    title: String(localized: "Could not import settings backup"),
+                    message: String(localized: "This backup does not include monitor settings.")
+                )
+            } catch {
+                showBackupAlert(
+                    title: String(localized: "Could not import settings backup"),
+                    message: String(localized: "Could not decode the selected backup file.")
+                )
+            }
+        }
+
+        private func exportSelectedSettings() {
+            guard let selectedBackupType else {
+                showBackupAlert(
+                    title: String(localized: "Could not export settings backup"),
+                    message: String(localized: "Select at least one settings category.")
+                )
+                return
+            }
+
+            let backup = DimlySettingsBackup(settings: settingsStore.settings, type: selectedBackupType)
+            do {
+                let encoder = JSONEncoder()
+                encoder.outputFormatting = [.prettyPrinted, .sortedKeys]
+                encoder.dateEncodingStrategy = .iso8601
+                let data = try encoder.encode(backup)
+
+                let panel = NSSavePanel()
+                panel.allowedContentTypes = [backupContentType]
+                panel.nameFieldStringValue = backupFileName(for: selectedBackupType, date: backup.exportedAt)
+                panel.canCreateDirectories = true
+                panel.isExtensionHidden = false
+
+                guard panel.runModal() == .OK, let destinationURL = panel.url else { return }
+                try data.write(to: destinationURL, options: .atomic)
+            } catch {
+                showBackupAlert(
+                    title: String(localized: "Could not export settings backup"),
+                    message: String(localized: "Could not save the backup file.")
+                )
+            }
+        }
+
+        private func decodeBackup(from data: Data) throws -> DimlySettingsBackup {
+            let decoder = JSONDecoder()
+            decoder.dateDecodingStrategy = .iso8601
+            if let backup = try? decoder.decode(DimlySettingsBackup.self, from: data) {
+                return backup
+            }
+            let legacySettings = try decoder.decode(DimlySettings.self, from: data)
+            return DimlySettingsBackup(settings: legacySettings, type: .generalAndMonitor)
+        }
+
+        private func showBackupAlert(title: String, message: String) {
+            let alert = NSAlert()
+            alert.alertStyle = .warning
+            alert.messageText = title
+            alert.informativeText = message
+            alert.runModal()
         }
 
         private func displayOptions(for binding: HotkeyBinding) -> [DisplayOption] {

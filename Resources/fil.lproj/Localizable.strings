@@ -1,6 +1,7 @@
 /* App Basics */
 "Dimly" = "Dimly";
 "About Dimly" = "Tungkol sa Dimly";
+"Dimly settings" = "Mga setting ng Dimly";
 "Settings..." = "Mga setting...";
 "Check for Updates..." = "Tingnan ang mga update...";
 "Quit Dimly" = "Isara ang Dimly";
@@ -74,6 +75,26 @@
 "Show display numbers on screens" = "Ipakita ang mga numero ng display sa screen";
 "No active displays detected." = "Walang aktibong display na natukoy.";
 "Show introduction again" = "Ipakita muli ang pagpapakilala";
+"Settings backup" = "Backup ng settings";
+"Choose what to import or export." = "Piliin kung ano ang i-import o i-export.";
+"General settings" = "Pangkalahatang settings";
+"Monitor settings" = "Mga setting ng monitor";
+"BackupGeneralRowDetails" = "asal ng app, hotkeys, at mga opsyon sa interface";
+"BackupMonitorRowDetails" = "mga pangalan ng display, pagkakasunod, at monitor-specific na opsyon";
+"Import selected settings" = "I-import ang napiling settings";
+"Export selected settings" = "I-export ang napiling settings";
+"ImportSelectedSettingsDetails" = "I-load ang napiling mga kategorya mula sa backup file.";
+"ExportSelectedSettingsDetails" = "I-save ang napiling mga kategorya sa backup file.";
+"Import" = "I-import";
+"Export" = "I-export";
+"Select at least one settings category." = "Pumili ng kahit isang kategorya ng settings.";
+"Could not import settings backup" = "Hindi ma-import ang backup ng settings";
+"Could not export settings backup" = "Hindi ma-export ang backup ng settings";
+"Choose a Dimly backup file to import." = "Pumili ng Dimly backup file na i-import.";
+"This backup does not include general settings." = "Walang kasamang pangkalahatang settings ang backup na ito.";
+"This backup does not include monitor settings." = "Walang kasamang settings ng monitor ang backup na ito.";
+"Could not decode the selected backup file." = "Hindi ma-decode ang napiling backup file.";
+"Could not save the backup file." = "Hindi ma-save ang backup file.";
 
 /* Settings Displays */
 "Internal" = "Panloob";
