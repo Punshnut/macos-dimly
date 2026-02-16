@@ -15,7 +15,7 @@
 "Dimly lives in the menu bar." = "Matatagpuan ang Dimly sa menu bar.";
 "Look at the top-right of your screen for the display icon." = "Hanapin ang icon ng display sa kanang-itaas ng screen.";
 "Got it" = "Nakuha";
-"Menu bar" = "Menu bar";
+"Menu bar" = "Bar ng menu";
 
 /* Menu Bar Overview */
 "DisplayCountFormat" = "%lld display na nakakonekta";
@@ -30,10 +30,10 @@
 "Quick Actions" = "Mabilis na aksyon";
 "External Displays" = "Panlabas na display";
 "Profiles" = "Mga profile";
-"App" = "App";
-"Mode" = "Mode";
-"Simple" = "Simple";
-"Advanced" = "Advanced";
+"App" = "Aplikasyon";
+"Mode" = "Paraan";
+"Simple" = "Payak";
+"Advanced" = "Mas advanced";
 
 /* Menu Bar Actions */
 "Toggle External Blackout" = "I-toggle ang panlabas na blackout";
@@ -80,7 +80,7 @@
 "General settings" = "Pangkalahatang settings";
 "Monitor settings" = "Mga setting ng monitor";
 "BackupGeneralRowDetails" = "asal ng app, hotkeys, at mga opsyon sa interface";
-"BackupMonitorRowDetails" = "mga pangalan ng display, pagkakasunod, at monitor-specific na opsyon";
+"BackupMonitorRowDetails" = "mga pangalan ng display, pagkakasunod-sunod, at mga opsyong partikular sa monitor";
 "Import selected settings" = "I-import ang napiling settings";
 "Export selected settings" = "I-export ang napiling settings";
 "ImportSelectedSettingsDetails" = "I-load ang napiling mga kategorya mula sa backup file.";
@@ -114,7 +114,7 @@
 "Add Hotkey" = "Magdagdag ng hotkey";
 "No hotkeys set yet" = "Wala pang naka-set na hotkey";
 "Add a hotkey to quickly toggle blackout or sleep/wake." = "Magdagdag ng hotkey para mabilis na i-toggle ang blackout o sleep/wake.";
-"Display" = "Display";
+"Display" = "Layar";
 "Action" = "Aksyon";
 "All External Displays" = "Lahat ng external na display";
 "Toggle Blackout" = "I-toggle ang blackout";
@@ -247,10 +247,10 @@
 "Keyboard Brightness Down" = "Keyboard Brightness Down";
 "Keyboard Brightness Toggle" = "Keyboard Brightness Toggle";
 
-"Brightness" = "Brightness";
-"Fallback" = "Overlay mode";
+"Brightness" = "Liwanag";
+"Fallback" = "Alternatibo";
 "DDC" = "DDC";
-"Overlay mode" = "Overlay mode";
+"Overlay mode" = "Mode na overlay";
 "BrightnessPercentFormat" = "%lld%%";
 "Settings" = "Mga setting";
-"Reorder Display" = "Reorder Display";
+"Reorder Display" = "Ayusin muli ang display";

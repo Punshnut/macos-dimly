@@ -29,9 +29,9 @@
 "Quick Actions" = "Actions rapides";
 "External Displays" = "Écrans externes";
 "Profiles" = "Profils";
-"App" = "App";
-"Mode" = "Mode";
-"Simple" = "Simple";
+"App" = "Application";
+"Mode" = "Mode d'affichage";
+"Simple" = "Basique";
 "Advanced" = "Avancé";
 
 /* Menu Bar Actions */
@@ -94,7 +94,7 @@
 "No hotkeys set yet" = "Aucun raccourci défini pour l'instant";
 "Add a hotkey to quickly toggle blackout or sleep/wake." = "Ajoutez un raccourci pour basculer rapidement l'extinction ou la mise en veille/réveil.";
 "Display" = "Écran";
-"Action" = "Action";
+"Action" = "Commande";
 "All External Displays" = "Tous les écrans externes";
 "Toggle Blackout" = "Basculer l'extinction";
 "Toggle Window" = "Basculer la fenêtre";
@@ -226,33 +226,33 @@
 "Keyboard Brightness Down" = "Keyboard Brightness Down";
 "Keyboard Brightness Toggle" = "Keyboard Brightness Toggle";
 
-"Brightness" = "Brightness";
-"Fallback" = "Overlay mode";
+"Brightness" = "Luminosite";
+"Fallback" = "Mode de secours";
 "DDC" = "DDC";
-"Overlay mode" = "Overlay mode";
+"Overlay mode" = "Mode superposition";
 "BrightnessPercentFormat" = "%lld%%";
 "Settings" = "Réglages";
-"Reorder Display" = "Reorder Display";
+"Reorder Display" = "Reordonner l'ecran";
 
-"BackupGeneralRowDetails" = "app behavior, hotkeys, and interface options";
-"BackupMonitorRowDetails" = "display names, ordering, and monitor-specific options";
-"Choose a Dimly backup file to import." = "Choose a Dimly backup file to import.";
-"Choose what to import or export." = "Choose what to import or export.";
-"Could not decode the selected backup file." = "Could not decode the selected backup file.";
-"Could not export settings backup" = "Could not export settings backup";
-"Could not import settings backup" = "Could not import settings backup";
-"Could not save the backup file." = "Could not save the backup file.";
-"Export" = "Export";
-"Export selected settings" = "Export selected settings";
-"ExportSelectedSettingsDetails" = "Save selected categories to a backup file.";
-"General settings" = "General settings";
-"Import" = "Import";
-"Import selected settings" = "Import selected settings";
-"ImportSelectedSettingsDetails" = "Load selected categories from a backup file.";
-"Monitor settings" = "Monitor settings";
-"Select at least one settings category." = "Select at least one settings category.";
-"Settings backup" = "Settings backup";
-"This backup does not include general settings." = "This backup does not include general settings.";
-"This backup does not include monitor settings." = "This backup does not include monitor settings.";
+"BackupGeneralRowDetails" = "comportement de l'application, raccourcis et options d'interface";
+"BackupMonitorRowDetails" = "noms des écrans, ordre et options spécifiques au moniteur";
+"Choose a Dimly backup file to import." = "Choisissez un fichier de sauvegarde Dimly a importer.";
+"Choose what to import or export." = "Choisissez ce que vous voulez importer ou exporter.";
+"Could not decode the selected backup file." = "Impossible de decoder le fichier de sauvegarde selectionne.";
+"Could not export settings backup" = "Impossible d'exporter la sauvegarde des reglages";
+"Could not import settings backup" = "Impossible d'importer la sauvegarde des reglages";
+"Could not save the backup file." = "Impossible d'enregistrer le fichier de sauvegarde.";
+"Export" = "Exporter";
+"Export selected settings" = "Exporter les reglages selectionnes";
+"ExportSelectedSettingsDetails" = "Enregistrez les categories selectionnees dans un fichier de sauvegarde.";
+"General settings" = "Reglages generaux";
+"Import" = "Importer";
+"Import selected settings" = "Importer les reglages selectionnes";
+"ImportSelectedSettingsDetails" = "Chargez les categories selectionnees depuis un fichier de sauvegarde.";
+"Monitor settings" = "Reglages de l'ecran";
+"Select at least one settings category." = "Selectionnez au moins une categorie de reglages.";
+"Settings backup" = "Sauvegarde des reglages";
+"This backup does not include general settings." = "Cette sauvegarde n'inclut pas les reglages generaux.";
+"This backup does not include monitor settings." = "Cette sauvegarde n'inclut pas les reglages de l'ecran.";
 
-"Dimly settings" = "Dimly settings";
+"Dimly settings" = "Reglages Dimly";

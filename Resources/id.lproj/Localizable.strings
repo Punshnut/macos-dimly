@@ -30,7 +30,7 @@
 "External Displays" = "Layar eksternal";
 "Profiles" = "Profil";
 "App" = "Aplikasi";
-"Mode" = "Mode";
+"Mode" = "Mode tampilan";
 "Simple" = "Sederhana";
 "Advanced" = "Lanjutan";
 
@@ -226,33 +226,33 @@
 "Keyboard Brightness Down" = "Keyboard Brightness Down";
 "Keyboard Brightness Toggle" = "Keyboard Brightness Toggle";
 
-"Brightness" = "Brightness";
-"Fallback" = "Overlay mode";
+"Brightness" = "Kecerahan";
+"Fallback" = "Mode cadangan";
 "DDC" = "DDC";
-"Overlay mode" = "Overlay mode";
+"Overlay mode" = "Mode overlay";
 "BrightnessPercentFormat" = "%lld%%";
 "Settings" = "Pengaturan";
-"Reorder Display" = "Reorder Display";
+"Reorder Display" = "Urutkan ulang layar";
 
-"BackupGeneralRowDetails" = "app behavior, hotkeys, and interface options";
-"BackupMonitorRowDetails" = "display names, ordering, and monitor-specific options";
-"Choose a Dimly backup file to import." = "Choose a Dimly backup file to import.";
-"Choose what to import or export." = "Choose what to import or export.";
-"Could not decode the selected backup file." = "Could not decode the selected backup file.";
-"Could not export settings backup" = "Could not export settings backup";
-"Could not import settings backup" = "Could not import settings backup";
-"Could not save the backup file." = "Could not save the backup file.";
-"Export" = "Export";
-"Export selected settings" = "Export selected settings";
-"ExportSelectedSettingsDetails" = "Save selected categories to a backup file.";
-"General settings" = "General settings";
-"Import" = "Import";
-"Import selected settings" = "Import selected settings";
-"ImportSelectedSettingsDetails" = "Load selected categories from a backup file.";
-"Monitor settings" = "Monitor settings";
-"Select at least one settings category." = "Select at least one settings category.";
-"Settings backup" = "Settings backup";
-"This backup does not include general settings." = "This backup does not include general settings.";
-"This backup does not include monitor settings." = "This backup does not include monitor settings.";
+"BackupGeneralRowDetails" = "perilaku aplikasi, hotkey, dan opsi antarmuka";
+"BackupMonitorRowDetails" = "nama layar, urutan, dan opsi khusus monitor";
+"Choose a Dimly backup file to import." = "Pilih file cadangan Dimly untuk diimpor.";
+"Choose what to import or export." = "Pilih apa yang ingin diimpor atau diekspor.";
+"Could not decode the selected backup file." = "Tidak dapat mendekode file cadangan yang dipilih.";
+"Could not export settings backup" = "Tidak dapat mengekspor cadangan pengaturan";
+"Could not import settings backup" = "Tidak dapat mengimpor cadangan pengaturan";
+"Could not save the backup file." = "Tidak dapat menyimpan file cadangan.";
+"Export" = "Ekspor";
+"Export selected settings" = "Ekspor pengaturan terpilih";
+"ExportSelectedSettingsDetails" = "Simpan kategori terpilih ke file cadangan.";
+"General settings" = "Pengaturan umum";
+"Import" = "Impor";
+"Import selected settings" = "Impor pengaturan terpilih";
+"ImportSelectedSettingsDetails" = "Muat kategori terpilih dari file cadangan.";
+"Monitor settings" = "Pengaturan monitor";
+"Select at least one settings category." = "Pilih setidaknya satu kategori pengaturan.";
+"Settings backup" = "Cadangan pengaturan";
+"This backup does not include general settings." = "Cadangan ini tidak menyertakan pengaturan umum.";
+"This backup does not include monitor settings." = "Cadangan ini tidak menyertakan pengaturan monitor.";
 
-"Dimly settings" = "Dimly settings";
+"Dimly settings" = "Pengaturan Dimly";
