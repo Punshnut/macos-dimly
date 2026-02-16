@@ -1,6 +1,6 @@
 # Dimly
 
-Dimly is the stealthy menu‑bar switch for external displays. One click (or a hotkey) drops glare instantly - blackout, sleep, or wake, per display or all at once. Keep the icon visible, or hide both the menu bar and Dock icons and let Dimly run quietly in the background.
+Dimly is a menu bar control center for multi-monitor setups. Its core feature is per-display brightness and per-display on/off control, with true DDC brightness when available and overlay mode fallback when it is not, so mixed premium, older, and cheap screens all behave like one coherent setup.
 
 <p align="center">
   <img src="https://img.shields.io/badge/macOS-native-000000?style=flat&logo=apple" alt="macOS native">
@@ -38,9 +38,11 @@ Dimly is the stealthy menu‑bar switch for external displays. One click (or a h
 
 ## Big hits
 
+- **Per-display brightness for real-world monitor fleets** - Control brightness per display with DDC when supported, and automatic overlay mode when not.
+- **Per-display on/off switch** - Put each display to sleep/wake with DDC, with blackout fallback so it still behaves like a reliable on/off control.
 - **Instant blackout** - Smash glare on any external display with a full-screen overlay.
 - **Sleep & wake** - Send DDC/CI standby and wake when supported, with seamless blackout fallback.
-- **Per-display control** - Toggle, sleep, wake, rename, and copy IDs per screen from one menu.
+- **Per-display control** - Brightness, toggle, sleep, wake, rename, and copy IDs per screen from one menu.
 - **Display labels** - Pop numbered overlays on every screen so you always know which is which.
 - **Shortcut friendly** - Global hotkeys, including a fixed panic shortcut to restore everything.
 - **State that sticks** - Remembers active blackouts and re-applies them after reconnects.
@@ -54,9 +56,10 @@ Dimly is the stealthy menu‑bar switch for external displays. One click (or a h
 ## What it actually does (from the code)
 
 - **Display inventory + change tracking** - live list of displays with connect/disconnect logging.
+- **Per-display brightness pipeline** - uses DDC brightness where possible and switches to overlay mode where DDC is unavailable.
 - **Blackout overlays** - per-display fullscreen overlays with fade transitions and persistence.
 - **DDC/CI power control** - probe support, send standby/wake commands, and track status.
-- **Sleep/wake fallback** - if DDC fails or is unsupported, blackout takes over instantly.
+- **Sleep/wake fallback** - if DDC fails or is unsupported, blackout takes over instantly so each display still has an effective on/off path.
 - **Hotkey system** - register custom hotkeys plus a fixed panic hotkey.
 - **Display labels** - numeric overlays with friendly names for each screen.
 - **Profiles + automation** - save/apply display snapshots, auto-apply on external connect.
@@ -71,9 +74,14 @@ Dimly is the stealthy menu‑bar switch for external displays. One click (or a h
 ## How it works
 
 1. Dimly sits in your menu bar. Click it or hit your hotkey.
-2. Use **Toggle External Blackout** to mute glare on all externals, or target a single display in the list.
-3. If your monitor supports DDC/CI, **Sleep** and **Wake** commands are sent directly; otherwise Dimly falls back to blackout.
-4. Dimly tracks display changes, keeps blackout state consistent, and can show numbered overlays for quick identification.
+2. Open a display tile and set **Brightness** per display.
+3. If the monitor supports DDC/CI, Dimly uses true hardware brightness and standby/wake.
+4. If it does not support DDC/CI, Dimly automatically uses **Overlay mode** for brightness and blackout fallback for on/off behavior.
+5. Dimly tracks display changes, keeps state consistent, and can show numbered overlays for quick identification.
+
+## Why this exists
+
+I’ve worked on desks with 8-12 mixed monitors and uneven DDC support, where fast control matters more than perfect hardware. Dimly is built so every screen stays controllable in one clean flow.
 
 ## Keyboard & mouse
 
@@ -82,14 +90,16 @@ Dimly is the stealthy menu‑bar switch for external displays. One click (or a h
 - **Option-click icon:** toggle blackout overlay on all externals.
 - **Control-click icon:** toggle sleep/wake (with blackout fallback).
 - **Restore everything:** fixed panic hotkey `Ctrl` + `Option` + `Shift` + `P`.
-- **Per-display actions:** sleep, wake, blackout, rename, and copy IDs from each display row.
+- **Per-display actions:** brightness, sleep, wake, blackout, rename, and copy IDs from each display row.
 - **Close quickly:** press Esc or click away-the menu bar extra behaves like built-in menus.
 
 ## Quick tips
 
 - Turn on **Show Display Numbers** when rearranging or labeling screens.
 - Rename displays once so menus show friendly names instead of model strings.
-- If DDC/CI is supported, prefer **Sleep** for true power-off; otherwise blackout is instant.
+- Use per-display **Brightness** first, then sleep/wake only when you actually want displays off.
+- In mixed monitor setups, expect a blend of DDC and overlay mode-this is exactly what Dimly is designed for.
+- If DDC/CI is supported, prefer **Sleep** for true power-off; otherwise blackout remains instant and reliable.
 - Hide the menu bar icon if you want a stealth setup-hotkeys keep working.
 - Use **Copy Display Report** or **Open Diagnostics Log** for fast support/debugging.
 
@@ -110,7 +120,7 @@ Supports Intel and Apple Silicon Macs. Requires macOS 14+
 ## Roadmap
 
 - **Adaptive dimming** - remember per-location or time-of-day preferences.
-- **Profile actions** - apply blackout/sleep rules when a saved setup is selected.
+- **Profile actions** - apply brightness + blackout/sleep rules when a saved setup is selected.
 - **Per-app triggers** - auto-dim when select apps enter full screen.
 - **Script hooks** - call custom scripts before/after blackout.
 

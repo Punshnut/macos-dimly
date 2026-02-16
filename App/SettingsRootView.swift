@@ -9,6 +9,7 @@ struct SettingsRootView: View {
     @ObservedObject var displayManager: DisplayManager
     @ObservedObject var profileManager: ProfileManager
     @ObservedObject var ddcManager: DDCManager
+    @ObservedObject var blackoutManager: BlackoutManager
     let engine: DimlyEngine
     @State private var introWindowController: IntroWindowController?
     @State private var selection: SettingsDestination = .general
@@ -102,7 +103,7 @@ struct SettingsRootView: View {
 
     /// Computes the human-friendly status text for a display.
     private func displayStatus(for display: DisplayInfo) -> String {
-        if engine.blackoutManager.activeDisplayIDs.contains(display.stableIdentity) {
+        if blackoutManager.activeDisplayIDs.contains(display.stableIdentity) {
             return String(localized: "Blackout")
         }
         if settingsStore.settings.overlayOnlyDisplayIDs.contains(display.stableIdentity) == false,
@@ -166,9 +167,12 @@ struct SettingsRootView: View {
         let state = ddcManager.states[display.stableIdentity] ?? DDCState(status: .unknown, lastError: nil, lastCommand: nil, lastCommandAt: nil)
         let ddcSupported = state.status == .supported
         let overlayOnly = settingsStore.settings.overlayOnlyDisplayIDs.contains(display.stableIdentity)
-        let fallbackActive = (!ddcSupported || overlayOnly) && engine.blackoutManager.activeDisplayIDs.contains(display.stableIdentity)
+        let fallbackActive = (!ddcSupported || overlayOnly) && blackoutManager.activeDisplayIDs.contains(display.stableIdentity)
         let controlTint: Color = (ddcSupported && !overlayOnly) ? .green : (fallbackActive ? .blue : .secondary)
         let canControl = display.isExternal
+        let brightnessMode = engine.brightnessMode(for: display)
+        let brightnessTint: Color = brightnessMode == .ddc ? .green : .blue
+        let brightnessModeLabel = brightnessMode == .ddc ? String(localized: "DDC") : String(localized: "Overlay mode")
 
         HStack(alignment: .top, spacing: 14) {
             SettingsIcon(systemName: display.isBuiltin ? "laptopcomputer" : "display")
@@ -231,6 +235,50 @@ struct SettingsRootView: View {
                 }
 
                 if display.isExternal {
+                    VStack(alignment: .leading, spacing: 8) {
+                        HStack(spacing: 8) {
+                            Label(String(localized: "Brightness"), systemImage: "sun.max.fill")
+                                .font(.caption.weight(.semibold))
+                                .foregroundStyle(brightnessTint)
+                            Spacer()
+                            Text(
+                                String.localizedStringWithFormat(
+                                    String(localized: "BrightnessPercentFormat"),
+                                    Int64(engine.brightnessPercent(for: display))
+                                )
+                            )
+                            .font(.caption.monospacedDigit())
+                            .foregroundStyle(.secondary)
+                            Text(brightnessModeLabel)
+                                .font(.caption2.weight(.semibold))
+                                .padding(.horizontal, 6)
+                                .padding(.vertical, 3)
+                                .background(brightnessTint.opacity(0.18))
+                                .foregroundStyle(brightnessTint)
+                                .clipShape(Capsule())
+                        }
+
+                        Slider(
+                            value: Binding(
+                                get: { Double(engine.brightnessPercent(for: display)) },
+                                set: { newValue in
+                                    engine.setBrightness(Int(newValue.rounded()), for: display)
+                                }
+                            ),
+                            in: 0...100
+                        )
+                        .tint(brightnessTint)
+                    }
+                    .padding(8)
+                    .background(
+                        RoundedRectangle(cornerRadius: 8, style: .continuous)
+                            .fill(brightnessTint.opacity(0.09))
+                    )
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 8, style: .continuous)
+                            .stroke(brightnessTint.opacity(0.28), lineWidth: 1)
+                    )
+
                     HStack(spacing: 10) {
                         Text(String(localized: "Overlay Only (Never Sleep)"))
                             .font(.caption)

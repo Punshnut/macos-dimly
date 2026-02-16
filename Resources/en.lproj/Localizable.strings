@@ -1,6 +1,7 @@
 /* App Basics */
 "Dimly" = "Dimly";
 "About Dimly" = "About Dimly";
+"Settings" = "Settings";
 "Settings..." = "Settings...";
 "Check for Updates..." = "Check for Updates...";
 "Quit Dimly" = "Quit Dimly";
@@ -44,7 +45,13 @@
 "Blackout Display" = "Blackout Display";
 "Sleep Display" = "Sleep Display";
 "Wake Display" = "Wake Display";
+"Reorder Display" = "Reorder Display";
 "Overlay Only (Never Sleep)" = "Overlay Only (Never Sleep)";
+"Brightness" = "Brightness";
+"Fallback" = "Overlay mode";
+"Overlay mode" = "Overlay mode";
+"BrightnessPercentFormat" = "%lld%%";
+"DDC" = "DDC";
 "Rename Display..." = "Rename Display...";
 "Copy Display ID" = "Copy Display ID";
 "Save Current Profile" = "Save Current Profile";

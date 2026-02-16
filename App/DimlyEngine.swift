@@ -4,6 +4,12 @@ import AppKit
 import Combine
 import OSLog
 
+/// Source used for a display brightness update.
+enum BrightnessControlMode {
+    case ddc
+    case fallback
+}
+
 /// Core, non-UI engine that owns hotkeys and display actions.
 @MainActor
 final class DimlyEngine {
@@ -122,6 +128,56 @@ final class DimlyEngine {
         DiagnosticsLogger.shared.log("Panic blackout invoked", category: "engine")
         wakeExternalDisplays()
         blackoutManager.panic(animated: animated)
+    }
+
+    /// Sets brightness for a display, preferring DDC and falling back to dim overlay.
+    func setBrightness(_ percent: Int, for display: DisplayInfo) {
+        let clamped = max(0, min(100, percent))
+        guard display.isExternal else { return }
+        let settings = settingsStore.settings
+        let overlayOnly = settings.overlayOnlyDisplayIDs.contains(display.stableIdentity)
+        let ddcStatus = ddcManager.states[display.stableIdentity]?.status
+        let canAttemptDDC = !overlayOnly && ddcStatus != .notSupported
+        if canAttemptDDC {
+            if ddcManager.setBrightness(clamped, for: display) {
+                blackoutManager.clearBrightnessFallback(for: display)
+                return
+            }
+        }
+        blackoutManager.setBrightnessFallback(
+            clamped,
+            for: display,
+            animated: settings.fadeOutAnimationEnabled
+        )
+    }
+
+    /// Returns current brightness value used for UI (0-100).
+    func brightnessPercent(for display: DisplayInfo) -> Int {
+        if let fallback = blackoutManager.fallbackBrightnessLevels[display.stableIdentity] {
+            return fallback
+        }
+        if let ddcBrightness = ddcManager.brightnessLevels[display.stableIdentity] {
+            return ddcBrightness
+        }
+        return 100
+    }
+
+    /// Returns which brightness path is currently expected for this display.
+    func brightnessMode(for display: DisplayInfo) -> BrightnessControlMode {
+        guard display.isExternal else { return .fallback }
+        if settingsStore.settings.overlayOnlyDisplayIDs.contains(display.stableIdentity) {
+            return .fallback
+        }
+        if blackoutManager.fallbackBrightnessLevels[display.stableIdentity] != nil {
+            return .fallback
+        }
+        if ddcManager.brightnessLevels[display.stableIdentity] != nil {
+            return .ddc
+        }
+        if ddcManager.states[display.stableIdentity]?.status == .notSupported {
+            return .fallback
+        }
+        return .ddc
     }
 
     /// Puts a display into standby via DDC or blackout fallback.

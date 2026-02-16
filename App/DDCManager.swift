@@ -39,6 +39,7 @@ struct DDCState: Equatable {
 @MainActor
 final class DDCManager: ObservableObject {
     @Published private(set) var states: [String: DDCState] = [:] // stableIdentity -> state
+    @Published private(set) var brightnessLevels: [String: Int] = [:] // stableIdentity -> percent
 
     private let displayManager: DisplayManager
     private let logger = Logger(subsystem: Bundle.main.bundleIdentifier ?? "Dimly", category: "DDC")
@@ -87,6 +88,22 @@ final class DDCManager: ObservableObject {
             return true
         case .failure(let error):
             handleFailure(error, display: display, action: "wake")
+            return false
+        }
+    }
+
+    /// Attempts to set hardware brightness (0-100%) over DDC/CI.
+    func setBrightness(_ percent: Int, for display: DisplayInfo) -> Bool {
+        let clamped = max(0, min(100, percent))
+        let result = sendBrightnessCommand(display, value: UInt16(clamped))
+        switch result {
+        case .success:
+            logger.notice("DDC brightness \(clamped, privacy: .public)% set for \(display.stableIdentity, privacy: .public)")
+            updateState(for: display, status: .supported, lastError: nil, lastCommand: nil)
+            brightnessLevels[display.stableIdentity] = clamped
+            return true
+        case .failure(let error):
+            handleFailure(error, display: display, action: "brightness")
             return false
         }
     }
@@ -167,6 +184,21 @@ final class DDCManager: ObservableObject {
         case .success(let connection):
             defer { Self.close(connection) }
             return Self.sendVCPCommand(connection: connection, code: 0xD6, value: value)
+        }
+    }
+
+    /// Sends a VCP brightness command (0x10) to a display.
+    private func sendBrightnessCommand(_ display: DisplayInfo, value: UInt16) -> Result<Void, Error> {
+        if states[display.stableIdentity]?.status == .notSupported {
+            return .failure(DDCError.notSupported)
+        }
+        let openResult = Self.openConnection(for: display.displayID)
+        switch openResult {
+        case .failure(let error):
+            return .failure(error)
+        case .success(let connection):
+            defer { Self.close(connection) }
+            return Self.sendVCPCommand(connection: connection, code: 0x10, value: value)
         }
     }
 

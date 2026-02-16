@@ -89,6 +89,7 @@ struct DimlyApp: App {
                 displayManager: displayManager,
                 profileManager: engine.profileManager,
                 ddcManager: engine.ddcManager,
+                blackoutManager: engine.blackoutManager,
                 engine: engine
             )
         }
@@ -260,6 +261,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
                 displayManager: displayManager,
                 profileManager: settingsEngine.profileManager,
                 ddcManager: settingsEngine.ddcManager,
+                blackoutManager: settingsEngine.blackoutManager,
                 engine: settingsEngine
             )
             let hostingView = NSHostingView(rootView: rootView)
@@ -269,7 +271,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
                 backing: .buffered,
                 defer: false
             )
-            window.title = "Settings"
+            window.title = String(localized: "Settings")
             window.titlebarAppearsTransparent = true
             window.titlebarSeparatorStyle = .none
             window.toolbarStyle = .unifiedCompact

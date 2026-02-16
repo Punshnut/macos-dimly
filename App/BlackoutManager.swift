@@ -13,7 +13,9 @@ final class BlackoutManager: ObservableObject {
     private let logger = Logger(subsystem: Bundle.main.bundleIdentifier ?? "Dimly", category: "Blackout")
     private var overlays: [String: BlackoutWindow] = [:] // keyed by stableIdentity
     private var transitionOverlays: [String: BlackoutWindow] = [:]
+    private var brightnessFallbackOverlays: [String: DimOverlayWindow] = [:]
     @Published private(set) var activeDisplayIDs: Set<String> = []
+    @Published private(set) var fallbackBrightnessLevels: [String: Int] = [:] // stableIdentity -> percent (0...99)
     private var persistenceToken: AnyCancellable?
     private var displayChangeToken: AnyCancellable?
     private let persistenceKey = "Blackout.activeDisplayIDs"
@@ -37,7 +39,7 @@ final class BlackoutManager: ObservableObject {
 
     /// Returns true when any blackout or transition overlay is visible.
     var hasAnyOverlays: Bool {
-        !overlays.isEmpty || !transitionOverlays.isEmpty
+        !overlays.isEmpty || !transitionOverlays.isEmpty || !brightnessFallbackOverlays.isEmpty
     }
 
     /// Toggles blackout for a single display.
@@ -120,7 +122,14 @@ final class BlackoutManager: ObservableObject {
                 window.close()
             }
         }
+        brightnessFallbackOverlays.values.forEach { window in
+            window.hide(animated: animated) {
+                window.close()
+            }
+        }
         transitionOverlays.removeAll()
+        brightnessFallbackOverlays.removeAll()
+        fallbackBrightnessLevels.removeAll()
         activeDisplayIDs.removeAll()
         persistState()
         logger.notice("Panic invoked: cleared all blackout overlays")
@@ -137,34 +146,87 @@ final class BlackoutManager: ObservableObject {
             window.hide(animated: false)
             window.close()
         }
+        brightnessFallbackOverlays.values.forEach { window in
+            window.hide(animated: false)
+            window.close()
+        }
         overlays.removeAll()
         transitionOverlays.removeAll()
+        brightnessFallbackOverlays.removeAll()
+        fallbackBrightnessLevels.removeAll()
         activeDisplayIDs.removeAll()
     }
 
     /// Fades out all overlays before quitting, then closes them.
     func fadeOutAllAndClose(animated: Bool, completion: @escaping () -> Void) {
-        let windows = Array(overlays.values) + Array(transitionOverlays.values)
-        guard !windows.isEmpty else {
+        let blackoutWindows = Array(overlays.values) + Array(transitionOverlays.values)
+        let brightnessWindows = Array(brightnessFallbackOverlays.values)
+        let totalWindowCount = blackoutWindows.count + brightnessWindows.count
+        guard totalWindowCount > 0 else {
             completion()
             return
         }
         overlays.removeAll()
         transitionOverlays.removeAll()
+        brightnessFallbackOverlays.removeAll()
+        fallbackBrightnessLevels.removeAll()
         activeDisplayIDs.removeAll()
-        var remaining = windows.count
+        var remaining = totalWindowCount
         let finish: () -> Void = {
             remaining -= 1
             if remaining == 0 {
                 completion()
             }
         }
-        windows.forEach { window in
+        blackoutWindows.forEach { window in
             window.hide(animated: animated) {
                 window.close()
                 finish()
             }
         }
+        brightnessWindows.forEach { window in
+            window.hide(animated: animated) {
+                window.close()
+                finish()
+            }
+        }
+    }
+
+    /// Applies non-blocking brightness fallback via black overlay opacity.
+    func setBrightnessFallback(_ percent: Int, for display: DisplayInfo, animated: Bool) {
+        guard display.isExternal else { return }
+        let clamped = max(0, min(100, percent))
+        guard clamped < 100 else {
+            clearBrightnessFallback(for: display, animated: animated)
+            return
+        }
+        guard let screen = screen(for: display.displayID) else { return }
+
+        let opacity = fallbackOpacity(forBrightnessPercent: clamped)
+        let window: DimOverlayWindow
+        if let existing = brightnessFallbackOverlays[display.stableIdentity] {
+            window = existing
+            window.update(screen: screen)
+        } else {
+            let created = DimOverlayWindow(screen: screen)
+            brightnessFallbackOverlays[display.stableIdentity] = created
+            window = created
+        }
+        window.setOpacity(opacity, animated: animated)
+        fallbackBrightnessLevels[display.stableIdentity] = clamped
+    }
+
+    /// Clears a non-blocking brightness fallback overlay for a display.
+    func clearBrightnessFallback(for display: DisplayInfo, animated: Bool = false) {
+        guard let window = brightnessFallbackOverlays[display.stableIdentity] else {
+            fallbackBrightnessLevels.removeValue(forKey: display.stableIdentity)
+            return
+        }
+        window.hide(animated: animated) { [weak self] in
+            window.close()
+            self?.brightnessFallbackOverlays.removeValue(forKey: display.stableIdentity)
+        }
+        fallbackBrightnessLevels.removeValue(forKey: display.stableIdentity)
     }
 
     // MARK: - Private helpers
@@ -191,6 +253,15 @@ final class BlackoutManager: ObservableObject {
                 window.close()
             }
             transitionOverlays.removeValue(forKey: key)
+        }
+        let staleBrightnessOverlays = brightnessFallbackOverlays.keys.filter { !liveIDs.contains($0) }
+        for key in staleBrightnessOverlays {
+            if let window = brightnessFallbackOverlays[key] {
+                window.hide(animated: false)
+                window.close()
+            }
+            brightnessFallbackOverlays.removeValue(forKey: key)
+            fallbackBrightnessLevels.removeValue(forKey: key)
         }
         rebindWindows(to: displays)
 
@@ -237,6 +308,18 @@ final class BlackoutManager: ObservableObject {
         for (id, window) in transitionOverlays {
             guard let display = byIdentity[id], let screen = screen(for: display.displayID) else { continue }
             window.update(screen: screen)
+        }
+
+        for (id, window) in brightnessFallbackOverlays {
+            guard let display = byIdentity[id], let screen = screen(for: display.displayID) else { continue }
+            window.update(screen: screen)
+            let level = fallbackBrightnessLevels[id] ?? 100
+            if level < 100 {
+                let opacity = fallbackOpacity(forBrightnessPercent: level)
+                window.setOpacity(opacity, animated: false)
+            } else {
+                window.hide(animated: false)
+            }
         }
     }
 
@@ -288,6 +371,12 @@ final class BlackoutManager: ObservableObject {
     private func persistedIdentities() -> Set<String> {
         let stored = UserDefaults.standard.array(forKey: persistenceKey) as? [String] ?? []
         return Set(stored)
+    }
+
+    /// Converts brightness percentage into black-overlay opacity.
+    private func fallbackOpacity(forBrightnessPercent percent: Int) -> CGFloat {
+        let clamped = max(0, min(100, percent))
+        return CGFloat((100 - clamped)) / 100.0
     }
 
     // MARK: - Transition overlays
@@ -478,6 +567,110 @@ final class BlackoutWindow: NSWindow {
         if shouldOrderOut {
             self.orderOut(nil)
         }
+        let completion = pendingCompletions.removeValue(forKey: token)
+        completion?()
+    }
+}
+
+/// Borderless, non-interactive black overlay used for fallback brightness dimming.
+final class DimOverlayWindow: NSWindow {
+    private enum Animation {
+        static let duration: TimeInterval = 0.2
+    }
+
+    private final class DimOverlayView: NSView {
+        override var wantsUpdateLayer: Bool { true }
+
+        override func updateLayer() {
+            layer?.backgroundColor = NSColor.black.cgColor
+        }
+    }
+
+    private let overlayView = DimOverlayView()
+    private var animationToken: Int = 0
+    private var pendingCompletions: [Int: () -> Void] = [:]
+
+    /// Creates a borderless dimming overlay for the given screen.
+    init(screen: NSScreen) {
+        super.init(
+            contentRect: screen.frame,
+            styleMask: [.borderless],
+            backing: .buffered,
+            defer: false
+        )
+        level = .screenSaver
+        animationBehavior = .none
+        isReleasedWhenClosed = false
+        isOpaque = false
+        backgroundColor = .clear
+        alphaValue = 0
+        hasShadow = false
+        ignoresMouseEvents = true
+        collectionBehavior = [.canJoinAllSpaces, .fullScreenAuxiliary, .stationary]
+        overlayView.wantsLayer = true
+        overlayView.autoresizingMask = [.width, .height]
+        contentView = overlayView
+        update(screen: screen)
+    }
+
+    /// Repositions and resizes the overlay to match the target screen.
+    func update(screen: NSScreen) {
+        setFrame(screen.frame, display: true)
+        overlayView.frame = CGRect(origin: .zero, size: screen.frame.size)
+    }
+
+    /// Sets the overlay alpha (0-1) and ensures visibility when non-zero.
+    func setOpacity(_ opacity: CGFloat, animated: Bool) {
+        let clamped = max(0, min(1, opacity))
+        guard clamped > 0 else {
+            hide(animated: animated)
+            return
+        }
+        orderFrontRegardless()
+        guard animated else {
+            alphaValue = clamped
+            return
+        }
+        NSAnimationContext.runAnimationGroup { context in
+            context.duration = Animation.duration
+            context.timingFunction = CAMediaTimingFunction(name: .easeInEaseOut)
+            animator().alphaValue = clamped
+        }
+    }
+
+    /// Hides the overlay.
+    func hide(animated: Bool, completion: (() -> Void)? = nil) {
+        animationToken += 1
+        let token = animationToken
+        guard animated else {
+            alphaValue = 0
+            orderOut(nil)
+            completion?()
+            return
+        }
+        enqueueCompletion(completion, token: token)
+        NSAnimationContext.runAnimationGroup { context in
+            context.duration = Animation.duration
+            context.timingFunction = CAMediaTimingFunction(name: .easeInEaseOut)
+            animator().alphaValue = 0
+        } completionHandler: { [weak self] in
+            Task { @MainActor in
+                self?.completeAnimation(token: token)
+            }
+        }
+    }
+
+    private func enqueueCompletion(_ completion: (() -> Void)?, token: Int) {
+        guard let completion else { return }
+        pendingCompletions[token] = completion
+    }
+
+    @MainActor private func completeAnimation(token: Int) {
+        guard animationToken == token else {
+            pendingCompletions.removeValue(forKey: token)
+            return
+        }
+        orderOut(nil)
         let completion = pendingCompletions.removeValue(forKey: token)
         completion?()
     }

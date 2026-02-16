@@ -367,6 +367,7 @@ struct MenuBarContentView: View {
             }
         }
         .animation(.spring(response: 0.25, dampingFraction: 0.82), value: orderedExternalIDs())
+        .animation(.spring(response: 0.25, dampingFraction: 0.82), value: settingsStore.settings.brightnessPanelExpandedDisplayIDs)
     }
 
     /// Simplified per-display list for simple mode.
@@ -378,102 +379,55 @@ struct MenuBarContentView: View {
             }
         }
         .animation(.spring(response: 0.25, dampingFraction: 0.82), value: orderedExternalIDs())
+        .animation(.spring(response: 0.25, dampingFraction: 0.82), value: settingsStore.settings.brightnessPanelExpandedDisplayIDs)
     }
 
     /// Renders a single display row with actions and status.
     private func displayRow(_ display: DisplayInfo) -> some View {
+        displayCard(display, includeMenu: true)
+    }
+
+    /// Simplified display row showing only alignment arrows and toggle button.
+    private func displayRowSimple(_ display: DisplayInfo) -> some View {
+        displayCard(display, includeMenu: false)
+    }
+
+    /// Shared display card used by both simple and advanced layouts.
+    private func displayCard(_ display: DisplayInfo, includeMenu: Bool) -> some View {
+        let rowBackground: AnyShapeStyle = AnyShapeStyle(.thinMaterial)
+        let rowShape = RoundedRectangle(cornerRadius: 10, style: .continuous)
+        let isExpanded = isBrightnessPanelExpanded(for: display)
+
+        return VStack(alignment: .leading, spacing: isExpanded ? 10 : 0) {
+            displayRowHeader(display, includeMenu: includeMenu, isExpanded: isExpanded)
+            if isExpanded {
+                brightnessDropdown(for: display)
+                    .transition(.move(edge: .top).combined(with: .opacity))
+            }
+        }
+        .padding(8)
+        .background(rowBackground)
+        .clipShape(rowShape)
+        .contentShape(rowShape)
+    }
+
+    /// Header row with status and per-display actions; click to expand brightness.
+    private func displayRowHeader(_ display: DisplayInfo, includeMenu: Bool, isExpanded: Bool) -> some View {
         let isBlackoutActive = blackoutManager.activeDisplayIDs.contains(display.stableIdentity)
         let ddcState = ddcManager.states[display.stableIdentity]?.status.localizedDescription ?? String(localized: "Unknown")
         let name = displayName(for: display)
         let status = displayStatus(for: display)
         let marker = displayOverlayMarker(for: display)
-        let rowBackground: AnyShapeStyle = AnyShapeStyle(.thinMaterial)
-        let rowShape = RoundedRectangle(cornerRadius: 10, style: .continuous)
-        let content = HStack(alignment: .top, spacing: 10) {
-            VStack(alignment: .leading, spacing: 2) {
-                Text(name)
-                    .font(.subheadline.weight(.semibold))
-                HStack(spacing: 6) {
-                    Text(String(format: String(localized: "DisplayRowStatusFormat"), display.resolution, ddcState, status))
-                        .font(.caption)
-                        .foregroundStyle(.secondary)
-                    Text(marker)
-                        .font(.caption2)
-                        .foregroundStyle(.tertiary)
-                }
-            }
-            Spacer()
-            HStack(spacing: 6) {
-                displayOrderButtons(for: display)
-                sleepWakeButton(for: display)
-                Menu {
-                    Button(isBlackoutActive ? String(localized: "Restore Display") : String(localized: "Blackout Display")) {
-                        let settings = settingsStore.settings
-                        blackoutManager.toggle(display: display, fadeOut: settings.fadeOutAnimationEnabled, fadeIn: settings.fadeInAnimationEnabled)
-                    }
-                    Button(String(localized: "Sleep Display")) {
-                        engine.standby(display: display)
-                    }
-                    Button(String(localized: "Wake Display")) {
-                        engine.wake(display: display)
-                    }
-                    Toggle(isOn: Binding(
-                        get: { settingsStore.settings.overlayOnlyDisplayIDs.contains(display.stableIdentity) },
-                        set: { enabled in
-                            settingsStore.update { settings in
-                                if enabled {
-                                    if settings.overlayOnlyDisplayIDs.contains(display.stableIdentity) == false {
-                                        settings.overlayOnlyDisplayIDs.append(display.stableIdentity)
-                                    }
-                                } else {
-                                    settings.overlayOnlyDisplayIDs.removeAll { $0 == display.stableIdentity }
-                                }
-                            }
-                        }
-                    )) {
-                        Text(String(localized: "Overlay Only (Never Sleep)"))
-                    }
-                    Divider()
-                    Button(String(localized: "Rename Display...")) {
-                        renameDisplay(display, currentName: name)
-                    }
-                    Button(String(localized: "Copy Display ID")) {
-                        copyDisplayID(display.stableIdentity)
-                    }
-                } label: {
-                    Image(systemName: "ellipsis")
-                        .font(.system(size: 13, weight: .semibold))
-                        .foregroundStyle(.secondary)
-                        .frame(width: 26, height: 26)
-                        .background(
-                            Circle()
-                                .fill(Color.secondary.opacity(0.12))
-                        )
-                }
-                .menuStyle(.borderlessButton)
-                .menuIndicator(.hidden)
-            }
-        }
-        return content
-        .padding(8)
-        .background(rowBackground)
-        .clipShape(rowShape)
-        .contentShape(rowShape)
-    }
-
-    /// Simplified display row showing only alignment arrows and toggle button.
-    private func displayRowSimple(_ display: DisplayInfo) -> some View {
-        let ddcState = ddcManager.states[display.stableIdentity]?.status.localizedDescription ?? String(localized: "Unknown")
-        let name = displayName(for: display)
-        let status = displayStatus(for: display)
-        let marker = displayOverlayMarker(for: display)
-        let rowBackground: AnyShapeStyle = AnyShapeStyle(.thinMaterial)
-        let rowShape = RoundedRectangle(cornerRadius: 10, style: .continuous)
 
         return HStack(alignment: .top, spacing: 10) {
             VStack(alignment: .leading, spacing: 2) {
-                Text(name)
-                    .font(.subheadline.weight(.semibold))
+                HStack(spacing: 6) {
+                    Text(name)
+                        .font(.subheadline.weight(.semibold))
+                    Image(systemName: isExpanded ? "chevron.down.circle.fill" : "chevron.right.circle")
+                        .font(.caption)
+                        .foregroundStyle(.tertiary)
+                }
                 HStack(spacing: 6) {
                     Text(String(format: String(localized: "DisplayRowStatusFormat"), display.resolution, ddcState, status))
                         .font(.caption)
@@ -483,16 +437,116 @@ struct MenuBarContentView: View {
                         .foregroundStyle(.tertiary)
                 }
             }
-            Spacer()
+            .frame(maxWidth: .infinity, alignment: .leading)
+            .contentShape(Rectangle())
+            .onTapGesture {
+                toggleBrightnessPanel(for: display)
+            }
             HStack(spacing: 6) {
                 displayOrderButtons(for: display)
                 sleepWakeButton(for: display)
+                if includeMenu {
+                    Menu {
+                        Button(isBlackoutActive ? String(localized: "Restore Display") : String(localized: "Blackout Display")) {
+                            let settings = settingsStore.settings
+                            blackoutManager.toggle(display: display, fadeOut: settings.fadeOutAnimationEnabled, fadeIn: settings.fadeInAnimationEnabled)
+                        }
+                        Button(String(localized: "Sleep Display")) {
+                            engine.standby(display: display)
+                        }
+                        Button(String(localized: "Wake Display")) {
+                            engine.wake(display: display)
+                        }
+                        Toggle(isOn: Binding(
+                            get: { settingsStore.settings.overlayOnlyDisplayIDs.contains(display.stableIdentity) },
+                            set: { enabled in
+                                settingsStore.update { settings in
+                                    if enabled {
+                                        if settings.overlayOnlyDisplayIDs.contains(display.stableIdentity) == false {
+                                            settings.overlayOnlyDisplayIDs.append(display.stableIdentity)
+                                        }
+                                    } else {
+                                        settings.overlayOnlyDisplayIDs.removeAll { $0 == display.stableIdentity }
+                                    }
+                                }
+                            }
+                        )) {
+                            Text(String(localized: "Overlay Only (Never Sleep)"))
+                        }
+                        Divider()
+                        Button(String(localized: "Rename Display...")) {
+                            renameDisplay(display, currentName: name)
+                        }
+                        Button(String(localized: "Copy Display ID")) {
+                            copyDisplayID(display.stableIdentity)
+                        }
+                    } label: {
+                        Image(systemName: "ellipsis")
+                            .font(.system(size: 13, weight: .semibold))
+                            .foregroundStyle(.secondary)
+                            .frame(width: 26, height: 26)
+                            .background(
+                                Circle()
+                                    .fill(Color.secondary.opacity(0.12))
+                            )
+                    }
+                    .menuStyle(.borderlessButton)
+                    .menuIndicator(.hidden)
+                }
             }
         }
+    }
+
+    /// Per-display brightness controls (0-100 with DDC/fallback accenting).
+    private func brightnessDropdown(for display: DisplayInfo) -> some View {
+        let mode = engine.brightnessMode(for: display)
+        let tint: Color = mode == .ddc ? .green : .blue
+        let level = engine.brightnessPercent(for: display)
+        let modeLabel = mode == .ddc ? String(localized: "DDC") : String(localized: "Overlay mode")
+
+        return VStack(alignment: .leading, spacing: 8) {
+            HStack(spacing: 8) {
+                Label(String(localized: "Brightness"), systemImage: "sun.max.fill")
+                    .font(.caption.weight(.semibold))
+                    .foregroundStyle(tint)
+                Spacer()
+                Text(
+                    String.localizedStringWithFormat(
+                        String(localized: "BrightnessPercentFormat"),
+                        Int64(level)
+                    )
+                )
+                    .font(.caption.monospacedDigit())
+                    .foregroundStyle(.secondary)
+                Text(modeLabel)
+                    .font(.caption2.weight(.semibold))
+                    .padding(.horizontal, 6)
+                    .padding(.vertical, 3)
+                    .background(tint.opacity(0.18))
+                    .foregroundStyle(tint)
+                    .clipShape(Capsule())
+            }
+
+            Slider(
+                value: Binding(
+                    get: { Double(engine.brightnessPercent(for: display)) },
+                    set: { newValue in
+                        engine.setBrightness(Int(newValue.rounded()), for: display)
+                    }
+                ),
+                in: 0...100
+            )
+            .tint(tint)
+        }
         .padding(8)
-        .background(rowBackground)
-        .clipShape(rowShape)
-        .contentShape(rowShape)
+        .background(
+            RoundedRectangle(cornerRadius: 8, style: .continuous)
+                .fill(tint.opacity(0.09))
+        )
+        .overlay(
+            RoundedRectangle(cornerRadius: 8, style: .continuous)
+                .stroke(tint.opacity(0.28), lineWidth: 1)
+        )
     }
 
     /// Builds the sleep/wake button, respecting DDC support and overlay-only settings.
@@ -725,6 +779,22 @@ struct MenuBarContentView: View {
             internalIndex: internalIndex,
             internalCount: internalCount
         )
+    }
+
+    /// Returns whether the display's brightness dropdown is currently expanded.
+    private func isBrightnessPanelExpanded(for display: DisplayInfo) -> Bool {
+        settingsStore.settings.brightnessPanelExpandedDisplayIDs.contains(display.stableIdentity)
+    }
+
+    /// Toggles the persisted expansion state for a display's brightness dropdown.
+    private func toggleBrightnessPanel(for display: DisplayInfo) {
+        settingsStore.update { settings in
+            if let index = settings.brightnessPanelExpandedDisplayIDs.firstIndex(of: display.stableIdentity) {
+                settings.brightnessPanelExpandedDisplayIDs.remove(at: index)
+            } else {
+                settings.brightnessPanelExpandedDisplayIDs.append(display.stableIdentity)
+            }
+        }
     }
 
     /// Produces additional status rows for any non-visible displays.

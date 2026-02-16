@@ -40,15 +40,15 @@ struct SettingsScrollView<Content: View>: View {
         ZStack {
             SettingsBackdrop()
             ScrollView {
-                VStack(alignment: .leading, spacing: 20) {
+                VStack(alignment: .leading, spacing: 14) {
                     SettingsHeader(title: title, subtitle: subtitle)
                     content()
                 }
-                .padding(24)
-                .padding(.top, 8)
+                .padding(16)
+                .padding(.top, 4)
             }
             .safeAreaInset(edge: .top) {
-                Color.clear.frame(height: 12)
+                Color.clear.frame(height: 6)
             }
         }
     }
@@ -59,16 +59,16 @@ struct SettingsHeader: View {
     let subtitle: String?
 
     var body: some View {
-        VStack(alignment: .leading, spacing: 6) {
+        VStack(alignment: .leading, spacing: 4) {
             Text(title)
-                .font(.largeTitle.weight(.semibold))
+                .font(.title.weight(.semibold))
             if let subtitle, subtitle.isEmpty == false {
                 Text(subtitle)
                     .font(.callout)
                     .foregroundStyle(.secondary)
             }
         }
-        .padding(.bottom, 4)
+        .padding(.bottom, 2)
     }
 }
 
@@ -80,8 +80,8 @@ struct SettingsCard<Content: View>: View {
     @Environment(\.colorScheme) private var colorScheme
 
     var body: some View {
-        VStack(alignment: .leading, spacing: 14) {
-            VStack(alignment: .leading, spacing: 4) {
+        VStack(alignment: .leading, spacing: 10) {
+            VStack(alignment: .leading, spacing: 2) {
                 Text(title)
                     .font(.headline)
                 if let subtitle, subtitle.isEmpty == false {
@@ -92,10 +92,10 @@ struct SettingsCard<Content: View>: View {
             }
             content()
         }
-        .padding(18)
+        .padding(14)
         .background(cardBackground)
         .overlay(cardBorder)
-        .clipShape(RoundedRectangle(cornerRadius: 18, style: .continuous))
+        .clipShape(RoundedRectangle(cornerRadius: 14, style: .continuous))
         .shadow(color: cardShadow.color, radius: cardShadow.radius, x: 0, y: cardShadow.y)
     }
 
@@ -110,7 +110,7 @@ struct SettingsCard<Content: View>: View {
     }
 
     private var cardBorder: some View {
-        RoundedRectangle(cornerRadius: 18, style: .continuous)
+        RoundedRectangle(cornerRadius: 14, style: .continuous)
             .stroke(cardBorderColor, lineWidth: 1)
     }
 
@@ -171,7 +171,7 @@ struct SettingsDivider: View {
         Rectangle()
             .fill(dividerColor)
             .frame(height: 1)
-            .padding(.leading, 48)
+            .padding(.leading, 44)
     }
 
     private var dividerColor: Color {
@@ -188,7 +188,7 @@ struct SettingsRow<Accessory: View>: View {
     @ViewBuilder let accessory: () -> Accessory
 
     var body: some View {
-        HStack(alignment: .center, spacing: 14) {
+        HStack(alignment: .center, spacing: 10) {
             SettingsIcon(systemName: systemImage)
             VStack(alignment: .leading, spacing: 3) {
                 Text(title)
@@ -202,7 +202,7 @@ struct SettingsRow<Accessory: View>: View {
             Spacer()
             accessory()
         }
-        .padding(.vertical, 2)
+        .padding(.vertical, 1)
     }
 }
 

@@ -225,3 +225,11 @@
 "Keyboard Brightness Up" = "Keyboard Brightness Up";
 "Keyboard Brightness Down" = "Keyboard Brightness Down";
 "Keyboard Brightness Toggle" = "Keyboard Brightness Toggle";
+
+"Brightness" = "Brightness";
+"Fallback" = "Overlay mode";
+"DDC" = "DDC";
+"Overlay mode" = "Overlay mode";
+"BrightnessPercentFormat" = "%lld%%";
+"Settings" = "설정";
+"Reorder Display" = "Reorder Display";
