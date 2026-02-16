@@ -256,3 +256,5 @@
 "This backup does not include monitor settings." = "이 백업에는 모니터 설정이 포함되어 있지 않습니다.";
 
 "Dimly settings" = "Dimly 설정";
+
+"Checking DDC" = "DDC 확인 중";

@@ -256,3 +256,5 @@
 "This backup does not include monitor settings." = "该备份不包含显示器设置。";
 
 "Dimly settings" = "Dimly 设置";
+
+"Checking DDC" = "正在检查 DDC";

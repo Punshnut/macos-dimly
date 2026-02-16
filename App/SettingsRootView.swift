@@ -172,8 +172,18 @@ struct SettingsRootView: View {
         let controlTint: Color = (ddcSupported && !overlayOnly) ? .green : (fallbackActive ? .blue : .secondary)
         let canControl = display.isExternal
         let brightnessMode = engine.brightnessMode(for: display)
-        let brightnessTint: Color = brightnessMode == .ddc ? .green : .blue
-        let brightnessModeLabel = brightnessMode == .ddc ? String(localized: "DDC") : String(localized: "Overlay mode")
+        let brightnessPresentation: (Color, String) = {
+            switch brightnessMode {
+            case .ddc:
+                return (.green, String(localized: "DDC"))
+            case .fallback:
+                return (.blue, String(localized: "Overlay mode"))
+            case .checking:
+                return (.orange, String(localized: "Checking DDC"))
+            }
+        }()
+        let brightnessTint = brightnessPresentation.0
+        let brightnessModeLabel = brightnessPresentation.1
 
         HStack(alignment: .top, spacing: 14) {
             SettingsIcon(systemName: display.isBuiltin ? "laptopcomputer" : "display")
@@ -643,6 +653,15 @@ struct SettingsRootView: View {
                 SettingsCard(title: String(localized: "Dimly"), subtitle: nil) {
                     let version = Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String ?? ""
                     let build = Bundle.main.object(forInfoDictionaryKey: "CFBundleVersion") as? String ?? ""
+                    let versionLabel: String = {
+                        if version.isEmpty { return build }
+                        if build.isEmpty { return version }
+                        let formatted = String(format: String(localized: "VersionFormat"), version, build)
+                        if build == version {
+                            return formatted.replacingOccurrences(of: " (\(build))", with: "")
+                        }
+                        return formatted
+                    }()
                     HStack(alignment: .center, spacing: 14) {
                         if let icon = NSApp.applicationIconImage {
                             Image(nsImage: icon)
@@ -654,7 +673,7 @@ struct SettingsRootView: View {
                         VStack(alignment: .leading, spacing: 4) {
                             Text(String(localized: "Dimly"))
                                 .font(.title2.bold())
-                            Text(String(format: String(localized: "VersionFormat"), version, build))
+                            Text(versionLabel)
                                 .font(.caption)
                                 .foregroundStyle(.secondary)
                             Text(String(localized: "© 2026 Jan Feuerbacher"))
@@ -722,15 +741,18 @@ struct SettingsRootView: View {
             backupTileContainer {
                 HStack(alignment: .center, spacing: 10) {
                     SettingsIcon(systemName: systemImage)
-                    HStack(alignment: .firstTextBaseline, spacing: 6) {
+                    VStack(alignment: .leading, spacing: 2) {
                         Text(title)
                             .font(.callout.weight(.semibold))
+                            .lineLimit(1)
+                            .minimumScaleFactor(0.9)
                         Text(details)
                             .font(.caption)
                             .foregroundStyle(.secondary)
+                            .lineLimit(2)
+                            .fixedSize(horizontal: false, vertical: true)
                     }
-                    .lineLimit(1)
-                    .minimumScaleFactor(0.82)
+                    .frame(maxWidth: .infinity, alignment: .leading)
                     Spacer(minLength: 8)
                     Toggle("", isOn: isOn)
                         .labelsHidden()

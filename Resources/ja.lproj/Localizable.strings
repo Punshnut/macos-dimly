@@ -256,3 +256,5 @@
 "This backup does not include monitor settings." = "このバックアップにはモニター設定が含まれていません。";
 
 "Dimly settings" = "Dimly設定";
+
+"Checking DDC" = "DDCを確認中";

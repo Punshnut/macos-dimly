@@ -256,3 +256,5 @@
 "This backup does not include monitor settings." = "Cette sauvegarde n'inclut pas les reglages de l'ecran.";
 
 "Dimly settings" = "Reglages Dimly";
+
+"Checking DDC" = "Vérification DDC";

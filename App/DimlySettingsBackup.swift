@@ -118,12 +118,45 @@ struct MonitorSettingsPayload: Codable {
     let overlayOnlyDisplayIDs: [String]
     let externalDisplayOrder: [String]
     let brightnessPanelExpandedDisplayIDs: [String]
+    let monitorBrightnessByDisplayID: [String: Int]
+    let monitorPowerStateByDisplayID: [String: PersistedMonitorPowerState]
+
+    private enum CodingKeys: String, CodingKey {
+        case displayAliases
+        case overlayOnlyDisplayIDs
+        case externalDisplayOrder
+        case brightnessPanelExpandedDisplayIDs
+        case monitorBrightnessByDisplayID
+        case monitorPowerStateByDisplayID
+    }
 
     init(from settings: DimlySettings) {
         displayAliases = settings.displayAliases
         overlayOnlyDisplayIDs = settings.overlayOnlyDisplayIDs
         externalDisplayOrder = settings.externalDisplayOrder
         brightnessPanelExpandedDisplayIDs = settings.brightnessPanelExpandedDisplayIDs
+        monitorBrightnessByDisplayID = settings.monitorBrightnessByDisplayID
+        monitorPowerStateByDisplayID = settings.monitorPowerStateByDisplayID
+    }
+
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        displayAliases = try container.decodeIfPresent([String: String].self, forKey: .displayAliases) ?? [:]
+        overlayOnlyDisplayIDs = try container.decodeIfPresent([String].self, forKey: .overlayOnlyDisplayIDs) ?? []
+        externalDisplayOrder = try container.decodeIfPresent([String].self, forKey: .externalDisplayOrder) ?? []
+        brightnessPanelExpandedDisplayIDs = try container.decodeIfPresent([String].self, forKey: .brightnessPanelExpandedDisplayIDs) ?? []
+        monitorBrightnessByDisplayID = try container.decodeIfPresent([String: Int].self, forKey: .monitorBrightnessByDisplayID) ?? [:]
+        monitorPowerStateByDisplayID = try container.decodeIfPresent([String: PersistedMonitorPowerState].self, forKey: .monitorPowerStateByDisplayID) ?? [:]
+    }
+
+    func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(displayAliases, forKey: .displayAliases)
+        try container.encode(overlayOnlyDisplayIDs, forKey: .overlayOnlyDisplayIDs)
+        try container.encode(externalDisplayOrder, forKey: .externalDisplayOrder)
+        try container.encode(brightnessPanelExpandedDisplayIDs, forKey: .brightnessPanelExpandedDisplayIDs)
+        try container.encode(monitorBrightnessByDisplayID, forKey: .monitorBrightnessByDisplayID)
+        try container.encode(monitorPowerStateByDisplayID, forKey: .monitorPowerStateByDisplayID)
     }
 
     func apply(to settings: inout DimlySettings) {
@@ -131,5 +164,7 @@ struct MonitorSettingsPayload: Codable {
         settings.overlayOnlyDisplayIDs = overlayOnlyDisplayIDs
         settings.externalDisplayOrder = externalDisplayOrder
         settings.brightnessPanelExpandedDisplayIDs = brightnessPanelExpandedDisplayIDs
+        settings.monitorBrightnessByDisplayID = monitorBrightnessByDisplayID
+        settings.monitorPowerStateByDisplayID = monitorPowerStateByDisplayID
     }
 }

@@ -2,6 +2,13 @@
 // Codable representation of persisted user preferences for Dimly.
 import Foundation
 
+/// Persisted desired monitor power behavior for a display.
+enum PersistedMonitorPowerState: String, Codable, Equatable {
+    case visible
+    case blackout
+    case standby
+}
+
 /// Persisted user-configurable settings for Dimly.
 struct DimlySettings: Codable, Equatable {
     var launchAtLogin: Bool
@@ -16,6 +23,8 @@ struct DimlySettings: Codable, Equatable {
     var externalDisplayOrder: [String]
     var menuBarSimpleMode: Bool
     var brightnessPanelExpandedDisplayIDs: [String]
+    var monitorBrightnessByDisplayID: [String: Int]
+    var monitorPowerStateByDisplayID: [String: PersistedMonitorPowerState]
 
     private enum CodingKeys: String, CodingKey {
         case launchAtLogin
@@ -31,6 +40,8 @@ struct DimlySettings: Codable, Equatable {
         case externalDisplayOrder
         case menuBarSimpleMode
         case brightnessPanelExpandedDisplayIDs
+        case monitorBrightnessByDisplayID
+        case monitorPowerStateByDisplayID
     }
 
     /// Default settings used on first launch or when decoding fails.
@@ -52,7 +63,9 @@ struct DimlySettings: Codable, Equatable {
         overlayOnlyDisplayIDs: [],
         externalDisplayOrder: [],
         menuBarSimpleMode: false,
-        brightnessPanelExpandedDisplayIDs: []
+        brightnessPanelExpandedDisplayIDs: [],
+        monitorBrightnessByDisplayID: [:],
+        monitorPowerStateByDisplayID: [:]
     )
 
     /// Memberwise initializer used by the default factory and decoder.
@@ -68,7 +81,9 @@ struct DimlySettings: Codable, Equatable {
         overlayOnlyDisplayIDs: [String],
         externalDisplayOrder: [String],
         menuBarSimpleMode: Bool,
-        brightnessPanelExpandedDisplayIDs: [String]
+        brightnessPanelExpandedDisplayIDs: [String],
+        monitorBrightnessByDisplayID: [String: Int],
+        monitorPowerStateByDisplayID: [String: PersistedMonitorPowerState]
     ) {
         self.launchAtLogin = launchAtLogin
         self.showMenuBarIcon = showMenuBarIcon
@@ -82,6 +97,8 @@ struct DimlySettings: Codable, Equatable {
         self.externalDisplayOrder = externalDisplayOrder
         self.menuBarSimpleMode = menuBarSimpleMode
         self.brightnessPanelExpandedDisplayIDs = brightnessPanelExpandedDisplayIDs
+        self.monitorBrightnessByDisplayID = monitorBrightnessByDisplayID
+        self.monitorPowerStateByDisplayID = monitorPowerStateByDisplayID
     }
 
     /// Custom decoder that also handles legacy single-hotkey migration.
@@ -100,6 +117,8 @@ struct DimlySettings: Codable, Equatable {
         let externalDisplayOrder = try container.decodeIfPresent([String].self, forKey: .externalDisplayOrder) ?? DimlySettings.default.externalDisplayOrder
         let menuBarSimpleMode = try container.decodeIfPresent(Bool.self, forKey: .menuBarSimpleMode) ?? DimlySettings.default.menuBarSimpleMode
         let brightnessPanelExpandedDisplayIDs = try container.decodeIfPresent([String].self, forKey: .brightnessPanelExpandedDisplayIDs) ?? DimlySettings.default.brightnessPanelExpandedDisplayIDs
+        let monitorBrightnessByDisplayID = try container.decodeIfPresent([String: Int].self, forKey: .monitorBrightnessByDisplayID) ?? DimlySettings.default.monitorBrightnessByDisplayID
+        let monitorPowerStateByDisplayID = try container.decodeIfPresent([String: PersistedMonitorPowerState].self, forKey: .monitorPowerStateByDisplayID) ?? DimlySettings.default.monitorPowerStateByDisplayID
         var resolvedBindings: [HotkeyBinding]
         if let hotkeyBindings, !hotkeyBindings.isEmpty {
             resolvedBindings = hotkeyBindings
@@ -132,7 +151,9 @@ struct DimlySettings: Codable, Equatable {
             overlayOnlyDisplayIDs: overlayOnlyDisplayIDs,
             externalDisplayOrder: externalDisplayOrder,
             menuBarSimpleMode: menuBarSimpleMode,
-            brightnessPanelExpandedDisplayIDs: brightnessPanelExpandedDisplayIDs
+            brightnessPanelExpandedDisplayIDs: brightnessPanelExpandedDisplayIDs,
+            monitorBrightnessByDisplayID: monitorBrightnessByDisplayID,
+            monitorPowerStateByDisplayID: monitorPowerStateByDisplayID
         )
     }
 
@@ -151,6 +172,8 @@ struct DimlySettings: Codable, Equatable {
         try container.encode(externalDisplayOrder, forKey: .externalDisplayOrder)
         try container.encode(menuBarSimpleMode, forKey: .menuBarSimpleMode)
         try container.encode(brightnessPanelExpandedDisplayIDs, forKey: .brightnessPanelExpandedDisplayIDs)
+        try container.encode(monitorBrightnessByDisplayID, forKey: .monitorBrightnessByDisplayID)
+        try container.encode(monitorPowerStateByDisplayID, forKey: .monitorPowerStateByDisplayID)
     }
 }
 

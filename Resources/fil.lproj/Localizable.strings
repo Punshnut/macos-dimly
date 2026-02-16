@@ -254,3 +254,5 @@
 "BrightnessPercentFormat" = "%lld%%";
 "Settings" = "Mga setting";
 "Reorder Display" = "Ayusin muli ang display";
+
+"Checking DDC" = "Sinusuri ang DDC";

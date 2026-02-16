@@ -256,3 +256,5 @@
 "This backup does not include monitor settings." = "ข้อมูลสำรองนี้ไม่มีการตั้งค่าจอภาพ";
 
 "Dimly settings" = "การตั้งค่า Dimly";
+
+"Checking DDC" = "กำลังตรวจสอบ DDC";

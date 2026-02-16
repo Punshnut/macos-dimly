@@ -3,6 +3,7 @@
 import Foundation
 import Combine
 import CoreGraphics
+import AppKit
 import IOKit
 import IOKit.graphics
 import IOKit.i2c
@@ -40,28 +41,72 @@ struct DDCState: Equatable {
 final class DDCManager: ObservableObject {
     @Published private(set) var states: [String: DDCState] = [:] // stableIdentity -> state
     @Published private(set) var brightnessLevels: [String: Int] = [:] // stableIdentity -> percent
+    @Published private(set) var cableCheckDisplayIDs: Set<String> = [] // stableIdentity set
 
     private let displayManager: DisplayManager
     private let logger = Logger(subsystem: Bundle.main.bundleIdentifier ?? "Dimly", category: "DDC")
+    private let probeRetryCount = 4
+    private let probeRetryDelayNanoseconds: UInt64 = 450_000_000
+    // Keep checking UI visible for a short, bounded "cable check" window (2-5s target).
+    private let cableCheckWindowNanoseconds: UInt64 = 3_000_000_000
+    private var probeTasks: [String: Task<Void, Never>] = [:]
+    private var cableCheckClearTasks: [String: Task<Void, Never>] = [:]
+    private var workspaceWakeToken: NSObjectProtocol?
+    private var workspaceScreensWakeToken: NSObjectProtocol?
 
     /// Starts probing current displays and listens for changes.
     init(displayManager: DisplayManager) {
         self.displayManager = displayManager
-        probeAll()
+        probeAll(markAsCableCheck: true)
         // Re-probe whenever displays change.
-        displayManager.$displays.sink { [weak self] _ in
-            self?.probeAll()
+        displayManager.$displays.sink { [weak self] displays in
+            self?.reconcileForDisplayChange(displays)
+            self?.probeAll(markAsCableCheck: true)
         }
         .store(in: &cancellables)
+
+        workspaceWakeToken = NSWorkspace.shared.notificationCenter.addObserver(
+            forName: NSWorkspace.didWakeNotification,
+            object: nil,
+            queue: .main
+        ) { [weak self] _ in
+            Task { @MainActor [weak self] in
+                self?.probeAll(markAsCableCheck: true)
+            }
+        }
+        workspaceScreensWakeToken = NSWorkspace.shared.notificationCenter.addObserver(
+            forName: NSWorkspace.screensDidWakeNotification,
+            object: nil,
+            queue: .main
+        ) { [weak self] _ in
+            Task { @MainActor [weak self] in
+                self?.probeAll(markAsCableCheck: true)
+            }
+        }
+    }
+
+    @MainActor
+    deinit {
+        if let workspaceWakeToken {
+            NSWorkspace.shared.notificationCenter.removeObserver(workspaceWakeToken)
+        }
+        if let workspaceScreensWakeToken {
+            NSWorkspace.shared.notificationCenter.removeObserver(workspaceScreensWakeToken)
+        }
     }
 
     // MARK: - Public API
 
     /// Probes every current display for DDC support.
-    func probeAll() {
+    func probeAll(markAsCableCheck: Bool = false) {
         for display in displayManager.displays {
-            probe(display)
+            scheduleProbe(display, retriesRemaining: probeRetryCount, markAsCableCheck: markAsCableCheck)
         }
+    }
+
+    /// Re-probes a specific display, used when a command failed while status is unresolved.
+    func refreshProbe(for display: DisplayInfo) {
+        scheduleProbe(display, retriesRemaining: probeRetryCount, markAsCableCheck: false)
     }
 
     /// Attempts to issue a DDC standby command; returns success.
@@ -92,19 +137,28 @@ final class DDCManager: ObservableObject {
         }
     }
 
-    /// Attempts to set hardware brightness (0-100%) over DDC/CI.
-    func setBrightness(_ percent: Int, for display: DisplayInfo) -> Bool {
+    /// Attempts to set hardware brightness (0-100%) over DDC/CI asynchronously.
+    func setBrightness(_ percent: Int, for display: DisplayInfo, completion: @escaping (Bool) -> Void) {
         let clamped = max(0, min(100, percent))
-        let result = sendBrightnessCommand(display, value: UInt16(clamped))
-        switch result {
-        case .success:
-            logger.notice("DDC brightness \(clamped, privacy: .public)% set for \(display.stableIdentity, privacy: .public)")
-            updateState(for: display, status: .supported, lastError: nil, lastCommand: nil)
-            brightnessLevels[display.stableIdentity] = clamped
-            return true
-        case .failure(let error):
-            handleFailure(error, display: display, action: "brightness")
-            return false
+        if states[display.stableIdentity]?.status == .notSupported {
+            completion(false)
+            return
+        }
+        Task { [weak self] in
+            guard let self else { return }
+            let result = await Task.detached(priority: .userInitiated) { [display, clamped] in
+                Self.sendBrightnessCommandSynchronously(displayID: display.displayID, value: UInt16(clamped))
+            }.value
+            switch result {
+            case .success:
+                self.logger.notice("DDC brightness \(clamped, privacy: .public)% set for \(display.stableIdentity, privacy: .public)")
+                self.updateState(for: display, status: .supported, lastError: nil, lastCommand: nil)
+                self.brightnessLevels[display.stableIdentity] = clamped
+                completion(true)
+            case .failure(let error):
+                self.handleFailure(error, display: display, action: "brightness")
+                completion(false)
+            }
         }
     }
 
@@ -112,18 +166,79 @@ final class DDCManager: ObservableObject {
 
     private var cancellables: Set<AnyCancellable> = []
 
+    /// Keeps internal probe/state maps aligned with the current display list.
+    private func reconcileForDisplayChange(_ displays: [DisplayInfo]) {
+        let liveIDs = Set(displays.map(\.stableIdentity))
+        let staleStateIDs = states.keys.filter { !liveIDs.contains($0) }
+        for id in staleStateIDs {
+            states.removeValue(forKey: id)
+            brightnessLevels.removeValue(forKey: id)
+            probeTasks[id]?.cancel()
+            probeTasks.removeValue(forKey: id)
+            cableCheckDisplayIDs.remove(id)
+            cableCheckClearTasks[id]?.cancel()
+            cableCheckClearTasks.removeValue(forKey: id)
+        }
+    }
+
     /// Probes a single display asynchronously to avoid blocking the main actor.
-    private func probe(_ display: DisplayInfo) {
+    private func scheduleProbe(_ display: DisplayInfo, retriesRemaining: Int, markAsCableCheck: Bool) {
+        let id = display.stableIdentity
+        probeTasks[id]?.cancel()
         if display.isBuiltin {
             setState(DDCState(status: .notSupported, lastError: String(localized: "Internal panel"), lastCommand: nil, lastCommandAt: nil), for: display)
+            probeTasks[id] = nil
+            return
+        }
+        if markAsCableCheck {
+            startCableCheckWindow(for: id)
+        }
+        setState(DDCState(status: .unknown, lastError: nil, lastCommand: nil, lastCommandAt: nil), for: display)
+
+        probeTasks[id] = Task { [weak self] in
+            guard let self else { return }
+            await self.runProbeAttempt(for: display, retriesRemaining: retriesRemaining)
+        }
+    }
+
+    /// Marks a display as actively being checked due to topology/wake changes.
+    private func startCableCheckWindow(for id: String) {
+        let window = cableCheckWindowNanoseconds
+        cableCheckDisplayIDs.insert(id)
+        cableCheckClearTasks[id]?.cancel()
+        cableCheckClearTasks[id] = Task { [weak self] in
+            try? await Task.sleep(nanoseconds: window)
+            guard !Task.isCancelled else { return }
+            await MainActor.run {
+                self?.cableCheckDisplayIDs.remove(id)
+                self?.cableCheckClearTasks.removeValue(forKey: id)
+            }
+        }
+    }
+
+    /// Runs one probe attempt and retries briefly to avoid false "not supported" during startup/reconnect.
+    private func runProbeAttempt(for display: DisplayInfo, retriesRemaining: Int) async {
+        let result = await Task.detached(priority: .utility) {
+            Self.probeDisplaySynchronously(display)
+        }.value
+        guard Task.isCancelled == false else { return }
+
+        if result.status == .supported {
+            setState(result, for: display)
+            probeTasks[display.stableIdentity] = nil
             return
         }
 
-        // IOI2CInterfaceOpen can block on some panels; do it off the main actor and marshal the result back.
-        Task.detached(priority: .utility) { [display, weak self] in
-            let result = Self.probeDisplaySynchronously(display)
-            await self?.setState(result, for: display)
+        guard retriesRemaining > 0 else {
+            setState(result, for: display)
+            probeTasks[display.stableIdentity] = nil
+            return
         }
+
+        setState(DDCState(status: .unknown, lastError: nil, lastCommand: nil, lastCommandAt: nil), for: display)
+        try? await Task.sleep(nanoseconds: probeRetryDelayNanoseconds)
+        guard Task.isCancelled == false else { return }
+        await runProbeAttempt(for: display, retriesRemaining: retriesRemaining - 1)
     }
 
     /// Synchronous probe used off-main-thread to detect DDC availability.
@@ -188,11 +303,8 @@ final class DDCManager: ObservableObject {
     }
 
     /// Sends a VCP brightness command (0x10) to a display.
-    private func sendBrightnessCommand(_ display: DisplayInfo, value: UInt16) -> Result<Void, Error> {
-        if states[display.stableIdentity]?.status == .notSupported {
-            return .failure(DDCError.notSupported)
-        }
-        let openResult = Self.openConnection(for: display.displayID)
+    nonisolated private static func sendBrightnessCommandSynchronously(displayID: CGDirectDisplayID, value: UInt16) -> Result<Void, Error> {
+        let openResult = Self.openConnection(for: displayID)
         switch openResult {
         case .failure(let error):
             return .failure(error)

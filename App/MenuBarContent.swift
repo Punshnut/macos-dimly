@@ -167,9 +167,38 @@ struct MenuBarContentView: View {
     }
 
     private func setSimpleMode(_ enabled: Bool) {
+        guard settingsStore.settings.menuBarSimpleMode != enabled else { return }
+        let previouslyExpanded = settingsStore.settings.brightnessPanelExpandedDisplayIDs
+
+        // Avoid SwiftUI transition crashes when switching layout branches with expanded
+        // brightness dropdowns still mounted.
+        if previouslyExpanded.isEmpty == false {
+            var transaction = Transaction()
+            transaction.animation = nil
+            withTransaction(transaction) {
+                settingsStore.update { settings in
+                    settings.brightnessPanelExpandedDisplayIDs.removeAll()
+                }
+            }
+        }
         withAnimation(.spring(response: 0.25, dampingFraction: 0.85)) {
             settingsStore.update { settings in
                 settings.menuBarSimpleMode = enabled
+            }
+        }
+
+        guard previouslyExpanded.isEmpty == false else { return }
+        // Restore expanded rows after the mode branch transition has settled.
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.14) {
+            let liveIDs = Set(self.externalDisplays.map(\.stableIdentity))
+            let restored = previouslyExpanded.filter { liveIDs.contains($0) }
+            guard restored.isEmpty == false else { return }
+            withAnimation(.spring(response: 0.28, dampingFraction: 0.84)) {
+                settingsStore.update { settings in
+                    // Keep user intent if mode changed again before restore fired.
+                    guard settings.menuBarSimpleMode == enabled else { return }
+                    settings.brightnessPanelExpandedDisplayIDs = restored
+                }
             }
         }
     }
@@ -402,7 +431,6 @@ struct MenuBarContentView: View {
             displayRowHeader(display, includeMenu: includeMenu, isExpanded: isExpanded)
             if isExpanded {
                 brightnessDropdown(for: display)
-                    .transition(.move(edge: .top).combined(with: .opacity))
             }
         }
         .padding(8)
@@ -500,9 +528,20 @@ struct MenuBarContentView: View {
     /// Per-display brightness controls (0-100 with DDC/fallback accenting).
     private func brightnessDropdown(for display: DisplayInfo) -> some View {
         let mode = engine.brightnessMode(for: display)
-        let tint: Color = mode == .ddc ? .green : .blue
+        let tint: Color
+        let modeLabel: String
+        switch mode {
+        case .ddc:
+            tint = .green
+            modeLabel = String(localized: "DDC")
+        case .fallback:
+            tint = .blue
+            modeLabel = String(localized: "Overlay mode")
+        case .checking:
+            tint = .orange
+            modeLabel = String(localized: "Checking DDC")
+        }
         let level = engine.brightnessPercent(for: display)
-        let modeLabel = mode == .ddc ? String(localized: "DDC") : String(localized: "Overlay mode")
 
         return VStack(alignment: .leading, spacing: 8) {
             HStack(spacing: 8) {
