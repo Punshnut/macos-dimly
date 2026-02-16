@@ -57,6 +57,9 @@ final class BlackoutManager: ObservableObject {
             return
         }
         if let window = overlays[display.stableIdentity] {
+            if let screen = screen(for: display.displayID) {
+                window.update(screen: screen)
+            }
             if !deferShow {
                 show(window, animated: animated, delay: delay)
             }
@@ -189,6 +192,7 @@ final class BlackoutManager: ObservableObject {
             }
             transitionOverlays.removeValue(forKey: key)
         }
+        rebindWindows(to: displays)
 
         // Restore blackout for any newly present display that was persisted.
         let persisted = persistedIdentities()
@@ -203,6 +207,36 @@ final class BlackoutManager: ObservableObject {
         }
         if !hasPerformedStartupRestore {
             hasPerformedStartupRestore = true
+        }
+    }
+
+    /// Rebinds persistent/transition overlays to the latest NSScreen geometry.
+    private func rebindWindows(to displays: [DisplayInfo]) {
+        var byIdentity: [String: DisplayInfo] = [:]
+        for display in displays {
+            byIdentity[display.stableIdentity] = display
+        }
+
+        for (id, window) in overlays {
+            guard let display = byIdentity[id] else { continue }
+            guard let screen = screen(for: display.displayID) else {
+                if activeDisplayIDs.contains(id) {
+                    window.hide(animated: false)
+                    DiagnosticsLogger.shared.log("Hid overlay due to missing screen for \(id)", category: "blackout")
+                }
+                continue
+            }
+            window.update(screen: screen)
+            if activeDisplayIDs.contains(id) {
+                window.show(animated: false)
+            } else {
+                window.hide(animated: false)
+            }
+        }
+
+        for (id, window) in transitionOverlays {
+            guard let display = byIdentity[id], let screen = screen(for: display.displayID) else { continue }
+            window.update(screen: screen)
         }
     }
 
@@ -274,6 +308,9 @@ final class BlackoutManager: ObservableObject {
             return
         }
         if let window = transitionOverlays[display.stableIdentity] {
+            if let screen = screen(for: display.displayID) {
+                window.update(screen: screen)
+            }
             window.show(animated: animated, completion: completion)
             return
         }
@@ -369,11 +406,17 @@ final class BlackoutWindow: NSWindow {
         hasShadow = false
         ignoresMouseEvents = false // blocks clicks; panic hotkey still works
         collectionBehavior = [.canJoinAllSpaces, .fullScreenAuxiliary, .stationary]
-        blackoutView.frame = screen.frame
         blackoutView.wantsLayer = true
         blackoutView.layer?.opacity = 1
+        blackoutView.autoresizingMask = [.width, .height]
         contentView = blackoutView
+        update(screen: screen)
+    }
+
+    /// Repositions and resizes the overlay to match the target screen.
+    func update(screen: NSScreen) {
         setFrame(screen.frame, display: true)
+        blackoutView.frame = CGRect(origin: .zero, size: screen.frame.size)
     }
 
     /// Shows the overlay with an optional fade animation.

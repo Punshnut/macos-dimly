@@ -4,6 +4,7 @@ import Foundation
 import Combine
 import OSLog
 import CoreGraphics
+import AppKit
 
 /// Publishes a live list of connected displays and logs changes.
 @MainActor
@@ -13,6 +14,10 @@ final class DisplayManager: ObservableObject {
     private let hardware: DisplayHardwareProviding
     private let logger = Logger(subsystem: Bundle.main.bundleIdentifier ?? "Dimly", category: "DisplayManager")
     private var callbackToken: AnyObject?
+    private var appScreenChangeToken: NSObjectProtocol?
+    private var workspaceWakeToken: NSObjectProtocol?
+    private var workspaceScreensWakeToken: NSObjectProtocol?
+    private var topologyRefreshTask: Task<Void, Never>?
 
     /// Loads initial display inventory and installs change callbacks.
     init(hardware: DisplayHardwareProviding = DisplayHardware()) {
@@ -23,13 +28,50 @@ final class DisplayManager: ObservableObject {
                 self?.handleDisplayChange(displayID: displayID, flags: flags)
             }
         }
+        appScreenChangeToken = NotificationCenter.default.addObserver(
+            forName: NSApplication.didChangeScreenParametersNotification,
+            object: nil,
+            queue: .main
+        ) { [weak self] _ in
+            Task { @MainActor [weak self] in
+                self?.scheduleTopologyRefresh(reason: "didChangeScreenParameters")
+            }
+        }
+        workspaceWakeToken = NSWorkspace.shared.notificationCenter.addObserver(
+            forName: NSWorkspace.didWakeNotification,
+            object: nil,
+            queue: .main
+        ) { [weak self] _ in
+            Task { @MainActor [weak self] in
+                self?.scheduleTopologyRefresh(reason: "workspaceDidWake")
+            }
+        }
+        workspaceScreensWakeToken = NSWorkspace.shared.notificationCenter.addObserver(
+            forName: NSWorkspace.screensDidWakeNotification,
+            object: nil,
+            queue: .main
+        ) { [weak self] _ in
+            Task { @MainActor [weak self] in
+                self?.scheduleTopologyRefresh(reason: "workspaceScreensDidWake")
+            }
+        }
         DiagnosticsLogger.shared.log("DisplayManager init", category: "display")
     }
 
     @MainActor
     deinit {
+        topologyRefreshTask?.cancel()
         if let callbackToken {
             hardware.unregisterCallback(callbackToken)
+        }
+        if let appScreenChangeToken {
+            NotificationCenter.default.removeObserver(appScreenChangeToken)
+        }
+        if let workspaceWakeToken {
+            NSWorkspace.shared.notificationCenter.removeObserver(workspaceWakeToken)
+        }
+        if let workspaceScreensWakeToken {
+            NSWorkspace.shared.notificationCenter.removeObserver(workspaceScreensWakeToken)
         }
     }
 
@@ -41,6 +83,22 @@ final class DisplayManager: ObservableObject {
         logger.notice("Display change detected for id \(displayID, privacy: .public): \(changeDesc, privacy: .public)")
         DiagnosticsLogger.shared.log("Display change id=\(displayID) flags=\(changeDesc)", category: "display")
         refresh(reason: changeDesc)
+    }
+
+    /// Runs a short refresh burst to catch delayed topology/orientation settling.
+    private func scheduleTopologyRefresh(reason: String) {
+        topologyRefreshTask?.cancel()
+        DiagnosticsLogger.shared.log("Schedule topology refresh: \(reason)", category: "display")
+        topologyRefreshTask = Task { @MainActor [weak self] in
+            guard let self else { return }
+            self.refresh(reason: reason)
+            try? await Task.sleep(nanoseconds: 250_000_000)
+            guard !Task.isCancelled else { return }
+            self.refresh(reason: "\(reason)-settle-250ms")
+            try? await Task.sleep(nanoseconds: 1_000_000_000)
+            guard !Task.isCancelled else { return }
+            self.refresh(reason: "\(reason)-settle-1250ms")
+        }
     }
 
     /// Refreshes display info off the main actor.
