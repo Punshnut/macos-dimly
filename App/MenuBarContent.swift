@@ -666,24 +666,29 @@ struct MenuBarContentView: View {
                     Label(String(localized: "Save Current Profile"), systemImage: "square.and.arrow.down")
                         .frame(maxWidth: .infinity)
                 }
-                Menu {
-                    if profileManager.profiles.isEmpty {
-                        Button(String(localized: "No profiles yet")) {}
-                            .disabled(true)
-                    } else {
-                        ForEach(profileManager.profiles) { profile in
-                            Button(profile.name) {
-                                profileManager.apply(profile: profile)
-                            }
-                        }
-                    }
-                } label: {
-                    Label(String(localized: "Apply Profile"), systemImage: "rectangle.3.group")
-                        .frame(maxWidth: .infinity)
-                }
+                applyProfileMenuButton(maxWidth: .infinity)
             }
             .buttonStyle(.bordered)
             .controlSize(.regular)
+        }
+    }
+
+    /// Reusable menu button that applies a saved profile.
+    private func applyProfileMenuButton(maxWidth: CGFloat? = nil) -> some View {
+        Menu {
+            if profileManager.profiles.isEmpty {
+                Button(String(localized: "No profiles yet")) {}
+                    .disabled(true)
+            } else {
+                ForEach(profileManager.profiles) { profile in
+                    Button(profile.name) {
+                        profileManager.apply(profile: profile)
+                    }
+                }
+            }
+        } label: {
+            Label(String(localized: "Apply Profile"), systemImage: "rectangle.3.group")
+                .frame(maxWidth: maxWidth)
         }
     }
 
@@ -765,10 +770,14 @@ struct MenuBarContentView: View {
 
             Divider()
 
-            Button(role: .destructive) {
-                NSApp.terminate(nil)
-            } label: {
-                Label(String(localized: "Quit Dimly"), systemImage: "power")
+            HStack(spacing: 8) {
+                Button(role: .destructive) {
+                    NSApp.terminate(nil)
+                } label: {
+                    Label(String(localized: "Quit Dimly"), systemImage: "power")
+                }
+                Spacer(minLength: 0)
+                applyProfileMenuButton()
             }
         }
         .buttonStyle(.bordered)
