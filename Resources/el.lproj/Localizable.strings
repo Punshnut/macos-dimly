@@ -13,6 +13,10 @@
 "Your displays, one click away." = "Οι οθόνες σου, ένα κλικ μακριά.";
 "Dimly lives in the menu bar." = "Το Dimly βρίσκεται στη γραμμή μενού.";
 "Look at the top-right of your screen for the display icon." = "Δες επάνω δεξιά για το εικονίδιο οθόνης.";
+"How control mode works" = "Πώς λειτουργεί η λειτουργία ελέγχου";
+"Direct monitor control for brightness and sleep/wake." = "Άμεσος έλεγχος οθόνης για φωτεινότητα και ύπνο/αφύπνιση.";
+"Fallback dimming layer when DDC is unavailable or disabled." = "Εφεδρικό επίπεδο σκίασης όταν το DDC δεν είναι διαθέσιμο ή είναι απενεργοποιημένο.";
+"Dimly tries DDC first, then safely falls back to overlay mode." = "Το Dimly δοκιμάζει πρώτα το DDC και έπειτα μεταβαίνει με ασφάλεια στη λειτουργία επικάλυψης.";
 "Got it" = "Εντάξει";
 "Menu bar" = "Γραμμή μενού";
 

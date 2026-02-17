@@ -13,6 +13,10 @@
 "Your displays, one click away." = "您的显示器只需一键。";
 "Dimly lives in the menu bar." = "Dimly 位于菜单栏。";
 "Look at the top-right of your screen for the display icon." = "请在屏幕右上角找到显示图标。";
+"How control mode works" = "控制模式如何工作";
+"Direct monitor control for brightness and sleep/wake." = "用于亮度和睡眠/唤醒的显示器直接控制。";
+"Fallback dimming layer when DDC is unavailable or disabled." = "当 DDC 不可用或被禁用时使用的后备调暗层。";
+"Dimly tries DDC first, then safely falls back to overlay mode." = "Dimly 会先尝试 DDC，然后安全回退到覆盖模式。";
 "Got it" = "知道了";
 "Menu bar" = "菜单栏";
 

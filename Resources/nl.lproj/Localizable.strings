@@ -13,6 +13,10 @@
 "Your displays, one click away." = "Je schermen zijn één klik verwijderd.";
 "Dimly lives in the menu bar." = "Dimly staat in de menubalk.";
 "Look at the top-right of your screen for the display icon." = "Kijk rechtsboven op je scherm voor het schermpictogram.";
+"How control mode works" = "Hoe de bedieningsmodus werkt";
+"Direct monitor control for brightness and sleep/wake." = "Directe monitorbediening voor helderheid en slaap/wakker maken.";
+"Fallback dimming layer when DDC is unavailable or disabled." = "Reserve-dimlaag wanneer DDC niet beschikbaar of uitgeschakeld is.";
+"Dimly tries DDC first, then safely falls back to overlay mode." = "Dimly probeert eerst DDC en schakelt daarna veilig over naar de overlaymodus.";
 "Got it" = "Begrepen";
 "Menu bar" = "Menubalk";
 

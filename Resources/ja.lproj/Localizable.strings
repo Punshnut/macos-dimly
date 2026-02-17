@@ -13,6 +13,10 @@
 "Your displays, one click away." = "あなたのディスプレイがワンクリックで。";
 "Dimly lives in the menu bar." = "Dimly はメニューバーに常駐します。";
 "Look at the top-right of your screen for the display icon." = "画面右上のディスプレイアイコンを確認してください。";
+"How control mode works" = "コントロールモードの仕組み";
+"Direct monitor control for brightness and sleep/wake." = "明るさやスリープ/復帰のためのモニター直接制御。";
+"Fallback dimming layer when DDC is unavailable or disabled." = "DDC が利用できない、または無効な場合のフォールバック調光レイヤー。";
+"Dimly tries DDC first, then safely falls back to overlay mode." = "Dimly はまず DDC を試し、必要に応じて安全にオーバーレイモードへ切り替えます。";
 "Got it" = "了解";
 "Menu bar" = "メニューバー";
 

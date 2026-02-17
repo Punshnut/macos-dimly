@@ -13,6 +13,10 @@
 "Your displays, one click away." = "உங்கள் காட்சிகள், ஒரு கிளிக்கில்.";
 "Dimly lives in the menu bar." = "Dimly மெனு பட்டையில் உள்ளது.";
 "Look at the top-right of your screen for the display icon." = "காட்சி ஐகானை காண உங்கள் திரையின் மேல் வலப்பக்கத்தைப் பாருங்கள்.";
+"How control mode works" = "கட்டுப்பாட்டு முறை எப்படி செயல்படுகிறது";
+"Direct monitor control for brightness and sleep/wake." = "ஒளிர்வு மற்றும் உறக்கம்/எழுப்பல் ஆகியவற்றிற்கான நேரடி மானிட்டர் கட்டுப்பாடு.";
+"Fallback dimming layer when DDC is unavailable or disabled." = "DDC கிடைக்கவில்லை அல்லது முடக்கப்பட்டிருக்கும்போது மாற்று மங்கலாக்க அடுக்கு.";
+"Dimly tries DDC first, then safely falls back to overlay mode." = "Dimly முதலில் DDC-ஐ முயற்சித்து, பின்னர் பாதுகாப்பாக மேலடுக்கு முறைக்கு மாறுகிறது.";
 "Got it" = "புரிந்தது";
 "Menu bar" = "மெனு பட்டை";
 

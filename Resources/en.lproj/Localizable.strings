@@ -15,6 +15,10 @@
 "Your displays, one click away." = "Your displays, one click away.";
 "Dimly lives in the menu bar." = "Dimly lives in the menu bar.";
 "Look at the top-right of your screen for the display icon." = "Look at the top-right of your screen for the display icon.";
+"How control mode works" = "How control mode works";
+"Direct monitor control for brightness and sleep/wake." = "Direct monitor control for brightness and sleep/wake.";
+"Fallback dimming layer when DDC is unavailable or disabled." = "Fallback dimming layer when DDC is unavailable or disabled.";
+"Dimly tries DDC first, then safely falls back to overlay mode." = "Dimly tries DDC first, then safely falls back to overlay mode.";
 "Got it" = "Got it";
 "Menu bar" = "Menu bar";
 

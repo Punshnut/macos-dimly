@@ -13,6 +13,10 @@
 "Your displays, one click away." = "จอของคุณเพียงคลิกเดียว";
 "Dimly lives in the menu bar." = "Dimly อยู่ที่แถบเมนู";
 "Look at the top-right of your screen for the display icon." = "มองที่มุมขวาบนของหน้าจอเพื่อหาสัญลักษณ์จอ";
+"How control mode works" = "โหมดควบคุมทำงานอย่างไร";
+"Direct monitor control for brightness and sleep/wake." = "ควบคุมจอภาพโดยตรงสำหรับความสว่างและการพัก/ปลุก";
+"Fallback dimming layer when DDC is unavailable or disabled." = "ชั้นลดความสว่างสำรองเมื่อ DDC ใช้งานไม่ได้หรือถูกปิดใช้งาน";
+"Dimly tries DDC first, then safely falls back to overlay mode." = "Dimly จะลองใช้ DDC ก่อน แล้วจึงสลับกลับไปยังโหมดโอเวอร์เลย์อย่างปลอดภัย";
 "Got it" = "รับทราบ";
 "Menu bar" = "แถบเมนู";
 

@@ -14,6 +14,10 @@
 "Your displays, one click away." = "Isang click lang ang layo ng iyong mga display.";
 "Dimly lives in the menu bar." = "Matatagpuan ang Dimly sa menu bar.";
 "Look at the top-right of your screen for the display icon." = "Hanapin ang icon ng display sa kanang-itaas ng screen.";
+"How control mode works" = "Paano gumagana ang control mode";
+"Direct monitor control for brightness and sleep/wake." = "Direktang kontrol ng monitor para sa liwanag at sleep/wake.";
+"Fallback dimming layer when DDC is unavailable or disabled." = "Pansamantalang dimming layer kapag hindi available o naka-disable ang DDC.";
+"Dimly tries DDC first, then safely falls back to overlay mode." = "Susubukan muna ng Dimly ang DDC, pagkatapos ay ligtas na lilipat sa overlay mode.";
 "Got it" = "Nakuha";
 "Menu bar" = "Bar ng menu";
 

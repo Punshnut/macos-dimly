@@ -13,6 +13,10 @@
 "Your displays, one click away." = "Màn hình của bạn chỉ cách một cú nhấp.";
 "Dimly lives in the menu bar." = "Dimly nằm trên thanh menu.";
 "Look at the top-right of your screen for the display icon." = "Xem biểu tượng màn hình ở góc trên bên phải.";
+"How control mode works" = "Chế độ điều khiển hoạt động như thế nào";
+"Direct monitor control for brightness and sleep/wake." = "Điều khiển màn hình trực tiếp cho độ sáng và ngủ/thức.";
+"Fallback dimming layer when DDC is unavailable or disabled." = "Lớp làm mờ dự phòng khi DDC không khả dụng hoặc bị tắt.";
+"Dimly tries DDC first, then safely falls back to overlay mode." = "Dimly thử DDC trước, sau đó chuyển an toàn sang chế độ phủ.";
 "Got it" = "Hiểu rồi";
 "Menu bar" = "Thanh menu";
 

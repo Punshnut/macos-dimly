@@ -13,6 +13,10 @@
 "Your displays, one click away." = "Àwọn àfihàn rẹ, títí kan títẹ̀ kan.";
 "Dimly lives in the menu bar." = "Dimly wà ní pátákó àkójọ.";
 "Look at the top-right of your screen for the display icon." = "Wo ọ̀tún òkè iboju fún àmì àfihàn.";
+"How control mode works" = "Bí ipo iṣakoso ṣe n ṣiṣẹ";
+"Direct monitor control for brightness and sleep/wake." = "Iṣakoso taara ti monitọ̀ fún ìmọ́lẹ̀ àti sun/jí.";
+"Fallback dimming layer when DDC is unavailable or disabled." = "Àlẹmọ dín ìmọ́lẹ̀ àfọwọ́yìí nígbà tí DDC kò sí tàbí tí a ti pa á.";
+"Dimly tries DDC first, then safely falls back to overlay mode." = "Dimly kọ́kọ́ gbìyànjú DDC, lẹ́yìn náà ó padà lọ sí ipo ìbojú ní ààbò.";
 "Got it" = "Mo lóye";
 "Menu bar" = "Pátákó àkójọ";
 

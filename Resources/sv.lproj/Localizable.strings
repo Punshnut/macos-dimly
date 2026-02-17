@@ -13,6 +13,10 @@
 "Your displays, one click away." = "Dina skärmar är ett klick bort.";
 "Dimly lives in the menu bar." = "Dimly finns i menyraden.";
 "Look at the top-right of your screen for the display icon." = "Titta uppe till höger efter skärmikonen.";
+"How control mode works" = "Så fungerar kontrolläget";
+"Direct monitor control for brightness and sleep/wake." = "Direkt skärmstyrning för ljusstyrka och vila/väckning.";
+"Fallback dimming layer when DDC is unavailable or disabled." = "Reservdämpningslager när DDC inte är tillgängligt eller inaktiverat.";
+"Dimly tries DDC first, then safely falls back to overlay mode." = "Dimly provar först DDC och växlar sedan säkert till överlagringsläge.";
 "Got it" = "Jag förstår";
 "Menu bar" = "Menyrad";
 

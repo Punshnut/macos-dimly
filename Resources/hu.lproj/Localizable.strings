@@ -13,6 +13,10 @@
 "Your displays, one click away." = "A kijelzőid egy kattintásra.";
 "Dimly lives in the menu bar." = "A Dimly a menüsávban él.";
 "Look at the top-right of your screen for the display icon." = "Nézd a képernyő jobb felső sarkát a kijelző ikonért.";
+"How control mode works" = "Hogyan működik a vezérlési mód";
+"Direct monitor control for brightness and sleep/wake." = "Közvetlen monitorvezérlés a fényerőhöz és az alvás/ébresztéshez.";
+"Fallback dimming layer when DDC is unavailable or disabled." = "Tartalék fényerő-csökkentő réteg, ha a DDC nem érhető el vagy le van tiltva.";
+"Dimly tries DDC first, then safely falls back to overlay mode." = "A Dimly először a DDC-t próbálja, majd biztonságosan átvált fedvény módra.";
 "Got it" = "Értettem";
 "Menu bar" = "Menüsáv";
 

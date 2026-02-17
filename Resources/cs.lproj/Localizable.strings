@@ -13,6 +13,10 @@
 "Your displays, one click away." = "Tvé displeje na jeden klik.";
 "Dimly lives in the menu bar." = "Dimly sídlí v liště menu.";
 "Look at the top-right of your screen for the display icon." = "Podívej se na ikonu displeje vpravo nahoře.";
+"How control mode works" = "Jak funguje režim ovládání";
+"Direct monitor control for brightness and sleep/wake." = "Přímé ovládání monitoru pro jas a uspání/probuzení.";
+"Fallback dimming layer when DDC is unavailable or disabled." = "Záložní vrstva ztmavení, když DDC není dostupné nebo je vypnuté.";
+"Dimly tries DDC first, then safely falls back to overlay mode." = "Dimly nejprve zkusí DDC a pak bezpečně přejde do režimu překrytí.";
 "Got it" = "Rozumím";
 "Menu bar" = "Lišta menu";
 

@@ -13,6 +13,10 @@
 "Your displays, one click away." = "Nuna-allon ka, danna guda daya kacal.";
 "Dimly lives in the menu bar." = "Dimly yana cikin sandar menu.";
 "Look at the top-right of your screen for the display icon." = "Duba saman dama na allonka don gunkin nunawa.";
+"How control mode works" = "Yadda yanayin sarrafawa ke aiki";
+"Direct monitor control for brightness and sleep/wake." = "Sarrafa na'urar nuni kai tsaye don haske da barci/farkawa.";
+"Fallback dimming layer when DDC is unavailable or disabled." = "Matakin rage haske na madadin lokacin da DDC bai samu ba ko an kashe shi.";
+"Dimly tries DDC first, then safely falls back to overlay mode." = "Dimly yana fara gwada DDC, sannan ya koma yanayin rufi cikin aminci.";
 "Got it" = "Na gane";
 "Menu bar" = "Sandar menu";
 

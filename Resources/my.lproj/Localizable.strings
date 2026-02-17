@@ -13,6 +13,10 @@
 "Your displays, one click away." = "သင့်ပြသမှုများ၊ တစ်ချက်နှိပ်လျှင် သာ။";
 "Dimly lives in the menu bar." = "Dimly သည် မီနူးဘားတွင် နေရသည်။";
 "Look at the top-right of your screen for the display icon." = "စခရင်ရဲ့ ညာဘက်အပေါ်ထောင့်ရှိ ပြသမှုအိုင်ကွန်ကို ကြည့်ပါ။";
+"How control mode works" = "ထိန်းချုပ်မှု မုဒ် အလုပ်လုပ်ပုံ";
+"Direct monitor control for brightness and sleep/wake." = "အလင်းအားနှင့် အိပ်/နှိုး အတွက် မော်နီတာကို တိုက်ရိုက် ထိန်းချုပ်ခြင်း။";
+"Fallback dimming layer when DDC is unavailable or disabled." = "DDC မရရှိနိုင်ခြင်း သို့မဟုတ် ပိတ်ထားခြင်း ဖြစ်ပါက အစားထိုး မှိန်စေမှု အလွှာ။";
+"Dimly tries DDC first, then safely falls back to overlay mode." = "Dimly သည် ပထမဦးစွာ DDC ကို စမ်းသပ်ပြီးနောက် လုံခြုံစွာ Overlay မုဒ်သို့ ပြန်လည်ပြောင်းလဲသည်။";
 "Got it" = "နားလည်ပါပြီ";
 "Menu bar" = "မီနူးဘား";
 

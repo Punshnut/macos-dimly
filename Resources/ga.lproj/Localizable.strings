@@ -13,6 +13,10 @@
 "Your displays, one click away." = "Do thaispeántais, cliceáil amháin uait.";
 "Dimly lives in the menu bar." = "Tá Dimly sa bharra roghchláir.";
 "Look at the top-right of your screen for the display icon." = "Féach ar bharr ar dheis do scáileáin don deilbhín taispeántais.";
+"How control mode works" = "Conas a oibríonn an mód rialaithe";
+"Direct monitor control for brightness and sleep/wake." = "Rialú díreach an mhonatóra le haghaidh gile agus codlata/múscailte.";
+"Fallback dimming layer when DDC is unavailable or disabled." = "Sraith mhaolaithe chúltaca nuair nach bhfuil DDC ar fáil nó nuair atá sé díchumasaithe.";
+"Dimly tries DDC first, then safely falls back to overlay mode." = "Déanann Dimly iarracht ar DDC ar dtús, ansin filleann sé go sábháilte ar mhód forleagain.";
 "Got it" = "Tuigthe";
 "Menu bar" = "Barra roghchláir";
 

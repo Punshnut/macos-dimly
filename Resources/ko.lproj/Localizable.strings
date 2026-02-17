@@ -13,6 +13,10 @@
 "Your displays, one click away." = "당신의 디스플레이, 한 번의 클릭 거리.";
 "Dimly lives in the menu bar." = "Dimly는 메뉴 막대에 있습니다.";
 "Look at the top-right of your screen for the display icon." = "화면 오른쪽 상단의 디스플레이 아이콘을 확인하세요.";
+"How control mode works" = "제어 모드 작동 방식";
+"Direct monitor control for brightness and sleep/wake." = "밝기 및 절전/깨우기를 위한 모니터 직접 제어.";
+"Fallback dimming layer when DDC is unavailable or disabled." = "DDC를 사용할 수 없거나 비활성화된 경우의 대체 디밍 레이어.";
+"Dimly tries DDC first, then safely falls back to overlay mode." = "Dimly는 먼저 DDC를 시도한 뒤, 안전하게 오버레이 모드로 전환합니다.";
 "Got it" = "알겠어요";
 "Menu bar" = "메뉴 막대";
 

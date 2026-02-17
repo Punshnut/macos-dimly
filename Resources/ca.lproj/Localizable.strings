@@ -13,6 +13,10 @@
 "Your displays, one click away." = "Les teves pantalles, a un clic.";
 "Dimly lives in the menu bar." = "Dimly viu a la barra de menú.";
 "Look at the top-right of your screen for the display icon." = "Mira a la part superior dreta per l'icona de pantalla.";
+"How control mode works" = "Com funciona el mode de control";
+"Direct monitor control for brightness and sleep/wake." = "Control directe del monitor per a la brillantor i el repòs/reactivació.";
+"Fallback dimming layer when DDC is unavailable or disabled." = "Capa d'atenuació alternativa quan el DDC no està disponible o està desactivat.";
+"Dimly tries DDC first, then safely falls back to overlay mode." = "Dimly prova primer el DDC i, si cal, passa de manera segura al mode de superposició.";
 "Got it" = "Entès";
 "Menu bar" = "Barra de menú";
 
@@ -257,4 +261,4 @@
 
 "Dimly settings" = "Configuració de Dimly";
 
-"Checking DDC" = "S'esta comprovant el DDC";
+"Checking DDC" = "S'està comprovant el DDC";

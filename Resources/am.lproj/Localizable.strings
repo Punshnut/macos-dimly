@@ -13,6 +13,10 @@
 "Your displays, one click away." = "የእርስዎ ማሳያዎች በአንድ ጠቅታ ርቀት።";
 "Dimly lives in the menu bar." = "Dimly በሜኑ አሞሌ ውስጥ ይኖራል።";
 "Look at the top-right of your screen for the display icon." = "በገጽታዎ ከፍተኛ ቀኝ የማሳያ አዶን ይፈልጉ።";
+"How control mode works" = "የመቆጣጠሪያ ሁኔታ እንዴት እንደሚሰራ";
+"Direct monitor control for brightness and sleep/wake." = "ለብሩህነት እና ለእንቅልፍ/ማስነሳት ቀጥተኛ የሞኒተር መቆጣጠሪያ።";
+"Fallback dimming layer when DDC is unavailable or disabled." = "DDC ካልተገኘ ወይም ከተሰናከለ ጊዜ የተተኪ ማደብዘዣ ሽፋን።";
+"Dimly tries DDC first, then safely falls back to overlay mode." = "Dimly መጀመሪያ DDCን ይሞክራል፣ ከዚያ በደህና ወደ የኦቨርሌይ ሁኔታ ይመለሳል።";
 "Got it" = "ተረዳሁ";
 "Menu bar" = "ሜኑ አሞሌ";
 

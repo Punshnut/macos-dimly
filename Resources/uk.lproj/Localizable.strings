@@ -13,6 +13,10 @@
 "Your displays, one click away." = "Ваші дисплеї — в один клік.";
 "Dimly lives in the menu bar." = "Dimly знаходиться в рядку меню.";
 "Look at the top-right of your screen for the display icon." = "Пошукайте іконку дисплея у правому верхньому куті.";
+"How control mode works" = "Як працює режим керування";
+"Direct monitor control for brightness and sleep/wake." = "Пряме керування монітором для яскравості та сну/пробудження.";
+"Fallback dimming layer when DDC is unavailable or disabled." = "Резервний шар затемнення, коли DDC недоступний або вимкнений.";
+"Dimly tries DDC first, then safely falls back to overlay mode." = "Dimly спочатку пробує DDC, а потім безпечно переходить у режим накладання.";
 "Got it" = "Зрозуміло";
 "Menu bar" = "Рядок меню";
 

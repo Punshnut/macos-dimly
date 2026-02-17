@@ -13,6 +13,10 @@
 "Your displays, one click away." = "شاشاتك على بُعد نقرة واحدة.";
 "Dimly lives in the menu bar." = "Dimly يوجد في شريط القوائم.";
 "Look at the top-right of your screen for the display icon." = "ابحث عن أيقونة الشاشة في أعلى يمين الشاشة.";
+"How control mode works" = "كيف يعمل وضع التحكم";
+"Direct monitor control for brightness and sleep/wake." = "تحكم مباشر في الشاشة للسطوع والسكون/الإيقاظ.";
+"Fallback dimming layer when DDC is unavailable or disabled." = "طبقة تعتيم بديلة عندما يكون DDC غير متاح أو معطلاً.";
+"Dimly tries DDC first, then safely falls back to overlay mode." = "يحاول Dimly استخدام DDC أولاً، ثم ينتقل بأمان إلى وضع التراكب.";
 "Got it" = "تم";
 "Menu bar" = "شريط القوائم";
 

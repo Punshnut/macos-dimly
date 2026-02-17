@@ -13,6 +13,10 @@
 "Your displays, one click away." = "Skrini zako ziko bonyeza moja tu.";
 "Dimly lives in the menu bar." = "Dimly iko kwenye mwambaa wa menyu.";
 "Look at the top-right of your screen for the display icon." = "Tazama kona ya juu kulia ya skrini kuona ikoni ya skrini.";
+"How control mode works" = "Jinsi hali ya udhibiti inavyofanya kazi";
+"Direct monitor control for brightness and sleep/wake." = "Udhibiti wa moja kwa moja wa kifuatiliaji kwa mwangaza na kulala/kuamsha.";
+"Fallback dimming layer when DDC is unavailable or disabled." = "Safu ya kupunguza mwangaza ya akiba DDC isipopatikana au ikizimwa.";
+"Dimly tries DDC first, then safely falls back to overlay mode." = "Dimly hujaribu DDC kwanza, kisha hurudi kwa usalama kwenye hali ya kufunika.";
 "Got it" = "Nimepata";
 "Menu bar" = "Mwambaa wa menyu";
 

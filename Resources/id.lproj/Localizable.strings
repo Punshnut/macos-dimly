@@ -13,6 +13,10 @@
 "Your displays, one click away." = "Layar Anda hanya satu klik.";
 "Dimly lives in the menu bar." = "Dimly berada di bilah menu.";
 "Look at the top-right of your screen for the display icon." = "Lihat ikon layar di kanan atas layar Anda.";
+"How control mode works" = "Cara kerja mode kontrol";
+"Direct monitor control for brightness and sleep/wake." = "Kontrol monitor langsung untuk kecerahan dan tidur/bangun.";
+"Fallback dimming layer when DDC is unavailable or disabled." = "Lapisan peredupan cadangan saat DDC tidak tersedia atau dinonaktifkan.";
+"Dimly tries DDC first, then safely falls back to overlay mode." = "Dimly mencoba DDC terlebih dahulu, lalu dengan aman beralih ke mode overlay.";
 "Got it" = "Mengerti";
 "Menu bar" = "Bilah menu";
 

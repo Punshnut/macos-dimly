@@ -13,6 +13,10 @@
 "Your displays, one click away." = "نمایشگرهای شما فقط یک کلیک فاصله دارند.";
 "Dimly lives in the menu bar." = "Dimly در نوار منو قرار دارد.";
 "Look at the top-right of your screen for the display icon." = "برای آیکون نمایشگر به گوشه بالای راست صفحه نگاه کنید.";
+"How control mode works" = "حالت کنترل چگونه کار می‌کند";
+"Direct monitor control for brightness and sleep/wake." = "کنترل مستقیم مانیتور برای روشنایی و خواب/بیداری.";
+"Fallback dimming layer when DDC is unavailable or disabled." = "لایه کم‌نورکننده جایگزین زمانی که DDC در دسترس نیست یا غیرفعال است.";
+"Dimly tries DDC first, then safely falls back to overlay mode." = "Dimly ابتدا DDC را امتحان می‌کند، سپس با اطمینان به حالت هم‌پوشانی برمی‌گردد.";
 "Got it" = "فهمیدم";
 "Menu bar" = "نوار منو";
 

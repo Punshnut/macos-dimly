@@ -13,6 +13,10 @@
 "Your displays, one click away." = "Näyttösi ovat vain klikkauksen päässä.";
 "Dimly lives in the menu bar." = "Dimly on valikkorivillä.";
 "Look at the top-right of your screen for the display icon." = "Katso näytön oikeaan yläkulmaan näyttökuvaketta.";
+"How control mode works" = "Miten ohjaustila toimii";
+"Direct monitor control for brightness and sleep/wake." = "Suora näytön ohjaus kirkkaudelle ja lepotila/herätys-toiminnoille.";
+"Fallback dimming layer when DDC is unavailable or disabled." = "Vara-himmennyskerros, kun DDC ei ole käytettävissä tai se on poistettu käytöstä.";
+"Dimly tries DDC first, then safely falls back to overlay mode." = "Dimly yrittää ensin DDC:tä ja siirtyy sitten turvallisesti peittotilaan.";
 "Got it" = "Selvä";
 "Menu bar" = "Valikkorivi";
 

@@ -13,6 +13,10 @@
 "Your displays, one click away." = "Ekranların bir tık uzakta.";
 "Dimly lives in the menu bar." = "Dimly menü çubuğunda yaşar.";
 "Look at the top-right of your screen for the display icon." = "Ekran simgesi için ekranın sağ üstüne bak.";
+"How control mode works" = "Kontrol modu nasıl çalışır";
+"Direct monitor control for brightness and sleep/wake." = "Parlaklık ve uyku/uyandırma için doğrudan monitör kontrolü.";
+"Fallback dimming layer when DDC is unavailable or disabled." = "DDC kullanılamadığında veya devre dışı bırakıldığında yedek karartma katmanı.";
+"Dimly tries DDC first, then safely falls back to overlay mode." = "Dimly önce DDC'yi dener, ardından güvenle kaplama moduna geri döner.";
 "Got it" = "Anladım";
 "Menu bar" = "Menü çubuğu";
 

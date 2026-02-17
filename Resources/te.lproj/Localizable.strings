@@ -13,6 +13,10 @@
 "Your displays, one click away." = "మీ ప్రదర్శనలు, ఒక్క క్లిక్ దూరంలో.";
 "Dimly lives in the menu bar." = "Dimly మెనూ బార్ లో ఉంటుంది.";
 "Look at the top-right of your screen for the display icon." = "డిస్ప్లే ఐకాన్ కోసం స్క్రీన్ పై కుడి పై మూలను చూడండి.";
+"How control mode works" = "కంట్రోల్ మోడ్ ఎలా పనిచేస్తుంది";
+"Direct monitor control for brightness and sleep/wake." = "ప్రకాశం మరియు నిద్ర/మేల్కొలుపు కోసం నేరుగా మానిటర్ నియంత్రణ.";
+"Fallback dimming layer when DDC is unavailable or disabled." = "DDC అందుబాటులో లేకపోయినా లేదా నిలిపివేసినా ఉపయోగించే బ్యాకప్ డిమ్మింగ్ పొర.";
+"Dimly tries DDC first, then safely falls back to overlay mode." = "Dimly ముందుగా DDC ను ప్రయత్నించి, ఆపై సురక్షితంగా ఓవర్లే మోడ్‌కి మారుతుంది.";
 "Got it" = "అర్థమైంది";
 "Menu bar" = "మెనూ బార్";
 
