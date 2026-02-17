@@ -53,7 +53,7 @@ Dimly is a menu bar control center for multi-monitor setups. Its core feature is
 - **Animation control** - Optional fade in/out on sleep, wake, and restore.
 - **Universal + updates** - Intel/Apple Silicon builds with Sparkle updates and a GitHub fallback.
 
-## What it actually does (from the code)
+## What it actually does
 
 - **Display inventory + change tracking** - live list of displays with connect/disconnect logging.
 - **Per-display brightness pipeline** - uses DDC brightness where possible and switches to overlay mode where DDC is unavailable.
