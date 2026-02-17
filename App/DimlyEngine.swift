@@ -15,6 +15,7 @@ enum BrightnessControlMode {
 @MainActor
 final class DimlyEngine {
     private let settingsStore: AppSettingsStore
+    private let launcherHotkeyManager: HotkeyManager
     private let panicHotkeyManager: HotkeyManager
     private let logger = Logger(subsystem: Bundle.main.bundleIdentifier ?? "Dimly", category: "Engine")
     private var settingsCancellable: AnyCancellable?
@@ -31,11 +32,15 @@ final class DimlyEngine {
     let blackoutManager: BlackoutManager
     let ddcManager: DDCManager
     let profileManager: ProfileManager
+    var onShowWindow: (() -> Void)?
     var onToggleWindow: (() -> Void)?
 
     /// Builds all managers and binds settings/hotkeys.
     init(settingsStore: AppSettingsStore, displayManager: DisplayManager = DisplayManager()) {
         self.settingsStore = settingsStore
+        self.launcherHotkeyManager = HotkeyManager(
+            descriptor: HotkeyDescriptor.toggleLauncher
+        )
         self.panicHotkeyManager = HotkeyManager(
             descriptor: HotkeyDescriptor.panicDefault
         )
@@ -52,6 +57,9 @@ final class DimlyEngine {
         )
         self.lastObservedBlackoutActiveIDs = blackoutManager.activeDisplayIDs
         DiagnosticsLogger.shared.log("Engine init: managers constructed", category: "engine")
+        self.launcherHotkeyManager.onHotkeyPressed = { [weak self] in
+            self?.onShowWindow?()
+        }
         self.panicHotkeyManager.onHotkeyPressed = { [weak self] in
             self?.panicBlackout(animated: false)
         }
@@ -340,6 +348,7 @@ final class DimlyEngine {
     /// Releases hotkeys and removes overlays before app termination.
     func cleanupBeforeExit() {
         DiagnosticsLogger.shared.log("Cleanup before exit", category: "engine")
+        launcherHotkeyManager.deactivate()
         hotkeyManagers.values.forEach { $0.deactivate() }
         blackoutManager.cleanupBeforeExit()
     }
@@ -347,6 +356,7 @@ final class DimlyEngine {
     /// Prepares for termination, fading out active overlays when requested.
     func prepareForExit(animated: Bool, completion: @escaping () -> Void) {
         DiagnosticsLogger.shared.log("Prepare for exit", category: "engine")
+        launcherHotkeyManager.deactivate()
         hotkeyManagers.values.forEach { $0.deactivate() }
         blackoutManager.fadeOutAllAndClose(animated: animated, completion: completion)
     }
@@ -355,6 +365,7 @@ final class DimlyEngine {
 
     /// Re-applies settings-dependent behaviors (currently hotkeys).
     private func apply(settings: DimlySettings) {
+        launcherHotkeyManager.activate()
         updateHotkeys(settings.hotkeyBindings)
         panicHotkeyManager.activate()
     }

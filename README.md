@@ -11,7 +11,7 @@ Dimly is a menu bar control center for multi-monitor setups. Its core feature is
 
 <p align="center">
     <a href="https://github.com/Punshnut/macos-dimly/releases/latest">
-    <img src="https://img.shields.io/badge/Download-1.1-blueviolet?style=for-the-badge" alt="Download 1.1">
+    <img src="https://img.shields.io/badge/Download-1.2-blueviolet?style=for-the-badge" alt="Download 1.2">
   </a>
 </p>
 
@@ -85,7 +85,7 @@ I’ve worked on desks with 8-12 mixed monitors and uneven DDC support, where fa
 
 ## Keyboard & mouse
 
-- **Show/hide Dimly window (works even when hidden):** default `Cmd` + `Ctrl` + `Option` + `M` (customizable).
+- **Show/hide Dimly menu popup:** default `Cmd` + `Ctrl` + `Option` + `M` (falls back to normal application window when menu bar icon is hidden).
 - **Set your own toggle:** assign a hotkey for Toggle External Blackout / Sleep-Wake in Settings.
 - **Option-click icon:** toggle blackout overlay on all externals.
 - **Control-click icon:** toggle sleep/wake (with blackout fallback).

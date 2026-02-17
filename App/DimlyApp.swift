@@ -156,8 +156,11 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
             engine: engine,
             updaterController: updaterController
         )
+        engine.onShowWindow = { [weak self] in
+            self?.togglePrimaryWindow()
+        }
         engine.onToggleWindow = { [weak self] in
-            self?.launcherWindowController?.toggle()
+            self?.togglePrimaryWindow()
         }
     }
 
@@ -312,6 +315,44 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         var frame = container.frame
         frame.origin.x += 6
         container.setFrameOrigin(frame.origin)
+    }
+
+    /// Toggles the menu bar popup when available, otherwise falls back to launcher window.
+    private func togglePrimaryWindow() {
+        if toggleMenuBarWindowIfPossible() {
+            return
+        }
+        launcherWindowController?.toggle()
+    }
+
+    /// Opens/closes the MenuBarExtra window through the status item when the icon is shown.
+    @discardableResult
+    private func toggleMenuBarWindowIfPossible() -> Bool {
+        guard settingsStore?.settings.showMenuBarIcon == true else { return false }
+        if let menuWindow = dimlyMenuBarWindow(),
+           menuWindow.isVisible {
+            menuWindow.orderOut(nil)
+            return true
+        }
+
+        if let menuWindow = dimlyMenuBarWindow() {
+            NSApp.activate(ignoringOtherApps: true)
+            menuWindow.makeKeyAndOrderFront(nil)
+            menuWindow.orderFrontRegardless()
+            return true
+        }
+        return false
+    }
+
+    /// Finds Dimly's menu bar extra window without relying on private status item APIs.
+    private func dimlyMenuBarWindow() -> NSWindow? {
+        NSApp.windows.first { window in
+            let className = NSStringFromClass(type(of: window))
+            guard className.localizedCaseInsensitiveContains("MenuBarExtra") else {
+                return false
+            }
+            return window.level == .statusBar || window.level == .popUpMenu
+        }
     }
 
 }

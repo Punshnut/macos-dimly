@@ -694,20 +694,148 @@ struct SettingsRootView: View {
                     }
                 }
 
-                SettingsCard(title: String(localized: "About"), subtitle: nil) {
-                    HStack(spacing: 12) {
+                SettingsCard(
+                    title: String(localized: "Community"),
+                    subtitle: String(localized: "Open source links and support")
+                ) {
+                    VStack(alignment: .leading, spacing: 12) {
+                        VStack(alignment: .leading, spacing: 8) {
+                            HStack(spacing: 8) {
+                                Image(systemName: "sparkles")
+                                    .font(.callout.weight(.semibold))
+                                    .foregroundStyle(.white)
+                                    .frame(width: 24, height: 24)
+                                    .background(
+                                        RoundedRectangle(cornerRadius: 8, style: .continuous)
+                                            .fill(.white.opacity(0.22))
+                                    )
+                                Text(String(localized: "Built in public on GitHub"))
+                                    .font(.callout.weight(.semibold))
+                                    .foregroundStyle(.white)
+                                Spacer()
+                            }
+                            Text(String(localized: "Follow releases, track development, and share feedback."))
+                                .font(.caption)
+                                .foregroundStyle(.white.opacity(0.9))
+                        }
+                        .padding(12)
+                        .background(
+                            LinearGradient(
+                                colors: [
+                                    Color(red: 0.11, green: 0.47, blue: 0.89),
+                                    Color(red: 0.12, green: 0.69, blue: 0.62)
+                                ],
+                                startPoint: .topLeading,
+                                endPoint: .bottomTrailing
+                            )
+                        )
+                        .overlay(
+                            RoundedRectangle(cornerRadius: 12, style: .continuous)
+                                .stroke(Color.white.opacity(0.22), lineWidth: 1)
+                        )
+                        .clipShape(RoundedRectangle(cornerRadius: 12, style: .continuous))
+
                         Link(destination: URL(string: "https://github.com/Punshnut/macos-dimly")!) {
-                            Label(String(localized: "GitHub Repo"), systemImage: "link")
+                            aboutActionTile(
+                                title: String(localized: "GitHub Repo"),
+                                subtitle: String(localized: "Source code, changelog, and releases"),
+                                systemImage: "chevron.left.forwardslash.chevron.right",
+                                tint: Color(red: 0.16, green: 0.50, blue: 0.89)
+                            )
                         }
-                        Link(destination: URL(string: "https://github.com/Punshnut/macos-dimly/issues/new")!) {
-                            Label(String(localized: "Report an Issue"), systemImage: "exclamationmark.bubble")
-                        }
-                        Link(destination: URL(string: "https://ko-fi.com/janfeuerbacher")!) {
-                            Label(String(localized: "Donate"), systemImage: "heart")
+                        .buttonStyle(.plain)
+
+                        ViewThatFits(in: .horizontal) {
+                            HStack(spacing: 10) {
+                                Link(destination: URL(string: "https://github.com/Punshnut/macos-dimly/issues/new")!) {
+                                    aboutActionTile(
+                                        title: String(localized: "Report an Issue"),
+                                        subtitle: String(localized: "Bug reports and ideas"),
+                                        systemImage: "exclamationmark.bubble.fill",
+                                        tint: Color(red: 0.93, green: 0.52, blue: 0.19)
+                                    )
+                                }
+                                .buttonStyle(.plain)
+
+                                Link(destination: URL(string: "https://ko-fi.com/janfeuerbacher")!) {
+                                    aboutActionTile(
+                                        title: String(localized: "Donate"),
+                                        subtitle: String(localized: "Support development"),
+                                        systemImage: "heart.fill",
+                                        tint: Color(red: 0.86, green: 0.26, blue: 0.35)
+                                    )
+                                }
+                                .buttonStyle(.plain)
+                            }
+
+                            VStack(spacing: 10) {
+                                Link(destination: URL(string: "https://github.com/Punshnut/macos-dimly/issues/new")!) {
+                                    aboutActionTile(
+                                        title: String(localized: "Report an Issue"),
+                                        subtitle: String(localized: "Bug reports and ideas"),
+                                        systemImage: "exclamationmark.bubble.fill",
+                                        tint: Color(red: 0.93, green: 0.52, blue: 0.19)
+                                    )
+                                }
+                                .buttonStyle(.plain)
+
+                                Link(destination: URL(string: "https://ko-fi.com/janfeuerbacher")!) {
+                                    aboutActionTile(
+                                        title: String(localized: "Donate"),
+                                        subtitle: String(localized: "Support development"),
+                                        systemImage: "heart.fill",
+                                        tint: Color(red: 0.86, green: 0.26, blue: 0.35)
+                                    )
+                                }
+                                .buttonStyle(.plain)
+                            }
                         }
                     }
                 }
             }
+        }
+
+        private func aboutActionTile(
+            title: String,
+            subtitle: String,
+            systemImage: String,
+            tint: Color
+        ) -> some View {
+            HStack(alignment: .center, spacing: 10) {
+                Image(systemName: systemImage)
+                    .font(.callout.weight(.semibold))
+                    .foregroundStyle(tint)
+                    .frame(width: 28, height: 28)
+                    .background(
+                        RoundedRectangle(cornerRadius: 8, style: .continuous)
+                            .fill(tint.opacity(0.14))
+                    )
+                VStack(alignment: .leading, spacing: 1) {
+                    Text(title)
+                        .font(.callout.weight(.semibold))
+                        .foregroundStyle(.primary)
+                        .lineLimit(1)
+                    Text(subtitle)
+                        .font(.caption)
+                        .foregroundStyle(.secondary)
+                        .lineLimit(1)
+                }
+                Spacer(minLength: 8)
+                Image(systemName: "arrow.up.right")
+                    .font(.caption.weight(.semibold))
+                    .foregroundStyle(.secondary)
+            }
+            .padding(.horizontal, 10)
+            .padding(.vertical, 9)
+            .background(
+                RoundedRectangle(cornerRadius: 11, style: .continuous)
+                    .fill(Color.primary.opacity(0.05))
+            )
+            .overlay(
+                RoundedRectangle(cornerRadius: 11, style: .continuous)
+                    .stroke(Color.primary.opacity(0.10), lineWidth: 1)
+            )
+            .contentShape(RoundedRectangle(cornerRadius: 11, style: .continuous))
         }
 
         private var selectedBackupType: SettingsBackupType? {

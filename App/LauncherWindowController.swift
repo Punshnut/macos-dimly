@@ -62,9 +62,14 @@ final class LauncherWindowController: NSWindowController, NSWindowDelegate {
         if window.isVisible {
             window.orderOut(nil)
         } else {
-            showWindow(nil)
-            window.makeKeyAndOrderFront(nil)
-            NSApp.activate(ignoringOtherApps: true)
+            showLauncherWindow()
         }
+    }
+
+    func showLauncherWindow() {
+        guard let window else { return }
+        showWindow(nil)
+        window.makeKeyAndOrderFront(nil)
+        NSApp.activate(ignoringOtherApps: true)
     }
 }
