@@ -15,6 +15,7 @@ struct SettingsRootView: View {
     @State private var introWindowController: IntroWindowController?
     @State private var selection: SettingsDestination = .general
     @State private var proposedProfileName: String = ""
+    @State private var builtinBrightnessCacheByDisplayID: [CGDirectDisplayID: Int] = [:]
 
     enum SettingsDestination: Hashable {
         case general
@@ -424,13 +425,31 @@ struct SettingsRootView: View {
         guard display.isBuiltin else {
             return engine.brightnessPercent(for: display)
         }
-        return DisplayHardware.builtinDisplayBrightnessPercent(for: display.displayID) ?? 100
+
+        if let liveBrightness = DisplayHardware.builtinDisplayBrightnessPercent(for: display.displayID) {
+            if builtinBrightnessCacheByDisplayID[display.displayID] != liveBrightness {
+                DispatchQueue.main.async {
+                    builtinBrightnessCacheByDisplayID[display.displayID] = liveBrightness
+                }
+            }
+            return builtinBrightnessCacheByDisplayID[display.displayID] ?? liveBrightness
+        }
+
+        return builtinBrightnessCacheByDisplayID[display.displayID] ?? 100
     }
 
     /// Applies display brightness to the right backend for this display type.
     private func setBrightness(_ percent: Int, for display: DisplayInfo) {
         if display.isBuiltin {
-            _ = DisplayHardware.setBuiltinDisplayBrightnessPercent(percent, for: display.displayID)
+            let clamped = max(0, min(100, percent))
+            builtinBrightnessCacheByDisplayID[display.displayID] = clamped
+            _ = DisplayHardware.setBuiltinDisplayBrightnessPercent(clamped, for: display.displayID)
+
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.08) {
+                if let confirmed = DisplayHardware.builtinDisplayBrightnessPercent(for: display.displayID) {
+                    builtinBrightnessCacheByDisplayID[display.displayID] = confirmed
+                }
+            }
             return
         }
         engine.setBrightness(percent, for: display)

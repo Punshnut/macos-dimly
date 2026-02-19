@@ -99,12 +99,18 @@ final class DisplayHardware: DisplayHardwareProviding, @unchecked Sendable {
     /// Reads the current brightness (0...100) for a built-in display, if available.
     static func builtinDisplayBrightnessPercent(for displayID: CGDirectDisplayID) -> Int? {
         guard CGDisplayIsBuiltin(displayID) == 1 else { return nil }
-        guard let servicePort = ioServicePort(for: displayID) else { return nil }
-        defer { IOObjectRelease(servicePort) }
+        if let servicePort = ioServicePort(for: displayID) {
+            defer { IOObjectRelease(servicePort) }
+            var brightness: Float = 0
+            let result = IODisplayGetFloatParameter(servicePort, 0, kIODisplayBrightnessKey as CFString, &brightness)
+            if result == KERN_SUCCESS {
+                let clamped = max(0, min(1, Double(brightness)))
+                return Int((clamped * 100).rounded())
+            }
+        }
 
-        var brightness: Float = 0
-        let result = IODisplayGetFloatParameter(servicePort, 0, kIODisplayBrightnessKey as CFString, &brightness)
-        guard result == KERN_SUCCESS else { return nil }
+        // Apple Silicon/internal panels can fail the IODisplay path; fallback to DisplayServices.
+        guard let brightness = displayServicesGetBrightness(displayID) else { return nil }
         let clamped = max(0, min(1, Double(brightness)))
         return Int((clamped * 100).rounded())
     }
@@ -113,12 +119,17 @@ final class DisplayHardware: DisplayHardwareProviding, @unchecked Sendable {
     @discardableResult
     static func setBuiltinDisplayBrightnessPercent(_ percent: Int, for displayID: CGDirectDisplayID) -> Bool {
         guard CGDisplayIsBuiltin(displayID) == 1 else { return false }
-        guard let servicePort = ioServicePort(for: displayID) else { return false }
-        defer { IOObjectRelease(servicePort) }
-
         let clamped = Float(max(0, min(100, percent))) / 100
-        let result = IODisplaySetFloatParameter(servicePort, 0, kIODisplayBrightnessKey as CFString, clamped)
-        return result == KERN_SUCCESS
+
+        if let servicePort = ioServicePort(for: displayID) {
+            defer { IOObjectRelease(servicePort) }
+            let result = IODisplaySetFloatParameter(servicePort, 0, kIODisplayBrightnessKey as CFString, clamped)
+            if result == KERN_SUCCESS {
+                return true
+            }
+        }
+
+        return displayServicesSetBrightness(displayID, clamped)
     }
 
     /// Best-effort lookup for a display UUID using private CoreGraphics symbol.
@@ -216,5 +227,58 @@ final class DisplayHardware: DisplayHardwareProviding, @unchecked Sendable {
             return number.uint32Value
         }
         return 0
+    }
+
+    // MARK: - DisplayServices fallback (private framework)
+
+    private typealias DisplayServicesGetBrightnessFn = @convention(c) (CGDirectDisplayID, UnsafeMutablePointer<Float>) -> Int32
+    private typealias DisplayServicesSetBrightnessFn = @convention(c) (CGDirectDisplayID, Float) -> Int32
+
+    private static let displayServicesGetBrightnessSymbol: DisplayServicesGetBrightnessFn? = {
+        guard
+            let address = displayServicesHandleAddress,
+            let handle = UnsafeMutableRawPointer(bitPattern: address),
+            let symbol = dlsym(handle, "DisplayServicesGetBrightness")
+        else {
+            return nil
+        }
+        return unsafeBitCast(symbol, to: DisplayServicesGetBrightnessFn.self)
+    }()
+
+    private static let displayServicesSetBrightnessSymbol: DisplayServicesSetBrightnessFn? = {
+        guard
+            let address = displayServicesHandleAddress,
+            let handle = UnsafeMutableRawPointer(bitPattern: address),
+            let symbol = dlsym(handle, "DisplayServicesSetBrightness")
+        else {
+            return nil
+        }
+        return unsafeBitCast(symbol, to: DisplayServicesSetBrightnessFn.self)
+    }()
+
+    private static let displayServicesHandleAddress: UInt? = {
+        let candidates = [
+            "/System/Library/PrivateFrameworks/DisplayServices.framework/DisplayServices",
+            "/System/Library/PrivateFrameworks/DisplayServices.framework/Versions/A/DisplayServices"
+        ]
+        for path in candidates {
+            if let handle = dlopen(path, RTLD_LAZY) {
+                return UInt(bitPattern: handle)
+            }
+        }
+        return nil
+    }()
+
+    private static func displayServicesGetBrightness(_ displayID: CGDirectDisplayID) -> Float? {
+        guard let getBrightness = displayServicesGetBrightnessSymbol else { return nil }
+        var level: Float = 0
+        let status = getBrightness(displayID, &level)
+        return status == 0 ? level : nil
+    }
+
+    private static func displayServicesSetBrightness(_ displayID: CGDirectDisplayID, _ level: Float) -> Bool {
+        guard let setBrightness = displayServicesSetBrightnessSymbol else { return false }
+        let status = setBrightness(displayID, level)
+        return status == 0
     }
 }
