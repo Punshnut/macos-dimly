@@ -205,7 +205,8 @@ struct MenuBarContentView: View {
 
     /// External displays only, as seen by the display manager.
     private var externalDisplays: [DisplayInfo] {
-        displayManager.displays.filter { $0.isExternal }
+        let excludedIDs = Set(settingsStore.settings.menuBarExcludedDisplayIDs)
+        return displayManager.displays.filter { $0.isExternal && excludedIDs.contains($0.stableIdentity) == false }
     }
 
     /// External displays ordered by the user's preference list.
@@ -215,7 +216,7 @@ struct MenuBarContentView: View {
 
     /// Map of display stable IDs to their external index number.
     private var externalIndexMap: [String: Int] {
-        indexMap(for: displayManager.displays.filter { $0.isExternal })
+        indexMap(for: externalDisplays)
     }
 
     /// Map of display stable IDs to their internal index number.
@@ -566,16 +567,40 @@ struct MenuBarContentView: View {
                     .clipShape(Capsule())
             }
 
-            Slider(
-                value: Binding(
-                    get: { Double(engine.brightnessPercent(for: display)) },
-                    set: { newValue in
-                        engine.setBrightness(Int(newValue.rounded()), for: display)
-                    }
-                ),
-                in: 0...100
-            )
-            .tint(tint)
+            HStack(spacing: 8) {
+                Button {
+                    nudgeBrightness(for: display, delta: -1)
+                } label: {
+                    Image(systemName: "chevron.left")
+                        .font(.system(size: 10, weight: .semibold))
+                        .frame(width: 18, height: 18)
+                }
+                .buttonStyle(.plain)
+                .foregroundStyle(.secondary)
+                .help(String(localized: "Decrease brightness"))
+
+                Slider(
+                    value: Binding(
+                        get: { Double(engine.brightnessPercent(for: display)) },
+                        set: { newValue in
+                            engine.setBrightness(Int(newValue.rounded()), for: display)
+                        }
+                    ),
+                    in: 0...100
+                )
+                .tint(tint)
+
+                Button {
+                    nudgeBrightness(for: display, delta: 1)
+                } label: {
+                    Image(systemName: "chevron.right")
+                        .font(.system(size: 10, weight: .semibold))
+                        .frame(width: 18, height: 18)
+                }
+                .buttonStyle(.plain)
+                .foregroundStyle(.secondary)
+                .help(String(localized: "Increase brightness"))
+            }
         }
         .padding(8)
         .background(
@@ -845,10 +870,22 @@ struct MenuBarContentView: View {
         }
     }
 
+    /// Nudges brightness by a fixed percentage amount.
+    private func nudgeBrightness(for display: DisplayInfo, delta: Int) {
+        let current = engine.brightnessPercent(for: display)
+        let updated = min(100, max(0, current + delta))
+        guard updated != current else { return }
+        engine.setBrightness(updated, for: display)
+    }
+
     /// Produces additional status rows for any non-visible displays.
     private func extendedStatusRows() -> [String] {
         let visibleText = String(localized: "Visible")
+        let excludedIDs = Set(settingsStore.settings.menuBarExcludedDisplayIDs)
         return displayManager.displays.compactMap { display in
+            if display.isExternal && excludedIDs.contains(display.stableIdentity) {
+                return nil
+            }
             let status = displayStatus(for: display)
             guard status != visibleText else { return nil }
             return "\(displayName(for: display)) • \(status)"

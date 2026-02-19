@@ -276,3 +276,10 @@
 "Bug reports and ideas" = "Rahotannin kurakurai da ra'ayoyi";
 
 "Support development" = "Tallafa wa ci gaba";
+
+"Decrease brightness" = "Rage haske";
+"Increase brightness" = "Ƙara haske";
+"Exclude from menu bar window" = "Cire daga taga sandar menu";
+"Hide this monitor from the menu bar display list." = "Ɓoye wannan na'urar nuni daga jerin nuni na sandar menu.";
+"On" = "Kunna";
+"Off" = "Kashe";

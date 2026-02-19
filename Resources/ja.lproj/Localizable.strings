@@ -276,3 +276,10 @@
 "Bug reports and ideas" = "バグ報告とアイデア";
 
 "Support development" = "開発を支援";
+
+"Decrease brightness" = "明るさを下げる";
+"Increase brightness" = "明るさを上げる";
+"Exclude from menu bar window" = "メニューバーウィンドウから除外";
+"Hide this monitor from the menu bar display list." = "このモニターをメニューバーのディスプレイ一覧から非表示にします。";
+"On" = "オン";
+"Off" = "オフ";

@@ -276,3 +276,10 @@
 "Bug reports and ideas" = "گزارش باگ و ایده‌ها";
 
 "Support development" = "از توسعه حمایت کنید";
+
+"Decrease brightness" = "کاهش روشنایی";
+"Increase brightness" = "افزایش روشنایی";
+"Exclude from menu bar window" = "حذف از پنجره نوار منو";
+"Hide this monitor from the menu bar display list." = "این نمایشگر را از فهرست نمایشگرهای نوار منو پنهان کن.";
+"On" = "روشن";
+"Off" = "خاموش";

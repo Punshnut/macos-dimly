@@ -276,3 +276,10 @@
 "Bug reports and ideas" = "বাগ রিপোর্ট ও আইডিয়া";
 
 "Support development" = "ডেভেলপমেন্টে সহায়তা করুন";
+
+"Decrease brightness" = "উজ্জ্বলতা কমান";
+"Increase brightness" = "উজ্জ্বলতা বাড়ান";
+"Exclude from menu bar window" = "মেনু বার উইন্ডো থেকে বাদ দিন";
+"Hide this monitor from the menu bar display list." = "মেনু বার ডিসপ্লে তালিকা থেকে এই মনিটরটি লুকান।";
+"On" = "চালু";
+"Off" = "বন্ধ";

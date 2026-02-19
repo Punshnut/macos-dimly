@@ -276,3 +276,10 @@
 "Bug reports and ideas" = "Bugmeldingen en ideeën";
 
 "Support development" = "Ondersteun de ontwikkeling";
+
+"Decrease brightness" = "Helderheid verlagen";
+"Increase brightness" = "Helderheid verhogen";
+"Exclude from menu bar window" = "Uitsluiten van menubalkvenster";
+"Hide this monitor from the menu bar display list." = "Verberg deze monitor in de schermlijst van de menubalk.";
+"On" = "Aan";
+"Off" = "Uit";

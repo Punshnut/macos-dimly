@@ -276,3 +276,10 @@
 "Bug reports and ideas" = "பிழை அறிக்கைகள் மற்றும் யோசனைகள்";
 
 "Support development" = "மேம்பாட்டை ஆதரிக்கவும்";
+
+"Decrease brightness" = "பிரகாசத்தை குறைக்கவும்";
+"Increase brightness" = "பிரகாசத்தை அதிகரிக்கவும்";
+"Exclude from menu bar window" = "மெனு பட்டி சாளரத்திலிருந்து விலக்கு";
+"Hide this monitor from the menu bar display list." = "இந்த மானிட்டரை மெனு பட்டி காட்சி பட்டியலில் இருந்து மறைக்கவும்.";
+"On" = "இயக்கு";
+"Off" = "அணை";

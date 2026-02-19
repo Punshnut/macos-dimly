@@ -276,3 +276,10 @@
 "Bug reports and ideas" = "Звіти про помилки та ідеї";
 
 "Support development" = "Підтримати розробку";
+
+"Decrease brightness" = "Зменшити яскравість";
+"Increase brightness" = "Збільшити яскравість";
+"Exclude from menu bar window" = "Виключити з вікна рядка меню";
+"Hide this monitor from the menu bar display list." = "Приховати цей монітор зі списку дисплеїв у рядку меню.";
+"On" = "Увімкнено";
+"Off" = "Вимкнено";

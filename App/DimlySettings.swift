@@ -20,6 +20,7 @@ struct DimlySettings: Codable, Equatable {
     var fadeOutAnimationEnabled: Bool
     var fadeInAnimationEnabled: Bool
     var overlayOnlyDisplayIDs: [String]
+    var menuBarExcludedDisplayIDs: [String]
     var externalDisplayOrder: [String]
     var menuBarSimpleMode: Bool
     var brightnessPanelExpandedDisplayIDs: [String]
@@ -37,6 +38,7 @@ struct DimlySettings: Codable, Equatable {
         case fadeOutAnimationEnabled
         case fadeInAnimationEnabled
         case overlayOnlyDisplayIDs
+        case menuBarExcludedDisplayIDs
         case externalDisplayOrder
         case menuBarSimpleMode
         case brightnessPanelExpandedDisplayIDs
@@ -61,6 +63,7 @@ struct DimlySettings: Codable, Equatable {
         fadeOutAnimationEnabled: true,
         fadeInAnimationEnabled: true,
         overlayOnlyDisplayIDs: [],
+        menuBarExcludedDisplayIDs: [],
         externalDisplayOrder: [],
         menuBarSimpleMode: false,
         brightnessPanelExpandedDisplayIDs: [],
@@ -79,6 +82,7 @@ struct DimlySettings: Codable, Equatable {
         fadeOutAnimationEnabled: Bool,
         fadeInAnimationEnabled: Bool,
         overlayOnlyDisplayIDs: [String],
+        menuBarExcludedDisplayIDs: [String],
         externalDisplayOrder: [String],
         menuBarSimpleMode: Bool,
         brightnessPanelExpandedDisplayIDs: [String],
@@ -94,6 +98,7 @@ struct DimlySettings: Codable, Equatable {
         self.fadeOutAnimationEnabled = fadeOutAnimationEnabled
         self.fadeInAnimationEnabled = fadeInAnimationEnabled
         self.overlayOnlyDisplayIDs = overlayOnlyDisplayIDs
+        self.menuBarExcludedDisplayIDs = menuBarExcludedDisplayIDs
         self.externalDisplayOrder = externalDisplayOrder
         self.menuBarSimpleMode = menuBarSimpleMode
         self.brightnessPanelExpandedDisplayIDs = brightnessPanelExpandedDisplayIDs
@@ -114,6 +119,7 @@ struct DimlySettings: Codable, Equatable {
         let fadeOutAnimationEnabled = try container.decodeIfPresent(Bool.self, forKey: .fadeOutAnimationEnabled) ?? DimlySettings.default.fadeOutAnimationEnabled
         let fadeInAnimationEnabled = try container.decodeIfPresent(Bool.self, forKey: .fadeInAnimationEnabled) ?? DimlySettings.default.fadeInAnimationEnabled
         let overlayOnlyDisplayIDs = try container.decodeIfPresent([String].self, forKey: .overlayOnlyDisplayIDs) ?? DimlySettings.default.overlayOnlyDisplayIDs
+        let menuBarExcludedDisplayIDs = try container.decodeIfPresent([String].self, forKey: .menuBarExcludedDisplayIDs) ?? DimlySettings.default.menuBarExcludedDisplayIDs
         let externalDisplayOrder = try container.decodeIfPresent([String].self, forKey: .externalDisplayOrder) ?? DimlySettings.default.externalDisplayOrder
         let menuBarSimpleMode = try container.decodeIfPresent(Bool.self, forKey: .menuBarSimpleMode) ?? DimlySettings.default.menuBarSimpleMode
         let brightnessPanelExpandedDisplayIDs = try container.decodeIfPresent([String].self, forKey: .brightnessPanelExpandedDisplayIDs) ?? DimlySettings.default.brightnessPanelExpandedDisplayIDs
@@ -149,6 +155,7 @@ struct DimlySettings: Codable, Equatable {
             fadeOutAnimationEnabled: fadeOutAnimationEnabled,
             fadeInAnimationEnabled: fadeInAnimationEnabled,
             overlayOnlyDisplayIDs: overlayOnlyDisplayIDs,
+            menuBarExcludedDisplayIDs: menuBarExcludedDisplayIDs,
             externalDisplayOrder: externalDisplayOrder,
             menuBarSimpleMode: menuBarSimpleMode,
             brightnessPanelExpandedDisplayIDs: brightnessPanelExpandedDisplayIDs,
@@ -169,6 +176,7 @@ struct DimlySettings: Codable, Equatable {
         try container.encode(fadeOutAnimationEnabled, forKey: .fadeOutAnimationEnabled)
         try container.encode(fadeInAnimationEnabled, forKey: .fadeInAnimationEnabled)
         try container.encode(overlayOnlyDisplayIDs, forKey: .overlayOnlyDisplayIDs)
+        try container.encode(menuBarExcludedDisplayIDs, forKey: .menuBarExcludedDisplayIDs)
         try container.encode(externalDisplayOrder, forKey: .externalDisplayOrder)
         try container.encode(menuBarSimpleMode, forKey: .menuBarSimpleMode)
         try container.encode(brightnessPanelExpandedDisplayIDs, forKey: .brightnessPanelExpandedDisplayIDs)

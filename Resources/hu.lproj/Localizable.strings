@@ -276,3 +276,10 @@
 "Bug reports and ideas" = "Hibajelentések és ötletek";
 
 "Support development" = "Támogasd a fejlesztést";
+
+"Decrease brightness" = "Fényerő csökkentése";
+"Increase brightness" = "Fényerő növelése";
+"Exclude from menu bar window" = "Kizárás a menüsáv ablakból";
+"Hide this monitor from the menu bar display list." = "A monitor elrejtése a menüsáv kijelzőlistájából.";
+"On" = "Be";
+"Off" = "Ki";

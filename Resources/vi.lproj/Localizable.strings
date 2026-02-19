@@ -276,3 +276,10 @@
 "Bug reports and ideas" = "Báo lỗi và ý tưởng";
 
 "Support development" = "Ủng hộ phát triển";
+
+"Decrease brightness" = "Giảm độ sáng";
+"Increase brightness" = "Tăng độ sáng";
+"Exclude from menu bar window" = "Loại trừ khỏi cửa sổ thanh menu";
+"Hide this monitor from the menu bar display list." = "Ẩn màn hình này khỏi danh sách màn hình trên thanh menu.";
+"On" = "Bật";
+"Off" = "Tắt";

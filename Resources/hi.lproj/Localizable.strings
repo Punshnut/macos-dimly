@@ -276,3 +276,10 @@
 "Bug reports and ideas" = "बग रिपोर्ट और विचार";
 
 "Support development" = "विकास का समर्थन करें";
+
+"Decrease brightness" = "ब्राइटनेस कम करें";
+"Increase brightness" = "ब्राइटनेस बढ़ाएँ";
+"Exclude from menu bar window" = "मेनू बार विंडो से बाहर रखें";
+"Hide this monitor from the menu bar display list." = "इस मॉनिटर को मेनू बार डिस्प्ले सूची से छिपाएँ।";
+"On" = "चालू";
+"Off" = "बंद";

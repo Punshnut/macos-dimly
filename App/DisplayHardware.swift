@@ -96,6 +96,31 @@ final class DisplayHardware: DisplayHardwareProviding, @unchecked Sendable {
 
     // MARK: - Helpers
 
+    /// Reads the current brightness (0...100) for a built-in display, if available.
+    static func builtinDisplayBrightnessPercent(for displayID: CGDirectDisplayID) -> Int? {
+        guard CGDisplayIsBuiltin(displayID) == 1 else { return nil }
+        guard let servicePort = ioServicePort(for: displayID) else { return nil }
+        defer { IOObjectRelease(servicePort) }
+
+        var brightness: Float = 0
+        let result = IODisplayGetFloatParameter(servicePort, 0, kIODisplayBrightnessKey as CFString, &brightness)
+        guard result == KERN_SUCCESS else { return nil }
+        let clamped = max(0, min(1, Double(brightness)))
+        return Int((clamped * 100).rounded())
+    }
+
+    /// Sets brightness (0...100) for a built-in display.
+    @discardableResult
+    static func setBuiltinDisplayBrightnessPercent(_ percent: Int, for displayID: CGDirectDisplayID) -> Bool {
+        guard CGDisplayIsBuiltin(displayID) == 1 else { return false }
+        guard let servicePort = ioServicePort(for: displayID) else { return false }
+        defer { IOObjectRelease(servicePort) }
+
+        let clamped = Float(max(0, min(100, percent))) / 100
+        let result = IODisplaySetFloatParameter(servicePort, 0, kIODisplayBrightnessKey as CFString, clamped)
+        return result == KERN_SUCCESS
+    }
+
     /// Best-effort lookup for a display UUID using private CoreGraphics symbol.
     private static func displayUUID(for id: CGDirectDisplayID) -> UUID? {
         typealias Fn = @convention(c) (CGDirectDisplayID) -> Unmanaged<CFUUID>?

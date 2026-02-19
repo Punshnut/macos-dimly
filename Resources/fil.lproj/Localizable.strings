@@ -274,3 +274,10 @@
 "Bug reports and ideas" = "Mga ulat ng bug at ideya";
 
 "Support development" = "Suportahan ang development";
+
+"Decrease brightness" = "Bawasan ang liwanag";
+"Increase brightness" = "Taasan ang liwanag";
+"Exclude from menu bar window" = "Ibukod sa window ng menu bar";
+"Hide this monitor from the menu bar display list." = "Itago ang monitor na ito mula sa listahan ng display sa menu bar.";
+"On" = "Naka-on";
+"Off" = "Naka-off";

@@ -276,3 +276,10 @@
 "Bug reports and ideas" = "Zgłoszenia błędów i pomysły";
 
 "Support development" = "Wesprzyj rozwój";
+
+"Decrease brightness" = "Zmniejsz jasność";
+"Increase brightness" = "Zwiększ jasność";
+"Exclude from menu bar window" = "Wyklucz z okna paska menu";
+"Hide this monitor from the menu bar display list." = "Ukryj ten monitor na liście ekranów w pasku menu.";
+"On" = "Włączone";
+"Off" = "Wyłączone";

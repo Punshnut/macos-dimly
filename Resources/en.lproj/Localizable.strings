@@ -273,3 +273,10 @@
 "Bug reports and ideas" = "Bug reports and ideas";
 
 "Support development" = "Support development";
+
+"Decrease brightness" = "Decrease brightness";
+"Increase brightness" = "Increase brightness";
+"Exclude from menu bar window" = "Exclude from menu bar window";
+"Hide this monitor from the menu bar display list." = "Hide this monitor from the menu bar display list.";
+"On" = "On";
+"Off" = "Off";

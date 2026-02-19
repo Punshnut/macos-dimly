@@ -276,3 +276,10 @@
 "Bug reports and ideas" = "የችግኝ ሪፖርቶች እና ሀሳቦች";
 
 "Support development" = "ልማቱን ይደግፉ";
+
+"Decrease brightness" = "ብሩህነትን አሳንስ";
+"Increase brightness" = "ብሩህነትን አሳድግ";
+"Exclude from menu bar window" = "ከሜኑ ባር መስኮት አስወግድ";
+"Hide this monitor from the menu bar display list." = "ይህን ማሳያ ከሜኑ ባር ማሳያ ዝርዝር ውስጥ ደብቅ።";
+"On" = "አብራ";
+"Off" = "ጥፋ";

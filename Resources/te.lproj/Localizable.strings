@@ -276,3 +276,10 @@
 "Bug reports and ideas" = "బగ్ నివేదికలు మరియు ఆలోచనలు";
 
 "Support development" = "అభివృద్ధికి మద్దతివ్వండి";
+
+"Decrease brightness" = "ప్రకాశాన్ని తగ్గించు";
+"Increase brightness" = "ప్రకాశాన్ని పెంచు";
+"Exclude from menu bar window" = "మెనూ బార్ విండో నుంచి మినహాయించు";
+"Hide this monitor from the menu bar display list." = "ఈ మానిటర్‌ను మెనూ బార్ డిస్ప్లే జాబితా నుండి దాచు.";
+"On" = "ఆన్";
+"Off" = "ఆఫ్";

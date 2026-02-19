@@ -276,3 +276,10 @@
 "Bug reports and ideas" = "Hata raporları ve fikirler";
 
 "Support development" = "Geliştirmeyi destekleyin";
+
+"Decrease brightness" = "Parlaklığı azalt";
+"Increase brightness" = "Parlaklığı artır";
+"Exclude from menu bar window" = "Menü çubuğu penceresinden hariç tut";
+"Hide this monitor from the menu bar display list." = "Bu monitörü menü çubuğu ekran listesinden gizle.";
+"On" = "Açık";
+"Off" = "Kapalı";

@@ -276,3 +276,10 @@
 "Bug reports and ideas" = "Laporan pepijat dan idea";
 
 "Support development" = "Sokong pembangunan";
+
+"Decrease brightness" = "Kurangkan kecerahan";
+"Increase brightness" = "Tingkatkan kecerahan";
+"Exclude from menu bar window" = "Kecualikan daripada tetingkap bar menu";
+"Hide this monitor from the menu bar display list." = "Sembunyikan monitor ini daripada senarai paparan pada bar menu.";
+"On" = "Hidup";
+"Off" = "Mati";

@@ -276,3 +276,10 @@
 "Bug reports and ideas" = "بلاغات الأخطاء والأفكار";
 
 "Support development" = "ادعم التطوير";
+
+"Decrease brightness" = "خفض السطوع";
+"Increase brightness" = "زيادة السطوع";
+"Exclude from menu bar window" = "استبعاد من نافذة شريط القوائم";
+"Hide this monitor from the menu bar display list." = "إخفاء هذا الشاشة من قائمة الشاشات في شريط القوائم.";
+"On" = "تشغيل";
+"Off" = "إيقاف";

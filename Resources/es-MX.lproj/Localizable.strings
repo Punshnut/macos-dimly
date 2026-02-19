@@ -276,3 +276,10 @@
 "Bug reports and ideas" = "Reportes de errores e ideas";
 
 "Support development" = "Apoya el desarrollo";
+
+"Decrease brightness" = "Disminuir brillo";
+"Increase brightness" = "Aumentar brillo";
+"Exclude from menu bar window" = "Excluir de la ventana de la barra de menús";
+"Hide this monitor from the menu bar display list." = "Oculta este monitor de la lista de pantallas en la barra de menús.";
+"On" = "Activado";
+"Off" = "Desactivado";

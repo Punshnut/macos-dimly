@@ -276,3 +276,10 @@
 "Bug reports and ideas" = "Ripoti za hitilafu na mawazo";
 
 "Support development" = "Saidia maendeleo";
+
+"Decrease brightness" = "Punguza mwangaza";
+"Increase brightness" = "Ongeza mwangaza";
+"Exclude from menu bar window" = "Ondoa kwenye dirisha la mwambaa wa menyu";
+"Hide this monitor from the menu bar display list." = "Ficha kifuatiliaji hiki kutoka kwenye orodha ya skrini kwenye mwambaa wa menyu.";
+"On" = "Washa";
+"Off" = "Zima";

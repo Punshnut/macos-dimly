@@ -276,3 +276,10 @@
 "Bug reports and ideas" = "问题反馈与想法";
 
 "Support development" = "支持开发";
+
+"Decrease brightness" = "降低亮度";
+"Increase brightness" = "提高亮度";
+"Exclude from menu bar window" = "从菜单栏窗口中排除";
+"Hide this monitor from the menu bar display list." = "在菜单栏显示器列表中隐藏此显示器。";
+"On" = "开";
+"Off" = "关";

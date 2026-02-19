@@ -276,3 +276,10 @@
 "Bug reports and ideas" = "Informes d'errors i idees";
 
 "Support development" = "Dona suport al desenvolupament";
+
+"Decrease brightness" = "Redueix la brillantor";
+"Increase brightness" = "Augmenta la brillantor";
+"Exclude from menu bar window" = "Exclou de la finestra de la barra de menú";
+"Hide this monitor from the menu bar display list." = "Amaga aquest monitor de la llista de pantalles de la barra de menú.";
+"On" = "Activat";
+"Off" = "Desactivat";

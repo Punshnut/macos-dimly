@@ -276,3 +276,10 @@
 "Bug reports and ideas" = "Bug အစီရင်ခံစာများနှင့် အကြံဉာဏ်များ";
 
 "Support development" = "ဖွံ့ဖြိုးတိုးတက်မှုကို ပံ့ပိုးပါ";
+
+"Decrease brightness" = "အလင်းအား လျှော့ရန်";
+"Increase brightness" = "အလင်းအား မြှင့်ရန်";
+"Exclude from menu bar window" = "မီနူးဘား ဝင်းဒိုးမှ ဖယ်ထုတ်ရန်";
+"Hide this monitor from the menu bar display list." = "ဤမော်နီတာကို မီနူးဘား ပြသမှုစာရင်းမှ ဖျောက်ပါ။";
+"On" = "ဖွင့်";
+"Off" = "ပိတ်";

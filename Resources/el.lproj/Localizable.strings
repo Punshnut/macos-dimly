@@ -276,3 +276,10 @@
 "Bug reports and ideas" = "Αναφορές σφαλμάτων και ιδέες";
 
 "Support development" = "Υποστήριξη ανάπτυξης";
+
+"Decrease brightness" = "Μείωση φωτεινότητας";
+"Increase brightness" = "Αύξηση φωτεινότητας";
+"Exclude from menu bar window" = "Εξαίρεση από το παράθυρο της γραμμής μενού";
+"Hide this monitor from the menu bar display list." = "Απόκρυψη αυτής της οθόνης από τη λίστα οθονών της γραμμής μενού.";
+"On" = "Ενεργό";
+"Off" = "Ανενεργό";

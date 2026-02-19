@@ -219,6 +219,7 @@ struct SettingsToggleRow: View {
         SettingsRow(title: title, subtitle: subtitle, systemImage: systemImage) {
             Toggle("", isOn: $isOn)
                 .labelsHidden()
+                .toggleStyle(TahoeGlassToggleStyle())
         }
     }
 }

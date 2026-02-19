@@ -276,3 +276,10 @@
 "Bug reports and ideas" = "รายงานบั๊กและไอเดีย";
 
 "Support development" = "สนับสนุนการพัฒนา";
+
+"Decrease brightness" = "ลดความสว่าง";
+"Increase brightness" = "เพิ่มความสว่าง";
+"Exclude from menu bar window" = "ยกเว้นจากหน้าต่างแถบเมนู";
+"Hide this monitor from the menu bar display list." = "ซ่อนจอนี้จากรายการจอภาพในแถบเมนู";
+"On" = "เปิด";
+"Off" = "ปิด";

@@ -276,3 +276,10 @@
 "Bug reports and ideas" = "Buggrapporter och idéer";
 
 "Support development" = "Stöd utvecklingen";
+
+"Decrease brightness" = "Minska ljusstyrkan";
+"Increase brightness" = "Öka ljusstyrkan";
+"Exclude from menu bar window" = "Uteslut från menyradsfönstret";
+"Hide this monitor from the menu bar display list." = "Dölj den här skärmen från displaylistan i menyraden.";
+"On" = "På";
+"Off" = "Av";

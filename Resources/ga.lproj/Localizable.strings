@@ -276,3 +276,10 @@
 "Bug reports and ideas" = "Tuairiscí fabhtanna agus smaointe";
 
 "Support development" = "Tacaigh leis an bhforbairt";
+
+"Decrease brightness" = "Laghdaigh gile";
+"Increase brightness" = "Méadaigh gile";
+"Exclude from menu bar window" = "Eisiamh ón bhfuinneog barra roghchláir";
+"Hide this monitor from the menu bar display list." = "Folaigh an monatóir seo ó liosta taispeántais an bharra roghchláir.";
+"On" = "Ar siúl";
+"Off" = "Múchta";

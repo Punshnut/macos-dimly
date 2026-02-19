@@ -128,6 +128,7 @@ struct GeneralSettingsPayload: Codable {
 struct MonitorSettingsPayload: Codable {
     let displayAliases: [String: String]
     let overlayOnlyDisplayIDs: [String]
+    let menuBarExcludedDisplayIDs: [String]
     let externalDisplayOrder: [String]
     let brightnessPanelExpandedDisplayIDs: [String]
     let monitorBrightnessByDisplayID: [String: Int]
@@ -136,6 +137,7 @@ struct MonitorSettingsPayload: Codable {
     private enum CodingKeys: String, CodingKey {
         case displayAliases
         case overlayOnlyDisplayIDs
+        case menuBarExcludedDisplayIDs
         case externalDisplayOrder
         case brightnessPanelExpandedDisplayIDs
         case monitorBrightnessByDisplayID
@@ -145,6 +147,7 @@ struct MonitorSettingsPayload: Codable {
     init(from settings: DimlySettings) {
         displayAliases = settings.displayAliases
         overlayOnlyDisplayIDs = settings.overlayOnlyDisplayIDs
+        menuBarExcludedDisplayIDs = settings.menuBarExcludedDisplayIDs
         externalDisplayOrder = settings.externalDisplayOrder
         brightnessPanelExpandedDisplayIDs = settings.brightnessPanelExpandedDisplayIDs
         monitorBrightnessByDisplayID = settings.monitorBrightnessByDisplayID
@@ -155,6 +158,7 @@ struct MonitorSettingsPayload: Codable {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         displayAliases = try container.decodeIfPresent([String: String].self, forKey: .displayAliases) ?? [:]
         overlayOnlyDisplayIDs = try container.decodeIfPresent([String].self, forKey: .overlayOnlyDisplayIDs) ?? []
+        menuBarExcludedDisplayIDs = try container.decodeIfPresent([String].self, forKey: .menuBarExcludedDisplayIDs) ?? []
         externalDisplayOrder = try container.decodeIfPresent([String].self, forKey: .externalDisplayOrder) ?? []
         brightnessPanelExpandedDisplayIDs = try container.decodeIfPresent([String].self, forKey: .brightnessPanelExpandedDisplayIDs) ?? []
         monitorBrightnessByDisplayID = try container.decodeIfPresent([String: Int].self, forKey: .monitorBrightnessByDisplayID) ?? [:]
@@ -165,6 +169,7 @@ struct MonitorSettingsPayload: Codable {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(displayAliases, forKey: .displayAliases)
         try container.encode(overlayOnlyDisplayIDs, forKey: .overlayOnlyDisplayIDs)
+        try container.encode(menuBarExcludedDisplayIDs, forKey: .menuBarExcludedDisplayIDs)
         try container.encode(externalDisplayOrder, forKey: .externalDisplayOrder)
         try container.encode(brightnessPanelExpandedDisplayIDs, forKey: .brightnessPanelExpandedDisplayIDs)
         try container.encode(monitorBrightnessByDisplayID, forKey: .monitorBrightnessByDisplayID)
@@ -174,6 +179,7 @@ struct MonitorSettingsPayload: Codable {
     func apply(to settings: inout DimlySettings) {
         settings.displayAliases = displayAliases
         settings.overlayOnlyDisplayIDs = overlayOnlyDisplayIDs
+        settings.menuBarExcludedDisplayIDs = menuBarExcludedDisplayIDs
         settings.externalDisplayOrder = externalDisplayOrder
         settings.brightnessPanelExpandedDisplayIDs = brightnessPanelExpandedDisplayIDs
         settings.monitorBrightnessByDisplayID = monitorBrightnessByDisplayID

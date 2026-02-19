@@ -276,3 +276,10 @@
 "Bug reports and ideas" = "Hlášení chyb a nápady";
 
 "Support development" = "Podpořte vývoj";
+
+"Decrease brightness" = "Snížit jas";
+"Increase brightness" = "Zvýšit jas";
+"Exclude from menu bar window" = "Vyloučit z okna lišty nabídek";
+"Hide this monitor from the menu bar display list." = "Skrýt tento monitor ze seznamu displejů v liště nabídek.";
+"On" = "Zapnuto";
+"Off" = "Vypnuto";

@@ -276,3 +276,10 @@
 "Bug reports and ideas" = "Сообщения об ошибках и идеи";
 
 "Support development" = "Поддержать разработку";
+
+"Decrease brightness" = "Уменьшить яркость";
+"Increase brightness" = "Увеличить яркость";
+"Exclude from menu bar window" = "Исключить из окна строки меню";
+"Hide this monitor from the menu bar display list." = "Скрыть этот монитор из списка дисплеев в строке меню.";
+"On" = "Вкл";
+"Off" = "Выкл";

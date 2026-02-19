@@ -276,3 +276,10 @@
 "Bug reports and ideas" = "Bugiraportit ja ideat";
 
 "Support development" = "Tue kehitystä";
+
+"Decrease brightness" = "Vähennä kirkkautta";
+"Increase brightness" = "Lisää kirkkautta";
+"Exclude from menu bar window" = "Poista valikkorivin ikkunasta";
+"Hide this monitor from the menu bar display list." = "Piilota tämä näyttö valikkorivin näyttöluettelosta.";
+"On" = "Päällä";
+"Off" = "Pois";

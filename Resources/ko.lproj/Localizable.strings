@@ -276,3 +276,10 @@
 "Bug reports and ideas" = "버그 제보 및 아이디어";
 
 "Support development" = "개발 지원";
+
+"Decrease brightness" = "밝기 낮추기";
+"Increase brightness" = "밝기 높이기";
+"Exclude from menu bar window" = "메뉴 막대 창에서 제외";
+"Hide this monitor from the menu bar display list." = "이 모니터를 메뉴 막대 디스플레이 목록에서 숨깁니다.";
+"On" = "켜짐";
+"Off" = "꺼짐";

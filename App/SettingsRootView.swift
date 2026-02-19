@@ -184,13 +184,20 @@ struct SettingsRootView: View {
         }()
         let brightnessTint = brightnessPresentation.0
         let brightnessModeLabel = brightnessPresentation.1
+        let isExcludedFromMenuBar = settingsStore.settings.menuBarExcludedDisplayIDs.contains(display.stableIdentity)
+        let currentBrightness = brightnessPercent(for: display)
 
-        HStack(alignment: .top, spacing: 14) {
-            SettingsIcon(systemName: display.isBuiltin ? "laptopcomputer" : "display")
-            VStack(alignment: .leading, spacing: 6) {
+        VStack(alignment: .leading, spacing: 12) {
+            HStack(alignment: .top, spacing: 10) {
+                SettingsIcon(systemName: display.isBuiltin ? "laptopcomputer" : "display")
                 HStack(alignment: .center, spacing: 10) {
-                    Text(name)
-                        .font(.callout.weight(.semibold))
+                    VStack(alignment: .leading, spacing: 2) {
+                        Text(name)
+                            .font(.callout.weight(.semibold))
+                        Text(String(format: String(localized: "DisplayTypeResolutionFormat"), typeLabel, display.resolution))
+                            .font(.caption)
+                            .foregroundStyle(.secondary)
+                    }
                     Spacer()
                     Button(String(localized: "Rename")) {
                         renameDisplay(display, currentName: name)
@@ -199,22 +206,25 @@ struct SettingsRootView: View {
                     .controlSize(.small)
                 }
 
-                Text(String(format: String(localized: "DisplayTypeResolutionFormat"), typeLabel, display.resolution))
+            }
+
+            ViewThatFits(in: .horizontal) {
+                HStack(spacing: 8) {
+                    Label(
+                        String(format: String(localized: "DDCStatusFormat"), state.status.localizedDescription),
+                        systemImage: state.status == .supported ? "antenna.radiowaves.left.and.right" : "nosign"
+                    )
                     .font(.caption)
-                    .foregroundStyle(.secondary)
-                if let hz = display.refreshRateHz {
-                    Text(String(format: String(localized: "RefreshRateFormat"), hz))
+                    .foregroundStyle(state.status == .supported ? .green : .secondary)
+                    Text(status)
                         .font(.caption)
                         .foregroundStyle(.secondary)
-                }
-                if let uuid = display.uuid {
-                    Text(String(format: String(localized: "DisplayIDFormat"), uuid))
-                        .font(.caption2)
-                        .foregroundStyle(.tertiary)
-                } else if let serial = display.serialNumber {
-                    Text(String(format: String(localized: "DisplaySerialFormat"), String(serial)))
-                        .font(.caption2)
-                        .foregroundStyle(.tertiary)
+                    if let hz = display.refreshRateHz {
+                        Text(String(format: String(localized: "RefreshRateFormat"), hz))
+                            .font(.caption)
+                            .foregroundStyle(.secondary)
+                    }
+                    Spacer()
                 }
 
                 HStack(spacing: 8) {
@@ -233,33 +243,49 @@ struct SettingsRootView: View {
                             .foregroundStyle(.secondary)
                     }
                     Spacer()
-                    Button(String(localized: "Standby")) { engine.standby(display: display) }
-                        .tint(controlTint)
-                        .disabled(!canControl)
-                        .buttonStyle(.bordered)
-                        .controlSize(.small)
-                    Button(String(localized: "Wake")) { engine.wake(display: display) }
-                        .tint(controlTint)
-                        .disabled(!canControl)
-                        .buttonStyle(.bordered)
-                        .controlSize(.small)
                 }
+            }
 
-                if display.isExternal {
-                    VStack(alignment: .leading, spacing: 8) {
-                        HStack(spacing: 8) {
-                            Label(String(localized: "Brightness"), systemImage: "sun.max.fill")
-                                .font(.caption.weight(.semibold))
-                                .foregroundStyle(brightnessTint)
-                            Spacer()
-                            Text(
-                                String.localizedStringWithFormat(
-                                    String(localized: "BrightnessPercentFormat"),
-                                    Int64(engine.brightnessPercent(for: display))
-                                )
+            if let uuid = display.uuid {
+                Text(String(format: String(localized: "DisplayIDFormat"), uuid))
+                    .font(.caption2)
+                    .foregroundStyle(.tertiary)
+            } else if let serial = display.serialNumber {
+                Text(String(format: String(localized: "DisplaySerialFormat"), String(serial)))
+                    .font(.caption2)
+                    .foregroundStyle(.tertiary)
+            }
+
+            HStack(spacing: 8) {
+                Button(String(localized: "Standby")) { engine.standby(display: display) }
+                    .tint(controlTint)
+                    .disabled(!canControl)
+                    .buttonStyle(.bordered)
+                    .controlSize(.small)
+                Button(String(localized: "Wake")) { engine.wake(display: display) }
+                    .tint(controlTint)
+                    .disabled(!canControl)
+                    .buttonStyle(.bordered)
+                    .controlSize(.small)
+                Spacer()
+            }
+
+            if display.isExternal || display.isBuiltin {
+                VStack(alignment: .leading, spacing: 8) {
+                    HStack(spacing: 8) {
+                        Label(String(localized: "Brightness"), systemImage: "sun.max.fill")
+                            .font(.caption.weight(.semibold))
+                            .foregroundStyle(brightnessTint)
+                        Spacer()
+                        Text(
+                            String.localizedStringWithFormat(
+                                String(localized: "BrightnessPercentFormat"),
+                                Int64(currentBrightness)
                             )
-                            .font(.caption.monospacedDigit())
-                            .foregroundStyle(.secondary)
+                        )
+                        .font(.caption.monospacedDigit())
+                        .foregroundStyle(.secondary)
+                        if display.isExternal {
                             Text(brightnessModeLabel)
                                 .font(.caption2.weight(.semibold))
                                 .padding(.horizontal, 6)
@@ -268,37 +294,65 @@ struct SettingsRootView: View {
                                 .foregroundStyle(brightnessTint)
                                 .clipShape(Capsule())
                         }
+                    }
+
+                    HStack(spacing: 8) {
+                        Button {
+                            nudgeBrightness(for: display, delta: -1)
+                        } label: {
+                            Image(systemName: "chevron.left")
+                                .font(.system(size: 10, weight: .semibold))
+                                .frame(width: 18, height: 18)
+                        }
+                        .buttonStyle(.plain)
+                        .foregroundStyle(.secondary)
+                        .help(String(localized: "Decrease brightness"))
 
                         Slider(
                             value: Binding(
-                                get: { Double(engine.brightnessPercent(for: display)) },
+                                get: { Double(brightnessPercent(for: display)) },
                                 set: { newValue in
-                                    engine.setBrightness(Int(newValue.rounded()), for: display)
+                                    setBrightness(Int(newValue.rounded()), for: display)
                                 }
                             ),
                             in: 0...100
                         )
                         .tint(brightnessTint)
+
+                        Button {
+                            nudgeBrightness(for: display, delta: 1)
+                        } label: {
+                            Image(systemName: "chevron.right")
+                                .font(.system(size: 10, weight: .semibold))
+                                .frame(width: 18, height: 18)
+                        }
+                        .buttonStyle(.plain)
+                        .foregroundStyle(.secondary)
+                        .help(String(localized: "Increase brightness"))
                     }
-                    .padding(8)
-                    .background(
-                        RoundedRectangle(cornerRadius: 8, style: .continuous)
-                            .fill(brightnessTint.opacity(0.09))
-                    )
-                    .overlay(
-                        RoundedRectangle(cornerRadius: 8, style: .continuous)
-                            .stroke(brightnessTint.opacity(0.28), lineWidth: 1)
-                    )
+                }
+                .padding(8)
+                .background(
+                    RoundedRectangle(cornerRadius: 8, style: .continuous)
+                        .fill(brightnessTint.opacity(0.09))
+                )
+                .overlay(
+                    RoundedRectangle(cornerRadius: 8, style: .continuous)
+                        .stroke(brightnessTint.opacity(0.28), lineWidth: 1)
+                )
+
+                if display.isExternal {
+                    Divider()
 
                     HStack(spacing: 10) {
                         Text(String(localized: "Overlay Only (Never Sleep)"))
                             .font(.caption)
                             .foregroundStyle(.secondary)
                         Spacer()
-                        Toggle("", isOn: Binding(
-                            get: { settingsStore.settings.overlayOnlyDisplayIDs.contains(display.stableIdentity) },
-                            set: { enabled in
-                                settingsStore.update { settings in
+                    Toggle("", isOn: Binding(
+                        get: { settingsStore.settings.overlayOnlyDisplayIDs.contains(display.stableIdentity) },
+                        set: { enabled in
+                            settingsStore.update { settings in
                                     if enabled {
                                         if settings.overlayOnlyDisplayIDs.contains(display.stableIdentity) == false {
                                             settings.overlayOnlyDisplayIDs.append(display.stableIdentity)
@@ -306,15 +360,78 @@ struct SettingsRootView: View {
                                     } else {
                                         settings.overlayOnlyDisplayIDs.removeAll { $0 == display.stableIdentity }
                                     }
+                            }
+                        }
+                    ))
+                    .labelsHidden()
+                    .toggleStyle(TahoeGlassToggleStyle())
+                }
+
+                    HStack(spacing: 10) {
+                        VStack(alignment: .leading, spacing: 2) {
+                            Text(String(localized: "Exclude from menu bar window"))
+                                .font(.caption)
+                                .foregroundStyle(.secondary)
+                            Text(String(localized: "Hide this monitor from the menu bar display list."))
+                                .font(.caption2)
+                                .foregroundStyle(.tertiary)
+                        }
+                        Spacer()
+                        Toggle("", isOn: Binding(
+                            get: { isExcludedFromMenuBar },
+                            set: { enabled in
+                                settingsStore.update { settings in
+                                    if enabled {
+                                        if settings.menuBarExcludedDisplayIDs.contains(display.stableIdentity) == false {
+                                            settings.menuBarExcludedDisplayIDs.append(display.stableIdentity)
+                                        }
+                                    } else {
+                                        settings.menuBarExcludedDisplayIDs.removeAll { $0 == display.stableIdentity }
+                                    }
                                 }
                             }
                         ))
                         .labelsHidden()
+                        .toggleStyle(TahoeGlassToggleStyle())
                     }
                 }
             }
         }
-        .padding(.vertical, 2)
+        .padding(14)
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .background(
+            RoundedRectangle(cornerRadius: 14, style: .continuous)
+                .fill(.ultraThinMaterial)
+        )
+        .overlay(
+            RoundedRectangle(cornerRadius: 14, style: .continuous)
+                .stroke(Color.primary.opacity(0.13), lineWidth: 1)
+        )
+    }
+
+    /// Nudges brightness by a fixed percentage amount.
+    private func nudgeBrightness(for display: DisplayInfo, delta: Int) {
+        let current = brightnessPercent(for: display)
+        let updated = min(100, max(0, current + delta))
+        guard updated != current else { return }
+        setBrightness(updated, for: display)
+    }
+
+    /// Returns display brightness from DDC/overlay for externals, macOS for internals.
+    private func brightnessPercent(for display: DisplayInfo) -> Int {
+        guard display.isBuiltin else {
+            return engine.brightnessPercent(for: display)
+        }
+        return DisplayHardware.builtinDisplayBrightnessPercent(for: display.displayID) ?? 100
+    }
+
+    /// Applies display brightness to the right backend for this display type.
+    private func setBrightness(_ percent: Int, for display: DisplayInfo) {
+        if display.isBuiltin {
+            _ = DisplayHardware.setBuiltinDisplayBrightnessPercent(percent, for: display.displayID)
+            return
+        }
+        engine.setBrightness(percent, for: display)
     }
 
     // MARK: - Detail Views
@@ -477,15 +594,52 @@ struct SettingsRootView: View {
                             .font(.caption)
                             .foregroundStyle(.secondary)
                     } else {
-                        ForEach(displayManager.displays) { display in
-                            displayRow(display)
-                            if display.id != displayManager.displays.last?.id {
-                                SettingsDivider()
+                        let internalDisplays = displayManager.displays.filter(\.isBuiltin)
+                        let externalDisplays = displayManager.displays.filter(\.isExternal)
+
+                        ForEach(Array(displayPairs(externalDisplays).enumerated()), id: \.offset) { _, pair in
+                            HStack(alignment: .top, spacing: 12) {
+                                displayRow(pair[0])
+                                    .frame(maxWidth: .infinity, alignment: .topLeading)
+
+                                if pair.count == 2 {
+                                    Rectangle()
+                                        .fill(Color.primary.opacity(0.12))
+                                        .frame(width: 1)
+                                        .padding(.vertical, 10)
+
+                                    displayRow(pair[1])
+                                        .frame(maxWidth: .infinity, alignment: .topLeading)
+                                } else {
+                                    Spacer(minLength: 0)
+                                        .frame(maxWidth: .infinity)
+                                }
                             }
+                        }
+
+                        if internalDisplays.isEmpty == false && externalDisplays.isEmpty == false {
+                            SettingsDivider()
+                        }
+
+                        ForEach(internalDisplays) { display in
+                            displayRow(display)
+                                .frame(maxWidth: .infinity, alignment: .topLeading)
                         }
                     }
                 }
             }
+        }
+
+        private func displayPairs(_ displays: [DisplayInfo]) -> [[DisplayInfo]] {
+            guard displays.isEmpty == false else { return [] }
+            var pairs: [[DisplayInfo]] = []
+            var index = 0
+            while index < displays.count {
+                let next = min(index + 2, displays.count)
+                pairs.append(Array(displays[index..<next]))
+                index += 2
+            }
+            return pairs
         }
 
         private var shortcutsDetail: some View {
@@ -631,6 +785,7 @@ struct SettingsRootView: View {
         private var automationSection: some View {
             VStack(alignment: .leading, spacing: 8) {
                 Toggle(String(localized: "Auto-apply profile when an external display connects"), isOn: $profileManager.automationEnabled)
+                    .toggleStyle(TahoeGlassToggleStyle())
                 Picker(String(localized: "Profile to apply"), selection: Binding(
                     get: { profileManager.automationProfileID ?? profileManager.profiles.first?.id },
                     set: { profileManager.automationProfileID = $0 }
@@ -1068,6 +1223,90 @@ struct SettingsRootView: View {
             )
             return String(format: String(localized: "DisplayTypeResolutionFormat"), name, marker)
         }
+    }
+}
+
+/// Glossy switch used for modern per-display exclusions in settings.
+struct TahoeGlassToggleStyle: ToggleStyle {
+    func makeBody(configuration: Configuration) -> some View {
+        TahoeGlassToggleBody(configuration: configuration)
+    }
+}
+
+private struct TahoeGlassToggleBody: View {
+    let configuration: ToggleStyle.Configuration
+    @GestureState private var dragTranslation: CGFloat = 0
+
+    private let trackWidth: CGFloat = 46
+    private let trackHeight: CGFloat = 26
+    private let knobPadding: CGFloat = 2
+
+    private var knobSize: CGFloat {
+        trackHeight - (knobPadding * 2)
+    }
+
+    private var knobTravel: CGFloat {
+        trackWidth - knobSize - (knobPadding * 2)
+    }
+
+    var body: some View {
+        let restingX = configuration.isOn ? knobTravel : 0
+        let dragX = min(max(restingX + dragTranslation, 0), knobTravel)
+        let visualOn = dragX > (knobTravel * 0.5)
+
+        ZStack(alignment: .leading) {
+            Capsule(style: .continuous)
+                .fill(
+                    LinearGradient(
+                        colors: visualOn
+                            ? [Color.accentColor.opacity(0.84), Color.accentColor.opacity(0.60)]
+                            : [Color.white.opacity(0.20), Color.white.opacity(0.08)],
+                        startPoint: .topLeading,
+                        endPoint: .bottomTrailing
+                    )
+                )
+                .background(Capsule(style: .continuous).fill(.ultraThinMaterial))
+                .overlay(
+                    Capsule(style: .continuous)
+                        .stroke(Color.white.opacity(visualOn ? 0.40 : 0.30), lineWidth: 1)
+                )
+
+            Circle()
+                .fill(
+                    LinearGradient(
+                        colors: [Color.white.opacity(0.99), Color.white.opacity(0.84)],
+                        startPoint: .top,
+                        endPoint: .bottom
+                    )
+                )
+                .overlay(
+                    Circle()
+                        .stroke(Color.black.opacity(0.10), lineWidth: 0.8)
+                )
+                .shadow(color: Color.black.opacity(0.20), radius: 2.6, y: 1.2)
+                .frame(width: knobSize, height: knobSize)
+                .offset(x: knobPadding + dragX)
+        }
+        .frame(width: trackWidth, height: trackHeight)
+        .contentShape(Rectangle())
+        .gesture(
+            DragGesture(minimumDistance: 0)
+                .updating($dragTranslation) { value, state, _ in
+                    state = value.translation.width
+                }
+                .onEnded { value in
+                    let finalX = min(max(restingX + value.translation.width, 0), knobTravel)
+                    let shouldTurnOn = finalX > (knobTravel * 0.5)
+                    if configuration.isOn != shouldTurnOn {
+                        configuration.isOn = shouldTurnOn
+                    }
+                }
+        )
+        .onTapGesture {
+            configuration.isOn.toggle()
+        }
+        .animation(.spring(response: 0.24, dampingFraction: 0.84), value: configuration.isOn)
+        .accessibilityValue(configuration.isOn ? String(localized: "On") : String(localized: "Off"))
     }
 }
 
