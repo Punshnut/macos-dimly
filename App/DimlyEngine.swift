@@ -54,7 +54,8 @@ final class DimlyEngine {
         self.profileManager = ProfileManager(
             displayManager: displayManager,
             blackoutManager: blackoutManager,
-            ddcManager: ddcManager
+            ddcManager: ddcManager,
+            settingsStore: settingsStore
         )
         self.lastObservedBlackoutActiveIDs = blackoutManager.activeDisplayIDs
         DiagnosticsLogger.shared.log("Engine init: managers constructed", category: "engine")

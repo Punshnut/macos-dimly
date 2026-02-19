@@ -933,7 +933,9 @@ struct MenuBarContentView: View {
             return builtinBrightnessCacheByDisplayID[display.displayID] ?? liveBrightness
         }
 
-        return builtinBrightnessCacheByDisplayID[display.displayID] ?? 100
+        return builtinBrightnessCacheByDisplayID[display.displayID]
+            ?? settingsStore.settings.monitorBrightnessByDisplayID[display.stableIdentity]
+            ?? 100
     }
 
     /// Applies display brightness to the right backend for this display type.
@@ -942,10 +944,16 @@ struct MenuBarContentView: View {
             let clamped = max(0, min(100, percent))
             builtinBrightnessCacheByDisplayID[display.displayID] = clamped
             _ = DisplayHardware.setBuiltinDisplayBrightnessPercent(clamped, for: display.displayID)
+            settingsStore.update { settings in
+                settings.monitorBrightnessByDisplayID[display.stableIdentity] = clamped
+            }
 
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.08) {
                 if let confirmed = DisplayHardware.builtinDisplayBrightnessPercent(for: display.displayID) {
                     builtinBrightnessCacheByDisplayID[display.displayID] = confirmed
+                    settingsStore.update { settings in
+                        settings.monitorBrightnessByDisplayID[display.stableIdentity] = confirmed
+                    }
                 }
             }
             return

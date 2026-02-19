@@ -72,6 +72,35 @@ struct DisplayProfile: Codable, Identifiable, Equatable {
     var name: String
     let createdAt: Date
     var displays: [DisplaySnapshot]
+    var monitorState: ProfileMonitorState?
+}
+
+/// Monitor-related UI + brightness state captured inside a profile.
+struct ProfileMonitorState: Codable, Equatable {
+    var menuBarExcludedDisplayIDs: [String]
+    var menuBarIncludedInternalDisplayIDs: [String]
+    var externalDisplayOrder: [String]
+    var internalDisplayOrder: [String]
+    var brightnessPanelExpandedDisplayIDs: [String]
+    var monitorBrightnessByDisplayID: [String: Int]
+
+    init(from settings: DimlySettings) {
+        menuBarExcludedDisplayIDs = settings.menuBarExcludedDisplayIDs
+        menuBarIncludedInternalDisplayIDs = settings.menuBarIncludedInternalDisplayIDs
+        externalDisplayOrder = settings.externalDisplayOrder
+        internalDisplayOrder = settings.internalDisplayOrder
+        brightnessPanelExpandedDisplayIDs = settings.brightnessPanelExpandedDisplayIDs
+        monitorBrightnessByDisplayID = settings.monitorBrightnessByDisplayID
+    }
+
+    func apply(to settings: inout DimlySettings) {
+        settings.menuBarExcludedDisplayIDs = menuBarExcludedDisplayIDs
+        settings.menuBarIncludedInternalDisplayIDs = menuBarIncludedInternalDisplayIDs
+        settings.externalDisplayOrder = externalDisplayOrder
+        settings.internalDisplayOrder = internalDisplayOrder
+        settings.brightnessPanelExpandedDisplayIDs = brightnessPanelExpandedDisplayIDs
+        settings.monitorBrightnessByDisplayID = monitorBrightnessByDisplayID
+    }
 }
 
 /// Persisted profile list + automation settings.
@@ -96,6 +125,7 @@ final class ProfileManager: ObservableObject {
     private let displayManager: DisplayManager
     private let blackoutManager: BlackoutManager
     private let ddcManager: DDCManager
+    private let settingsStore: AppSettingsStore
     weak var engine: DimlyEngine?
     private let store: ProfileStore
     private let logger = Logger(subsystem: Bundle.main.bundleIdentifier ?? "Dimly", category: "Profiles")
@@ -107,11 +137,13 @@ final class ProfileManager: ObservableObject {
         displayManager: DisplayManager,
         blackoutManager: BlackoutManager,
         ddcManager: DDCManager,
+        settingsStore: AppSettingsStore,
         store: ProfileStore = ProfileStore()
     ) {
         self.displayManager = displayManager
         self.blackoutManager = blackoutManager
         self.ddcManager = ddcManager
+        self.settingsStore = settingsStore
         self.store = store
 
         let loaded = store.load()
@@ -145,7 +177,8 @@ final class ProfileManager: ObservableObject {
                 ? String(format: String(localized: "ProfileDefaultNameFormat"), Int64(profiles.count + 1))
                 : name,
             createdAt: Date(),
-            displays: snapshots
+            displays: snapshots,
+            monitorState: ProfileMonitorState(from: settingsStore.settings)
         )
         profiles.append(profile)
         persist()
@@ -153,6 +186,12 @@ final class ProfileManager: ObservableObject {
 
     /// Applies a profile to current displays, logging missing targets.
     func apply(profile: DisplayProfile) {
+        if let monitorState = profile.monitorState {
+            settingsStore.update { settings in
+                monitorState.apply(to: &settings)
+            }
+        }
+
         let currentDisplays = displayManager.displays
         let expectedIDs = Set(profile.displays.map(\.id))
         let currentIDs = Set(currentDisplays.map(\.stableIdentity))
@@ -241,6 +280,13 @@ final class ProfileManager: ObservableObject {
 
     /// Determines the current brightness for profile capture.
     private func currentBrightness(for display: DisplayInfo) -> Int? {
+        if display.isBuiltin {
+            if let liveBrightness = DisplayHardware.builtinDisplayBrightnessPercent(for: display.displayID) {
+                return liveBrightness
+            }
+            return settingsStore.settings.monitorBrightnessByDisplayID[display.stableIdentity]
+        }
+
         guard display.isExternal else { return nil }
         if let engine {
             return engine.brightnessPercent(for: display)
@@ -256,6 +302,15 @@ final class ProfileManager: ObservableObject {
 
     /// Applies brightness from a profile, allowing wake transitions to settle first.
     private func applyBrightness(_ brightness: Int, to display: DisplayInfo, afterPowerTransitionFrom previousState: DisplayPowerState) {
+        if display.isBuiltin {
+            let clamped = max(0, min(100, brightness))
+            _ = DisplayHardware.setBuiltinDisplayBrightnessPercent(clamped, for: display.displayID)
+            settingsStore.update { settings in
+                settings.monitorBrightnessByDisplayID[display.stableIdentity] = clamped
+            }
+            return
+        }
+
         guard let engine else {
             logger.error("Cannot apply profile brightness; engine unavailable")
             return
