@@ -364,7 +364,8 @@ struct SettingsRootView: View {
                         }
                     ))
                     .labelsHidden()
-                    .toggleStyle(TahoeGlassToggleStyle())
+                    .toggleStyle(.switch)
+                    .controlSize(.large)
                 }
 
                     HStack(spacing: 10) {
@@ -392,7 +393,8 @@ struct SettingsRootView: View {
                             }
                         ))
                         .labelsHidden()
-                        .toggleStyle(TahoeGlassToggleStyle())
+                        .toggleStyle(.switch)
+                        .controlSize(.large)
                     }
                 }
             }
@@ -785,7 +787,8 @@ struct SettingsRootView: View {
         private var automationSection: some View {
             VStack(alignment: .leading, spacing: 8) {
                 Toggle(String(localized: "Auto-apply profile when an external display connects"), isOn: $profileManager.automationEnabled)
-                    .toggleStyle(TahoeGlassToggleStyle())
+                    .toggleStyle(.switch)
+                    .controlSize(.large)
                 Picker(String(localized: "Profile to apply"), selection: Binding(
                     get: { profileManager.automationProfileID ?? profileManager.profiles.first?.id },
                     set: { profileManager.automationProfileID = $0 }
@@ -1223,90 +1226,6 @@ struct SettingsRootView: View {
             )
             return String(format: String(localized: "DisplayTypeResolutionFormat"), name, marker)
         }
-    }
-}
-
-/// Glossy switch used for modern per-display exclusions in settings.
-struct TahoeGlassToggleStyle: ToggleStyle {
-    func makeBody(configuration: Configuration) -> some View {
-        TahoeGlassToggleBody(configuration: configuration)
-    }
-}
-
-private struct TahoeGlassToggleBody: View {
-    let configuration: ToggleStyle.Configuration
-    @GestureState private var dragTranslation: CGFloat = 0
-
-    private let trackWidth: CGFloat = 46
-    private let trackHeight: CGFloat = 26
-    private let knobPadding: CGFloat = 2
-
-    private var knobSize: CGFloat {
-        trackHeight - (knobPadding * 2)
-    }
-
-    private var knobTravel: CGFloat {
-        trackWidth - knobSize - (knobPadding * 2)
-    }
-
-    var body: some View {
-        let restingX = configuration.isOn ? knobTravel : 0
-        let dragX = min(max(restingX + dragTranslation, 0), knobTravel)
-        let visualOn = dragX > (knobTravel * 0.5)
-
-        ZStack(alignment: .leading) {
-            Capsule(style: .continuous)
-                .fill(
-                    LinearGradient(
-                        colors: visualOn
-                            ? [Color.accentColor.opacity(0.84), Color.accentColor.opacity(0.60)]
-                            : [Color.white.opacity(0.20), Color.white.opacity(0.08)],
-                        startPoint: .topLeading,
-                        endPoint: .bottomTrailing
-                    )
-                )
-                .background(Capsule(style: .continuous).fill(.ultraThinMaterial))
-                .overlay(
-                    Capsule(style: .continuous)
-                        .stroke(Color.white.opacity(visualOn ? 0.40 : 0.30), lineWidth: 1)
-                )
-
-            Circle()
-                .fill(
-                    LinearGradient(
-                        colors: [Color.white.opacity(0.99), Color.white.opacity(0.84)],
-                        startPoint: .top,
-                        endPoint: .bottom
-                    )
-                )
-                .overlay(
-                    Circle()
-                        .stroke(Color.black.opacity(0.10), lineWidth: 0.8)
-                )
-                .shadow(color: Color.black.opacity(0.20), radius: 2.6, y: 1.2)
-                .frame(width: knobSize, height: knobSize)
-                .offset(x: knobPadding + dragX)
-        }
-        .frame(width: trackWidth, height: trackHeight)
-        .contentShape(Rectangle())
-        .gesture(
-            DragGesture(minimumDistance: 0)
-                .updating($dragTranslation) { value, state, _ in
-                    state = value.translation.width
-                }
-                .onEnded { value in
-                    let finalX = min(max(restingX + value.translation.width, 0), knobTravel)
-                    let shouldTurnOn = finalX > (knobTravel * 0.5)
-                    if configuration.isOn != shouldTurnOn {
-                        configuration.isOn = shouldTurnOn
-                    }
-                }
-        )
-        .onTapGesture {
-            configuration.isOn.toggle()
-        }
-        .animation(.spring(response: 0.24, dampingFraction: 0.84), value: configuration.isOn)
-        .accessibilityValue(configuration.isOn ? String(localized: "On") : String(localized: "Off"))
     }
 }
 
