@@ -288,3 +288,6 @@
 "Monitors" = "डिस्प्ले";
 "Show in Dimly" = "Dimly में दिखाएँ";
 "Show this monitor in the Dimly monitor list." = "इस मॉनिटर को Dimly की मॉनिटर सूची में दिखाएँ।";
+
+"Merge internal and external monitor order" = "आंतरिक और बाहरी मॉनिटर क्रम मर्ज करें";
+"Tip: Turn this on to arrange visible built-in and external monitors in one shared list." = "संकेत: इसे चालू करें ताकि दिखाई देने वाले बिल्ट-इन और बाहरी मॉनिटर एक साझा सूची में व्यवस्थित हों।";

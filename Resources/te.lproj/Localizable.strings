@@ -288,3 +288,6 @@
 "Monitors" = "డిస్ప్లేలు";
 "Show in Dimly" = "Dimly లో చూపించు";
 "Show this monitor in the Dimly monitor list." = "ఈ మానిటర్‌ను Dimly మానిటర్ జాబితాలో చూపించు.";
+
+"Merge internal and external monitor order" = "అంతర్గత మరియు బాహ్య మానిటర్ క్రమాన్ని విలీనం చేయండి";
+"Tip: Turn this on to arrange visible built-in and external monitors in one shared list." = "సూచన: కనిపించే బిల్ట్-ఇన్ మరియు బాహ్య మానిటర్లను ఒకే భాగస్వామ్య జాబితాలో అమర్చడానికి దీన్ని ఆన్ చేయండి.";

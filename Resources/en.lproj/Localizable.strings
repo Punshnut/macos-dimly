@@ -85,6 +85,8 @@
 "Fade out on sleep/blackout" = "Fade out on sleep/blackout";
 "Fade in on wake/restore" = "Fade in on wake/restore";
 "Show display numbers on screens" = "Show display numbers on screens";
+"Merge internal and external monitor order" = "Merge internal and external monitor order";
+"Tip: Turn this on to arrange visible built-in and external monitors in one shared list." = "Tip: Turn this on to arrange visible built-in and external monitors in one shared list.";
 "No active displays detected." = "No active displays detected.";
 "Show introduction again" = "Show introduction again";
 "Settings backup" = "Settings backup";

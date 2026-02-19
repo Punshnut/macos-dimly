@@ -288,3 +288,6 @@
 "Monitors" = "Layar";
 "Show in Dimly" = "Tampilkan di Dimly";
 "Show this monitor in the Dimly monitor list." = "Tampilkan monitor ini di daftar monitor Dimly.";
+
+"Merge internal and external monitor order" = "Gabungkan urutan monitor internal dan eksternal";
+"Tip: Turn this on to arrange visible built-in and external monitors in one shared list." = "Kiat: Aktifkan ini untuk menyusun monitor bawaan dan eksternal yang terlihat dalam satu daftar bersama.";

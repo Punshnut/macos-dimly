@@ -22,6 +22,8 @@ final class DimlyEngine {
     private var stateCancellables: Set<AnyCancellable> = []
     private var pendingBrightnessByDisplayID: [String: Int] = [:]
     private var brightnessRequestRevisionByDisplayID: [String: Int] = [:]
+    private var builtinRestoreBrightnessByDisplayID: [String: Int] = [:]
+    private var builtinBrightnessAnimationTasks: [String: Task<Void, Never>] = [:]
     private var lastObservedBlackoutActiveIDs: Set<String> = []
     private var lastObservedDDCSupportByDisplayID: [String: DDCSupportStatus] = [:]
     private var hotkeyManagers: [UUID: HotkeyManager] = [:]
@@ -112,6 +114,7 @@ final class DimlyEngine {
 
     @MainActor
     deinit {
+        builtinBrightnessAnimationTasks.values.forEach { $0.cancel() }
         if let workspaceWakeToken {
             NSWorkspace.shared.notificationCenter.removeObserver(workspaceWakeToken)
         }
@@ -178,6 +181,35 @@ final class DimlyEngine {
         DiagnosticsLogger.shared.log("Panic blackout invoked", category: "engine")
         wakeExternalDisplays()
         blackoutManager.panic(animated: animated)
+    }
+
+    /// Returns true when a display is currently in blackout mode.
+    func isDisplayBlackoutActive(_ display: DisplayInfo) -> Bool {
+        if display.isBuiltin {
+            return settingsStore.settings.monitorPowerStateByDisplayID[display.stableIdentity] == .blackout
+        }
+        return blackoutManager.activeDisplayIDs.contains(display.stableIdentity)
+    }
+
+    /// Toggles blackout mode for a specific display.
+    func toggleDisplayBlackout(display: DisplayInfo) {
+        let settings = settingsStore.settings
+        if isDisplayBlackoutActive(display) {
+            if display.isBuiltin {
+                applyBuiltinVisible(display, animated: settings.fadeInAnimationEnabled, persistState: true)
+            } else {
+                blackoutManager.unblackout(display, animated: settings.fadeInAnimationEnabled)
+            }
+            DiagnosticsLogger.shared.log("Display blackout OFF for \(display.stableIdentity)", category: "engine")
+            return
+        }
+
+        if display.isBuiltin {
+            applyBuiltinBlackout(display, animated: settings.fadeOutAnimationEnabled, persistState: true)
+        } else {
+            blackoutManager.blackout(display, animated: settings.fadeOutAnimationEnabled)
+        }
+        DiagnosticsLogger.shared.log("Display blackout ON for \(display.stableIdentity)", category: "engine")
     }
 
     /// Sets brightness for a display, preferring DDC and falling back to dim overlay.
@@ -276,6 +308,12 @@ final class DimlyEngine {
     /// Puts a display into standby via DDC or blackout fallback.
     func standby(display: DisplayInfo) {
         let settings = settingsStore.settings
+        if display.isBuiltin {
+            applyBuiltinBlackout(display, animated: settings.fadeOutAnimationEnabled, persistState: true)
+            DiagnosticsLogger.shared.log("Standby mapped to builtin blackout for \(display.stableIdentity)", category: "engine")
+            return
+        }
+
         let overlayOnly = settings.overlayOnlyDisplayIDs.contains(display.stableIdentity)
         let fadeOut = settings.fadeOutAnimationEnabled
         let ddcSupported = ddcManager.states[display.stableIdentity]?.status == .supported
@@ -315,6 +353,12 @@ final class DimlyEngine {
     /// Wakes a display via DDC or removes blackout fallback.
     func wake(display: DisplayInfo) {
         let settings = settingsStore.settings
+        if display.isBuiltin {
+            applyBuiltinVisible(display, animated: settings.fadeInAnimationEnabled, persistState: true)
+            DiagnosticsLogger.shared.log("Wake mapped to builtin restore for \(display.stableIdentity)", category: "engine")
+            return
+        }
+
         let overlayOnly = settings.overlayOnlyDisplayIDs.contains(display.stableIdentity)
         let fadeIn = settings.fadeInAnimationEnabled
         let ddcSupported = ddcManager.states[display.stableIdentity]?.status == .supported
@@ -403,8 +447,7 @@ final class DimlyEngine {
             toggleExternalBlackout()
         case .display(let id):
             guard let display = displayManager.displays.first(where: { $0.stableIdentity == id }) else { return }
-            let settings = settingsStore.settings
-            blackoutManager.toggle(display: display, fadeOut: settings.fadeOutAnimationEnabled, fadeIn: settings.fadeInAnimationEnabled)
+            toggleDisplayBlackout(display: display)
             DiagnosticsLogger.shared.log("Hotkey toggled blackout for \(id)", category: "engine")
         }
     }
@@ -428,7 +471,7 @@ final class DimlyEngine {
 
     /// Returns true when a display is blacked out or in DDC standby.
     private func isDisplayAsleep(_ display: DisplayInfo) -> Bool {
-        if blackoutManager.activeDisplayIDs.contains(display.stableIdentity) {
+        if isDisplayBlackoutActive(display) {
             return true
         }
         return ddcManager.states[display.stableIdentity]?.lastCommand == .standby
@@ -458,6 +501,18 @@ final class DimlyEngine {
     /// Applies persisted power + brightness state to currently connected displays.
     private func restorePersistedMonitorState(reason: String, remainingAttempts: Int) {
         let settings = settingsStore.settings
+        let internals = displayManager.displays.filter(\.isBuiltin)
+        for display in internals {
+            let id = display.stableIdentity
+            let power = settings.monitorPowerStateByDisplayID[id] ?? .visible
+            switch power {
+            case .blackout:
+                applyBuiltinBlackout(display, animated: false, persistState: false)
+            case .visible, .standby:
+                applyBuiltinVisible(display, animated: false, persistState: false)
+            }
+        }
+
         let externals = displayManager.displays.filter(\.isExternal)
         guard !externals.isEmpty else { return }
 
@@ -562,6 +617,74 @@ final class DimlyEngine {
         settingsStore.update { settings in
             settings.monitorBrightnessByDisplayID[id] = clamped
         }
+    }
+
+    /// Applies blackout mode for built-in displays by fading brightness to 0.
+    private func applyBuiltinBlackout(_ display: DisplayInfo, animated: Bool, persistState: Bool) {
+        let id = display.stableIdentity
+        let current = DisplayHardware.builtinDisplayBrightnessPercent(for: display.displayID)
+            ?? settingsStore.settings.monitorBrightnessByDisplayID[id]
+            ?? 100
+        builtinRestoreBrightnessByDisplayID[id] = current
+        persistBrightness(current, for: id)
+        setBuiltinBrightness(0, for: display, animated: animated)
+        if persistState {
+            persistPowerState(.blackout, for: id)
+        }
+    }
+
+    /// Restores built-in display brightness from the saved pre-blackout level.
+    private func applyBuiltinVisible(_ display: DisplayInfo, animated: Bool, persistState: Bool) {
+        let id = display.stableIdentity
+        let target = builtinRestoreBrightnessByDisplayID.removeValue(forKey: id)
+            ?? settingsStore.settings.monitorBrightnessByDisplayID[id]
+            ?? 100
+        setBuiltinBrightness(target, for: display, animated: animated)
+        persistBrightness(target, for: id)
+        if persistState {
+            persistPowerState(.visible, for: id)
+        }
+    }
+
+    /// Sets built-in panel brightness, optionally animating the transition.
+    private func setBuiltinBrightness(_ percent: Int, for display: DisplayInfo, animated: Bool) {
+        let id = display.stableIdentity
+        let target = max(0, min(100, percent))
+        builtinBrightnessAnimationTasks[id]?.cancel()
+
+        let applyTarget = {
+            _ = DisplayHardware.setBuiltinDisplayBrightnessPercent(target, for: display.displayID)
+        }
+
+        guard animated else {
+            applyTarget()
+            return
+        }
+
+        let current = DisplayHardware.builtinDisplayBrightnessPercent(for: display.displayID)
+            ?? settingsStore.settings.monitorBrightnessByDisplayID[id]
+            ?? target
+        guard current != target else {
+            applyTarget()
+            return
+        }
+
+        let delta = target - current
+        let steps = min(24, max(8, abs(delta)))
+        let sleepNanos = UInt64((0.28 / Double(steps)) * 1_000_000_000)
+
+        let task = Task { @MainActor [weak self] in
+            for step in 1...steps {
+                guard !Task.isCancelled else { return }
+                let progress = Double(step) / Double(steps)
+                let value = Int((Double(current) + (Double(delta) * progress)).rounded())
+                _ = DisplayHardware.setBuiltinDisplayBrightnessPercent(value, for: display.displayID)
+                try? await Task.sleep(nanoseconds: sleepNanos)
+            }
+            _ = DisplayHardware.setBuiltinDisplayBrightnessPercent(target, for: display.displayID)
+            self?.builtinBrightnessAnimationTasks.removeValue(forKey: id)
+        }
+        builtinBrightnessAnimationTasks[id] = task
     }
 
     /// Migrates legacy persistence keys into settings-backed monitor state.

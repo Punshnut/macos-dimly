@@ -288,3 +288,6 @@
 "Monitors" = "Kijelzők";
 "Show in Dimly" = "Megjelenítés a Dimlyben";
 "Show this monitor in the Dimly monitor list." = "Jelenítse meg ezt a monitort a Dimly monitorlistájában.";
+
+"Merge internal and external monitor order" = "Belső és külső monitorok sorrendjének egyesítése";
+"Tip: Turn this on to arrange visible built-in and external monitors in one shared list." = "Tipp: Kapcsolja be, hogy a látható beépített és külső monitorok egy közös listában rendeződjenek.";

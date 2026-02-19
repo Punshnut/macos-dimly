@@ -288,3 +288,6 @@
 "Monitors" = "Näytöt";
 "Show in Dimly" = "Näytä Dimlyssä";
 "Show this monitor in the Dimly monitor list." = "Näytä tämä näyttö Dimlyn näyttöluettelossa.";
+
+"Merge internal and external monitor order" = "Yhdistä sisäisten ja ulkoisten näyttöjen järjestys";
+"Tip: Turn this on to arrange visible built-in and external monitors in one shared list." = "Vinkki: Ota tämä käyttöön, jotta näkyvät sisäiset ja ulkoiset näytöt järjestetään yhteen yhteiseen listaan.";

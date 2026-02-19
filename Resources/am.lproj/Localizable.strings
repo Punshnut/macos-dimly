@@ -288,3 +288,6 @@
 "Monitors" = "ማሳያዎች";
 "Show in Dimly" = "በ Dimly ውስጥ አሳይ";
 "Show this monitor in the Dimly monitor list." = "ይህን ሞኒተር በ Dimly የሞኒተሮች ዝርዝር ውስጥ አሳይ።";
+
+"Merge internal and external monitor order" = "የውስጥ እና የውጫዊ ማሳያዎችን ቅደም ተከተል አንድ አድርግ";
+"Tip: Turn this on to arrange visible built-in and external monitors in one shared list." = "ጠቃሚ ምክር፦ ይህን በማብራት የሚታዩ የተካተቱ እና የውጫዊ ማሳያዎችን በአንድ የጋራ ዝርዝር ውስጥ ያደራጁ።";

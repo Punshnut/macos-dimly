@@ -288,3 +288,6 @@
 "Monitors" = "காட்சிகள்";
 "Show in Dimly" = "Dimly இல் காட்டு";
 "Show this monitor in the Dimly monitor list." = "இந்த மானிட்டரை Dimly-யின் மானிட்டர் பட்டியலில் காட்டு.";
+
+"Merge internal and external monitor order" = "உள் மற்றும் வெளி மானிட்டர் வரிசையை ஒன்றிணை";
+"Tip: Turn this on to arrange visible built-in and external monitors in one shared list." = "குறிப்பு: காணப்படும் உள்ளமைக்கப்பட்ட மற்றும் வெளி மானிட்டர்களை ஒரே பகிரப்பட்ட பட்டியலில் ஒழுங்குபடுத்த இதை இயக்கவும்.";

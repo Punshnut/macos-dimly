@@ -631,15 +631,28 @@ struct SettingsRootView: View {
                         )
                     )
                     SettingsDivider()
+                    SettingsToggleRow(
+                        title: String(localized: "Merge internal and external monitor order"),
+                        subtitle: nil,
+                        systemImage: "rectangle.3.group.bubble.left",
+                        isOn: Binding(
+                            get: { settingsStore.settings.mergeInternalAndExternalDisplays },
+                            set: { newValue in settingsStore.update { $0.mergeInternalAndExternalDisplays = newValue } }
+                        )
+                    )
+                    SettingsDivider()
+                    Text(String(localized: "Tip: Turn this on to arrange visible built-in and external monitors in one shared list."))
+                        .font(.caption)
+                        .foregroundStyle(.secondary)
+                    SettingsDivider()
                     if displayManager.displays.isEmpty {
                         Text(String(localized: "No active displays detected."))
                             .font(.caption)
                             .foregroundStyle(.secondary)
                     } else {
-                        let internalDisplays = displayManager.displays.filter(\.isBuiltin)
-                        let externalDisplays = displayManager.displays.filter(\.isExternal)
+                        let displays = displayRows()
 
-                        ForEach(Array(displayPairs(externalDisplays).enumerated()), id: \.offset) { _, pair in
+                        ForEach(Array(displayPairs(displays).enumerated()), id: \.offset) { _, pair in
                             HStack(alignment: .top, spacing: 12) {
                                 displayRow(pair[0])
                                     .frame(maxWidth: .infinity, alignment: .topLeading)
@@ -658,15 +671,6 @@ struct SettingsRootView: View {
                                 }
                             }
                         }
-
-                        if internalDisplays.isEmpty == false && externalDisplays.isEmpty == false {
-                            SettingsDivider()
-                        }
-
-                        ForEach(internalDisplays) { display in
-                            displayRow(display)
-                                .frame(maxWidth: .infinity, alignment: .topLeading)
-                        }
                     }
                 }
             }
@@ -682,6 +686,22 @@ struct SettingsRootView: View {
                 index += 2
             }
             return pairs
+        }
+
+        private func displayRows() -> [DisplayInfo] {
+            let allDisplays = displayManager.displays
+            guard settingsStore.settings.mergeInternalAndExternalDisplays else {
+                let externalDisplays = allDisplays.filter(\.isExternal)
+                let internalDisplays = allDisplays.filter(\.isBuiltin)
+                return externalDisplays + internalDisplays
+            }
+
+            let order = settingsStore.settings.mergedDisplayOrder
+            let byID = Dictionary(uniqueKeysWithValues: allDisplays.map { ($0.stableIdentity, $0) })
+            let ordered = order.compactMap { byID[$0] }
+            let remaining = allDisplays.filter { order.contains($0.stableIdentity) == false }
+                .sorted { $0.displayID < $1.displayID }
+            return ordered + remaining
         }
 
         private var shortcutsDetail: some View {

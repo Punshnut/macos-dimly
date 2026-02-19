@@ -288,3 +288,6 @@
 "Monitors" = "Displeje";
 "Show in Dimly" = "Zobrazit v Dimly";
 "Show this monitor in the Dimly monitor list." = "Zobrazit tento monitor v seznamu monitorů Dimly.";
+
+"Merge internal and external monitor order" = "Sloučit pořadí interních a externích monitorů";
+"Tip: Turn this on to arrange visible built-in and external monitors in one shared list." = "Tip: Zapněte tuto volbu, aby se viditelné interní a externí monitory řadily v jednom společném seznamu.";

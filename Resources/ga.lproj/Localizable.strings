@@ -288,3 +288,6 @@
 "Monitors" = "Taispeántais";
 "Show in Dimly" = "Taispeáin i Dimly";
 "Show this monitor in the Dimly monitor list." = "Taispeáin an monatóir seo i liosta monatóirí Dimly.";
+
+"Merge internal and external monitor order" = "Cumaisc ord na monatóirí inmheánacha agus seachtracha";
+"Tip: Turn this on to arrange visible built-in and external monitors in one shared list." = "Leid: Cas air seo chun monatóirí inmheánacha ionsuite agus seachtracha infheicthe a chur in aon liosta comhroinnte amháin.";

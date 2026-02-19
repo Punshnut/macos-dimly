@@ -288,3 +288,6 @@
 "Monitors" = "Дисплеи";
 "Show in Dimly" = "Показывать в Dimly";
 "Show this monitor in the Dimly monitor list." = "Показывать этот монитор в списке мониторов Dimly.";
+
+"Merge internal and external monitor order" = "Объединить порядок внутренних и внешних мониторов";
+"Tip: Turn this on to arrange visible built-in and external monitors in one shared list." = "Подсказка: Включите это, чтобы упорядочить видимые встроенные и внешние мониторы в одном общем списке.";

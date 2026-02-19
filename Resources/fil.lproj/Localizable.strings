@@ -286,3 +286,6 @@
 "Monitors" = "Mga display";
 "Show in Dimly" = "Ipakita sa Dimly";
 "Show this monitor in the Dimly monitor list." = "Ipakita ang monitor na ito sa listahan ng mga monitor ng Dimly.";
+
+"Merge internal and external monitor order" = "Pagsamahin ang ayos ng internal at external na monitor";
+"Tip: Turn this on to arrange visible built-in and external monitors in one shared list." = "Tip: I-on ito para ayusin ang mga nakikitang built-in at external na monitor sa iisang pinagsasaluhang listahan.";

@@ -288,3 +288,6 @@
 "Monitors" = "Àfihàn";
 "Show in Dimly" = "Fi han ninu Dimly";
 "Show this monitor in the Dimly monitor list." = "Fi mọ́nítọ̀ yìí han ninu atokọ mọ́nítọ̀ Dimly.";
+
+"Merge internal and external monitor order" = "Dapọ tito awọn moniitọ inu ati ita";
+"Tip: Turn this on to arrange visible built-in and external monitors in one shared list." = "Itọ́sọ́nà: Tan eyi lati ṣeto awọn moniitọ built-in ati ita ti o han sinu atokọ apapọ kan ṣoṣo.";

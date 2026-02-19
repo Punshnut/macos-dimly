@@ -22,8 +22,10 @@ struct DimlySettings: Codable, Equatable {
     var overlayOnlyDisplayIDs: [String]
     var menuBarExcludedDisplayIDs: [String]
     var menuBarIncludedInternalDisplayIDs: [String]
+    var mergeInternalAndExternalDisplays: Bool
     var externalDisplayOrder: [String]
     var internalDisplayOrder: [String]
+    var mergedDisplayOrder: [String]
     var menuBarSimpleMode: Bool
     var brightnessPanelExpandedDisplayIDs: [String]
     var monitorBrightnessByDisplayID: [String: Int]
@@ -42,8 +44,10 @@ struct DimlySettings: Codable, Equatable {
         case overlayOnlyDisplayIDs
         case menuBarExcludedDisplayIDs
         case menuBarIncludedInternalDisplayIDs
+        case mergeInternalAndExternalDisplays
         case externalDisplayOrder
         case internalDisplayOrder
+        case mergedDisplayOrder
         case menuBarSimpleMode
         case brightnessPanelExpandedDisplayIDs
         case monitorBrightnessByDisplayID
@@ -69,8 +73,10 @@ struct DimlySettings: Codable, Equatable {
         overlayOnlyDisplayIDs: [],
         menuBarExcludedDisplayIDs: [],
         menuBarIncludedInternalDisplayIDs: [],
+        mergeInternalAndExternalDisplays: false,
         externalDisplayOrder: [],
         internalDisplayOrder: [],
+        mergedDisplayOrder: [],
         menuBarSimpleMode: false,
         brightnessPanelExpandedDisplayIDs: [],
         monitorBrightnessByDisplayID: [:],
@@ -90,8 +96,10 @@ struct DimlySettings: Codable, Equatable {
         overlayOnlyDisplayIDs: [String],
         menuBarExcludedDisplayIDs: [String],
         menuBarIncludedInternalDisplayIDs: [String],
+        mergeInternalAndExternalDisplays: Bool,
         externalDisplayOrder: [String],
         internalDisplayOrder: [String],
+        mergedDisplayOrder: [String],
         menuBarSimpleMode: Bool,
         brightnessPanelExpandedDisplayIDs: [String],
         monitorBrightnessByDisplayID: [String: Int],
@@ -108,8 +116,10 @@ struct DimlySettings: Codable, Equatable {
         self.overlayOnlyDisplayIDs = overlayOnlyDisplayIDs
         self.menuBarExcludedDisplayIDs = menuBarExcludedDisplayIDs
         self.menuBarIncludedInternalDisplayIDs = menuBarIncludedInternalDisplayIDs
+        self.mergeInternalAndExternalDisplays = mergeInternalAndExternalDisplays
         self.externalDisplayOrder = externalDisplayOrder
         self.internalDisplayOrder = internalDisplayOrder
+        self.mergedDisplayOrder = mergedDisplayOrder
         self.menuBarSimpleMode = menuBarSimpleMode
         self.brightnessPanelExpandedDisplayIDs = brightnessPanelExpandedDisplayIDs
         self.monitorBrightnessByDisplayID = monitorBrightnessByDisplayID
@@ -131,8 +141,10 @@ struct DimlySettings: Codable, Equatable {
         let overlayOnlyDisplayIDs = try container.decodeIfPresent([String].self, forKey: .overlayOnlyDisplayIDs) ?? DimlySettings.default.overlayOnlyDisplayIDs
         let menuBarExcludedDisplayIDs = try container.decodeIfPresent([String].self, forKey: .menuBarExcludedDisplayIDs) ?? DimlySettings.default.menuBarExcludedDisplayIDs
         let menuBarIncludedInternalDisplayIDs = try container.decodeIfPresent([String].self, forKey: .menuBarIncludedInternalDisplayIDs) ?? DimlySettings.default.menuBarIncludedInternalDisplayIDs
+        let mergeInternalAndExternalDisplays = try container.decodeIfPresent(Bool.self, forKey: .mergeInternalAndExternalDisplays) ?? DimlySettings.default.mergeInternalAndExternalDisplays
         let externalDisplayOrder = try container.decodeIfPresent([String].self, forKey: .externalDisplayOrder) ?? DimlySettings.default.externalDisplayOrder
         let internalDisplayOrder = try container.decodeIfPresent([String].self, forKey: .internalDisplayOrder) ?? DimlySettings.default.internalDisplayOrder
+        let mergedDisplayOrder = try container.decodeIfPresent([String].self, forKey: .mergedDisplayOrder) ?? DimlySettings.default.mergedDisplayOrder
         let menuBarSimpleMode = try container.decodeIfPresent(Bool.self, forKey: .menuBarSimpleMode) ?? DimlySettings.default.menuBarSimpleMode
         let brightnessPanelExpandedDisplayIDs = try container.decodeIfPresent([String].self, forKey: .brightnessPanelExpandedDisplayIDs) ?? DimlySettings.default.brightnessPanelExpandedDisplayIDs
         let monitorBrightnessByDisplayID = try container.decodeIfPresent([String: Int].self, forKey: .monitorBrightnessByDisplayID) ?? DimlySettings.default.monitorBrightnessByDisplayID
@@ -169,8 +181,10 @@ struct DimlySettings: Codable, Equatable {
             overlayOnlyDisplayIDs: overlayOnlyDisplayIDs,
             menuBarExcludedDisplayIDs: menuBarExcludedDisplayIDs,
             menuBarIncludedInternalDisplayIDs: menuBarIncludedInternalDisplayIDs,
+            mergeInternalAndExternalDisplays: mergeInternalAndExternalDisplays,
             externalDisplayOrder: externalDisplayOrder,
             internalDisplayOrder: internalDisplayOrder,
+            mergedDisplayOrder: mergedDisplayOrder,
             menuBarSimpleMode: menuBarSimpleMode,
             brightnessPanelExpandedDisplayIDs: brightnessPanelExpandedDisplayIDs,
             monitorBrightnessByDisplayID: monitorBrightnessByDisplayID,
@@ -192,8 +206,10 @@ struct DimlySettings: Codable, Equatable {
         try container.encode(overlayOnlyDisplayIDs, forKey: .overlayOnlyDisplayIDs)
         try container.encode(menuBarExcludedDisplayIDs, forKey: .menuBarExcludedDisplayIDs)
         try container.encode(menuBarIncludedInternalDisplayIDs, forKey: .menuBarIncludedInternalDisplayIDs)
+        try container.encode(mergeInternalAndExternalDisplays, forKey: .mergeInternalAndExternalDisplays)
         try container.encode(externalDisplayOrder, forKey: .externalDisplayOrder)
         try container.encode(internalDisplayOrder, forKey: .internalDisplayOrder)
+        try container.encode(mergedDisplayOrder, forKey: .mergedDisplayOrder)
         try container.encode(menuBarSimpleMode, forKey: .menuBarSimpleMode)
         try container.encode(brightnessPanelExpandedDisplayIDs, forKey: .brightnessPanelExpandedDisplayIDs)
         try container.encode(monitorBrightnessByDisplayID, forKey: .monitorBrightnessByDisplayID)

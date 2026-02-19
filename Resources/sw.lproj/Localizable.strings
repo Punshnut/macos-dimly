@@ -288,3 +288,6 @@
 "Monitors" = "Skrini";
 "Show in Dimly" = "Onyesha kwenye Dimly";
 "Show this monitor in the Dimly monitor list." = "Onyesha kichunguzi hiki kwenye orodha ya vichunguzi ya Dimly.";
+
+"Merge internal and external monitor order" = "Unganisha mpangilio wa vichunguzi vya ndani na vya nje";
+"Tip: Turn this on to arrange visible built-in and external monitors in one shared list." = "Dokezo: Washa hii ili kupanga vichunguzi vya ndani vilivyojengwa na vya nje vinavyoonekana katika orodha moja ya pamoja.";

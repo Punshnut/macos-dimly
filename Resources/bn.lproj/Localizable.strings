@@ -288,3 +288,6 @@
 "Monitors" = "ডিসপ্লে";
 "Show in Dimly" = "Dimly-তে দেখান";
 "Show this monitor in the Dimly monitor list." = "এই মনিটরটি Dimly-এর মনিটর তালিকায় দেখান।";
+
+"Merge internal and external monitor order" = "অভ্যন্তরীণ ও বাহ্যিক মনিটরের ক্রম একত্র করুন";
+"Tip: Turn this on to arrange visible built-in and external monitors in one shared list." = "টিপ: এটি চালু করলে দৃশ্যমান বিল্ট-ইন ও বাহ্যিক মনিটরগুলো একটি যৌথ তালিকায় সাজাতে পারবেন।";

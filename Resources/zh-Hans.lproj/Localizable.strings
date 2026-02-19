@@ -288,3 +288,6 @@
 "Monitors" = "显示器";
 "Show in Dimly" = "在 Dimly 中显示";
 "Show this monitor in the Dimly monitor list." = "在 Dimly 的显示器列表中显示此显示器。";
+
+"Merge internal and external monitor order" = "合并内置与外接显示器排序";
+"Tip: Turn this on to arrange visible built-in and external monitors in one shared list." = "提示：开启后，可在同一共享列表中排列可见的内置与外接显示器。";

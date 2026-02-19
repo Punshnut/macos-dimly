@@ -288,3 +288,6 @@
 "Monitors" = "ディスプレイ";
 "Show in Dimly" = "Dimlyに表示";
 "Show this monitor in the Dimly monitor list." = "このモニターをDimlyのモニター一覧に表示します。";
+
+"Merge internal and external monitor order" = "内蔵ディスプレイと外部ディスプレイの並び順を統合";
+"Tip: Turn this on to arrange visible built-in and external monitors in one shared list." = "ヒント: これをオンにすると、表示中の内蔵ディスプレイと外部ディスプレイを1つの共有リストで並べ替えできます。";

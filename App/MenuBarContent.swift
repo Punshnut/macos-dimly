@@ -212,6 +212,10 @@ struct MenuBarContentView: View {
         Set(settingsStore.settings.menuBarIncludedInternalDisplayIDs)
     }
 
+    private var mergeInternalAndExternalDisplays: Bool {
+        settingsStore.settings.mergeInternalAndExternalDisplays
+    }
+
     /// External displays visible in Dimly.
     private var visibleExternalDisplays: [DisplayInfo] {
         displayManager.displays.filter { $0.isExternal && excludedExternalDisplayIDs.contains($0.stableIdentity) == false }
@@ -232,9 +236,17 @@ struct MenuBarContentView: View {
         orderInternalDisplays(visibleInternalDisplays)
     }
 
-    /// All displays visible in Dimly (ordered externals first, then internals).
+    /// Displays ordered as one merged list when merge mode is enabled.
+    private var orderedMergedDisplays: [DisplayInfo] {
+        orderMergedDisplays(visibleExternalDisplays + visibleInternalDisplays)
+    }
+
+    /// All displays visible in Dimly.
     private var menuBarDisplays: [DisplayInfo] {
-        orderedExternalDisplays + orderedInternalDisplays
+        if mergeInternalAndExternalDisplays {
+            return orderedMergedDisplays
+        }
+        return orderedExternalDisplays + orderedInternalDisplays
     }
 
     /// Map of display stable IDs to their external index number.
@@ -411,7 +423,7 @@ struct MenuBarContentView: View {
         return AnyView(button.buttonStyle(BorderedButtonStyle()))
     }
 
-    /// Per-display controls and status lines for external displays.
+    /// Per-display controls and status lines for visible displays.
     private var externalDisplaysSection: some View {
         VStack(alignment: .leading, spacing: 8) {
             sectionHeader(monitorsSectionTitle)
@@ -421,6 +433,7 @@ struct MenuBarContentView: View {
         }
         .animation(.spring(response: 0.25, dampingFraction: 0.82), value: orderedExternalIDs())
         .animation(.spring(response: 0.25, dampingFraction: 0.82), value: orderedInternalIDs())
+        .animation(.spring(response: 0.25, dampingFraction: 0.82), value: orderedMergedIDs())
         .animation(.spring(response: 0.25, dampingFraction: 0.82), value: settingsStore.settings.brightnessPanelExpandedDisplayIDs)
     }
 
@@ -434,6 +447,7 @@ struct MenuBarContentView: View {
         }
         .animation(.spring(response: 0.25, dampingFraction: 0.82), value: orderedExternalIDs())
         .animation(.spring(response: 0.25, dampingFraction: 0.82), value: orderedInternalIDs())
+        .animation(.spring(response: 0.25, dampingFraction: 0.82), value: orderedMergedIDs())
         .animation(.spring(response: 0.25, dampingFraction: 0.82), value: settingsStore.settings.brightnessPanelExpandedDisplayIDs)
     }
 
@@ -467,7 +481,7 @@ struct MenuBarContentView: View {
 
     /// Header row with status and per-display actions; click to expand brightness.
     private func displayRowHeader(_ display: DisplayInfo, includeMenu: Bool, isExpanded: Bool) -> some View {
-        let isBlackoutActive = blackoutManager.activeDisplayIDs.contains(display.stableIdentity)
+        let isBlackoutActive = engine.isDisplayBlackoutActive(display)
         let ddcState = ddcManager.states[display.stableIdentity]?.status.localizedDescription ?? String(localized: "Unknown")
         let name = displayName(for: display)
         let status = displayStatus(for: display)
@@ -502,8 +516,7 @@ struct MenuBarContentView: View {
                 if includeMenu {
                     Menu {
                         Button(isBlackoutActive ? String(localized: "Restore Display") : String(localized: "Blackout Display")) {
-                            let settings = settingsStore.settings
-                            blackoutManager.toggle(display: display, fadeOut: settings.fadeOutAnimationEnabled, fadeIn: settings.fadeInAnimationEnabled)
+                            engine.toggleDisplayBlackout(display: display)
                         }
                         Button(String(localized: "Sleep Display")) {
                             engine.standby(display: display)
@@ -638,10 +651,34 @@ struct MenuBarContentView: View {
         )
     }
 
-    /// Builds the sleep/wake button, respecting DDC support and overlay-only settings.
-    private func sleepWakeButton(for display: DisplayInfo) -> some View {
+    /// Builds the per-display control button (sleep/wake for externals, blackout toggle for internals).
+    private func sleepWakeButton(for display: DisplayInfo) -> AnyView {
+        if display.isBuiltin {
+            let isBlackoutActive = engine.isDisplayBlackoutActive(display)
+            let label = isBlackoutActive ? String(localized: "Restore Display") : String(localized: "Blackout Display")
+            let icon = isBlackoutActive ? "moon.fill" : "sun.max.fill"
+            let tint: Color = isBlackoutActive ? .green : .secondary
+
+            return AnyView(
+                Button {
+                    engine.toggleDisplayBlackout(display: display)
+                } label: {
+                    Image(systemName: icon)
+                        .font(.system(size: 13, weight: .semibold))
+                        .foregroundStyle(tint)
+                        .frame(width: 26, height: 26)
+                        .background(
+                            Circle()
+                                .fill(tint.opacity(0.12))
+                        )
+                }
+                .buttonStyle(StaticIconButtonStyle())
+                .help(label)
+            )
+        }
+
         let state = ddcManager.states[display.stableIdentity] ?? DDCState(status: .unknown, lastError: nil, lastCommand: nil, lastCommandAt: nil)
-        let canControl = display.isExternal
+        let canControl = true
         let ddcSupported = state.status == .supported
         let overlayOnly = settingsStore.settings.overlayOnlyDisplayIDs.contains(display.stableIdentity)
         let fallbackActive = (!ddcSupported || overlayOnly) && blackoutManager.activeDisplayIDs.contains(display.stableIdentity)
@@ -652,37 +689,46 @@ struct MenuBarContentView: View {
         let icon = isAsleep ? "moon.zzz" : "sun.max.fill"
         let tint: Color = (ddcSupported && !overlayOnly) ? .green : (fallbackActive ? .blue : .secondary)
 
-        return Button {
-            if isAsleep {
-                engine.wake(display: display)
-            } else {
-                engine.standby(display: display)
+        return AnyView(
+            Button {
+                if isAsleep {
+                    engine.wake(display: display)
+                } else {
+                    engine.standby(display: display)
+                }
+            } label: {
+                Image(systemName: icon)
+                    .font(.system(size: 13, weight: .semibold))
+                    .foregroundStyle(canControl ? tint : .secondary)
+                    .frame(width: 26, height: 26)
+                    .background(
+                        Circle()
+                            .fill((canControl ? tint : .secondary).opacity(0.12))
+                    )
             }
-        } label: {
-            Image(systemName: icon)
-                .font(.system(size: 13, weight: .semibold))
-                .foregroundStyle(canControl ? tint : .secondary)
-                .frame(width: 26, height: 26)
-                .background(
-                    Circle()
-                        .fill((canControl ? tint : .secondary).opacity(0.12))
-                )
-        }
-        .buttonStyle(.plain)
-        .disabled(!canControl)
-        .help(label)
+            .buttonStyle(.plain)
+            .disabled(!canControl)
+            .help(label)
+        )
     }
 
     /// Up/down buttons used to reorder displays in their section.
     private func displayOrderButtons(for display: DisplayInfo) -> AnyView {
-        let order = display.isExternal ? orderedExternalIDs() : orderedInternalIDs()
+        let order: [String]
+        if mergeInternalAndExternalDisplays {
+            order = orderedMergedIDs()
+        } else {
+            order = display.isExternal ? orderedExternalIDs() : orderedInternalIDs()
+        }
         let index = order.firstIndex(of: display.stableIdentity) ?? 0
         let canMoveUp = index > 0
         let canMoveDown = index < (order.count - 1)
 
         return AnyView(VStack(spacing: 4) {
             Button {
-                if display.isExternal {
+                if mergeInternalAndExternalDisplays {
+                    moveMergedDisplayUp(display.stableIdentity)
+                } else if display.isExternal {
                     moveExternalDisplayUp(display.stableIdentity)
                 } else {
                     moveInternalDisplayUp(display.stableIdentity)
@@ -696,7 +742,9 @@ struct MenuBarContentView: View {
             .disabled(!canMoveUp)
 
             Button {
-                if display.isExternal {
+                if mergeInternalAndExternalDisplays {
+                    moveMergedDisplayDown(display.stableIdentity)
+                } else if display.isExternal {
                     moveExternalDisplayDown(display.stableIdentity)
                 } else {
                     moveInternalDisplayDown(display.stableIdentity)
@@ -871,7 +919,7 @@ struct MenuBarContentView: View {
 
     /// Computes the visibility/sleep/blackout status for a display.
     private func displayStatus(for display: DisplayInfo) -> String {
-        if blackoutManager.activeDisplayIDs.contains(display.stableIdentity) {
+        if engine.isDisplayBlackoutActive(display) {
             return String(localized: "Blackout")
         }
         if settingsStore.settings.overlayOnlyDisplayIDs.contains(display.stableIdentity) == false,
@@ -1002,7 +1050,7 @@ struct MenuBarContentView: View {
 
     /// Returns true when the display is in blackout or DDC standby.
     private func isDisplaySuspended(_ display: DisplayInfo) -> Bool {
-        if blackoutManager.activeDisplayIDs.contains(display.stableIdentity) {
+        if engine.isDisplayBlackoutActive(display) {
             return true
         }
         return ddcManager.states[display.stableIdentity]?.lastCommand == .standby
@@ -1048,6 +1096,22 @@ struct MenuBarContentView: View {
     /// Convenience helper returning internal display IDs in the current order.
     private func orderedInternalIDs() -> [String] {
         orderedInternalDisplays.map(\.stableIdentity)
+    }
+
+    /// Orders all visible displays using the merged saved order list.
+    private func orderMergedDisplays(_ displays: [DisplayInfo]) -> [DisplayInfo] {
+        guard displays.isEmpty == false else { return [] }
+        let order = settingsStore.settings.mergedDisplayOrder
+        let byID = Dictionary(uniqueKeysWithValues: displays.map { ($0.stableIdentity, $0) })
+        let ordered = order.compactMap { byID[$0] }
+        let remaining = displays.filter { order.contains($0.stableIdentity) == false }
+            .sorted { $0.displayID < $1.displayID }
+        return ordered + remaining
+    }
+
+    /// Convenience helper returning merged display IDs in the current order.
+    private func orderedMergedIDs() -> [String] {
+        orderedMergedDisplays.map(\.stableIdentity)
     }
 
     /// Swaps two external displays in the saved order list.
@@ -1112,6 +1176,30 @@ struct MenuBarContentView: View {
         }
     }
 
+    /// Moves the given display one slot up in the merged order list.
+    private func moveMergedDisplayUp(_ id: String) {
+        var order = orderedMergedIDs()
+        guard let index = order.firstIndex(of: id), index > 0 else { return }
+        order.swapAt(index, index - 1)
+        withAnimation(.spring(response: 0.25, dampingFraction: 0.82)) {
+            settingsStore.update { settings in
+                settings.mergedDisplayOrder = order
+            }
+        }
+    }
+
+    /// Moves the given display one slot down in the merged order list.
+    private func moveMergedDisplayDown(_ id: String) {
+        var order = orderedMergedIDs()
+        guard let index = order.firstIndex(of: id), index < (order.count - 1) else { return }
+        order.swapAt(index, index + 1)
+        withAnimation(.spring(response: 0.25, dampingFraction: 0.82)) {
+            settingsStore.update { settings in
+                settings.mergedDisplayOrder = order
+            }
+        }
+    }
+
     /// Copies a plain-text report of all displays to the clipboard.
     private func copyDisplayReport() {
         let report = buildDisplayReport()
@@ -1163,7 +1251,7 @@ struct MenuBarContentView: View {
             let type = display.isExternal ? String(localized: "External") : String(localized: "Internal")
             let refresh = display.refreshRateHz.map { String(format: String(localized: "DisplayReportRefreshRateFormat"), $0) } ?? String(localized: "DisplayReportRefreshNA")
             let ddc = ddcManager.states[display.stableIdentity]?.status.localizedDescription ?? String(localized: "Unknown")
-            let blackout = blackoutManager.activeDisplayIDs.contains(display.stableIdentity) ? String(localized: "Blackout On") : String(localized: "Blackout Off")
+            let blackout = engine.isDisplayBlackoutActive(display) ? String(localized: "Blackout On") : String(localized: "Blackout Off")
             lines.append(String(format: String(localized: "DisplayReportLineFormat"), name, type))
             lines.append(String(format: String(localized: "DisplayReportResolutionFormat"), display.resolution))
             lines.append(String(format: String(localized: "DisplayReportRefreshFormat"), refresh))
@@ -1179,5 +1267,12 @@ struct MenuBarContentView: View {
     private func openDiagnosticsLog() {
         let url = DiagnosticsLogger.shared.logFileURL
         NSWorkspace.shared.activateFileViewerSelecting([url])
+    }
+}
+
+/// Button style that keeps icon colors stable during pressed state (no accent flash).
+private struct StaticIconButtonStyle: ButtonStyle {
+    func makeBody(configuration: Configuration) -> some View {
+        configuration.label
     }
 }

@@ -288,3 +288,6 @@
 "Monitors" = "Ekranlar";
 "Show in Dimly" = "Dimly'de göster";
 "Show this monitor in the Dimly monitor list." = "Bu monitörü Dimly monitör listesinde göster.";
+
+"Merge internal and external monitor order" = "Dahili ve harici monitör sırasını birleştir";
+"Tip: Turn this on to arrange visible built-in and external monitors in one shared list." = "İpucu: Görünen yerleşik ve harici monitörleri tek bir ortak listede düzenlemek için bunu açın.";

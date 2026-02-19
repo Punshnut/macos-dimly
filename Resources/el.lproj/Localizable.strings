@@ -288,3 +288,6 @@
 "Monitors" = "Οθόνες";
 "Show in Dimly" = "Εμφάνιση στο Dimly";
 "Show this monitor in the Dimly monitor list." = "Εμφάνιση αυτής της οθόνης στη λίστα οθονών του Dimly.";
+
+"Merge internal and external monitor order" = "Συγχώνευση σειράς εσωτερικών και εξωτερικών οθονών";
+"Tip: Turn this on to arrange visible built-in and external monitors in one shared list." = "Συμβουλή: Ενεργοποιήστε το για να ταξινομείτε τις ορατές ενσωματωμένες και εξωτερικές οθόνες σε μία κοινή λίστα.";

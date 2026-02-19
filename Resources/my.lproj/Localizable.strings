@@ -288,3 +288,6 @@
 "Monitors" = "ပြသမှုများ";
 "Show in Dimly" = "Dimly တွင် ပြပါ";
 "Show this monitor in the Dimly monitor list." = "ဤမော်နီတာကို Dimly ၏ မော်နီတာစာရင်းတွင် ပြပါ။";
+
+"Merge internal and external monitor order" = "အတွင်းပိုင်းနှင့် ပြင်ပ မော်နီတာအစီအစဉ်ကို ပေါင်းစည်းရန်";
+"Tip: Turn this on to arrange visible built-in and external monitors in one shared list." = "အကြံပြုချက် - မြင်ရသော built-in နှင့် ပြင်ပ မော်နီတာများကို မျှဝေထားသော စာရင်းတစ်ခုတည်းတွင် စီစဉ်ရန် ဤအရာကို ဖွင့်ပါ။";

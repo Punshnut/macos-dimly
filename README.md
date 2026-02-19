@@ -30,7 +30,7 @@ Dimly is a free and open-source quiet macOS menu bar control center for multi-mo
 
 <p align="center">
   <details>
-    <summary>Show screenshot</summary>
+    <summary>Show screenshot (old, gets updated in a few days)</summary>
     <img src="Media/ScreenshotMenuBarWindow.png" alt="Dimly screenshot" width="600">
   </details>
 </p>

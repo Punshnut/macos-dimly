@@ -288,3 +288,6 @@
 "Monitors" = "Màn hình";
 "Show in Dimly" = "Hiển thị trong Dimly";
 "Show this monitor in the Dimly monitor list." = "Hiển thị màn hình này trong danh sách màn hình của Dimly.";
+
+"Merge internal and external monitor order" = "Gộp thứ tự màn hình trong và ngoài";
+"Tip: Turn this on to arrange visible built-in and external monitors in one shared list." = "Mẹo: Bật mục này để sắp xếp các màn hình tích hợp và màn hình ngoài đang hiển thị trong một danh sách chung.";

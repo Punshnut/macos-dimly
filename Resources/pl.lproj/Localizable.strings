@@ -288,3 +288,6 @@
 "Monitors" = "Wyświetlacze";
 "Show in Dimly" = "Pokaż w Dimly";
 "Show this monitor in the Dimly monitor list." = "Pokaż ten monitor na liście monitorów Dimly.";
+
+"Merge internal and external monitor order" = "Scal kolejność monitorów wewnętrznych i zewnętrznych";
+"Tip: Turn this on to arrange visible built-in and external monitors in one shared list." = "Wskazówka: Włącz to, aby uporządkować widoczne wbudowane i zewnętrzne monitory na jednej wspólnej liście.";

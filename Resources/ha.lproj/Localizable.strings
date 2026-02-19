@@ -288,3 +288,6 @@
 "Monitors" = "Alluna";
 "Show in Dimly" = "Nuna a Dimly";
 "Show this monitor in the Dimly monitor list." = "Nuna wannan monitor a jerin monitor na Dimly.";
+
+"Merge internal and external monitor order" = "Haɗa jerin tsarin na allunan ciki da na waje";
+"Tip: Turn this on to arrange visible built-in and external monitors in one shared list." = "Shawara: Kunna wannan don tsara allunan da aka gina a ciki da na waje da ake gani a cikin jerin guda ɗaya na bai ɗaya.";
