@@ -283,3 +283,8 @@
 "Hide this monitor from the menu bar display list." = "اس مانیٹر کو مینو بار ڈسپلے فہرست سے چھپائیں۔";
 "On" = "آن";
 "Off" = "آف";
+
+/* Dimly Display Visibility */
+"Monitors" = "ڈسپلے";
+"Show in Dimly" = "Dimly میں دکھائیں";
+"Show this monitor in the Dimly monitor list." = "اس مانیٹر کو Dimly کی مانیٹر فہرست میں دکھائیں۔";

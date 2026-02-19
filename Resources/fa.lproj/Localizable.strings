@@ -283,3 +283,8 @@
 "Hide this monitor from the menu bar display list." = "این نمایشگر را از فهرست نمایشگرهای نوار منو پنهان کن.";
 "On" = "روشن";
 "Off" = "خاموش";
+
+/* Dimly Display Visibility */
+"Monitors" = "نمایشگرها";
+"Show in Dimly" = "نمایش در Dimly";
+"Show this monitor in the Dimly monitor list." = "این مانیتور را در فهرست مانیتورهای Dimly نمایش بده.";

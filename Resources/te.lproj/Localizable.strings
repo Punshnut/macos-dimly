@@ -283,3 +283,8 @@
 "Hide this monitor from the menu bar display list." = "ఈ మానిటర్‌ను మెనూ బార్ డిస్ప్లే జాబితా నుండి దాచు.";
 "On" = "ఆన్";
 "Off" = "ఆఫ్";
+
+/* Dimly Display Visibility */
+"Monitors" = "డిస్ప్లేలు";
+"Show in Dimly" = "Dimly లో చూపించు";
+"Show this monitor in the Dimly monitor list." = "ఈ మానిటర్‌ను Dimly మానిటర్ జాబితాలో చూపించు.";

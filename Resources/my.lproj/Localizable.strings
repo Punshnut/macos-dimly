@@ -283,3 +283,8 @@
 "Hide this monitor from the menu bar display list." = "ဤမော်နီတာကို မီနူးဘား ပြသမှုစာရင်းမှ ဖျောက်ပါ။";
 "On" = "ဖွင့်";
 "Off" = "ပိတ်";
+
+/* Dimly Display Visibility */
+"Monitors" = "ပြသမှုများ";
+"Show in Dimly" = "Dimly တွင် ပြပါ";
+"Show this monitor in the Dimly monitor list." = "ဤမော်နီတာကို Dimly ၏ မော်နီတာစာရင်းတွင် ပြပါ။";

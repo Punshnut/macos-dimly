@@ -283,3 +283,8 @@
 "Hide this monitor from the menu bar display list." = "இந்த மானிட்டரை மெனு பட்டி காட்சி பட்டியலில் இருந்து மறைக்கவும்.";
 "On" = "இயக்கு";
 "Off" = "அணை";
+
+/* Dimly Display Visibility */
+"Monitors" = "காட்சிகள்";
+"Show in Dimly" = "Dimly இல் காட்டு";
+"Show this monitor in the Dimly monitor list." = "இந்த மானிட்டரை Dimly-யின் மானிட்டர் பட்டியலில் காட்டு.";

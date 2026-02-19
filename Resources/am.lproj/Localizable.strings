@@ -283,3 +283,8 @@
 "Hide this monitor from the menu bar display list." = "ይህን ማሳያ ከሜኑ ባር ማሳያ ዝርዝር ውስጥ ደብቅ።";
 "On" = "አብራ";
 "Off" = "ጥፋ";
+
+/* Dimly Display Visibility */
+"Monitors" = "ማሳያዎች";
+"Show in Dimly" = "በ Dimly ውስጥ አሳይ";
+"Show this monitor in the Dimly monitor list." = "ይህን ሞኒተር በ Dimly የሞኒተሮች ዝርዝር ውስጥ አሳይ።";

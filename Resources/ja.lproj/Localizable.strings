@@ -283,3 +283,8 @@
 "Hide this monitor from the menu bar display list." = "このモニターをメニューバーのディスプレイ一覧から非表示にします。";
 "On" = "オン";
 "Off" = "オフ";
+
+/* Dimly Display Visibility */
+"Monitors" = "ディスプレイ";
+"Show in Dimly" = "Dimlyに表示";
+"Show this monitor in the Dimly monitor list." = "このモニターをDimlyのモニター一覧に表示します。";

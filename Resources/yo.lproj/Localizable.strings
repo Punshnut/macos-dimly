@@ -283,3 +283,8 @@
 "Hide this monitor from the menu bar display list." = "Fi monitọ̀ yìí pamọ́ kúrò nínú àkójọ àfihàn pátákó àkójọ.";
 "On" = "Tan";
 "Off" = "Pa";
+
+/* Dimly Display Visibility */
+"Monitors" = "Àfihàn";
+"Show in Dimly" = "Fi han ninu Dimly";
+"Show this monitor in the Dimly monitor list." = "Fi mọ́nítọ̀ yìí han ninu atokọ mọ́nítọ̀ Dimly.";

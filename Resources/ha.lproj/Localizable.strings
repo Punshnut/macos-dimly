@@ -283,3 +283,8 @@
 "Hide this monitor from the menu bar display list." = "Ɓoye wannan na'urar nuni daga jerin nuni na sandar menu.";
 "On" = "Kunna";
 "Off" = "Kashe";
+
+/* Dimly Display Visibility */
+"Monitors" = "Alluna";
+"Show in Dimly" = "Nuna a Dimly";
+"Show this monitor in the Dimly monitor list." = "Nuna wannan monitor a jerin monitor na Dimly.";

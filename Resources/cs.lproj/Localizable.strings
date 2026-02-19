@@ -283,3 +283,8 @@
 "Hide this monitor from the menu bar display list." = "Skrýt tento monitor ze seznamu displejů v liště nabídek.";
 "On" = "Zapnuto";
 "Off" = "Vypnuto";
+
+/* Dimly Display Visibility */
+"Monitors" = "Displeje";
+"Show in Dimly" = "Zobrazit v Dimly";
+"Show this monitor in the Dimly monitor list." = "Zobrazit tento monitor v seznamu monitorů Dimly.";

@@ -283,3 +283,8 @@
 "Hide this monitor from the menu bar display list." = "মেনু বার ডিসপ্লে তালিকা থেকে এই মনিটরটি লুকান।";
 "On" = "চালু";
 "Off" = "বন্ধ";
+
+/* Dimly Display Visibility */
+"Monitors" = "ডিসপ্লে";
+"Show in Dimly" = "Dimly-তে দেখান";
+"Show this monitor in the Dimly monitor list." = "এই মনিটরটি Dimly-এর মনিটর তালিকায় দেখান।";

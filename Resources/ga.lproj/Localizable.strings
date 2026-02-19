@@ -283,3 +283,8 @@
 "Hide this monitor from the menu bar display list." = "Folaigh an monatóir seo ó liosta taispeántais an bharra roghchláir.";
 "On" = "Ar siúl";
 "Off" = "Múchta";
+
+/* Dimly Display Visibility */
+"Monitors" = "Taispeántais";
+"Show in Dimly" = "Taispeáin i Dimly";
+"Show this monitor in the Dimly monitor list." = "Taispeáin an monatóir seo i liosta monatóirí Dimly.";

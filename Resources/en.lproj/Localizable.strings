@@ -34,6 +34,7 @@
 /* Menu Bar Sections */
 "Quick Actions" = "Quick Actions";
 "External Displays" = "External Displays";
+"Monitors" = "Monitors";
 "Profiles" = "Profiles";
 "App" = "App";
 "Mode" = "Mode";
@@ -120,6 +121,8 @@
 "Rename" = "Rename";
 "Rename Display" = "Rename Display";
 "Give this display a friendly name." = "Give this display a friendly name.";
+"Show in Dimly" = "Show in Dimly";
+"Show this monitor in the Dimly monitor list." = "Show this monitor in the Dimly monitor list.";
 
 /* Settings Shortcuts */
 "Global shortcuts" = "Global shortcuts";

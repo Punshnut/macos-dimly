@@ -281,3 +281,8 @@
 "Hide this monitor from the menu bar display list." = "Itago ang monitor na ito mula sa listahan ng display sa menu bar.";
 "On" = "Naka-on";
 "Off" = "Naka-off";
+
+/* Dimly Display Visibility */
+"Monitors" = "Mga display";
+"Show in Dimly" = "Ipakita sa Dimly";
+"Show this monitor in the Dimly monitor list." = "Ipakita ang monitor na ito sa listahan ng mga monitor ng Dimly.";

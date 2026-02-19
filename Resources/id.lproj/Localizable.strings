@@ -283,3 +283,8 @@
 "Hide this monitor from the menu bar display list." = "Sembunyikan monitor ini dari daftar tampilan di bilah menu.";
 "On" = "Nyala";
 "Off" = "Mati";
+
+/* Dimly Display Visibility */
+"Monitors" = "Layar";
+"Show in Dimly" = "Tampilkan di Dimly";
+"Show this monitor in the Dimly monitor list." = "Tampilkan monitor ini di daftar monitor Dimly.";

@@ -20,6 +20,7 @@ struct MenuBarContentView: View {
     let updaterController: UpdaterController
     let presentation: Presentation
     @State private var modifierClickMonitor: Any?
+    @State private var builtinBrightnessCacheByDisplayID: [CGDirectDisplayID: Int] = [:]
     @Namespace private var modeSwitchNamespace
     @Environment(\.colorScheme) private var colorScheme
 
@@ -29,14 +30,14 @@ struct MenuBarContentView: View {
             modeSwitchRow
             if isSimpleMode {
                 quickActionsSection(includeShowNumbers: false)
-                if !externalDisplays.isEmpty {
+                if !menuBarDisplays.isEmpty {
                     externalDisplaysSimpleSection
                 }
                 appControlsSimpleSection
             } else {
                 headerCard
                 quickActionsSection(includeShowNumbers: true)
-                if !externalDisplays.isEmpty {
+                if !menuBarDisplays.isEmpty {
                     externalDisplaysSection
                 }
                 profilesSection
@@ -190,7 +191,7 @@ struct MenuBarContentView: View {
         guard previouslyExpanded.isEmpty == false else { return }
         // Restore expanded rows after the mode branch transition has settled.
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.14) {
-            let liveIDs = Set(self.externalDisplays.map(\.stableIdentity))
+            let liveIDs = Set(self.menuBarDisplays.map(\.stableIdentity))
             let restored = previouslyExpanded.filter { liveIDs.contains($0) }
             guard restored.isEmpty == false else { return }
             withAnimation(.spring(response: 0.28, dampingFraction: 0.84)) {
@@ -203,20 +204,42 @@ struct MenuBarContentView: View {
         }
     }
 
-    /// External displays only, as seen by the display manager.
-    private var externalDisplays: [DisplayInfo] {
-        let excludedIDs = Set(settingsStore.settings.menuBarExcludedDisplayIDs)
-        return displayManager.displays.filter { $0.isExternal && excludedIDs.contains($0.stableIdentity) == false }
+    private var excludedExternalDisplayIDs: Set<String> {
+        Set(settingsStore.settings.menuBarExcludedDisplayIDs)
+    }
+
+    private var includedInternalDisplayIDs: Set<String> {
+        Set(settingsStore.settings.menuBarIncludedInternalDisplayIDs)
+    }
+
+    /// External displays visible in Dimly.
+    private var visibleExternalDisplays: [DisplayInfo] {
+        displayManager.displays.filter { $0.isExternal && excludedExternalDisplayIDs.contains($0.stableIdentity) == false }
+    }
+
+    /// Internal displays explicitly shown in Dimly.
+    private var visibleInternalDisplays: [DisplayInfo] {
+        displayManager.displays.filter { $0.isBuiltin && includedInternalDisplayIDs.contains($0.stableIdentity) }
     }
 
     /// External displays ordered by the user's preference list.
     private var orderedExternalDisplays: [DisplayInfo] {
-        orderExternalDisplays(externalDisplays)
+        orderExternalDisplays(visibleExternalDisplays)
+    }
+
+    /// Internal displays ordered by the user's preference list.
+    private var orderedInternalDisplays: [DisplayInfo] {
+        orderInternalDisplays(visibleInternalDisplays)
+    }
+
+    /// All displays visible in Dimly (ordered externals first, then internals).
+    private var menuBarDisplays: [DisplayInfo] {
+        orderedExternalDisplays + orderedInternalDisplays
     }
 
     /// Map of display stable IDs to their external index number.
     private var externalIndexMap: [String: Int] {
-        indexMap(for: externalDisplays)
+        indexMap(for: displayManager.displays.filter { $0.isExternal })
     }
 
     /// Map of display stable IDs to their internal index number.
@@ -225,13 +248,13 @@ struct MenuBarContentView: View {
     }
 
     /// Count of internal (built-in) panels.
-    private var internalDisplayCount: Int {
-        displayManager.displays.filter { $0.isBuiltin }.count
+    private var visibleInternalDisplayCount: Int {
+        visibleInternalDisplays.count
     }
 
     /// Number of external displays currently blacked out.
     private var blackoutActiveCount: Int {
-        externalDisplays.filter { blackoutManager.activeDisplayIDs.contains($0.stableIdentity) }.count
+        visibleExternalDisplays.filter { blackoutManager.activeDisplayIDs.contains($0.stableIdentity) }.count
     }
 
     /// Summary card showing active display count and overall status.
@@ -267,12 +290,12 @@ struct MenuBarContentView: View {
     /// One-line summary of internal vs external display counts.
     private var displaySummaryText: String {
         var parts: [String] = []
-        let externalCount = externalDisplays.count
+        let externalCount = visibleExternalDisplays.count
         if externalCount > 0 {
             parts.append(String(format: String(localized: "ExternalCountFormat"), Int64(externalCount)))
         }
-        if internalDisplayCount > 0 {
-            parts.append(String(format: String(localized: "InternalCountFormat"), Int64(internalDisplayCount)))
+        if visibleInternalDisplayCount > 0 {
+            parts.append(String(format: String(localized: "InternalCountFormat"), Int64(visibleInternalDisplayCount)))
         }
         return parts.isEmpty ? String(localized: "No displays detected") : parts.joined(separator: " • ")
     }
@@ -360,7 +383,7 @@ struct MenuBarContentView: View {
         }
         .buttonStyle(.bordered)
         .controlSize(.regular)
-        .disabled(externalDisplays.isEmpty)
+        .disabled(visibleExternalDisplays.isEmpty)
     }
 
     /// Sleep button that reflects whether all/partial/none are asleep.
@@ -391,24 +414,26 @@ struct MenuBarContentView: View {
     /// Per-display controls and status lines for external displays.
     private var externalDisplaysSection: some View {
         VStack(alignment: .leading, spacing: 8) {
-            sectionHeader(String(localized: "External Displays"))
-            ForEach(orderedExternalDisplays) { display in
+            sectionHeader(monitorsSectionTitle)
+            ForEach(menuBarDisplays) { display in
                 displayRow(display)
             }
         }
         .animation(.spring(response: 0.25, dampingFraction: 0.82), value: orderedExternalIDs())
+        .animation(.spring(response: 0.25, dampingFraction: 0.82), value: orderedInternalIDs())
         .animation(.spring(response: 0.25, dampingFraction: 0.82), value: settingsStore.settings.brightnessPanelExpandedDisplayIDs)
     }
 
     /// Simplified per-display list for simple mode.
     private var externalDisplaysSimpleSection: some View {
         VStack(alignment: .leading, spacing: 8) {
-            sectionHeader(String(localized: "External Displays"))
-            ForEach(orderedExternalDisplays) { display in
+            sectionHeader(monitorsSectionTitle)
+            ForEach(menuBarDisplays) { display in
                 displayRowSimple(display)
             }
         }
         .animation(.spring(response: 0.25, dampingFraction: 0.82), value: orderedExternalIDs())
+        .animation(.spring(response: 0.25, dampingFraction: 0.82), value: orderedInternalIDs())
         .animation(.spring(response: 0.25, dampingFraction: 0.82), value: settingsStore.settings.brightnessPanelExpandedDisplayIDs)
     }
 
@@ -528,7 +553,7 @@ struct MenuBarContentView: View {
 
     /// Per-display brightness controls (0-100 with DDC/fallback accenting).
     private func brightnessDropdown(for display: DisplayInfo) -> some View {
-        let mode = engine.brightnessMode(for: display)
+        let mode = display.isBuiltin ? BrightnessControlMode.ddc : engine.brightnessMode(for: display)
         let tint: Color
         let modeLabel: String
         switch mode {
@@ -542,7 +567,7 @@ struct MenuBarContentView: View {
             tint = .orange
             modeLabel = String(localized: "Checking DDC")
         }
-        let level = engine.brightnessPercent(for: display)
+        let level = brightnessPercent(for: display)
 
         return VStack(alignment: .leading, spacing: 8) {
             HStack(spacing: 8) {
@@ -581,9 +606,9 @@ struct MenuBarContentView: View {
 
                 Slider(
                     value: Binding(
-                        get: { Double(engine.brightnessPercent(for: display)) },
+                        get: { Double(brightnessPercent(for: display)) },
                         set: { newValue in
-                            engine.setBrightness(Int(newValue.rounded()), for: display)
+                            setBrightness(Int(newValue.rounded()), for: display)
                         }
                     ),
                     in: 0...100
@@ -648,16 +673,20 @@ struct MenuBarContentView: View {
         .help(label)
     }
 
-    /// Up/down buttons used to reorder external displays.
-    private func displayOrderButtons(for display: DisplayInfo) -> some View {
-        let order = orderedExternalIDs()
+    /// Up/down buttons used to reorder displays in their section.
+    private func displayOrderButtons(for display: DisplayInfo) -> AnyView {
+        let order = display.isExternal ? orderedExternalIDs() : orderedInternalIDs()
         let index = order.firstIndex(of: display.stableIdentity) ?? 0
         let canMoveUp = index > 0
         let canMoveDown = index < (order.count - 1)
 
-        return VStack(spacing: 4) {
+        return AnyView(VStack(spacing: 4) {
             Button {
-                moveExternalDisplayUp(display.stableIdentity)
+                if display.isExternal {
+                    moveExternalDisplayUp(display.stableIdentity)
+                } else {
+                    moveInternalDisplayUp(display.stableIdentity)
+                }
             } label: {
                 Image(systemName: "chevron.up")
                     .font(.system(size: 10, weight: .semibold))
@@ -667,7 +696,11 @@ struct MenuBarContentView: View {
             .disabled(!canMoveUp)
 
             Button {
-                moveExternalDisplayDown(display.stableIdentity)
+                if display.isExternal {
+                    moveExternalDisplayDown(display.stableIdentity)
+                } else {
+                    moveInternalDisplayDown(display.stableIdentity)
+                }
             } label: {
                 Image(systemName: "chevron.down")
                     .font(.system(size: 10, weight: .semibold))
@@ -677,7 +710,7 @@ struct MenuBarContentView: View {
             .disabled(!canMoveDown)
         }
         .foregroundStyle(.secondary)
-        .help(String(localized: "Reorder Display"))
+        .help(String(localized: "Reorder Display")))
     }
 
     /// UI to save/apply display profiles.
@@ -809,6 +842,13 @@ struct MenuBarContentView: View {
         .controlSize(.small)
     }
 
+    private var monitorsSectionTitle: String {
+        if visibleExternalDisplays.isEmpty == false && visibleInternalDisplays.isEmpty == false {
+            return String(localized: "Monitors")
+        }
+        return String(localized: "External Displays")
+    }
+
     /// Standard section header styling used in the popover.
     private func sectionHeader(_ title: String) -> some View {
         Text(title)
@@ -872,24 +912,68 @@ struct MenuBarContentView: View {
 
     /// Nudges brightness by a fixed percentage amount.
     private func nudgeBrightness(for display: DisplayInfo, delta: Int) {
-        let current = engine.brightnessPercent(for: display)
+        let current = brightnessPercent(for: display)
         let updated = min(100, max(0, current + delta))
         guard updated != current else { return }
-        engine.setBrightness(updated, for: display)
+        setBrightness(updated, for: display)
+    }
+
+    /// Returns display brightness from DDC/overlay for externals, macOS for internals.
+    private func brightnessPercent(for display: DisplayInfo) -> Int {
+        guard display.isBuiltin else {
+            return engine.brightnessPercent(for: display)
+        }
+
+        if let liveBrightness = DisplayHardware.builtinDisplayBrightnessPercent(for: display.displayID) {
+            if builtinBrightnessCacheByDisplayID[display.displayID] != liveBrightness {
+                DispatchQueue.main.async {
+                    builtinBrightnessCacheByDisplayID[display.displayID] = liveBrightness
+                }
+            }
+            return builtinBrightnessCacheByDisplayID[display.displayID] ?? liveBrightness
+        }
+
+        return builtinBrightnessCacheByDisplayID[display.displayID] ?? 100
+    }
+
+    /// Applies display brightness to the right backend for this display type.
+    private func setBrightness(_ percent: Int, for display: DisplayInfo) {
+        if display.isBuiltin {
+            let clamped = max(0, min(100, percent))
+            builtinBrightnessCacheByDisplayID[display.displayID] = clamped
+            _ = DisplayHardware.setBuiltinDisplayBrightnessPercent(clamped, for: display.displayID)
+
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.08) {
+                if let confirmed = DisplayHardware.builtinDisplayBrightnessPercent(for: display.displayID) {
+                    builtinBrightnessCacheByDisplayID[display.displayID] = confirmed
+                }
+            }
+            return
+        }
+        engine.setBrightness(percent, for: display)
     }
 
     /// Produces additional status rows for any non-visible displays.
     private func extendedStatusRows() -> [String] {
         let visibleText = String(localized: "Visible")
-        let excludedIDs = Set(settingsStore.settings.menuBarExcludedDisplayIDs)
         return displayManager.displays.compactMap { display in
-            if display.isExternal && excludedIDs.contains(display.stableIdentity) {
+            if shouldShowInDimly(display) == false {
                 return nil
             }
             let status = displayStatus(for: display)
             guard status != visibleText else { return nil }
             return "\(displayName(for: display)) • \(status)"
         }
+    }
+
+    private func shouldShowInDimly(_ display: DisplayInfo) -> Bool {
+        if display.isBuiltin {
+            return includedInternalDisplayIDs.contains(display.stableIdentity)
+        }
+        if display.isExternal {
+            return excludedExternalDisplayIDs.contains(display.stableIdentity) == false
+        }
+        return true
     }
 
     private enum SuspendState {
@@ -900,7 +984,7 @@ struct MenuBarContentView: View {
 
     /// Roll-up state used to style the sleep button when some/all are asleep.
     private var suspendState: SuspendState {
-        let externals = externalDisplays
+        let externals = visibleExternalDisplays
         guard externals.isEmpty == false else { return .none }
         let suspendedCount = externals.filter { isDisplaySuspended($0) }.count
         if suspendedCount == 0 { return .none }
@@ -942,6 +1026,22 @@ struct MenuBarContentView: View {
         orderedExternalDisplays.map(\.stableIdentity)
     }
 
+    /// Orders internal displays using the persisted sort order.
+    private func orderInternalDisplays(_ displays: [DisplayInfo]) -> [DisplayInfo] {
+        guard displays.isEmpty == false else { return [] }
+        let order = settingsStore.settings.internalDisplayOrder
+        let byID = Dictionary(uniqueKeysWithValues: displays.map { ($0.stableIdentity, $0) })
+        let ordered = order.compactMap { byID[$0] }
+        let remaining = displays.filter { order.contains($0.stableIdentity) == false }
+            .sorted { $0.displayID < $1.displayID }
+        return ordered + remaining
+    }
+
+    /// Convenience helper returning internal display IDs in the current order.
+    private func orderedInternalIDs() -> [String] {
+        orderedInternalDisplays.map(\.stableIdentity)
+    }
+
     /// Swaps two external displays in the saved order list.
     private func moveExternalDisplay(from draggedID: String, to targetID: String) {
         var order = orderedExternalIDs()
@@ -976,6 +1076,30 @@ struct MenuBarContentView: View {
         withAnimation(.spring(response: 0.25, dampingFraction: 0.82)) {
             settingsStore.update { settings in
                 settings.externalDisplayOrder = order
+            }
+        }
+    }
+
+    /// Moves the given internal display one slot up in the saved order.
+    private func moveInternalDisplayUp(_ id: String) {
+        var order = orderedInternalIDs()
+        guard let index = order.firstIndex(of: id), index > 0 else { return }
+        order.swapAt(index, index - 1)
+        withAnimation(.spring(response: 0.25, dampingFraction: 0.82)) {
+            settingsStore.update { settings in
+                settings.internalDisplayOrder = order
+            }
+        }
+    }
+
+    /// Moves the given internal display one slot down in the saved order.
+    private func moveInternalDisplayDown(_ id: String) {
+        var order = orderedInternalIDs()
+        guard let index = order.firstIndex(of: id), index < (order.count - 1) else { return }
+        order.swapAt(index, index + 1)
+        withAnimation(.spring(response: 0.25, dampingFraction: 0.82)) {
+            settingsStore.update { settings in
+                settings.internalDisplayOrder = order
             }
         }
     }

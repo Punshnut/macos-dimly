@@ -283,3 +283,8 @@
 "Hide this monitor from the menu bar display list." = "ซ่อนจอนี้จากรายการจอภาพในแถบเมนู";
 "On" = "เปิด";
 "Off" = "ปิด";
+
+/* Dimly Display Visibility */
+"Monitors" = "จอภาพ";
+"Show in Dimly" = "แสดงใน Dimly";
+"Show this monitor in the Dimly monitor list." = "แสดงจอภาพนี้ในรายการจอภาพของ Dimly";

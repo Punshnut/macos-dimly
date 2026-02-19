@@ -283,3 +283,8 @@
 "Hide this monitor from the menu bar display list." = "이 모니터를 메뉴 막대 디스플레이 목록에서 숨깁니다.";
 "On" = "켜짐";
 "Off" = "꺼짐";
+
+/* Dimly Display Visibility */
+"Monitors" = "디스플레이";
+"Show in Dimly" = "Dimly에 표시";
+"Show this monitor in the Dimly monitor list." = "이 모니터를 Dimly 모니터 목록에 표시합니다.";

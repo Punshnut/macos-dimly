@@ -283,3 +283,8 @@
 "Hide this monitor from the menu bar display list." = "Ẩn màn hình này khỏi danh sách màn hình trên thanh menu.";
 "On" = "Bật";
 "Off" = "Tắt";
+
+/* Dimly Display Visibility */
+"Monitors" = "Màn hình";
+"Show in Dimly" = "Hiển thị trong Dimly";
+"Show this monitor in the Dimly monitor list." = "Hiển thị màn hình này trong danh sách màn hình của Dimly.";

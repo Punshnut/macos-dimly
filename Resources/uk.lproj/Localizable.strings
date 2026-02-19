@@ -283,3 +283,8 @@
 "Hide this monitor from the menu bar display list." = "Приховати цей монітор зі списку дисплеїв у рядку меню.";
 "On" = "Увімкнено";
 "Off" = "Вимкнено";
+
+/* Dimly Display Visibility */
+"Monitors" = "Дисплеї";
+"Show in Dimly" = "Показувати в Dimly";
+"Show this monitor in the Dimly monitor list." = "Показувати цей монітор у списку моніторів Dimly.";

@@ -283,3 +283,8 @@
 "Hide this monitor from the menu bar display list." = "Ficha kifuatiliaji hiki kutoka kwenye orodha ya skrini kwenye mwambaa wa menyu.";
 "On" = "Washa";
 "Off" = "Zima";
+
+/* Dimly Display Visibility */
+"Monitors" = "Skrini";
+"Show in Dimly" = "Onyesha kwenye Dimly";
+"Show this monitor in the Dimly monitor list." = "Onyesha kichunguzi hiki kwenye orodha ya vichunguzi ya Dimly.";

@@ -185,7 +185,12 @@ struct SettingsRootView: View {
         }()
         let brightnessTint = brightnessPresentation.0
         let brightnessModeLabel = brightnessPresentation.1
-        let isExcludedFromMenuBar = settingsStore.settings.menuBarExcludedDisplayIDs.contains(display.stableIdentity)
+        let isShownInDimly: Bool = {
+            if display.isBuiltin {
+                return settingsStore.settings.menuBarIncludedInternalDisplayIDs.contains(display.stableIdentity)
+            }
+            return settingsStore.settings.menuBarExcludedDisplayIDs.contains(display.stableIdentity) == false
+        }()
         let currentBrightness = brightnessPercent(for: display)
 
         VStack(alignment: .leading, spacing: 12) {
@@ -350,45 +355,16 @@ struct SettingsRootView: View {
                             .font(.caption)
                             .foregroundStyle(.secondary)
                         Spacer()
-                    Toggle("", isOn: Binding(
-                        get: { settingsStore.settings.overlayOnlyDisplayIDs.contains(display.stableIdentity) },
-                        set: { enabled in
-                            settingsStore.update { settings in
+                        Toggle("", isOn: Binding(
+                            get: { settingsStore.settings.overlayOnlyDisplayIDs.contains(display.stableIdentity) },
+                            set: { enabled in
+                                settingsStore.update { settings in
                                     if enabled {
                                         if settings.overlayOnlyDisplayIDs.contains(display.stableIdentity) == false {
                                             settings.overlayOnlyDisplayIDs.append(display.stableIdentity)
                                         }
                                     } else {
                                         settings.overlayOnlyDisplayIDs.removeAll { $0 == display.stableIdentity }
-                                    }
-                            }
-                        }
-                    ))
-                    .labelsHidden()
-                    .toggleStyle(.switch)
-                    .controlSize(.large)
-                }
-
-                    HStack(spacing: 10) {
-                        VStack(alignment: .leading, spacing: 2) {
-                            Text(String(localized: "Exclude from menu bar window"))
-                                .font(.caption)
-                                .foregroundStyle(.secondary)
-                            Text(String(localized: "Hide this monitor from the menu bar display list."))
-                                .font(.caption2)
-                                .foregroundStyle(.tertiary)
-                        }
-                        Spacer()
-                        Toggle("", isOn: Binding(
-                            get: { isExcludedFromMenuBar },
-                            set: { enabled in
-                                settingsStore.update { settings in
-                                    if enabled {
-                                        if settings.menuBarExcludedDisplayIDs.contains(display.stableIdentity) == false {
-                                            settings.menuBarExcludedDisplayIDs.append(display.stableIdentity)
-                                        }
-                                    } else {
-                                        settings.menuBarExcludedDisplayIDs.removeAll { $0 == display.stableIdentity }
                                     }
                                 }
                             }
@@ -397,6 +373,43 @@ struct SettingsRootView: View {
                         .toggleStyle(.switch)
                         .controlSize(.large)
                     }
+                }
+
+                HStack(spacing: 10) {
+                    VStack(alignment: .leading, spacing: 2) {
+                        Text(String(localized: "Show in Dimly"))
+                            .font(.caption)
+                            .foregroundStyle(.secondary)
+                        Text(String(localized: "Show this monitor in the Dimly monitor list."))
+                            .font(.caption2)
+                            .foregroundStyle(.tertiary)
+                    }
+                    Spacer()
+                    Toggle("", isOn: Binding(
+                        get: { isShownInDimly },
+                        set: { enabled in
+                            settingsStore.update { settings in
+                                if display.isBuiltin {
+                                    if enabled {
+                                        if settings.menuBarIncludedInternalDisplayIDs.contains(display.stableIdentity) == false {
+                                            settings.menuBarIncludedInternalDisplayIDs.append(display.stableIdentity)
+                                        }
+                                    } else {
+                                        settings.menuBarIncludedInternalDisplayIDs.removeAll { $0 == display.stableIdentity }
+                                    }
+                                } else {
+                                    if enabled {
+                                        settings.menuBarExcludedDisplayIDs.removeAll { $0 == display.stableIdentity }
+                                    } else if settings.menuBarExcludedDisplayIDs.contains(display.stableIdentity) == false {
+                                        settings.menuBarExcludedDisplayIDs.append(display.stableIdentity)
+                                    }
+                                }
+                            }
+                        }
+                    ))
+                    .labelsHidden()
+                    .toggleStyle(.switch)
+                    .controlSize(.large)
                 }
             }
         }

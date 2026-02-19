@@ -283,3 +283,8 @@
 "Hide this monitor from the menu bar display list." = "Bu monitörü menü çubuğu ekran listesinden gizle.";
 "On" = "Açık";
 "Off" = "Kapalı";
+
+/* Dimly Display Visibility */
+"Monitors" = "Ekranlar";
+"Show in Dimly" = "Dimly'de göster";
+"Show this monitor in the Dimly monitor list." = "Bu monitörü Dimly monitör listesinde göster.";

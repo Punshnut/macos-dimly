@@ -283,3 +283,8 @@
 "Hide this monitor from the menu bar display list." = "A monitor elrejtése a menüsáv kijelzőlistájából.";
 "On" = "Be";
 "Off" = "Ki";
+
+/* Dimly Display Visibility */
+"Monitors" = "Kijelzők";
+"Show in Dimly" = "Megjelenítés a Dimlyben";
+"Show this monitor in the Dimly monitor list." = "Jelenítse meg ezt a monitort a Dimly monitorlistájában.";

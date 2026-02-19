@@ -129,7 +129,9 @@ struct MonitorSettingsPayload: Codable {
     let displayAliases: [String: String]
     let overlayOnlyDisplayIDs: [String]
     let menuBarExcludedDisplayIDs: [String]
+    let menuBarIncludedInternalDisplayIDs: [String]
     let externalDisplayOrder: [String]
+    let internalDisplayOrder: [String]
     let brightnessPanelExpandedDisplayIDs: [String]
     let monitorBrightnessByDisplayID: [String: Int]
     let monitorPowerStateByDisplayID: [String: PersistedMonitorPowerState]
@@ -138,7 +140,9 @@ struct MonitorSettingsPayload: Codable {
         case displayAliases
         case overlayOnlyDisplayIDs
         case menuBarExcludedDisplayIDs
+        case menuBarIncludedInternalDisplayIDs
         case externalDisplayOrder
+        case internalDisplayOrder
         case brightnessPanelExpandedDisplayIDs
         case monitorBrightnessByDisplayID
         case monitorPowerStateByDisplayID
@@ -148,7 +152,9 @@ struct MonitorSettingsPayload: Codable {
         displayAliases = settings.displayAliases
         overlayOnlyDisplayIDs = settings.overlayOnlyDisplayIDs
         menuBarExcludedDisplayIDs = settings.menuBarExcludedDisplayIDs
+        menuBarIncludedInternalDisplayIDs = settings.menuBarIncludedInternalDisplayIDs
         externalDisplayOrder = settings.externalDisplayOrder
+        internalDisplayOrder = settings.internalDisplayOrder
         brightnessPanelExpandedDisplayIDs = settings.brightnessPanelExpandedDisplayIDs
         monitorBrightnessByDisplayID = settings.monitorBrightnessByDisplayID
         monitorPowerStateByDisplayID = settings.monitorPowerStateByDisplayID
@@ -159,7 +165,9 @@ struct MonitorSettingsPayload: Codable {
         displayAliases = try container.decodeIfPresent([String: String].self, forKey: .displayAliases) ?? [:]
         overlayOnlyDisplayIDs = try container.decodeIfPresent([String].self, forKey: .overlayOnlyDisplayIDs) ?? []
         menuBarExcludedDisplayIDs = try container.decodeIfPresent([String].self, forKey: .menuBarExcludedDisplayIDs) ?? []
+        menuBarIncludedInternalDisplayIDs = try container.decodeIfPresent([String].self, forKey: .menuBarIncludedInternalDisplayIDs) ?? []
         externalDisplayOrder = try container.decodeIfPresent([String].self, forKey: .externalDisplayOrder) ?? []
+        internalDisplayOrder = try container.decodeIfPresent([String].self, forKey: .internalDisplayOrder) ?? []
         brightnessPanelExpandedDisplayIDs = try container.decodeIfPresent([String].self, forKey: .brightnessPanelExpandedDisplayIDs) ?? []
         monitorBrightnessByDisplayID = try container.decodeIfPresent([String: Int].self, forKey: .monitorBrightnessByDisplayID) ?? [:]
         monitorPowerStateByDisplayID = try container.decodeIfPresent([String: PersistedMonitorPowerState].self, forKey: .monitorPowerStateByDisplayID) ?? [:]
@@ -170,7 +178,9 @@ struct MonitorSettingsPayload: Codable {
         try container.encode(displayAliases, forKey: .displayAliases)
         try container.encode(overlayOnlyDisplayIDs, forKey: .overlayOnlyDisplayIDs)
         try container.encode(menuBarExcludedDisplayIDs, forKey: .menuBarExcludedDisplayIDs)
+        try container.encode(menuBarIncludedInternalDisplayIDs, forKey: .menuBarIncludedInternalDisplayIDs)
         try container.encode(externalDisplayOrder, forKey: .externalDisplayOrder)
+        try container.encode(internalDisplayOrder, forKey: .internalDisplayOrder)
         try container.encode(brightnessPanelExpandedDisplayIDs, forKey: .brightnessPanelExpandedDisplayIDs)
         try container.encode(monitorBrightnessByDisplayID, forKey: .monitorBrightnessByDisplayID)
         try container.encode(monitorPowerStateByDisplayID, forKey: .monitorPowerStateByDisplayID)
@@ -180,7 +190,9 @@ struct MonitorSettingsPayload: Codable {
         settings.displayAliases = displayAliases
         settings.overlayOnlyDisplayIDs = overlayOnlyDisplayIDs
         settings.menuBarExcludedDisplayIDs = menuBarExcludedDisplayIDs
+        settings.menuBarIncludedInternalDisplayIDs = menuBarIncludedInternalDisplayIDs
         settings.externalDisplayOrder = externalDisplayOrder
+        settings.internalDisplayOrder = internalDisplayOrder
         settings.brightnessPanelExpandedDisplayIDs = brightnessPanelExpandedDisplayIDs
         settings.monitorBrightnessByDisplayID = monitorBrightnessByDisplayID
         settings.monitorPowerStateByDisplayID = monitorPowerStateByDisplayID

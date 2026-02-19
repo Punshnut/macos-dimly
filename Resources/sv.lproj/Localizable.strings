@@ -283,3 +283,8 @@
 "Hide this monitor from the menu bar display list." = "Dölj den här skärmen från displaylistan i menyraden.";
 "On" = "På";
 "Off" = "Av";
+
+/* Dimly Display Visibility */
+"Monitors" = "Skärmar";
+"Show in Dimly" = "Visa i Dimly";
+"Show this monitor in the Dimly monitor list." = "Visa den här skärmen i Dimlys skärmlista.";

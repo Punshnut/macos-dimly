@@ -283,3 +283,8 @@
 "Hide this monitor from the menu bar display list." = "在菜单栏显示器列表中隐藏此显示器。";
 "On" = "开";
 "Off" = "关";
+
+/* Dimly Display Visibility */
+"Monitors" = "显示器";
+"Show in Dimly" = "在 Dimly 中显示";
+"Show this monitor in the Dimly monitor list." = "在 Dimly 的显示器列表中显示此显示器。";

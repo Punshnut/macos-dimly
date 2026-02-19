@@ -283,3 +283,8 @@
 "Hide this monitor from the menu bar display list." = "Oculta este monitor de la lista de pantallas en la barra de menús.";
 "On" = "Activado";
 "Off" = "Desactivado";
+
+/* Dimly Display Visibility */
+"Monitors" = "Pantallas";
+"Show in Dimly" = "Mostrar en Dimly";
+"Show this monitor in the Dimly monitor list." = "Mostrar este monitor en la lista de monitores de Dimly.";

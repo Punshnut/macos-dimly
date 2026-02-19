@@ -283,3 +283,8 @@
 "Hide this monitor from the menu bar display list." = "Απόκρυψη αυτής της οθόνης από τη λίστα οθονών της γραμμής μενού.";
 "On" = "Ενεργό";
 "Off" = "Ανενεργό";
+
+/* Dimly Display Visibility */
+"Monitors" = "Οθόνες";
+"Show in Dimly" = "Εμφάνιση στο Dimly";
+"Show this monitor in the Dimly monitor list." = "Εμφάνιση αυτής της οθόνης στη λίστα οθονών του Dimly.";
