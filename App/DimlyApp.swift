@@ -40,10 +40,11 @@ struct DimlyApp: App {
             forName: NSApplication.willTerminateNotification,
             object: nil,
             queue: nil
-        ) { [engine] _ in
+        ) { [engine, store] _ in
             DiagnosticsLogger.shared.log("App will terminate", category: "app")
             Task { @MainActor in
                 engine.cleanupBeforeExit()
+                store.flushPendingPersistence()
             }
         }
     }

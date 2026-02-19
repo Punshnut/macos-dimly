@@ -23,6 +23,7 @@ final class DimlyEngine {
     private var pendingBrightnessByDisplayID: [String: Int] = [:]
     private var brightnessRequestRevisionByDisplayID: [String: Int] = [:]
     private var lastObservedBlackoutActiveIDs: Set<String> = []
+    private var lastObservedDDCSupportByDisplayID: [String: DDCSupportStatus] = [:]
     private var hotkeyManagers: [UUID: HotkeyManager] = [:]
     private let legacySleepPersistenceKey = "Sleep.activeDisplayIDs"
     private let legacyBlackoutPersistenceKey = "Blackout.activeDisplayIDs"
@@ -445,6 +446,12 @@ final class DimlyEngine {
                 self?.syncPersistedPowerStatesFromBlackoutActiveIDs(activeIDs)
             }
             .store(in: &stateCancellables)
+
+        ddcManager.$states
+            .sink { [weak self] states in
+                self?.handleDDCStateChanges(states)
+            }
+            .store(in: &stateCancellables)
     }
 
     /// Applies persisted power + brightness state to currently connected displays.
@@ -520,6 +527,25 @@ final class DimlyEngine {
             }
             settings.monitorPowerStateByDisplayID = updated
         }
+    }
+
+    /// Re-runs persisted-state restore once DDC capability resolves past "unknown".
+    private func handleDDCStateChanges(_ states: [String: DDCState]) {
+        let currentSupport = states.mapValues(\.status)
+        let allIDs = Set(lastObservedDDCSupportByDisplayID.keys).union(currentSupport.keys)
+        var resolvedIDs: [String] = []
+        for id in allIDs {
+            let previous = lastObservedDDCSupportByDisplayID[id]
+            let current = currentSupport[id]
+            guard previous != current else { continue }
+            if current == .supported || current == .notSupported {
+                resolvedIDs.append(id)
+            }
+        }
+        lastObservedDDCSupportByDisplayID = currentSupport
+        guard !resolvedIDs.isEmpty else { return }
+        DiagnosticsLogger.shared.log("DDC support resolved for \(resolvedIDs.count) displays; reapplying persisted monitor state", category: "engine")
+        restorePersistedMonitorState(reason: "ddcSupportResolved", remainingAttempts: 3)
     }
 
     /// Persists monitor power state for one display.

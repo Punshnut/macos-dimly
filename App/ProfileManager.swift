@@ -20,15 +20,17 @@ struct DisplaySnapshot: Codable, Equatable, Identifiable {
     let resolution: String
     let refreshRateHz: Double?
     let powerState: DisplayPowerState
+    let brightnessPercent: Int?
 
     /// Builds a snapshot from live display info.
-    init(from info: DisplayInfo, powerState: DisplayPowerState) {
+    init(from info: DisplayInfo, powerState: DisplayPowerState, brightnessPercent: Int?) {
         id = info.stableIdentity
         name = info.name
         isPrimary = info.displayID == CGMainDisplayID()
         resolution = info.resolution
         refreshRateHz = info.refreshRateHz
         self.powerState = powerState
+        self.brightnessPercent = brightnessPercent.map { max(0, min(100, $0)) }
     }
 
     enum CodingKeys: String, CodingKey {
@@ -38,6 +40,7 @@ struct DisplaySnapshot: Codable, Equatable, Identifiable {
         case resolution
         case refreshRateHz
         case powerState
+        case brightnessPercent
     }
 
     init(from decoder: Decoder) throws {
@@ -48,6 +51,7 @@ struct DisplaySnapshot: Codable, Equatable, Identifiable {
         resolution = try container.decode(String.self, forKey: .resolution)
         refreshRateHz = try container.decodeIfPresent(Double.self, forKey: .refreshRateHz)
         powerState = try container.decodeIfPresent(DisplayPowerState.self, forKey: .powerState) ?? .visible
+        brightnessPercent = try container.decodeIfPresent(Int.self, forKey: .brightnessPercent)
     }
 
     func encode(to encoder: Encoder) throws {
@@ -58,6 +62,7 @@ struct DisplaySnapshot: Codable, Equatable, Identifiable {
         try container.encode(resolution, forKey: .resolution)
         try container.encodeIfPresent(refreshRateHz, forKey: .refreshRateHz)
         try container.encode(powerState, forKey: .powerState)
+        try container.encodeIfPresent(brightnessPercent, forKey: .brightnessPercent)
     }
 }
 
@@ -128,7 +133,11 @@ final class ProfileManager: ObservableObject {
     /// Captures the current display state into a new named profile.
     func saveCurrentProfile(named name: String) {
         let snapshots = displayManager.displays.map { display in
-            DisplaySnapshot(from: display, powerState: currentPowerState(for: display))
+            DisplaySnapshot(
+                from: display,
+                powerState: currentPowerState(for: display),
+                brightnessPercent: currentBrightness(for: display)
+            )
         }
         let profile = DisplayProfile(
             id: UUID(),
@@ -155,6 +164,9 @@ final class ProfileManager: ObservableObject {
             let currentState = currentPowerState(for: display)
             if currentState != snapshot.powerState {
                 applyPowerState(snapshot.powerState, to: display)
+            }
+            if snapshot.powerState == .visible, let brightness = snapshot.brightnessPercent {
+                applyBrightness(brightness, to: display, afterPowerTransitionFrom: currentState)
             }
             appliedCount += 1
         }
@@ -227,16 +239,59 @@ final class ProfileManager: ObservableObject {
         }
     }
 
+    /// Determines the current brightness for profile capture.
+    private func currentBrightness(for display: DisplayInfo) -> Int? {
+        guard display.isExternal else { return nil }
+        if let engine {
+            return engine.brightnessPercent(for: display)
+        }
+        if let fallback = blackoutManager.fallbackBrightnessLevels[display.stableIdentity] {
+            return fallback
+        }
+        if let ddc = ddcManager.brightnessLevels[display.stableIdentity] {
+            return ddc
+        }
+        return 100
+    }
+
+    /// Applies brightness from a profile, allowing wake transitions to settle first.
+    private func applyBrightness(_ brightness: Int, to display: DisplayInfo, afterPowerTransitionFrom previousState: DisplayPowerState) {
+        guard let engine else {
+            logger.error("Cannot apply profile brightness; engine unavailable")
+            return
+        }
+        let clamped = max(0, min(100, brightness))
+        if previousState == .asleep {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.55) {
+                engine.setBrightness(clamped, for: display)
+            }
+            return
+        }
+        engine.setBrightness(clamped, for: display)
+    }
+
     // MARK: - Persistence
 
-    /// Persists profiles and automation settings to disk.
-    private func persist() {
-        let state = ProfileState(
+    /// Returns the current profile state for backup export.
+    func exportState() -> ProfileState {
+        ProfileState(
             profiles: profiles,
             automationEnabled: automationEnabled,
             automationProfileID: automationProfileID
         )
-        store.save(state)
+    }
+
+    /// Restores profile state from backup import.
+    func importState(_ state: ProfileState) {
+        profiles = state.profiles
+        automationEnabled = state.automationEnabled
+        automationProfileID = state.automationProfileID
+        persist()
+    }
+
+    /// Persists profiles and automation settings to disk.
+    private func persist() {
+        store.save(exportState())
     }
 }
 

@@ -49,13 +49,20 @@ struct DimlySettingsBackup: Codable {
     let type: SettingsBackupType
     let general: GeneralSettingsPayload?
     let monitor: MonitorSettingsPayload?
+    let profileState: ProfileState?
 
-    init(settings: DimlySettings, type: SettingsBackupType, exportedAt: Date = Date()) {
-        self.version = 1
+    init(
+        settings: DimlySettings,
+        type: SettingsBackupType,
+        exportedAt: Date = Date(),
+        profileState: ProfileState? = nil
+    ) {
+        self.version = 2
         self.exportedAt = exportedAt
         self.type = type
         self.general = type.includesGeneral ? GeneralSettingsPayload(from: settings) : nil
         self.monitor = type.includesMonitor ? MonitorSettingsPayload(from: settings) : nil
+        self.profileState = type.includesMonitor ? profileState : nil
     }
 
     func applying(
@@ -77,6 +84,11 @@ struct DimlySettingsBackup: Codable {
             monitor.apply(to: &updated)
         }
         return updated
+    }
+
+    func importedProfileState(includeMonitor: Bool) -> ProfileState? {
+        guard includeMonitor else { return nil }
+        return profileState
     }
 }
 

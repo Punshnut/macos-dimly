@@ -955,6 +955,9 @@ struct SettingsRootView: View {
                 if updated != settingsStore.settings {
                     settingsStore.settings = updated
                 }
+                if let importedProfiles = backup.importedProfileState(includeMonitor: includeMonitorSettings) {
+                    profileManager.importState(importedProfiles)
+                }
             } catch SettingsBackupApplyError.missingGeneralSettings {
                 showBackupAlert(
                     title: String(localized: "Could not import settings backup"),
@@ -982,7 +985,11 @@ struct SettingsRootView: View {
                 return
             }
 
-            let backup = DimlySettingsBackup(settings: settingsStore.settings, type: selectedBackupType)
+            let backup = DimlySettingsBackup(
+                settings: settingsStore.settings,
+                type: selectedBackupType,
+                profileState: profileManager.exportState()
+            )
             do {
                 let encoder = JSONEncoder()
                 encoder.outputFormatting = [.prettyPrinted, .sortedKeys]

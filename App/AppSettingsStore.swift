@@ -33,6 +33,11 @@ final class AppSettingsStore: ObservableObject {
         settings = copy
     }
 
+    /// Blocks until all queued async persistence work has completed.
+    func flushPendingPersistence() {
+        Self.persistenceQueue.sync {}
+    }
+
     // MARK: - Private
 
     /// Persists settings asynchronously to avoid blocking UI.
