@@ -235,6 +235,20 @@ final class ProfileManager: ObservableObject {
         persist()
     }
 
+    /// Moves a profile one slot up in the saved order.
+    func moveProfileUp(_ profile: DisplayProfile) {
+        guard let index = profiles.firstIndex(where: { $0.id == profile.id }), index > 0 else { return }
+        profiles.swapAt(index, index - 1)
+        persist()
+    }
+
+    /// Moves a profile one slot down in the saved order.
+    func moveProfileDown(_ profile: DisplayProfile) {
+        guard let index = profiles.firstIndex(where: { $0.id == profile.id }), index < (profiles.count - 1) else { return }
+        profiles.swapAt(index, index + 1)
+        persist()
+    }
+
     // MARK: - Automation
 
     /// Triggers automation when new external displays appear.

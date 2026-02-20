@@ -781,7 +781,7 @@ struct SettingsRootView: View {
         private var profilesDetail: some View {
             SettingsScrollView(title: String(localized: "Profiles"), subtitle: nil, contentMaxWidth: 980) {
                 SettingsCard(title: String(localized: "Profiles"), subtitle: nil) {
-                    HStack(alignment: .center, spacing: 10) {
+                    HStack(alignment: .center, spacing: 8) {
                         Button(String(localized: "Save Current Setup")) {
                             profileManager.saveCurrentProfile(named: proposedProfileName)
                             proposedProfileName = ""
@@ -790,7 +790,7 @@ struct SettingsRootView: View {
                         .controlSize(.small)
                         TextField(String(localized: "Profile name"), text: $proposedProfileName)
                             .textFieldStyle(.roundedBorder)
-                            .frame(width: 180)
+                            .frame(width: 210)
                     }
 
                     SettingsDivider()
@@ -800,12 +800,20 @@ struct SettingsRootView: View {
                             .font(.caption)
                             .foregroundStyle(.secondary)
                     } else {
-                        ForEach(profileManager.profiles) { profile in
-                            profileRow(profile)
-                            if profile.id != profileManager.profiles.last?.id {
-                                SettingsDivider()
+                        LazyVGrid(
+                            columns: [
+                                GridItem(.flexible(), spacing: 10),
+                                GridItem(.flexible(), spacing: 10)
+                            ],
+                            alignment: .leading,
+                            spacing: 10
+                        ) {
+                            ForEach(profileManager.profiles) { profile in
+                                profileTile(profile)
+                                    .id(profile.id)
                             }
                         }
+                        .animation(.spring(response: 0.24, dampingFraction: 0.84), value: profileManager.profiles.map(\.id))
                     }
 
                     SettingsDivider()
@@ -814,34 +822,81 @@ struct SettingsRootView: View {
             }
         }
 
-        @ViewBuilder
-        private func profileRow(_ profile: DisplayProfile) -> some View {
-            VStack(alignment: .leading, spacing: 6) {
-                HStack(alignment: .center, spacing: 10) {
-                    Text(profile.name)
-                        .font(.callout.weight(.semibold))
-                    Text(profile.createdAt, style: .date)
-                        .font(.caption)
+        private func profileTile(_ profile: DisplayProfile) -> some View {
+            let index = profileManager.profiles.firstIndex(where: { $0.id == profile.id }) ?? 0
+            let canMoveUp = index > 0
+            let canMoveDown = index < (profileManager.profiles.count - 1)
+
+            return VStack(alignment: .leading, spacing: 8) {
+                HStack(alignment: .top, spacing: 8) {
+                    VStack(alignment: .leading, spacing: 2) {
+                        Text(profile.name)
+                            .font(.callout.weight(.semibold))
+                            .lineLimit(1)
+                        Text(profile.createdAt, style: .date)
+                            .font(.caption2)
+                            .foregroundStyle(.secondary)
+                    }
+                    Spacer(minLength: 6)
+                    VStack(spacing: 3) {
+                        Button {
+                            withAnimation(.spring(response: 0.24, dampingFraction: 0.84)) {
+                                profileManager.moveProfileUp(profile)
+                            }
+                        } label: {
+                            Image(systemName: "chevron.up")
+                                .font(.system(size: 9, weight: .semibold))
+                                .frame(width: 16, height: 11)
+                        }
+                        .buttonStyle(.plain)
+                        .disabled(!canMoveUp)
                         .foregroundStyle(.secondary)
-                    Spacer()
+
+                        Button {
+                            withAnimation(.spring(response: 0.24, dampingFraction: 0.84)) {
+                                profileManager.moveProfileDown(profile)
+                            }
+                        } label: {
+                            Image(systemName: "chevron.down")
+                                .font(.system(size: 9, weight: .semibold))
+                                .frame(width: 16, height: 11)
+                        }
+                        .buttonStyle(.plain)
+                        .disabled(!canMoveDown)
+                        .foregroundStyle(.secondary)
+                    }
+                }
+                Text(String(format: String(localized: "ProfileDisplayCountFormat"), Int64(profile.displays.count)))
+                    .font(.caption)
+                    .foregroundStyle(.secondary)
+
+                HStack(spacing: 6) {
                     Button(String(localized: "Apply")) { profileManager.apply(profile: profile) }
-                        .buttonStyle(.bordered)
+                        .buttonStyle(.borderedProminent)
                         .controlSize(.small)
                     Button(String(localized: "Rename")) {
                         renameProfile(profile)
                     }
                     .buttonStyle(.bordered)
                     .controlSize(.small)
+                    Spacer(minLength: 0)
                     Button(role: .destructive, action: { profileManager.delete(profile: profile) }) {
                         Text(String(localized: "Delete"))
                     }
                     .buttonStyle(.bordered)
                     .controlSize(.small)
                 }
-                Text(String(format: String(localized: "ProfileDisplayCountFormat"), Int64(profile.displays.count)))
-                    .font(.caption)
-                    .foregroundStyle(.secondary)
             }
+            .padding(10)
+            .frame(maxWidth: .infinity, alignment: .leading)
+            .background(
+                RoundedRectangle(cornerRadius: 12, style: .continuous)
+                    .fill(.ultraThinMaterial)
+            )
+            .overlay(
+                RoundedRectangle(cornerRadius: 12, style: .continuous)
+                    .stroke(Color.primary.opacity(0.1), lineWidth: 1)
+            )
         }
 
         private var automationSection: some View {
