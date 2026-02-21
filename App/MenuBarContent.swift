@@ -767,7 +767,7 @@ struct MenuBarContentView: View {
             sectionHeader(String(localized: "Profiles"))
             HStack(spacing: 8) {
                 Button {
-                    profileManager.saveCurrentProfile(named: "")
+                    saveCurrentProfileWithPrompt()
                 } label: {
                     Label(String(localized: "Save Current Profile"), systemImage: "square.and.arrow.down")
                         .frame(maxWidth: .infinity)
@@ -1223,7 +1223,7 @@ struct MenuBarContentView: View {
         let input = NSTextField(string: currentName)
         input.frame = NSRect(x: 0, y: 0, width: 240, height: 24)
         alert.accessoryView = input
-        let response = alert.runModal()
+        let response = AlertPresentation.runModalOnCursorScreen(alert)
         if response == .alertFirstButtonReturn {
             let trimmed = input.stringValue.trimmingCharacters(in: .whitespacesAndNewlines)
             settingsStore.update { settings in
@@ -1234,6 +1234,22 @@ struct MenuBarContentView: View {
                 }
             }
         }
+    }
+
+    /// Prompts for a profile name before saving from the advanced menu.
+    private func saveCurrentProfileWithPrompt() {
+        let alert = NSAlert()
+        alert.messageText = String(localized: "Save Current Profile")
+        alert.informativeText = String(localized: "Profile name")
+        alert.addButton(withTitle: String(localized: "Save"))
+        alert.addButton(withTitle: String(localized: "Cancel"))
+        let input = NSTextField(string: "")
+        input.placeholderString = String(localized: "Profile name")
+        input.frame = NSRect(x: 0, y: 0, width: 240, height: 24)
+        alert.accessoryView = input
+        let response = AlertPresentation.runModalOnCursorScreen(alert)
+        guard response == .alertFirstButtonReturn else { return }
+        profileManager.saveCurrentProfile(named: input.stringValue.trimmingCharacters(in: .whitespacesAndNewlines))
     }
 
     /// Builds a human-readable report for troubleshooting.

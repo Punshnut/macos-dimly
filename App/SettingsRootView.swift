@@ -85,7 +85,7 @@ struct SettingsRootView: View {
         let input = NSTextField(string: profile.name)
         input.frame = NSRect(x: 0, y: 0, width: 240, height: 24)
         alert.accessoryView = input
-        let response = alert.runModal()
+        let response = AlertPresentation.runModalOnCursorScreen(alert)
         if response == .alertFirstButtonReturn {
             profileManager.rename(profile: profile, to: input.stringValue)
         }
@@ -147,7 +147,7 @@ struct SettingsRootView: View {
         let input = NSTextField(string: currentName)
         input.frame = NSRect(x: 0, y: 0, width: 240, height: 24)
         alert.accessoryView = input
-        let response = alert.runModal()
+        let response = AlertPresentation.runModalOnCursorScreen(alert)
         if response == .alertFirstButtonReturn {
             let trimmed = input.stringValue.trimmingCharacters(in: .whitespacesAndNewlines)
             settingsStore.update { settings in
