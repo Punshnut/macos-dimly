@@ -21,6 +21,7 @@ struct MenuBarContentView: View {
     let presentation: Presentation
     @State private var modifierClickMonitor: Any?
     @State private var builtinBrightnessCacheByDisplayID: [CGDirectDisplayID: Int] = [:]
+    private let builtinBrightnessRefreshTimer = Timer.publish(every: 0.4, on: .main, in: .common).autoconnect()
     @Namespace private var modeSwitchNamespace
     @Environment(\.colorScheme) private var colorScheme
 
@@ -48,10 +49,14 @@ struct MenuBarContentView: View {
         .frame(minWidth: 300)
         .onAppear {
             activateWindowIfNeeded()
+            refreshBuiltinBrightnessCache()
             if presentation == .menuBar {
                 handleModifierClickIfNeeded()
                 installModifierClickMonitor()
             }
+        }
+        .onReceive(builtinBrightnessRefreshTimer) { _ in
+            refreshBuiltinBrightnessCache()
         }
         .onDisappear {
             removeModifierClickMonitor()
@@ -958,12 +963,16 @@ struct MenuBarContentView: View {
 
     /// Toggles the persisted expansion state for a display's brightness dropdown.
     private func toggleBrightnessPanel(for display: DisplayInfo) {
+        let isExpanding = isBrightnessPanelExpanded(for: display) == false
         settingsStore.update { settings in
             if let index = settings.brightnessPanelExpandedDisplayIDs.firstIndex(of: display.stableIdentity) {
                 settings.brightnessPanelExpandedDisplayIDs.remove(at: index)
             } else {
                 settings.brightnessPanelExpandedDisplayIDs.append(display.stableIdentity)
             }
+        }
+        if display.isBuiltin && isExpanding {
+            refreshBuiltinBrightness(for: display, persistToSettings: true)
         }
     }
 
@@ -1016,6 +1025,27 @@ struct MenuBarContentView: View {
             return
         }
         engine.setBrightness(percent, for: display)
+    }
+
+    /// Keeps built-in brightness cache in sync while the menu is visible (e.g. media key changes).
+    private func refreshBuiltinBrightnessCache() {
+        guard visibleInternalDisplays.isEmpty == false else { return }
+        for display in visibleInternalDisplays {
+            refreshBuiltinBrightness(for: display, persistToSettings: false)
+        }
+    }
+
+    /// Reads current built-in brightness and updates local cache (and optionally persisted settings).
+    private func refreshBuiltinBrightness(for display: DisplayInfo, persistToSettings: Bool) {
+        guard display.isBuiltin else { return }
+        guard let liveBrightness = DisplayHardware.builtinDisplayBrightnessPercent(for: display.displayID) else { return }
+        guard builtinBrightnessCacheByDisplayID[display.displayID] != liveBrightness else { return }
+
+        builtinBrightnessCacheByDisplayID[display.displayID] = liveBrightness
+        guard persistToSettings else { return }
+        settingsStore.update { settings in
+            settings.monitorBrightnessByDisplayID[display.stableIdentity] = liveBrightness
+        }
     }
 
     /// Produces additional status rows for any non-visible displays.
