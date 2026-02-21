@@ -24,6 +24,8 @@ final class DimlyEngine {
     private var brightnessRequestRevisionByDisplayID: [String: Int] = [:]
     private var builtinRestoreBrightnessByDisplayID: [String: Int] = [:]
     private var builtinBrightnessAnimationTasks: [String: Task<Void, Never>] = [:]
+    private var externalBrightnessAnimationTasks: [String: Task<Void, Never>] = [:]
+    private var synchronizedBrightnessTransitionTask: Task<Void, Never>?
     private var lastObservedBlackoutActiveIDs: Set<String> = []
     private var lastObservedDDCSupportByDisplayID: [String: DDCSupportStatus] = [:]
     private var hotkeyManagers: [UUID: HotkeyManager] = [:]
@@ -114,7 +116,9 @@ final class DimlyEngine {
 
     @MainActor
     deinit {
+        synchronizedBrightnessTransitionTask?.cancel()
         builtinBrightnessAnimationTasks.values.forEach { $0.cancel() }
+        externalBrightnessAnimationTasks.values.forEach { $0.cancel() }
         if let workspaceWakeToken {
             NSWorkspace.shared.notificationCenter.removeObserver(workspaceWakeToken)
         }
@@ -214,9 +218,113 @@ final class DimlyEngine {
 
     /// Sets brightness for a display, preferring DDC and falling back to dim overlay.
     func setBrightness(_ percent: Int, for display: DisplayInfo) {
+        setBrightness(percent, for: display, animated: false)
+    }
+
+    /// Applies brightness to multiple displays using one synchronized transition timeline.
+    func setBrightnessSynchronously(_ targets: [(display: DisplayInfo, percent: Int)], animated: Bool) {
+        guard !targets.isEmpty else { return }
+        synchronizedBrightnessTransitionTask?.cancel()
+        synchronizedBrightnessTransitionTask = nil
+        builtinBrightnessAnimationTasks.values.forEach { $0.cancel() }
+        builtinBrightnessAnimationTasks.removeAll()
+        externalBrightnessAnimationTasks.values.forEach { $0.cancel() }
+        externalBrightnessAnimationTasks.removeAll()
+
+        let normalizedTargets: [(display: DisplayInfo, percent: Int)] = targets.map { target in
+            (display: target.display, percent: max(0, min(100, target.percent)))
+        }
+
+        guard animated else {
+            normalizedTargets.forEach { target in
+                setBrightness(target.percent, for: target.display, animated: false)
+            }
+            return
+        }
+
+        var startByDisplayID: [String: Int] = [:]
+        var maxDelta = 0
+        for target in normalizedTargets {
+            let display = target.display
+            let start: Int
+            if display.isBuiltin {
+                start = DisplayHardware.builtinDisplayBrightnessPercent(for: display.displayID)
+                    ?? settingsStore.settings.monitorBrightnessByDisplayID[display.stableIdentity]
+                    ?? target.percent
+            } else {
+                start = brightnessPercent(for: display)
+            }
+            startByDisplayID[display.stableIdentity] = start
+            maxDelta = max(maxDelta, abs(target.percent - start))
+        }
+        guard maxDelta > 0 else {
+            normalizedTargets.forEach { target in
+                setBrightness(target.percent, for: target.display, animated: false)
+            }
+            return
+        }
+
+        let steps = min(22, max(8, maxDelta))
+        let sleepNanos = UInt64((0.36 / Double(steps)) * 1_000_000_000)
+        synchronizedBrightnessTransitionTask = Task { @MainActor [weak self] in
+            guard let self else { return }
+            for step in 1...steps {
+                guard !Task.isCancelled else { return }
+                let progress = Double(step) / Double(steps)
+                let isFinalStep = step == steps
+                for target in normalizedTargets {
+                    let display = target.display
+                    let id = display.stableIdentity
+                    let start = startByDisplayID[id] ?? target.percent
+                    let delta = target.percent - start
+                    let value = Int((Double(start) + (Double(delta) * progress)).rounded())
+                    if display.isBuiltin {
+                        setBuiltinBrightness(value, for: display, animated: false)
+                        if isFinalStep {
+                            persistBrightness(target.percent, for: id)
+                        }
+                        continue
+                    }
+                    applyExternalBrightness(
+                        value,
+                        for: display,
+                        persist: isFinalStep,
+                        fallbackAnimated: false
+                    )
+                }
+                if !isFinalStep {
+                    try? await Task.sleep(nanoseconds: sleepNanos)
+                }
+            }
+            self.synchronizedBrightnessTransitionTask = nil
+        }
+    }
+
+    /// Sets brightness for a display with optional smooth animation.
+    func setBrightness(_ percent: Int, for display: DisplayInfo, animated: Bool) {
+        let clamped = max(0, min(100, percent))
+        if display.isBuiltin {
+            persistBrightness(clamped, for: display.stableIdentity)
+            setBuiltinBrightness(clamped, for: display, animated: animated)
+            return
+        }
+        guard display.isExternal else { return }
+        externalBrightnessAnimationTasks[display.stableIdentity]?.cancel()
+        externalBrightnessAnimationTasks.removeValue(forKey: display.stableIdentity)
+        if animated {
+            animateExternalBrightness(to: clamped, for: display)
+            return
+        }
+        applyExternalBrightness(clamped, for: display, persist: true, fallbackAnimated: settingsStore.settings.fadeOutAnimationEnabled)
+    }
+
+    /// Applies one external brightness value immediately.
+    private func applyExternalBrightness(_ percent: Int, for display: DisplayInfo, persist: Bool, fallbackAnimated: Bool) {
         let clamped = max(0, min(100, percent))
         guard display.isExternal else { return }
-        persistBrightness(clamped, for: display.stableIdentity)
+        if persist {
+            persistBrightness(clamped, for: display.stableIdentity)
+        }
         pendingBrightnessByDisplayID[display.stableIdentity] = clamped
         let revision = (brightnessRequestRevisionByDisplayID[display.stableIdentity] ?? 0) + 1
         brightnessRequestRevisionByDisplayID[display.stableIdentity] = revision
@@ -228,7 +336,7 @@ final class DimlyEngine {
             blackoutManager.setBrightnessFallback(
                 clamped,
                 for: display,
-                animated: settings.fadeOutAnimationEnabled
+                animated: fallbackAnimated
             )
             pendingBrightnessByDisplayID.removeValue(forKey: display.stableIdentity)
             return
@@ -237,7 +345,7 @@ final class DimlyEngine {
             blackoutManager.setBrightnessFallback(
                 clamped,
                 for: display,
-                animated: settings.fadeOutAnimationEnabled
+                animated: fallbackAnimated
             )
             pendingBrightnessByDisplayID.removeValue(forKey: display.stableIdentity)
             return
@@ -254,7 +362,7 @@ final class DimlyEngine {
                 self.blackoutManager.setBrightnessFallback(
                     clamped,
                     for: display,
-                    animated: settings.fadeOutAnimationEnabled
+                    animated: fallbackAnimated
                 )
                 self.pendingBrightnessByDisplayID.removeValue(forKey: display.stableIdentity)
             }
@@ -263,9 +371,43 @@ final class DimlyEngine {
         blackoutManager.setBrightnessFallback(
             clamped,
             for: display,
-            animated: settings.fadeOutAnimationEnabled
+            animated: fallbackAnimated
         )
         pendingBrightnessByDisplayID.removeValue(forKey: display.stableIdentity)
+    }
+
+    /// Smoothly ramps external brightness and applies the final target.
+    private func animateExternalBrightness(to target: Int, for display: DisplayInfo) {
+        let id = display.stableIdentity
+        let start = brightnessPercent(for: display)
+        guard start != target else {
+            applyExternalBrightness(target, for: display, persist: true, fallbackAnimated: true)
+            return
+        }
+        let delta = target - start
+        let steps = min(22, max(8, abs(delta)))
+        let sleepNanos = UInt64((0.36 / Double(steps)) * 1_000_000_000)
+
+        let task = Task { @MainActor [weak self] in
+            guard let self else { return }
+            for step in 1...steps {
+                guard !Task.isCancelled else { return }
+                let progress = Double(step) / Double(steps)
+                let value = Int((Double(start) + (Double(delta) * progress)).rounded())
+                let isFinalStep = step == steps
+                self.applyExternalBrightness(
+                    value,
+                    for: display,
+                    persist: isFinalStep,
+                    fallbackAnimated: true
+                )
+                if !isFinalStep {
+                    try? await Task.sleep(nanoseconds: sleepNanos)
+                }
+            }
+            self.externalBrightnessAnimationTasks.removeValue(forKey: id)
+        }
+        externalBrightnessAnimationTasks[id] = task
     }
 
     /// Returns current brightness value used for UI (0-100).

@@ -196,8 +196,11 @@ final class ProfileManager: ObservableObject {
         let expectedIDs = Set(profile.displays.map(\.id))
         let currentIDs = Set(currentDisplays.map(\.stableIdentity))
         let missing = expectedIDs.subtracting(currentIDs)
+        let shouldAnimateBrightness = settingsStore.settings.fadeOutAnimationEnabled || settingsStore.settings.fadeInAnimationEnabled
 
         var appliedCount = 0
+        var immediateBrightnessTargets: [(display: DisplayInfo, percent: Int)] = []
+        var delayedBrightnessTargets: [(display: DisplayInfo, percent: Int)] = []
         for display in currentDisplays {
             guard let snapshot = profile.displays.first(where: { $0.id == display.stableIdentity }) else { continue }
             let currentState = currentPowerState(for: display)
@@ -205,9 +208,22 @@ final class ProfileManager: ObservableObject {
                 applyPowerState(snapshot.powerState, to: display)
             }
             if snapshot.powerState == .visible, let brightness = snapshot.brightnessPercent {
-                applyBrightness(brightness, to: display, afterPowerTransitionFrom: currentState)
+                let clamped = max(0, min(100, brightness))
+                if currentState == .asleep {
+                    delayedBrightnessTargets.append((display: display, percent: clamped))
+                } else {
+                    immediateBrightnessTargets.append((display: display, percent: clamped))
+                }
             }
             appliedCount += 1
+        }
+        if let engine {
+            engine.setBrightnessSynchronously(immediateBrightnessTargets, animated: shouldAnimateBrightness)
+            if !delayedBrightnessTargets.isEmpty {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.55) {
+                    engine.setBrightnessSynchronously(delayedBrightnessTargets, animated: shouldAnimateBrightness)
+                }
+            }
         }
 
         if missing.isEmpty {
@@ -312,31 +328,6 @@ final class ProfileManager: ObservableObject {
             return ddc
         }
         return 100
-    }
-
-    /// Applies brightness from a profile, allowing wake transitions to settle first.
-    private func applyBrightness(_ brightness: Int, to display: DisplayInfo, afterPowerTransitionFrom previousState: DisplayPowerState) {
-        if display.isBuiltin {
-            let clamped = max(0, min(100, brightness))
-            _ = DisplayHardware.setBuiltinDisplayBrightnessPercent(clamped, for: display.displayID)
-            settingsStore.update { settings in
-                settings.monitorBrightnessByDisplayID[display.stableIdentity] = clamped
-            }
-            return
-        }
-
-        guard let engine else {
-            logger.error("Cannot apply profile brightness; engine unavailable")
-            return
-        }
-        let clamped = max(0, min(100, brightness))
-        if previousState == .asleep {
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.55) {
-                engine.setBrightness(clamped, for: display)
-            }
-            return
-        }
-        engine.setBrightness(clamped, for: display)
     }
 
     // MARK: - Persistence
