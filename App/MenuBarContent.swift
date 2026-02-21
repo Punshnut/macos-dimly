@@ -486,6 +486,10 @@ struct MenuBarContentView: View {
         let name = displayName(for: display)
         let status = displayStatus(for: display)
         let marker = displayOverlayMarker(for: display)
+        let brightnessText = String.localizedStringWithFormat(
+            String(localized: "BrightnessPercentFormat"),
+            Int64(brightnessPercent(for: display))
+        )
 
         return HStack(alignment: .top, spacing: 10) {
             VStack(alignment: .leading, spacing: 2) {
@@ -495,6 +499,11 @@ struct MenuBarContentView: View {
                     Image(systemName: isExpanded ? "chevron.down.circle.fill" : "chevron.right.circle")
                         .font(.caption)
                         .foregroundStyle(.tertiary)
+                    if !isExpanded {
+                        Text(brightnessText)
+                            .font(.caption.monospacedDigit())
+                            .foregroundStyle(.secondary)
+                    }
                 }
                 HStack(spacing: 6) {
                     Text(String(format: String(localized: "DisplayRowStatusFormat"), display.resolution, ddcState, status))
