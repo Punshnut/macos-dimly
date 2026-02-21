@@ -5,7 +5,6 @@ Dimly is a free and open-source quiet macOS menu bar control center for multi-mo
 <p align="center">
   <img src="https://img.shields.io/badge/macOS-native-000000?style=flat&logo=apple" alt="macOS native">
   <img src="https://img.shields.io/badge/License-MIT-green.svg" alt="License: MIT">
-  <img src="https://img.shields.io/badge/Swift-6.2.1-orange" alt="Swift 6.2.1">
 </p>
 
 <p align="center">

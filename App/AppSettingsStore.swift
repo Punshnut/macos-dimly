@@ -57,8 +57,11 @@ final class AppSettingsStore: ObservableObject {
         if lastAppliedSettings?.hideDockIcon != settings.hideDockIcon {
             applyDockIconVisibility(hidden: settings.hideDockIcon)
         }
+        if lastAppliedSettings?.appAppearancePreference != settings.appAppearancePreference {
+            applyAppAppearance(settings.appAppearancePreference)
+        }
         lastAppliedSettings = settings
-        logger.debug("Settings applied: launchAtLogin=\(settings.launchAtLogin, privacy: .public) showMenuBarIcon=\(settings.showMenuBarIcon, privacy: .public) hideDockIcon=\(settings.hideDockIcon, privacy: .public)")
+        logger.debug("Settings applied: launchAtLogin=\(settings.launchAtLogin, privacy: .public) showMenuBarIcon=\(settings.showMenuBarIcon, privacy: .public) hideDockIcon=\(settings.hideDockIcon, privacy: .public) appearance=\(settings.appAppearancePreference.rawValue, privacy: .public)")
     }
 
     /// Updates app activation policy to show or hide the Dock icon.
@@ -68,5 +71,22 @@ final class AppSettingsStore: ObservableObject {
         if app.activationPolicy() != policy {
             _ = app.setActivationPolicy(policy)
         }
+    }
+
+    /// Updates AppKit appearance so non-SwiftUI surfaces match the selected mode.
+    private func applyAppAppearance(_ preference: AppAppearancePreference) {
+        let app = NSApplication.shared
+        switch preference {
+        case .system:
+            app.appearance = NSAppearance(named: isSystemInDarkMode ? .darkAqua : .aqua)
+        case .light:
+            app.appearance = NSAppearance(named: .aqua)
+        case .dark:
+            app.appearance = NSAppearance(named: .darkAqua)
+        }
+    }
+
+    private var isSystemInDarkMode: Bool {
+        UserDefaults.standard.string(forKey: "AppleInterfaceStyle") == "Dark"
     }
 }

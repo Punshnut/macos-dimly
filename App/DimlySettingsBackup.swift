@@ -96,6 +96,7 @@ struct GeneralSettingsPayload: Codable {
     let launchAtLogin: Bool
     let showMenuBarIcon: Bool
     let hideDockIcon: Bool
+    let appAppearancePreference: AppAppearancePreference?
     let hotkeyBindings: [HotkeyBinding]
     let showDisplayNumbers: Bool
     let fadeOutAnimationEnabled: Bool
@@ -106,6 +107,7 @@ struct GeneralSettingsPayload: Codable {
         launchAtLogin = settings.launchAtLogin
         showMenuBarIcon = settings.showMenuBarIcon
         hideDockIcon = settings.hideDockIcon
+        appAppearancePreference = settings.appAppearancePreference
         hotkeyBindings = settings.hotkeyBindings
         showDisplayNumbers = settings.showDisplayNumbers
         fadeOutAnimationEnabled = settings.fadeOutAnimationEnabled
@@ -117,6 +119,7 @@ struct GeneralSettingsPayload: Codable {
         settings.launchAtLogin = launchAtLogin
         settings.showMenuBarIcon = showMenuBarIcon
         settings.hideDockIcon = hideDockIcon
+        settings.appAppearancePreference = appAppearancePreference ?? .system
         settings.hotkeyBindings = hotkeyBindings
         settings.showDisplayNumbers = showDisplayNumbers
         settings.fadeOutAnimationEnabled = fadeOutAnimationEnabled

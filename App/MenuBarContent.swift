@@ -61,6 +61,18 @@ struct MenuBarContentView: View {
         .onDisappear {
             removeModifierClickMonitor()
         }
+        .preferredColorScheme(preferredColorSchemeSelection)
+    }
+
+    private var preferredColorSchemeSelection: ColorScheme? {
+        switch settingsStore.settings.appAppearancePreference {
+        case .system:
+            nil
+        case .light:
+            .light
+        case .dark:
+            .dark
+        }
     }
 
     /// Brings the menu bar popover window forward for better keyboard focus.

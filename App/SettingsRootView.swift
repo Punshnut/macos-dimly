@@ -29,7 +29,7 @@ struct SettingsRootView: View {
     var body: some View {
         NavigationSplitView(columnVisibility: .constant(.all)) {
             List(selection: $selection) {
-                Section(String(localized: "General")) {
+                Section(String(localized: "Dimly")) {
                     Label(String(localized: "General"), systemImage: "gearshape")
                         .tag(SettingsDestination.general)
                     Label(String(localized: "Displays"), systemImage: "display")
@@ -60,6 +60,7 @@ struct SettingsRootView: View {
         }
         .frame(minWidth: 900, minHeight: 580)
         .hideSettingsToolbar()
+        .preferredColorScheme(settingsStore.settings.appAppearancePreference.preferredColorScheme)
     }
 
     /// Forces the intro window to reappear for the current session.
@@ -539,6 +540,28 @@ struct SettingsRootView: View {
                             set: { newValue in settingsStore.update { $0.hideDockIcon = newValue } }
                         )
                     )
+                    SettingsDivider()
+                    SettingsRow(
+                        title: String(localized: "Appearance"),
+                        subtitle: String(localized: "Choose how Dimly looks."),
+                        systemImage: "circle.lefthalf.filled"
+                    ) {
+                        Picker(
+                            String(localized: "Appearance"),
+                            selection: Binding(
+                                get: { settingsStore.settings.appAppearancePreference },
+                                set: { newValue in settingsStore.update { $0.appAppearancePreference = newValue } }
+                            )
+                        ) {
+                            ForEach(AppAppearancePreference.allCases) { preference in
+                                Text(preference.localizedTitle)
+                                    .tag(preference)
+                            }
+                        }
+                        .labelsHidden()
+                        .pickerStyle(.menu)
+                        .frame(width: 150)
+                    }
                     SettingsDivider()
                     VStack(alignment: .leading, spacing: 6) {
                         Text(String(localized: "Hide the Dock icon and app switcher entry."))
@@ -1340,6 +1363,30 @@ struct SettingsRootView: View {
                 internalIndex: internalIndex
             )
             return String(format: String(localized: "DisplayTypeResolutionFormat"), name, marker)
+        }
+    }
+}
+
+private extension AppAppearancePreference {
+    var preferredColorScheme: ColorScheme? {
+        switch self {
+        case .system:
+            nil
+        case .light:
+            .light
+        case .dark:
+            .dark
+        }
+    }
+
+    var localizedTitle: String {
+        switch self {
+        case .system:
+            String(localized: "Like system")
+        case .light:
+            String(localized: "Always light")
+        case .dark:
+            String(localized: "Always dark")
         }
     }
 }

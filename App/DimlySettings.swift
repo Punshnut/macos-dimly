@@ -9,11 +9,21 @@ enum PersistedMonitorPowerState: String, Codable, Equatable {
     case standby
 }
 
+/// Persisted app appearance preference.
+enum AppAppearancePreference: String, Codable, Equatable, CaseIterable, Identifiable {
+    case system
+    case light
+    case dark
+
+    var id: String { rawValue }
+}
+
 /// Persisted user-configurable settings for Dimly.
 struct DimlySettings: Codable, Equatable {
     var launchAtLogin: Bool
     var showMenuBarIcon: Bool
     var hideDockIcon: Bool
+    var appAppearancePreference: AppAppearancePreference
     var hotkeyBindings: [HotkeyBinding]
     var showDisplayNumbers: Bool
     var displayAliases: [String: String]
@@ -35,6 +45,7 @@ struct DimlySettings: Codable, Equatable {
         case launchAtLogin
         case showMenuBarIcon
         case hideDockIcon
+        case appAppearancePreference
         case hotkeyBindings
         case primaryHotkey
         case showDisplayNumbers
@@ -59,6 +70,7 @@ struct DimlySettings: Codable, Equatable {
         launchAtLogin: false,
         showMenuBarIcon: true,
         hideDockIcon: true,
+        appAppearancePreference: .system,
         hotkeyBindings: [
             HotkeyBinding(
                 action: .toggleWindow,
@@ -88,6 +100,7 @@ struct DimlySettings: Codable, Equatable {
         launchAtLogin: Bool,
         showMenuBarIcon: Bool,
         hideDockIcon: Bool,
+        appAppearancePreference: AppAppearancePreference,
         hotkeyBindings: [HotkeyBinding],
         showDisplayNumbers: Bool,
         displayAliases: [String: String],
@@ -108,6 +121,7 @@ struct DimlySettings: Codable, Equatable {
         self.launchAtLogin = launchAtLogin
         self.showMenuBarIcon = showMenuBarIcon
         self.hideDockIcon = hideDockIcon
+        self.appAppearancePreference = appAppearancePreference
         self.hotkeyBindings = hotkeyBindings
         self.showDisplayNumbers = showDisplayNumbers
         self.displayAliases = displayAliases
@@ -132,6 +146,7 @@ struct DimlySettings: Codable, Equatable {
         let launchAtLogin = try container.decodeIfPresent(Bool.self, forKey: .launchAtLogin) ?? DimlySettings.default.launchAtLogin
         let showMenuBarIcon = try container.decodeIfPresent(Bool.self, forKey: .showMenuBarIcon) ?? DimlySettings.default.showMenuBarIcon
         let hideDockIcon = try container.decodeIfPresent(Bool.self, forKey: .hideDockIcon) ?? DimlySettings.default.hideDockIcon
+        let appAppearancePreference = try container.decodeIfPresent(AppAppearancePreference.self, forKey: .appAppearancePreference) ?? DimlySettings.default.appAppearancePreference
         let hotkeyBindings = try container.decodeIfPresent([HotkeyBinding].self, forKey: .hotkeyBindings)
         let legacyPrimaryHotkey = try container.decodeIfPresent(HotkeyDescriptor.self, forKey: .primaryHotkey)
         let showDisplayNumbers = try container.decodeIfPresent(Bool.self, forKey: .showDisplayNumbers) ?? DimlySettings.default.showDisplayNumbers
@@ -173,6 +188,7 @@ struct DimlySettings: Codable, Equatable {
             launchAtLogin: launchAtLogin,
             showMenuBarIcon: showMenuBarIcon,
             hideDockIcon: hideDockIcon,
+            appAppearancePreference: appAppearancePreference,
             hotkeyBindings: resolvedBindings,
             showDisplayNumbers: showDisplayNumbers,
             displayAliases: displayAliases,
@@ -198,6 +214,7 @@ struct DimlySettings: Codable, Equatable {
         try container.encode(launchAtLogin, forKey: .launchAtLogin)
         try container.encode(showMenuBarIcon, forKey: .showMenuBarIcon)
         try container.encode(hideDockIcon, forKey: .hideDockIcon)
+        try container.encode(appAppearancePreference, forKey: .appAppearancePreference)
         try container.encode(hotkeyBindings, forKey: .hotkeyBindings)
         try container.encode(showDisplayNumbers, forKey: .showDisplayNumbers)
         try container.encode(displayAliases, forKey: .displayAliases)
