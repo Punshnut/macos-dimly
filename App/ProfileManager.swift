@@ -287,12 +287,16 @@ final class ProfileManager: ObservableObject {
             }
             if snapshot.powerState == .visible, let brightness = snapshot.brightnessPercent {
                 let clamped = max(0, min(100, brightness))
+                let needsPostWakeStabilization = display.isExternal && (
+                    currentState == .asleep ||
+                    ddcManager.states[display.stableIdentity]?.status != .supported
+                )
                 if currentState == .asleep {
                     delayedBrightnessTargets.append((display: display, percent: clamped))
                 } else {
                     immediateBrightnessTargets.append((display: display, percent: clamped))
                 }
-                if display.isExternal && (currentState == .asleep || ddcManager.states[display.stableIdentity]?.status != .supported) {
+                if needsPostWakeStabilization {
                     retryBrightnessTargets.append((display: display, percent: clamped))
                 }
             }
@@ -302,12 +306,21 @@ final class ProfileManager: ObservableObject {
             engine.setBrightnessSynchronously(immediateBrightnessTargets, animated: shouldAnimateBrightness)
             if !delayedBrightnessTargets.isEmpty {
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.55) {
-                    engine.setBrightnessSynchronously(delayedBrightnessTargets, animated: shouldAnimateBrightness)
+                    delayedBrightnessTargets.forEach { target in
+                        engine.setBrightness(target.percent, for: target.display, animated: false)
+                    }
                 }
             }
             if !retryBrightnessTargets.isEmpty {
                 DispatchQueue.main.asyncAfter(deadline: .now() + 1.6) {
-                    engine.setBrightnessSynchronously(retryBrightnessTargets, animated: false)
+                    retryBrightnessTargets.forEach { target in
+                        engine.setBrightness(target.percent, for: target.display, animated: false)
+                    }
+                }
+                DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) {
+                    retryBrightnessTargets.forEach { target in
+                        engine.setBrightness(target.percent, for: target.display, animated: false)
+                    }
                 }
             }
         }

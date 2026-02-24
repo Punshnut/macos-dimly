@@ -348,7 +348,7 @@ final class DimlyEngine {
                 for: display,
                 animated: fallbackAnimated
             )
-            pendingBrightnessByDisplayID.removeValue(forKey: display.stableIdentity)
+            // Keep pending target so it can be replayed once DDC capability resolves.
             return
         }
         if canAttemptDDC {
@@ -783,8 +783,31 @@ final class DimlyEngine {
         }
         lastObservedDDCSupportByDisplayID = currentSupport
         guard !resolvedIDs.isEmpty else { return }
+        reapplyPendingBrightnessForResolvedDisplays(resolvedIDs)
         DiagnosticsLogger.shared.log("DDC support resolved for \(resolvedIDs.count) displays; reapplying persisted monitor state", category: "engine")
         restorePersistedMonitorState(reason: "ddcSupportResolved", remainingAttempts: 3)
+    }
+
+    /// Replays deferred brightness targets after DDC support transitions out of "unknown".
+    private func reapplyPendingBrightnessForResolvedDisplays(_ resolvedIDs: [String]) {
+        guard !resolvedIDs.isEmpty else { return }
+        let displayByID = Dictionary(uniqueKeysWithValues: displayManager.displays.map { ($0.stableIdentity, $0) })
+        for id in resolvedIDs {
+            guard let target = pendingBrightnessByDisplayID[id], let display = displayByID[id] else { continue }
+            guard display.isExternal else {
+                pendingBrightnessByDisplayID.removeValue(forKey: id)
+                continue
+            }
+            let status = ddcManager.states[id]?.status
+            if status == .supported {
+                applyExternalBrightness(target, for: display, persist: true, fallbackAnimated: false)
+                continue
+            }
+            if status == .notSupported {
+                blackoutManager.setBrightnessFallback(target, for: display, animated: false)
+                pendingBrightnessByDisplayID.removeValue(forKey: id)
+            }
+        }
     }
 
     /// Persists monitor power state for one display.
