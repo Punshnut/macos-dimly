@@ -15,7 +15,12 @@ enum DisplayPowerState: String, Codable {
 /// Snapshot of a single display used inside profiles.
 struct DisplaySnapshot: Codable, Equatable, Identifiable {
     let id: String
+    let uuid: String?
+    let serialNumber: Int?
+    let vendorNumber: Int?
+    let modelNumber: Int?
     let name: String?
+    let isBuiltin: Bool?
     let isPrimary: Bool
     let resolution: String
     let refreshRateHz: Double?
@@ -25,7 +30,12 @@ struct DisplaySnapshot: Codable, Equatable, Identifiable {
     /// Builds a snapshot from live display info.
     init(from info: DisplayInfo, powerState: DisplayPowerState, brightnessPercent: Int?) {
         id = info.stableIdentity
+        uuid = info.uuid
+        serialNumber = info.serialNumber
+        vendorNumber = info.vendorNumber
+        modelNumber = info.modelNumber
         name = info.name
+        isBuiltin = info.isBuiltin
         isPrimary = info.displayID == CGMainDisplayID()
         resolution = info.resolution
         refreshRateHz = info.refreshRateHz
@@ -35,7 +45,12 @@ struct DisplaySnapshot: Codable, Equatable, Identifiable {
 
     enum CodingKeys: String, CodingKey {
         case id
+        case uuid
+        case serialNumber
+        case vendorNumber
+        case modelNumber
         case name
+        case isBuiltin
         case isPrimary
         case resolution
         case refreshRateHz
@@ -46,7 +61,12 @@ struct DisplaySnapshot: Codable, Equatable, Identifiable {
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         id = try container.decode(String.self, forKey: .id)
+        uuid = try container.decodeIfPresent(String.self, forKey: .uuid)
+        serialNumber = try container.decodeIfPresent(Int.self, forKey: .serialNumber)
+        vendorNumber = try container.decodeIfPresent(Int.self, forKey: .vendorNumber)
+        modelNumber = try container.decodeIfPresent(Int.self, forKey: .modelNumber)
         name = try container.decodeIfPresent(String.self, forKey: .name)
+        isBuiltin = try container.decodeIfPresent(Bool.self, forKey: .isBuiltin)
         isPrimary = try container.decode(Bool.self, forKey: .isPrimary)
         resolution = try container.decode(String.self, forKey: .resolution)
         refreshRateHz = try container.decodeIfPresent(Double.self, forKey: .refreshRateHz)
@@ -57,7 +77,12 @@ struct DisplaySnapshot: Codable, Equatable, Identifiable {
     func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(id, forKey: .id)
+        try container.encodeIfPresent(uuid, forKey: .uuid)
+        try container.encodeIfPresent(serialNumber, forKey: .serialNumber)
+        try container.encodeIfPresent(vendorNumber, forKey: .vendorNumber)
+        try container.encodeIfPresent(modelNumber, forKey: .modelNumber)
         try container.encodeIfPresent(name, forKey: .name)
+        try container.encodeIfPresent(isBuiltin, forKey: .isBuiltin)
         try container.encode(isPrimary, forKey: .isPrimary)
         try container.encode(resolution, forKey: .resolution)
         try container.encodeIfPresent(refreshRateHz, forKey: .refreshRateHz)
@@ -84,6 +109,22 @@ struct ProfileMonitorState: Codable, Equatable {
     var brightnessPanelExpandedDisplayIDs: [String]
     var monitorBrightnessByDisplayID: [String: Int]
 
+    init(
+        menuBarExcludedDisplayIDs: [String],
+        menuBarIncludedInternalDisplayIDs: [String],
+        externalDisplayOrder: [String],
+        internalDisplayOrder: [String],
+        brightnessPanelExpandedDisplayIDs: [String],
+        monitorBrightnessByDisplayID: [String: Int]
+    ) {
+        self.menuBarExcludedDisplayIDs = menuBarExcludedDisplayIDs
+        self.menuBarIncludedInternalDisplayIDs = menuBarIncludedInternalDisplayIDs
+        self.externalDisplayOrder = externalDisplayOrder
+        self.internalDisplayOrder = internalDisplayOrder
+        self.brightnessPanelExpandedDisplayIDs = brightnessPanelExpandedDisplayIDs
+        self.monitorBrightnessByDisplayID = monitorBrightnessByDisplayID
+    }
+
     init(from settings: DimlySettings) {
         menuBarExcludedDisplayIDs = settings.menuBarExcludedDisplayIDs
         menuBarIncludedInternalDisplayIDs = settings.menuBarIncludedInternalDisplayIDs
@@ -100,6 +141,38 @@ struct ProfileMonitorState: Codable, Equatable {
         settings.internalDisplayOrder = internalDisplayOrder
         settings.brightnessPanelExpandedDisplayIDs = brightnessPanelExpandedDisplayIDs
         settings.monitorBrightnessByDisplayID = monitorBrightnessByDisplayID
+    }
+
+    /// Rewrites monitor IDs using profile snapshot -> current display mappings.
+    func remapped(using idMap: [String: String]) -> ProfileMonitorState {
+        ProfileMonitorState(
+            menuBarExcludedDisplayIDs: remap(menuBarExcludedDisplayIDs, with: idMap),
+            menuBarIncludedInternalDisplayIDs: remap(menuBarIncludedInternalDisplayIDs, with: idMap),
+            externalDisplayOrder: remap(externalDisplayOrder, with: idMap),
+            internalDisplayOrder: remap(internalDisplayOrder, with: idMap),
+            brightnessPanelExpandedDisplayIDs: remap(brightnessPanelExpandedDisplayIDs, with: idMap),
+            monitorBrightnessByDisplayID: remap(monitorBrightnessByDisplayID, with: idMap)
+        )
+    }
+
+    private func remap(_ ids: [String], with idMap: [String: String]) -> [String] {
+        var remapped: [String] = []
+        var seen: Set<String> = []
+        for id in ids {
+            let resolved = idMap[id] ?? id
+            guard seen.contains(resolved) == false else { continue }
+            remapped.append(resolved)
+            seen.insert(resolved)
+        }
+        return remapped
+    }
+
+    private func remap(_ values: [String: Int], with idMap: [String: String]) -> [String: Int] {
+        var remapped: [String: Int] = [:]
+        for (id, value) in values {
+            remapped[idMap[id] ?? id] = value
+        }
+        return remapped
     }
 }
 
@@ -186,23 +259,28 @@ final class ProfileManager: ObservableObject {
 
     /// Applies a profile to current displays, logging missing targets.
     func apply(profile: DisplayProfile) {
+        let currentDisplays = displayManager.displays
+        let matched = resolveSnapshotMappings(profile.displays, to: currentDisplays)
+        let appliedSnapshotIDs = Set(matched.map(\.snapshot.id))
+        let expectedIDs = Set(profile.displays.map(\.id))
+        let missing = expectedIDs.subtracting(appliedSnapshotIDs)
+        let idMap = Dictionary(uniqueKeysWithValues: matched.map { ($0.snapshot.id, $0.display.stableIdentity) })
+
         if let monitorState = profile.monitorState {
+            let remappedState = monitorState.remapped(using: idMap)
             settingsStore.update { settings in
-                monitorState.apply(to: &settings)
+                remappedState.apply(to: &settings)
             }
         }
 
-        let currentDisplays = displayManager.displays
-        let expectedIDs = Set(profile.displays.map(\.id))
-        let currentIDs = Set(currentDisplays.map(\.stableIdentity))
-        let missing = expectedIDs.subtracting(currentIDs)
         let shouldAnimateBrightness = settingsStore.settings.fadeOutAnimationEnabled || settingsStore.settings.fadeInAnimationEnabled
 
         var appliedCount = 0
         var immediateBrightnessTargets: [(display: DisplayInfo, percent: Int)] = []
         var delayedBrightnessTargets: [(display: DisplayInfo, percent: Int)] = []
-        for display in currentDisplays {
-            guard let snapshot = profile.displays.first(where: { $0.id == display.stableIdentity }) else { continue }
+        var retryBrightnessTargets: [(display: DisplayInfo, percent: Int)] = []
+
+        for (snapshot, display) in matched {
             let currentState = currentPowerState(for: display)
             if currentState != snapshot.powerState {
                 applyPowerState(snapshot.powerState, to: display)
@@ -214,6 +292,9 @@ final class ProfileManager: ObservableObject {
                 } else {
                     immediateBrightnessTargets.append((display: display, percent: clamped))
                 }
+                if display.isExternal && (currentState == .asleep || ddcManager.states[display.stableIdentity]?.status != .supported) {
+                    retryBrightnessTargets.append((display: display, percent: clamped))
+                }
             }
             appliedCount += 1
         }
@@ -222,6 +303,11 @@ final class ProfileManager: ObservableObject {
             if !delayedBrightnessTargets.isEmpty {
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.55) {
                     engine.setBrightnessSynchronously(delayedBrightnessTargets, animated: shouldAnimateBrightness)
+                }
+            }
+            if !retryBrightnessTargets.isEmpty {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 1.6) {
+                    engine.setBrightnessSynchronously(retryBrightnessTargets, animated: false)
                 }
             }
         }
@@ -233,6 +319,93 @@ final class ProfileManager: ObservableObject {
             logger.info("Applied profile \(profile.name, privacy: .public) partially to \(appliedCount, privacy: .public) displays; missing: \(missingList, privacy: .public)")
         }
         lastAppliedProfileName = profile.name
+    }
+
+    /// Resolves profile snapshots to currently connected displays with robust fallback matching.
+    private func resolveSnapshotMappings(
+        _ snapshots: [DisplaySnapshot],
+        to currentDisplays: [DisplayInfo]
+    ) -> [(snapshot: DisplaySnapshot, display: DisplayInfo)] {
+        var result: [(snapshot: DisplaySnapshot, display: DisplayInfo)] = []
+        var unmatchedDisplaysByID = Dictionary(uniqueKeysWithValues: currentDisplays.map { ($0.stableIdentity, $0) })
+        var unmatchedSnapshots: [DisplaySnapshot] = []
+
+        for snapshot in snapshots {
+            if let exact = unmatchedDisplaysByID.removeValue(forKey: snapshot.id) {
+                result.append((snapshot: snapshot, display: exact))
+            } else {
+                unmatchedSnapshots.append(snapshot)
+            }
+        }
+
+        typealias Candidate = (snapshot: DisplaySnapshot, display: DisplayInfo, score: Int)
+        var candidates: [Candidate] = []
+        for snapshot in unmatchedSnapshots {
+            for display in unmatchedDisplaysByID.values {
+                let score = snapshotMatchScore(snapshot: snapshot, display: display)
+                if score >= 70 {
+                    candidates.append((snapshot: snapshot, display: display, score: score))
+                }
+            }
+        }
+        candidates.sort {
+            if $0.score != $1.score { return $0.score > $1.score }
+            if $0.snapshot.id != $1.snapshot.id { return $0.snapshot.id < $1.snapshot.id }
+            return $0.display.stableIdentity < $1.display.stableIdentity
+        }
+
+        var usedSnapshots = Set<String>()
+        var usedDisplays = Set<String>()
+        for candidate in candidates {
+            let snapshotID = candidate.snapshot.id
+            let displayID = candidate.display.stableIdentity
+            guard usedSnapshots.contains(snapshotID) == false else { continue }
+            guard usedDisplays.contains(displayID) == false else { continue }
+            usedSnapshots.insert(snapshotID)
+            usedDisplays.insert(displayID)
+            result.append((snapshot: candidate.snapshot, display: candidate.display))
+        }
+
+        return result
+    }
+
+    /// Scores how likely a current display is to be the same physical panel as a saved snapshot.
+    private func snapshotMatchScore(snapshot: DisplaySnapshot, display: DisplayInfo) -> Int {
+        if let snapshotIsBuiltin = snapshot.isBuiltin, snapshotIsBuiltin != display.isBuiltin {
+            return 0
+        }
+
+        var score = 0
+        if let uuid = snapshot.uuid, uuid == display.uuid {
+            score += 130
+        }
+        if let serial = snapshot.serialNumber, serial == display.serialNumber {
+            score += 90
+        }
+        if let vendor = snapshot.vendorNumber, let model = snapshot.modelNumber,
+           vendor == display.vendorNumber, model == display.modelNumber {
+            score += 70
+        }
+        if normalized(snapshot.name) == normalized(display.name) {
+            score += 35
+        }
+        if snapshot.resolution == display.resolution {
+            score += 20
+        }
+        if let snapshotHz = snapshot.refreshRateHz, let displayHz = display.refreshRateHz,
+           abs(snapshotHz - displayHz) < 1 {
+            score += 10
+        }
+        if snapshot.isPrimary == (display.displayID == CGMainDisplayID()) {
+            score += 5
+        }
+        return score
+    }
+
+    private func normalized(_ value: String?) -> String {
+        (value ?? "")
+            .trimmingCharacters(in: .whitespacesAndNewlines)
+            .lowercased()
     }
 
     /// Renames an existing profile.

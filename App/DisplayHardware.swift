@@ -13,6 +13,8 @@ struct DisplayInfo: Identifiable, Equatable {
     let displayID: CGDirectDisplayID
     let uuid: String?
     let serialNumber: Int?
+    let vendorNumber: Int
+    let modelNumber: Int
     let name: String?
     let isBuiltin: Bool
     let isExternal: Bool
@@ -63,6 +65,8 @@ final class DisplayHardware: DisplayHardwareProviding, @unchecked Sendable {
     func displayInfo(for id: CGDirectDisplayID) -> DisplayInfo {
         let uuid = Self.displayUUID(for: id)
         let serial = CGDisplaySerialNumber(id)
+        let vendor = CGDisplayVendorNumber(id)
+        let model = CGDisplayModelNumber(id)
         let builtIn = CGDisplayIsBuiltin(id) == 1
         let resolution = Self.resolutionString(for: id)
         let refresh = Self.refreshRate(for: id)
@@ -72,6 +76,8 @@ final class DisplayHardware: DisplayHardwareProviding, @unchecked Sendable {
             displayID: id,
             uuid: uuid?.uuidString,
             serialNumber: serial == 0 ? nil : Int(serial),
+            vendorNumber: Int(vendor),
+            modelNumber: Int(model),
             name: name,
             isBuiltin: builtIn,
             isExternal: !builtIn,

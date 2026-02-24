@@ -125,6 +125,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         }
     }
 
+    /// Defers quit until active overlays finish their fade-out teardown.
     func applicationShouldTerminate(_ sender: NSApplication) -> NSApplication.TerminateReply {
         guard let settingsEngine else {
             return .terminateNow
@@ -145,6 +146,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         return .terminateLater
     }
 
+    /// Creates the standalone launcher controller and wires engine callbacks to UI toggling.
     func configureLauncher(
         settingsStore: AppSettingsStore,
         displayManager: DisplayManager,
@@ -165,6 +167,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         }
     }
 
+    /// Stores shared dependencies used later when opening the settings window.
     func configureSettings(
         settingsStore: AppSettingsStore,
         displayManager: DisplayManager,
@@ -252,6 +255,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         NSApp.mainMenu = mainMenu
     }
 
+    /// Lazily constructs and presents the singleton settings window.
     @objc func showSettingsWindow(_ sender: Any?) {
         guard
             let settingsStore,
@@ -298,6 +302,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         }
     }
 
+    /// Centers a window on the screen under the pointer (or main screen fallback).
     private func center(window: NSWindow) {
         let mouseLocation = NSEvent.mouseLocation
         let screen = NSScreen.screens.first { $0.frame.contains(mouseLocation) } ?? NSScreen.main
@@ -309,6 +314,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         window.setFrameOrigin(origin)
     }
 
+    /// Nudges traffic lights to match the custom titlebar spacing used by the app.
     private func adjustTrafficLights(for window: NSWindow) {
         guard let button = window.standardWindowButton(.closeButton),
               let container = button.superview

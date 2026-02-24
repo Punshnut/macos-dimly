@@ -31,6 +31,7 @@ final class DimlyEngine {
     private var hotkeyManagers: [UUID: HotkeyManager] = [:]
     private let legacySleepPersistenceKey = "Sleep.activeDisplayIDs"
     private let legacyBlackoutPersistenceKey = "Blackout.activeDisplayIDs"
+    private let monitorStateRetentionDays = 90
     private var workspaceWakeToken: NSObjectProtocol?
     private var workspaceScreensWakeToken: NSObjectProtocol?
     let displayManager: DisplayManager
@@ -622,7 +623,8 @@ final class DimlyEngine {
     /// Subscribes to display/overlay changes to keep persisted monitor state in sync.
     private func observeMonitorState() {
         displayManager.$displays
-            .sink { [weak self] _ in
+            .sink { [weak self] displays in
+                self?.trackMonitorLastSeenAndPruneStaleState(displays)
                 self?.restorePersistedMonitorState(reason: "displayChange", remainingAttempts: 5)
             }
             .store(in: &stateCancellables)
@@ -724,6 +726,45 @@ final class DimlyEngine {
                 updated[id] = .visible
             }
             settings.monitorPowerStateByDisplayID = updated
+        }
+    }
+
+    /// Tracks monitor presence and prunes stale monitor-specific state after a retention window.
+    private func trackMonitorLastSeenAndPruneStaleState(_ displays: [DisplayInfo]) {
+        let liveIDs = Set(displays.map(\.stableIdentity))
+        let now = Date()
+        let cutoff = now.addingTimeInterval(-TimeInterval(monitorStateRetentionDays * 24 * 60 * 60))
+
+        settingsStore.update { settings in
+            var lastSeen = settings.monitorLastSeenAtByDisplayID
+            for id in liveIDs {
+                lastSeen[id] = now
+            }
+
+            let staleIDs = lastSeen.compactMap { id, seenAt -> String? in
+                guard liveIDs.contains(id) == false else { return nil }
+                return seenAt < cutoff ? id : nil
+            }
+            guard staleIDs.isEmpty == false else {
+                settings.monitorLastSeenAtByDisplayID = lastSeen
+                return
+            }
+
+            let staleSet = Set(staleIDs)
+            staleSet.forEach { id in
+                lastSeen.removeValue(forKey: id)
+                settings.monitorBrightnessByDisplayID.removeValue(forKey: id)
+                settings.monitorPowerStateByDisplayID.removeValue(forKey: id)
+                settings.displayAliases.removeValue(forKey: id)
+            }
+            settings.overlayOnlyDisplayIDs.removeAll { staleSet.contains($0) }
+            settings.menuBarExcludedDisplayIDs.removeAll { staleSet.contains($0) }
+            settings.menuBarIncludedInternalDisplayIDs.removeAll { staleSet.contains($0) }
+            settings.externalDisplayOrder.removeAll { staleSet.contains($0) }
+            settings.internalDisplayOrder.removeAll { staleSet.contains($0) }
+            settings.mergedDisplayOrder.removeAll { staleSet.contains($0) }
+            settings.brightnessPanelExpandedDisplayIDs.removeAll { staleSet.contains($0) }
+            settings.monitorLastSeenAtByDisplayID = lastSeen
         }
     }
 

@@ -162,6 +162,7 @@ struct MenuBarContentView: View {
         }
     }
 
+    /// Segment-like button used by the simple/advanced mode switch row.
     private func modeSwitchButton(title: String, isActive: Bool, action: @escaping () -> Void) -> some View {
         Button(action: action) {
             Text(title)
@@ -180,10 +181,12 @@ struct MenuBarContentView: View {
         .buttonStyle(.plain)
     }
 
+    /// Cached convenience flag for the current menu bar layout mode.
     private var isSimpleMode: Bool {
         settingsStore.settings.menuBarSimpleMode
     }
 
+    /// Switches layout mode while preserving expanded brightness rows when safe.
     private func setSimpleMode(_ enabled: Bool) {
         guard settingsStore.settings.menuBarSimpleMode != enabled else { return }
         let previouslyExpanded = settingsStore.settings.brightnessPanelExpandedDisplayIDs
@@ -1073,6 +1076,7 @@ struct MenuBarContentView: View {
         }
     }
 
+    /// Applies user visibility rules to decide whether a display appears in Dimly lists.
     private func shouldShowInDimly(_ display: DisplayInfo) -> Bool {
         if display.isBuiltin {
             return includedInternalDisplayIDs.contains(display.stableIdentity)

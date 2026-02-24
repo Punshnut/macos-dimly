@@ -116,14 +116,17 @@ struct SettingsRootView: View {
         return String(localized: "Visible")
     }
 
+    /// External display numbering map used for labels and markers.
     private var externalIndexMap: [String: Int] {
         indexMap(for: displayManager.displays.filter { $0.isExternal })
     }
 
+    /// Internal display numbering map used for labels and markers.
     private var internalIndexMap: [String: Int] {
         indexMap(for: displayManager.displays.filter { $0.isBuiltin })
     }
 
+    /// Number of built-in panels currently visible to the app.
     private var internalDisplayCount: Int {
         displayManager.displays.filter { $0.isBuiltin }.count
     }
@@ -1134,10 +1137,12 @@ struct SettingsRootView: View {
             .contentShape(RoundedRectangle(cornerRadius: 11, style: .continuous))
         }
 
+        /// Computes the selected backup scope from the two category checkboxes.
         private var selectedBackupType: SettingsBackupType? {
             SettingsBackupType(includeGeneral: includeGeneralSettings, includeMonitor: includeMonitorSettings)
         }
 
+        /// Custom file type used for exported backup files.
         private var backupContentType: UTType {
             UTType(filenameExtension: "backup") ?? .data
         }
@@ -1151,11 +1156,13 @@ struct SettingsRootView: View {
             return formatter
         }()
 
+        /// Builds a stable, sortable backup filename with date + scope token.
         private func backupFileName(for type: SettingsBackupType, date: Date) -> String {
             let formattedDate = Self.backupFilenameDateFormatter.string(from: date)
             return "DimlySettings\(formattedDate)\(type.fileToken).backup"
         }
 
+        /// Reusable card UI for selecting which settings categories to include.
         private func backupSelectionTile(
             title: String,
             details: String,
@@ -1186,6 +1193,7 @@ struct SettingsRootView: View {
             .frame(maxWidth: .infinity, alignment: .leading)
         }
 
+        /// Reusable action card for import/export controls in the backup section.
         private func backupActionTile(
             title: String,
             systemImage: String,
@@ -1210,6 +1218,7 @@ struct SettingsRootView: View {
             .frame(maxWidth: .infinity, alignment: .leading)
         }
 
+        /// Visual container shared by all backup cards for consistent spacing and chrome.
         private func backupTileContainer<Content: View>(
             @ViewBuilder content: () -> Content
         ) -> some View {
@@ -1222,6 +1231,7 @@ struct SettingsRootView: View {
                 )
         }
 
+        /// Imports a selected backup file and merges selected categories into live settings.
         private func importSelectedSettings() {
             guard selectedBackupType != nil else {
                 showBackupAlert(
@@ -1272,6 +1282,7 @@ struct SettingsRootView: View {
             }
         }
 
+        /// Exports selected settings/profile state to a user-chosen backup file.
         private func exportSelectedSettings() {
             guard let selectedBackupType else {
                 showBackupAlert(
@@ -1308,6 +1319,7 @@ struct SettingsRootView: View {
             }
         }
 
+        /// Decodes modern backup payloads and transparently upgrades legacy raw-settings files.
         private func decodeBackup(from data: Data) throws -> DimlySettingsBackup {
             let decoder = JSONDecoder()
             decoder.dateDecodingStrategy = .iso8601
@@ -1318,6 +1330,7 @@ struct SettingsRootView: View {
             return DimlySettingsBackup(settings: legacySettings, type: .generalAndMonitor)
         }
 
+        /// Displays a modal warning used by backup import/export error paths.
         private func showBackupAlert(title: String, message: String) {
             let alert = NSAlert()
             alert.alertStyle = .warning
@@ -1326,6 +1339,7 @@ struct SettingsRootView: View {
             alert.runModal()
         }
 
+        /// Returns picker options for a hotkey target, including stale IDs still referenced in settings.
         private func displayOptions(for binding: HotkeyBinding) -> [DisplayOption] {
             var options: [DisplayOption] = [
                 DisplayOption(id: .allExternalDisplays, label: String(localized: "All External Displays"))
@@ -1345,6 +1359,7 @@ struct SettingsRootView: View {
             return options
         }
 
+        /// Formats display option labels with resolved display name and overlay marker.
         private func displayOptionLabel(for display: DisplayInfo) -> String {
             let externalIndex = displayManager.displays.filter { $0.isExternal }.sorted { $0.displayID < $1.displayID }
                 .firstIndex(where: { $0.stableIdentity == display.stableIdentity }).map { $0 + 1 } ?? 1
