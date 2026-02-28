@@ -37,6 +37,7 @@
 "Mode" = "Modi";
 "Simple" = "Rahisi";
 "Advanced" = "Ya Juu";
+"Short" = "Short";
 
 /* Menu Bar Actions */
 "Toggle External Blackout" = "Badilisha blackout ya nje";

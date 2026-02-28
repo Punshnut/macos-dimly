@@ -37,6 +37,7 @@
 "Mode" = "حالت";
 "Simple" = "ساده";
 "Advanced" = "پیشرفته";
+"Short" = "Short";
 
 /* Menu Bar Actions */
 "Toggle External Blackout" = "تغییر وضعیت خاموشی خارجی";

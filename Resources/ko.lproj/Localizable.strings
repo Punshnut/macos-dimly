@@ -37,6 +37,7 @@
 "Mode" = "모드";
 "Simple" = "간단함";
 "Advanced" = "고급";
+"Short" = "Short";
 
 /* Menu Bar Actions */
 "Toggle External Blackout" = "외부 블랙아웃 전환";

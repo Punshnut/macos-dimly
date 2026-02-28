@@ -37,6 +37,7 @@
 "Mode" = "Ipo";
 "Simple" = "Rọrun";
 "Advanced" = "Ti ni ilọsiwaju";
+"Short" = "Short";
 
 /* Menu Bar Actions */
 "Toggle External Blackout" = "Pa/Ṣí ìdàmú dudu òde";

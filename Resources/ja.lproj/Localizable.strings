@@ -37,6 +37,7 @@
 "Mode" = "モード";
 "Simple" = "シンプル";
 "Advanced" = "詳細";
+"Short" = "Short";
 
 /* Menu Bar Actions */
 "Toggle External Blackout" = "外部ブラックアウトを切替";

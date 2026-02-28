@@ -37,6 +37,7 @@
 "Mode" = "Mod";
 "Simple" = "Ringkas";
 "Advanced" = "Lanjutan";
+"Short" = "Short";
 
 /* Menu Bar Actions */
 "Toggle External Blackout" = "Togol blackout luaran";

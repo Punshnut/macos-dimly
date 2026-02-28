@@ -37,6 +37,7 @@
 "Mode" = "Modus";
 "Simple" = "Eenvoudig";
 "Advanced" = "Geavanceerd";
+"Short" = "Short";
 
 /* Menu Bar Actions */
 "Toggle External Blackout" = "Externe blackout wisselen";

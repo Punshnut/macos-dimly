@@ -37,6 +37,7 @@
 "Mode" = "الوضع";
 "Simple" = "بسيط";
 "Advanced" = "متقدم";
+"Short" = "Short";
 
 /* Menu Bar Actions */
 "Toggle External Blackout" = "تبديل تعتيم الشاشات الخارجية";

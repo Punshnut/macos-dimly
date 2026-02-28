@@ -37,6 +37,7 @@
 "Mode" = "Läge";
 "Simple" = "Enkelt";
 "Advanced" = "Avancerat";
+"Short" = "Short";
 
 /* Menu Bar Actions */
 "Toggle External Blackout" = "Växla extern blackout";

@@ -37,6 +37,7 @@
 "Mode" = "Режим";
 "Simple" = "Простий";
 "Advanced" = "Розширений";
+"Short" = "Short";
 
 /* Menu Bar Actions */
 "Toggle External Blackout" = "Перемкнути зовнішнє затемнення";

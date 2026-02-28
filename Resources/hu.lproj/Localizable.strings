@@ -37,6 +37,7 @@
 "Mode" = "Mód";
 "Simple" = "Egyszerű";
 "Advanced" = "Haladó";
+"Short" = "Short";
 
 /* Menu Bar Actions */
 "Toggle External Blackout" = "Külső elsötétítés váltása";

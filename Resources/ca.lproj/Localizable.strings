@@ -37,6 +37,7 @@
 "Mode" = "Mode";
 "Simple" = "Senzill";
 "Advanced" = "Avançat";
+"Short" = "Short";
 
 /* Menu Bar Actions */
 "Toggle External Blackout" = "Commuta blackout extern";

@@ -37,6 +37,7 @@
 "Mode" = "Režim";
 "Simple" = "Jednoduchý";
 "Advanced" = "Pokročilý";
+"Short" = "Short";
 
 /* Menu Bar Actions */
 "Toggle External Blackout" = "Přepnout externí blackout";

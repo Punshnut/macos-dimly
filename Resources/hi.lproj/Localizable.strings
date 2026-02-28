@@ -37,6 +37,7 @@
 "Mode" = "मोड";
 "Simple" = "सरल";
 "Advanced" = "उन्नत";
+"Short" = "Short";
 
 /* Menu Bar Actions */
 "Toggle External Blackout" = "बाहरी ब्लैकआउट टॉगल करें";

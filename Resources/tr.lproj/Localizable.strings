@@ -37,6 +37,7 @@
 "Mode" = "Mod";
 "Simple" = "Basit";
 "Advanced" = "Gelişmiş";
+"Short" = "Short";
 
 /* Menu Bar Actions */
 "Toggle External Blackout" = "Harici karartmayı aç/kapat";

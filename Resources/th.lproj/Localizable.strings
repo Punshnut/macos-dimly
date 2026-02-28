@@ -37,6 +37,7 @@
 "Mode" = "โหมด";
 "Simple" = "เรียบง่าย";
 "Advanced" = "ขั้นสูง";
+"Short" = "Short";
 
 /* Menu Bar Actions */
 "Toggle External Blackout" = "สลับมืดจอภายนอก";

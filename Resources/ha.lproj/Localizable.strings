@@ -37,6 +37,7 @@
 "Mode" = "Yanayi";
 "Simple" = "Sauƙi";
 "Advanced" = "Na ci gaba";
+"Short" = "Short";
 
 /* Menu Bar Actions */
 "Toggle External Blackout" = "Canja damarar duhun allon waje";

@@ -37,6 +37,7 @@
 "Mode" = "Mode tampilan";
 "Simple" = "Sederhana";
 "Advanced" = "Lanjutan";
+"Short" = "Short";
 
 /* Menu Bar Actions */
 "Toggle External Blackout" = "Ubah blackout eksternal";

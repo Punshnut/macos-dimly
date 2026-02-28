@@ -37,6 +37,7 @@ struct DimlySettings: Codable, Equatable {
     var internalDisplayOrder: [String]
     var mergedDisplayOrder: [String]
     var menuBarSimpleMode: Bool
+    var menuBarQuickActionsMode: Bool
     var menuBarSmartButtonsLimit: Int
     var menuBarSmartButtonsColorlessMode: Bool
     var brightnessPanelExpandedDisplayIDs: [String]
@@ -63,6 +64,7 @@ struct DimlySettings: Codable, Equatable {
         case internalDisplayOrder
         case mergedDisplayOrder
         case menuBarSimpleMode
+        case menuBarQuickActionsMode
         case menuBarSmartButtonsLimit
         case menuBarSmartButtonsColorlessMode
         case brightnessPanelExpandedDisplayIDs
@@ -96,6 +98,7 @@ struct DimlySettings: Codable, Equatable {
         internalDisplayOrder: [],
         mergedDisplayOrder: [],
         menuBarSimpleMode: false,
+        menuBarQuickActionsMode: false,
         menuBarSmartButtonsLimit: 8,
         menuBarSmartButtonsColorlessMode: false,
         brightnessPanelExpandedDisplayIDs: [],
@@ -123,6 +126,7 @@ struct DimlySettings: Codable, Equatable {
         internalDisplayOrder: [String],
         mergedDisplayOrder: [String],
         menuBarSimpleMode: Bool,
+        menuBarQuickActionsMode: Bool,
         menuBarSmartButtonsLimit: Int,
         menuBarSmartButtonsColorlessMode: Bool,
         brightnessPanelExpandedDisplayIDs: [String],
@@ -147,6 +151,7 @@ struct DimlySettings: Codable, Equatable {
         self.internalDisplayOrder = internalDisplayOrder
         self.mergedDisplayOrder = mergedDisplayOrder
         self.menuBarSimpleMode = menuBarSimpleMode
+        self.menuBarQuickActionsMode = menuBarQuickActionsMode
         self.menuBarSmartButtonsLimit = Self.normalizedSmartButtonsLimit(menuBarSmartButtonsLimit)
         self.menuBarSmartButtonsColorlessMode = menuBarSmartButtonsColorlessMode
         self.brightnessPanelExpandedDisplayIDs = brightnessPanelExpandedDisplayIDs
@@ -176,6 +181,7 @@ struct DimlySettings: Codable, Equatable {
         let internalDisplayOrder = try container.decodeIfPresent([String].self, forKey: .internalDisplayOrder) ?? DimlySettings.default.internalDisplayOrder
         let mergedDisplayOrder = try container.decodeIfPresent([String].self, forKey: .mergedDisplayOrder) ?? DimlySettings.default.mergedDisplayOrder
         let menuBarSimpleMode = try container.decodeIfPresent(Bool.self, forKey: .menuBarSimpleMode) ?? DimlySettings.default.menuBarSimpleMode
+        let menuBarQuickActionsMode = try container.decodeIfPresent(Bool.self, forKey: .menuBarQuickActionsMode) ?? DimlySettings.default.menuBarQuickActionsMode
         let menuBarSmartButtonsLimit = try container.decodeIfPresent(Int.self, forKey: .menuBarSmartButtonsLimit) ?? DimlySettings.default.menuBarSmartButtonsLimit
         let menuBarSmartButtonsColorlessMode = try container.decodeIfPresent(Bool.self, forKey: .menuBarSmartButtonsColorlessMode) ?? DimlySettings.default.menuBarSmartButtonsColorlessMode
         let brightnessPanelExpandedDisplayIDs = try container.decodeIfPresent([String].self, forKey: .brightnessPanelExpandedDisplayIDs) ?? DimlySettings.default.brightnessPanelExpandedDisplayIDs
@@ -220,6 +226,7 @@ struct DimlySettings: Codable, Equatable {
             internalDisplayOrder: internalDisplayOrder,
             mergedDisplayOrder: mergedDisplayOrder,
             menuBarSimpleMode: menuBarSimpleMode,
+            menuBarQuickActionsMode: menuBarQuickActionsMode,
             menuBarSmartButtonsLimit: menuBarSmartButtonsLimit,
             menuBarSmartButtonsColorlessMode: menuBarSmartButtonsColorlessMode,
             brightnessPanelExpandedDisplayIDs: brightnessPanelExpandedDisplayIDs,
@@ -249,6 +256,7 @@ struct DimlySettings: Codable, Equatable {
         try container.encode(internalDisplayOrder, forKey: .internalDisplayOrder)
         try container.encode(mergedDisplayOrder, forKey: .mergedDisplayOrder)
         try container.encode(menuBarSimpleMode, forKey: .menuBarSimpleMode)
+        try container.encode(menuBarQuickActionsMode, forKey: .menuBarQuickActionsMode)
         try container.encode(Self.normalizedSmartButtonsLimit(menuBarSmartButtonsLimit), forKey: .menuBarSmartButtonsLimit)
         try container.encode(menuBarSmartButtonsColorlessMode, forKey: .menuBarSmartButtonsColorlessMode)
         try container.encode(brightnessPanelExpandedDisplayIDs, forKey: .brightnessPanelExpandedDisplayIDs)

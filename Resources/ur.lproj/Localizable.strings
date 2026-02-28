@@ -37,6 +37,7 @@
 "Mode" = "موڈ";
 "Simple" = "سادہ";
 "Advanced" = "جدید";
+"Short" = "Short";
 
 /* Menu Bar Actions */
 "Toggle External Blackout" = "بیرونی بلیک آؤٹ ٹوگل کریں";

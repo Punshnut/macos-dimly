@@ -37,6 +37,7 @@
 "Mode" = "Tryb";
 "Simple" = "Prosty";
 "Advanced" = "Zaawansowany";
+"Short" = "Short";
 
 /* Menu Bar Actions */
 "Toggle External Blackout" = "Przełącz blackout zewnętrzny";

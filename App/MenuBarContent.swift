@@ -11,6 +11,12 @@ struct MenuBarContentView: View {
         case window
     }
 
+    private enum LayoutMode: Equatable {
+        case simple
+        case advanced
+        case short
+    }
+
     @ObservedObject var settingsStore: AppSettingsStore
     @ObservedObject var displayManager: DisplayManager
     @ObservedObject var blackoutManager: BlackoutManager
@@ -29,14 +35,15 @@ struct MenuBarContentView: View {
     var body: some View {
         VStack(alignment: .leading, spacing: sectionSpacing) {
             modeSwitchRow
-            if isSimpleMode {
+            switch activeLayoutMode {
+            case .simple:
                 quickActionsSection(includeShowNumbers: false)
                 smartButtonsSection(compact: false)
                 if !menuBarDisplays.isEmpty {
                     externalDisplaysSimpleSection
                 }
                 appControlsSimpleSection
-            } else {
+            case .advanced:
                 headerCard
                 quickActionsSection(includeShowNumbers: true)
                 smartButtonsSection(compact: true)
@@ -45,6 +52,10 @@ struct MenuBarContentView: View {
                 }
                 profilesSection
                 appControlsSection
+            case .short:
+                quickActionsSection(includeShowNumbers: false)
+                smartButtonsSection(compact: false)
+                shortModeAppActionsSection
             }
         }
         .padding(12)
@@ -171,7 +182,7 @@ struct MenuBarContentView: View {
         }
     }
 
-    /// Top-level switch between simple and advanced layouts.
+    /// Top-level switch between all supported menu bar layouts.
     private var modeSwitchRow: some View {
         HStack(spacing: 10) {
             Text(String(localized: "Mode"))
@@ -179,11 +190,14 @@ struct MenuBarContentView: View {
                 .foregroundStyle(neutralSecondaryText)
             Spacer()
             HStack(spacing: 6) {
-                modeSwitchButton(title: String(localized: "Simple"), isActive: isSimpleMode) {
-                    setSimpleMode(true)
+                modeSwitchButton(title: String(localized: "Simple"), isActive: activeLayoutMode == .simple) {
+                    setLayoutMode(.simple)
                 }
-                modeSwitchButton(title: String(localized: "Advanced"), isActive: !isSimpleMode) {
-                    setSimpleMode(false)
+                modeSwitchButton(title: String(localized: "Advanced"), isActive: activeLayoutMode == .advanced) {
+                    setLayoutMode(.advanced)
+                }
+                modeSwitchButton(title: String(localized: "Short"), isActive: activeLayoutMode == .short) {
+                    setLayoutMode(.short)
                 }
             }
             .padding(4)
@@ -194,7 +208,7 @@ struct MenuBarContentView: View {
         }
     }
 
-    /// Segment-like button used by the simple/advanced mode switch row.
+    /// Segment-like button used by the menu layout mode switch row.
     private func modeSwitchButton(title: String, isActive: Bool, action: @escaping () -> Void) -> some View {
         Button(action: action) {
             Text(title)
@@ -213,14 +227,21 @@ struct MenuBarContentView: View {
         .buttonStyle(.plain)
     }
 
-    /// Cached convenience flag for the current menu bar layout mode.
-    private var isSimpleMode: Bool {
-        settingsStore.settings.menuBarSimpleMode
+    /// Cached convenience value for the current menu bar layout mode.
+    private var activeLayoutMode: LayoutMode {
+        layoutMode(for: settingsStore.settings)
+    }
+
+    private func layoutMode(for settings: DimlySettings) -> LayoutMode {
+        if settings.menuBarQuickActionsMode {
+            return .short
+        }
+        return settings.menuBarSimpleMode ? .simple : .advanced
     }
 
     /// Switches layout mode while preserving expanded brightness rows when safe.
-    private func setSimpleMode(_ enabled: Bool) {
-        guard settingsStore.settings.menuBarSimpleMode != enabled else { return }
+    private func setLayoutMode(_ mode: LayoutMode) {
+        guard activeLayoutMode != mode else { return }
         let previouslyExpanded = settingsStore.settings.brightnessPanelExpandedDisplayIDs
 
         // Avoid SwiftUI transition crashes when switching layout branches with expanded
@@ -236,7 +257,8 @@ struct MenuBarContentView: View {
         }
         withAnimation(.spring(response: 0.25, dampingFraction: 0.85)) {
             settingsStore.update { settings in
-                settings.menuBarSimpleMode = enabled
+                settings.menuBarSimpleMode = (mode == .simple)
+                settings.menuBarQuickActionsMode = (mode == .short)
             }
         }
 
@@ -249,7 +271,7 @@ struct MenuBarContentView: View {
             withAnimation(.spring(response: 0.28, dampingFraction: 0.84)) {
                 settingsStore.update { settings in
                     // Keep user intent if mode changed again before restore fired.
-                    guard settings.menuBarSimpleMode == enabled else { return }
+                    guard layoutMode(for: settings) == mode else { return }
                     settings.brightnessPanelExpandedDisplayIDs = restored
                 }
             }
@@ -1086,6 +1108,24 @@ struct MenuBarContentView: View {
 
             Divider()
 
+            HStack(spacing: 8) {
+                Button(role: .destructive) {
+                    NSApp.terminate(nil)
+                } label: {
+                    Label(String(localized: "Quit Dimly"), systemImage: "power")
+                }
+                Spacer(minLength: 0)
+                applyProfileMenuButton()
+            }
+        }
+        .buttonStyle(.bordered)
+        .controlSize(.small)
+    }
+
+    /// Minimal app actions shown in short mode.
+    private var shortModeAppActionsSection: some View {
+        VStack(alignment: .leading, spacing: 8) {
+            sectionHeader(String(localized: "App"))
             HStack(spacing: 8) {
                 Button(role: .destructive) {
                     NSApp.terminate(nil)

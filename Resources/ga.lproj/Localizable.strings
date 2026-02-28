@@ -37,6 +37,7 @@
 "Mode" = "Mód";
 "Simple" = "Simplí";
 "Advanced" = "Casta";
+"Short" = "Short";
 
 /* Menu Bar Actions */
 "Toggle External Blackout" = "Scoránaigh dorchadas seachtrach";

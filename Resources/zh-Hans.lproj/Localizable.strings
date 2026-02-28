@@ -37,6 +37,7 @@
 "Mode" = "模式";
 "Simple" = "简单";
 "Advanced" = "高级";
+"Short" = "Short";
 
 /* Menu Bar Actions */
 "Toggle External Blackout" = "切换外接黑屏";

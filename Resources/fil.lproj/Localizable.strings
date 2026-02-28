@@ -38,6 +38,7 @@
 "Mode" = "Paraan";
 "Simple" = "Payak";
 "Advanced" = "Mas advanced";
+"Short" = "Short";
 
 /* Menu Bar Actions */
 "Toggle External Blackout" = "I-toggle ang panlabas na blackout";

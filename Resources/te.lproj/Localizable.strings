@@ -37,6 +37,7 @@
 "Mode" = "మోడ్";
 "Simple" = "సరళం";
 "Advanced" = "అధునాతన";
+"Short" = "Short";
 
 /* Menu Bar Actions */
 "Toggle External Blackout" = "బాహ్య బ్లాకౌట్ మార్చు";

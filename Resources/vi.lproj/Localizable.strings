@@ -37,6 +37,7 @@
 "Mode" = "Chế độ";
 "Simple" = "Đơn giản";
 "Advanced" = "Nâng cao";
+"Short" = "Short";
 
 /* Menu Bar Actions */
 "Toggle External Blackout" = "Bật/tắt blackout ngoài";

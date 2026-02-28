@@ -37,6 +37,7 @@
 "Mode" = "မုဒ်";
 "Simple" = "ရိုးရှင်း";
 "Advanced" = "အဆင့်မြင့်";
+"Short" = "Short";
 
 /* Menu Bar Actions */
 "Toggle External Blackout" = "ပြင်ပအမည်းဖုံး ပြောင်းရန်";

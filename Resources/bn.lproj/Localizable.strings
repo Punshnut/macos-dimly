@@ -37,6 +37,7 @@
 "Mode" = "মোড";
 "Simple" = "সহজ";
 "Advanced" = "উন্নত";
+"Short" = "Short";
 
 /* Menu Bar Actions */
 "Toggle External Blackout" = "বাহ্যিক ব্ল্যাকআউট টগল";

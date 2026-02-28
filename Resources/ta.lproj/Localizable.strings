@@ -37,6 +37,7 @@
 "Mode" = "முறை";
 "Simple" = "எளியது";
 "Advanced" = "மேம்பட்ட";
+"Short" = "Short";
 
 /* Menu Bar Actions */
 "Toggle External Blackout" = "வெளிப்புற கருமையை மாற்று";

@@ -37,6 +37,7 @@
 "Mode" = "Режим";
 "Simple" = "Простой";
 "Advanced" = "Расширенный";
+"Short" = "Short";
 
 /* Menu Bar Actions */
 "Toggle External Blackout" = "Переключить внешний blackout";

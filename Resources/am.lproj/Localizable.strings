@@ -37,6 +37,7 @@
 "Mode" = "ሁኔታ";
 "Simple" = "ቀላል";
 "Advanced" = "የላቀ";
+"Short" = "Short";
 
 /* Menu Bar Actions */
 "Toggle External Blackout" = "ውጫዊ ጥቁርነት ቀይር";
