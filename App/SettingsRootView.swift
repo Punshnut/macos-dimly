@@ -495,6 +495,7 @@ struct SettingsRootView: View {
         let displayRow: (DisplayInfo) -> AnyView
         @State private var includeGeneralSettings = true
         @State private var includeMonitorSettings = true
+        @State private var draggedProfileID: UUID?
 
         var body: some View {
             switch selection {
@@ -820,6 +821,9 @@ struct SettingsRootView: View {
                     }
 
                     SettingsDivider()
+                    smartButtonsConfigurationSection
+
+                    SettingsDivider()
 
                     if profileManager.profiles.isEmpty {
                         Text(String(localized: "No profiles yet. Save the current display setup to create one."))
@@ -837,9 +841,32 @@ struct SettingsRootView: View {
                             ForEach(profileManager.profiles) { profile in
                                 profileTile(profile)
                                     .id(profile.id)
+                                    .opacity(draggedProfileID == profile.id ? 0.72 : 1)
+                                    .onDrag {
+                                        draggedProfileID = profile.id
+                                        return NSItemProvider(object: profile.id.uuidString as NSString)
+                                    }
+                                    .onDrop(
+                                        of: [.text],
+                                        delegate: ProfileTileDropDelegate(
+                                            targetProfileID: profile.id,
+                                            draggedProfileID: $draggedProfileID,
+                                            profileManager: profileManager
+                                        )
+                                    )
                             }
                         }
+                        .onDrop(
+                            of: [.text],
+                            delegate: ProfileGridDropDelegate(
+                                draggedProfileID: $draggedProfileID,
+                                profileManager: profileManager
+                            )
+                        )
                         .animation(.spring(response: 0.24, dampingFraction: 0.84), value: profileManager.profiles.map(\.id))
+                        Text(String(localized: "Tip: Drag profile cards to reorder them."))
+                            .font(.caption)
+                            .foregroundStyle(.secondary)
                     }
 
                     SettingsDivider()
@@ -896,6 +923,51 @@ struct SettingsRootView: View {
                     .font(.caption)
                     .foregroundStyle(.secondary)
 
+                Toggle(isOn: Binding(
+                    get: { profile.showInSmartButtons },
+                    set: { newValue in
+                        profileManager.setSmartButtonVisibility(for: profile, isVisible: newValue)
+                    }
+                )) {
+                    VStack(alignment: .leading, spacing: 2) {
+                        Text(String(localized: "Show as smart button"))
+                            .font(.caption)
+                            .foregroundStyle(.secondary)
+                        Text(String(localized: "Lets this profile appear under Quick Actions in the menu bar."))
+                            .font(.caption2)
+                            .foregroundStyle(.tertiary)
+                    }
+                }
+                .toggleStyle(.switch)
+                .controlSize(.small)
+
+                HStack(spacing: 8) {
+                    Text(String(localized: "Smart button color"))
+                        .font(.caption)
+                        .foregroundStyle(.secondary)
+                    Spacer()
+                    Picker(
+                        String(localized: "Smart button color"),
+                        selection: Binding<SmartButtonColorPreset?>(
+                            get: { profile.smartButtonColorPreset },
+                            set: { newValue in
+                                profileManager.setSmartButtonColorPreset(for: profile, preset: newValue)
+                            }
+                        )
+                    ) {
+                        Text(String(localized: "Auto")).tag(Optional<SmartButtonColorPreset>.none)
+                        ForEach(SmartButtonColorPreset.allCases) { preset in
+                            Text(preset.localizedTitle).tag(Optional(preset))
+                        }
+                    }
+                    .labelsHidden()
+                    .pickerStyle(.menu)
+                    .frame(width: 128)
+                    .controlSize(.small)
+                }
+                .disabled(!profile.showInSmartButtons)
+                .opacity(profile.showInSmartButtons ? 1 : 0.58)
+
                 HStack(spacing: 6) {
                     Button(String(localized: "Apply")) { profileManager.apply(profile: profile) }
                         .buttonStyle(.borderedProminent)
@@ -923,6 +995,95 @@ struct SettingsRootView: View {
                 RoundedRectangle(cornerRadius: 12, style: .continuous)
                     .stroke(Color.primary.opacity(0.1), lineWidth: 1)
             )
+        }
+
+        private var smartButtonsConfigurationSection: some View {
+            VStack(alignment: .leading, spacing: 8) {
+                SettingsRow(
+                    title: String(localized: "Smart buttons"),
+                    subtitle: String(localized: "Quick profile shortcuts shown below Quick Actions."),
+                    systemImage: "square.grid.2x2"
+                ) {
+                    Picker(
+                        String(localized: "Smart buttons"),
+                        selection: Binding(
+                            get: { max(4, min(16, settingsStore.settings.menuBarSmartButtonsLimit)) },
+                            set: { newValue in
+                                settingsStore.update { settings in
+                                    settings.menuBarSmartButtonsLimit = max(4, min(16, newValue))
+                                }
+                            }
+                        )
+                    ) {
+                        Text("4").tag(4)
+                        Text("8").tag(8)
+                        Text("12").tag(12)
+                        Text("16").tag(16)
+                    }
+                    .labelsHidden()
+                    .pickerStyle(.menu)
+                    .frame(width: 88)
+                }
+                HStack(spacing: 8) {
+                    Text(String(localized: "Colorless mode"))
+                        .font(.caption)
+                        .foregroundStyle(.secondary)
+                    Spacer()
+                    Toggle("", isOn: Binding(
+                        get: { settingsStore.settings.menuBarSmartButtonsColorlessMode },
+                        set: { newValue in
+                            settingsStore.update { settings in
+                                settings.menuBarSmartButtonsColorlessMode = newValue
+                            }
+                        }
+                    ))
+                    .labelsHidden()
+                    .toggleStyle(.switch)
+                    .controlSize(.small)
+                }
+                Text(String(localized: "Profiles stay sorted by this list order. Up to 4 smart buttons are shown per row in the menu bar."))
+                    .font(.caption)
+                    .foregroundStyle(.secondary)
+            }
+        }
+
+        private struct ProfileTileDropDelegate: DropDelegate {
+            let targetProfileID: UUID
+            @Binding var draggedProfileID: UUID?
+            let profileManager: ProfileManager
+
+            func dropEntered(info: DropInfo) {
+                guard let draggedProfileID else { return }
+                profileManager.moveProfile(draggedProfileID, before: targetProfileID)
+            }
+
+            func dropUpdated(info: DropInfo) -> DropProposal? {
+                DropProposal(operation: .move)
+            }
+
+            func performDrop(info: DropInfo) -> Bool {
+                draggedProfileID = nil
+                return true
+            }
+        }
+
+        private struct ProfileGridDropDelegate: DropDelegate {
+            @Binding var draggedProfileID: UUID?
+            let profileManager: ProfileManager
+
+            func dropEntered(info: DropInfo) {
+                guard let draggedProfileID else { return }
+                profileManager.moveProfileToEnd(draggedProfileID)
+            }
+
+            func dropUpdated(info: DropInfo) -> DropProposal? {
+                DropProposal(operation: .move)
+            }
+
+            func performDrop(info: DropInfo) -> Bool {
+                draggedProfileID = nil
+                return true
+            }
         }
 
         private var automationSection: some View {

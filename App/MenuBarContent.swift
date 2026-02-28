@@ -27,10 +27,11 @@ struct MenuBarContentView: View {
 
     /// Primary menu bar layout rendered inside the status item window.
     var body: some View {
-        VStack(alignment: .leading, spacing: 12) {
+        VStack(alignment: .leading, spacing: sectionSpacing) {
             modeSwitchRow
             if isSimpleMode {
                 quickActionsSection(includeShowNumbers: false)
+                smartButtonsSection(compact: false)
                 if !menuBarDisplays.isEmpty {
                     externalDisplaysSimpleSection
                 }
@@ -38,6 +39,7 @@ struct MenuBarContentView: View {
             } else {
                 headerCard
                 quickActionsSection(includeShowNumbers: true)
+                smartButtonsSection(compact: true)
                 if !menuBarDisplays.isEmpty {
                     externalDisplaysSection
                 }
@@ -62,6 +64,36 @@ struct MenuBarContentView: View {
             removeModifierClickMonitor()
         }
         .preferredColorScheme(preferredColorSchemeSelection)
+    }
+
+    private var sectionSpacing: CGFloat { 12 }
+
+    private var neutralPrimaryText: Color {
+        colorScheme == .dark ? Color.white.opacity(0.95) : Color.black.opacity(0.86)
+    }
+
+    private var neutralSecondaryText: Color {
+        colorScheme == .dark ? Color.white.opacity(0.76) : Color.black.opacity(0.62)
+    }
+
+    private var neutralTertiaryText: Color {
+        colorScheme == .dark ? Color.white.opacity(0.56) : Color.black.opacity(0.46)
+    }
+
+    private var neutralCardFill: Color {
+        colorScheme == .dark ? Color.white.opacity(0.1) : Color.white.opacity(0.5)
+    }
+
+    private var neutralCardFillStrong: Color {
+        colorScheme == .dark ? Color.white.opacity(0.13) : Color.white.opacity(0.62)
+    }
+
+    private var neutralChromeFill: Color {
+        colorScheme == .dark ? Color.white.opacity(0.14) : Color.black.opacity(0.08)
+    }
+
+    private var neutralStroke: Color {
+        colorScheme == .dark ? Color.white.opacity(0.2) : Color.black.opacity(0.11)
     }
 
     private var preferredColorSchemeSelection: ColorScheme? {
@@ -144,7 +176,7 @@ struct MenuBarContentView: View {
         HStack(spacing: 10) {
             Text(String(localized: "Mode"))
                 .font(.caption.weight(.semibold))
-                .foregroundStyle(.secondary)
+                .foregroundStyle(neutralSecondaryText)
             Spacer()
             HStack(spacing: 6) {
                 modeSwitchButton(title: String(localized: "Simple"), isActive: isSimpleMode) {
@@ -157,7 +189,7 @@ struct MenuBarContentView: View {
             .padding(4)
             .background(
                 Capsule()
-                    .fill(Color.secondary.opacity(0.12))
+                    .fill(neutralChromeFill)
             )
         }
     }
@@ -167,7 +199,7 @@ struct MenuBarContentView: View {
         Button(action: action) {
             Text(title)
                 .font(.caption.weight(.semibold))
-                .foregroundStyle(isActive ? .primary : .secondary)
+                .foregroundStyle(isActive ? neutralPrimaryText : neutralSecondaryText)
                 .padding(.horizontal, 10)
                 .padding(.vertical, 4)
                 .background(alignment: .center) {
@@ -297,15 +329,16 @@ struct MenuBarContentView: View {
             HStack(alignment: .center, spacing: 10) {
                 Image(systemName: "display.2")
                     .font(.system(size: 18, weight: .semibold))
-                    .foregroundStyle(.primary)
+                    .foregroundStyle(neutralPrimaryText)
                     .frame(width: 30, height: 30)
-                    .background(Circle().fill(.ultraThinMaterial))
+                    .background(Circle().fill(neutralChromeFill))
                 VStack(alignment: .leading, spacing: 2) {
                     Text(countText)
                         .font(.headline)
+                        .foregroundStyle(neutralPrimaryText)
                     Text(displaySummaryText)
                         .font(.caption)
-                        .foregroundStyle(.secondary)
+                        .foregroundStyle(neutralSecondaryText)
                 }
                 Spacer()
                 if count > 0 {
@@ -315,7 +348,14 @@ struct MenuBarContentView: View {
             extendedStatusView
         }
         .padding(10)
-        .background(.thinMaterial)
+        .background(
+            RoundedRectangle(cornerRadius: 12, style: .continuous)
+                .fill(neutralCardFillStrong)
+        )
+        .overlay(
+            RoundedRectangle(cornerRadius: 12, style: .continuous)
+                .stroke(neutralStroke, lineWidth: 1)
+        )
         .clipShape(RoundedRectangle(cornerRadius: 12, style: .continuous))
     }
 
@@ -351,7 +391,7 @@ struct MenuBarContentView: View {
             return AnyView(
                 Text(String(localized: "All displays active"))
                     .font(.caption)
-                    .foregroundStyle(.secondary)
+                    .foregroundStyle(neutralSecondaryText)
             )
         }
         return AnyView(
@@ -359,7 +399,7 @@ struct MenuBarContentView: View {
                 ForEach(rows, id: \.self) { row in
                     Text(row)
                         .font(.caption)
-                        .foregroundStyle(.secondary)
+                        .foregroundStyle(neutralSecondaryText)
                 }
             }
         )
@@ -443,6 +483,143 @@ struct MenuBarContentView: View {
         return AnyView(button.buttonStyle(BorderedButtonStyle()))
     }
 
+    /// Profiles pinned for quick one-click apply actions under Quick Actions.
+    private var smartButtonProfiles: [DisplayProfile] {
+        let selected = profileManager.profiles.filter(\.showInSmartButtons)
+        return Array(selected.prefix(smartButtonLimit))
+    }
+
+    /// Maximum number of smart buttons shown in the menu bar.
+    private var smartButtonLimit: Int {
+        max(4, min(16, settingsStore.settings.menuBarSmartButtonsLimit))
+    }
+
+    /// Grid of smart profile buttons laid out in 4 columns.
+    private func smartButtonsSection(compact: Bool) -> some View {
+        VStack(alignment: .leading, spacing: 8) {
+            sectionHeader(String(localized: "Smart Buttons"))
+            if smartButtonProfiles.isEmpty {
+                Text(String(localized: "No smart buttons yet. Save profiles in Settings and enable \"Show as smart button\"."))
+                    .font(.caption)
+                    .foregroundStyle(neutralSecondaryText)
+            } else {
+                let columns = Array(repeating: GridItem(.flexible(), spacing: 8), count: 4)
+                LazyVGrid(columns: columns, alignment: .leading, spacing: 8) {
+                    ForEach(smartButtonProfiles) { profile in
+                        smartButton(profile, compact: compact)
+                    }
+                }
+            }
+        }
+    }
+
+    /// Arc-like shortcut tile for applying a saved profile.
+    private func smartButton(_ profile: DisplayProfile, compact: Bool) -> some View {
+        let isColorless = settingsStore.settings.menuBarSmartButtonsColorlessMode
+        let minHeight: CGFloat = compact ? 24 : 40
+        let titleColor: Color = {
+            if isColorless {
+                return colorScheme == .dark ? Color.white.opacity(0.92) : Color.black.opacity(0.64)
+            }
+            return Color.white.opacity(colorScheme == .dark ? 0.95 : 0.9)
+        }()
+
+        return Button {
+            profileManager.apply(profile: profile)
+        } label: {
+            Text(profile.name)
+                .font(.system(size: compact ? 8 : 9.5, weight: .semibold))
+                .lineLimit(compact ? 1 : 2)
+                .minimumScaleFactor(0.72)
+                .multilineTextAlignment(.center)
+                .foregroundStyle(titleColor)
+                .frame(maxWidth: .infinity)
+            .frame(maxWidth: .infinity, minHeight: minHeight)
+            .padding(.vertical, compact ? 0 : 2)
+            .padding(.horizontal, compact ? 2 : 3)
+            .background(
+                RoundedRectangle(cornerRadius: compact ? 10 : 12, style: .continuous)
+                    .fill(isColorless ? AnyShapeStyle(smartButtonNeutralFill) : AnyShapeStyle(smartButtonGradient(for: profile)))
+            )
+            .overlay(
+                RoundedRectangle(cornerRadius: compact ? 10 : 12, style: .continuous)
+                    .stroke(
+                        isColorless ? neutralStroke.opacity(compact ? 0.8 : 0.7) : Color.white.opacity(colorScheme == .dark ? 0.19 : 0.28),
+                        lineWidth: 1
+                    )
+            )
+        }
+        .buttonStyle(.plain)
+        .help(profile.name)
+    }
+
+    private var smartButtonNeutralFill: Color {
+        colorScheme == .dark ? Color.white.opacity(0.1) : Color.black.opacity(0.06)
+    }
+
+    /// Resolved gradient used by smart buttons (manual preset or deterministic auto).
+    private func smartButtonGradient(for profile: DisplayProfile) -> LinearGradient {
+        let preset = profile.smartButtonColorPreset ?? autoSmartButtonColorPreset(for: profile)
+        let colors = smartButtonGradientColors(for: preset)
+        let opacity: Double = colorScheme == .dark ? 0.75 : 0.93
+        return LinearGradient(
+            colors: [colors.0.opacity(opacity), colors.1.opacity(opacity)],
+            startPoint: .topLeading,
+            endPoint: .bottomTrailing
+        )
+    }
+
+    /// Chooses a stable auto color preset from profile metadata.
+    private func autoSmartButtonColorPreset(for profile: DisplayProfile) -> SmartButtonColorPreset {
+        let seed = "\(profile.id.uuidString.lowercased())|\(profile.name.lowercased())"
+        var hash: UInt64 = 1469598103934665603
+        for byte in seed.utf8 {
+            hash ^= UInt64(byte)
+            hash &*= 1099511628211
+        }
+        let presets = SmartButtonColorPreset.allCases
+        let index = Int(hash % UInt64(presets.count))
+        return presets[index]
+    }
+
+    /// Defines gradient color pairs for each curated smart button preset.
+    private func smartButtonGradientColors(for preset: SmartButtonColorPreset) -> (Color, Color) {
+        switch preset {
+        case .sunset:
+            return (Color(red: 0.95, green: 0.45, blue: 0.12), Color(red: 0.85, green: 0.18, blue: 0.48))
+        case .ocean:
+            return (Color(red: 0.07, green: 0.65, blue: 0.92), Color(red: 0.14, green: 0.39, blue: 0.89))
+        case .mint:
+            return (Color(red: 0.06, green: 0.73, blue: 0.52), Color(red: 0.05, green: 0.63, blue: 0.75))
+        case .violet:
+            return (Color(red: 0.55, green: 0.37, blue: 0.96), Color(red: 0.39, green: 0.40, blue: 0.95))
+        case .amber:
+            return (Color(red: 0.96, green: 0.62, blue: 0.06), Color(red: 0.92, green: 0.27, blue: 0.20))
+        case .rose:
+            return (Color(red: 0.93, green: 0.29, blue: 0.60), Color(red: 0.91, green: 0.25, blue: 0.45))
+        case .lime:
+            return (Color(red: 0.49, green: 0.77, blue: 0.14), Color(red: 0.10, green: 0.64, blue: 0.36))
+        case .slate:
+            return (Color(red: 0.40, green: 0.47, blue: 0.56), Color(red: 0.20, green: 0.26, blue: 0.33))
+        case .teal:
+            return (Color(red: 0.05, green: 0.66, blue: 0.63), Color(red: 0.08, green: 0.48, blue: 0.55))
+        case .indigo:
+            return (Color(red: 0.35, green: 0.40, blue: 0.94), Color(red: 0.22, green: 0.27, blue: 0.78))
+        case .coral:
+            return (Color(red: 0.96, green: 0.47, blue: 0.39), Color(red: 0.89, green: 0.29, blue: 0.34))
+        case .copper:
+            return (Color(red: 0.79, green: 0.47, blue: 0.24), Color(red: 0.56, green: 0.32, blue: 0.18))
+        case .emerald:
+            return (Color(red: 0.07, green: 0.71, blue: 0.41), Color(red: 0.04, green: 0.50, blue: 0.30))
+        case .sky:
+            return (Color(red: 0.35, green: 0.76, blue: 0.98), Color(red: 0.20, green: 0.55, blue: 0.93))
+        case .magenta:
+            return (Color(red: 0.86, green: 0.29, blue: 0.86), Color(red: 0.63, green: 0.21, blue: 0.79))
+        case .gold:
+            return (Color(red: 0.95, green: 0.76, blue: 0.20), Color(red: 0.86, green: 0.58, blue: 0.08))
+        }
+    }
+
     /// Per-display controls and status lines for visible displays.
     private var externalDisplaysSection: some View {
         VStack(alignment: .leading, spacing: 8) {
@@ -483,7 +660,6 @@ struct MenuBarContentView: View {
 
     /// Shared display card used by both simple and advanced layouts.
     private func displayCard(_ display: DisplayInfo, includeMenu: Bool) -> some View {
-        let rowBackground: AnyShapeStyle = AnyShapeStyle(.thinMaterial)
         let rowShape = RoundedRectangle(cornerRadius: 10, style: .continuous)
         let isExpanded = isBrightnessPanelExpanded(for: display)
 
@@ -494,7 +670,11 @@ struct MenuBarContentView: View {
             }
         }
         .padding(8)
-        .background(rowBackground)
+        .background(neutralCardFill)
+        .overlay(
+            rowShape
+                .stroke(neutralStroke.opacity(0.78), lineWidth: 1)
+        )
         .clipShape(rowShape)
         .contentShape(rowShape)
     }
@@ -516,22 +696,23 @@ struct MenuBarContentView: View {
                 HStack(spacing: 6) {
                     Text(name)
                         .font(.subheadline.weight(.semibold))
+                        .foregroundStyle(neutralPrimaryText)
                     Image(systemName: isExpanded ? "chevron.down.circle.fill" : "chevron.right.circle")
                         .font(.caption)
-                        .foregroundStyle(.tertiary)
+                        .foregroundStyle(neutralTertiaryText)
                     if !isExpanded {
                         Text(brightnessText)
                             .font(.caption.monospacedDigit())
-                            .foregroundStyle(.secondary)
+                            .foregroundStyle(neutralSecondaryText)
                     }
                 }
                 HStack(spacing: 6) {
                     Text(String(format: String(localized: "DisplayRowStatusFormat"), display.resolution, ddcState, status))
                         .font(.caption)
-                        .foregroundStyle(.secondary)
+                        .foregroundStyle(neutralSecondaryText)
                     Text(marker)
                         .font(.caption2)
-                        .foregroundStyle(.tertiary)
+                        .foregroundStyle(neutralTertiaryText)
                 }
             }
             .frame(maxWidth: .infinity, alignment: .leading)
@@ -579,11 +760,11 @@ struct MenuBarContentView: View {
                     } label: {
                         Image(systemName: "ellipsis")
                             .font(.system(size: 13, weight: .semibold))
-                            .foregroundStyle(.secondary)
+                            .foregroundStyle(neutralSecondaryText)
                             .frame(width: 26, height: 26)
                             .background(
                                 Circle()
-                                    .fill(Color.secondary.opacity(0.12))
+                                    .fill(neutralChromeFill)
                             )
                     }
                     .menuStyle(.borderlessButton)
@@ -624,7 +805,7 @@ struct MenuBarContentView: View {
                     )
                 )
                     .font(.caption.monospacedDigit())
-                    .foregroundStyle(.secondary)
+                    .foregroundStyle(neutralSecondaryText)
                 Text(modeLabel)
                     .font(.caption2.weight(.semibold))
                     .padding(.horizontal, 6)
@@ -643,7 +824,7 @@ struct MenuBarContentView: View {
                         .frame(width: 18, height: 18)
                 }
                 .buttonStyle(.plain)
-                .foregroundStyle(.secondary)
+                .foregroundStyle(neutralSecondaryText)
                 .help(String(localized: "Decrease brightness"))
 
                 Slider(
@@ -665,7 +846,7 @@ struct MenuBarContentView: View {
                         .frame(width: 18, height: 18)
                 }
                 .buttonStyle(.plain)
-                .foregroundStyle(.secondary)
+                .foregroundStyle(neutralSecondaryText)
                 .help(String(localized: "Increase brightness"))
             }
         }
@@ -786,7 +967,7 @@ struct MenuBarContentView: View {
             .buttonStyle(.plain)
             .disabled(!canMoveDown)
         }
-        .foregroundStyle(.secondary)
+        .foregroundStyle(neutralSecondaryText)
         .help(String(localized: "Reorder Display")))
     }
 
@@ -930,7 +1111,7 @@ struct MenuBarContentView: View {
     private func sectionHeader(_ title: String) -> some View {
         Text(title)
             .font(.caption.weight(.semibold))
-            .foregroundStyle(.secondary)
+            .foregroundStyle(neutralSecondaryText)
             .textCase(.uppercase)
     }
 

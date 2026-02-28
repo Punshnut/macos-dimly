@@ -12,6 +12,65 @@ enum DisplayPowerState: String, Codable {
     case asleep
 }
 
+/// Curated color presets for smart profile buttons.
+enum SmartButtonColorPreset: String, Codable, CaseIterable, Identifiable {
+    case sunset
+    case ocean
+    case mint
+    case violet
+    case amber
+    case rose
+    case lime
+    case slate
+    case teal
+    case indigo
+    case coral
+    case copper
+    case emerald
+    case sky
+    case magenta
+    case gold
+
+    var id: String { rawValue }
+
+    var localizedTitle: String {
+        switch self {
+        case .sunset:
+            return String(localized: "Sunset")
+        case .ocean:
+            return String(localized: "Ocean")
+        case .mint:
+            return String(localized: "Mint")
+        case .violet:
+            return String(localized: "Violet")
+        case .amber:
+            return String(localized: "Amber")
+        case .rose:
+            return String(localized: "Rose")
+        case .lime:
+            return String(localized: "Lime")
+        case .slate:
+            return String(localized: "Slate")
+        case .teal:
+            return String(localized: "Teal")
+        case .indigo:
+            return String(localized: "Indigo")
+        case .coral:
+            return String(localized: "Coral")
+        case .copper:
+            return String(localized: "Copper")
+        case .emerald:
+            return String(localized: "Emerald")
+        case .sky:
+            return String(localized: "Sky")
+        case .magenta:
+            return String(localized: "Magenta")
+        case .gold:
+            return String(localized: "Gold")
+        }
+    }
+}
+
 /// Snapshot of a single display used inside profiles.
 struct DisplaySnapshot: Codable, Equatable, Identifiable {
     let id: String
@@ -98,6 +157,58 @@ struct DisplayProfile: Codable, Identifiable, Equatable {
     let createdAt: Date
     var displays: [DisplaySnapshot]
     var monitorState: ProfileMonitorState?
+    var showInSmartButtons: Bool = true
+    var smartButtonColorPreset: SmartButtonColorPreset?
+
+    init(
+        id: UUID,
+        name: String,
+        createdAt: Date,
+        displays: [DisplaySnapshot],
+        monitorState: ProfileMonitorState?,
+        showInSmartButtons: Bool = true,
+        smartButtonColorPreset: SmartButtonColorPreset? = nil
+    ) {
+        self.id = id
+        self.name = name
+        self.createdAt = createdAt
+        self.displays = displays
+        self.monitorState = monitorState
+        self.showInSmartButtons = showInSmartButtons
+        self.smartButtonColorPreset = smartButtonColorPreset
+    }
+
+    enum CodingKeys: String, CodingKey {
+        case id
+        case name
+        case createdAt
+        case displays
+        case monitorState
+        case showInSmartButtons
+        case smartButtonColorPreset
+    }
+
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        id = try container.decode(UUID.self, forKey: .id)
+        name = try container.decode(String.self, forKey: .name)
+        createdAt = try container.decode(Date.self, forKey: .createdAt)
+        displays = try container.decode([DisplaySnapshot].self, forKey: .displays)
+        monitorState = try container.decodeIfPresent(ProfileMonitorState.self, forKey: .monitorState)
+        showInSmartButtons = try container.decodeIfPresent(Bool.self, forKey: .showInSmartButtons) ?? true
+        smartButtonColorPreset = try container.decodeIfPresent(SmartButtonColorPreset.self, forKey: .smartButtonColorPreset)
+    }
+
+    func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(id, forKey: .id)
+        try container.encode(name, forKey: .name)
+        try container.encode(createdAt, forKey: .createdAt)
+        try container.encode(displays, forKey: .displays)
+        try container.encodeIfPresent(monitorState, forKey: .monitorState)
+        try container.encode(showInSmartButtons, forKey: .showInSmartButtons)
+        try container.encodeIfPresent(smartButtonColorPreset, forKey: .smartButtonColorPreset)
+    }
 }
 
 /// Monitor-related UI + brightness state captured inside a profile.
@@ -251,7 +362,8 @@ final class ProfileManager: ObservableObject {
                 : name,
             createdAt: Date(),
             displays: snapshots,
-            monitorState: ProfileMonitorState(from: settingsStore.settings)
+            monitorState: ProfileMonitorState(from: settingsStore.settings),
+            showInSmartButtons: true
         )
         profiles.append(profile)
         persist()
@@ -448,6 +560,43 @@ final class ProfileManager: ObservableObject {
     func moveProfileDown(_ profile: DisplayProfile) {
         guard let index = profiles.firstIndex(where: { $0.id == profile.id }), index < (profiles.count - 1) else { return }
         profiles.swapAt(index, index + 1)
+        persist()
+    }
+
+    /// Moves a profile to appear before another profile.
+    func moveProfile(_ draggedID: UUID, before targetID: UUID) {
+        guard draggedID != targetID else { return }
+        guard let fromIndex = profiles.firstIndex(where: { $0.id == draggedID }),
+              let toIndex = profiles.firstIndex(where: { $0.id == targetID }) else { return }
+        let insertionIndex = fromIndex < toIndex ? max(0, toIndex - 1) : toIndex
+        guard insertionIndex != fromIndex else { return }
+        let profile = profiles.remove(at: fromIndex)
+        profiles.insert(profile, at: insertionIndex)
+        persist()
+    }
+
+    /// Moves a profile to the end of the saved order.
+    func moveProfileToEnd(_ draggedID: UUID) {
+        guard let fromIndex = profiles.firstIndex(where: { $0.id == draggedID }) else { return }
+        guard fromIndex != (profiles.count - 1) else { return }
+        let profile = profiles.remove(at: fromIndex)
+        profiles.append(profile)
+        persist()
+    }
+
+    /// Shows or hides a profile from the menu bar smart buttons section.
+    func setSmartButtonVisibility(for profile: DisplayProfile, isVisible: Bool) {
+        guard let index = profiles.firstIndex(where: { $0.id == profile.id }) else { return }
+        guard profiles[index].showInSmartButtons != isVisible else { return }
+        profiles[index].showInSmartButtons = isVisible
+        persist()
+    }
+
+    /// Sets an optional smart button color preset for a profile (`nil` uses auto).
+    func setSmartButtonColorPreset(for profile: DisplayProfile, preset: SmartButtonColorPreset?) {
+        guard let index = profiles.firstIndex(where: { $0.id == profile.id }) else { return }
+        guard profiles[index].smartButtonColorPreset != preset else { return }
+        profiles[index].smartButtonColorPreset = preset
         persist()
     }
 
