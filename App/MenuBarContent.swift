@@ -17,6 +17,28 @@ struct MenuBarContentView: View {
         case short
     }
 
+    private enum SmartButtonDropTarget: Equatable {
+        case before(UUID)
+        case after(UUID)
+    }
+
+    private enum SmartButtonGridItem: Identifiable, Equatable {
+        case profile(UUID)
+        case spacerBefore(UUID)
+        case spacerAfter(UUID)
+
+        var id: String {
+            switch self {
+            case .profile(let id):
+                return "profile-\(id.uuidString)"
+            case .spacerBefore(let targetID):
+                return "spacer-before-\(targetID.uuidString)"
+            case .spacerAfter(let targetID):
+                return "spacer-after-\(targetID.uuidString)"
+            }
+        }
+    }
+
     @ObservedObject var settingsStore: AppSettingsStore
     @ObservedObject var displayManager: DisplayManager
     @ObservedObject var blackoutManager: BlackoutManager
@@ -27,7 +49,12 @@ struct MenuBarContentView: View {
     let presentation: Presentation
     @State private var modifierClickMonitor: Any?
     @State private var builtinBrightnessCacheByDisplayID: [CGDirectDisplayID: Int] = [:]
+    @State private var draggedSmartButtonProfileID: UUID?
+    @State private var smartButtonFramesByProfileID: [UUID: CGRect] = [:]
+    @State private var smartButtonDragStartFramesByProfileID: [UUID: CGRect] = [:]
+    @State private var smartButtonDropTarget: SmartButtonDropTarget?
     private let builtinBrightnessRefreshTimer = Timer.publish(every: 0.4, on: .main, in: .common).autoconnect()
+    private let smartButtonsGridCoordinateSpace = "smartButtonsGrid"
     @Namespace private var modeSwitchNamespace
     @Environment(\.colorScheme) private var colorScheme
 
@@ -233,10 +260,14 @@ struct MenuBarContentView: View {
     }
 
     private func layoutMode(for settings: DimlySettings) -> LayoutMode {
-        if settings.menuBarQuickActionsMode {
+        switch settings.menuBarLayoutMode {
+        case .simple:
+            return .simple
+        case .advanced:
+            return .advanced
+        case .short:
             return .short
         }
-        return settings.menuBarSimpleMode ? .simple : .advanced
     }
 
     /// Switches layout mode while preserving expanded brightness rows when safe.
@@ -257,8 +288,14 @@ struct MenuBarContentView: View {
         }
         withAnimation(.spring(response: 0.25, dampingFraction: 0.85)) {
             settingsStore.update { settings in
-                settings.menuBarSimpleMode = (mode == .simple)
-                settings.menuBarQuickActionsMode = (mode == .short)
+                switch mode {
+                case .simple:
+                    settings.menuBarLayoutMode = .simple
+                case .advanced:
+                    settings.menuBarLayoutMode = .advanced
+                case .short:
+                    settings.menuBarLayoutMode = .short
+                }
             }
         }
 
@@ -511,6 +548,34 @@ struct MenuBarContentView: View {
         return Array(selected.prefix(smartButtonLimit))
     }
 
+    /// Fast lookup of visible smart-button profiles by ID.
+    private var smartButtonProfileByID: [UUID: DisplayProfile] {
+        Dictionary(uniqueKeysWithValues: smartButtonProfiles.map { ($0.id, $0) })
+    }
+
+    /// Render list for the smart-button grid including a temporary spacer while dragging.
+    private var smartButtonGridItems: [SmartButtonGridItem] {
+        let ids = smartButtonProfiles.map(\.id)
+        guard draggedSmartButtonProfileID != nil,
+              let smartButtonDropTarget else {
+            return ids.map { .profile($0) }
+        }
+        var items = ids.map { SmartButtonGridItem.profile($0) }
+        switch smartButtonDropTarget {
+        case .before(let targetID):
+            guard let targetIndex = ids.firstIndex(of: targetID) else {
+                return ids.map { .profile($0) }
+            }
+            items.insert(.spacerBefore(targetID), at: targetIndex)
+        case .after(let targetID):
+            guard let targetIndex = ids.firstIndex(of: targetID) else {
+                return ids.map { .profile($0) }
+            }
+            items.insert(.spacerAfter(targetID), at: min(items.count, targetIndex + 1))
+        }
+        return items
+    }
+
     /// Maximum number of smart buttons shown in the menu bar.
     private var smartButtonLimit: Int {
         max(4, min(16, settingsStore.settings.menuBarSmartButtonsLimit))
@@ -527,10 +592,33 @@ struct MenuBarContentView: View {
             } else {
                 let columns = Array(repeating: GridItem(.flexible(), spacing: 8), count: 4)
                 LazyVGrid(columns: columns, alignment: .leading, spacing: 8) {
-                    ForEach(smartButtonProfiles) { profile in
-                        smartButton(profile, compact: compact)
+                    ForEach(smartButtonGridItems) { item in
+                        switch item {
+                        case .profile(let profileID):
+                            if let profile = smartButtonProfileByID[profileID] {
+                                smartButton(profile, compact: compact)
+                                    .opacity(draggedSmartButtonProfileID == profile.id ? 0.42 : 1)
+                                    .background(
+                                        GeometryReader { geometry in
+                                            Color.clear.preference(
+                                                key: SmartButtonFramePreferenceKey.self,
+                                                value: [profile.id: geometry.frame(in: .named(smartButtonsGridCoordinateSpace))]
+                                            )
+                                        }
+                                    )
+                                    .gesture(smartButtonReorderGesture(for: profile.id))
+                            }
+                        case .spacerBefore, .spacerAfter:
+                            smartButtonSpacerTile(compact: compact)
+                        }
                     }
                 }
+                .coordinateSpace(name: smartButtonsGridCoordinateSpace)
+                .onPreferenceChange(SmartButtonFramePreferenceKey.self) { frames in
+                    smartButtonFramesByProfileID = frames
+                }
+                .animation(.spring(response: 0.16, dampingFraction: 0.9), value: smartButtonDropTarget)
+                .animation(.spring(response: 0.24, dampingFraction: 0.84), value: profileManager.profiles.map(\.id))
             }
         }
     }
@@ -546,16 +634,13 @@ struct MenuBarContentView: View {
             return Color.white.opacity(colorScheme == .dark ? 0.95 : 0.9)
         }()
 
-        return Button {
-            profileManager.apply(profile: profile)
-        } label: {
-            Text(profile.name)
-                .font(.system(size: compact ? 8 : 9.5, weight: .semibold))
-                .lineLimit(compact ? 1 : 2)
-                .minimumScaleFactor(0.72)
-                .multilineTextAlignment(.center)
-                .foregroundStyle(titleColor)
-                .frame(maxWidth: .infinity)
+        return Text(profile.name)
+            .font(.system(size: compact ? 8 : 9.5, weight: .semibold))
+            .lineLimit(compact ? 1 : 2)
+            .minimumScaleFactor(0.72)
+            .multilineTextAlignment(.center)
+            .foregroundStyle(titleColor)
+            .frame(maxWidth: .infinity)
             .frame(maxWidth: .infinity, minHeight: minHeight)
             .padding(.vertical, compact ? 0 : 2)
             .padding(.horizontal, compact ? 2 : 3)
@@ -570,9 +655,101 @@ struct MenuBarContentView: View {
                         lineWidth: 1
                     )
             )
-        }
-        .buttonStyle(.plain)
+            .contentShape(RoundedRectangle(cornerRadius: compact ? 10 : 12, style: .continuous))
+            .onTapGesture {
+                profileManager.apply(profile: profile)
+            }
         .help(profile.name)
+    }
+
+    /// Placeholder tile shown at the potential drop location while dragging.
+    private func smartButtonSpacerTile(compact: Bool) -> some View {
+        let minHeight: CGFloat = compact ? 24 : 40
+        let cornerRadius: CGFloat = compact ? 10 : 12
+        return RoundedRectangle(cornerRadius: cornerRadius, style: .continuous)
+            .fill(neutralChromeFill.opacity(0.38))
+            .overlay(
+                RoundedRectangle(cornerRadius: cornerRadius, style: .continuous)
+                    .stroke(neutralStroke.opacity(0.96), style: StrokeStyle(lineWidth: 1, dash: [4, 3]))
+            )
+            .frame(maxWidth: .infinity, minHeight: minHeight)
+            .padding(.vertical, compact ? 0 : 2)
+            .padding(.horizontal, compact ? 2 : 3)
+    }
+
+    /// Drag gesture used to preview and then commit smart-button reordering.
+    private func smartButtonReorderGesture(for profileID: UUID) -> some Gesture {
+        DragGesture(minimumDistance: 3, coordinateSpace: .named(smartButtonsGridCoordinateSpace))
+            .onChanged { value in
+                if draggedSmartButtonProfileID != profileID {
+                    draggedSmartButtonProfileID = profileID
+                    smartButtonDragStartFramesByProfileID = smartButtonFramesByProfileID
+                    smartButtonDropTarget = nil
+                }
+                guard let draggedID = draggedSmartButtonProfileID else { return }
+                smartButtonDropTarget = smartButtonDropTarget(for: value.translation, draggedID: draggedID)
+            }
+            .onEnded { _ in
+                applySmartButtonDropIfNeeded()
+                draggedSmartButtonProfileID = nil
+                smartButtonDragStartFramesByProfileID.removeAll()
+                smartButtonDropTarget = nil
+            }
+    }
+
+    /// Commits any pending smart-button drop target to the persisted profile order.
+    private func applySmartButtonDropIfNeeded() {
+        guard let draggedID = draggedSmartButtonProfileID,
+              let smartButtonDropTarget else { return }
+        withAnimation(.spring(response: 0.24, dampingFraction: 0.84)) {
+            switch smartButtonDropTarget {
+            case .before(let targetID):
+                profileManager.moveProfile(draggedID, before: targetID)
+            case .after(let targetID):
+                profileManager.moveProfile(draggedID, after: targetID)
+            }
+        }
+    }
+
+    /// Resolves the current drop target from drag translation with a small hysteresis threshold.
+    private func smartButtonDropTarget(for translation: CGSize, draggedID: UUID) -> SmartButtonDropTarget? {
+        let frames = smartButtonDragStartFramesByProfileID.isEmpty ? smartButtonFramesByProfileID : smartButtonDragStartFramesByProfileID
+        guard let draggedFrame = frames[draggedID] else { return nil }
+        let dragCenter = draggedFrame.center.offsetBy(dx: translation.width, dy: translation.height)
+        if abs(translation.width) < 5 && abs(translation.height) < 5 {
+            return nil
+        }
+        guard let targetID = smartButtonTargetID(for: dragCenter, excluding: draggedID, frames: frames) else {
+            return nil
+        }
+        guard let fromIndex = smartButtonProfiles.firstIndex(where: { $0.id == draggedID }),
+              let targetIndex = smartButtonProfiles.firstIndex(where: { $0.id == targetID }),
+              fromIndex != targetIndex else {
+            return nil
+        }
+        return fromIndex < targetIndex ? .after(targetID) : .before(targetID)
+    }
+
+    /// Resolves the nearest smart button tile currently under/near the drag location.
+    private func smartButtonTargetID(
+        for dragCenter: CGPoint,
+        excluding draggedID: UUID,
+        frames: [UUID: CGRect]
+    ) -> UUID? {
+        let candidateFrames = frames.filter { $0.key != draggedID }
+        if let directHit = candidateFrames.first(where: { $0.value.contains(dragCenter) })?.key {
+            return directHit
+        }
+        guard let nearest = candidateFrames.min(by: {
+            $0.value.center.distanceSquared(to: dragCenter) < $1.value.center.distanceSquared(to: dragCenter)
+        }) else {
+            return nil
+        }
+        let threshold = max(nearest.value.width, nearest.value.height) * 0.52
+        guard nearest.value.center.distanceSquared(to: dragCenter) <= (threshold * threshold) else {
+            return nil
+        }
+        return nearest.key
     }
 
     private var smartButtonNeutralFill: Color {
@@ -1559,6 +1736,33 @@ struct MenuBarContentView: View {
     private func openDiagnosticsLog() {
         let url = DiagnosticsLogger.shared.logFileURL
         NSWorkspace.shared.activateFileViewerSelecting([url])
+    }
+
+    /// Captures smart button frame rectangles for drag hit-testing.
+    private struct SmartButtonFramePreferenceKey: PreferenceKey {
+        static let defaultValue: [UUID: CGRect] = [:]
+
+        static func reduce(value: inout [UUID: CGRect], nextValue: () -> [UUID: CGRect]) {
+            value.merge(nextValue()) { _, new in new }
+        }
+    }
+}
+
+private extension CGRect {
+    var center: CGPoint {
+        CGPoint(x: midX, y: midY)
+    }
+}
+
+private extension CGPoint {
+    func offsetBy(dx: CGFloat, dy: CGFloat) -> CGPoint {
+        CGPoint(x: x + dx, y: y + dy)
+    }
+
+    func distanceSquared(to other: CGPoint) -> CGFloat {
+        let dx = x - other.x
+        let dy = y - other.y
+        return (dx * dx) + (dy * dy)
     }
 }
 

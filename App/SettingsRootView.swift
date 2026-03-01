@@ -483,6 +483,28 @@ struct SettingsRootView: View {
     // MARK: - Detail Views
 
     private struct SettingsDetailView: View {
+        private enum ProfileDropTarget: Equatable {
+            case before(UUID)
+            case after(UUID)
+        }
+
+        private enum ProfileGridItem: Identifiable, Equatable {
+            case profile(UUID)
+            case spacerBefore(UUID)
+            case spacerAfter(UUID)
+
+            var id: String {
+                switch self {
+                case .profile(let id):
+                    return "profile-\(id.uuidString)"
+                case .spacerBefore(let targetID):
+                    return "spacer-before-\(targetID.uuidString)"
+                case .spacerAfter(let targetID):
+                    return "spacer-after-\(targetID.uuidString)"
+                }
+            }
+        }
+
         let selection: SettingsDestination
         @ObservedObject var settingsStore: AppSettingsStore
         @ObservedObject var displayManager: DisplayManager
@@ -496,6 +518,7 @@ struct SettingsRootView: View {
         @State private var includeGeneralSettings = true
         @State private var includeMonitorSettings = true
         @State private var draggedProfileID: UUID?
+        @State private var profileDropTarget: ProfileDropTarget?
 
         var body: some View {
             switch selection {
@@ -805,6 +828,34 @@ struct SettingsRootView: View {
             }
         }
 
+        private var profileByID: [UUID: DisplayProfile] {
+            Dictionary(uniqueKeysWithValues: profileManager.profiles.map { ($0.id, $0) })
+        }
+
+        private var profileGridItems: [ProfileGridItem] {
+            let ids = profileManager.profiles.map(\.id)
+            guard let draggedProfileID,
+                  ids.contains(draggedProfileID),
+                  let profileDropTarget else {
+                return ids.map { .profile($0) }
+            }
+            let reducedIDs = ids.filter { $0 != draggedProfileID }
+            var items = reducedIDs.map { ProfileGridItem.profile($0) }
+            switch profileDropTarget {
+            case .before(let targetID):
+                guard let targetIndex = reducedIDs.firstIndex(of: targetID) else {
+                    return ids.map { .profile($0) }
+                }
+                items.insert(.spacerBefore(targetID), at: targetIndex)
+            case .after(let targetID):
+                guard let targetIndex = reducedIDs.firstIndex(of: targetID) else {
+                    return ids.map { .profile($0) }
+                }
+                items.insert(.spacerAfter(targetID), at: min(items.count, targetIndex + 1))
+            }
+            return items
+        }
+
         private var profilesDetail: some View {
             SettingsScrollView(title: String(localized: "Profiles"), subtitle: nil, contentMaxWidth: 980) {
                 SettingsCard(title: String(localized: "Profiles"), subtitle: nil) {
@@ -838,31 +889,42 @@ struct SettingsRootView: View {
                             alignment: .leading,
                             spacing: 10
                         ) {
-                            ForEach(profileManager.profiles) { profile in
-                                profileTile(profile)
-                                    .id(profile.id)
-                                    .opacity(draggedProfileID == profile.id ? 0.72 : 1)
-                                    .onDrag {
-                                        draggedProfileID = profile.id
-                                        return NSItemProvider(object: profile.id.uuidString as NSString)
+                            ForEach(profileGridItems) { item in
+                                switch item {
+                                case .profile(let profileID):
+                                    if let profile = profileByID[profileID] {
+                                        profileTile(profile)
+                                            .id(profile.id)
+                                            .opacity(draggedProfileID == profile.id ? 0.72 : 1)
+                                            .onDrag {
+                                                draggedProfileID = profile.id
+                                                profileDropTarget = nil
+                                                return NSItemProvider(object: profile.id.uuidString as NSString)
+                                            }
+                                            .onDrop(
+                                                of: [.text],
+                                                delegate: ProfileTileDropDelegate(
+                                                    targetProfileID: profile.id,
+                                                    draggedProfileID: $draggedProfileID,
+                                                    profileDropTarget: $profileDropTarget,
+                                                    profileManager: profileManager
+                                                )
+                                            )
                                     }
-                                    .onDrop(
-                                        of: [.text],
-                                        delegate: ProfileTileDropDelegate(
-                                            targetProfileID: profile.id,
-                                            draggedProfileID: $draggedProfileID,
-                                            profileManager: profileManager
-                                        )
-                                    )
+                                case .spacerBefore, .spacerAfter:
+                                    profileReorderSpacerTile
+                                }
                             }
                         }
                         .onDrop(
                             of: [.text],
                             delegate: ProfileGridDropDelegate(
                                 draggedProfileID: $draggedProfileID,
+                                profileDropTarget: $profileDropTarget,
                                 profileManager: profileManager
                             )
                         )
+                        .animation(.spring(response: 0.18, dampingFraction: 0.88), value: profileDropTarget)
                         .animation(.spring(response: 0.24, dampingFraction: 0.84), value: profileManager.profiles.map(\.id))
                         Text(String(localized: "Tip: Drag profile cards to reorder them."))
                             .font(.caption)
@@ -997,6 +1059,24 @@ struct SettingsRootView: View {
             )
         }
 
+        private var profileReorderSpacerTile: some View {
+            RoundedRectangle(cornerRadius: 12, style: .continuous)
+                .fill(Color.accentColor.opacity(0.08))
+                .overlay(
+                    RoundedRectangle(cornerRadius: 12, style: .continuous)
+                        .stroke(
+                            Color.accentColor.opacity(0.62),
+                            style: StrokeStyle(lineWidth: 1.2, dash: [6, 4])
+                        )
+                )
+                .frame(maxWidth: .infinity, minHeight: 180)
+                .overlay(
+                    Image(systemName: "plus")
+                        .font(.system(size: 15, weight: .semibold))
+                        .foregroundStyle(Color.accentColor.opacity(0.75))
+                )
+        }
+
         private var smartButtonsConfigurationSection: some View {
             VStack(alignment: .leading, spacing: 8) {
                 SettingsRow(
@@ -1050,38 +1130,98 @@ struct SettingsRootView: View {
         private struct ProfileTileDropDelegate: DropDelegate {
             let targetProfileID: UUID
             @Binding var draggedProfileID: UUID?
+            @Binding var profileDropTarget: ProfileDropTarget?
             let profileManager: ProfileManager
 
             func dropEntered(info: DropInfo) {
                 guard let draggedProfileID else { return }
-                profileManager.moveProfile(draggedProfileID, before: targetProfileID)
+                profileDropTarget = Self.dropTarget(
+                    for: draggedProfileID,
+                    hovering: targetProfileID,
+                    profiles: profileManager.profiles
+                )
             }
 
             func dropUpdated(info: DropInfo) -> DropProposal? {
                 DropProposal(operation: .move)
             }
 
+            func dropExited(info: DropInfo) {
+                if profileDropTarget == .before(targetProfileID) || profileDropTarget == .after(targetProfileID) {
+                    profileDropTarget = nil
+                }
+            }
+
             func performDrop(info: DropInfo) -> Bool {
+                Self.applyDrop(
+                    draggedProfileID: draggedProfileID,
+                    profileDropTarget: profileDropTarget,
+                    profileManager: profileManager
+                )
                 draggedProfileID = nil
+                profileDropTarget = nil
                 return true
+            }
+
+            private static func dropTarget(
+                for draggedProfileID: UUID,
+                hovering targetProfileID: UUID,
+                profiles: [DisplayProfile]
+            ) -> ProfileDropTarget? {
+                guard draggedProfileID != targetProfileID else { return nil }
+                guard let fromIndex = profiles.firstIndex(where: { $0.id == draggedProfileID }),
+                      let targetIndex = profiles.firstIndex(where: { $0.id == targetProfileID }),
+                      fromIndex != targetIndex else {
+                    return nil
+                }
+                return fromIndex < targetIndex ? .after(targetProfileID) : .before(targetProfileID)
+            }
+
+            static func applyDrop(
+                draggedProfileID: UUID?,
+                profileDropTarget: ProfileDropTarget?,
+                profileManager: ProfileManager
+            ) {
+                guard let draggedProfileID, let profileDropTarget else { return }
+                switch profileDropTarget {
+                case .before(let targetID):
+                    profileManager.moveProfile(draggedProfileID, before: targetID)
+                case .after(let targetID):
+                    profileManager.moveProfile(draggedProfileID, after: targetID)
+                }
             }
         }
 
         private struct ProfileGridDropDelegate: DropDelegate {
             @Binding var draggedProfileID: UUID?
+            @Binding var profileDropTarget: ProfileDropTarget?
             let profileManager: ProfileManager
 
             func dropEntered(info: DropInfo) {
                 guard let draggedProfileID else { return }
-                profileManager.moveProfileToEnd(draggedProfileID)
+                if profileManager.profiles.last?.id == draggedProfileID {
+                    profileDropTarget = nil
+                } else if let lastID = profileManager.profiles.last?.id {
+                    profileDropTarget = .after(lastID)
+                }
             }
 
             func dropUpdated(info: DropInfo) -> DropProposal? {
                 DropProposal(operation: .move)
             }
 
+            func dropExited(info: DropInfo) {
+                profileDropTarget = nil
+            }
+
             func performDrop(info: DropInfo) -> Bool {
+                ProfileTileDropDelegate.applyDrop(
+                    draggedProfileID: draggedProfileID,
+                    profileDropTarget: profileDropTarget,
+                    profileManager: profileManager
+                )
                 draggedProfileID = nil
+                profileDropTarget = nil
                 return true
             }
         }

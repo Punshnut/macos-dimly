@@ -575,6 +575,18 @@ final class ProfileManager: ObservableObject {
         persist()
     }
 
+    /// Moves a profile to appear after another profile.
+    func moveProfile(_ draggedID: UUID, after targetID: UUID) {
+        guard draggedID != targetID else { return }
+        guard let fromIndex = profiles.firstIndex(where: { $0.id == draggedID }),
+              let toIndex = profiles.firstIndex(where: { $0.id == targetID }) else { return }
+        let insertionIndex = fromIndex < toIndex ? toIndex : min(profiles.count, toIndex + 1)
+        guard insertionIndex != fromIndex else { return }
+        let profile = profiles.remove(at: fromIndex)
+        profiles.insert(profile, at: insertionIndex)
+        persist()
+    }
+
     /// Moves a profile to the end of the saved order.
     func moveProfileToEnd(_ draggedID: UUID) {
         guard let fromIndex = profiles.firstIndex(where: { $0.id == draggedID }) else { return }

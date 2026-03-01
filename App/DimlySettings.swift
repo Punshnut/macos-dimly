@@ -20,6 +20,12 @@ enum AppAppearancePreference: String, Codable, Equatable, CaseIterable, Identifi
 
 /// Persisted user-configurable settings for Dimly.
 struct DimlySettings: Codable, Equatable {
+    enum MenuBarLayoutMode: String, Codable, Equatable {
+        case simple
+        case advanced
+        case short
+    }
+
     var launchAtLogin: Bool
     var showMenuBarIcon: Bool
     var hideDockIcon: Bool
@@ -65,12 +71,26 @@ struct DimlySettings: Codable, Equatable {
         case mergedDisplayOrder
         case menuBarSimpleMode
         case menuBarQuickActionsMode
+        case menuBarLayoutMode
         case menuBarSmartButtonsLimit
         case menuBarSmartButtonsColorlessMode
         case brightnessPanelExpandedDisplayIDs
         case monitorBrightnessByDisplayID
         case monitorPowerStateByDisplayID
         case monitorLastSeenAtByDisplayID
+    }
+
+    var menuBarLayoutMode: MenuBarLayoutMode {
+        get {
+            if menuBarQuickActionsMode {
+                return .short
+            }
+            return menuBarSimpleMode ? .simple : .advanced
+        }
+        set {
+            menuBarSimpleMode = (newValue == .simple)
+            menuBarQuickActionsMode = (newValue == .short)
+        }
     }
 
     /// Default settings used on first launch or when decoding fails.
@@ -180,8 +200,13 @@ struct DimlySettings: Codable, Equatable {
         let externalDisplayOrder = try container.decodeIfPresent([String].self, forKey: .externalDisplayOrder) ?? DimlySettings.default.externalDisplayOrder
         let internalDisplayOrder = try container.decodeIfPresent([String].self, forKey: .internalDisplayOrder) ?? DimlySettings.default.internalDisplayOrder
         let mergedDisplayOrder = try container.decodeIfPresent([String].self, forKey: .mergedDisplayOrder) ?? DimlySettings.default.mergedDisplayOrder
-        let menuBarSimpleMode = try container.decodeIfPresent(Bool.self, forKey: .menuBarSimpleMode) ?? DimlySettings.default.menuBarSimpleMode
-        let menuBarQuickActionsMode = try container.decodeIfPresent(Bool.self, forKey: .menuBarQuickActionsMode) ?? DimlySettings.default.menuBarQuickActionsMode
+        let decodedMenuBarLayoutMode = try container.decodeIfPresent(MenuBarLayoutMode.self, forKey: .menuBarLayoutMode)
+        let legacyMenuBarSimpleMode = try container.decodeIfPresent(Bool.self, forKey: .menuBarSimpleMode) ?? DimlySettings.default.menuBarSimpleMode
+        let legacyMenuBarQuickActionsMode = try container.decodeIfPresent(Bool.self, forKey: .menuBarQuickActionsMode) ?? DimlySettings.default.menuBarQuickActionsMode
+        let resolvedMenuBarLayoutMode = decodedMenuBarLayoutMode
+            ?? (legacyMenuBarQuickActionsMode ? .short : (legacyMenuBarSimpleMode ? .simple : .advanced))
+        let menuBarSimpleMode = resolvedMenuBarLayoutMode == .simple
+        let menuBarQuickActionsMode = resolvedMenuBarLayoutMode == .short
         let menuBarSmartButtonsLimit = try container.decodeIfPresent(Int.self, forKey: .menuBarSmartButtonsLimit) ?? DimlySettings.default.menuBarSmartButtonsLimit
         let menuBarSmartButtonsColorlessMode = try container.decodeIfPresent(Bool.self, forKey: .menuBarSmartButtonsColorlessMode) ?? DimlySettings.default.menuBarSmartButtonsColorlessMode
         let brightnessPanelExpandedDisplayIDs = try container.decodeIfPresent([String].self, forKey: .brightnessPanelExpandedDisplayIDs) ?? DimlySettings.default.brightnessPanelExpandedDisplayIDs
@@ -257,6 +282,7 @@ struct DimlySettings: Codable, Equatable {
         try container.encode(mergedDisplayOrder, forKey: .mergedDisplayOrder)
         try container.encode(menuBarSimpleMode, forKey: .menuBarSimpleMode)
         try container.encode(menuBarQuickActionsMode, forKey: .menuBarQuickActionsMode)
+        try container.encode(menuBarLayoutMode, forKey: .menuBarLayoutMode)
         try container.encode(Self.normalizedSmartButtonsLimit(menuBarSmartButtonsLimit), forKey: .menuBarSmartButtonsLimit)
         try container.encode(menuBarSmartButtonsColorlessMode, forKey: .menuBarSmartButtonsColorlessMode)
         try container.encode(brightnessPanelExpandedDisplayIDs, forKey: .brightnessPanelExpandedDisplayIDs)
