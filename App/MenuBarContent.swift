@@ -1462,12 +1462,62 @@ struct MenuBarContentView: View {
                 } label: {
                     Label(String(localized: "Quit Dimly"), systemImage: "power")
                 }
+                .overlay(alignment: .topTrailing) {
+                    shortModeUpdatesBadge
+                        .offset(x: 7, y: -7)
+                }
                 Spacer(minLength: 0)
                 applyProfileMenuButton()
+                    .overlay(alignment: .topTrailing) {
+                        shortModeSettingsBadge
+                            .offset(x: 7, y: -7)
+                    }
             }
         }
         .buttonStyle(.bordered)
         .controlSize(.small)
+    }
+
+    /// Tiny settings launcher shown as an overlay badge in short mode.
+    private var shortModeSettingsBadge: some View {
+        SettingsLink {
+            Image(systemName: "gearshape.fill")
+                .font(.system(size: 9, weight: .semibold))
+                .foregroundStyle(neutralSecondaryText)
+                .frame(width: 16, height: 16)
+                .background(
+                    Circle()
+                        .fill(neutralChromeFill.opacity(0.94))
+                )
+                .overlay(
+                    Circle()
+                        .stroke(neutralStroke.opacity(0.9), lineWidth: 0.8)
+                )
+        }
+        .buttonStyle(.plain)
+        .help(String(localized: "Settings..."))
+    }
+
+    /// Tiny update-check launcher shown as an overlay badge in short mode.
+    private var shortModeUpdatesBadge: some View {
+        Button {
+            updaterController.checkForUpdates(nil)
+        } label: {
+            Image(systemName: "arrow.triangle.2.circlepath")
+                .font(.system(size: 9, weight: .semibold))
+                .foregroundStyle(neutralSecondaryText)
+                .frame(width: 16, height: 16)
+                .background(
+                    Circle()
+                        .fill(neutralChromeFill.opacity(0.94))
+                )
+                .overlay(
+                    Circle()
+                        .stroke(neutralStroke.opacity(0.9), lineWidth: 0.8)
+                )
+        }
+        .buttonStyle(.plain)
+        .help(String(localized: "Check for Updates..."))
     }
 
     private var monitorsSectionTitle: String {
