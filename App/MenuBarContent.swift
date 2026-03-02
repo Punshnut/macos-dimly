@@ -52,6 +52,7 @@ struct MenuBarContentView: View {
     @State private var draggedSmartButtonProfileID: UUID?
     @State private var smartButtonFramesByProfileID: [UUID: CGRect] = [:]
     @State private var smartButtonDragStartFramesByProfileID: [UUID: CGRect] = [:]
+    @State private var smartButtonDragTranslation: CGSize = .zero
     @State private var smartButtonDropTarget: SmartButtonDropTarget?
     private let builtinBrightnessRefreshTimer = Timer.publish(every: 0.4, on: .main, in: .common).autoconnect()
     private let smartButtonsGridCoordinateSpace = "smartButtonsGrid"
@@ -556,19 +557,21 @@ struct MenuBarContentView: View {
     /// Render list for the smart-button grid including a temporary spacer while dragging.
     private var smartButtonGridItems: [SmartButtonGridItem] {
         let ids = smartButtonProfiles.map(\.id)
-        guard draggedSmartButtonProfileID != nil,
+        guard let draggedSmartButtonProfileID,
+              ids.contains(draggedSmartButtonProfileID),
               let smartButtonDropTarget else {
             return ids.map { .profile($0) }
         }
-        var items = ids.map { SmartButtonGridItem.profile($0) }
+        let reducedIDs = ids.filter { $0 != draggedSmartButtonProfileID }
+        var items = reducedIDs.map { SmartButtonGridItem.profile($0) }
         switch smartButtonDropTarget {
         case .before(let targetID):
-            guard let targetIndex = ids.firstIndex(of: targetID) else {
+            guard let targetIndex = reducedIDs.firstIndex(of: targetID) else {
                 return ids.map { .profile($0) }
             }
             items.insert(.spacerBefore(targetID), at: targetIndex)
         case .after(let targetID):
-            guard let targetIndex = ids.firstIndex(of: targetID) else {
+            guard let targetIndex = reducedIDs.firstIndex(of: targetID) else {
                 return ids.map { .profile($0) }
             }
             items.insert(.spacerAfter(targetID), at: min(items.count, targetIndex + 1))
@@ -591,26 +594,43 @@ struct MenuBarContentView: View {
                     .foregroundStyle(neutralSecondaryText)
             } else {
                 let columns = Array(repeating: GridItem(.flexible(), spacing: 8), count: 4)
-                LazyVGrid(columns: columns, alignment: .leading, spacing: 8) {
-                    ForEach(smartButtonGridItems) { item in
-                        switch item {
-                        case .profile(let profileID):
-                            if let profile = smartButtonProfileByID[profileID] {
-                                smartButton(profile, compact: compact)
-                                    .opacity(draggedSmartButtonProfileID == profile.id ? 0.42 : 1)
-                                    .background(
-                                        GeometryReader { geometry in
-                                            Color.clear.preference(
-                                                key: SmartButtonFramePreferenceKey.self,
-                                                value: [profile.id: geometry.frame(in: .named(smartButtonsGridCoordinateSpace))]
-                                            )
-                                        }
-                                    )
-                                    .gesture(smartButtonReorderGesture(for: profile.id))
+                ZStack(alignment: .topLeading) {
+                    LazyVGrid(columns: columns, alignment: .leading, spacing: 8) {
+                        ForEach(smartButtonGridItems) { item in
+                            switch item {
+                            case .profile(let profileID):
+                                if let profile = smartButtonProfileByID[profileID] {
+                                    smartButton(profile, compact: compact)
+                                        .opacity(draggedSmartButtonProfileID == profile.id ? 0.02 : 1)
+                                        .background(
+                                            GeometryReader { geometry in
+                                                Color.clear.preference(
+                                                    key: SmartButtonFramePreferenceKey.self,
+                                                    value: [profile.id: geometry.frame(in: .named(smartButtonsGridCoordinateSpace))]
+                                                )
+                                            }
+                                        )
+                                        .gesture(smartButtonReorderGesture(for: profile.id))
+                                }
+                            case .spacerBefore, .spacerAfter:
+                                smartButtonSpacerTile(compact: compact)
                             }
-                        case .spacerBefore, .spacerAfter:
-                            smartButtonSpacerTile(compact: compact)
                         }
+                    }
+
+                    if let draggedID = draggedSmartButtonProfileID,
+                       let draggedProfile = smartButtonProfileByID[draggedID],
+                       let draggedFrame = smartButtonDragStartFramesByProfileID[draggedID] {
+                        floatingSmartButtonPreview(
+                            draggedProfile,
+                            compact: compact,
+                            size: CGSize(width: draggedFrame.width, height: draggedFrame.height)
+                        )
+                            .allowsHitTesting(false)
+                            .position(x: draggedFrame.midX, y: draggedFrame.midY)
+                            .offset(smartButtonDragTranslation)
+                            .shadow(color: Color.black.opacity(colorScheme == .dark ? 0.32 : 0.18), radius: 6, x: 0, y: 3)
+                            .zIndex(10)
                     }
                 }
                 .coordinateSpace(name: smartButtonsGridCoordinateSpace)
@@ -662,6 +682,36 @@ struct MenuBarContentView: View {
         .help(profile.name)
     }
 
+    /// Fixed-size floating preview tile shown while dragging.
+    private func floatingSmartButtonPreview(_ profile: DisplayProfile, compact: Bool, size: CGSize) -> some View {
+        let isColorless = settingsStore.settings.menuBarSmartButtonsColorlessMode
+        let titleColor: Color = {
+            if isColorless {
+                return colorScheme == .dark ? Color.white.opacity(0.92) : Color.black.opacity(0.64)
+            }
+            return Color.white.opacity(colorScheme == .dark ? 0.95 : 0.9)
+        }()
+
+        return Text(profile.name)
+            .font(.system(size: compact ? 8 : 9.5, weight: .semibold))
+            .lineLimit(compact ? 1 : 2)
+            .minimumScaleFactor(0.72)
+            .multilineTextAlignment(.center)
+            .foregroundStyle(titleColor)
+            .frame(width: max(24, size.width), height: max(24, size.height))
+            .background(
+                RoundedRectangle(cornerRadius: compact ? 10 : 12, style: .continuous)
+                    .fill(isColorless ? AnyShapeStyle(smartButtonNeutralFill) : AnyShapeStyle(smartButtonGradient(for: profile)))
+            )
+            .overlay(
+                RoundedRectangle(cornerRadius: compact ? 10 : 12, style: .continuous)
+                    .stroke(
+                        isColorless ? neutralStroke.opacity(compact ? 0.8 : 0.7) : Color.white.opacity(colorScheme == .dark ? 0.19 : 0.28),
+                        lineWidth: 1
+                    )
+            )
+    }
+
     /// Placeholder tile shown at the potential drop location while dragging.
     private func smartButtonSpacerTile(compact: Bool) -> some View {
         let minHeight: CGFloat = compact ? 24 : 40
@@ -686,6 +736,7 @@ struct MenuBarContentView: View {
                     smartButtonDragStartFramesByProfileID = smartButtonFramesByProfileID
                     smartButtonDropTarget = nil
                 }
+                smartButtonDragTranslation = value.translation
                 guard let draggedID = draggedSmartButtonProfileID else { return }
                 smartButtonDropTarget = smartButtonDropTarget(for: value.translation, draggedID: draggedID)
             }
@@ -693,6 +744,7 @@ struct MenuBarContentView: View {
                 applySmartButtonDropIfNeeded()
                 draggedSmartButtonProfileID = nil
                 smartButtonDragStartFramesByProfileID.removeAll()
+                smartButtonDragTranslation = .zero
                 smartButtonDropTarget = nil
             }
     }
@@ -711,45 +763,146 @@ struct MenuBarContentView: View {
         }
     }
 
-    /// Resolves the current drop target from drag translation with a small hysteresis threshold.
+    /// Resolves drop target by fitting the dragged tile rect into virtual grid insertion slots.
     private func smartButtonDropTarget(for translation: CGSize, draggedID: UUID) -> SmartButtonDropTarget? {
-        let frames = smartButtonDragStartFramesByProfileID.isEmpty ? smartButtonFramesByProfileID : smartButtonDragStartFramesByProfileID
-        guard let draggedFrame = frames[draggedID] else { return nil }
-        let dragCenter = draggedFrame.center.offsetBy(dx: translation.width, dy: translation.height)
+        let startFrames = smartButtonDragStartFramesByProfileID.isEmpty ? smartButtonFramesByProfileID : smartButtonDragStartFramesByProfileID
+        guard let draggedFrame = startFrames[draggedID] else { return nil }
         if abs(translation.width) < 5 && abs(translation.height) < 5 {
             return nil
         }
-        guard let targetID = smartButtonTargetID(for: dragCenter, excluding: draggedID, frames: frames) else {
+
+        let orderedIDs = smartButtonProfiles.map(\.id)
+        guard let fromIndex = orderedIDs.firstIndex(of: draggedID) else { return nil }
+        let reducedIDs = orderedIDs.filter { $0 != draggedID }
+        guard reducedIDs.isEmpty == false else { return nil }
+
+        let dragRect = draggedFrame.offsetBy(dx: translation.width, dy: translation.height)
+        // Keep a generous cancel zone around the original tile location so dropping
+        // back in place is easy and predictable.
+        let cancelPadding = max(draggedFrame.width, draggedFrame.height) * 0.45
+        if draggedFrame.insetBy(dx: -cancelPadding, dy: -cancelPadding).contains(dragRect.center) {
             return nil
         }
-        guard let fromIndex = smartButtonProfiles.firstIndex(where: { $0.id == draggedID }),
-              let targetIndex = smartButtonProfiles.firstIndex(where: { $0.id == targetID }),
-              fromIndex != targetIndex else {
+
+        guard let fit = bestSmartButtonInsertionFit(for: dragRect, reducedIDs: reducedIDs) else {
             return nil
         }
-        return fromIndex < targetIndex ? .after(targetID) : .before(targetID)
+
+        let maxDistance = max(fit.stepX, fit.stepY) * 1.75
+        guard fit.distance <= maxDistance else {
+            return nil
+        }
+
+        if fit.insertionIndex == fromIndex {
+            return nil
+        }
+        if fit.insertionIndex >= reducedIDs.count, let lastID = reducedIDs.last {
+            return .after(lastID)
+        }
+        return .before(reducedIDs[fit.insertionIndex])
     }
 
-    /// Resolves the nearest smart button tile currently under/near the drag location.
-    private func smartButtonTargetID(
-        for dragCenter: CGPoint,
-        excluding draggedID: UUID,
-        frames: [UUID: CGRect]
-    ) -> UUID? {
-        let candidateFrames = frames.filter { $0.key != draggedID }
-        if let directHit = candidateFrames.first(where: { $0.value.contains(dragCenter) })?.key {
-            return directHit
+    /// Picks the insertion slot where the dragged tile physically fits best.
+    private func bestSmartButtonInsertionFit(
+        for dragRect: CGRect,
+        reducedIDs: [UUID]
+    ) -> (insertionIndex: Int, distance: CGFloat, stepX: CGFloat, stepY: CGFloat)? {
+        let liveFrames = smartButtonFramesByProfileID
+        let startFrames = smartButtonDragStartFramesByProfileID
+        let reducedFrames: [CGRect] = reducedIDs.compactMap { id in
+            liveFrames[id] ?? startFrames[id]
         }
-        guard let nearest = candidateFrames.min(by: {
-            $0.value.center.distanceSquared(to: dragCenter) < $1.value.center.distanceSquared(to: dragCenter)
-        }) else {
-            return nil
+        guard reducedFrames.count == reducedIDs.count else { return nil }
+
+        let columns = 4
+        let width = reducedFrames.map(\.width).median ?? 36
+        let height = reducedFrames.map(\.height).median ?? 28
+        let stepX = inferredStepX(from: reducedFrames, fallback: width + 8)
+        let stepY = inferredStepY(from: reducedFrames, columns: columns, fallback: height + 8)
+
+        let rowBreakTolerance = max(4, height * 0.22)
+        let slotRects = smartButtonInsertionSlotRects(
+            frames: reducedFrames,
+            slotSize: CGSize(width: width, height: height),
+            rowBreakTolerance: rowBreakTolerance
+        )
+
+        var bestIndex = 0
+        var bestOverlap: CGFloat = -1
+        var bestDistance = CGFloat.greatestFiniteMagnitude
+        let dragCenter = dragRect.center
+
+        for slot in slotRects {
+            let slotCenter = slot.rect.center
+            let slotRect = slot.rect
+            let overlap = dragRect.intersection(slotRect).area
+            let distance = dragCenter.distanceSquared(to: slotCenter).squareRoot()
+            if overlap > bestOverlap + 0.5 || (abs(overlap - bestOverlap) <= 0.5 && distance < bestDistance) {
+                bestOverlap = overlap
+                bestDistance = distance
+                bestIndex = slot.insertionIndex
+            }
         }
-        let threshold = max(nearest.value.width, nearest.value.height) * 0.52
-        guard nearest.value.center.distanceSquared(to: dragCenter) <= (threshold * threshold) else {
-            return nil
+
+        return (bestIndex, bestDistance, stepX, stepY)
+    }
+
+    private func smartButtonInsertionSlotRects(
+        frames: [CGRect],
+        slotSize: CGSize,
+        rowBreakTolerance: CGFloat
+    ) -> [(insertionIndex: Int, rect: CGRect)] {
+        guard frames.isEmpty == false else { return [] }
+        var slots: [(insertionIndex: Int, rect: CGRect)] = []
+
+        for insertionIndex in 0...frames.count {
+            if insertionIndex == 0 {
+                let next = frames[0]
+                let center = CGPoint(x: next.minX - (slotSize.width * 0.5), y: next.midY)
+                slots.append((insertionIndex, CGRect(center: center, size: slotSize)))
+                continue
+            }
+
+            if insertionIndex == frames.count {
+                let previous = frames[insertionIndex - 1]
+                let center = CGPoint(x: previous.maxX + (slotSize.width * 0.5), y: previous.midY)
+                slots.append((insertionIndex, CGRect(center: center, size: slotSize)))
+                continue
+            }
+
+            let previous = frames[insertionIndex - 1]
+            let next = frames[insertionIndex]
+            let sameRow = abs(previous.midY - next.midY) <= rowBreakTolerance
+            if sameRow {
+                let center = CGPoint(
+                    x: (previous.maxX + next.minX) * 0.5,
+                    y: (previous.midY + next.midY) * 0.5
+                )
+                slots.append((insertionIndex, CGRect(center: center, size: slotSize)))
+            } else {
+                // For row breaks, keep both candidates for the same insertion index:
+                // end of previous row and start of next row.
+                let endPreviousRow = CGPoint(x: previous.maxX + (slotSize.width * 0.5), y: previous.midY)
+                let startNextRow = CGPoint(x: next.minX - (slotSize.width * 0.5), y: next.midY)
+                slots.append((insertionIndex, CGRect(center: endPreviousRow, size: slotSize)))
+                slots.append((insertionIndex, CGRect(center: startNextRow, size: slotSize)))
+            }
         }
-        return nearest.key
+
+        return slots
+    }
+
+    private func inferredStepX(from frames: [CGRect], fallback: CGFloat) -> CGFloat {
+        let centers = frames.map { $0.center.x }.sorted()
+        let diffs = zip(centers, centers.dropFirst()).map { $1 - $0 }.filter { $0 > 2 }
+        return diffs.median ?? fallback
+    }
+
+    private func inferredStepY(from frames: [CGRect], columns: Int, fallback: CGFloat) -> CGFloat {
+        guard frames.count > columns else { return fallback }
+        let centers = frames.map { $0.center.y }.sorted()
+        let diffs = zip(centers, centers.dropFirst()).map { $1 - $0 }.filter { $0 > 2 }
+        return diffs.median ?? fallback
     }
 
     private var smartButtonNeutralFill: Color {
@@ -1749,8 +1902,22 @@ struct MenuBarContentView: View {
 }
 
 private extension CGRect {
+    init(center: CGPoint, size: CGSize) {
+        self.init(
+            x: center.x - (size.width * 0.5),
+            y: center.y - (size.height * 0.5),
+            width: size.width,
+            height: size.height
+        )
+    }
+
     var center: CGPoint {
         CGPoint(x: midX, y: midY)
+    }
+
+    var area: CGFloat {
+        guard isNull == false, isInfinite == false else { return 0 }
+        return max(0, width) * max(0, height)
     }
 }
 
@@ -1763,6 +1930,18 @@ private extension CGPoint {
         let dx = x - other.x
         let dy = y - other.y
         return (dx * dx) + (dy * dy)
+    }
+}
+
+private extension Array where Element == CGFloat {
+    var median: CGFloat? {
+        guard isEmpty == false else { return nil }
+        let sorted = self.sorted()
+        let mid = sorted.count / 2
+        if sorted.count.isMultiple(of: 2) {
+            return (sorted[mid - 1] + sorted[mid]) * 0.5
+        }
+        return sorted[mid]
     }
 }
 
