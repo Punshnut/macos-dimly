@@ -37,7 +37,7 @@
 "Mode" = "โหมด";
 "Simple" = "เรียบง่าย";
 "Advanced" = "ขั้นสูง";
-"Short" = "Short";
+"Short" = "กะทัดรัด";
 
 /* Menu Bar Actions */
 "Toggle External Blackout" = "สลับมืดจอภายนอก";
@@ -326,3 +326,6 @@
 "Teal" = "สีเขียวอมฟ้า";
 "Tip: Drag profile cards to reorder them." = "เคล็ดลับ: ลากการ์ดโปรไฟล์เพื่อจัดลำดับใหม่";
 "Violet" = "สีม่วง";
+
+"Trigger monitor connection" = "ทริกเกอร์เมื่อเชื่อมต่อจอภาพ";
+"Any External Monitor" = "จอภาพภายนอกใดก็ได้";

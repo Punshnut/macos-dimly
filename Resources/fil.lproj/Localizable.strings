@@ -38,7 +38,7 @@
 "Mode" = "Paraan";
 "Simple" = "Payak";
 "Advanced" = "Mas advanced";
-"Short" = "Short";
+"Short" = "Kompak";
 
 /* Menu Bar Actions */
 "Toggle External Blackout" = "I-toggle ang panlabas na blackout";
@@ -324,3 +324,6 @@
 "Teal" = "Berde-asul";
 "Tip: Drag profile cards to reorder them." = "Tip: I-drag ang mga profile card para ayusin muli.";
 "Violet" = "Lila";
+
+"Trigger monitor connection" = "I-trigger sa koneksyon ng monitor";
+"Any External Monitor" = "Anumang panlabas na monitor";

@@ -37,7 +37,7 @@
 "Mode" = "Režim";
 "Simple" = "Jednoduchý";
 "Advanced" = "Pokročilý";
-"Short" = "Short";
+"Short" = "Kompaktní";
 
 /* Menu Bar Actions */
 "Toggle External Blackout" = "Přepnout externí blackout";
@@ -326,3 +326,6 @@
 "Teal" = "Modrozelená";
 "Tip: Drag profile cards to reorder them." = "Tip: Přetažením karet profilů změníte jejich pořadí.";
 "Violet" = "Fialová";
+
+"Trigger monitor connection" = "Spuštění při připojení monitoru";
+"Any External Monitor" = "Jakýkoli externí monitor";

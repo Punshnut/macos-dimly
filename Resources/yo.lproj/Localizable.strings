@@ -37,7 +37,7 @@
 "Mode" = "Ipo";
 "Simple" = "Rọrun";
 "Advanced" = "Ti ni ilọsiwaju";
-"Short" = "Short";
+"Short" = "Kékèké";
 
 /* Menu Bar Actions */
 "Toggle External Blackout" = "Pa/Ṣí ìdàmú dudu òde";
@@ -326,3 +326,6 @@
 "Teal" = "Awọ teal";
 "Tip: Drag profile cards to reorder them." = "Imọ̀ràn: Fa àwọn kaadi profaili láti tún wọn ṣe ní títò.";
 "Violet" = "Awọ violet";
+
+"Trigger monitor connection" = "Ìtaniji ìsopọ̀ mọ́nítọ̀";
+"Any External Monitor" = "Eyikeyi mọ́nítọ̀ ita";

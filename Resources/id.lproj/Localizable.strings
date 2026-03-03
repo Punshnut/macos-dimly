@@ -37,7 +37,7 @@
 "Mode" = "Mode tampilan";
 "Simple" = "Sederhana";
 "Advanced" = "Lanjutan";
-"Short" = "Short";
+"Short" = "Ringkas";
 
 /* Menu Bar Actions */
 "Toggle External Blackout" = "Ubah blackout eksternal";
@@ -326,3 +326,6 @@
 "Teal" = "Hijau kebiruan";
 "Tip: Drag profile cards to reorder them." = "Tip: Seret kartu profil untuk mengurutkan ulang.";
 "Violet" = "Ungu";
+
+"Trigger monitor connection" = "Pemicu koneksi monitor";
+"Any External Monitor" = "Monitor eksternal apa pun";

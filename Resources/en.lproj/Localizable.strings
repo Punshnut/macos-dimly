@@ -40,7 +40,7 @@
 "Mode" = "Mode";
 "Simple" = "Simple";
 "Advanced" = "Advanced";
-"Short" = "Short";
+"Short" = "Compact";
 
 /* Menu Bar Actions */
 "Toggle External Blackout" = "Toggle External Blackout";
@@ -156,6 +156,8 @@
 "Save" = "Save";
 "Cancel" = "Cancel";
 "Auto-apply profile when an external display connects" = "Auto-apply profile when an external display connects";
+"Trigger monitor connection" = "Trigger monitor connection";
+"Any External Monitor" = "Any External Monitor";
 "Profile to apply" = "Profile to apply";
 "LastAppliedFormat" = "Last applied: %@";
 "ProfileDefaultNameFormat" = "Profile %lld";

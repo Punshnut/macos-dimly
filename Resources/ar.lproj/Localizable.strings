@@ -37,7 +37,7 @@
 "Mode" = "الوضع";
 "Simple" = "بسيط";
 "Advanced" = "متقدم";
-"Short" = "Short";
+"Short" = "مضغوط";
 
 /* Menu Bar Actions */
 "Toggle External Blackout" = "تبديل تعتيم الشاشات الخارجية";
@@ -326,3 +326,6 @@
 "Teal" = "أزرق مخضر";
 "Tip: Drag profile cards to reorder them." = "نصيحة: اسحب بطاقات الملفات الشخصية لإعادة ترتيبها.";
 "Violet" = "بنفسجي";
+
+"Trigger monitor connection" = "تشغيل عند اتصال شاشة";
+"Any External Monitor" = "أي شاشة خارجية";

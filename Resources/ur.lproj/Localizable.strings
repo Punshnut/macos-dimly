@@ -37,7 +37,7 @@
 "Mode" = "موڈ";
 "Simple" = "سادہ";
 "Advanced" = "جدید";
-"Short" = "Short";
+"Short" = "مختصر";
 
 /* Menu Bar Actions */
 "Toggle External Blackout" = "بیرونی بلیک آؤٹ ٹوگل کریں";
@@ -326,3 +326,6 @@
 "Teal" = "سبز مائل نیلا";
 "Tip: Drag profile cards to reorder them." = "مشورہ: ترتیب بدلنے کے لیے پروفائل کارڈز کو گھسیٹیں۔";
 "Violet" = "بنفشی";
+
+"Trigger monitor connection" = "مانیٹر کنکشن ٹرگر";
+"Any External Monitor" = "کوئی بھی بیرونی مانیٹر";

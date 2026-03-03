@@ -37,7 +37,7 @@
 "Mode" = "Modi";
 "Simple" = "Rahisi";
 "Advanced" = "Ya Juu";
-"Short" = "Short";
+"Short" = "Fupi";
 
 /* Menu Bar Actions */
 "Toggle External Blackout" = "Badilisha blackout ya nje";
@@ -326,3 +326,6 @@
 "Teal" = "Kijani-samawati";
 "Tip: Drag profile cards to reorder them." = "Kidokezo: Buruta kadi za profaili ili kubadilisha mpangilio.";
 "Violet" = "Zambarau";
+
+"Trigger monitor connection" = "Kichocheo cha muunganisho wa monitor";
+"Any External Monitor" = "Monitor yoyote ya nje";

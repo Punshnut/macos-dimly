@@ -37,7 +37,7 @@
 "Mode" = "မုဒ်";
 "Simple" = "ရိုးရှင်း";
 "Advanced" = "အဆင့်မြင့်";
-"Short" = "Short";
+"Short" = "ကျစ်လစ်";
 
 /* Menu Bar Actions */
 "Toggle External Blackout" = "ပြင်ပအမည်းဖုံး ပြောင်းရန်";
@@ -326,3 +326,6 @@
 "Teal" = "စိမ်းပြာရောင်";
 "Tip: Drag profile cards to reorder them." = "အကြံပြုချက် - Profile ကတ်များကို ဆွဲ၍ အစဉ်ပြန်စီပါ။";
 "Violet" = "ခရမ်းရောင်";
+
+"Trigger monitor connection" = "မော်နီတာ ချိတ်ဆက်မှု အလုပ်လုပ်စေခြင်း";
+"Any External Monitor" = "မည်သည့် ပြင်ပ မော်နီတာမဆို";

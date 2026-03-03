@@ -37,7 +37,7 @@
 "Mode" = "మోడ్";
 "Simple" = "సరళం";
 "Advanced" = "అధునాతన";
-"Short" = "Short";
+"Short" = "సంక్షిప్తం";
 
 /* Menu Bar Actions */
 "Toggle External Blackout" = "బాహ్య బ్లాకౌట్ మార్చు";
@@ -326,3 +326,6 @@
 "Teal" = "టీల్";
 "Tip: Drag profile cards to reorder them." = "సూచన: ప్రొఫైల్ కార్డులను లాగి మళ్లీ క్రమబద్ధీకరించండి.";
 "Violet" = "వైలెట్";
+
+"Trigger monitor connection" = "మానిటర్ కనెక్షన్ ట్రిగ్గర్";
+"Any External Monitor" = "ఏదైనా బాహ్య మానిటర్";

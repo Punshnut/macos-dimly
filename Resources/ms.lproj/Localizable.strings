@@ -37,7 +37,7 @@
 "Mode" = "Mod";
 "Simple" = "Ringkas";
 "Advanced" = "Lanjutan";
-"Short" = "Short";
+"Short" = "Padat";
 
 /* Menu Bar Actions */
 "Toggle External Blackout" = "Togol blackout luaran";
@@ -326,3 +326,6 @@
 "Teal" = "Hijau kebiruan";
 "Tip: Drag profile cards to reorder them." = "Petua: Seret kad profil untuk menyusun semula.";
 "Violet" = "Ungu";
+
+"Trigger monitor connection" = "Pencetus sambungan monitor";
+"Any External Monitor" = "Mana-mana monitor luaran";

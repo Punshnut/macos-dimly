@@ -37,7 +37,7 @@
 "Mode" = "Tryb";
 "Simple" = "Prosty";
 "Advanced" = "Zaawansowany";
-"Short" = "Short";
+"Short" = "Kompaktowy";
 
 /* Menu Bar Actions */
 "Toggle External Blackout" = "Przełącz blackout zewnętrzny";
@@ -326,3 +326,6 @@
 "Teal" = "Morski";
 "Tip: Drag profile cards to reorder them." = "Wskazówka: przeciągnij karty profili, aby zmienić kolejność.";
 "Violet" = "Fioletowy";
+
+"Trigger monitor connection" = "Wyzwalacz po podłączeniu monitora";
+"Any External Monitor" = "Dowolny monitor zewnętrzny";

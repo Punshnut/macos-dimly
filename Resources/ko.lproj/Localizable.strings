@@ -37,7 +37,7 @@
 "Mode" = "모드";
 "Simple" = "간단함";
 "Advanced" = "고급";
-"Short" = "Short";
+"Short" = "컴팩트";
 
 /* Menu Bar Actions */
 "Toggle External Blackout" = "외부 블랙아웃 전환";
@@ -326,3 +326,6 @@
 "Teal" = "틸";
 "Tip: Drag profile cards to reorder them." = "팁: 프로필 카드를 드래그하여 순서를 바꾸세요.";
 "Violet" = "바이올렛";
+
+"Trigger monitor connection" = "모니터 연결 트리거";
+"Any External Monitor" = "모든 외부 모니터";

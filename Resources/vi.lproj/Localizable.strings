@@ -37,7 +37,7 @@
 "Mode" = "Chế độ";
 "Simple" = "Đơn giản";
 "Advanced" = "Nâng cao";
-"Short" = "Short";
+"Short" = "Gọn";
 
 /* Menu Bar Actions */
 "Toggle External Blackout" = "Bật/tắt blackout ngoài";
@@ -326,3 +326,6 @@
 "Teal" = "Xanh mòng két";
 "Tip: Drag profile cards to reorder them." = "Mẹo: Kéo thẻ hồ sơ để sắp xếp lại.";
 "Violet" = "Tím";
+
+"Trigger monitor connection" = "Kích hoạt khi kết nối màn hình";
+"Any External Monitor" = "Bất kỳ màn hình ngoài nào";

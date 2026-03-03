@@ -37,7 +37,7 @@
 "Mode" = "حالت";
 "Simple" = "ساده";
 "Advanced" = "پیشرفته";
-"Short" = "Short";
+"Short" = "فشرده";
 
 /* Menu Bar Actions */
 "Toggle External Blackout" = "تغییر وضعیت خاموشی خارجی";
@@ -326,3 +326,6 @@
 "Teal" = "سبزآبی";
 "Tip: Drag profile cards to reorder them." = "نکته: برای تغییر ترتیب، کارت‌های پروفایل را بکشید.";
 "Violet" = "بنفش";
+
+"Trigger monitor connection" = "فعال‌سازی با اتصال مانیتور";
+"Any External Monitor" = "هر مانیتور خارجی";

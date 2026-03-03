@@ -37,7 +37,7 @@
 "Mode" = "Λειτουργία";
 "Simple" = "Απλό";
 "Advanced" = "Προηγμένο";
-"Short" = "Short";
+"Short" = "Συμπαγές";
 
 /* Menu Bar Actions */
 "Toggle External Blackout" = "Εναλλαγή blackout εξωτερικών";
@@ -326,3 +326,6 @@
 "Teal" = "Κυανόπρασινο";
 "Tip: Drag profile cards to reorder them." = "Συμβουλή: Σύρετε τις κάρτες προφίλ για να αλλάξετε σειρά.";
 "Violet" = "Βιολετί";
+
+"Trigger monitor connection" = "Ενεργοποίηση στη σύνδεση οθόνης";
+"Any External Monitor" = "Οποιαδήποτε εξωτερική οθόνη";

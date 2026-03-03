@@ -37,7 +37,7 @@
 "Mode" = "Mód";
 "Simple" = "Egyszerű";
 "Advanced" = "Haladó";
-"Short" = "Short";
+"Short" = "Kompakt";
 
 /* Menu Bar Actions */
 "Toggle External Blackout" = "Külső elsötétítés váltása";
@@ -326,3 +326,6 @@
 "Teal" = "Türkiz";
 "Tip: Drag profile cards to reorder them." = "Tipp: Húzd a profilkártyákat az átrendezéshez.";
 "Violet" = "Ibolya";
+
+"Trigger monitor connection" = "Indítás monitor csatlakozásakor";
+"Any External Monitor" = "Bármely külső monitor";

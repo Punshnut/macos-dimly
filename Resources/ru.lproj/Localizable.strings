@@ -37,7 +37,7 @@
 "Mode" = "Режим";
 "Simple" = "Простой";
 "Advanced" = "Расширенный";
-"Short" = "Short";
+"Short" = "Компактный";
 
 /* Menu Bar Actions */
 "Toggle External Blackout" = "Переключить внешний blackout";
@@ -326,3 +326,6 @@
 "Teal" = "Сине-зелёный";
 "Tip: Drag profile cards to reorder them." = "Совет: перетащите карточки профилей, чтобы изменить порядок.";
 "Violet" = "Фиолетовый";
+
+"Trigger monitor connection" = "Триггер подключения монитора";
+"Any External Monitor" = "Любой внешний монитор";

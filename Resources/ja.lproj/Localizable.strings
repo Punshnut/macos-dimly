@@ -37,7 +37,7 @@
 "Mode" = "モード";
 "Simple" = "シンプル";
 "Advanced" = "詳細";
-"Short" = "Short";
+"Short" = "コンパクト";
 
 /* Menu Bar Actions */
 "Toggle External Blackout" = "外部ブラックアウトを切替";
@@ -326,3 +326,6 @@
 "Teal" = "ティール";
 "Tip: Drag profile cards to reorder them." = "ヒント: プロファイルカードをドラッグして並べ替えます。";
 "Violet" = "バイオレット";
+
+"Trigger monitor connection" = "モニター接続時のトリガー";
+"Any External Monitor" = "任意の外部モニター";

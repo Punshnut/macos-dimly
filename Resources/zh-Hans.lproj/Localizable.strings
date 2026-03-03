@@ -37,7 +37,7 @@
 "Mode" = "模式";
 "Simple" = "简单";
 "Advanced" = "高级";
-"Short" = "Short";
+"Short" = "紧凑";
 
 /* Menu Bar Actions */
 "Toggle External Blackout" = "切换外接黑屏";
@@ -326,3 +326,6 @@
 "Teal" = "蓝绿色";
 "Tip: Drag profile cards to reorder them." = "提示：拖动配置卡片可重新排序。";
 "Violet" = "紫罗兰色";
+
+"Trigger monitor connection" = "显示器连接触发条件";
+"Any External Monitor" = "任意外接显示器";

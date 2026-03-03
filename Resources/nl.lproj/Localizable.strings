@@ -37,7 +37,7 @@
 "Mode" = "Modus";
 "Simple" = "Eenvoudig";
 "Advanced" = "Geavanceerd";
-"Short" = "Short";
+"Short" = "Compact";
 
 /* Menu Bar Actions */
 "Toggle External Blackout" = "Externe blackout wisselen";
@@ -326,3 +326,6 @@
 "Teal" = "Blauwgroen";
 "Tip: Drag profile cards to reorder them." = "Tip: sleep profielkaarten om ze opnieuw te ordenen.";
 "Violet" = "Violetkleur";
+
+"Trigger monitor connection" = "Trigger bij monitorverbinding";
+"Any External Monitor" = "Elke externe monitor";

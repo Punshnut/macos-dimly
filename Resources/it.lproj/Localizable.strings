@@ -37,7 +37,7 @@
 "Mode" = "Modalità";
 "Simple" = "Semplice";
 "Advanced" = "Avanzato";
-"Short" = "Short";
+"Short" = "Compatto";
 
 /* Menu Bar Actions */
 "Toggle External Blackout" = "Attiva/disattiva blackout esterni";
@@ -326,3 +326,6 @@
 "Teal" = "Verde acqua";
 "Tip: Drag profile cards to reorder them." = "Suggerimento: trascina le schede profilo per riordinarle.";
 "Violet" = "Viola";
+
+"Trigger monitor connection" = "Attiva alla connessione del monitor";
+"Any External Monitor" = "Qualsiasi monitor esterno";

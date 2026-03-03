@@ -37,7 +37,7 @@
 "Mode" = "Tila";
 "Simple" = "Yksinkertainen";
 "Advanced" = "Edistynyt";
-"Short" = "Short";
+"Short" = "Tiivis";
 
 /* Menu Bar Actions */
 "Toggle External Blackout" = "Vaihda ulkoisten pimennystä";
@@ -326,3 +326,6 @@
 "Teal" = "Sinivihreä";
 "Tip: Drag profile cards to reorder them." = "Vinkki: Järjestä profiilikortit uudelleen vetämällä.";
 "Violet" = "Violetti";
+
+"Trigger monitor connection" = "Laukaise näytön liitännästä";
+"Any External Monitor" = "Mikä tahansa ulkoinen näyttö";

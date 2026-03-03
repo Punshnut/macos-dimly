@@ -1349,6 +1349,15 @@ struct SettingsRootView: View {
                 Toggle(String(localized: "Auto-apply profile when an external display connects"), isOn: $profileManager.automationEnabled)
                     .toggleStyle(.switch)
                     .controlSize(.large)
+                Picker(
+                    String(localized: "Trigger monitor connection"),
+                    selection: $profileManager.automationTriggerTarget
+                ) {
+                    ForEach(automationDisplayOptions(for: profileManager.automationTriggerTarget)) { option in
+                        Text(option.label).tag(option.id)
+                    }
+                }
+                .disabled(profileManager.automationEnabled == false)
                 Picker(String(localized: "Profile to apply"), selection: Binding(
                     get: { profileManager.automationProfileID ?? profileManager.profiles.first?.id },
                     set: { profileManager.automationProfileID = $0 }
@@ -1760,6 +1769,23 @@ struct SettingsRootView: View {
 
         /// Returns picker options for a hotkey target, including stale IDs still referenced in settings.
         private func displayOptions(for binding: HotkeyBinding) -> [DisplayOption] {
+            externalDisplayOptions(includingMissingTarget: binding.target)
+        }
+
+        /// Returns picker options for profile automation trigger target.
+        private func automationDisplayOptions(for target: HotkeyTarget) -> [DisplayOption] {
+            externalDisplayOptions(includingMissingTarget: target)
+                .map { option in
+                    guard option.id == .allExternalDisplays else { return option }
+                    return DisplayOption(
+                        id: option.id,
+                        label: String(localized: "Any External Monitor")
+                    )
+                }
+        }
+
+        /// Returns external display picker options plus stale IDs if the selected target is missing.
+        private func externalDisplayOptions(includingMissingTarget target: HotkeyTarget) -> [DisplayOption] {
             var options: [DisplayOption] = [
                 DisplayOption(id: .allExternalDisplays, label: String(localized: "All External Displays"))
             ]
@@ -1770,10 +1796,10 @@ struct SettingsRootView: View {
                     label: displayOptionLabel(for: display)
                 )
             })
-            if case .display(let id) = binding.target,
-               options.contains(where: { $0.id == binding.target }) == false {
+            if case .display(let id) = target,
+               options.contains(where: { $0.id == target }) == false {
                 let label = String(format: String(localized: "MissingDisplayFormat"), id)
-                options.append(DisplayOption(id: binding.target, label: label))
+                options.append(DisplayOption(id: target, label: label))
             }
             return options
         }

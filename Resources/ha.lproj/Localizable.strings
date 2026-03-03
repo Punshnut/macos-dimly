@@ -37,7 +37,7 @@
 "Mode" = "Yanayi";
 "Simple" = "Sauƙi";
 "Advanced" = "Na ci gaba";
-"Short" = "Short";
+"Short" = "Karami";
 
 /* Menu Bar Actions */
 "Toggle External Blackout" = "Canja damarar duhun allon waje";
@@ -326,3 +326,6 @@
 "Teal" = "Launin teal";
 "Tip: Drag profile cards to reorder them." = "Shawara: Ja katunan profile don sake tsara su.";
 "Violet" = "Launin violet";
+
+"Trigger monitor connection" = "Kunna yayin haɗin monitor";
+"Any External Monitor" = "Duk wani monitor na waje";

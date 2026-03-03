@@ -37,7 +37,7 @@
 "Mode" = "Mód";
 "Simple" = "Simplí";
 "Advanced" = "Casta";
-"Short" = "Short";
+"Short" = "Dlúth";
 
 /* Menu Bar Actions */
 "Toggle External Blackout" = "Scoránaigh dorchadas seachtrach";
@@ -326,3 +326,6 @@
 "Teal" = "Glasghorm";
 "Tip: Drag profile cards to reorder them." = "Leid: Tarraing cártaí próifíle chun iad a athordú.";
 "Violet" = "Corcra";
+
+"Trigger monitor connection" = "Spreag ar nascadh monatóra";
+"Any External Monitor" = "Aon mhonatóir seachtrach";

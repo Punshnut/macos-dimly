@@ -292,6 +292,34 @@ struct ProfileState: Codable {
     var profiles: [DisplayProfile]
     var automationEnabled: Bool
     var automationProfileID: UUID?
+    var automationTriggerTarget: HotkeyTarget
+
+    private enum CodingKeys: String, CodingKey {
+        case profiles
+        case automationEnabled
+        case automationProfileID
+        case automationTriggerTarget
+    }
+
+    init(
+        profiles: [DisplayProfile],
+        automationEnabled: Bool,
+        automationProfileID: UUID?,
+        automationTriggerTarget: HotkeyTarget
+    ) {
+        self.profiles = profiles
+        self.automationEnabled = automationEnabled
+        self.automationProfileID = automationProfileID
+        self.automationTriggerTarget = automationTriggerTarget
+    }
+
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        profiles = try container.decode([DisplayProfile].self, forKey: .profiles)
+        automationEnabled = try container.decode(Bool.self, forKey: .automationEnabled)
+        automationProfileID = try container.decodeIfPresent(UUID.self, forKey: .automationProfileID)
+        automationTriggerTarget = try container.decodeIfPresent(HotkeyTarget.self, forKey: .automationTriggerTarget) ?? .allExternalDisplays
+    }
 }
 
 /// Manages saving/applying display profiles and simple automation on external connect.
@@ -302,6 +330,9 @@ final class ProfileManager: ObservableObject {
         didSet { persist() }
     }
     @Published var automationProfileID: UUID? {
+        didSet { persist() }
+    }
+    @Published var automationTriggerTarget: HotkeyTarget = .allExternalDisplays {
         didSet { persist() }
     }
     @Published var lastAppliedProfileName: String?
@@ -334,6 +365,7 @@ final class ProfileManager: ObservableObject {
         profiles = loaded.profiles
         automationEnabled = loaded.automationEnabled
         automationProfileID = loaded.automationProfileID
+        automationTriggerTarget = loaded.automationTriggerTarget
 
         previousDisplayIDs = Set(displayManager.displays.map(\.stableIdentity))
 
@@ -614,7 +646,7 @@ final class ProfileManager: ObservableObject {
 
     // MARK: - Automation
 
-    /// Triggers automation when new external displays appear.
+    /// Triggers automation when new external displays appear and match the selected trigger target.
     private func handleDisplayChange(_ displays: [DisplayInfo]) {
         let current = Set(displays.map(\.stableIdentity))
         let added = current.subtracting(previousDisplayIDs)
@@ -625,6 +657,16 @@ final class ProfileManager: ObservableObject {
 
         let addedExternals = displays.filter { added.contains($0.stableIdentity) && $0.isExternal }
         guard addedExternals.isEmpty == false else { return }
+
+        let shouldTrigger: Bool = {
+            switch automationTriggerTarget {
+            case .allExternalDisplays:
+                return true
+            case .display(let id):
+                return addedExternals.contains { $0.stableIdentity == id }
+            }
+        }()
+        guard shouldTrigger else { return }
 
         logger.notice("Automation triggered on display connect; applying profile \(profile.name, privacy: .public)")
         apply(profile: profile)
@@ -684,7 +726,8 @@ final class ProfileManager: ObservableObject {
         ProfileState(
             profiles: profiles,
             automationEnabled: automationEnabled,
-            automationProfileID: automationProfileID
+            automationProfileID: automationProfileID,
+            automationTriggerTarget: automationTriggerTarget
         )
     }
 
@@ -693,6 +736,7 @@ final class ProfileManager: ObservableObject {
         profiles = state.profiles
         automationEnabled = state.automationEnabled
         automationProfileID = state.automationProfileID
+        automationTriggerTarget = state.automationTriggerTarget
         persist()
     }
 
@@ -710,12 +754,22 @@ struct ProfileStore {
     func load() -> ProfileState {
         let url = storageURL()
         guard let data = try? Data(contentsOf: url) else {
-            return ProfileState(profiles: [], automationEnabled: false, automationProfileID: nil)
+            return ProfileState(
+                profiles: [],
+                automationEnabled: false,
+                automationProfileID: nil,
+                automationTriggerTarget: .allExternalDisplays
+            )
         }
         do {
             return try JSONDecoder().decode(ProfileState.self, from: data)
         } catch {
-            return ProfileState(profiles: [], automationEnabled: false, automationProfileID: nil)
+            return ProfileState(
+                profiles: [],
+                automationEnabled: false,
+                automationProfileID: nil,
+                automationTriggerTarget: .allExternalDisplays
+            )
         }
     }
 

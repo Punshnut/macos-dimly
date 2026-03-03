@@ -37,7 +37,7 @@
 "Mode" = "முறை";
 "Simple" = "எளியது";
 "Advanced" = "மேம்பட்ட";
-"Short" = "Short";
+"Short" = "சுருக்கமான";
 
 /* Menu Bar Actions */
 "Toggle External Blackout" = "வெளிப்புற கருமையை மாற்று";
@@ -326,3 +326,6 @@
 "Teal" = "நீலப்பச்சை";
 "Tip: Drag profile cards to reorder them." = "குறிப்பு: சுயவிவர அட்டைகளை இழுத்து மறுவரிசைப்படுத்தவும்.";
 "Violet" = "ஊதா";
+
+"Trigger monitor connection" = "மானிட்டர் இணைப்பு தூண்டுதல்";
+"Any External Monitor" = "எந்த வெளிப்புற மானிட்டரும்";

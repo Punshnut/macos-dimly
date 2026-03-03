@@ -37,7 +37,7 @@
 "Mode" = "ሁኔታ";
 "Simple" = "ቀላል";
 "Advanced" = "የላቀ";
-"Short" = "Short";
+"Short" = "አጭር";
 
 /* Menu Bar Actions */
 "Toggle External Blackout" = "ውጫዊ ጥቁርነት ቀይር";
@@ -326,3 +326,6 @@
 "Teal" = "ቲል";
 "Tip: Drag profile cards to reorder them." = "ጠቃሚ ምክር: የፕሮፋይል ካርዶችን በመጎተት እንደገና ያደራጁ።";
 "Violet" = "ቫዮሌት";
+
+"Trigger monitor connection" = "የማሳያ ግንኙነት ማነሳሻ";
+"Any External Monitor" = "ማንኛውም ውጫዊ ማሳያ";

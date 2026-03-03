@@ -37,7 +37,7 @@
 "Mode" = "Läge";
 "Simple" = "Enkelt";
 "Advanced" = "Avancerat";
-"Short" = "Short";
+"Short" = "Kompakt";
 
 /* Menu Bar Actions */
 "Toggle External Blackout" = "Växla extern blackout";
@@ -326,3 +326,6 @@
 "Teal" = "Blågrön";
 "Tip: Drag profile cards to reorder them." = "Tips: Dra profilkort för att ändra ordningen.";
 "Violet" = "Violett";
+
+"Trigger monitor connection" = "Utlös vid skärmanslutning";
+"Any External Monitor" = "Valfri extern skärm";

@@ -37,7 +37,7 @@
 "Mode" = "Mod";
 "Simple" = "Basit";
 "Advanced" = "Gelişmiş";
-"Short" = "Short";
+"Short" = "Kompakt";
 
 /* Menu Bar Actions */
 "Toggle External Blackout" = "Harici karartmayı aç/kapat";
@@ -326,3 +326,6 @@
 "Teal" = "Camgöbeği";
 "Tip: Drag profile cards to reorder them." = "İpucu: Profil kartlarını sürükleyerek yeniden sıralayın.";
 "Violet" = "Menekşe";
+
+"Trigger monitor connection" = "Monitör bağlantı tetikleyicisi";
+"Any External Monitor" = "Herhangi bir harici monitör";

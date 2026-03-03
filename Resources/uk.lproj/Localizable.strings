@@ -37,7 +37,7 @@
 "Mode" = "Режим";
 "Simple" = "Простий";
 "Advanced" = "Розширений";
-"Short" = "Short";
+"Short" = "Компактний";
 
 /* Menu Bar Actions */
 "Toggle External Blackout" = "Перемкнути зовнішнє затемнення";
@@ -326,3 +326,6 @@
 "Teal" = "Бірюзовий";
 "Tip: Drag profile cards to reorder them." = "Порада: перетягуйте картки профілів, щоб змінити порядок.";
 "Violet" = "Фіолетовий";
+
+"Trigger monitor connection" = "Тригер підключення монітора";
+"Any External Monitor" = "Будь-який зовнішній монітор";
