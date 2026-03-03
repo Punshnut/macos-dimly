@@ -11,7 +11,7 @@ struct MenuBarContentView: View {
         case window
     }
 
-    private enum LayoutMode: Equatable {
+    private enum LayoutMode: Hashable {
         case simple
         case advanced
         case short
@@ -54,41 +54,33 @@ struct MenuBarContentView: View {
     @State private var smartButtonDragStartFramesByProfileID: [UUID: CGRect] = [:]
     @State private var smartButtonDragTranslation: CGSize = .zero
     @State private var smartButtonDropTarget: SmartButtonDropTarget?
+    @State private var smartButtonFlashIDs: Set<UUID> = []
+    @State private var smartButtonPulseIDs: Set<UUID> = []
+    @State private var isModeTransitioning = false
+    @State private var modeTransitionToken: Int = 0
+    @State private var renderedLayoutMode: LayoutMode?
+    @State private var modeHeightsByLayout: [LayoutMode: CGFloat] = [:]
+    @State private var modeContainerHeight: CGFloat?
+    @State private var modeContentScaleY: CGFloat = 1
+    @State private var modeContentOpacity: Double = 1
     private let builtinBrightnessRefreshTimer = Timer.publish(every: 0.4, on: .main, in: .common).autoconnect()
     private let smartButtonsGridCoordinateSpace = "smartButtonsGrid"
     @Namespace private var modeSwitchNamespace
     @Environment(\.colorScheme) private var colorScheme
+    @Environment(\.accessibilityReduceMotion) private var reduceMotion
 
     /// Primary menu bar layout rendered inside the status item window.
     var body: some View {
         VStack(alignment: .leading, spacing: sectionSpacing) {
             modeSwitchRow
-            switch activeLayoutMode {
-            case .simple:
-                quickActionsSection(includeShowNumbers: false)
-                smartButtonsSection(compact: false)
-                if !menuBarDisplays.isEmpty {
-                    externalDisplaysSimpleSection
-                }
-                appControlsSimpleSection
-            case .advanced:
-                headerCard
-                quickActionsSection(includeShowNumbers: true)
-                smartButtonsSection(compact: true)
-                if !menuBarDisplays.isEmpty {
-                    externalDisplaysSection
-                }
-                profilesSection
-                appControlsSection
-            case .short:
-                quickActionsSection(includeShowNumbers: false)
-                smartButtonsSection(compact: false)
-                shortModeAppActionsSection
-            }
+            modeContent
         }
         .padding(12)
         .frame(minWidth: 300)
         .onAppear {
+            if renderedLayoutMode == nil {
+                renderedLayoutMode = activeLayoutMode
+            }
             activateWindowIfNeeded()
             refreshBuiltinBrightnessCache()
             if presentation == .menuBar {
@@ -106,6 +98,148 @@ struct MenuBarContentView: View {
     }
 
     private var sectionSpacing: CGFloat { 12 }
+
+    private var quickAnimation: Animation? {
+        reduceMotion ? nil : DimlyMotion.quickSpring
+    }
+
+    private var standardAnimation: Animation? {
+        (reduceMotion || isModeTransitioning) ? nil : DimlyMotion.standardSpring
+    }
+
+    private var brightnessPanelTransition: AnyTransition {
+        if reduceMotion {
+            return .opacity
+        }
+        return .asymmetric(
+            insertion: .opacity.combined(with: .move(edge: .top)),
+            removal: .opacity
+        )
+    }
+
+    private func runMotion(_ animation: Animation, updates: @escaping () -> Void) {
+        if reduceMotion {
+            updates()
+        } else {
+            withAnimation(animation, updates)
+        }
+    }
+
+    private func flashSmartButton(_ profileID: UUID) {
+        smartButtonFlashIDs.remove(profileID)
+        smartButtonPulseIDs.remove(profileID)
+        guard reduceMotion == false else { return }
+        runMotion(DimlyMotion.quickSpring) {
+            smartButtonFlashIDs.insert(profileID)
+            smartButtonPulseIDs.insert(profileID)
+        }
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.12) {
+            runMotion(DimlyMotion.gentleEaseOut) {
+                smartButtonFlashIDs.remove(profileID)
+            }
+        }
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.34) {
+            runMotion(DimlyMotion.standardSpring) {
+                smartButtonPulseIDs.remove(profileID)
+            }
+        }
+    }
+
+    private func applySmartButton(_ profile: DisplayProfile) {
+        flashSmartButton(profile.id)
+        // Defer one runloop so the tap feedback paints before heavy profile application work.
+        DispatchQueue.main.async {
+            profileManager.apply(profile: profile)
+        }
+    }
+
+    @ViewBuilder
+    private func animatedSymbol<Value: Equatable>(
+        _ systemName: String,
+        size: CGFloat,
+        weight: Font.Weight = .semibold,
+        value: Value
+    ) -> some View {
+        let base = Image(systemName: systemName)
+            .font(.system(size: size, weight: weight))
+        if reduceMotion {
+            base
+        } else {
+            base
+                .contentTransition(.symbolEffect(.replace))
+                .symbolEffect(.bounce, value: value)
+        }
+    }
+
+    private var modeContent: some View {
+        let mode = renderedLayoutMode ?? activeLayoutMode
+        let baseContent = modeContentBody(for: mode)
+            .background(
+                GeometryReader { geometry in
+                    Color.clear.preference(key: ModeContentHeightPreferenceKey.self, value: [mode: geometry.size.height])
+                }
+            )
+            .scaleEffect(x: 1, y: modeContentScaleY, anchor: .top)
+            .opacity(modeContentOpacity)
+            .frame(maxWidth: .infinity, alignment: .topLeading)
+            .frame(height: modeContainerHeight, alignment: .top)
+            .onPreferenceChange(ModeContentHeightPreferenceKey.self) { heights in
+                modeHeightsByLayout.merge(heights) { _, new in new }
+                guard isModeTransitioning else { return }
+                guard let measured = heights[mode] else { return }
+                runMotion(DimlyMotion.standardSpring) {
+                    modeContainerHeight = measured
+                }
+            }
+        if isModeTransitioning {
+            return AnyView(baseContent.clipped())
+        }
+        return AnyView(baseContent)
+    }
+
+    @ViewBuilder
+    private func modeContentBody(for mode: LayoutMode) -> some View {
+        switch mode {
+        case .simple:
+            simpleModeContent
+        case .advanced:
+            advancedModeContent
+        case .short:
+            shortModeContent
+        }
+    }
+
+    private var simpleModeContent: some View {
+        VStack(alignment: .leading, spacing: sectionSpacing) {
+            quickActionsSection(includeShowNumbers: false)
+            smartButtonsSection(compact: false)
+            if !menuBarDisplays.isEmpty {
+                externalDisplaysSimpleSection
+            }
+            appControlsSimpleSection
+        }
+    }
+
+    private var advancedModeContent: some View {
+        VStack(alignment: .leading, spacing: sectionSpacing) {
+            headerCard
+            quickActionsSection(includeShowNumbers: true)
+            smartButtonsSection(compact: true)
+            if !menuBarDisplays.isEmpty {
+                externalDisplaysSection
+            }
+            profilesSection
+            appControlsSection
+        }
+    }
+
+    private var shortModeContent: some View {
+        VStack(alignment: .leading, spacing: sectionSpacing) {
+            quickActionsSection(includeShowNumbers: false)
+            smartButtonsSection(compact: false)
+            shortModeAppActionsSection
+        }
+    }
 
     private var neutralPrimaryText: Color {
         colorScheme == .dark ? Color.white.opacity(0.95) : Color.black.opacity(0.86)
@@ -252,7 +386,7 @@ struct MenuBarContentView: View {
                     }
                 }
         }
-        .buttonStyle(.plain)
+        .buttonStyle(FluentPressButtonStyle(pressedScale: 0.985, pressedOpacity: 0.95))
     }
 
     /// Cached convenience value for the current menu bar layout mode.
@@ -274,6 +408,13 @@ struct MenuBarContentView: View {
     /// Switches layout mode while preserving expanded brightness rows when safe.
     private func setLayoutMode(_ mode: LayoutMode) {
         guard activeLayoutMode != mode else { return }
+        modeTransitionToken += 1
+        let transitionToken = modeTransitionToken
+        isModeTransitioning = true
+        let currentMode = renderedLayoutMode ?? activeLayoutMode
+        if let currentHeight = modeHeightsByLayout[currentMode] {
+            modeContainerHeight = currentHeight
+        }
         let previouslyExpanded = settingsStore.settings.brightnessPanelExpandedDisplayIDs
 
         // Avoid SwiftUI transition crashes when switching layout branches with expanded
@@ -287,7 +428,7 @@ struct MenuBarContentView: View {
                 }
             }
         }
-        withAnimation(.spring(response: 0.25, dampingFraction: 0.85)) {
+        if reduceMotion {
             settingsStore.update { settings in
                 switch mode {
                 case .simple:
@@ -298,15 +439,58 @@ struct MenuBarContentView: View {
                     settings.menuBarLayoutMode = .short
                 }
             }
+            renderedLayoutMode = mode
+            modeContainerHeight = nil
+            modeContentScaleY = 1
+            modeContentOpacity = 1
+            isModeTransitioning = false
+        } else {
+            runMotion(.easeOut(duration: 0.1)) {
+                modeContentScaleY = 0.94
+                modeContentOpacity = 0.82
+            }
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.09) {
+                guard self.modeTransitionToken == transitionToken else { return }
+
+                var transaction = Transaction()
+                transaction.animation = nil
+                withTransaction(transaction) {
+                    settingsStore.update { settings in
+                        switch mode {
+                        case .simple:
+                            settings.menuBarLayoutMode = .simple
+                        case .advanced:
+                            settings.menuBarLayoutMode = .advanced
+                        case .short:
+                            settings.menuBarLayoutMode = .short
+                        }
+                    }
+                    renderedLayoutMode = mode
+                }
+
+                let targetHeight = modeHeightsByLayout[mode]
+                runMotion(DimlyMotion.standardSpring) {
+                    if let targetHeight {
+                        modeContainerHeight = targetHeight
+                    }
+                    modeContentScaleY = 1
+                    modeContentOpacity = 1
+                }
+            }
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.34) {
+                guard self.modeTransitionToken == transitionToken else { return }
+                self.isModeTransitioning = false
+                self.modeContainerHeight = nil
+            }
         }
 
         guard previouslyExpanded.isEmpty == false else { return }
         // Restore expanded rows after the mode branch transition has settled.
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.14) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
             let liveIDs = Set(self.menuBarDisplays.map(\.stableIdentity))
             let restored = previouslyExpanded.filter { liveIDs.contains($0) }
             guard restored.isEmpty == false else { return }
-            withAnimation(.spring(response: 0.28, dampingFraction: 0.84)) {
+            runMotion(DimlyMotion.standardSpring) {
                 settingsStore.update { settings in
                     // Keep user intent if mode changed again before restore fired.
                     guard layoutMode(for: settings) == mode else { return }
@@ -435,13 +619,18 @@ struct MenuBarContentView: View {
     /// Small badge highlighting blackout status.
     private var statusPill: some View {
         let isBlackoutActive = blackoutActiveCount > 0
-        return Text(isBlackoutActive ? String(localized: "Blackout On") : String(localized: "Ready"))
-            .font(.caption2.weight(.semibold))
-            .padding(.horizontal, 8)
-            .padding(.vertical, 4)
-            .background(isBlackoutActive ? Color.red.opacity(0.18) : Color.green.opacity(0.18))
-            .foregroundStyle(isBlackoutActive ? .red : .green)
-            .clipShape(Capsule())
+        return HStack(spacing: 4) {
+            animatedSymbol(isBlackoutActive ? "moon.fill" : "sparkles", size: 9, value: isBlackoutActive)
+            Text(isBlackoutActive ? String(localized: "Blackout On") : String(localized: "Ready"))
+                .font(.caption2.weight(.semibold))
+        }
+        .padding(.horizontal, 8)
+        .padding(.vertical, 4)
+        .background(isBlackoutActive ? Color.red.opacity(0.18) : Color.green.opacity(0.18))
+        .foregroundStyle(isBlackoutActive ? .red : .green)
+        .clipShape(Capsule())
+        .scaleEffect(isBlackoutActive && !reduceMotion ? 1.03 : 1)
+        .animation(quickAnimation, value: isBlackoutActive)
     }
 
     /// Optional list of non-visible displays (sleep/blackout).
@@ -637,8 +826,8 @@ struct MenuBarContentView: View {
                 .onPreferenceChange(SmartButtonFramePreferenceKey.self) { frames in
                     smartButtonFramesByProfileID = frames
                 }
-                .animation(.spring(response: 0.16, dampingFraction: 0.9), value: smartButtonDropTarget)
-                .animation(.spring(response: 0.24, dampingFraction: 0.84), value: profileManager.profiles.map(\.id))
+                .animation(quickAnimation, value: smartButtonDropTarget)
+                .animation(draggedSmartButtonProfileID == nil ? standardAnimation : nil, value: profileManager.profiles.map(\.id))
             }
         }
     }
@@ -647,39 +836,84 @@ struct MenuBarContentView: View {
     private func smartButton(_ profile: DisplayProfile, compact: Bool) -> some View {
         let isColorless = settingsStore.settings.menuBarSmartButtonsColorlessMode
         let minHeight: CGFloat = compact ? 24 : 40
+        let cornerRadius: CGFloat = compact ? 10 : 12
+        let flashOpacity: Double = colorScheme == .dark ? 0.14 : 0.24
         let titleColor: Color = {
             if isColorless {
                 return colorScheme == .dark ? Color.white.opacity(0.92) : Color.black.opacity(0.64)
             }
             return Color.white.opacity(colorScheme == .dark ? 0.95 : 0.9)
         }()
+        let label = smartButtonLabel(
+            profile: profile,
+            compact: compact,
+            titleColor: titleColor,
+            isColorless: isColorless,
+            cornerRadius: cornerRadius,
+            minHeight: minHeight,
+            flashOpacity: flashOpacity
+        )
 
-        return Text(profile.name)
-            .font(.system(size: compact ? 8 : 9.5, weight: .semibold))
-            .lineLimit(compact ? 1 : 2)
-            .minimumScaleFactor(0.72)
-            .multilineTextAlignment(.center)
-            .foregroundStyle(titleColor)
-            .frame(maxWidth: .infinity)
-            .frame(maxWidth: .infinity, minHeight: minHeight)
-            .padding(.vertical, compact ? 0 : 2)
-            .padding(.horizontal, compact ? 2 : 3)
-            .background(
-                RoundedRectangle(cornerRadius: compact ? 10 : 12, style: .continuous)
-                    .fill(isColorless ? AnyShapeStyle(smartButtonNeutralFill) : AnyShapeStyle(smartButtonGradient(for: profile)))
-            )
-            .overlay(
-                RoundedRectangle(cornerRadius: compact ? 10 : 12, style: .continuous)
-                    .stroke(
-                        isColorless ? neutralStroke.opacity(compact ? 0.8 : 0.7) : Color.white.opacity(colorScheme == .dark ? 0.19 : 0.28),
-                        lineWidth: 1
-                    )
-            )
-            .contentShape(RoundedRectangle(cornerRadius: compact ? 10 : 12, style: .continuous))
-            .onTapGesture {
-                profileManager.apply(profile: profile)
-            }
+        return Button {
+            applySmartButton(profile)
+        } label: {
+            label
+        }
+        .buttonStyle(FluentPressButtonStyle(pressedScale: compact ? 0.962 : 0.952, pressedOpacity: 0.88))
+        .dimlyHoverLift(enabled: draggedSmartButtonProfileID == nil, hoverScale: compact ? 1.045 : 1.06, shadowOpacity: 0.14)
         .help(profile.name)
+    }
+
+    private func smartButtonLabel(
+        profile: DisplayProfile,
+        compact: Bool,
+        titleColor: Color,
+        isColorless: Bool,
+        cornerRadius: CGFloat,
+        minHeight: CGFloat,
+        flashOpacity: Double
+    ) -> AnyView {
+        let isFlashing = smartButtonFlashIDs.contains(profile.id)
+        let isPulsing = smartButtonPulseIDs.contains(profile.id)
+        let fillStyle = isColorless ? AnyShapeStyle(smartButtonNeutralFill) : AnyShapeStyle(smartButtonGradient(for: profile))
+        let strokeColor = isColorless ? neutralStroke.opacity(compact ? 0.8 : 0.7) : Color.white.opacity(colorScheme == .dark ? 0.19 : 0.28)
+        let pulseGlowOpacity = isPulsing ? (colorScheme == .dark ? 0.24 : 0.12) : 0
+
+        return AnyView(
+            Text(profile.name)
+                .font(.system(size: compact ? 8 : 9.5, weight: .semibold))
+                .lineLimit(compact ? 1 : 2)
+                .minimumScaleFactor(0.72)
+                .multilineTextAlignment(.center)
+                .foregroundStyle(titleColor)
+                .frame(maxWidth: .infinity)
+                .frame(maxWidth: .infinity, minHeight: minHeight)
+                .padding(.vertical, compact ? 0 : 2)
+                .padding(.horizontal, compact ? 2 : 3)
+                .background(
+                    RoundedRectangle(cornerRadius: cornerRadius, style: .continuous)
+                        .fill(fillStyle)
+                )
+                .overlay(
+                    RoundedRectangle(cornerRadius: cornerRadius, style: .continuous)
+                        .stroke(strokeColor, lineWidth: 1)
+                )
+                .overlay(
+                    RoundedRectangle(cornerRadius: cornerRadius, style: .continuous)
+                        .fill(Color.white.opacity(isFlashing ? flashOpacity : 0))
+                        .blendMode(.plusLighter)
+                )
+                .scaleEffect(isPulsing ? 1.018 : 1)
+                .shadow(
+                    color: Color.white.opacity(pulseGlowOpacity),
+                    radius: isPulsing ? 8 : 0,
+                    x: 0,
+                    y: 0
+                )
+                .animation(reduceMotion ? nil : DimlyMotion.gentleEaseOut, value: isFlashing)
+                .animation(reduceMotion ? nil : DimlyMotion.standardSpring, value: isPulsing)
+                .contentShape(RoundedRectangle(cornerRadius: cornerRadius, style: .continuous))
+        )
     }
 
     /// Fixed-size floating preview tile shown while dragging.
@@ -753,7 +987,7 @@ struct MenuBarContentView: View {
     private func applySmartButtonDropIfNeeded() {
         guard let draggedID = draggedSmartButtonProfileID,
               let smartButtonDropTarget else { return }
-        withAnimation(.spring(response: 0.24, dampingFraction: 0.84)) {
+        runMotion(DimlyMotion.standardSpring) {
             switch smartButtonDropTarget {
             case .before(let targetID):
                 profileManager.moveProfile(draggedID, before: targetID)
@@ -980,10 +1214,10 @@ struct MenuBarContentView: View {
                 displayRow(display)
             }
         }
-        .animation(.spring(response: 0.25, dampingFraction: 0.82), value: orderedExternalIDs())
-        .animation(.spring(response: 0.25, dampingFraction: 0.82), value: orderedInternalIDs())
-        .animation(.spring(response: 0.25, dampingFraction: 0.82), value: orderedMergedIDs())
-        .animation(.spring(response: 0.25, dampingFraction: 0.82), value: settingsStore.settings.brightnessPanelExpandedDisplayIDs)
+        .animation(standardAnimation, value: orderedExternalIDs())
+        .animation(standardAnimation, value: orderedInternalIDs())
+        .animation(standardAnimation, value: orderedMergedIDs())
+        .animation(standardAnimation, value: settingsStore.settings.brightnessPanelExpandedDisplayIDs)
     }
 
     /// Simplified per-display list for simple mode.
@@ -994,10 +1228,10 @@ struct MenuBarContentView: View {
                 displayRowSimple(display)
             }
         }
-        .animation(.spring(response: 0.25, dampingFraction: 0.82), value: orderedExternalIDs())
-        .animation(.spring(response: 0.25, dampingFraction: 0.82), value: orderedInternalIDs())
-        .animation(.spring(response: 0.25, dampingFraction: 0.82), value: orderedMergedIDs())
-        .animation(.spring(response: 0.25, dampingFraction: 0.82), value: settingsStore.settings.brightnessPanelExpandedDisplayIDs)
+        .animation(standardAnimation, value: orderedExternalIDs())
+        .animation(standardAnimation, value: orderedInternalIDs())
+        .animation(standardAnimation, value: orderedMergedIDs())
+        .animation(standardAnimation, value: settingsStore.settings.brightnessPanelExpandedDisplayIDs)
     }
 
     /// Renders a single display row with actions and status.
@@ -1019,6 +1253,7 @@ struct MenuBarContentView: View {
             displayRowHeader(display, includeMenu: includeMenu, isExpanded: isExpanded)
             if isExpanded {
                 brightnessDropdown(for: display)
+                    .transition(brightnessPanelTransition)
             }
         }
         .padding(8)
@@ -1049,8 +1284,11 @@ struct MenuBarContentView: View {
                     Text(name)
                         .font(.subheadline.weight(.semibold))
                         .foregroundStyle(neutralPrimaryText)
-                    Image(systemName: isExpanded ? "chevron.down.circle.fill" : "chevron.right.circle")
-                        .font(.caption)
+                    animatedSymbol(
+                        isExpanded ? "chevron.down.circle.fill" : "chevron.right.circle",
+                        size: 12,
+                        value: isExpanded
+                    )
                         .foregroundStyle(neutralTertiaryText)
                     if !isExpanded {
                         Text(brightnessText)
@@ -1110,8 +1348,7 @@ struct MenuBarContentView: View {
                             copyDisplayID(display.stableIdentity)
                         }
                     } label: {
-                        Image(systemName: "ellipsis")
-                            .font(.system(size: 13, weight: .semibold))
+                        animatedSymbol("ellipsis", size: 13, value: activeLayoutMode)
                             .foregroundStyle(neutralSecondaryText)
                             .frame(width: 26, height: 26)
                             .background(
@@ -1121,6 +1358,7 @@ struct MenuBarContentView: View {
                     }
                     .menuStyle(.borderlessButton)
                     .menuIndicator(.hidden)
+                    .buttonStyle(FluentPressButtonStyle(pressedScale: 0.9, pressedOpacity: 0.84))
                 }
             }
         }
@@ -1171,11 +1409,10 @@ struct MenuBarContentView: View {
                 Button {
                     nudgeBrightness(for: display, delta: -1)
                 } label: {
-                    Image(systemName: "chevron.left")
-                        .font(.system(size: 10, weight: .semibold))
+                    animatedSymbol("chevron.left", size: 10, value: level)
                         .frame(width: 18, height: 18)
                 }
-                .buttonStyle(.plain)
+                .buttonStyle(FluentPressButtonStyle(pressedScale: 0.84, pressedOpacity: 0.84))
                 .foregroundStyle(neutralSecondaryText)
                 .help(String(localized: "Decrease brightness"))
 
@@ -1193,11 +1430,10 @@ struct MenuBarContentView: View {
                 Button {
                     nudgeBrightness(for: display, delta: 1)
                 } label: {
-                    Image(systemName: "chevron.right")
-                        .font(.system(size: 10, weight: .semibold))
+                    animatedSymbol("chevron.right", size: 10, value: level)
                         .frame(width: 18, height: 18)
                 }
-                .buttonStyle(.plain)
+                .buttonStyle(FluentPressButtonStyle(pressedScale: 0.84, pressedOpacity: 0.84))
                 .foregroundStyle(neutralSecondaryText)
                 .help(String(localized: "Increase brightness"))
             }
@@ -1225,8 +1461,7 @@ struct MenuBarContentView: View {
                 Button {
                     engine.toggleDisplayBlackout(display: display)
                 } label: {
-                    Image(systemName: icon)
-                        .font(.system(size: 13, weight: .semibold))
+                    animatedSymbol(icon, size: 13, value: isBlackoutActive)
                         .foregroundStyle(tint)
                         .frame(width: 26, height: 26)
                         .background(
@@ -1235,6 +1470,8 @@ struct MenuBarContentView: View {
                         )
                 }
                 .buttonStyle(StaticIconButtonStyle())
+                .scaleEffect(isBlackoutActive && !reduceMotion ? 1.03 : 1)
+                .animation(quickAnimation, value: isBlackoutActive)
                 .help(label)
             )
         }
@@ -1259,8 +1496,7 @@ struct MenuBarContentView: View {
                     engine.standby(display: display)
                 }
             } label: {
-                Image(systemName: icon)
-                    .font(.system(size: 13, weight: .semibold))
+                animatedSymbol(icon, size: 13, value: isAsleep)
                     .foregroundStyle(canControl ? tint : .secondary)
                     .frame(width: 26, height: 26)
                     .background(
@@ -1268,7 +1504,9 @@ struct MenuBarContentView: View {
                             .fill((canControl ? tint : .secondary).opacity(0.12))
                     )
             }
-            .buttonStyle(.plain)
+            .buttonStyle(FluentPressButtonStyle(pressedScale: 0.88, pressedOpacity: 0.82))
+            .scaleEffect(isAsleep && !reduceMotion ? 1.03 : 1)
+            .animation(quickAnimation, value: isAsleep)
             .disabled(!canControl)
             .help(label)
         )
@@ -1296,11 +1534,10 @@ struct MenuBarContentView: View {
                     moveInternalDisplayUp(display.stableIdentity)
                 }
             } label: {
-                Image(systemName: "chevron.up")
-                    .font(.system(size: 10, weight: .semibold))
+                animatedSymbol("chevron.up", size: 10, value: order)
                     .frame(width: 18, height: 12)
             }
-            .buttonStyle(.plain)
+            .buttonStyle(FluentPressButtonStyle(pressedScale: 0.84, pressedOpacity: 0.82))
             .disabled(!canMoveUp)
 
             Button {
@@ -1312,11 +1549,10 @@ struct MenuBarContentView: View {
                     moveInternalDisplayDown(display.stableIdentity)
                 }
             } label: {
-                Image(systemName: "chevron.down")
-                    .font(.system(size: 10, weight: .semibold))
+                animatedSymbol("chevron.down", size: 10, value: order)
                     .frame(width: 18, height: 12)
             }
-            .buttonStyle(.plain)
+            .buttonStyle(FluentPressButtonStyle(pressedScale: 0.84, pressedOpacity: 0.82))
             .disabled(!canMoveDown)
         }
         .foregroundStyle(neutralSecondaryText)
@@ -1494,7 +1730,8 @@ struct MenuBarContentView: View {
                         .stroke(neutralStroke.opacity(0.9), lineWidth: 0.8)
                 )
         }
-        .buttonStyle(.plain)
+        .buttonStyle(FluentPressButtonStyle(pressedScale: 0.9, pressedOpacity: 0.84))
+        .dimlyHoverLift(hoverScale: 1.04, shadowOpacity: 0.08)
         .help(String(localized: "Settings..."))
     }
 
@@ -1516,7 +1753,8 @@ struct MenuBarContentView: View {
                         .stroke(neutralStroke.opacity(0.9), lineWidth: 0.8)
                 )
         }
-        .buttonStyle(.plain)
+        .buttonStyle(FluentPressButtonStyle(pressedScale: 0.9, pressedOpacity: 0.84))
+        .dimlyHoverLift(hoverScale: 1.04, shadowOpacity: 0.08)
         .help(String(localized: "Check for Updates..."))
     }
 
@@ -1580,11 +1818,13 @@ struct MenuBarContentView: View {
     /// Toggles the persisted expansion state for a display's brightness dropdown.
     private func toggleBrightnessPanel(for display: DisplayInfo) {
         let isExpanding = isBrightnessPanelExpanded(for: display) == false
-        settingsStore.update { settings in
-            if let index = settings.brightnessPanelExpandedDisplayIDs.firstIndex(of: display.stableIdentity) {
-                settings.brightnessPanelExpandedDisplayIDs.remove(at: index)
-            } else {
-                settings.brightnessPanelExpandedDisplayIDs.append(display.stableIdentity)
+        runMotion(DimlyMotion.standardSpring) {
+            settingsStore.update { settings in
+                if let index = settings.brightnessPanelExpandedDisplayIDs.firstIndex(of: display.stableIdentity) {
+                    settings.brightnessPanelExpandedDisplayIDs.remove(at: index)
+                } else {
+                    settings.brightnessPanelExpandedDisplayIDs.append(display.stableIdentity)
+                }
             }
         }
         if display.isBuiltin && isExpanding {
@@ -1777,7 +2017,7 @@ struct MenuBarContentView: View {
               let toIndex = order.firstIndex(of: targetID),
               fromIndex != toIndex else { return }
         order.swapAt(fromIndex, toIndex)
-        withAnimation(.spring(response: 0.25, dampingFraction: 0.82)) {
+        runMotion(DimlyMotion.standardSpring) {
             settingsStore.update { settings in
                 settings.externalDisplayOrder = order
             }
@@ -1789,7 +2029,7 @@ struct MenuBarContentView: View {
         var order = orderedExternalIDs()
         guard let index = order.firstIndex(of: id), index > 0 else { return }
         order.swapAt(index, index - 1)
-        withAnimation(.spring(response: 0.25, dampingFraction: 0.82)) {
+        runMotion(DimlyMotion.standardSpring) {
             settingsStore.update { settings in
                 settings.externalDisplayOrder = order
             }
@@ -1801,7 +2041,7 @@ struct MenuBarContentView: View {
         var order = orderedExternalIDs()
         guard let index = order.firstIndex(of: id), index < (order.count - 1) else { return }
         order.swapAt(index, index + 1)
-        withAnimation(.spring(response: 0.25, dampingFraction: 0.82)) {
+        runMotion(DimlyMotion.standardSpring) {
             settingsStore.update { settings in
                 settings.externalDisplayOrder = order
             }
@@ -1813,7 +2053,7 @@ struct MenuBarContentView: View {
         var order = orderedInternalIDs()
         guard let index = order.firstIndex(of: id), index > 0 else { return }
         order.swapAt(index, index - 1)
-        withAnimation(.spring(response: 0.25, dampingFraction: 0.82)) {
+        runMotion(DimlyMotion.standardSpring) {
             settingsStore.update { settings in
                 settings.internalDisplayOrder = order
             }
@@ -1825,7 +2065,7 @@ struct MenuBarContentView: View {
         var order = orderedInternalIDs()
         guard let index = order.firstIndex(of: id), index < (order.count - 1) else { return }
         order.swapAt(index, index + 1)
-        withAnimation(.spring(response: 0.25, dampingFraction: 0.82)) {
+        runMotion(DimlyMotion.standardSpring) {
             settingsStore.update { settings in
                 settings.internalDisplayOrder = order
             }
@@ -1837,7 +2077,7 @@ struct MenuBarContentView: View {
         var order = orderedMergedIDs()
         guard let index = order.firstIndex(of: id), index > 0 else { return }
         order.swapAt(index, index - 1)
-        withAnimation(.spring(response: 0.25, dampingFraction: 0.82)) {
+        runMotion(DimlyMotion.standardSpring) {
             settingsStore.update { settings in
                 settings.mergedDisplayOrder = order
             }
@@ -1849,7 +2089,7 @@ struct MenuBarContentView: View {
         var order = orderedMergedIDs()
         guard let index = order.firstIndex(of: id), index < (order.count - 1) else { return }
         order.swapAt(index, index + 1)
-        withAnimation(.spring(response: 0.25, dampingFraction: 0.82)) {
+        runMotion(DimlyMotion.standardSpring) {
             settingsStore.update { settings in
                 settings.mergedDisplayOrder = order
             }
@@ -1949,6 +2189,14 @@ struct MenuBarContentView: View {
             value.merge(nextValue()) { _, new in new }
         }
     }
+
+    private struct ModeContentHeightPreferenceKey: PreferenceKey {
+        static let defaultValue: [LayoutMode: CGFloat] = [:]
+
+        static func reduce(value: inout [LayoutMode: CGFloat], nextValue: () -> [LayoutMode: CGFloat]) {
+            value.merge(nextValue()) { _, new in new }
+        }
+    }
 }
 
 private extension CGRect {
@@ -1997,7 +2245,12 @@ private extension Array where Element == CGFloat {
 
 /// Button style that keeps icon colors stable during pressed state (no accent flash).
 private struct StaticIconButtonStyle: ButtonStyle {
+    @Environment(\.accessibilityReduceMotion) private var reduceMotion
+
     func makeBody(configuration: Configuration) -> some View {
         configuration.label
+            .scaleEffect(configuration.isPressed && !reduceMotion ? 0.9 : 1)
+            .opacity(configuration.isPressed ? 0.84 : 1)
+            .animation(reduceMotion ? nil : DimlyMotion.quickSpring, value: configuration.isPressed)
     }
 }

@@ -314,7 +314,7 @@ struct SettingsRootView: View {
                                 .font(.system(size: 10, weight: .semibold))
                                 .frame(width: 18, height: 18)
                         }
-                        .buttonStyle(.plain)
+                        .buttonStyle(FluentPressButtonStyle(pressedScale: 0.84, pressedOpacity: 0.82))
                         .foregroundStyle(.secondary)
                         .help(String(localized: "Decrease brightness"))
 
@@ -336,7 +336,7 @@ struct SettingsRootView: View {
                                 .font(.system(size: 10, weight: .semibold))
                                 .frame(width: 18, height: 18)
                         }
-                        .buttonStyle(.plain)
+                        .buttonStyle(FluentPressButtonStyle(pressedScale: 0.84, pressedOpacity: 0.82))
                         .foregroundStyle(.secondary)
                         .help(String(localized: "Increase brightness"))
                     }
@@ -515,6 +515,7 @@ struct SettingsRootView: View {
         let renameProfile: (DisplayProfile) -> Void
         let showIntroAgain: () -> Void
         let displayRow: (DisplayInfo) -> AnyView
+        @Environment(\.accessibilityReduceMotion) private var reduceMotion
         @State private var includeGeneralSettings = true
         @State private var includeMonitorSettings = true
         @State private var draggedProfileID: UUID?
@@ -523,6 +524,22 @@ struct SettingsRootView: View {
         @State private var profileDragStartFramesByID: [UUID: CGRect] = [:]
         @State private var profileDragTranslation: CGSize = .zero
         private let profileGridCoordinateSpace = "settings-profiles-grid-coordinate-space"
+
+        private var quickAnimation: Animation? {
+            reduceMotion ? nil : DimlyMotion.quickSpring
+        }
+
+        private var standardAnimation: Animation? {
+            reduceMotion ? nil : DimlyMotion.standardSpring
+        }
+
+        private func runMotion(_ animation: Animation, updates: @escaping () -> Void) {
+            if reduceMotion {
+                updates()
+            } else {
+                withAnimation(animation, updates)
+            }
+        }
 
         var body: some View {
             switch selection {
@@ -931,8 +948,8 @@ struct SettingsRootView: View {
                         .onPreferenceChange(ProfileTileFramePreferenceKey.self) { frames in
                             profileFramesByID = frames
                         }
-                        .animation(.spring(response: 0.18, dampingFraction: 0.88), value: profileDropTarget)
-                        .animation(.spring(response: 0.24, dampingFraction: 0.84), value: profileManager.profiles.map(\.id))
+                        .animation(quickAnimation, value: profileDropTarget)
+                        .animation(draggedProfileID == nil ? standardAnimation : nil, value: profileManager.profiles.map(\.id))
                         Text(String(localized: "Tip: Drag profile cards to reorder them."))
                             .font(.caption)
                             .foregroundStyle(.secondary)
@@ -962,7 +979,7 @@ struct SettingsRootView: View {
                     Spacer(minLength: 6)
                     VStack(spacing: 3) {
                         Button {
-                            withAnimation(.spring(response: 0.24, dampingFraction: 0.84)) {
+                            runMotion(DimlyMotion.standardSpring) {
                                 profileManager.moveProfileUp(profile)
                             }
                         } label: {
@@ -970,12 +987,12 @@ struct SettingsRootView: View {
                                 .font(.system(size: 9, weight: .semibold))
                                 .frame(width: 16, height: 11)
                         }
-                        .buttonStyle(.plain)
+                        .buttonStyle(FluentPressButtonStyle(pressedScale: 0.84, pressedOpacity: 0.82))
                         .disabled(!canMoveUp)
                         .foregroundStyle(.secondary)
 
                         Button {
-                            withAnimation(.spring(response: 0.24, dampingFraction: 0.84)) {
+                            runMotion(DimlyMotion.standardSpring) {
                                 profileManager.moveProfileDown(profile)
                             }
                         } label: {
@@ -983,7 +1000,7 @@ struct SettingsRootView: View {
                                 .font(.system(size: 9, weight: .semibold))
                                 .frame(width: 16, height: 11)
                         }
-                        .buttonStyle(.plain)
+                        .buttonStyle(FluentPressButtonStyle(pressedScale: 0.84, pressedOpacity: 0.82))
                         .disabled(!canMoveDown)
                         .foregroundStyle(.secondary)
                     }
@@ -1162,7 +1179,7 @@ struct SettingsRootView: View {
 
         private func applyProfileDropIfNeeded() {
             guard let draggedID = draggedProfileID, let profileDropTarget else { return }
-            withAnimation(.spring(response: 0.24, dampingFraction: 0.84)) {
+            runMotion(DimlyMotion.standardSpring) {
                 switch profileDropTarget {
                 case .before(let targetID):
                     profileManager.moveProfile(draggedID, before: targetID)
@@ -1470,7 +1487,8 @@ struct SettingsRootView: View {
                                 tint: Color(red: 0.16, green: 0.50, blue: 0.89)
                             )
                         }
-                        .buttonStyle(.plain)
+                        .buttonStyle(FluentPressButtonStyle(pressedScale: 0.985, pressedOpacity: 0.94))
+                        .dimlyHoverLift(hoverScale: 1.01, shadowOpacity: 0.08)
 
                         ViewThatFits(in: .horizontal) {
                             HStack(spacing: 10) {
@@ -1482,7 +1500,8 @@ struct SettingsRootView: View {
                                         tint: Color(red: 0.93, green: 0.52, blue: 0.19)
                                     )
                                 }
-                                .buttonStyle(.plain)
+                                .buttonStyle(FluentPressButtonStyle(pressedScale: 0.985, pressedOpacity: 0.94))
+                                .dimlyHoverLift(hoverScale: 1.01, shadowOpacity: 0.08)
 
                                 Link(destination: URL(string: "https://ko-fi.com/janfeuerbacher")!) {
                                     aboutActionTile(
@@ -1492,7 +1511,8 @@ struct SettingsRootView: View {
                                         tint: Color(red: 0.86, green: 0.26, blue: 0.35)
                                     )
                                 }
-                                .buttonStyle(.plain)
+                                .buttonStyle(FluentPressButtonStyle(pressedScale: 0.985, pressedOpacity: 0.94))
+                                .dimlyHoverLift(hoverScale: 1.01, shadowOpacity: 0.08)
                             }
 
                             VStack(spacing: 10) {
@@ -1504,7 +1524,8 @@ struct SettingsRootView: View {
                                         tint: Color(red: 0.93, green: 0.52, blue: 0.19)
                                     )
                                 }
-                                .buttonStyle(.plain)
+                                .buttonStyle(FluentPressButtonStyle(pressedScale: 0.985, pressedOpacity: 0.94))
+                                .dimlyHoverLift(hoverScale: 1.01, shadowOpacity: 0.08)
 
                                 Link(destination: URL(string: "https://ko-fi.com/janfeuerbacher")!) {
                                     aboutActionTile(
@@ -1514,7 +1535,8 @@ struct SettingsRootView: View {
                                         tint: Color(red: 0.86, green: 0.26, blue: 0.35)
                                     )
                                 }
-                                .buttonStyle(.plain)
+                                .buttonStyle(FluentPressButtonStyle(pressedScale: 0.985, pressedOpacity: 0.94))
+                                .dimlyHoverLift(hoverScale: 1.01, shadowOpacity: 0.08)
                             }
                         }
                     }
