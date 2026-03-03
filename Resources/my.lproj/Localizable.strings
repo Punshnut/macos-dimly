@@ -329,3 +329,9 @@
 
 "Trigger monitor connection" = "မော်နီတာ ချိတ်ဆက်မှု အလုပ်လုပ်စေခြင်း";
 "Any External Monitor" = "မည်သည့် ပြင်ပ မော်နီတာမဆို";
+
+"Fast Actions visibility" = "အမြန်လုပ်ဆောင်ချက်များ မြင်နိုင်မှု";
+"Control where the Quick Actions section appears." = "Quick Actions အပိုင်း ပေါ်လာမည့်နေရာကို ထိန်းချုပ်ပါ။";
+"Hide in compact" = "ကျစ်လစ်ပုံစံတွင် ဖျောက်ရန်";
+"Only in advanced" = "အဆင့်မြင့်တွင်သာ";
+"Show on every screen" = "မျက်နှာပြင်အားလုံးတွင် ပြပါ";

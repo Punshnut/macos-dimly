@@ -329,3 +329,9 @@
 
 "Trigger monitor connection" = "የማሳያ ግንኙነት ማነሳሻ";
 "Any External Monitor" = "ማንኛውም ውጫዊ ማሳያ";
+
+"Fast Actions visibility" = "የፈጣን እርምጃዎች ታይነት";
+"Control where the Quick Actions section appears." = "የፈጣን እርምጃዎች ክፍል የሚታይበትን ቦታ ያቀናብሩ።";
+"Hide in compact" = "በኮምፓክት ሁኔታ ደብቅ";
+"Only in advanced" = "በከፍተኛ ሁኔታ ብቻ";
+"Show on every screen" = "በሁሉም ማያ ገጾች ላይ አሳይ";

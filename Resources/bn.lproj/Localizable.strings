@@ -329,3 +329,9 @@
 
 "Trigger monitor connection" = "মনিটর সংযোগ ট্রিগার";
 "Any External Monitor" = "যেকোনো বাহ্যিক মনিটর";
+
+"Fast Actions visibility" = "ফাস্ট অ্যাকশনসের দৃশ্যমানতা";
+"Control where the Quick Actions section appears." = "কুইক অ্যাকশনস অংশ কোথায় দেখাবে তা নিয়ন্ত্রণ করুন।";
+"Hide in compact" = "কমপ্যাক্টে লুকান";
+"Only in advanced" = "শুধু অ্যাডভান্সডে";
+"Show on every screen" = "সব স্ক্রিনে দেখান";

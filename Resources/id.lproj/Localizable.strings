@@ -329,3 +329,9 @@
 
 "Trigger monitor connection" = "Pemicu koneksi monitor";
 "Any External Monitor" = "Monitor eksternal apa pun";
+
+"Fast Actions visibility" = "Visibilitas Aksi Cepat";
+"Control where the Quick Actions section appears." = "Atur di mana bagian Aksi Cepat ditampilkan.";
+"Hide in compact" = "Sembunyikan di tampilan ringkas";
+"Only in advanced" = "Hanya di lanjutan";
+"Show on every screen" = "Tampilkan di setiap layar";

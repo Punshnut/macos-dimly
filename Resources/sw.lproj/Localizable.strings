@@ -329,3 +329,9 @@
 
 "Trigger monitor connection" = "Kichocheo cha muunganisho wa monitor";
 "Any External Monitor" = "Monitor yoyote ya nje";
+
+"Fast Actions visibility" = "Mwonekano wa Vitendo vya Haraka";
+"Control where the Quick Actions section appears." = "Dhibiti mahali sehemu ya Vitendo vya Haraka inaonekana.";
+"Hide in compact" = "Ficha katika compact";
+"Only in advanced" = "Katika advanced tu";
+"Show on every screen" = "Onyesha kwenye kila skrini";

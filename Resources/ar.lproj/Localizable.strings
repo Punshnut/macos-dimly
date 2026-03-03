@@ -329,3 +329,9 @@
 
 "Trigger monitor connection" = "تشغيل عند اتصال شاشة";
 "Any External Monitor" = "أي شاشة خارجية";
+
+"Fast Actions visibility" = "ظهور الإجراءات السريعة";
+"Control where the Quick Actions section appears." = "تحكم في المكان الذي يظهر فيه قسم الإجراءات السريعة.";
+"Hide in compact" = "إخفاء في الوضع المضغوط";
+"Only in advanced" = "في الوضع المتقدم فقط";
+"Show on every screen" = "إظهار على كل الشاشات";

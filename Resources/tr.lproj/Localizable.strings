@@ -329,3 +329,9 @@
 
 "Trigger monitor connection" = "Monitör bağlantı tetikleyicisi";
 "Any External Monitor" = "Herhangi bir harici monitör";
+
+"Fast Actions visibility" = "Hızlı İşlemler görünürlüğü";
+"Control where the Quick Actions section appears." = "Hızlı İşlemler bölümünün nerede görüneceğini kontrol edin.";
+"Hide in compact" = "Kompakt görünümde gizle";
+"Only in advanced" = "Yalnızca gelişmişte";
+"Show on every screen" = "Her ekranda göster";

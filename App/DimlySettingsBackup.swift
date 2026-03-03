@@ -103,6 +103,7 @@ struct GeneralSettingsPayload: Codable {
     let fadeInAnimationEnabled: Bool
     let menuBarSimpleMode: Bool
     let menuBarQuickActionsMode: Bool?
+    let fastActionsVisibilityMode: DimlySettings.FastActionsVisibilityMode?
 
     init(from settings: DimlySettings) {
         launchAtLogin = settings.launchAtLogin
@@ -115,6 +116,7 @@ struct GeneralSettingsPayload: Codable {
         fadeInAnimationEnabled = settings.fadeInAnimationEnabled
         menuBarSimpleMode = settings.menuBarSimpleMode
         menuBarQuickActionsMode = settings.menuBarQuickActionsMode
+        fastActionsVisibilityMode = settings.fastActionsVisibilityMode
     }
 
     func apply(to settings: inout DimlySettings) {
@@ -128,6 +130,7 @@ struct GeneralSettingsPayload: Codable {
         settings.fadeInAnimationEnabled = fadeInAnimationEnabled
         settings.menuBarSimpleMode = menuBarSimpleMode
         settings.menuBarQuickActionsMode = menuBarQuickActionsMode ?? false
+        settings.fastActionsVisibilityMode = fastActionsVisibilityMode ?? .advancedOnly
     }
 }
 

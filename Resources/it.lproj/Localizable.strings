@@ -329,3 +329,9 @@
 
 "Trigger monitor connection" = "Attiva alla connessione del monitor";
 "Any External Monitor" = "Qualsiasi monitor esterno";
+
+"Fast Actions visibility" = "Visibilita azioni rapide";
+"Control where the Quick Actions section appears." = "Controlla dove viene mostrata la sezione Azioni rapide.";
+"Hide in compact" = "Nascondi in compatta";
+"Only in advanced" = "Solo in avanzata";
+"Show on every screen" = "Mostra su ogni schermo";

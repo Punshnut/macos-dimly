@@ -329,3 +329,9 @@
 
 "Trigger monitor connection" = "모니터 연결 트리거";
 "Any External Monitor" = "모든 외부 모니터";
+
+"Fast Actions visibility" = "빠른 작업 표시";
+"Control where the Quick Actions section appears." = "빠른 작업 섹션이 표시되는 위치를 제어합니다.";
+"Hide in compact" = "컴팩트에서 숨기기";
+"Only in advanced" = "고급에서만";
+"Show on every screen" = "모든 화면에 표시";

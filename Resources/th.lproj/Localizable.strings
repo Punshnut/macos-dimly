@@ -329,3 +329,9 @@
 
 "Trigger monitor connection" = "ทริกเกอร์เมื่อเชื่อมต่อจอภาพ";
 "Any External Monitor" = "จอภาพภายนอกใดก็ได้";
+
+"Fast Actions visibility" = "การแสดงผลการทำงานด่วน";
+"Control where the Quick Actions section appears." = "กำหนดตำแหน่งที่จะแสดงส่วนการทำงานด่วน";
+"Hide in compact" = "ซ่อนในมุมมองกะทัดรัด";
+"Only in advanced" = "เฉพาะในขั้นสูง";
+"Show on every screen" = "แสดงบนทุกหน้าจอ";

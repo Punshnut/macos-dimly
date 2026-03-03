@@ -329,3 +329,9 @@
 
 "Trigger monitor connection" = "மானிட்டர் இணைப்பு தூண்டுதல்";
 "Any External Monitor" = "எந்த வெளிப்புற மானிட்டரும்";
+
+"Fast Actions visibility" = "விரைவு செயல்களின் காண்பிப்பு";
+"Control where the Quick Actions section appears." = "விரைவு செயல்கள் பகுதி எங்கே தோன்ற வேண்டும் என்பதை கட்டுப்படுத்து.";
+"Hide in compact" = "சுருக்க முறையில் மறை";
+"Only in advanced" = "மேம்பட்டதில் மட்டும்";
+"Show on every screen" = "அனைத்து திரைகளிலும் காட்டு";

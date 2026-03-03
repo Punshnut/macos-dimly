@@ -80,6 +80,11 @@
 "Show menu bar icon" = "Show menu bar icon";
 "Show Menu Bar Icon" = "Show Menu Bar Icon";
 "Hide Dock icon" = "Hide Dock icon";
+"Fast Actions visibility" = "Fast Actions visibility";
+"Control where the Quick Actions section appears." = "Control where the Quick Actions section appears.";
+"Hide in compact" = "Hide in compact";
+"Only in advanced" = "Only in advanced";
+"Show on every screen" = "Show on every screen";
 "Hide the Dock icon and app switcher entry." = "Hide the Dock icon and app switcher entry.";
 "Dimly stays running for hotkeys even when the menu bar icon is hidden." = "Dimly stays running for hotkeys even when the menu bar icon is hidden.";
 "Displays" = "Displays";

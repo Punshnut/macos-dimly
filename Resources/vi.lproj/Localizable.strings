@@ -329,3 +329,9 @@
 
 "Trigger monitor connection" = "Kích hoạt khi kết nối màn hình";
 "Any External Monitor" = "Bất kỳ màn hình ngoài nào";
+
+"Fast Actions visibility" = "Hiển thị thao tác nhanh";
+"Control where the Quick Actions section appears." = "Kiểm soát nơi phần Thao tác nhanh xuất hiện.";
+"Hide in compact" = "Ẩn trong chế độ thu gọn";
+"Only in advanced" = "Chỉ trong nâng cao";
+"Show on every screen" = "Hiển thị trên mọi màn hình";

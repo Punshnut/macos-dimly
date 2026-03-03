@@ -211,7 +211,9 @@ struct MenuBarContentView: View {
 
     private var simpleModeContent: some View {
         VStack(alignment: .leading, spacing: sectionSpacing) {
-            quickActionsSection(includeShowNumbers: false)
+            if shouldShowQuickActions(in: .simple) {
+                quickActionsSection(includeShowNumbers: false)
+            }
             smartButtonsSection(compact: false)
             if !menuBarDisplays.isEmpty {
                 externalDisplaysSimpleSection
@@ -223,7 +225,9 @@ struct MenuBarContentView: View {
     private var advancedModeContent: some View {
         VStack(alignment: .leading, spacing: sectionSpacing) {
             headerCard
-            quickActionsSection(includeShowNumbers: true)
+            if shouldShowQuickActions(in: .advanced) {
+                quickActionsSection(includeShowNumbers: true)
+            }
             smartButtonsSection(compact: true)
             if !menuBarDisplays.isEmpty {
                 externalDisplaysSection
@@ -235,9 +239,22 @@ struct MenuBarContentView: View {
 
     private var shortModeContent: some View {
         VStack(alignment: .leading, spacing: sectionSpacing) {
-            quickActionsSection(includeShowNumbers: false)
+            if shouldShowQuickActions(in: .short) {
+                quickActionsSection(includeShowNumbers: false)
+            }
             smartButtonsSection(compact: false)
             shortModeAppActionsSection
+        }
+    }
+
+    private func shouldShowQuickActions(in mode: LayoutMode) -> Bool {
+        switch settingsStore.settings.fastActionsVisibilityMode {
+        case .hideInCompact:
+            return mode != .short
+        case .advancedOnly:
+            return mode == .advanced
+        case .showEverywhere:
+            return true
         }
     }
 

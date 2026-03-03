@@ -329,3 +329,9 @@
 
 "Trigger monitor connection" = "Kunna yayin haɗin monitor";
 "Any External Monitor" = "Duk wani monitor na waje";
+
+"Fast Actions visibility" = "Bayyanar Ayyuka Masu Sauri";
+"Control where the Quick Actions section appears." = "Sarrafa inda sashen Ayyuka Masu Sauri zai bayyana.";
+"Hide in compact" = "Boye a compact";
+"Only in advanced" = "A advanced kawai";
+"Show on every screen" = "Nuna a kowace allo";

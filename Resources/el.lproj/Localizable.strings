@@ -329,3 +329,9 @@
 
 "Trigger monitor connection" = "Ενεργοποίηση στη σύνδεση οθόνης";
 "Any External Monitor" = "Οποιαδήποτε εξωτερική οθόνη";
+
+"Fast Actions visibility" = "Ορατότητα γρήγορων ενεργειών";
+"Control where the Quick Actions section appears." = "Ορίστε πού εμφανίζεται η ενότητα Γρήγορες ενέργειες.";
+"Hide in compact" = "Απόκρυψη στη συμπαγή προβολή";
+"Only in advanced" = "Μόνο στην προηγμένη προβολή";
+"Show on every screen" = "Εμφάνιση σε κάθε οθόνη";

@@ -329,3 +329,9 @@
 
 "Trigger monitor connection" = "Триггер подключения монитора";
 "Any External Monitor" = "Любой внешний монитор";
+
+"Fast Actions visibility" = "Видимость быстрых действий";
+"Control where the Quick Actions section appears." = "Управляйте тем, где отображается раздел Быстрые действия.";
+"Hide in compact" = "Скрывать в компактном режиме";
+"Only in advanced" = "Только в расширенном";
+"Show on every screen" = "Показывать на всех экранах";

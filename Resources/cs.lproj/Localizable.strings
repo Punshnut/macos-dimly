@@ -329,3 +329,9 @@
 
 "Trigger monitor connection" = "Spuštění při připojení monitoru";
 "Any External Monitor" = "Jakýkoli externí monitor";
+
+"Fast Actions visibility" = "Viditelnost rychlých akcí";
+"Control where the Quick Actions section appears." = "Určete, kde se zobrazuje sekce Rychlé akce.";
+"Hide in compact" = "Skrýt v kompaktním režimu";
+"Only in advanced" = "Pouze v pokročilém režimu";
+"Show on every screen" = "Zobrazit na všech obrazovkách";

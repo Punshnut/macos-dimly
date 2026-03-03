@@ -611,6 +611,28 @@ struct SettingsRootView: View {
                         .frame(width: 150)
                     }
                     SettingsDivider()
+                    SettingsRow(
+                        title: String(localized: "Fast Actions visibility"),
+                        subtitle: String(localized: "Control where the Quick Actions section appears."),
+                        systemImage: "bolt.badge.clock"
+                    ) {
+                        Picker(
+                            String(localized: "Fast Actions visibility"),
+                            selection: Binding(
+                                get: { settingsStore.settings.fastActionsVisibilityMode },
+                                set: { newValue in settingsStore.update { $0.fastActionsVisibilityMode = newValue } }
+                            )
+                        ) {
+                            ForEach(DimlySettings.FastActionsVisibilityMode.allCases) { mode in
+                                Text(mode.localizedTitle)
+                                    .tag(mode)
+                            }
+                        }
+                        .labelsHidden()
+                        .pickerStyle(.menu)
+                        .frame(width: 150)
+                    }
+                    SettingsDivider()
                     VStack(alignment: .leading, spacing: 6) {
                         Text(String(localized: "Hide the Dock icon and app switcher entry."))
                             .font(.caption)

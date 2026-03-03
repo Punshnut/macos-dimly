@@ -327,3 +327,9 @@
 
 "Trigger monitor connection" = "I-trigger sa koneksyon ng monitor";
 "Any External Monitor" = "Anumang panlabas na monitor";
+
+"Fast Actions visibility" = "Visibility ng Mabilis na Aksyon";
+"Control where the Quick Actions section appears." = "Kontrolin kung saan lilitaw ang seksyong Mabilis na Aksyon.";
+"Hide in compact" = "Itago sa compact";
+"Only in advanced" = "Sa advanced lang";
+"Show on every screen" = "Ipakita sa bawat screen";

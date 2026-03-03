@@ -329,3 +329,9 @@
 
 "Trigger monitor connection" = "Spreag ar nascadh monatóra";
 "Any External Monitor" = "Aon mhonatóir seachtrach";
+
+"Fast Actions visibility" = "Infheictheacht gniomhartha tapa";
+"Control where the Quick Actions section appears." = "Rialaigh an ait a dtaispeantar an rannog Gniomhartha Tapa.";
+"Hide in compact" = "Folaigh i mod dluth";
+"Only in advanced" = "In ardmhodh amhain";
+"Show on every screen" = "Taispeain ar gach scailean";

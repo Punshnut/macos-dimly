@@ -329,3 +329,9 @@
 
 "Trigger monitor connection" = "Utlös vid skärmanslutning";
 "Any External Monitor" = "Valfri extern skärm";
+
+"Fast Actions visibility" = "Synlighet för snabba åtgärder";
+"Control where the Quick Actions section appears." = "Styr var avsnittet Snabbåtgärder visas.";
+"Hide in compact" = "Dölj i kompakt läge";
+"Only in advanced" = "Endast i avancerat";
+"Show on every screen" = "Visa på varje skärm";

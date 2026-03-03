@@ -329,3 +329,9 @@
 
 "Trigger monitor connection" = "Laukaise näytön liitännästä";
 "Any External Monitor" = "Mikä tahansa ulkoinen näyttö";
+
+"Fast Actions visibility" = "Pikatoimintojen nakyvyys";
+"Control where the Quick Actions section appears." = "Maarita, missa Pikatoiminnot-osio nakyy.";
+"Hide in compact" = "Piilota kompaktissa nakymassa";
+"Only in advanced" = "Vain edistyneessa nakymassa";
+"Show on every screen" = "Nayta kaikilla naytoilla";

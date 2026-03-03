@@ -329,3 +329,9 @@
 
 "Trigger monitor connection" = "モニター接続時のトリガー";
 "Any External Monitor" = "任意の外部モニター";
+
+"Fast Actions visibility" = "高速アクションの表示";
+"Control where the Quick Actions section appears." = "クイックアクションセクションを表示する場所を設定します。";
+"Hide in compact" = "コンパクトで非表示";
+"Only in advanced" = "詳細のみ";
+"Show on every screen" = "すべての画面に表示";

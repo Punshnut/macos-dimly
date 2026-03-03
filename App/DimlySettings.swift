@@ -26,6 +26,14 @@ struct DimlySettings: Codable, Equatable {
         case short
     }
 
+    enum FastActionsVisibilityMode: String, Codable, Equatable, CaseIterable, Identifiable {
+        case hideInCompact
+        case advancedOnly
+        case showEverywhere
+
+        var id: String { rawValue }
+    }
+
     var launchAtLogin: Bool
     var showMenuBarIcon: Bool
     var hideDockIcon: Bool
@@ -44,6 +52,7 @@ struct DimlySettings: Codable, Equatable {
     var mergedDisplayOrder: [String]
     var menuBarSimpleMode: Bool
     var menuBarQuickActionsMode: Bool
+    var fastActionsVisibilityMode: FastActionsVisibilityMode
     var menuBarSmartButtonsLimit: Int
     var menuBarSmartButtonsColorlessMode: Bool
     var brightnessPanelExpandedDisplayIDs: [String]
@@ -72,6 +81,7 @@ struct DimlySettings: Codable, Equatable {
         case menuBarSimpleMode
         case menuBarQuickActionsMode
         case menuBarLayoutMode
+        case fastActionsVisibilityMode
         case menuBarSmartButtonsLimit
         case menuBarSmartButtonsColorlessMode
         case brightnessPanelExpandedDisplayIDs
@@ -119,6 +129,7 @@ struct DimlySettings: Codable, Equatable {
         mergedDisplayOrder: [],
         menuBarSimpleMode: false,
         menuBarQuickActionsMode: false,
+        fastActionsVisibilityMode: .advancedOnly,
         menuBarSmartButtonsLimit: 8,
         menuBarSmartButtonsColorlessMode: false,
         brightnessPanelExpandedDisplayIDs: [],
@@ -147,6 +158,7 @@ struct DimlySettings: Codable, Equatable {
         mergedDisplayOrder: [String],
         menuBarSimpleMode: Bool,
         menuBarQuickActionsMode: Bool,
+        fastActionsVisibilityMode: FastActionsVisibilityMode,
         menuBarSmartButtonsLimit: Int,
         menuBarSmartButtonsColorlessMode: Bool,
         brightnessPanelExpandedDisplayIDs: [String],
@@ -172,6 +184,7 @@ struct DimlySettings: Codable, Equatable {
         self.mergedDisplayOrder = mergedDisplayOrder
         self.menuBarSimpleMode = menuBarSimpleMode
         self.menuBarQuickActionsMode = menuBarQuickActionsMode
+        self.fastActionsVisibilityMode = fastActionsVisibilityMode
         self.menuBarSmartButtonsLimit = Self.normalizedSmartButtonsLimit(menuBarSmartButtonsLimit)
         self.menuBarSmartButtonsColorlessMode = menuBarSmartButtonsColorlessMode
         self.brightnessPanelExpandedDisplayIDs = brightnessPanelExpandedDisplayIDs
@@ -207,6 +220,8 @@ struct DimlySettings: Codable, Equatable {
             ?? (legacyMenuBarQuickActionsMode ? .short : (legacyMenuBarSimpleMode ? .simple : .advanced))
         let menuBarSimpleMode = resolvedMenuBarLayoutMode == .simple
         let menuBarQuickActionsMode = resolvedMenuBarLayoutMode == .short
+        let fastActionsVisibilityMode = try container.decodeIfPresent(FastActionsVisibilityMode.self, forKey: .fastActionsVisibilityMode)
+            ?? DimlySettings.default.fastActionsVisibilityMode
         let menuBarSmartButtonsLimit = try container.decodeIfPresent(Int.self, forKey: .menuBarSmartButtonsLimit) ?? DimlySettings.default.menuBarSmartButtonsLimit
         let menuBarSmartButtonsColorlessMode = try container.decodeIfPresent(Bool.self, forKey: .menuBarSmartButtonsColorlessMode) ?? DimlySettings.default.menuBarSmartButtonsColorlessMode
         let brightnessPanelExpandedDisplayIDs = try container.decodeIfPresent([String].self, forKey: .brightnessPanelExpandedDisplayIDs) ?? DimlySettings.default.brightnessPanelExpandedDisplayIDs
@@ -252,6 +267,7 @@ struct DimlySettings: Codable, Equatable {
             mergedDisplayOrder: mergedDisplayOrder,
             menuBarSimpleMode: menuBarSimpleMode,
             menuBarQuickActionsMode: menuBarQuickActionsMode,
+            fastActionsVisibilityMode: fastActionsVisibilityMode,
             menuBarSmartButtonsLimit: menuBarSmartButtonsLimit,
             menuBarSmartButtonsColorlessMode: menuBarSmartButtonsColorlessMode,
             brightnessPanelExpandedDisplayIDs: brightnessPanelExpandedDisplayIDs,
@@ -283,6 +299,7 @@ struct DimlySettings: Codable, Equatable {
         try container.encode(menuBarSimpleMode, forKey: .menuBarSimpleMode)
         try container.encode(menuBarQuickActionsMode, forKey: .menuBarQuickActionsMode)
         try container.encode(menuBarLayoutMode, forKey: .menuBarLayoutMode)
+        try container.encode(fastActionsVisibilityMode, forKey: .fastActionsVisibilityMode)
         try container.encode(Self.normalizedSmartButtonsLimit(menuBarSmartButtonsLimit), forKey: .menuBarSmartButtonsLimit)
         try container.encode(menuBarSmartButtonsColorlessMode, forKey: .menuBarSmartButtonsColorlessMode)
         try container.encode(brightnessPanelExpandedDisplayIDs, forKey: .brightnessPanelExpandedDisplayIDs)
@@ -293,6 +310,19 @@ struct DimlySettings: Codable, Equatable {
 
     private static func normalizedSmartButtonsLimit(_ value: Int) -> Int {
         max(4, min(16, value))
+    }
+}
+
+extension DimlySettings.FastActionsVisibilityMode {
+    var localizedTitle: String {
+        switch self {
+        case .hideInCompact:
+            return String(localized: "Hide in compact")
+        case .advancedOnly:
+            return String(localized: "Only in advanced")
+        case .showEverywhere:
+            return String(localized: "Show on every screen")
+        }
     }
 }
 

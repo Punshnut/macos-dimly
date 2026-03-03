@@ -329,3 +329,9 @@
 
 "Trigger monitor connection" = "فعال‌سازی با اتصال مانیتور";
 "Any External Monitor" = "هر مانیتور خارجی";
+
+"Fast Actions visibility" = "نمايش اقدامات سريع";
+"Control where the Quick Actions section appears." = "محل نمايش بخش اقدامات سريع را کنترل کنيد.";
+"Hide in compact" = "پنهان در حالت فشرده";
+"Only in advanced" = "فقط در حالت پيشرفته";
+"Show on every screen" = "نمايش در همه صفحه نمايش ها";

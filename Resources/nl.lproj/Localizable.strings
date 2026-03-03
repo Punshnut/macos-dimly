@@ -329,3 +329,9 @@
 
 "Trigger monitor connection" = "Trigger bij monitorverbinding";
 "Any External Monitor" = "Elke externe monitor";
+
+"Fast Actions visibility" = "Zichtbaarheid van snelle acties";
+"Control where the Quick Actions section appears." = "Bepaal waar de sectie Snelle acties wordt weergegeven.";
+"Hide in compact" = "Verbergen in compact";
+"Only in advanced" = "Alleen in geavanceerd";
+"Show on every screen" = "Op elk scherm tonen";
