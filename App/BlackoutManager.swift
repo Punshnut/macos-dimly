@@ -155,6 +155,7 @@ final class BlackoutManager: ObservableObject {
         brightnessFallbackOverlays.removeAll()
         fallbackBrightnessLevels.removeAll()
         activeDisplayIDs.removeAll()
+        persistState()
     }
 
     /// Fades out all overlays before quitting, then closes them.
@@ -163,6 +164,7 @@ final class BlackoutManager: ObservableObject {
         let brightnessWindows = Array(brightnessFallbackOverlays.values)
         let totalWindowCount = blackoutWindows.count + brightnessWindows.count
         guard totalWindowCount > 0 else {
+            persistState()
             completion()
             return
         }
@@ -171,6 +173,7 @@ final class BlackoutManager: ObservableObject {
         brightnessFallbackOverlays.removeAll()
         fallbackBrightnessLevels.removeAll()
         activeDisplayIDs.removeAll()
+        persistState()
         var remaining = totalWindowCount
         let finish: () -> Void = {
             remaining -= 1

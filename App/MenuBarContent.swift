@@ -54,6 +54,7 @@ struct MenuBarContentView: View {
     @State private var smartButtonDragStartFramesByProfileID: [UUID: CGRect] = [:]
     @State private var smartButtonDragTranslation: CGSize = .zero
     @State private var smartButtonDropTarget: SmartButtonDropTarget?
+    @State private var suppressSmartButtonTapUntil: Date = .distantPast
     @State private var smartButtonFlashIDs: Set<UUID> = []
     @State private var smartButtonPulseIDs: Set<UUID> = []
     @State private var isModeTransitioning = false
@@ -146,6 +147,7 @@ struct MenuBarContentView: View {
     }
 
     private func applySmartButton(_ profile: DisplayProfile) {
+        guard Date() >= suppressSmartButtonTapUntil else { return }
         flashSmartButton(profile.id)
         // Defer one runloop so the tap feedback paints before heavy profile application work.
         DispatchQueue.main.async {
@@ -816,22 +818,22 @@ struct MenuBarContentView: View {
                                                 )
                                             }
                                         )
-                                        .gesture(smartButtonReorderGesture(for: profile.id))
+                                        .highPriorityGesture(smartButtonReorderGesture(for: profile.id))
                                 }
                             case .spacerBefore, .spacerAfter:
                                 smartButtonSpacerTile(compact: compact)
                             }
                         }
-                    }
+                }
 
-                    if let draggedID = draggedSmartButtonProfileID,
-                       let draggedProfile = smartButtonProfileByID[draggedID],
-                       let draggedFrame = smartButtonDragStartFramesByProfileID[draggedID] {
-                        floatingSmartButtonPreview(
-                            draggedProfile,
-                            compact: compact,
-                            size: CGSize(width: draggedFrame.width, height: draggedFrame.height)
-                        )
+                if let draggedID = draggedSmartButtonProfileID,
+                   let draggedProfile = smartButtonProfileByID[draggedID],
+                   let draggedFrame = smartButtonDragStartFramesByProfileID[draggedID] ?? smartButtonFramesByProfileID[draggedID] {
+                    floatingSmartButtonPreview(
+                        draggedProfile,
+                        compact: compact,
+                        size: CGSize(width: draggedFrame.width, height: draggedFrame.height)
+                    )
                             .allowsHitTesting(false)
                             .position(x: draggedFrame.midX, y: draggedFrame.midY)
                             .offset(smartButtonDragTranslation)
@@ -985,6 +987,10 @@ struct MenuBarContentView: View {
                 if draggedSmartButtonProfileID != profileID {
                     draggedSmartButtonProfileID = profileID
                     smartButtonDragStartFramesByProfileID = smartButtonFramesByProfileID
+                    if smartButtonDragStartFramesByProfileID[profileID] == nil,
+                       let liveFrame = smartButtonFramesByProfileID[profileID] {
+                        smartButtonDragStartFramesByProfileID[profileID] = liveFrame
+                    }
                     smartButtonDropTarget = nil
                 }
                 smartButtonDragTranslation = value.translation
@@ -992,6 +998,10 @@ struct MenuBarContentView: View {
                 smartButtonDropTarget = smartButtonDropTarget(for: value.translation, draggedID: draggedID)
             }
             .onEnded { _ in
+                if abs(smartButtonDragTranslation.width) >= 4 || abs(smartButtonDragTranslation.height) >= 4 {
+                    // Ignore the trailing button-up tap after a drag.
+                    suppressSmartButtonTapUntil = Date().addingTimeInterval(0.25)
+                }
                 applySmartButtonDropIfNeeded()
                 draggedSmartButtonProfileID = nil
                 smartButtonDragStartFramesByProfileID.removeAll()
@@ -1540,6 +1550,8 @@ struct MenuBarContentView: View {
         let index = order.firstIndex(of: display.stableIdentity) ?? 0
         let canMoveUp = index > 0
         let canMoveDown = index < (order.count - 1)
+        let enabledArrowColor = neutralSecondaryText
+        let disabledArrowColor = neutralTertiaryText
 
         return AnyView(VStack(spacing: 4) {
             Button {
@@ -1555,6 +1567,8 @@ struct MenuBarContentView: View {
                     .frame(width: 18, height: 12)
             }
             .buttonStyle(FluentPressButtonStyle(pressedScale: 0.84, pressedOpacity: 0.82))
+            .foregroundStyle(canMoveUp ? enabledArrowColor : disabledArrowColor)
+            .opacity(canMoveUp ? 1 : 0.48)
             .disabled(!canMoveUp)
 
             Button {
@@ -1570,9 +1584,10 @@ struct MenuBarContentView: View {
                     .frame(width: 18, height: 12)
             }
             .buttonStyle(FluentPressButtonStyle(pressedScale: 0.84, pressedOpacity: 0.82))
+            .foregroundStyle(canMoveDown ? enabledArrowColor : disabledArrowColor)
+            .opacity(canMoveDown ? 1 : 0.48)
             .disabled(!canMoveDown)
         }
-        .foregroundStyle(neutralSecondaryText)
         .help(String(localized: "Reorder Display")))
     }
 

@@ -59,11 +59,13 @@ final class DDCManager: ObservableObject {
         self.displayManager = displayManager
         probeAll(markAsCableCheck: true)
         // Re-probe whenever displays change.
-        displayManager.$displays.sink { [weak self] displays in
-            self?.reconcileForDisplayChange(displays)
-            self?.probeAll(markAsCableCheck: true)
-        }
-        .store(in: &cancellables)
+        displayManager.$displays
+            .removeDuplicates()
+            .sink { [weak self] displays in
+                self?.reconcileForDisplayChange(displays)
+                self?.probeAll(markAsCableCheck: true)
+            }
+            .store(in: &cancellables)
 
         workspaceWakeToken = NSWorkspace.shared.notificationCenter.addObserver(
             forName: NSWorkspace.didWakeNotification,

@@ -18,6 +18,7 @@ final class DisplayManager: ObservableObject {
     private var workspaceWakeToken: NSObjectProtocol?
     private var workspaceScreensWakeToken: NSObjectProtocol?
     private var topologyRefreshTask: Task<Void, Never>?
+    private var refreshGeneration: UInt64 = 0
 
     /// Loads initial display inventory and installs change callbacks.
     init(hardware: DisplayHardwareProviding = DisplayHardware()) {
@@ -103,20 +104,30 @@ final class DisplayManager: ObservableObject {
 
     /// Refreshes display info off the main actor.
     private func refresh(reason: String) {
-        let previous = displays
+        refreshGeneration &+= 1
+        let generation = refreshGeneration
         let currentIDs = hardware.activeDisplayIDs()
         DiagnosticsLogger.shared.log("Refresh displays (reason: \(reason)) count=\(currentIDs.count)", category: "display")
 
         // Resolving display info can block on IOKit; perform off the main actor and marshal back.
         Task.detached(priority: .utility) { [hardware, weak self] in
             let currentDisplays = currentIDs.map { hardware.displayInfo(for: $0) }
-            await self?.applyDisplays(currentDisplays, previous: previous, reason: reason)
+            await self?.applyDisplays(currentDisplays, reason: reason, generation: generation)
         }
     }
 
     /// Applies new display info and logs changes.
     @MainActor
-    private func applyDisplays(_ displays: [DisplayInfo], previous: [DisplayInfo], reason: String) {
+    private func applyDisplays(_ displays: [DisplayInfo], reason: String, generation: UInt64) {
+        guard generation == refreshGeneration else {
+            DiagnosticsLogger.shared.log("Discard stale display refresh reason=\(reason) generation=\(generation) latest=\(refreshGeneration)", category: "display")
+            return
+        }
+        let previous = self.displays
+        guard previous != displays else {
+            DiagnosticsLogger.shared.log("Display inventory unchanged reason=\(reason)", category: "display")
+            return
+        }
         self.displays = displays
         logDiff(previous: previous, current: displays, reason: reason)
         logInventory(displays, reason: reason)

@@ -987,6 +987,8 @@ struct SettingsRootView: View {
             let index = profileManager.profiles.firstIndex(where: { $0.id == profile.id }) ?? 0
             let canMoveUp = index > 0
             let canMoveDown = index < (profileManager.profiles.count - 1)
+            let enabledArrowColor = Color.secondary
+            let disabledArrowColor = Color.secondary.opacity(0.45)
 
             return VStack(alignment: .leading, spacing: 8) {
                 HStack(alignment: .top, spacing: 8) {
@@ -1010,8 +1012,9 @@ struct SettingsRootView: View {
                                 .frame(width: 16, height: 11)
                         }
                         .buttonStyle(FluentPressButtonStyle(pressedScale: 0.84, pressedOpacity: 0.82))
+                        .foregroundStyle(canMoveUp ? enabledArrowColor : disabledArrowColor)
+                        .opacity(canMoveUp ? 1 : 0.5)
                         .disabled(!canMoveUp)
-                        .foregroundStyle(.secondary)
 
                         Button {
                             runMotion(DimlyMotion.standardSpring) {
@@ -1023,8 +1026,9 @@ struct SettingsRootView: View {
                                 .frame(width: 16, height: 11)
                         }
                         .buttonStyle(FluentPressButtonStyle(pressedScale: 0.84, pressedOpacity: 0.82))
+                        .foregroundStyle(canMoveDown ? enabledArrowColor : disabledArrowColor)
+                        .opacity(canMoveDown ? 1 : 0.5)
                         .disabled(!canMoveDown)
-                        .foregroundStyle(.secondary)
                     }
                 }
                 Text(String(format: String(localized: "ProfileDisplayCountFormat"), Int64(profile.displays.count)))

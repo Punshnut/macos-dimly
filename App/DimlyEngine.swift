@@ -32,8 +32,14 @@ final class DimlyEngine {
     private let legacySleepPersistenceKey = "Sleep.activeDisplayIDs"
     private let legacyBlackoutPersistenceKey = "Blackout.activeDisplayIDs"
     private let monitorStateRetentionDays = 90
+    private let monitorStateRestoreRetryDelayNanoseconds: UInt64 = 400_000_000
+    private let displayChangeRestoreDelayNanoseconds: UInt64 = 180_000_000
+    private let wakeRestoreDelayNanoseconds: UInt64 = 750_000_000
+    private let ddcResolvedRestoreDelayNanoseconds: UInt64 = 120_000_000
     private var workspaceWakeToken: NSObjectProtocol?
     private var workspaceScreensWakeToken: NSObjectProtocol?
+    private var monitorRestoreTask: Task<Void, Never>?
+    private var monitorRestoreGeneration: UInt64 = 0
     let displayManager: DisplayManager
     let blackoutManager: BlackoutManager
     let ddcManager: DDCManager
@@ -83,7 +89,7 @@ final class DimlyEngine {
             }
 
         profileManager.engine = self
-        restorePersistedMonitorState(reason: "startup", remainingAttempts: 5)
+        schedulePersistedMonitorStateRestore(reason: "startup", remainingAttempts: 5)
 
         workspaceWakeToken = NSWorkspace.shared.notificationCenter.addObserver(
             forName: NSWorkspace.didWakeNotification,
@@ -91,7 +97,12 @@ final class DimlyEngine {
             queue: .main
         ) { [weak self] _ in
             Task { @MainActor [weak self] in
-                self?.restorePersistedMonitorState(reason: "workspaceDidWake", remainingAttempts: 5)
+                guard let self else { return }
+                self.schedulePersistedMonitorStateRestore(
+                    reason: "workspaceDidWake",
+                    remainingAttempts: 5,
+                    initialDelayNanoseconds: self.wakeRestoreDelayNanoseconds
+                )
             }
         }
         workspaceScreensWakeToken = NSWorkspace.shared.notificationCenter.addObserver(
@@ -100,7 +111,12 @@ final class DimlyEngine {
             queue: .main
         ) { [weak self] _ in
             Task { @MainActor [weak self] in
-                self?.restorePersistedMonitorState(reason: "workspaceScreensDidWake", remainingAttempts: 5)
+                guard let self else { return }
+                self.schedulePersistedMonitorStateRestore(
+                    reason: "workspaceScreensDidWake",
+                    remainingAttempts: 5,
+                    initialDelayNanoseconds: self.wakeRestoreDelayNanoseconds
+                )
             }
         }
 
@@ -120,6 +136,7 @@ final class DimlyEngine {
         synchronizedBrightnessTransitionTask?.cancel()
         builtinBrightnessAnimationTasks.values.forEach { $0.cancel() }
         externalBrightnessAnimationTasks.values.forEach { $0.cancel() }
+        monitorRestoreTask?.cancel()
         if let workspaceWakeToken {
             NSWorkspace.shared.notificationCenter.removeObserver(workspaceWakeToken)
         }
@@ -623,9 +640,15 @@ final class DimlyEngine {
     /// Subscribes to display/overlay changes to keep persisted monitor state in sync.
     private func observeMonitorState() {
         displayManager.$displays
+            .removeDuplicates()
             .sink { [weak self] displays in
-                self?.trackMonitorLastSeenAndPruneStaleState(displays)
-                self?.restorePersistedMonitorState(reason: "displayChange", remainingAttempts: 5)
+                guard let self else { return }
+                self.trackMonitorLastSeenAndPruneStaleState(displays)
+                self.schedulePersistedMonitorStateRestore(
+                    reason: "displayChange",
+                    remainingAttempts: 5,
+                    initialDelayNanoseconds: self.displayChangeRestoreDelayNanoseconds
+                )
             }
             .store(in: &stateCancellables)
 
@@ -642,72 +665,135 @@ final class DimlyEngine {
             .store(in: &stateCancellables)
     }
 
-    /// Applies persisted power + brightness state to currently connected displays.
-    private func restorePersistedMonitorState(reason: String, remainingAttempts: Int) {
+    /// Coalesces persisted-state restores to avoid repeated wake-time brightness thrashing.
+    private func schedulePersistedMonitorStateRestore(
+        reason: String,
+        remainingAttempts: Int,
+        initialDelayNanoseconds: UInt64 = 0
+    ) {
+        monitorRestoreTask?.cancel()
+        monitorRestoreGeneration &+= 1
+        let generation = monitorRestoreGeneration
+        let retryDelay = monitorStateRestoreRetryDelayNanoseconds
+        monitorRestoreTask = Task { @MainActor [weak self] in
+            guard let self else { return }
+            guard self.monitorRestoreGeneration == generation else { return }
+            if initialDelayNanoseconds > 0 {
+                try? await Task.sleep(nanoseconds: initialDelayNanoseconds)
+                guard !Task.isCancelled else { return }
+                guard self.monitorRestoreGeneration == generation else { return }
+            }
+            let attempts = max(1, remainingAttempts)
+            var restrictedIDs: Set<String>? = nil
+            for attempt in 0..<attempts {
+                guard !Task.isCancelled else { return }
+                guard self.monitorRestoreGeneration == generation else { return }
+                let attemptReason = attempt == 0 ? reason : "\(reason)-retry-\(attempt)"
+                let pending = self.restorePersistedMonitorStatePass(
+                    reason: attemptReason,
+                    restrictedToDisplayIDs: restrictedIDs
+                )
+                guard !pending.isEmpty else {
+                    if self.monitorRestoreGeneration == generation {
+                        self.monitorRestoreTask = nil
+                    }
+                    return
+                }
+                restrictedIDs = pending
+                guard attempt < (attempts - 1) else { break }
+                try? await Task.sleep(nanoseconds: retryDelay)
+            }
+            if !Task.isCancelled, self.monitorRestoreGeneration == generation {
+                self.monitorRestoreTask = nil
+            }
+        }
+    }
+
+    /// Applies one persisted-state restore pass and returns any displays that still need retry.
+    private func restorePersistedMonitorStatePass(reason: String, restrictedToDisplayIDs: Set<String>? = nil) -> Set<String> {
         let settings = settingsStore.settings
-        let internals = displayManager.displays.filter(\.isBuiltin)
-        for display in internals {
-            let id = display.stableIdentity
-            let power = settings.monitorPowerStateByDisplayID[id] ?? .visible
-            switch power {
-            case .blackout:
-                applyBuiltinBlackout(display, animated: false, persistState: false)
-            case .visible, .standby:
+        if restrictedToDisplayIDs == nil {
+            let internals = displayManager.displays.filter(\.isBuiltin)
+            for display in internals {
+                let id = display.stableIdentity
+                let power = settings.monitorPowerStateByDisplayID[id] ?? .visible
+                let runtimeBuiltinBlackoutActive = builtinRestoreBrightnessByDisplayID[id] != nil
+                if power == .blackout, runtimeBuiltinBlackoutActive {
+                    applyBuiltinBlackout(display, animated: false, persistState: false)
+                    continue
+                }
+                if power != .visible {
+                    persistPowerState(.visible, for: id)
+                }
                 applyBuiltinVisible(display, animated: false, persistState: false)
             }
         }
 
         let externals = displayManager.displays.filter(\.isExternal)
-        guard !externals.isEmpty else { return }
+        guard !externals.isEmpty else { return [] }
 
-        DiagnosticsLogger.shared.log("Restore persisted monitor state reason=\(reason) displays=\(externals.count)", category: "engine")
-        var pending: [DisplayInfo] = []
-
-        for display in externals {
-            let id = display.stableIdentity
-            let power = settings.monitorPowerStateByDisplayID[id] ?? .visible
-
-            if power != .standby, let brightness = settings.monitorBrightnessByDisplayID[id] {
-                setBrightness(brightness, for: display)
-            }
-
-            switch power {
-            case .visible:
-                if blackoutManager.activeDisplayIDs.contains(id) {
-                    blackoutManager.unblackout(display, animated: settings.fadeInAnimationEnabled)
-                }
-            case .blackout:
-                blackoutManager.blackout(display, animated: settings.fadeOutAnimationEnabled)
-            case .standby:
-                if settings.overlayOnlyDisplayIDs.contains(id) {
-                    blackoutManager.blackout(display, animated: settings.fadeOutAnimationEnabled)
-                    persistPowerState(.blackout, for: id)
-                    continue
-                }
-                guard let status = ddcManager.states[id]?.status else {
-                    pending.append(display)
-                    continue
-                }
-                switch status {
-                case .supported:
-                    standby(display: display)
-                case .notSupported:
-                    blackoutManager.blackout(display, animated: settings.fadeOutAnimationEnabled)
-                    persistPowerState(.blackout, for: id)
-                case .unknown:
-                    pending.append(display)
-                }
-            }
-        }
-
-        guard remainingAttempts > 0, !pending.isEmpty else { return }
-        Task { @MainActor [weak self] in
-            try? await Task.sleep(nanoseconds: 400_000_000)
-            self?.restorePersistedMonitorState(
-                reason: "\(reason)-retry",
-                remainingAttempts: remainingAttempts - 1
+        if let restrictedToDisplayIDs {
+            DiagnosticsLogger.shared.log(
+                "Restore persisted monitor state reason=\(reason) displays=\(externals.count) scope=pending(\(restrictedToDisplayIDs.count))",
+                category: "engine"
+            )
+        } else {
+            DiagnosticsLogger.shared.log(
+                "Restore persisted monitor state reason=\(reason) displays=\(externals.count) scope=all",
+                category: "engine"
             )
         }
+        for display in externals {
+            let id = display.stableIdentity
+            if let restrictedToDisplayIDs, !restrictedToDisplayIDs.contains(id) {
+                continue
+            }
+            let power = settings.monitorPowerStateByDisplayID[id] ?? .visible
+
+            if restrictedToDisplayIDs == nil,
+               power != .standby,
+               let brightness = settings.monitorBrightnessByDisplayID[id] {
+                if shouldApplyPersistedBrightnessOnAutomaticRestore(for: display, settings: settings) {
+                    setBrightness(brightness, for: display)
+                } else if blackoutManager.fallbackBrightnessLevels[id] != nil {
+                    blackoutManager.clearBrightnessFallback(for: display, animated: false)
+                }
+            }
+
+            let runtimeBlackoutActive = blackoutManager.activeDisplayIDs.contains(id)
+            let runtimeStandbyActive = ddcManager.states[id]?.lastCommand == .standby
+            if reason.hasPrefix("startup"), runtimeBlackoutActive {
+                blackoutManager.unblackout(display, animated: false)
+                if power != .visible {
+                    persistPowerState(.visible, for: id)
+                }
+                continue
+            }
+            if power == .visible {
+                if runtimeBlackoutActive {
+                    blackoutManager.unblackout(display, animated: settings.fadeInAnimationEnabled)
+                }
+                continue
+            }
+            // Avoid forcing stale persisted sleep/blackout states when the current runtime
+            // has no evidence the display is intentionally asleep.
+            if runtimeBlackoutActive || runtimeStandbyActive {
+                continue
+            }
+            persistPowerState(.visible, for: id)
+        }
+        return []
+    }
+
+    /// Decides whether automatic startup/wake restore should actively push brightness for this display.
+    private func shouldApplyPersistedBrightnessOnAutomaticRestore(for display: DisplayInfo, settings: DimlySettings) -> Bool {
+        let id = display.stableIdentity
+        if settings.overlayOnlyDisplayIDs.contains(id) {
+            return true
+        }
+        let ddcStatus = ddcManager.states[id]?.status
+        // Avoid applying fallback dim overlays during startup/wake while DDC is unresolved/unsupported.
+        return ddcStatus == .supported
     }
 
     /// Mirrors active blackout overlays into persisted monitor power states.
@@ -785,7 +871,11 @@ final class DimlyEngine {
         guard !resolvedIDs.isEmpty else { return }
         reapplyPendingBrightnessForResolvedDisplays(resolvedIDs)
         DiagnosticsLogger.shared.log("DDC support resolved for \(resolvedIDs.count) displays; reapplying persisted monitor state", category: "engine")
-        restorePersistedMonitorState(reason: "ddcSupportResolved", remainingAttempts: 3)
+        schedulePersistedMonitorStateRestore(
+            reason: "ddcSupportResolved",
+            remainingAttempts: 3,
+            initialDelayNanoseconds: ddcResolvedRestoreDelayNanoseconds
+        )
     }
 
     /// Replays deferred brightness targets after DDC support transitions out of "unknown".
