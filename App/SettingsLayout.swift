@@ -226,6 +226,7 @@ struct SettingsToggleRow: View {
 }
 
 struct SettingsWindowToolbarHider: ViewModifier {
+    /// Injects a placeholder toolbar item so AppKit keeps the unified toolbar area stable.
     func body(content: Content) -> some View {
         content
             .toolbar {
@@ -238,17 +239,20 @@ struct SettingsWindowToolbarHider: ViewModifier {
 }
 
 extension View {
+    /// Hides default settings-window toolbar artifacts while preserving window chrome.
     func hideSettingsToolbar() -> some View {
         modifier(SettingsWindowToolbarHider())
     }
 }
 
-// Removes leftover sidebar/separator toolbar items and keeps the toolbar alive.
+// Cleans toolbar leftovers while keeping the toolbar attached.
 private struct SettingsToolbarCleaner: NSViewRepresentable {
+    /// Initializes the coordinator that owns toolbar cleanup.
     func makeCoordinator() -> Coordinator {
         Coordinator()
     }
 
+    /// Initializes a host view and schedules the first cleanup pass.
     func makeNSView(context: Context) -> NSView {
         let view = NSView(frame: .zero)
         Task { @MainActor in
@@ -257,6 +261,7 @@ private struct SettingsToolbarCleaner: NSViewRepresentable {
         return view
     }
 
+    /// Re-attaches cleanup after view/window reparenting changes.
     func updateNSView(_ nsView: NSView, context: Context) {
         Task { @MainActor in
             context.coordinator.attachToolbar(to: nsView.window)
@@ -266,6 +271,7 @@ private struct SettingsToolbarCleaner: NSViewRepresentable {
     final class Coordinator: NSObject, NSToolbarDelegate {
         private let placeholderID = NSToolbarItem.Identifier("settings.toolbar.placeholder")
 
+        /// Ensures a toolbar exists, then applies prune/placeholder rules.
         @MainActor func attachToolbar(to window: NSWindow?) {
             guard let window else { return }
             if window.toolbar == nil {
@@ -275,6 +281,7 @@ private struct SettingsToolbarCleaner: NSViewRepresentable {
             pruneToolbarItems(in: window.toolbar)
         }
 
+        /// Removes unwanted sidebar/separator items and guarantees a placeholder item.
         @MainActor private func pruneToolbarItems(in toolbar: NSToolbar?) {
             guard let toolbar else { return }
             let removalIndices = toolbar.items.enumerated().compactMap { index, item in
@@ -292,14 +299,17 @@ private struct SettingsToolbarCleaner: NSViewRepresentable {
             }
         }
 
+        /// Restricts the toolbar to the placeholder item only.
         func toolbarAllowedItemIdentifiers(_ toolbar: NSToolbar) -> [NSToolbarItem.Identifier] {
             [placeholderID]
         }
 
+        /// Supplies the toolbar's default item set.
         func toolbarDefaultItemIdentifiers(_ toolbar: NSToolbar) -> [NSToolbarItem.Identifier] {
             [placeholderID]
         }
 
+        /// Creates the placeholder toolbar item used to keep the toolbar attached.
         func toolbar(
             _ toolbar: NSToolbar,
             itemForItemIdentifier itemIdentifier: NSToolbarItem.Identifier,

@@ -1,17 +1,17 @@
 // MARK: - Login Item Toggle
-// Wraps macOS login-item APIs so settings can keep a single entry point.
+// Login-item state management.
 import Foundation
 import ServiceManagement
 import OSLog
 
-/// Coordinates enabling or disabling Dimly as a login item.
+/// Enables or disables the app login item.
 enum LaunchAtLoginManager {
     private static let loginItemLogger = Logger(
         subsystem: Bundle.main.bundleIdentifier ?? "Dimly",
         category: "LaunchAtLogin"
     )
 
-    /// Attempts to update the login item state using the best API available for the platform.
+    /// Updates login-item state using the best API available on this platform.
     static func setEnabled(_ shouldEnableLoginItem: Bool) {
         Task.detached(priority: .utility) {
             let start = Date()
@@ -33,6 +33,7 @@ enum LaunchAtLoginManager {
         }
     }
 
+    /// Uses `SMAppService` to register/unregister only when a state change is required.
     private static func setEnabledWithServiceManagement(_ shouldEnableLoginItem: Bool) async throws {
         // Fast exit when the service is already in the desired state.
         if !needsUpdate(targetState: shouldEnableLoginItem) {

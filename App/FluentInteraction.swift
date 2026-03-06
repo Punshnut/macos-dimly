@@ -15,6 +15,7 @@ struct FluentPressButtonStyle: ButtonStyle {
 
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
 
+    /// Applies a quick press-down feedback that respects Reduce Motion.
     func makeBody(configuration: Configuration) -> some View {
         configuration.label
             .scaleEffect(configuration.isPressed && !reduceMotion ? pressedScale : 1)
@@ -32,6 +33,7 @@ private struct HoverLiftModifier: ViewModifier {
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
     @State private var isHovering = false
 
+    /// Adds a subtle hover lift/shadow effect for desktop pointer interaction.
     func body(content: Content) -> some View {
         content
             .scaleEffect((enabled && isHovering && !reduceMotion) ? hoverScale : 1)
@@ -53,6 +55,7 @@ private struct HoverLiftModifier: ViewModifier {
 }
 
 extension View {
+    /// Opts a view into Dimly's reusable hover-lift treatment.
     func dimlyHoverLift(enabled: Bool = true, hoverScale: CGFloat = 1.015, shadowOpacity: Double = 0.12) -> some View {
         modifier(HoverLiftModifier(enabled: enabled, hoverScale: hoverScale, shadowOpacity: shadowOpacity))
     }

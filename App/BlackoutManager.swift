@@ -1,6 +1,5 @@
 // MARK: - Blackout Manager
-// Owns the lifecycle of fullscreen blackout overlays per external display,
-// persisting state and reacting to hardware changes.
+// Lifecycle manager for external-display blackout overlays.
 import AppKit
 import QuartzCore
 import Combine
@@ -24,7 +23,7 @@ final class BlackoutManager: ObservableObject {
     private let startupFadeDelay: TimeInterval = 0.12
     private var didReplayStartupFade = false
 
-    /// Creates the manager and restores persisted blackout state.
+    /// Initializes the manager and restores persisted blackout state.
     init(displayManager: DisplayManager, startupRestoreAnimated: Bool) {
         self.displayManager = displayManager
         self.startupRestoreAnimated = startupRestoreAnimated
@@ -37,7 +36,7 @@ final class BlackoutManager: ObservableObject {
 
     // MARK: - Public API
 
-    /// Returns true when any blackout or transition overlay is visible.
+    /// Indicates whether any blackout or transition overlay is visible.
     var hasAnyOverlays: Bool {
         !overlays.isEmpty || !transitionOverlays.isEmpty || !brightnessFallbackOverlays.isEmpty
     }
@@ -51,7 +50,7 @@ final class BlackoutManager: ObservableObject {
         }
     }
 
-    /// Blackouts a display by showing a fullscreen overlay window.
+    /// Applies blackout to a display by showing a fullscreen overlay.
     func blackout(_ display: DisplayInfo, animated: Bool, delay: TimeInterval = 0, deferShow: Bool = false) {
         guard display.isExternal else {
             logger.info("Refusing to blackout non-external display \(display.stableIdentity, privacy: .public)")
@@ -109,7 +108,7 @@ final class BlackoutManager: ObservableObject {
         DiagnosticsLogger.shared.log("Toggle all external blackout active=\(anyActive)", category: "blackout")
     }
 
-    /// Panic: clear all overlays.
+    /// Clears all blackout and transition overlays immediately.
     func panic(animated: Bool) {
         overlays.values.forEach { $0.hide(animated: animated) }
         transitionOverlays.values.forEach { window in
@@ -136,7 +135,7 @@ final class BlackoutManager: ObservableObject {
         DiagnosticsLogger.shared.log("Panic cleared overlays", category: "blackout")
     }
 
-    /// Ensure no windows stay around if the app is quitting.
+    /// Closes all overlay windows during app shutdown.
     func cleanupBeforeExit() {
         overlays.values.forEach { window in
             window.hide(animated: false)
@@ -158,7 +157,7 @@ final class BlackoutManager: ObservableObject {
         persistState()
     }
 
-    /// Fades out all overlays before quitting, then closes them.
+    /// Fades out and closes all overlays before exit.
     func fadeOutAllAndClose(animated: Bool, completion: @escaping () -> Void) {
         let blackoutWindows = Array(overlays.values) + Array(transitionOverlays.values)
         let brightnessWindows = Array(brightnessFallbackOverlays.values)
@@ -358,7 +357,7 @@ final class BlackoutManager: ObservableObject {
         return restored
     }
 
-    /// Shows the overlay, optionally delayed.
+    /// Presents an overlay, optionally after a delay.
     private func show(_ window: BlackoutWindow, animated: Bool, delay: TimeInterval) {
         guard delay > 0, animated else {
             window.show(animated: animated)
@@ -384,12 +383,12 @@ final class BlackoutManager: ObservableObject {
 
     // MARK: - Transition overlays
 
-    /// Returns true when a persistent overlay exists for the display.
+    /// Indicates whether a persistent overlay exists for the display.
     func hasPersistentOverlay(for display: DisplayInfo) -> Bool {
         overlays[display.stableIdentity] != nil
     }
 
-    /// Shows a temporary overlay during DDC transitions.
+    /// Presents a temporary overlay during DDC transitions.
     func showTransitionOverlay(for display: DisplayInfo, animated: Bool, completion: (() -> Void)? = nil) {
         guard display.isExternal else {
             completion?()
@@ -462,13 +461,13 @@ final class BlackoutManager: ObservableObject {
     }
 }
 
-/// Simple borderless black window pinned to a display.
+/// Borderless black window pinned to a display.
 final class BlackoutWindow: NSWindow {
     private enum Animation {
         static let duration: TimeInterval = 0.45
     }
 
-    /// Plain view that paints a black background.
+    /// Backing view that paints black.
     private final class BlackoutView: NSView {
         override var wantsUpdateLayer: Bool { true }
 
@@ -481,7 +480,7 @@ final class BlackoutWindow: NSWindow {
     private var animationToken: Int = 0
     private var pendingCompletions: [Int: () -> Void] = [:]
 
-    /// Creates a borderless overlay window for the given screen.
+    /// Initializes a borderless overlay window for a screen.
     init(screen: NSScreen) {
         super.init(
             contentRect: screen.frame,
@@ -511,7 +510,7 @@ final class BlackoutWindow: NSWindow {
         blackoutView.frame = CGRect(origin: .zero, size: screen.frame.size)
     }
 
-    /// Shows the overlay with an optional fade animation.
+    /// Presents the overlay, optionally with a fade animation.
     func show(animated: Bool, completion: (() -> Void)? = nil) {
         animationToken += 1
         let token = animationToken
@@ -557,11 +556,13 @@ final class BlackoutWindow: NSWindow {
         }
     }
 
+    /// Queues an animation completion tied to the current animation token.
     private func enqueueCompletion(_ completion: (() -> Void)?, token: Int) {
         guard let completion else { return }
         pendingCompletions[token] = completion
     }
 
+    /// Completes the current blackout animation if the token still matches.
     @MainActor private func completeAnimation(token: Int, shouldOrderOut: Bool) {
         guard animationToken == token else {
             pendingCompletions.removeValue(forKey: token)
@@ -593,7 +594,7 @@ final class DimOverlayWindow: NSWindow {
     private var animationToken: Int = 0
     private var pendingCompletions: [Int: () -> Void] = [:]
 
-    /// Creates a borderless dimming overlay for the given screen.
+    /// Initializes a borderless dimming overlay for a screen.
     init(screen: NSScreen) {
         super.init(
             contentRect: screen.frame,
@@ -663,11 +664,13 @@ final class DimOverlayWindow: NSWindow {
         }
     }
 
+    /// Queues an animation completion tied to the current animation token.
     private func enqueueCompletion(_ completion: (() -> Void)?, token: Int) {
         guard let completion else { return }
         pendingCompletions[token] = completion
     }
 
+    /// Completes the current dim-overlay animation if the token still matches.
     @MainActor private func completeAnimation(token: Int) {
         guard animationToken == token else {
             pendingCompletions.removeValue(forKey: token)

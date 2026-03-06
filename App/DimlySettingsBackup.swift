@@ -65,6 +65,7 @@ struct DimlySettingsBackup: Codable {
         self.profileState = type.includesMonitor ? profileState : nil
     }
 
+    /// Applies selected backup sections to a live settings snapshot.
     func applying(
         to settings: DimlySettings,
         includeGeneral: Bool,
@@ -86,6 +87,7 @@ struct DimlySettingsBackup: Codable {
         return updated
     }
 
+    /// Returns imported profile data only when monitor settings are being restored.
     func importedProfileState(includeMonitor: Bool) -> ProfileState? {
         guard includeMonitor else { return nil }
         return profileState
@@ -119,6 +121,7 @@ struct GeneralSettingsPayload: Codable {
         fastActionsVisibilityMode = settings.fastActionsVisibilityMode
     }
 
+    /// Writes general (non-monitor-specific) settings into the target settings object.
     func apply(to settings: inout DimlySettings) {
         settings.launchAtLogin = launchAtLogin
         settings.showMenuBarIcon = showMenuBarIcon
@@ -190,6 +193,7 @@ struct MonitorSettingsPayload: Codable {
         monitorPowerStateByDisplayID = try container.decodeIfPresent([String: PersistedMonitorPowerState].self, forKey: .monitorPowerStateByDisplayID) ?? [:]
     }
 
+    /// Encodes monitor payload while preserving forward/backward compatibility defaults.
     func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(displayAliases, forKey: .displayAliases)
@@ -205,6 +209,7 @@ struct MonitorSettingsPayload: Codable {
         try container.encode(monitorPowerStateByDisplayID, forKey: .monitorPowerStateByDisplayID)
     }
 
+    /// Writes monitor-related settings into the target settings object.
     func apply(to settings: inout DimlySettings) {
         settings.displayAliases = displayAliases
         settings.overlayOnlyDisplayIDs = overlayOnlyDisplayIDs

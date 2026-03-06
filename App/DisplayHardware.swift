@@ -1,5 +1,5 @@
 // MARK: - Display Hardware
-// Thin wrapper around CoreGraphics/IOKit for enumerating and describing displays.
+// CoreGraphics/IOKit helpers for display inventory and metadata.
 import Foundation
 import CoreGraphics
 import CoreGraphics.CGDirectDisplay
@@ -8,7 +8,7 @@ import Darwin
 import IOKit
 import IOKit.graphics
 
-/// Describes a single display's best-effort identifying and descriptive info.
+/// Display identity and descriptive metadata.
 struct DisplayInfo: Identifiable, Equatable {
     let displayID: CGDirectDisplayID
     let uuid: String?
@@ -21,7 +21,7 @@ struct DisplayInfo: Identifiable, Equatable {
     let resolution: String
     let refreshRateHz: Double?
 
-    /// Stable identifier used across sessions (UUID, serial, or fallback to display ID).
+    /// Stable cross-session identifier (UUID, serial, or display ID fallback).
     var stableIdentity: String {
         if let uuid { return uuid }
         if let serialNumber { return "serial-\(serialNumber)" }
@@ -32,11 +32,11 @@ struct DisplayInfo: Identifiable, Equatable {
     var id: String { stableIdentity }
 }
 
-/// Protocol allowing the display manager to be tested by injecting a fake hardware backend.
+/// Hardware abstraction used by `DisplayManager`.
 protocol DisplayHardwareProviding: AnyObject, Sendable {
     /// Returns active CoreGraphics display IDs.
     func activeDisplayIDs() -> [CGDirectDisplayID]
-    /// Builds a `DisplayInfo` for a given display ID.
+    /// Returns `DisplayInfo` for a given display ID.
     func displayInfo(for id: CGDirectDisplayID) -> DisplayInfo
     /// Registers a callback for display changes and returns an opaque token.
     func registerCallback(_ callback: @escaping (CGDirectDisplayID, CGDisplayChangeSummaryFlags) -> Void) -> AnyObject
@@ -44,7 +44,7 @@ protocol DisplayHardwareProviding: AnyObject, Sendable {
     func unregisterCallback(_ token: AnyObject)
 }
 
-/// CoreGraphics/IOKit-backed hardware reader.
+/// Default CoreGraphics/IOKit implementation.
 final class DisplayHardware: DisplayHardwareProviding, @unchecked Sendable {
     private final class CallbackBox {
         let handler: (CGDirectDisplayID, CGDisplayChangeSummaryFlags) -> Void
@@ -174,7 +174,7 @@ final class DisplayHardware: DisplayHardwareProviding, @unchecked Sendable {
         return hz > 1 ? hz : nil
     }
 
-    /// Attempts to read a user-friendly display name via IOKit/EDID.
+    /// Reads a user-friendly display name via IOKit/EDID.
     private static func displayName(for id: CGDirectDisplayID) -> String? {
         // Best-effort using IOKit to read the preferred product name from EDID.
         guard let servicePort = ioServicePort(for: id) else { return nil }
@@ -275,6 +275,7 @@ final class DisplayHardware: DisplayHardwareProviding, @unchecked Sendable {
         return nil
     }()
 
+    /// Reads built-in brightness using private DisplayServices when IODisplay APIs fail.
     private static func displayServicesGetBrightness(_ displayID: CGDirectDisplayID) -> Float? {
         guard let getBrightness = displayServicesGetBrightnessSymbol else { return nil }
         var level: Float = 0
@@ -282,6 +283,7 @@ final class DisplayHardware: DisplayHardwareProviding, @unchecked Sendable {
         return status == 0 ? level : nil
     }
 
+    /// Writes built-in brightness through private DisplayServices fallback.
     private static func displayServicesSetBrightness(_ displayID: CGDirectDisplayID, _ level: Float) -> Bool {
         guard let setBrightness = displayServicesSetBrightnessSymbol else { return false }
         let status = setBrightness(displayID, level)

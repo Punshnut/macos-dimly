@@ -58,6 +58,7 @@ enum HotkeyTarget: Hashable, Codable {
         }
     }
 
+    /// Encodes the target type (`allExternalDisplays` or specific display ID).
     func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         switch self {

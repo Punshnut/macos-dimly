@@ -1,5 +1,5 @@
 // MARK: - DDC/CI Orchestration
-// Encapsulates best-effort DDC power commands and probes external panel capability.
+// DDC power and brightness orchestration for external displays.
 import Foundation
 import Combine
 import CoreGraphics
@@ -36,7 +36,7 @@ struct DDCState: Equatable {
     var lastCommandAt: Date?
 }
 
-/// Handles best-effort DDC/CI commands and per-display capability probing.
+/// Manages DDC probing plus power/brightness commands.
 @MainActor
 final class DDCManager: ObservableObject {
     @Published private(set) var states: [String: DDCState] = [:] // stableIdentity -> state
@@ -106,12 +106,12 @@ final class DDCManager: ObservableObject {
         }
     }
 
-    /// Re-probes a specific display, used when a command failed while status is unresolved.
+    /// Re-probes one display, typically after a failed command while unresolved.
     func refreshProbe(for display: DisplayInfo) {
         scheduleProbe(display, retriesRemaining: probeRetryCount, markAsCableCheck: false)
     }
 
-    /// Attempts to issue a DDC standby command; returns success.
+    /// Sends a DDC standby command. Returns `true` on success.
     func standby(_ display: DisplayInfo) -> Bool {
         let result = sendPowerCommand(display, value: 0x04) // VCP 0xD6 power off
         switch result {
@@ -125,7 +125,7 @@ final class DDCManager: ObservableObject {
         }
     }
 
-    /// Attempts to issue a DDC wake command; returns success.
+    /// Sends a DDC wake command. Returns `true` on success.
     func wake(_ display: DisplayInfo) -> Bool {
         let result = sendPowerCommand(display, value: 0x01) // VCP 0xD6 power on
         switch result {
@@ -139,7 +139,7 @@ final class DDCManager: ObservableObject {
         }
     }
 
-    /// Attempts to set hardware brightness (0-100%) over DDC/CI asynchronously.
+    /// Sets hardware brightness over DDC/CI asynchronously (0...100).
     func setBrightness(_ percent: Int, for display: DisplayInfo, completion: @escaping (Bool) -> Void) {
         let clamped = max(0, min(100, percent))
         if states[display.stableIdentity]?.status == .notSupported {

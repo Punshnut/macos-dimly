@@ -1,10 +1,10 @@
 // MARK: - Dimly Application Entry
-// Wires the SwiftUI scenes, settings store, and background engine together.
+// App entry and scene wiring.
 import SwiftUI
 import AppKit
 import OSLog
 
-/// Dimly entry point. Wires the settings store, engine, menu bar presence, and settings window.
+/// Main app entry point.
 @main
 struct DimlyApp: App {
     @NSApplicationDelegateAdaptor(AppDelegate.self) private var appDelegate
@@ -125,7 +125,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         }
     }
 
-    /// Defers quit until active overlays finish their fade-out teardown.
+    /// Delays termination until overlay teardown completes.
     func applicationShouldTerminate(_ sender: NSApplication) -> NSApplication.TerminateReply {
         guard let settingsEngine else {
             return .terminateNow
@@ -146,7 +146,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         return .terminateLater
     }
 
-    /// Creates the standalone launcher controller and wires engine callbacks to UI toggling.
+    /// Initializes the standalone launcher controller and binds engine callbacks.
     func configureLauncher(
         settingsStore: AppSettingsStore,
         displayManager: DisplayManager,
@@ -180,7 +180,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
 
 
 
-    /// Shows the intro window on first launch.
+    /// Opens the intro window on first launch.
     private func showIntroIfNeeded() {
         showIntro(force: false)
     }
@@ -207,7 +207,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         NSApp.activate(ignoringOtherApps: true)
     }
 
-    /// Builds the application menu (About, Settings, Updates, Quit).
+    /// Configures the app menu (About, Settings, Updates, Quit).
     private func configureMainMenu() {
         let mainMenu = NSMenu()
         let appMenuItem = NSMenuItem()

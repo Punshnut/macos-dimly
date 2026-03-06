@@ -1,14 +1,14 @@
 // MARK: - Intro Window Controller
-// Hosts the first-launch introduction window.
+// AppKit host for the intro window.
 import AppKit
 import SwiftUI
 
-/// Hosts the first-launch intro SwiftUI view inside an AppKit window.
+/// Window controller that hosts `IntroWindowView`.
 final class IntroWindowController: NSWindowController, NSWindowDelegate {
     private let onDismiss: () -> Void
     private static let contentWidth: CGFloat = 520
 
-    /// Creates the intro window and wires a dismissal callback.
+    /// Creates the intro window and binds dismissal.
     init(onDismiss: @escaping () -> Void) {
         self.onDismiss = onDismiss
 

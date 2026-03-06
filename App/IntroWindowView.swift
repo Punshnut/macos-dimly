@@ -1,9 +1,9 @@
 // MARK: - Intro Window
-// Simple first-launch welcome window pointing to the menu bar.
+// First-launch welcome UI.
 import SwiftUI
 import AppKit
 
-/// First-launch welcome UI that points users to the menu bar icon.
+/// Welcome surface shown on first launch.
 struct IntroWindowView: View {
     /// Called when the user dismisses the intro window.
     let onDismiss: () -> Void
@@ -119,6 +119,7 @@ struct IntroWindowView: View {
         .ignoresSafeArea()
     }
 
+    /// Shared rounded card container for grouped intro content blocks.
     @ViewBuilder
     private func introCard<Content: View>(@ViewBuilder content: () -> Content) -> some View {
         VStack(alignment: .leading, spacing: 10) {
@@ -135,6 +136,7 @@ struct IntroWindowView: View {
         )
     }
 
+    /// Compact explanatory tile for a control mode (DDC or overlay).
     private func modeTile(title: String, subtitle: String, symbol: String, color: Color) -> some View {
         VStack(alignment: .leading, spacing: 8) {
             HStack(spacing: 6) {
@@ -162,6 +164,7 @@ struct IntroWindowView: View {
         )
     }
 
+    /// Small status badge shown in section headers.
     private func statusPill(title: String, color: Color) -> some View {
         Text(title)
             .font(.caption2.weight(.semibold))

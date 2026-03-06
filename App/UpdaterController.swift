@@ -1,9 +1,9 @@
 // MARK: - Sparkle Integration
-// Wraps the updater in a tiny coordinator so menu items can trigger updates safely.
+// Sparkle updater coordination for menu actions and window focus.
 import AppKit
 import Sparkle
 
-/// Owns Sparkle's updater and exposes actions for menu items and commands.
+/// Sparkle updater bridge used by menu actions.
 @MainActor
 final class UpdaterController: NSObject, SPUStandardUserDriverDelegate, SPUUpdaterDelegate {
     private lazy var updaterController: SPUStandardUpdaterController = {

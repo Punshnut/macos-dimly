@@ -2,6 +2,7 @@ import AppKit
 
 /// Presents modal alerts on the display that currently contains the mouse cursor.
 enum AlertPresentation {
+    /// Presents an alert centered on the screen currently under the mouse cursor.
     @MainActor
     static func runModalOnCursorScreen(_ alert: NSAlert) -> NSApplication.ModalResponse {
         let mouseLocation = NSEvent.mouseLocation
@@ -30,6 +31,7 @@ enum AlertPresentation {
         return response
     }
 
+    /// Runs an `NSAlert` as a sheet and bridges the completion callback to a blocking modal response.
     @MainActor
     private static func runModalAsSheet(_ alert: NSAlert, for window: NSWindow) -> NSApplication.ModalResponse {
         var response: NSApplication.ModalResponse = .abort

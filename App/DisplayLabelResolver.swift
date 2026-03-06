@@ -1,8 +1,8 @@
 // MARK: - Display Label Resolver
-// Centralizes naming + numbering rules for displays.
+// Shared naming and marker rules for display labels.
 import Foundation
 
-/// Central place for naming and overlay marker rules.
+/// Helper for display titles and overlay markers.
 struct DisplayLabelResolver {
     /// Resolves a friendly, user-facing name for a display.
     static func displayName(

@@ -1,11 +1,10 @@
 // MARK: - Settings Store
-// Centralizes persistence and side effects for user preferences so SwiftUI views
-// can bind to a single observable source of truth.
+// Single source of truth for settings persistence and side effects.
 import AppKit
 import Combine
 import OSLog
 
-/// Observable wrapper around `DimlySettings` so SwiftUI views can react to changes.
+/// Observable settings store used across the app.
 @MainActor
 final class AppSettingsStore: ObservableObject {
     @Published var settings: DimlySettings {
@@ -48,7 +47,7 @@ final class AppSettingsStore: ObservableObject {
         }
     }
 
-    /// Apply non-UI side effects so that toggles immediately change system behavior.
+    /// Applies system-side effects after settings updates.
     private func applySideEffects(for settings: DimlySettings) {
         // Avoid redundant system calls (e.g., failing SMAppService requests) when nothing changed.
         if lastAppliedSettings?.launchAtLogin != settings.launchAtLogin {
@@ -86,6 +85,7 @@ final class AppSettingsStore: ObservableObject {
         }
     }
 
+    /// Reads the current system appearance preference from user defaults.
     private var isSystemInDarkMode: Bool {
         UserDefaults.standard.string(forKey: "AppleInterfaceStyle") == "Dark"
     }

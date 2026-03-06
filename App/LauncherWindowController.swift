@@ -57,6 +57,7 @@ final class LauncherWindowController: NSWindowController, NSWindowDelegate {
         nil
     }
 
+    /// Toggles the standalone launcher window visibility.
     func toggle() {
         guard let window else { return }
         if window.isVisible {
@@ -66,6 +67,7 @@ final class LauncherWindowController: NSWindowController, NSWindowDelegate {
         }
     }
 
+    /// Shows and activates the launcher window.
     func showLauncherWindow() {
         guard let window else { return }
         showWindow(nil)

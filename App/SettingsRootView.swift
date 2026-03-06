@@ -533,6 +533,7 @@ struct SettingsRootView: View {
             reduceMotion ? nil : DimlyMotion.standardSpring
         }
 
+        /// Runs animated state changes unless Reduce Motion is enabled.
         private func runMotion(_ animation: Animation, updates: @escaping () -> Void) {
             if reduceMotion {
                 updates()
@@ -769,6 +770,7 @@ struct SettingsRootView: View {
             }
         }
 
+        /// Groups displays into two-column rows for the settings grid.
         private func displayPairs(_ displays: [DisplayInfo]) -> [[DisplayInfo]] {
             guard displays.isEmpty == false else { return [] }
             var pairs: [[DisplayInfo]] = []
@@ -781,6 +783,7 @@ struct SettingsRootView: View {
             return pairs
         }
 
+        /// Returns display ordering based on merged/separate settings preferences.
         private func displayRows() -> [DisplayInfo] {
             let allDisplays = displayManager.displays
             guard settingsStore.settings.mergeInternalAndExternalDisplays else {
@@ -983,6 +986,7 @@ struct SettingsRootView: View {
             }
         }
 
+        /// Interactive card used in the profile grid (apply, reorder, visibility controls).
         private func profileTile(_ profile: DisplayProfile) -> some View {
             let index = profileManager.profiles.firstIndex(where: { $0.id == profile.id }) ?? 0
             let canMoveUp = index > 0
@@ -1177,11 +1181,13 @@ struct SettingsRootView: View {
             }
         }
 
+        /// Floating tile used while dragging a profile card.
         private func floatingProfilePreview(_ profile: DisplayProfile, size: CGSize) -> some View {
             profileTile(profile)
                 .frame(width: size.width, height: size.height, alignment: .topLeading)
         }
 
+        /// Drag gesture that tracks profile reordering and computes live drop targets.
         private func profileReorderGesture(for profileID: UUID) -> some Gesture {
             DragGesture(minimumDistance: 3, coordinateSpace: .named(profileGridCoordinateSpace))
                 .onChanged { value in
@@ -1203,6 +1209,7 @@ struct SettingsRootView: View {
                 }
         }
 
+        /// Commits the queued profile reorder operation when drag ends.
         private func applyProfileDropIfNeeded() {
             guard let draggedID = draggedProfileID, let profileDropTarget else { return }
             runMotion(DimlyMotion.standardSpring) {
@@ -1215,6 +1222,7 @@ struct SettingsRootView: View {
             }
         }
 
+        /// Resolves the best drop target (before/after) for the dragged profile tile.
         private func profileDropTarget(for translation: CGSize, draggedID: UUID) -> ProfileDropTarget? {
             let startFrames = profileDragStartFramesByID.isEmpty ? profileFramesByID : profileDragStartFramesByID
             guard let draggedFrame = startFrames[draggedID] else { return nil }
@@ -1260,6 +1268,7 @@ struct SettingsRootView: View {
             return candidate
         }
 
+        /// Chooses the insertion slot with best overlap/proximity for the dragged tile.
         private func bestProfileInsertionFit(
             for dragRect: CGRect,
             reducedIDs: [UUID]
@@ -1304,6 +1313,7 @@ struct SettingsRootView: View {
             return (bestIndex, orderedVisibleIDs, bestDistance, stepX, stepY)
         }
 
+        /// Detects drag targets that would keep the profile in its current position.
         private func isNoOpProfileMove(
             draggedID: UUID,
             fromIndex: Int,
@@ -1324,6 +1334,7 @@ struct SettingsRootView: View {
             return insertionIndex == fromIndex
         }
 
+        /// Builds candidate insertion rects for profile-grid drag/drop.
         private func profileInsertionSlotRects(
             frames: [CGRect],
             slotSize: CGSize,
@@ -1367,12 +1378,14 @@ struct SettingsRootView: View {
             return slots
         }
 
+        /// Infers horizontal tile spacing for drag threshold calculations.
         private func inferredProfileStepX(from frames: [CGRect], fallback: CGFloat) -> CGFloat {
             let centers = frames.map { $0.center.x }.sorted()
             let diffs = zip(centers, centers.dropFirst()).map { $1 - $0 }.filter { $0 > 2 }
             return diffs.median ?? fallback
         }
 
+        /// Infers vertical row spacing for drag threshold calculations.
         private func inferredProfileStepY(from frames: [CGRect], fallback: CGFloat) -> CGFloat {
             let centers = frames.map { $0.center.y }.sorted()
             let diffs = zip(centers, centers.dropFirst()).map { $1 - $0 }.filter { $0 > 2 }
@@ -1382,6 +1395,7 @@ struct SettingsRootView: View {
         private struct ProfileTileFramePreferenceKey: PreferenceKey {
             static let defaultValue: [UUID: CGRect] = [:]
 
+            /// Merges profile tile frame snapshots for drag/drop calculations.
             static func reduce(value: inout [UUID: CGRect], nextValue: () -> [UUID: CGRect]) {
                 value.merge(nextValue()) { _, new in new }
             }
@@ -1570,6 +1584,7 @@ struct SettingsRootView: View {
             }
         }
 
+        /// Shared tile style for external about/support links.
         private func aboutActionTile(
             title: String,
             subtitle: String,
@@ -1955,7 +1970,7 @@ private struct HotkeyBindingRow: View {
 
 // MARK: - Hotkey Recorder
 
-/// Simple recorder surface that captures a new hotkey descriptor.
+/// Recorder surface for capturing a new hotkey descriptor.
 private struct HotkeyRecorder: View {
     @Binding var descriptor: HotkeyDescriptor?
     @State private var isRecording = false
@@ -2063,6 +2078,7 @@ private extension CGRect {
 }
 
 private extension CGPoint {
+    /// Squared euclidean distance, used for fast nearest-slot comparisons.
     func distanceSquared(to other: CGPoint) -> CGFloat {
         let dx = x - other.x
         let dy = y - other.y
@@ -2071,6 +2087,7 @@ private extension CGPoint {
 }
 
 private extension Array where Element == CGFloat {
+    /// Median value helper for robust spacing estimates in layout heuristics.
     var median: CGFloat? {
         guard isEmpty == false else { return nil }
         let sorted = self.sorted()

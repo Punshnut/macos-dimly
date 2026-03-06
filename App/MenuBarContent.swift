@@ -1,10 +1,10 @@
 // MARK: - Menu Bar UI
-// Status item popover showing quick actions and app controls.
+// Status-item UI for quick actions and display controls.
 import SwiftUI
 import AppKit
 import UniformTypeIdentifiers
 
-/// SwiftUI menu bar contents shown when the status item is visible.
+/// Menu bar surface rendered inside the status-item window.
 struct MenuBarContentView: View {
     enum Presentation {
         case menuBar
@@ -118,6 +118,7 @@ struct MenuBarContentView: View {
         )
     }
 
+    /// Runs animated updates unless Reduce Motion is enabled.
     private func runMotion(_ animation: Animation, updates: @escaping () -> Void) {
         if reduceMotion {
             updates()
@@ -126,6 +127,7 @@ struct MenuBarContentView: View {
         }
     }
 
+    /// Plays a short visual confirmation pulse when a smart button is triggered.
     private func flashSmartButton(_ profileID: UUID) {
         smartButtonFlashIDs.remove(profileID)
         smartButtonPulseIDs.remove(profileID)
@@ -146,6 +148,7 @@ struct MenuBarContentView: View {
         }
     }
 
+    /// Applies a smart-button profile with lightweight tap feedback.
     private func applySmartButton(_ profile: DisplayProfile) {
         guard Date() >= suppressSmartButtonTapUntil else { return }
         flashSmartButton(profile.id)
@@ -200,6 +203,7 @@ struct MenuBarContentView: View {
     }
 
     @ViewBuilder
+    /// Returns the content tree for the selected menu layout mode.
     private func modeContentBody(for mode: LayoutMode) -> some View {
         switch mode {
         case .simple:
@@ -249,6 +253,7 @@ struct MenuBarContentView: View {
         }
     }
 
+    /// Resolves whether quick actions should be visible in the current layout mode.
     private func shouldShowQuickActions(in mode: LayoutMode) -> Bool {
         switch settingsStore.settings.fastActionsVisibilityMode {
         case .hideInCompact:
@@ -413,6 +418,7 @@ struct MenuBarContentView: View {
         layoutMode(for: settingsStore.settings)
     }
 
+    /// Maps persisted settings to the active in-memory layout mode enum.
     private func layoutMode(for settings: DimlySettings) -> LayoutMode {
         switch settings.menuBarLayoutMode {
         case .simple:
@@ -883,6 +889,7 @@ struct MenuBarContentView: View {
         .help(profile.name)
     }
 
+    /// Renders the styled smart-button label with flash/pulse overlays.
     private func smartButtonLabel(
         profile: DisplayProfile,
         compact: Bool,
@@ -1108,6 +1115,7 @@ struct MenuBarContentView: View {
         return (bestIndex, bestDistance, stepX, stepY)
     }
 
+    /// Builds candidate insertion slots for drag-reordering smart buttons.
     private func smartButtonInsertionSlotRects(
         frames: [CGRect],
         slotSize: CGSize,
@@ -1153,12 +1161,14 @@ struct MenuBarContentView: View {
         return slots
     }
 
+    /// Infers horizontal spacing between smart buttons for drop-distance thresholds.
     private func inferredStepX(from frames: [CGRect], fallback: CGFloat) -> CGFloat {
         let centers = frames.map { $0.center.x }.sorted()
         let diffs = zip(centers, centers.dropFirst()).map { $1 - $0 }.filter { $0 > 2 }
         return diffs.median ?? fallback
     }
 
+    /// Infers vertical row spacing for smart-button drag/drop heuristics.
     private func inferredStepY(from frames: [CGRect], columns: Int, fallback: CGFloat) -> CGFloat {
         guard frames.count > columns else { return fallback }
         let centers = frames.map { $0.center.y }.sorted()
@@ -1476,7 +1486,7 @@ struct MenuBarContentView: View {
         )
     }
 
-    /// Builds the per-display control button (sleep/wake for externals, blackout toggle for internals).
+    /// Renders the per-display control button (sleep/wake for externals, blackout toggle for internals).
     private func sleepWakeButton(for display: DisplayInfo) -> AnyView {
         if display.isBuiltin {
             let isBlackoutActive = engine.isDisplayBlackoutActive(display)
@@ -1746,7 +1756,7 @@ struct MenuBarContentView: View {
         .controlSize(.small)
     }
 
-    /// Tiny settings launcher shown as an overlay badge in short mode.
+    /// Compact settings launcher shown as an overlay badge in short mode.
     private var shortModeSettingsBadge: some View {
         SettingsLink {
             Image(systemName: "gearshape.fill")
@@ -1767,7 +1777,7 @@ struct MenuBarContentView: View {
         .help(String(localized: "Settings..."))
     }
 
-    /// Tiny update-check launcher shown as an overlay badge in short mode.
+    /// Compact update launcher shown as an overlay badge in short mode.
     private var shortModeUpdatesBadge: some View {
         Button {
             updaterController.checkForUpdates(nil)
@@ -1976,7 +1986,7 @@ struct MenuBarContentView: View {
         return .partial
     }
 
-    /// Returns true when the display is in blackout or DDC standby.
+    /// Indicates whether the display is in blackout or DDC standby.
     private func isDisplaySuspended(_ display: DisplayInfo) -> Bool {
         if engine.isDisplayBlackoutActive(display) {
             return true
@@ -1984,7 +1994,7 @@ struct MenuBarContentView: View {
         return ddcManager.states[display.stableIdentity]?.lastCommand == .standby
     }
 
-    /// Creates a stable index map for display numbering.
+    /// Computes a stable index map for display numbering.
     private func indexMap(for displays: [DisplayInfo]) -> [String: Int] {
         let ordered = displays.sorted { $0.displayID < $1.displayID }
         var mapping: [String: Int] = [:]
@@ -2180,7 +2190,7 @@ struct MenuBarContentView: View {
         profileManager.saveCurrentProfile(named: input.stringValue.trimmingCharacters(in: .whitespacesAndNewlines))
     }
 
-    /// Builds a human-readable report for troubleshooting.
+    /// Produces a human-readable troubleshooting report.
     private func buildDisplayReport() -> String {
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy-MM-dd HH:mm"
@@ -2217,6 +2227,7 @@ struct MenuBarContentView: View {
     private struct SmartButtonFramePreferenceKey: PreferenceKey {
         static let defaultValue: [UUID: CGRect] = [:]
 
+        /// Merges per-button frame snapshots for drag/drop hit testing.
         static func reduce(value: inout [UUID: CGRect], nextValue: () -> [UUID: CGRect]) {
             value.merge(nextValue()) { _, new in new }
         }
@@ -2225,6 +2236,7 @@ struct MenuBarContentView: View {
     private struct ModeContentHeightPreferenceKey: PreferenceKey {
         static let defaultValue: [LayoutMode: CGFloat] = [:]
 
+        /// Merges measured heights by layout mode for animated container sizing.
         static func reduce(value: inout [LayoutMode: CGFloat], nextValue: () -> [LayoutMode: CGFloat]) {
             value.merge(nextValue()) { _, new in new }
         }
@@ -2252,10 +2264,12 @@ private extension CGRect {
 }
 
 private extension CGPoint {
+    /// Returns a translated copy of this point.
     func offsetBy(dx: CGFloat, dy: CGFloat) -> CGPoint {
         CGPoint(x: x + dx, y: y + dy)
     }
 
+    /// Squared euclidean distance, used to compare proximity without extra sqrt calls.
     func distanceSquared(to other: CGPoint) -> CGFloat {
         let dx = x - other.x
         let dy = y - other.y
@@ -2264,6 +2278,7 @@ private extension CGPoint {
 }
 
 private extension Array where Element == CGFloat {
+    /// Median value used for robust spacing estimates in drag/drop layouts.
     var median: CGFloat? {
         guard isEmpty == false else { return nil }
         let sorted = self.sorted()
@@ -2279,6 +2294,7 @@ private extension Array where Element == CGFloat {
 private struct StaticIconButtonStyle: ButtonStyle {
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
 
+    /// Applies press feedback without changing icon tint semantics.
     func makeBody(configuration: Configuration) -> some View {
         configuration.label
             .scaleEffect(configuration.isPressed && !reduceMotion ? 0.9 : 1)

@@ -1,9 +1,8 @@
 // MARK: - Diagnostics Logger
-// Lightweight file-based logger to complement macOS unified logging in debug builds.
+// File logger used alongside unified logging.
 import Foundation
 
-/// Minimal file logger to capture diagnostics even if unified logging is empty.
-/// Thread-safe via an internal serial queue; marked `@unchecked Sendable` so it can be used across actors.
+/// Small thread-safe logger for local diagnostics.
 final class DiagnosticsLogger: @unchecked Sendable {
     static let shared = DiagnosticsLogger()
 

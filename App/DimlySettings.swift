@@ -308,6 +308,7 @@ struct DimlySettings: Codable, Equatable {
         try container.encode(monitorLastSeenAtByDisplayID, forKey: .monitorLastSeenAtByDisplayID)
     }
 
+    /// Clamps smart-button row limits to the supported range.
     private static func normalizedSmartButtonsLimit(_ value: Int) -> Int {
         max(4, min(16, value))
     }

@@ -133,6 +133,7 @@ struct DisplaySnapshot: Codable, Equatable, Identifiable {
         brightnessPercent = try container.decodeIfPresent(Int.self, forKey: .brightnessPercent)
     }
 
+    /// Encodes a display snapshot, preserving optional hardware identity fields.
     func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(id, forKey: .id)
@@ -199,6 +200,7 @@ struct DisplayProfile: Codable, Identifiable, Equatable {
         smartButtonColorPreset = try container.decodeIfPresent(SmartButtonColorPreset.self, forKey: .smartButtonColorPreset)
     }
 
+    /// Encodes profile metadata and captured display snapshots.
     func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(id, forKey: .id)
@@ -245,6 +247,7 @@ struct ProfileMonitorState: Codable, Equatable {
         monitorBrightnessByDisplayID = settings.monitorBrightnessByDisplayID
     }
 
+    /// Applies captured monitor-related UI state back into live app settings.
     func apply(to settings: inout DimlySettings) {
         settings.menuBarExcludedDisplayIDs = menuBarExcludedDisplayIDs
         settings.menuBarIncludedInternalDisplayIDs = menuBarIncludedInternalDisplayIDs
@@ -266,6 +269,7 @@ struct ProfileMonitorState: Codable, Equatable {
         )
     }
 
+    /// Remaps an ordered ID list while preserving order and removing duplicates.
     private func remap(_ ids: [String], with idMap: [String: String]) -> [String] {
         var remapped: [String] = []
         var seen: Set<String> = []
@@ -278,6 +282,7 @@ struct ProfileMonitorState: Codable, Equatable {
         return remapped
     }
 
+    /// Remaps dictionary keys from snapshot IDs to current display IDs.
     private func remap(_ values: [String: Int], with idMap: [String: String]) -> [String: Int] {
         var remapped: [String: Int] = [:]
         for (id, value) in values {
@@ -559,6 +564,7 @@ final class ProfileManager: ObservableObject {
         return score
     }
 
+    /// Normalizes optional names for relaxed case-insensitive matching.
     private func normalized(_ value: String?) -> String {
         (value ?? "")
             .trimmingCharacters(in: .whitespacesAndNewlines)

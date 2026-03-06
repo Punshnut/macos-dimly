@@ -1,9 +1,9 @@
 // MARK: - Hotkey Infrastructure
-// Describes and registers global shortcuts (including media keys) across Carbon and NSEvent monitors.
+// Global hotkey models and registrars.
 import AppKit
 import Carbon
 
-/// Descriptor describing the key code/modifier combination for a global hotkey.
+/// Key descriptor used for global hotkey registration.
 struct HotkeyDescriptor: Equatable, Hashable, Codable {
     private static let relevantModifiers: NSEvent.ModifierFlags = [.command, .option, .shift, .control]
 
@@ -61,6 +61,7 @@ struct HotkeyDescriptor: Equatable, Hashable, Codable {
         mediaKey = try container.decodeIfPresent(MediaKey.self, forKey: .mediaKey)
     }
 
+    /// Encodes the descriptor for persistence in user settings.
     func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(keyCode, forKey: .keyCode)
@@ -117,10 +118,12 @@ struct HotkeyDescriptor: Equatable, Hashable, Codable {
         filtered(event.modifierFlags)
     }
 
+    /// Keeps only command/option/shift/control and drops unrelated flags.
     private static func filtered(_ modifiers: NSEvent.ModifierFlags) -> NSEvent.ModifierFlags {
         modifiers.intersection(relevantModifiers)
     }
 
+    /// Builds localized modifier labels in the order shown in settings.
     private func modifierDisplayParts() -> [String] {
         var parts: [String] = []
         if modifierFlags.contains(.command) {
@@ -138,6 +141,7 @@ struct HotkeyDescriptor: Equatable, Hashable, Codable {
         return parts
     }
 
+    /// Returns the best available key label for display in the UI.
     private func keyDisplayText() -> String {
         if let mediaKey {
             return mediaKey.displayName
@@ -148,6 +152,7 @@ struct HotkeyDescriptor: Equatable, Hashable, Codable {
         return Self.displayName(for: keyCode)
     }
 
+    /// Converts an `NSEvent` keypress into a normalized printable label.
     private static func displayNameForKey(_ event: NSEvent) -> String {
         let trimmed = event.charactersIgnoringModifiers?.trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
         if trimmed.isEmpty {
@@ -159,6 +164,7 @@ struct HotkeyDescriptor: Equatable, Hashable, Codable {
         return trimmed.uppercased()
     }
 
+    /// Resolves a key code to a localized user-facing label.
     private static func displayName(for keyCode: UInt32) -> String {
         if let known = keyCodeLabels[keyCode] {
             return localizedLabel(known)
@@ -172,7 +178,7 @@ struct HotkeyDescriptor: Equatable, Hashable, Codable {
         return unknownKeyLabel(for: keyCode)
     }
 
-    /// Attempts to extract a media key from a system-defined event.
+    /// Extracts a media key from a system-defined event when available.
     static func mediaKey(from event: NSEvent) -> MediaKey? {
         guard event.type == .systemDefined, event.subtype.rawValue == 8 else {
             return nil
@@ -188,7 +194,7 @@ struct HotkeyDescriptor: Equatable, Hashable, Codable {
         return MediaKey(rawValue: keyCode)
     }
 
-    /// Basic lookup table for readable key names.
+    /// Lookup table for readable key labels.
     private static let keyCodeLabels: [UInt32: String] = [
         UInt32(kVK_Return): "Return",
         UInt32(kVK_Tab): "Tab",
@@ -273,12 +279,14 @@ struct HotkeyDescriptor: Equatable, Hashable, Codable {
         UInt32(kVK_ANSI_KeypadEquals): "Keypad ="
     ]
 
+    /// Localizes non-symbol key labels while preserving single-character/F-key strings.
     private static func localizedLabel(_ label: String) -> String {
         if label.count == 1 { return label }
         if label.hasPrefix("F"), label.dropFirst().allSatisfy({ $0.isNumber }) { return label }
         return String(localized: String.LocalizationValue(label))
     }
 
+    /// Fallback text for unknown key codes.
     private static func unknownKeyLabel(for keyCode: UInt32) -> String {
         String(format: String(localized: "KeyFormat"), Int(keyCode))
     }
@@ -340,7 +348,7 @@ protocol HotkeyRegistering {
     func endListening()
 }
 
-/// Coordinates registering a system-wide hotkey and notifying observers when it fires.
+/// Registers one global hotkey and forwards presses.
 @MainActor
 final class HotkeyManager {
     private var registeredHotkey: HotkeyDescriptor?
@@ -363,7 +371,7 @@ final class HotkeyManager {
         restart()
     }
 
-    /// Attempts to register the configured hotkey, no-opping if already active.
+    /// Registers the configured hotkey, no-oping if already active.
     @discardableResult
     func activate() -> Bool {
         guard isHotkeyActive == false else { return true }

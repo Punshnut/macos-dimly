@@ -1,10 +1,10 @@
 // MARK: - Display Label Manager
-// Shows per-display numeric overlays to help identify screens.
+// On-screen display number overlays.
 import SwiftUI
 import AppKit
 import Combine
 
-/// Controls on-screen numeric overlays used to identify displays.
+/// Manages display-number overlays.
 @MainActor
 final class DisplayLabelManager {
     private let settingsStore: AppSettingsStore

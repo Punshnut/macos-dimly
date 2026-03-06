@@ -205,7 +205,7 @@ final class DimlyEngine {
         blackoutManager.panic(animated: animated)
     }
 
-    /// Returns true when a display is currently in blackout mode.
+    /// Indicates whether a display is currently in blackout mode.
     func isDisplayBlackoutActive(_ display: DisplayInfo) -> Bool {
         if display.isBuiltin {
             return settingsStore.settings.monitorPowerStateByDisplayID[display.stableIdentity] == .blackout
@@ -629,7 +629,7 @@ final class DimlyEngine {
         }
     }
 
-    /// Returns true when a display is blacked out or in DDC standby.
+    /// Indicates whether a display is blacked out or in DDC standby.
     private func isDisplayAsleep(_ display: DisplayInfo) -> Bool {
         if isDisplayBlackoutActive(display) {
             return true
