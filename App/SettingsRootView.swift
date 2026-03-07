@@ -88,7 +88,7 @@ struct SettingsRootView: View {
         alert.accessoryView = input
         let response = AlertPresentation.runModalOnCursorScreen(alert)
         if response == .alertFirstButtonReturn {
-            profileManager.rename(profile: profile, to: input.stringValue)
+            profileManager.rename(profile: profile, to: input.stringValue.trimmingCharacters(in: .whitespacesAndNewlines))
         }
     }
 

@@ -884,6 +884,13 @@ struct MenuBarContentView: View {
         } label: {
             label
         }
+        .contextMenu {
+            Button {
+                renameProfile(profile)
+            } label: {
+                Label(String(localized: "Rename"), systemImage: "pencil")
+            }
+        }
         .buttonStyle(FluentPressButtonStyle(pressedScale: compact ? 0.962 : 0.952, pressedOpacity: 0.88))
         .dimlyHoverLift(enabled: draggedSmartButtonProfileID == nil, hoverScale: compact ? 1.045 : 1.06, shadowOpacity: 0.14)
         .help(profile.name)
@@ -2188,6 +2195,21 @@ struct MenuBarContentView: View {
         let response = AlertPresentation.runModalOnCursorScreen(alert)
         guard response == .alertFirstButtonReturn else { return }
         profileManager.saveCurrentProfile(named: input.stringValue.trimmingCharacters(in: .whitespacesAndNewlines))
+    }
+
+    /// Prompts to rename an existing profile directly from a smart button.
+    private func renameProfile(_ profile: DisplayProfile) {
+        let alert = NSAlert()
+        alert.messageText = String(localized: "Rename Profile")
+        alert.informativeText = String(localized: "Enter a new name for this profile.")
+        alert.addButton(withTitle: String(localized: "Save"))
+        alert.addButton(withTitle: String(localized: "Cancel"))
+        let input = NSTextField(string: profile.name)
+        input.frame = NSRect(x: 0, y: 0, width: 240, height: 24)
+        alert.accessoryView = input
+        let response = AlertPresentation.runModalOnCursorScreen(alert)
+        guard response == .alertFirstButtonReturn else { return }
+        profileManager.rename(profile: profile, to: input.stringValue.trimmingCharacters(in: .whitespacesAndNewlines))
     }
 
     /// Produces a human-readable troubleshooting report.
