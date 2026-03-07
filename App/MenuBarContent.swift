@@ -1655,13 +1655,25 @@ struct MenuBarContentView: View {
             } else {
                 ForEach(profileManager.profiles) { profile in
                     Button(profile.name) {
-                        profileManager.overwriteProfileWithCurrentSettings(profile)
+                        confirmAndOverwriteProfile(profile)
                     }
                 }
             }
         } label: {
             Label(String(localized: "Overwrite Profile"), systemImage: "arrow.triangle.2.circlepath")
                 .frame(maxWidth: maxWidth)
+        }
+    }
+
+    /// Confirms profile overwrite before replacing saved values with current settings.
+    private func confirmAndOverwriteProfile(_ profile: DisplayProfile) {
+        let alert = NSAlert()
+        alert.messageText = String(localized: "Overwrite Profile")
+        alert.informativeText = profile.name
+        alert.addButton(withTitle: String(localized: "Overwrite"))
+        alert.addButton(withTitle: String(localized: "Cancel"))
+        if AlertPresentation.runModalOnCursorScreen(alert) == .alertFirstButtonReturn {
+            profileManager.overwriteProfileWithCurrentSettings(profile)
         }
     }
 

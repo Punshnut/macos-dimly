@@ -1094,7 +1094,7 @@ struct SettingsRootView: View {
                     .buttonStyle(.bordered)
                     .controlSize(.small)
                     Button(String(localized: "Overwrite")) {
-                        profileManager.overwriteProfileWithCurrentSettings(profile)
+                        confirmAndOverwriteProfile(profile)
                     }
                     .buttonStyle(.bordered)
                     .controlSize(.small)
@@ -1134,6 +1134,18 @@ struct SettingsRootView: View {
                         .font(.system(size: 15, weight: .semibold))
                         .foregroundStyle(Color.accentColor.opacity(0.75))
                 )
+        }
+
+        /// Confirms profile overwrite before replacing saved values with current settings.
+        private func confirmAndOverwriteProfile(_ profile: DisplayProfile) {
+            let alert = NSAlert()
+            alert.messageText = String(localized: "Overwrite Profile")
+            alert.informativeText = profile.name
+            alert.addButton(withTitle: String(localized: "Overwrite"))
+            alert.addButton(withTitle: String(localized: "Cancel"))
+            if AlertPresentation.runModalOnCursorScreen(alert) == .alertFirstButtonReturn {
+                profileManager.overwriteProfileWithCurrentSettings(profile)
+            }
         }
 
         private var smartButtonsConfigurationSection: some View {
