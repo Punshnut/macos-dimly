@@ -7,40 +7,17 @@ enum AlertPresentation {
     static func runModalOnCursorScreen(_ alert: NSAlert) -> NSApplication.ModalResponse {
         let mouseLocation = NSEvent.mouseLocation
         let screen = targetScreen(for: mouseLocation) ?? NSScreen.main
-        let frame = screen?.visibleFrame ?? NSScreen.main?.visibleFrame ?? .zero
-        let hostOrigin = NSPoint(x: frame.midX - 0.5, y: frame.midY - 0.5)
-        let hostWindow = NSWindow(
-            contentRect: NSRect(origin: hostOrigin, size: NSSize(width: 1, height: 1)),
-            styleMask: [.borderless],
-            backing: .buffered,
-            defer: false,
-            screen: screen
+        let visibleFrame = screen?.visibleFrame ?? NSScreen.main?.visibleFrame ?? .zero
+        let alertWindow = alert.window
+        let centeredOrigin = NSPoint(
+            x: visibleFrame.midX - (alertWindow.frame.width * 0.5),
+            y: visibleFrame.midY - (alertWindow.frame.height * 0.5)
         )
-        hostWindow.isOpaque = false
-        hostWindow.backgroundColor = .clear
-        hostWindow.hasShadow = false
-        hostWindow.alphaValue = 0
-        hostWindow.ignoresMouseEvents = true
-        hostWindow.level = .modalPanel
-        hostWindow.collectionBehavior = [.transient, .moveToActiveSpace]
-        hostWindow.makeKeyAndOrderFront(nil)
+        alertWindow.setFrameOrigin(centeredOrigin)
+        alertWindow.level = .modalPanel
+        alertWindow.collectionBehavior = [.transient, .moveToActiveSpace]
         NSApp.activate(ignoringOtherApps: true)
-
-        let response = runModalAsSheet(alert, for: hostWindow)
-        hostWindow.orderOut(nil)
-        return response
-    }
-
-    /// Runs an `NSAlert` as a sheet and bridges the completion callback to a blocking modal response.
-    @MainActor
-    private static func runModalAsSheet(_ alert: NSAlert, for window: NSWindow) -> NSApplication.ModalResponse {
-        var response: NSApplication.ModalResponse = .abort
-        alert.beginSheetModal(for: window) { modalResponse in
-            response = modalResponse
-            NSApp.stopModal()
-        }
-        NSApp.runModal(for: window)
-        return response
+        return alert.runModal()
     }
 
     /// Resolves the best target screen for the cursor, including monitor-edge fallback.
