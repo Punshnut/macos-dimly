@@ -1093,6 +1093,11 @@ struct SettingsRootView: View {
                     }
                     .buttonStyle(.bordered)
                     .controlSize(.small)
+                    Button(String(localized: "Overwrite")) {
+                        profileManager.overwriteProfileWithCurrentSettings(profile)
+                    }
+                    .buttonStyle(.bordered)
+                    .controlSize(.small)
                     Spacer(minLength: 0)
                     Button(role: .destructive, action: { profileManager.delete(profile: profile) }) {
                         Text(String(localized: "Delete"))

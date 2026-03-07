@@ -385,13 +385,7 @@ final class ProfileManager: ObservableObject {
 
     /// Captures the current display state into a new named profile.
     func saveCurrentProfile(named name: String) {
-        let snapshots = displayManager.displays.map { display in
-            DisplaySnapshot(
-                from: display,
-                powerState: currentPowerState(for: display),
-                brightnessPercent: currentBrightness(for: display)
-            )
-        }
+        let snapshots = captureCurrentDisplaySnapshots()
         let profile = DisplayProfile(
             id: UUID(),
             name: name.isEmpty
@@ -403,6 +397,16 @@ final class ProfileManager: ObservableObject {
             showInSmartButtons: true
         )
         profiles.append(profile)
+        persist()
+    }
+
+    /// Replaces a saved profile's captured state with the current live setup.
+    func overwriteProfileWithCurrentSettings(_ profile: DisplayProfile) {
+        guard let index = profiles.firstIndex(where: { $0.id == profile.id }) else { return }
+        var updated = profiles[index]
+        updated.displays = captureCurrentDisplaySnapshots()
+        updated.monitorState = ProfileMonitorState(from: settingsStore.settings)
+        profiles[index] = updated
         persist()
     }
 
@@ -700,6 +704,17 @@ final class ProfileManager: ObservableObject {
             engine.standby(display: display)
         case .visible:
             engine.wake(display: display)
+        }
+    }
+
+    /// Captures snapshots for all currently known displays.
+    private func captureCurrentDisplaySnapshots() -> [DisplaySnapshot] {
+        displayManager.displays.map { display in
+            DisplaySnapshot(
+                from: display,
+                powerState: currentPowerState(for: display),
+                brightnessPercent: currentBrightness(for: display)
+            )
         }
     }
 

@@ -64,6 +64,7 @@
 "Save Current Profile" = "Save Current Profile";
 "No profiles yet" = "No profiles yet";
 "Apply Profile" = "Apply Profile";
+"Overwrite Profile" = "Overwrite Profile";
 "Copy Display Report" = "Copy Display Report";
 "Open Diagnostics Log" = "Open Diagnostics Log";
 
@@ -154,6 +155,7 @@
 "Profile name" = "Profile name";
 "No profiles yet. Save the current display setup to create one." = "No profiles yet. Save the current display setup to create one.";
 "Apply" = "Apply";
+"Overwrite" = "Overwrite";
 "Delete" = "Delete";
 "ProfileDisplayCountFormat" = "%lld display(s)";
 "Rename Profile" = "Rename Profile";

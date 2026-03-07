@@ -1619,6 +1619,7 @@ struct MenuBarContentView: View {
                     Label(String(localized: "Save Current Profile"), systemImage: "square.and.arrow.down")
                         .frame(maxWidth: .infinity)
                 }
+                overwriteProfileMenuButton(maxWidth: .infinity)
                 applyProfileMenuButton(maxWidth: .infinity)
             }
             .buttonStyle(.bordered)
@@ -1641,6 +1642,25 @@ struct MenuBarContentView: View {
             }
         } label: {
             Label(String(localized: "Apply Profile"), systemImage: "rectangle.3.group")
+                .frame(maxWidth: maxWidth)
+        }
+    }
+
+    /// Reusable menu button that overwrites a saved profile with the current state.
+    private func overwriteProfileMenuButton(maxWidth: CGFloat? = nil) -> some View {
+        Menu {
+            if profileManager.profiles.isEmpty {
+                Button(String(localized: "No profiles yet")) {}
+                    .disabled(true)
+            } else {
+                ForEach(profileManager.profiles) { profile in
+                    Button(profile.name) {
+                        profileManager.overwriteProfileWithCurrentSettings(profile)
+                    }
+                }
+            }
+        } label: {
+            Label(String(localized: "Overwrite Profile"), systemImage: "arrow.triangle.2.circlepath")
                 .frame(maxWidth: maxWidth)
         }
     }
