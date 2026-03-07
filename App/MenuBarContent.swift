@@ -17,28 +17,6 @@ struct MenuBarContentView: View {
         case short
     }
 
-    private enum SmartButtonDropTarget: Equatable {
-        case before(UUID)
-        case after(UUID)
-    }
-
-    private enum SmartButtonGridItem: Identifiable, Equatable {
-        case profile(UUID)
-        case spacerBefore(UUID)
-        case spacerAfter(UUID)
-
-        var id: String {
-            switch self {
-            case .profile(let id):
-                return "profile-\(id.uuidString)"
-            case .spacerBefore(let targetID):
-                return "spacer-before-\(targetID.uuidString)"
-            case .spacerAfter(let targetID):
-                return "spacer-after-\(targetID.uuidString)"
-            }
-        }
-    }
-
     @ObservedObject var settingsStore: AppSettingsStore
     @ObservedObject var displayManager: DisplayManager
     @ObservedObject var blackoutManager: BlackoutManager
@@ -53,7 +31,7 @@ struct MenuBarContentView: View {
     @State private var smartButtonFramesByProfileID: [UUID: CGRect] = [:]
     @State private var smartButtonDragStartFramesByProfileID: [UUID: CGRect] = [:]
     @State private var smartButtonDragTranslation: CGSize = .zero
-    @State private var smartButtonDropTarget: SmartButtonDropTarget?
+    @State private var smartButtonSwapTargetID: UUID?
     @State private var suppressSmartButtonTapUntil: Date = .distantPast
     @State private var smartButtonFlashIDs: Set<UUID> = []
     @State private var smartButtonPulseIDs: Set<UUID> = []
@@ -768,31 +746,6 @@ struct MenuBarContentView: View {
         Dictionary(uniqueKeysWithValues: smartButtonProfiles.map { ($0.id, $0) })
     }
 
-    /// Render list for the smart-button grid including a temporary spacer while dragging.
-    private var smartButtonGridItems: [SmartButtonGridItem] {
-        let ids = smartButtonProfiles.map(\.id)
-        guard let draggedSmartButtonProfileID,
-              ids.contains(draggedSmartButtonProfileID),
-              let smartButtonDropTarget else {
-            return ids.map { .profile($0) }
-        }
-        let reducedIDs = ids.filter { $0 != draggedSmartButtonProfileID }
-        var items = reducedIDs.map { SmartButtonGridItem.profile($0) }
-        switch smartButtonDropTarget {
-        case .before(let targetID):
-            guard let targetIndex = reducedIDs.firstIndex(of: targetID) else {
-                return ids.map { .profile($0) }
-            }
-            items.insert(.spacerBefore(targetID), at: targetIndex)
-        case .after(let targetID):
-            guard let targetIndex = reducedIDs.firstIndex(of: targetID) else {
-                return ids.map { .profile($0) }
-            }
-            items.insert(.spacerAfter(targetID), at: min(items.count, targetIndex + 1))
-        }
-        return items
-    }
-
     /// Maximum number of smart buttons shown in the menu bar.
     private var smartButtonLimit: Int {
         max(4, min(16, settingsStore.settings.menuBarSmartButtonsLimit))
@@ -810,25 +763,28 @@ struct MenuBarContentView: View {
                 let columns = Array(repeating: GridItem(.flexible(), spacing: 8), count: 4)
                 ZStack(alignment: .topLeading) {
                     LazyVGrid(columns: columns, alignment: .leading, spacing: 8) {
-                        ForEach(smartButtonGridItems) { item in
-                            switch item {
-                            case .profile(let profileID):
-                                if let profile = smartButtonProfileByID[profileID] {
-                                    smartButton(profile, compact: compact)
-                                        .opacity(draggedSmartButtonProfileID == profile.id ? 0.02 : 1)
-                                        .background(
-                                            GeometryReader { geometry in
-                                                Color.clear.preference(
-                                                    key: SmartButtonFramePreferenceKey.self,
-                                                    value: [profile.id: geometry.frame(in: .named(smartButtonsGridCoordinateSpace))]
-                                                )
-                                            }
+                        ForEach(smartButtonProfiles) { profile in
+                            smartButton(profile, compact: compact)
+                                .id(profile.id)
+                                .opacity(draggedSmartButtonProfileID == profile.id ? 0.02 : 1)
+                                .background(
+                                    GeometryReader { geometry in
+                                        Color.clear.preference(
+                                            key: SmartButtonFramePreferenceKey.self,
+                                            value: [profile.id: geometry.frame(in: .named(smartButtonsGridCoordinateSpace))]
                                         )
-                                        .highPriorityGesture(smartButtonReorderGesture(for: profile.id))
-                                }
-                            case .spacerBefore, .spacerAfter:
-                                smartButtonSpacerTile(compact: compact)
-                            }
+                                    }
+                                )
+                                .highPriorityGesture(smartButtonReorderGesture(for: profile.id))
+                                .overlay(
+                                    RoundedRectangle(cornerRadius: compact ? 10 : 12, style: .continuous)
+                                        .stroke(
+                                            draggedSmartButtonProfileID != nil && smartButtonSwapTargetID == profile.id
+                                                ? Color.accentColor.opacity(colorScheme == .dark ? 0.88 : 0.78)
+                                                : Color.clear,
+                                            lineWidth: 2
+                                        )
+                                )
                         }
                 }
 
@@ -851,7 +807,7 @@ struct MenuBarContentView: View {
                 .onPreferenceChange(SmartButtonFramePreferenceKey.self) { frames in
                     smartButtonFramesByProfileID = frames
                 }
-                .animation(quickAnimation, value: smartButtonDropTarget)
+                .animation(quickAnimation, value: smartButtonSwapTargetID)
                 .animation(draggedSmartButtonProfileID == nil ? standardAnimation : nil, value: profileManager.profiles.map(\.id))
             }
         }
@@ -979,21 +935,6 @@ struct MenuBarContentView: View {
             )
     }
 
-    /// Placeholder tile shown at the potential drop location while dragging.
-    private func smartButtonSpacerTile(compact: Bool) -> some View {
-        let minHeight: CGFloat = compact ? 24 : 40
-        let cornerRadius: CGFloat = compact ? 10 : 12
-        return RoundedRectangle(cornerRadius: cornerRadius, style: .continuous)
-            .fill(neutralChromeFill.opacity(0.38))
-            .overlay(
-                RoundedRectangle(cornerRadius: cornerRadius, style: .continuous)
-                    .stroke(neutralStroke.opacity(0.96), style: StrokeStyle(lineWidth: 1, dash: [4, 3]))
-            )
-            .frame(maxWidth: .infinity, minHeight: minHeight)
-            .padding(.vertical, compact ? 0 : 2)
-            .padding(.horizontal, compact ? 2 : 3)
-    }
-
     /// Drag gesture used to preview and then commit smart-button reordering.
     private func smartButtonReorderGesture(for profileID: UUID) -> some Gesture {
         DragGesture(minimumDistance: 3, coordinateSpace: .named(smartButtonsGridCoordinateSpace))
@@ -1005,51 +946,42 @@ struct MenuBarContentView: View {
                        let liveFrame = smartButtonFramesByProfileID[profileID] {
                         smartButtonDragStartFramesByProfileID[profileID] = liveFrame
                     }
-                    smartButtonDropTarget = nil
+                    smartButtonSwapTargetID = nil
                 }
                 smartButtonDragTranslation = value.translation
                 guard let draggedID = draggedSmartButtonProfileID else { return }
-                smartButtonDropTarget = smartButtonDropTarget(for: value.translation, draggedID: draggedID)
+                smartButtonSwapTargetID = smartButtonSwapTarget(for: value.translation, draggedID: draggedID)
             }
             .onEnded { _ in
                 if abs(smartButtonDragTranslation.width) >= 4 || abs(smartButtonDragTranslation.height) >= 4 {
                     // Ignore the trailing button-up tap after a drag.
                     suppressSmartButtonTapUntil = Date().addingTimeInterval(0.25)
                 }
-                applySmartButtonDropIfNeeded()
+                applySmartButtonSwapIfNeeded()
                 draggedSmartButtonProfileID = nil
                 smartButtonDragStartFramesByProfileID.removeAll()
                 smartButtonDragTranslation = .zero
-                smartButtonDropTarget = nil
+                smartButtonSwapTargetID = nil
             }
     }
 
-    /// Commits any pending smart-button drop target to the persisted profile order.
-    private func applySmartButtonDropIfNeeded() {
+    /// Commits the pending smart-button swap target to persisted profile order.
+    private func applySmartButtonSwapIfNeeded() {
         guard let draggedID = draggedSmartButtonProfileID,
-              let smartButtonDropTarget else { return }
+              let targetID = smartButtonSwapTargetID,
+              targetID != draggedID else { return }
         runMotion(DimlyMotion.standardSpring) {
-            switch smartButtonDropTarget {
-            case .before(let targetID):
-                profileManager.moveProfile(draggedID, before: targetID)
-            case .after(let targetID):
-                profileManager.moveProfile(draggedID, after: targetID)
-            }
+            profileManager.swapProfiles(draggedID, with: targetID)
         }
     }
 
-    /// Resolves drop target by fitting the dragged tile rect into virtual grid insertion slots.
-    private func smartButtonDropTarget(for translation: CGSize, draggedID: UUID) -> SmartButtonDropTarget? {
+    /// Resolves which smart button should swap with the dragged one.
+    private func smartButtonSwapTarget(for translation: CGSize, draggedID: UUID) -> UUID? {
         let startFrames = smartButtonDragStartFramesByProfileID.isEmpty ? smartButtonFramesByProfileID : smartButtonDragStartFramesByProfileID
         guard let draggedFrame = startFrames[draggedID] else { return nil }
         if abs(translation.width) < 5 && abs(translation.height) < 5 {
             return nil
         }
-
-        let orderedIDs = smartButtonProfiles.map(\.id)
-        guard let fromIndex = orderedIDs.firstIndex(of: draggedID) else { return nil }
-        let reducedIDs = orderedIDs.filter { $0 != draggedID }
-        guard reducedIDs.isEmpty == false else { return nil }
 
         let dragRect = draggedFrame.offsetBy(dx: translation.width, dy: translation.height)
         // Keep a generous cancel zone around the original tile location so dropping
@@ -1059,113 +991,43 @@ struct MenuBarContentView: View {
             return nil
         }
 
-        guard let fit = bestSmartButtonInsertionFit(for: dragRect, reducedIDs: reducedIDs) else {
+        let orderedIDs = smartButtonProfiles.map(\.id).filter { $0 != draggedID }
+        let candidates: [(id: UUID, frame: CGRect)] = orderedIDs.compactMap { id in
+            guard let frame = smartButtonFramesByProfileID[id] ?? startFrames[id] else { return nil }
+            return (id: id, frame: frame)
+        }
+        guard candidates.isEmpty == false else {
             return nil
         }
 
-        let maxDistance = max(fit.stepX, fit.stepY) * 1.75
-        guard fit.distance <= maxDistance else {
-            return nil
-        }
+        let frames = candidates.map(\.frame)
+        let fallbackStepX = (frames.map(\.width).median ?? draggedFrame.width) + 8
+        let fallbackStepY = (frames.map(\.height).median ?? draggedFrame.height) + 8
+        let stepX = inferredStepX(from: frames, fallback: fallbackStepX)
+        let stepY = inferredStepY(from: frames, columns: 4, fallback: fallbackStepY)
 
-        if fit.insertionIndex == fromIndex {
-            return nil
-        }
-        if fit.insertionIndex >= reducedIDs.count, let lastID = reducedIDs.last {
-            return .after(lastID)
-        }
-        return .before(reducedIDs[fit.insertionIndex])
-    }
+        // Keep target selection in the same row until the user drags far enough vertically.
+        let laneLockThreshold = max(8, stepY * 0.55)
+        let sameRowTolerance = max(4, stepY * 0.34)
+        let scopedCandidates: [(id: UUID, frame: CGRect)] = {
+            guard abs(translation.height) < laneLockThreshold else { return candidates }
+            let sameRow = candidates.filter { abs($0.frame.midY - draggedFrame.midY) <= sameRowTolerance }
+            return sameRow.isEmpty ? candidates : sameRow
+        }()
 
-    /// Picks the insertion slot where the dragged tile physically fits best.
-    private func bestSmartButtonInsertionFit(
-        for dragRect: CGRect,
-        reducedIDs: [UUID]
-    ) -> (insertionIndex: Int, distance: CGFloat, stepX: CGFloat, stepY: CGFloat)? {
-        let liveFrames = smartButtonFramesByProfileID
-        let startFrames = smartButtonDragStartFramesByProfileID
-        let reducedFrames: [CGRect] = reducedIDs.compactMap { id in
-            liveFrames[id] ?? startFrames[id]
-        }
-        guard reducedFrames.count == reducedIDs.count else { return nil }
-
-        let columns = 4
-        let width = reducedFrames.map(\.width).median ?? 36
-        let height = reducedFrames.map(\.height).median ?? 28
-        let stepX = inferredStepX(from: reducedFrames, fallback: width + 8)
-        let stepY = inferredStepY(from: reducedFrames, columns: columns, fallback: height + 8)
-
-        let rowBreakTolerance = max(4, height * 0.22)
-        let slotRects = smartButtonInsertionSlotRects(
-            frames: reducedFrames,
-            slotSize: CGSize(width: width, height: height),
-            rowBreakTolerance: rowBreakTolerance
-        )
-
-        var bestIndex = 0
-        var bestOverlap: CGFloat = -1
-        var bestDistance = CGFloat.greatestFiniteMagnitude
         let dragCenter = dragRect.center
-
-        for slot in slotRects {
-            let slotCenter = slot.rect.center
-            let slotRect = slot.rect
-            let overlap = dragRect.intersection(slotRect).area
-            let distance = dragCenter.distanceSquared(to: slotCenter).squareRoot()
-            if overlap > bestOverlap + 0.5 || (abs(overlap - bestOverlap) <= 0.5 && distance < bestDistance) {
-                bestOverlap = overlap
-                bestDistance = distance
-                bestIndex = slot.insertionIndex
-            }
+        guard let nearest = scopedCandidates.min(by: {
+            dragCenter.distanceSquared(to: $0.frame.center) < dragCenter.distanceSquared(to: $1.frame.center)
+        }) else {
+            return nil
         }
 
-        return (bestIndex, bestDistance, stepX, stepY)
-    }
-
-    /// Builds candidate insertion slots for drag-reordering smart buttons.
-    private func smartButtonInsertionSlotRects(
-        frames: [CGRect],
-        slotSize: CGSize,
-        rowBreakTolerance: CGFloat
-    ) -> [(insertionIndex: Int, rect: CGRect)] {
-        guard frames.isEmpty == false else { return [] }
-        var slots: [(insertionIndex: Int, rect: CGRect)] = []
-
-        for insertionIndex in 0...frames.count {
-            if insertionIndex == 0 {
-                let next = frames[0]
-                let center = CGPoint(x: next.minX - (slotSize.width * 0.5), y: next.midY)
-                slots.append((insertionIndex, CGRect(center: center, size: slotSize)))
-                continue
-            }
-
-            if insertionIndex == frames.count {
-                let previous = frames[insertionIndex - 1]
-                let center = CGPoint(x: previous.maxX + (slotSize.width * 0.5), y: previous.midY)
-                slots.append((insertionIndex, CGRect(center: center, size: slotSize)))
-                continue
-            }
-
-            let previous = frames[insertionIndex - 1]
-            let next = frames[insertionIndex]
-            let sameRow = abs(previous.midY - next.midY) <= rowBreakTolerance
-            if sameRow {
-                let center = CGPoint(
-                    x: (previous.maxX + next.minX) * 0.5,
-                    y: (previous.midY + next.midY) * 0.5
-                )
-                slots.append((insertionIndex, CGRect(center: center, size: slotSize)))
-            } else {
-                // For row breaks, keep both candidates for the same insertion index:
-                // end of previous row and start of next row.
-                let endPreviousRow = CGPoint(x: previous.maxX + (slotSize.width * 0.5), y: previous.midY)
-                let startNextRow = CGPoint(x: next.minX - (slotSize.width * 0.5), y: next.midY)
-                slots.append((insertionIndex, CGRect(center: endPreviousRow, size: slotSize)))
-                slots.append((insertionIndex, CGRect(center: startNextRow, size: slotSize)))
-            }
+        let maxDistance = max(stepX, stepY) * 1.2
+        let nearestDistance = dragCenter.distanceSquared(to: nearest.frame.center).squareRoot()
+        guard nearestDistance <= maxDistance else {
+            return nil
         }
-
-        return slots
+        return nearest.id
     }
 
     /// Infers horizontal spacing between smart buttons for drop-distance thresholds.

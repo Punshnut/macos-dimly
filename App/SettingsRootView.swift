@@ -483,28 +483,6 @@ struct SettingsRootView: View {
     // MARK: - Detail Views
 
     private struct SettingsDetailView: View {
-        private enum ProfileDropTarget: Equatable {
-            case before(UUID)
-            case after(UUID)
-        }
-
-        private enum ProfileGridItem: Identifiable, Equatable {
-            case profile(UUID)
-            case spacerBefore(UUID)
-            case spacerAfter(UUID)
-
-            var id: String {
-                switch self {
-                case .profile(let id):
-                    return "profile-\(id.uuidString)"
-                case .spacerBefore(let targetID):
-                    return "spacer-before-\(targetID.uuidString)"
-                case .spacerAfter(let targetID):
-                    return "spacer-after-\(targetID.uuidString)"
-                }
-            }
-        }
-
         let selection: SettingsDestination
         @ObservedObject var settingsStore: AppSettingsStore
         @ObservedObject var displayManager: DisplayManager
@@ -519,7 +497,7 @@ struct SettingsRootView: View {
         @State private var includeGeneralSettings = true
         @State private var includeMonitorSettings = true
         @State private var draggedProfileID: UUID?
-        @State private var profileDropTarget: ProfileDropTarget?
+        @State private var profileSwapTargetID: UUID?
         @State private var profileFramesByID: [UUID: CGRect] = [:]
         @State private var profileDragStartFramesByID: [UUID: CGRect] = [:]
         @State private var profileDragTranslation: CGSize = .zero
@@ -878,30 +856,6 @@ struct SettingsRootView: View {
             Dictionary(uniqueKeysWithValues: profileManager.profiles.map { ($0.id, $0) })
         }
 
-        private var profileGridItems: [ProfileGridItem] {
-            let ids = profileManager.profiles.map(\.id)
-            guard let draggedProfileID,
-                  ids.contains(draggedProfileID),
-                  let profileDropTarget else {
-                return ids.map { .profile($0) }
-            }
-            let reducedIDs = ids.filter { $0 != draggedProfileID }
-            var items = reducedIDs.map { ProfileGridItem.profile($0) }
-            switch profileDropTarget {
-            case .before(let targetID):
-                guard let targetIndex = reducedIDs.firstIndex(of: targetID) else {
-                    return ids.map { .profile($0) }
-                }
-                items.insert(.spacerBefore(targetID), at: targetIndex)
-            case .after(let targetID):
-                guard let targetIndex = reducedIDs.firstIndex(of: targetID) else {
-                    return ids.map { .profile($0) }
-                }
-                items.insert(.spacerAfter(targetID), at: min(items.count, targetIndex + 1))
-            }
-            return items
-        }
-
         private var profilesDetail: some View {
             SettingsScrollView(title: String(localized: "Profiles"), subtitle: nil, contentMaxWidth: 980) {
                 SettingsCard(title: String(localized: "Profiles"), subtitle: nil) {
@@ -936,26 +890,28 @@ struct SettingsRootView: View {
                                 alignment: .leading,
                                 spacing: 10
                             ) {
-                                ForEach(profileGridItems) { item in
-                                    switch item {
-                                    case .profile(let profileID):
-                                        if let profile = profileByID[profileID] {
-                                            profileTile(profile)
-                                                .id(profile.id)
-                                                .opacity(draggedProfileID == profile.id ? 0.05 : 1)
-                                                .background(
-                                                    GeometryReader { geometry in
-                                                        Color.clear.preference(
-                                                            key: ProfileTileFramePreferenceKey.self,
-                                                            value: [profile.id: geometry.frame(in: .named(profileGridCoordinateSpace))]
-                                                        )
-                                                    }
+                                ForEach(profileManager.profiles) { profile in
+                                    profileTile(profile)
+                                        .id(profile.id)
+                                        .opacity(draggedProfileID == profile.id ? 0.05 : 1)
+                                        .background(
+                                            GeometryReader { geometry in
+                                                Color.clear.preference(
+                                                    key: ProfileTileFramePreferenceKey.self,
+                                                    value: [profile.id: geometry.frame(in: .named(profileGridCoordinateSpace))]
                                                 )
-                                                .simultaneousGesture(profileReorderGesture(for: profile.id))
-                                        }
-                                    case .spacerBefore, .spacerAfter:
-                                        profileReorderSpacerTile
-                                    }
+                                            }
+                                        )
+                                        .simultaneousGesture(profileReorderGesture(for: profile.id))
+                                        .overlay(
+                                            RoundedRectangle(cornerRadius: 12, style: .continuous)
+                                                .stroke(
+                                                    draggedProfileID != nil && profileSwapTargetID == profile.id
+                                                        ? Color.accentColor.opacity(0.8)
+                                                        : Color.clear,
+                                                    lineWidth: 2
+                                                )
+                                        )
                                 }
                             }
                             if let draggedID = draggedProfileID,
@@ -973,7 +929,7 @@ struct SettingsRootView: View {
                         .onPreferenceChange(ProfileTileFramePreferenceKey.self) { frames in
                             profileFramesByID = frames
                         }
-                        .animation(quickAnimation, value: profileDropTarget)
+                        .animation(quickAnimation, value: profileSwapTargetID)
                         .animation(draggedProfileID == nil ? standardAnimation : nil, value: profileManager.profiles.map(\.id))
                         Text(String(localized: "Tip: Drag profile cards to reorder them."))
                             .font(.caption)
@@ -1118,24 +1074,6 @@ struct SettingsRootView: View {
             )
         }
 
-        private var profileReorderSpacerTile: some View {
-            RoundedRectangle(cornerRadius: 12, style: .continuous)
-                .fill(Color.accentColor.opacity(0.08))
-                .overlay(
-                    RoundedRectangle(cornerRadius: 12, style: .continuous)
-                        .stroke(
-                            Color.accentColor.opacity(0.62),
-                            style: StrokeStyle(lineWidth: 1.2, dash: [6, 4])
-                        )
-                )
-                .frame(maxWidth: .infinity, minHeight: 180)
-                .overlay(
-                    Image(systemName: "plus")
-                        .font(.system(size: 15, weight: .semibold))
-                        .foregroundStyle(Color.accentColor.opacity(0.75))
-                )
-        }
-
         /// Confirms profile overwrite before replacing saved values with current settings.
         private func confirmAndOverwriteProfile(_ profile: DisplayProfile) {
             let alert = NSAlert()
@@ -1211,46 +1149,38 @@ struct SettingsRootView: View {
                     if draggedProfileID != profileID {
                         draggedProfileID = profileID
                         profileDragStartFramesByID = profileFramesByID
-                        profileDropTarget = nil
+                        profileSwapTargetID = nil
                     }
                     profileDragTranslation = value.translation
                     guard let draggedID = draggedProfileID else { return }
-                    profileDropTarget = profileDropTarget(for: value.translation, draggedID: draggedID)
+                    profileSwapTargetID = profileSwapTarget(for: value.translation, draggedID: draggedID)
                 }
                 .onEnded { _ in
-                    applyProfileDropIfNeeded()
+                    applyProfileSwapIfNeeded()
                     draggedProfileID = nil
                     profileDragStartFramesByID.removeAll()
                     profileDragTranslation = .zero
-                    profileDropTarget = nil
+                    profileSwapTargetID = nil
                 }
         }
 
-        /// Commits the queued profile reorder operation when drag ends.
-        private func applyProfileDropIfNeeded() {
-            guard let draggedID = draggedProfileID, let profileDropTarget else { return }
+        /// Commits the queued profile swap operation when drag ends.
+        private func applyProfileSwapIfNeeded() {
+            guard let draggedID = draggedProfileID,
+                  let targetID = profileSwapTargetID,
+                  targetID != draggedID else { return }
             runMotion(DimlyMotion.standardSpring) {
-                switch profileDropTarget {
-                case .before(let targetID):
-                    profileManager.moveProfile(draggedID, before: targetID)
-                case .after(let targetID):
-                    profileManager.moveProfile(draggedID, after: targetID)
-                }
+                profileManager.swapProfiles(draggedID, with: targetID)
             }
         }
 
-        /// Resolves the best drop target (before/after) for the dragged profile tile.
-        private func profileDropTarget(for translation: CGSize, draggedID: UUID) -> ProfileDropTarget? {
+        /// Resolves which profile tile should swap with the dragged tile.
+        private func profileSwapTarget(for translation: CGSize, draggedID: UUID) -> UUID? {
             let startFrames = profileDragStartFramesByID.isEmpty ? profileFramesByID : profileDragStartFramesByID
             guard let draggedFrame = startFrames[draggedID] else { return nil }
             if abs(translation.width) < 5 && abs(translation.height) < 5 {
                 return nil
             }
-
-            let orderedIDs = profileManager.profiles.map(\.id)
-            guard let fromIndex = orderedIDs.firstIndex(of: draggedID) else { return nil }
-            let reducedIDs = orderedIDs.filter { $0 != draggedID }
-            guard reducedIDs.isEmpty == false else { return nil }
 
             let dragRect = draggedFrame.offsetBy(dx: translation.width, dy: translation.height)
             let cancelPadding = max(draggedFrame.width, draggedFrame.height) * 0.45
@@ -1258,141 +1188,43 @@ struct SettingsRootView: View {
                 return nil
             }
 
-            guard let fit = bestProfileInsertionFit(for: dragRect, reducedIDs: reducedIDs) else {
-                return nil
-            }
-
-            let maxDistance = max(fit.stepX, fit.stepY) * 1.8
-            guard fit.distance <= maxDistance else {
-                return nil
-            }
-
-            let candidate: ProfileDropTarget = {
-                if fit.insertionIndex >= fit.orderedVisibleIDs.count, let lastID = fit.orderedVisibleIDs.last {
-                    return .after(lastID)
-                }
-                return .before(fit.orderedVisibleIDs[fit.insertionIndex])
-            }()
-
-            if isNoOpProfileMove(
-                draggedID: draggedID,
-                fromIndex: fromIndex,
-                candidate: candidate,
-                profiles: profileManager.profiles
-            ) {
-                return nil
-            }
-            return candidate
-        }
-
-        /// Chooses the insertion slot with best overlap/proximity for the dragged tile.
-        private func bestProfileInsertionFit(
-            for dragRect: CGRect,
-            reducedIDs: [UUID]
-        ) -> (insertionIndex: Int, orderedVisibleIDs: [UUID], distance: CGFloat, stepX: CGFloat, stepY: CGFloat)? {
-            let liveFrames = profileFramesByID
-            let startFrames = profileDragStartFramesByID
-            let visible: [(id: UUID, frame: CGRect)] = reducedIDs.compactMap { id in
-                guard let frame = liveFrames[id] ?? startFrames[id] else { return nil }
+            let orderedIDs = profileManager.profiles.map(\.id).filter { $0 != draggedID }
+            let candidates: [(id: UUID, frame: CGRect)] = orderedIDs.compactMap { id in
+                guard let frame = profileFramesByID[id] ?? startFrames[id] else { return nil }
                 return (id: id, frame: frame)
             }
-            let orderedVisibleIDs = visible.map(\.id)
-            let reducedFrames = visible.map(\.frame)
-            guard reducedFrames.isEmpty == false else { return nil }
+            guard candidates.isEmpty == false else {
+                return nil
+            }
 
-            let width = reducedFrames.map(\.width).median ?? 220
-            let height = reducedFrames.map(\.height).median ?? 160
-            let stepX = inferredProfileStepX(from: reducedFrames, fallback: width + 10)
-            let stepY = inferredProfileStepY(from: reducedFrames, fallback: height + 10)
-            let rowBreakTolerance = max(6, height * 0.22)
-            let slotRects = profileInsertionSlotRects(
-                frames: reducedFrames,
-                slotSize: CGSize(width: width, height: height),
-                rowBreakTolerance: rowBreakTolerance
-            )
+            let frames = candidates.map(\.frame)
+            let fallbackStepX = (frames.map(\.width).median ?? draggedFrame.width) + 10
+            let fallbackStepY = (frames.map(\.height).median ?? draggedFrame.height) + 10
+            let stepX = inferredProfileStepX(from: frames, fallback: fallbackStepX)
+            let stepY = inferredProfileStepY(from: frames, fallback: fallbackStepY)
 
-            var bestIndex = 0
-            var bestOverlap: CGFloat = -1
-            var bestDistance = CGFloat.greatestFiniteMagnitude
+            // Keep swaps in-row unless vertical intent is explicit.
+            let laneLockThreshold = max(10, stepY * 0.55)
+            let sameRowTolerance = max(6, stepY * 0.34)
+            let scopedCandidates: [(id: UUID, frame: CGRect)] = {
+                guard abs(translation.height) < laneLockThreshold else { return candidates }
+                let sameRow = candidates.filter { abs($0.frame.midY - draggedFrame.midY) <= sameRowTolerance }
+                return sameRow.isEmpty ? candidates : sameRow
+            }()
+
             let dragCenter = dragRect.center
-
-            for slot in slotRects {
-                let slotRect = slot.rect
-                let overlap = dragRect.intersection(slotRect).area
-                let distance = dragCenter.distanceSquared(to: slotRect.center).squareRoot()
-                if overlap > bestOverlap + 0.5 || (abs(overlap - bestOverlap) <= 0.5 && distance < bestDistance) {
-                    bestOverlap = overlap
-                    bestDistance = distance
-                    bestIndex = slot.insertionIndex
-                }
+            guard let nearest = scopedCandidates.min(by: {
+                dragCenter.distanceSquared(to: $0.frame.center) < dragCenter.distanceSquared(to: $1.frame.center)
+            }) else {
+                return nil
             }
 
-            return (bestIndex, orderedVisibleIDs, bestDistance, stepX, stepY)
-        }
-
-        /// Detects drag targets that would keep the profile in its current position.
-        private func isNoOpProfileMove(
-            draggedID: UUID,
-            fromIndex: Int,
-            candidate: ProfileDropTarget,
-            profiles: [DisplayProfile]
-        ) -> Bool {
-            let targetIndex: Int?
-            switch candidate {
-            case .before(let targetID):
-                targetIndex = profiles.firstIndex(where: { $0.id == targetID })
-            case .after(let targetID):
-                targetIndex = profiles.firstIndex(where: { $0.id == targetID }).map { $0 + 1 }
+            let maxDistance = max(stepX, stepY) * 1.2
+            let nearestDistance = dragCenter.distanceSquared(to: nearest.frame.center).squareRoot()
+            guard nearestDistance <= maxDistance else {
+                return nil
             }
-            guard var insertionIndex = targetIndex else { return true }
-            if insertionIndex > fromIndex {
-                insertionIndex -= 1
-            }
-            return insertionIndex == fromIndex
-        }
-
-        /// Builds candidate insertion rects for profile-grid drag/drop.
-        private func profileInsertionSlotRects(
-            frames: [CGRect],
-            slotSize: CGSize,
-            rowBreakTolerance: CGFloat
-        ) -> [(insertionIndex: Int, rect: CGRect)] {
-            guard frames.isEmpty == false else { return [] }
-            var slots: [(insertionIndex: Int, rect: CGRect)] = []
-
-            for insertionIndex in 0...frames.count {
-                if insertionIndex == 0 {
-                    let next = frames[0]
-                    let center = CGPoint(x: next.minX - (slotSize.width * 0.5), y: next.midY)
-                    slots.append((insertionIndex, CGRect(center: center, size: slotSize)))
-                    continue
-                }
-
-                if insertionIndex == frames.count {
-                    let previous = frames[insertionIndex - 1]
-                    let center = CGPoint(x: previous.maxX + (slotSize.width * 0.5), y: previous.midY)
-                    slots.append((insertionIndex, CGRect(center: center, size: slotSize)))
-                    continue
-                }
-
-                let previous = frames[insertionIndex - 1]
-                let next = frames[insertionIndex]
-                let sameRow = abs(previous.midY - next.midY) <= rowBreakTolerance
-                if sameRow {
-                    let center = CGPoint(
-                        x: (previous.maxX + next.minX) * 0.5,
-                        y: (previous.midY + next.midY) * 0.5
-                    )
-                    slots.append((insertionIndex, CGRect(center: center, size: slotSize)))
-                } else {
-                    let endPreviousRow = CGPoint(x: previous.maxX + (slotSize.width * 0.5), y: previous.midY)
-                    let startNextRow = CGPoint(x: next.minX - (slotSize.width * 0.5), y: next.midY)
-                    slots.append((insertionIndex, CGRect(center: endPreviousRow, size: slotSize)))
-                    slots.append((insertionIndex, CGRect(center: startNextRow, size: slotSize)))
-                }
-            }
-
-            return slots
+            return nearest.id
         }
 
         /// Infers horizontal tile spacing for drag threshold calculations.

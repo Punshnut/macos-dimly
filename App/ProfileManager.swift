@@ -605,6 +605,15 @@ final class ProfileManager: ObservableObject {
         persist()
     }
 
+    /// Swaps the saved order of two profiles.
+    func swapProfiles(_ firstID: UUID, with secondID: UUID) {
+        guard firstID != secondID else { return }
+        guard let firstIndex = profiles.firstIndex(where: { $0.id == firstID }),
+              let secondIndex = profiles.firstIndex(where: { $0.id == secondID }) else { return }
+        profiles.swapAt(firstIndex, secondIndex)
+        persist()
+    }
+
     /// Moves a profile to appear before another profile.
     func moveProfile(_ draggedID: UUID, before targetID: UUID) {
         guard draggedID != targetID else { return }
