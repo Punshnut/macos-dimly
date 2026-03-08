@@ -806,10 +806,10 @@ final class DimlyEngine {
             let power = settings.monitorPowerStateByDisplayID[id] ?? .visible
             let isPrimary = display.displayID == primaryDisplayID
             let runtimeBlackoutActive = blackoutManager.activeDisplayIDs.contains(id)
-            let runtimeStandbyActive = ddcManager.states[id]?.lastCommand == .standby
+            let runtimeStandbyActive = power == .standby && ddcManager.states[id]?.lastCommand == .standby
 
             if isPrimary && shouldForcePrimaryVisible {
-                if runtimeStandbyActive || power == .standby {
+                if power == .standby {
                     wake(display: display)
                 } else if runtimeBlackoutActive {
                     blackoutManager.unblackout(display, animated: settings.fadeInAnimationEnabled)
@@ -832,7 +832,7 @@ final class DimlyEngine {
                 blackoutManager.clearBrightnessFallback(for: display, animated: false)
             }
 
-            if isPrimary && settleInProgress && (power != .visible || runtimeBlackoutActive || runtimeStandbyActive) {
+            if isPrimary && settleInProgress && (power != .visible || runtimeBlackoutActive) {
                 pendingIDs.insert(id)
             }
 
@@ -858,13 +858,12 @@ final class DimlyEngine {
         let primaryID = primaryDisplay.stableIdentity
         let primaryPower = settings.monitorPowerStateByDisplayID[primaryID] ?? .visible
         let primaryRuntimeBlackoutActive = blackoutManager.activeDisplayIDs.contains(primaryID)
-        let primaryRuntimeStandbyActive = ddcManager.states[primaryID]?.lastCommand == .standby
         let primaryRuntimeBuiltinBlackoutActive = builtinRestoreBrightnessByDisplayID[primaryID] != nil
         let primaryIsDark: Bool
         if primaryDisplay.isBuiltin {
             primaryIsDark = primaryPower == .blackout || primaryRuntimeBuiltinBlackoutActive
         } else {
-            primaryIsDark = primaryPower != .visible || primaryRuntimeBlackoutActive || primaryRuntimeStandbyActive
+            primaryIsDark = primaryPower != .visible || primaryRuntimeBlackoutActive
         }
         guard primaryIsDark else { return false }
 
@@ -887,9 +886,6 @@ final class DimlyEngine {
             return false
         }
         if blackoutManager.activeDisplayIDs.contains(id) {
-            return false
-        }
-        if ddcManager.states[id]?.lastCommand == .standby {
             return false
         }
         return true
