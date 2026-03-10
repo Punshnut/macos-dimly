@@ -351,6 +351,8 @@ final class ProfileManager: ObservableObject {
     private let logger = Logger(subsystem: Bundle.main.bundleIdentifier ?? "Dimly", category: "Profiles")
     private var cancellables: Set<AnyCancellable> = []
     private var previousDisplayIDs: Set<String> = []
+    private var profileApplyGeneration: UInt64 = 0
+    private var pendingProfileBrightnessTasks: [Task<Void, Never>] = []
 
     /// Loads profiles and starts observing display changes for automation.
     init(
@@ -412,6 +414,15 @@ final class ProfileManager: ObservableObject {
 
     /// Applies a profile to current displays, logging missing targets.
     func apply(profile: DisplayProfile) {
+        pendingProfileBrightnessTasks.forEach { $0.cancel() }
+        pendingProfileBrightnessTasks.removeAll()
+        profileApplyGeneration &+= 1
+        let applyGeneration = profileApplyGeneration
+        DiagnosticsLogger.shared.log(
+            "Apply profile name=\(profile.name) generation=\(applyGeneration)",
+            category: "profile"
+        )
+
         let currentDisplays = displayManager.displays
         let matched = resolveSnapshotMappings(profile.displays, to: currentDisplays)
         let appliedSnapshotIDs = Set(matched.map(\.snapshot.id))
@@ -456,25 +467,30 @@ final class ProfileManager: ObservableObject {
             appliedCount += 1
         }
         if let engine {
-            engine.setBrightnessSynchronously(immediateBrightnessTargets, animated: shouldAnimateBrightness)
+            let deduplicatedImmediate = deduplicatedBrightnessTargets(immediateBrightnessTargets)
+            engine.setBrightnessSynchronously(deduplicatedImmediate, animated: shouldAnimateBrightness)
             if !delayedBrightnessTargets.isEmpty {
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.55) {
-                    delayedBrightnessTargets.forEach { target in
-                        engine.setBrightness(target.percent, for: target.display, animated: false)
-                    }
-                }
+                scheduleProfileBrightnessApply(
+                    targets: deduplicatedBrightnessTargets(delayedBrightnessTargets),
+                    afterNanoseconds: 550_000_000,
+                    generation: applyGeneration,
+                    phase: "postWakeDelay"
+                )
             }
             if !retryBrightnessTargets.isEmpty {
-                DispatchQueue.main.asyncAfter(deadline: .now() + 1.6) {
-                    retryBrightnessTargets.forEach { target in
-                        engine.setBrightness(target.percent, for: target.display, animated: false)
-                    }
-                }
-                DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) {
-                    retryBrightnessTargets.forEach { target in
-                        engine.setBrightness(target.percent, for: target.display, animated: false)
-                    }
-                }
+                let deduplicatedRetry = deduplicatedBrightnessTargets(retryBrightnessTargets)
+                scheduleProfileBrightnessApply(
+                    targets: deduplicatedRetry,
+                    afterNanoseconds: 1_600_000_000,
+                    generation: applyGeneration,
+                    phase: "retry1"
+                )
+                scheduleProfileBrightnessApply(
+                    targets: deduplicatedRetry,
+                    afterNanoseconds: 3_000_000_000,
+                    generation: applyGeneration,
+                    phase: "retry2"
+                )
             }
         }
 
@@ -485,6 +501,86 @@ final class ProfileManager: ObservableObject {
             logger.info("Applied profile \(profile.name, privacy: .public) partially to \(appliedCount, privacy: .public) displays; missing: \(missingList, privacy: .public)")
         }
         lastAppliedProfileName = profile.name
+    }
+
+    /// Schedules one delayed profile-brightness phase that is canceled by newer applies.
+    private func scheduleProfileBrightnessApply(
+        targets: [(display: DisplayInfo, percent: Int)],
+        afterNanoseconds delay: UInt64,
+        generation: UInt64,
+        phase: String
+    ) {
+        guard !targets.isEmpty else { return }
+        let task = Task { @MainActor [weak self] in
+            try? await Task.sleep(nanoseconds: delay)
+            guard let self else { return }
+            guard !Task.isCancelled else { return }
+            guard self.profileApplyGeneration == generation else {
+                DiagnosticsLogger.shared.log(
+                    "Skip stale profile brightness phase=\(phase) generation=\(generation) latest=\(self.profileApplyGeneration)",
+                    category: "profile"
+                )
+                return
+            }
+            guard let engine = self.engine else { return }
+            DiagnosticsLogger.shared.log(
+                "Run profile brightness phase=\(phase) generation=\(generation) targets=\(targets.count)",
+                category: "profile"
+            )
+            for target in targets {
+                self.applyProfileBrightnessTargetIfNeeded(
+                    target,
+                    engine: engine,
+                    generation: generation,
+                    phase: phase
+                )
+            }
+        }
+        pendingProfileBrightnessTasks.append(task)
+    }
+
+    /// Applies one profile brightness target only when it still meaningfully differs.
+    private func applyProfileBrightnessTargetIfNeeded(
+        _ target: (display: DisplayInfo, percent: Int),
+        engine: DimlyEngine,
+        generation: UInt64,
+        phase: String
+    ) {
+        guard profileApplyGeneration == generation else { return }
+        let clamped = max(0, min(100, target.percent))
+        let currentState = currentPowerState(for: target.display)
+        let currentBrightness = engine.brightnessPercent(for: target.display)
+        if currentState == .visible, abs(currentBrightness - clamped) <= 1 {
+            DiagnosticsLogger.shared.log(
+                "Skip profile brightness noop id=\(target.display.stableIdentity) phase=\(phase) current=\(currentBrightness) target=\(clamped)",
+                category: "profile"
+            )
+            return
+        }
+        DiagnosticsLogger.shared.log(
+            "Apply profile brightness id=\(target.display.stableIdentity) phase=\(phase) current=\(currentBrightness) target=\(clamped)",
+            category: "profile"
+        )
+        engine.setBrightness(clamped, for: target.display, animated: false)
+    }
+
+    /// Coalesces duplicate display entries while preserving ordering.
+    private func deduplicatedBrightnessTargets(
+        _ targets: [(display: DisplayInfo, percent: Int)]
+    ) -> [(display: DisplayInfo, percent: Int)] {
+        var ordered: [(display: DisplayInfo, percent: Int)] = []
+        var indexByDisplayID: [String: Int] = [:]
+        for target in targets {
+            let id = target.display.stableIdentity
+            let clamped = max(0, min(100, target.percent))
+            if let index = indexByDisplayID[id] {
+                ordered[index] = (display: target.display, percent: clamped)
+            } else {
+                indexByDisplayID[id] = ordered.count
+                ordered.append((display: target.display, percent: clamped))
+            }
+        }
+        return ordered
     }
 
     /// Resolves profile snapshots to currently connected displays with robust fallback matching.

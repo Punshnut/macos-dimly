@@ -14,6 +14,12 @@ enum BrightnessControlMode {
 /// Core, non-UI engine that owns hotkeys and display actions.
 @MainActor
 final class DimlyEngine {
+    private struct RestoreBrightnessWriteRecord {
+        let percent: Int
+        let writtenAt: Date
+        let reason: String
+    }
+
     private let settingsStore: AppSettingsStore
     private let launcherHotkeyManager: HotkeyManager
     private let panicHotkeyManager: HotkeyManager
@@ -36,12 +42,26 @@ final class DimlyEngine {
     private let displayChangeRestoreDelayNanoseconds: UInt64 = 180_000_000
     private let wakeRestoreDelayNanoseconds: UInt64 = 750_000_000
     private let ddcResolvedRestoreDelayNanoseconds: UInt64 = 120_000_000
+    private let postSessionUnlockRestoreDelayNanoseconds: UInt64 = 420_000_000
     private let topologySettleGraceWindowNanoseconds: UInt64 = 1_900_000_000
+    private let topologyQuietWindowNanoseconds: UInt64 = 1_100_000_000
+    private let wakeSettleMaximumWindowNanoseconds: UInt64 = 8_000_000_000
+    private let duplicateAutomaticRestoreSuppressWindow: TimeInterval = 2.4
     private var workspaceWakeToken: NSObjectProtocol?
     private var workspaceScreensWakeToken: NSObjectProtocol?
+    private var workspaceSessionDidResignToken: NSObjectProtocol?
+    private var workspaceSessionDidBecomeToken: NSObjectProtocol?
+    private var distributedScreenLockedToken: NSObjectProtocol?
+    private var distributedScreenUnlockedToken: NSObjectProtocol?
     private var monitorRestoreTask: Task<Void, Never>?
     private var monitorRestoreGeneration: UInt64 = 0
     private var topologySettleDeadline: Date?
+    private var wakeSettleHardDeadline: Date?
+    private var lastDisplayTopologyChangeAt: Date = .distantPast
+    private var activeRestoreCycleGeneration: UInt64?
+    private var automaticRestoreBrightnessWriteRecordByDisplayID: [String: RestoreBrightnessWriteRecord] = [:]
+    private var isSessionInteractive = true
+    private var deferredRestoreReasonsAfterSessionUnlock: Set<String> = []
     let displayManager: DisplayManager
     let blackoutManager: BlackoutManager
     let ddcManager: DDCManager
@@ -91,7 +111,7 @@ final class DimlyEngine {
             }
 
         profileManager.engine = self
-        beginTopologySettleGraceWindow()
+        beginTopologySettleGraceWindow(reason: "startup")
         schedulePersistedMonitorStateRestore(reason: "startup", remainingAttempts: 5)
 
         workspaceWakeToken = NSWorkspace.shared.notificationCenter.addObserver(
@@ -101,7 +121,7 @@ final class DimlyEngine {
         ) { [weak self] _ in
             Task { @MainActor [weak self] in
                 guard let self else { return }
-                self.beginTopologySettleGraceWindow()
+                self.beginTopologySettleGraceWindow(reason: "workspaceDidWake")
                 self.schedulePersistedMonitorStateRestore(
                     reason: "workspaceDidWake",
                     remainingAttempts: 5,
@@ -116,12 +136,49 @@ final class DimlyEngine {
         ) { [weak self] _ in
             Task { @MainActor [weak self] in
                 guard let self else { return }
-                self.beginTopologySettleGraceWindow()
+                self.beginTopologySettleGraceWindow(reason: "workspaceScreensDidWake")
                 self.schedulePersistedMonitorStateRestore(
                     reason: "workspaceScreensDidWake",
                     remainingAttempts: 5,
                     initialDelayNanoseconds: self.wakeRestoreDelayNanoseconds
                 )
+            }
+        }
+        workspaceSessionDidResignToken = NSWorkspace.shared.notificationCenter.addObserver(
+            forName: NSWorkspace.sessionDidResignActiveNotification,
+            object: nil,
+            queue: .main
+        ) { [weak self] _ in
+            Task { @MainActor [weak self] in
+                self?.updateSessionInteractivity(isInteractive: false, source: "workspaceSessionDidResign")
+            }
+        }
+        workspaceSessionDidBecomeToken = NSWorkspace.shared.notificationCenter.addObserver(
+            forName: NSWorkspace.sessionDidBecomeActiveNotification,
+            object: nil,
+            queue: .main
+        ) { [weak self] _ in
+            Task { @MainActor [weak self] in
+                self?.updateSessionInteractivity(isInteractive: true, source: "workspaceSessionDidBecome")
+            }
+        }
+        let distributedCenter = DistributedNotificationCenter.default()
+        distributedScreenLockedToken = distributedCenter.addObserver(
+            forName: Notification.Name("com.apple.screenIsLocked"),
+            object: nil,
+            queue: .main
+        ) { [weak self] _ in
+            Task { @MainActor [weak self] in
+                self?.updateSessionInteractivity(isInteractive: false, source: "distributedScreenLocked")
+            }
+        }
+        distributedScreenUnlockedToken = distributedCenter.addObserver(
+            forName: Notification.Name("com.apple.screenIsUnlocked"),
+            object: nil,
+            queue: .main
+        ) { [weak self] _ in
+            Task { @MainActor [weak self] in
+                self?.updateSessionInteractivity(isInteractive: true, source: "distributedScreenUnlocked")
             }
         }
 
@@ -147,6 +204,19 @@ final class DimlyEngine {
         }
         if let workspaceScreensWakeToken {
             NSWorkspace.shared.notificationCenter.removeObserver(workspaceScreensWakeToken)
+        }
+        if let workspaceSessionDidResignToken {
+            NSWorkspace.shared.notificationCenter.removeObserver(workspaceSessionDidResignToken)
+        }
+        if let workspaceSessionDidBecomeToken {
+            NSWorkspace.shared.notificationCenter.removeObserver(workspaceSessionDidBecomeToken)
+        }
+        let distributedCenter = DistributedNotificationCenter.default()
+        if let distributedScreenLockedToken {
+            distributedCenter.removeObserver(distributedScreenLockedToken)
+        }
+        if let distributedScreenUnlockedToken {
+            distributedCenter.removeObserver(distributedScreenUnlockedToken)
         }
     }
 
@@ -355,11 +425,19 @@ final class DimlyEngine {
         let overlayOnly = settings.overlayOnlyDisplayIDs.contains(display.stableIdentity)
         let ddcStatus = ddcManager.states[display.stableIdentity]?.status
         let canAttemptDDC = !overlayOnly && ddcStatus != .notSupported
+        DiagnosticsLogger.shared.log(
+            "Brightness write id=\(display.stableIdentity) target=\(clamped) persist=\(persist) overlayOnly=\(overlayOnly) ddcStatus=\(ddcStatus?.rawValue ?? "nil")",
+            category: "engine"
+        )
         if overlayOnly {
             blackoutManager.setBrightnessFallback(
                 clamped,
                 for: display,
                 animated: fallbackAnimated
+            )
+            DiagnosticsLogger.shared.log(
+                "Brightness path=fallback-overlayOnly id=\(display.stableIdentity) target=\(clamped)",
+                category: "engine"
             )
             pendingBrightnessByDisplayID.removeValue(forKey: display.stableIdentity)
             return
@@ -371,6 +449,10 @@ final class DimlyEngine {
                 animated: fallbackAnimated
             )
             // Keep pending target so it can be replayed once DDC capability resolves.
+            DiagnosticsLogger.shared.log(
+                "Brightness path=fallback-ddcUnknown id=\(display.stableIdentity) target=\(clamped)",
+                category: "engine"
+            )
             return
         }
         if canAttemptDDC {
@@ -378,10 +460,18 @@ final class DimlyEngine {
                 guard let self else { return }
                 guard self.brightnessRequestRevisionByDisplayID[display.stableIdentity] == revision else { return }
                 if success {
+                    DiagnosticsLogger.shared.log(
+                        "Brightness path=ddc-success id=\(display.stableIdentity) target=\(clamped)",
+                        category: "engine"
+                    )
                     self.blackoutManager.clearBrightnessFallback(for: display)
                     self.pendingBrightnessByDisplayID.removeValue(forKey: display.stableIdentity)
                     return
                 }
+                DiagnosticsLogger.shared.log(
+                    "Brightness path=ddc-failed-fallback id=\(display.stableIdentity) target=\(clamped)",
+                    category: "engine"
+                )
                 self.blackoutManager.setBrightnessFallback(
                     clamped,
                     for: display,
@@ -395,6 +485,10 @@ final class DimlyEngine {
             clamped,
             for: display,
             animated: fallbackAnimated
+        )
+        DiagnosticsLogger.shared.log(
+            "Brightness path=fallback-ddcNotSupported id=\(display.stableIdentity) target=\(clamped)",
+            category: "engine"
         )
         pendingBrightnessByDisplayID.removeValue(forKey: display.stableIdentity)
     }
@@ -648,6 +742,7 @@ final class DimlyEngine {
             .removeDuplicates()
             .sink { [weak self] displays in
                 guard let self else { return }
+                self.recordDisplayTopologyChange(displays: displays)
                 self.trackMonitorLastSeenAndPruneStaleState(displays)
                 self.schedulePersistedMonitorStateRestore(
                     reason: "displayChange",
@@ -670,21 +765,112 @@ final class DimlyEngine {
             .store(in: &stateCancellables)
     }
 
+    /// Tracks lock/unlock session state and defers wake restore until interaction resumes.
+    private func updateSessionInteractivity(isInteractive: Bool, source: String) {
+        let changed = self.isSessionInteractive != isInteractive
+        self.isSessionInteractive = isInteractive
+        DiagnosticsLogger.shared.log(
+            "Session interactivity source=\(source) interactive=\(isInteractive) changed=\(changed)",
+            category: "engine"
+        )
+        if !isInteractive {
+            monitorRestoreTask?.cancel()
+            monitorRestoreTask = nil
+            activeRestoreCycleGeneration = nil
+            deferredRestoreReasonsAfterSessionUnlock.insert("resumeAfterUnlock")
+            return
+        }
+        flushDeferredRestoreAfterSessionUnlock(triggerSource: source)
+    }
+
+    /// Runs a deferred wake/display restore pass after screen unlock/session resume.
+    private func flushDeferredRestoreAfterSessionUnlock(triggerSource: String) {
+        guard isSessionInteractive else { return }
+        guard !deferredRestoreReasonsAfterSessionUnlock.isEmpty else { return }
+        let mergedReasons = deferredRestoreReasonsAfterSessionUnlock.sorted().joined(separator: ",")
+        deferredRestoreReasonsAfterSessionUnlock.removeAll()
+        DiagnosticsLogger.shared.log(
+            "Flush deferred restore after unlock trigger=\(triggerSource) reasons=\(mergedReasons)",
+            category: "engine"
+        )
+        beginTopologySettleGraceWindow(reason: "sessionUnlock")
+        schedulePersistedMonitorStateRestore(
+            reason: "sessionUnlocked[\(mergedReasons)]",
+            remainingAttempts: 6,
+            initialDelayNanoseconds: postSessionUnlockRestoreDelayNanoseconds
+        )
+    }
+
     /// Starts a short grace window to let wake/startup display topology settle.
-    private func beginTopologySettleGraceWindow() {
-        let seconds = Double(topologySettleGraceWindowNanoseconds) / 1_000_000_000
-        topologySettleDeadline = Date().addingTimeInterval(seconds)
+    private func beginTopologySettleGraceWindow(reason: String) {
+        let now = Date()
+        let minSettleSeconds = Double(topologySettleGraceWindowNanoseconds) / 1_000_000_000
+        let maxSettleSeconds = Double(wakeSettleMaximumWindowNanoseconds) / 1_000_000_000
+        topologySettleDeadline = now.addingTimeInterval(minSettleSeconds)
+        wakeSettleHardDeadline = now.addingTimeInterval(maxSettleSeconds)
+        lastDisplayTopologyChangeAt = now
+        automaticRestoreBrightnessWriteRecordByDisplayID.removeAll()
+        DiagnosticsLogger.shared.log(
+            "Begin topology settle reason=\(reason) min=\(String(format: "%.2f", minSettleSeconds))s max=\(String(format: "%.2f", maxSettleSeconds))s",
+            category: "engine"
+        )
+    }
+
+    /// Tracks display inventory transitions and extends settle while wake topology is still churning.
+    private func recordDisplayTopologyChange(displays: [DisplayInfo]) {
+        let now = Date()
+        lastDisplayTopologyChangeAt = now
+        let liveIDs = Set(displays.map(\.stableIdentity))
+        automaticRestoreBrightnessWriteRecordByDisplayID.keys
+            .filter { !liveIDs.contains($0) }
+            .forEach { automaticRestoreBrightnessWriteRecordByDisplayID.removeValue(forKey: $0) }
+
+        guard let hardDeadline = wakeSettleHardDeadline, now < hardDeadline else { return }
+        let quietWindowSeconds = Double(topologyQuietWindowNanoseconds) / 1_000_000_000
+        let quietDeadline = now.addingTimeInterval(quietWindowSeconds)
+        let bounded = min(quietDeadline, hardDeadline)
+        if let current = topologySettleDeadline {
+            topologySettleDeadline = max(current, bounded)
+        } else {
+            topologySettleDeadline = bounded
+        }
     }
 
     /// Returns whether startup/wake topology settling is still in progress.
     private func isInTopologySettleGraceWindow() -> Bool {
+        let now = Date()
+        if let hardDeadline = wakeSettleHardDeadline, now >= hardDeadline {
+            return false
+        }
         guard let topologySettleDeadline else { return false }
-        return Date() < topologySettleDeadline
+        return now < topologySettleDeadline
+    }
+
+    /// Returns whether post-wake restore decisions should still be deferred.
+    private func isAutomaticRestoreStabilizationInProgress(settings: DimlySettings, displays: [DisplayInfo]) -> Bool {
+        if isInTopologySettleGraceWindow() {
+            return true
+        }
+        // Keep waiting while external DDC capability is unresolved for displays expected to be visible.
+        return displays.contains { display in
+            guard display.isExternal else { return false }
+            let id = display.stableIdentity
+            if settings.overlayOnlyDisplayIDs.contains(id) {
+                return false
+            }
+            let persistedPower = settings.monitorPowerStateByDisplayID[id] ?? .visible
+            guard persistedPower == .visible else { return false }
+            let status = ddcManager.states[id]?.status
+            return status == .unknown || status == nil
+        }
     }
 
     /// Extends display-change restore delay while topology is still settling.
     private func effectiveDisplayChangeRestoreDelayNanoseconds() -> UInt64 {
         guard let topologySettleDeadline else { return displayChangeRestoreDelayNanoseconds }
+        if let hardDeadline = wakeSettleHardDeadline, Date() >= hardDeadline {
+            return displayChangeRestoreDelayNanoseconds
+        }
         let remainingSeconds = topologySettleDeadline.timeIntervalSinceNow
         guard remainingSeconds > 0 else { return displayChangeRestoreDelayNanoseconds }
         let remainingNanoseconds = UInt64(remainingSeconds * 1_000_000_000)
@@ -697,10 +883,23 @@ final class DimlyEngine {
         remainingAttempts: Int,
         initialDelayNanoseconds: UInt64 = 0
     ) {
+        if !isSessionInteractive {
+            deferredRestoreReasonsAfterSessionUnlock.insert(reason)
+            DiagnosticsLogger.shared.log(
+                "Defer restore while session inactive reason=\(reason)",
+                category: "engine"
+            )
+            return
+        }
         monitorRestoreTask?.cancel()
         monitorRestoreGeneration &+= 1
         let generation = monitorRestoreGeneration
+        activeRestoreCycleGeneration = generation
         let retryDelay = monitorStateRestoreRetryDelayNanoseconds
+        DiagnosticsLogger.shared.log(
+            "Schedule restore cycle generation=\(generation) reason=\(reason) attempts=\(remainingAttempts) initialDelayMs=\(initialDelayNanoseconds / 1_000_000)",
+            category: "engine"
+        )
         monitorRestoreTask = Task { @MainActor [weak self] in
             guard let self else { return }
             guard self.monitorRestoreGeneration == generation else { return }
@@ -719,9 +918,14 @@ final class DimlyEngine {
                     reason: attemptReason,
                     restrictedToDisplayIDs: restrictedIDs
                 )
+                DiagnosticsLogger.shared.log(
+                    "Restore cycle generation=\(generation) attempt=\(attempt + 1)/\(attempts) pending=\(pending.count) reason=\(attemptReason)",
+                    category: "engine"
+                )
                 guard !pending.isEmpty else {
                     if self.monitorRestoreGeneration == generation {
                         self.monitorRestoreTask = nil
+                        self.activeRestoreCycleGeneration = nil
                     }
                     return
                 }
@@ -731,6 +935,7 @@ final class DimlyEngine {
             }
             if !Task.isCancelled, self.monitorRestoreGeneration == generation {
                 self.monitorRestoreTask = nil
+                self.activeRestoreCycleGeneration = nil
             }
         }
     }
@@ -741,7 +946,7 @@ final class DimlyEngine {
         let displays = displayManager.displays
         let primaryDisplayID = CGMainDisplayID()
         let primaryDisplay = displays.first { $0.displayID == primaryDisplayID }
-        let settleInProgress = isInTopologySettleGraceWindow()
+        let settleInProgress = isAutomaticRestoreStabilizationInProgress(settings: settings, displays: displays)
         let shouldForcePrimaryVisible = !settleInProgress && shouldForcePrimaryVisibleAfterSettle(
             settings: settings,
             primaryDisplay: primaryDisplay
@@ -759,14 +964,15 @@ final class DimlyEngine {
             let isPrimary = display.displayID == primaryDisplayID
 
             if isPrimary && shouldForcePrimaryVisible {
-                if power != .visible {
-                    persistPowerState(.visible, for: id)
-                }
+                DiagnosticsLogger.shared.log(
+                    "Restore reason=\(reason) primarySafetyVisible id=\(id) kind=builtin",
+                    category: "engine"
+                )
                 applyBuiltinVisible(display, animated: false, persistState: false)
                 continue
             }
 
-            if power == .blackout {
+            if power == .blackout || power == .standby {
                 if isPrimary && settleInProgress {
                     pendingIDs.insert(id)
                 }
@@ -779,9 +985,6 @@ final class DimlyEngine {
                 continue
             }
 
-            if power != .visible {
-                persistPowerState(.visible, for: id)
-            }
             applyBuiltinVisible(display, animated: false, persistState: false)
         }
 
@@ -789,12 +992,12 @@ final class DimlyEngine {
 
         if let restrictedToDisplayIDs {
             DiagnosticsLogger.shared.log(
-                "Restore persisted monitor state reason=\(reason) displays=\(externals.count) scope=pending(\(restrictedToDisplayIDs.count))",
+                "Restore persisted monitor state cycle=\(activeRestoreCycleGeneration ?? 0) reason=\(reason) displays=\(externals.count) scope=pending(\(restrictedToDisplayIDs.count)) settle=\(settleInProgress)",
                 category: "engine"
             )
         } else {
             DiagnosticsLogger.shared.log(
-                "Restore persisted monitor state reason=\(reason) displays=\(externals.count) scope=all",
+                "Restore persisted monitor state cycle=\(activeRestoreCycleGeneration ?? 0) reason=\(reason) displays=\(externals.count) scope=all settle=\(settleInProgress)",
                 category: "engine"
             )
         }
@@ -806,54 +1009,84 @@ final class DimlyEngine {
             let power = settings.monitorPowerStateByDisplayID[id] ?? .visible
             let isPrimary = display.displayID == primaryDisplayID
             let runtimeBlackoutActive = blackoutManager.activeDisplayIDs.contains(id)
-            let runtimeStandbyActive = power == .standby && ddcManager.states[id]?.lastCommand == .standby
+            let runtimeStandbyActive = ddcManager.states[id]?.lastCommand == .standby
 
             if isPrimary && shouldForcePrimaryVisible {
-                if power == .standby {
+                DiagnosticsLogger.shared.log(
+                    "Restore reason=\(reason) primarySafetyVisible id=\(id) kind=external",
+                    category: "engine"
+                )
+                if power == .standby || runtimeStandbyActive {
                     wake(display: display)
                 } else if runtimeBlackoutActive {
                     blackoutManager.unblackout(display, animated: settings.fadeInAnimationEnabled)
                 }
-                if power != .visible {
-                    persistPowerState(.visible, for: id)
-                }
-                continue
-            }
-
-            if power == .visible, let brightness = settings.monitorBrightnessByDisplayID[id] {
-                if settleInProgress {
-                    pendingIDs.insert(id)
-                } else if shouldApplyPersistedBrightnessOnAutomaticRestore(for: display, settings: settings) {
-                    setBrightness(brightness, for: display)
-                } else if blackoutManager.fallbackBrightnessLevels[id] != nil {
+                if blackoutManager.fallbackBrightnessLevels[id] != nil {
                     blackoutManager.clearBrightnessFallback(for: display, animated: false)
                 }
-            } else if power != .visible && blackoutManager.fallbackBrightnessLevels[id] != nil {
-                blackoutManager.clearBrightnessFallback(for: display, animated: false)
-            }
-
-            if isPrimary && settleInProgress && (power != .visible || runtimeBlackoutActive) {
-                pendingIDs.insert(id)
+                continue
             }
 
             if power == .visible {
                 if runtimeBlackoutActive {
                     blackoutManager.unblackout(display, animated: settings.fadeInAnimationEnabled)
                 }
+                if runtimeStandbyActive {
+                    wake(display: display)
+                }
+
+                if let brightness = settings.monitorBrightnessByDisplayID[id] {
+                    if settleInProgress {
+                        pendingIDs.insert(id)
+                    } else if shouldApplyPersistedBrightnessOnAutomaticRestore(for: display, settings: settings) {
+                        applyAutomaticRestoreBrightnessIfNeeded(
+                            brightness,
+                            for: display,
+                            reason: reason
+                        )
+                    } else if blackoutManager.fallbackBrightnessLevels[id] != nil {
+                        blackoutManager.clearBrightnessFallback(for: display, animated: false)
+                    }
+                } else if !settleInProgress && blackoutManager.fallbackBrightnessLevels[id] != nil {
+                    blackoutManager.clearBrightnessFallback(for: display, animated: false)
+                }
                 continue
             }
-            // Avoid forcing stale persisted sleep/blackout states when the current runtime
-            // has no evidence the display is intentionally asleep.
-            if runtimeBlackoutActive || runtimeStandbyActive {
+
+            if power == .blackout {
+                if blackoutManager.fallbackBrightnessLevels[id] != nil {
+                    blackoutManager.clearBrightnessFallback(for: display, animated: false)
+                }
+                if settleInProgress {
+                    pendingIDs.insert(id)
+                    continue
+                }
+                if runtimeBlackoutActive == false {
+                    blackoutManager.blackout(display, animated: false)
+                }
                 continue
             }
-            persistPowerState(.visible, for: id)
+
+            if blackoutManager.fallbackBrightnessLevels[id] != nil {
+                blackoutManager.clearBrightnessFallback(for: display, animated: false)
+            }
+            if settleInProgress {
+                pendingIDs.insert(id)
+                continue
+            }
+            if runtimeStandbyActive == false {
+                standby(display: display)
+            }
         }
         return pendingIDs
     }
 
     /// Forces the primary display visible only when no secondary display appears usable.
     private func shouldForcePrimaryVisibleAfterSettle(settings: DimlySettings, primaryDisplay: DisplayInfo?) -> Bool {
+        guard isSessionInteractive else {
+            DiagnosticsLogger.shared.log("Primary safety decision skipped: session inactive", category: "engine")
+            return false
+        }
         guard let primaryDisplay else { return false }
         let primaryID = primaryDisplay.stableIdentity
         let primaryPower = settings.monitorPowerStateByDisplayID[primaryID] ?? .visible
@@ -871,6 +1104,10 @@ final class DimlyEngine {
             guard candidate.displayID != primaryDisplay.displayID else { return false }
             return isDisplayLikelyVisibleAsSecondary(candidate, settings: settings)
         }
+        DiagnosticsLogger.shared.log(
+            "Primary safety decision primary=\(primaryID) dark=\(primaryIsDark) hasVisibleSecondary=\(hasVisibleSecondary)",
+            category: "engine"
+        )
         return !hasVisibleSecondary
     }
 
@@ -882,12 +1119,17 @@ final class DimlyEngine {
             let runtimeBuiltinBlackoutActive = builtinRestoreBrightnessByDisplayID[id] != nil
             return persistedPower == .visible && !runtimeBuiltinBlackoutActive
         }
-        if persistedPower != .visible {
-            return false
-        }
         if blackoutManager.activeDisplayIDs.contains(id) {
             return false
         }
+        if ddcManager.states[id]?.lastCommand == .standby {
+            return false
+        }
+        if persistedPower == .visible {
+            return true
+        }
+        // If an external display is physically present and runtime signals do not indicate
+        // blackout/standby, treat it as potentially usable and avoid forcing the primary.
         return true
     }
 
@@ -898,8 +1140,47 @@ final class DimlyEngine {
             return true
         }
         let ddcStatus = ddcManager.states[id]?.status
-        // Avoid applying fallback dim overlays during startup/wake while DDC is unresolved/unsupported.
-        return ddcStatus == .supported
+        // Avoid applying fallback dim overlays during startup/wake while DDC is unresolved.
+        return ddcStatus == .supported || ddcStatus == .notSupported
+    }
+
+    /// Applies restore brightness only when it actually changes intent, suppressing duplicate writes.
+    private func applyAutomaticRestoreBrightnessIfNeeded(_ percent: Int, for display: DisplayInfo, reason: String) {
+        let id = display.stableIdentity
+        let clamped = max(0, min(100, percent))
+        let now = Date()
+        if let record = automaticRestoreBrightnessWriteRecordByDisplayID[id],
+           record.percent == clamped,
+           now.timeIntervalSince(record.writtenAt) < duplicateAutomaticRestoreSuppressWindow {
+            DiagnosticsLogger.shared.log(
+                "Skip duplicate restore brightness id=\(id) percent=\(clamped) reason=\(reason) previousReason=\(record.reason)",
+                category: "engine"
+            )
+            return
+        }
+        let current = brightnessPercent(for: display)
+        if abs(current - clamped) <= 1 {
+            DiagnosticsLogger.shared.log(
+                "Skip noop restore brightness id=\(id) current=\(current) target=\(clamped) reason=\(reason)",
+                category: "engine"
+            )
+            automaticRestoreBrightnessWriteRecordByDisplayID[id] = RestoreBrightnessWriteRecord(
+                percent: clamped,
+                writtenAt: now,
+                reason: reason
+            )
+            return
+        }
+        DiagnosticsLogger.shared.log(
+            "Apply restore brightness id=\(id) current=\(current) target=\(clamped) reason=\(reason)",
+            category: "engine"
+        )
+        automaticRestoreBrightnessWriteRecordByDisplayID[id] = RestoreBrightnessWriteRecord(
+            percent: clamped,
+            writtenAt: now,
+            reason: reason
+        )
+        setBrightness(clamped, for: display)
     }
 
     /// Mirrors active blackout overlays into persisted monitor power states.
@@ -908,13 +1189,14 @@ final class DimlyEngine {
         let removed = lastObservedBlackoutActiveIDs.subtracting(activeIDs)
         lastObservedBlackoutActiveIDs = activeIDs
         guard !added.isEmpty || !removed.isEmpty else { return }
+        let liveIDs = Set(displayManager.displays.map(\.stableIdentity))
 
         settingsStore.update { settings in
             var updated = settings.monitorPowerStateByDisplayID
             for id in added where settings.monitorPowerStateByDisplayID[id] != .standby {
                 updated[id] = .blackout
             }
-            for id in removed where settings.monitorPowerStateByDisplayID[id] == .blackout {
+            for id in removed where liveIDs.contains(id) && settings.monitorPowerStateByDisplayID[id] == .blackout {
                 updated[id] = .visible
             }
             settings.monitorPowerStateByDisplayID = updated
