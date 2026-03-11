@@ -15,7 +15,6 @@ struct DimlyApp: App {
 
     init() {
         DiagnosticsLogger.shared.log("App init starting", category: "app")
-        DiagnosticsLogger.shared.startHeartbeat()
         DispatchQueue.main.async {
             DiagnosticsLogger.shared.log("Main queue async checkpoint", category: "app")
         }

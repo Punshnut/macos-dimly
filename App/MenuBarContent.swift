@@ -1805,25 +1805,19 @@ struct MenuBarContentView: View {
 
     /// Applies display brightness to the right backend for this display type.
     private func setBrightness(_ percent: Int, for display: DisplayInfo) {
+        let clamped = max(0, min(100, percent))
         if display.isBuiltin {
-            let clamped = max(0, min(100, percent))
             builtinBrightnessCacheByDisplayID[display.displayID] = clamped
-            _ = DisplayHardware.setBuiltinDisplayBrightnessPercent(clamped, for: display.displayID)
-            settingsStore.update { settings in
-                settings.monitorBrightnessByDisplayID[display.stableIdentity] = clamped
-            }
+            engine.setBrightness(clamped, for: display, source: .slider)
 
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.08) {
                 if let confirmed = DisplayHardware.builtinDisplayBrightnessPercent(for: display.displayID) {
                     builtinBrightnessCacheByDisplayID[display.displayID] = confirmed
-                    settingsStore.update { settings in
-                        settings.monitorBrightnessByDisplayID[display.stableIdentity] = confirmed
-                    }
                 }
             }
             return
         }
-        engine.setBrightness(percent, for: display)
+        engine.setBrightness(clamped, for: display, source: .slider)
     }
 
     /// Keeps built-in brightness cache in sync while the menu is visible (e.g. media key changes).
