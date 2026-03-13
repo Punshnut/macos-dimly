@@ -40,8 +40,9 @@ struct MenuBarContentView: View {
     @State private var renderedLayoutMode: LayoutMode?
     @State private var modeHeightsByLayout: [LayoutMode: CGFloat] = [:]
     @State private var modeContainerHeight: CGFloat?
-    @State private var modeContentScaleY: CGFloat = 1
     @State private var modeContentOpacity: Double = 1
+    @State private var modeContentOffsetY: CGFloat = 0
+    @State private var modeTransitionInvolvesCompactMode = false
     private let builtinBrightnessRefreshTimer = Timer.publish(every: 0.4, on: .main, in: .common).autoconnect()
     private let smartButtonsGridCoordinateSpace = "smartButtonsGrid"
     @Namespace private var modeSwitchNamespace
@@ -56,6 +57,9 @@ struct MenuBarContentView: View {
         }
         .padding(12)
         .frame(minWidth: 300)
+        .background(
+            MenuBarWindowAnchorLock(isEnabled: presentation == .menuBar && isModeTransitioning)
+        )
         .onAppear {
             if renderedLayoutMode == nil {
                 renderedLayoutMode = activeLayoutMode
@@ -84,6 +88,33 @@ struct MenuBarContentView: View {
 
     private var standardAnimation: Animation? {
         (reduceMotion || isModeTransitioning) ? nil : DimlyMotion.standardSpring
+    }
+
+    private var allowsAnimatedModeTransition: Bool {
+        reduceMotion == false
+    }
+
+    private var modeResizeAnimation: Animation {
+        if modeTransitionInvolvesCompactMode {
+            return Animation.spring(response: 0.38, dampingFraction: 0.9)
+        }
+        return Animation.spring(response: 0.3, dampingFraction: 0.88)
+    }
+
+    private var modeFadeOutAnimation: Animation {
+        .easeOut(duration: modeTransitionInvolvesCompactMode ? 0.16 : 0.12)
+    }
+
+    private var modeFadeInAnimation: Animation {
+        .easeOut(duration: modeTransitionInvolvesCompactMode ? 0.22 : 0.17)
+    }
+
+    private var modeSwapDelay: TimeInterval {
+        modeTransitionInvolvesCompactMode ? 0.14 : 0.1
+    }
+
+    private var modeSettleDelay: TimeInterval {
+        modeTransitionInvolvesCompactMode ? 0.46 : 0.34
     }
 
     private var brightnessPanelTransition: AnyTransition {
@@ -162,15 +193,15 @@ struct MenuBarContentView: View {
                     Color.clear.preference(key: ModeContentHeightPreferenceKey.self, value: [mode: geometry.size.height])
                 }
             )
-            .scaleEffect(x: 1, y: modeContentScaleY, anchor: .top)
             .opacity(modeContentOpacity)
+            .offset(y: modeContentOffsetY)
             .frame(maxWidth: .infinity, alignment: .topLeading)
             .frame(height: modeContainerHeight, alignment: .top)
             .onPreferenceChange(ModeContentHeightPreferenceKey.self) { heights in
                 modeHeightsByLayout.merge(heights) { _, new in new }
                 guard isModeTransitioning else { return }
                 guard let measured = heights[mode] else { return }
-                runMotion(DimlyMotion.standardSpring) {
+                runMotion(modeResizeAnimation) {
                     modeContainerHeight = measured
                 }
             }
@@ -413,12 +444,22 @@ struct MenuBarContentView: View {
         guard activeLayoutMode != mode else { return }
         modeTransitionToken += 1
         let transitionToken = modeTransitionToken
-        isModeTransitioning = true
+        isModeTransitioning = allowsAnimatedModeTransition
         let currentMode = renderedLayoutMode ?? activeLayoutMode
+        modeTransitionInvolvesCompactMode = currentMode == .short || mode == .short
         if let currentHeight = modeHeightsByLayout[currentMode] {
             modeContainerHeight = currentHeight
         }
         let previouslyExpanded = settingsStore.settings.brightnessPanelExpandedDisplayIDs
+        let currentHeight = modeHeightsByLayout[currentMode] ?? modeContainerHeight
+        let targetHeight = modeHeightsByLayout[mode]
+        let outgoingOffset: CGFloat = {
+            if let currentHeight, let targetHeight {
+                return targetHeight < currentHeight ? -10 : 10
+            }
+            return modeTransitionInvolvesCompactMode ? -8 : -6
+        }()
+        let incomingOffset = outgoingOffset * -0.35
 
         // Avoid SwiftUI transition crashes when switching layout branches with expanded
         // brightness dropdowns still mounted.
@@ -431,28 +472,33 @@ struct MenuBarContentView: View {
                 }
             }
         }
-        if reduceMotion {
-            settingsStore.update { settings in
-                switch mode {
-                case .simple:
-                    settings.menuBarLayoutMode = .simple
-                case .advanced:
-                    settings.menuBarLayoutMode = .advanced
-                case .short:
-                    settings.menuBarLayoutMode = .short
+        if allowsAnimatedModeTransition == false {
+            var transaction = Transaction()
+            transaction.animation = nil
+            withTransaction(transaction) {
+                settingsStore.update { settings in
+                    switch mode {
+                    case .simple:
+                        settings.menuBarLayoutMode = .simple
+                    case .advanced:
+                        settings.menuBarLayoutMode = .advanced
+                    case .short:
+                        settings.menuBarLayoutMode = .short
+                    }
                 }
+                renderedLayoutMode = mode
+                modeContainerHeight = nil
+                modeContentOpacity = 1
+                modeContentOffsetY = 0
+                isModeTransitioning = false
+                modeTransitionInvolvesCompactMode = false
             }
-            renderedLayoutMode = mode
-            modeContainerHeight = nil
-            modeContentScaleY = 1
-            modeContentOpacity = 1
-            isModeTransitioning = false
         } else {
-            runMotion(.easeOut(duration: 0.1)) {
-                modeContentScaleY = 0.94
-                modeContentOpacity = 0.82
+            runMotion(modeFadeOutAnimation) {
+                modeContentOpacity = 0
+                modeContentOffsetY = outgoingOffset
             }
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.09) {
+            DispatchQueue.main.asyncAfter(deadline: .now() + modeSwapDelay) {
                 guard self.modeTransitionToken == transitionToken else { return }
 
                 var transaction = Transaction()
@@ -469,21 +515,25 @@ struct MenuBarContentView: View {
                         }
                     }
                     renderedLayoutMode = mode
+                    modeContentOpacity = 0
+                    modeContentOffsetY = incomingOffset
                 }
 
-                let targetHeight = modeHeightsByLayout[mode]
-                runMotion(DimlyMotion.standardSpring) {
+                runMotion(modeResizeAnimation) {
                     if let targetHeight {
                         modeContainerHeight = targetHeight
                     }
-                    modeContentScaleY = 1
+                }
+                runMotion(modeFadeInAnimation) {
                     modeContentOpacity = 1
+                    modeContentOffsetY = 0
                 }
             }
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.34) {
+            DispatchQueue.main.asyncAfter(deadline: .now() + modeSettleDelay) {
                 guard self.modeTransitionToken == transitionToken else { return }
                 self.isModeTransitioning = false
                 self.modeContainerHeight = nil
+                self.modeTransitionInvolvesCompactMode = false
             }
         }
 
@@ -2197,6 +2247,91 @@ private extension Array where Element == CGFloat {
             return (sorted[mid - 1] + sorted[mid]) * 0.5
         }
         return sorted[mid]
+    }
+}
+
+private struct MenuBarWindowAnchorLock: NSViewRepresentable {
+    let isEnabled: Bool
+
+    func makeCoordinator() -> Coordinator {
+        Coordinator()
+    }
+
+    func makeNSView(context: Context) -> NSView {
+        let view = NSView(frame: .zero)
+        Task { @MainActor in
+            context.coordinator.attach(to: view.window, isEnabled: isEnabled)
+        }
+        return view
+    }
+
+    func updateNSView(_ nsView: NSView, context: Context) {
+        Task { @MainActor in
+            context.coordinator.attach(to: nsView.window, isEnabled: isEnabled)
+        }
+    }
+
+    static func dismantleNSView(_ nsView: NSView, coordinator: Coordinator) {
+        coordinator.detach()
+    }
+
+    @MainActor
+    final class Coordinator: NSObject {
+        private weak var window: NSWindow?
+        private var isEnabled = false
+        private var lockedTopY: CGFloat?
+
+        func attach(to window: NSWindow?, isEnabled: Bool) {
+            self.isEnabled = isEnabled
+            guard let window else { return }
+
+            if self.window !== window {
+                detach()
+                self.window = window
+                NotificationCenter.default.addObserver(
+                    self,
+                    selector: #selector(handleResizeNotification(_:)),
+                    name: NSWindow.didResizeNotification,
+                    object: window
+                )
+            }
+
+            if isEnabled {
+                lockedTopY = window.frame.maxY
+            } else {
+                lockedTopY = nil
+            }
+        }
+
+        func detach() {
+            if let window {
+                NotificationCenter.default.removeObserver(
+                    self,
+                    name: NSWindow.didResizeNotification,
+                    object: window
+                )
+            }
+            window = nil
+            lockedTopY = nil
+            isEnabled = false
+        }
+
+        @objc
+        private func handleResizeNotification(_ notification: Notification) {
+            handleResize()
+        }
+
+        private func handleResize() {
+            guard isEnabled, let window else { return }
+            let topY = lockedTopY ?? window.frame.maxY
+            lockedTopY = topY
+
+            var frame = window.frame
+            let targetY = topY - frame.height
+            guard abs(frame.origin.y - targetY) > 0.5 else { return }
+            frame.origin.y = targetY
+            window.setFrame(frame, display: false, animate: false)
+        }
     }
 }
 
