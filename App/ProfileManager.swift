@@ -213,6 +213,19 @@ struct DisplayProfile: Codable, Identifiable, Equatable {
     }
 }
 
+extension Array where Element == DisplayProfile {
+    /// Returns a transient profile order with two profile IDs swapped for drag previews.
+    func swappingProfiles(_ firstID: UUID?, with secondID: UUID?) -> [DisplayProfile] {
+        guard let firstID, let secondID, firstID != secondID else { return self }
+        guard let sourceIndex = firstIndex(where: { $0.id == firstID }),
+              let targetIndex = firstIndex(where: { $0.id == secondID }) else { return self }
+
+        var swapped = self
+        swapped.swapAt(sourceIndex, targetIndex)
+        return swapped
+    }
+}
+
 /// Monitor-related UI + brightness state captured inside a profile.
 struct ProfileMonitorState: Codable, Equatable {
     var menuBarExcludedDisplayIDs: [String]

@@ -90,6 +90,10 @@ struct MenuBarContentView: View {
         (reduceMotion || isModeTransitioning) ? nil : DimlyMotion.standardSpring
     }
 
+    private var reorderAnimation: Animation? {
+        (reduceMotion || isModeTransitioning) ? nil : DimlyMotion.reorderSpring
+    }
+
     private var allowsAnimatedModeTransition: Bool {
         reduceMotion == false
     }
@@ -791,6 +795,11 @@ struct MenuBarContentView: View {
         return Array(selected.prefix(smartButtonLimit))
     }
 
+    /// Drag-preview order used to animate surrounding smart buttons out of the way.
+    private var displayedSmartButtonProfiles: [DisplayProfile] {
+        smartButtonProfiles.swappingProfiles(draggedSmartButtonProfileID, with: smartButtonSwapTargetID)
+    }
+
     /// Fast lookup of visible smart-button profiles by ID.
     private var smartButtonProfileByID: [UUID: DisplayProfile] {
         Dictionary(uniqueKeysWithValues: smartButtonProfiles.map { ($0.id, $0) })
@@ -813,10 +822,14 @@ struct MenuBarContentView: View {
                 let columns = Array(repeating: GridItem(.flexible(), spacing: 8), count: 4)
                 ZStack(alignment: .topLeading) {
                     LazyVGrid(columns: columns, alignment: .leading, spacing: 8) {
-                        ForEach(smartButtonProfiles) { profile in
+                        ForEach(displayedSmartButtonProfiles) { profile in
+                            let isDragged = draggedSmartButtonProfileID == profile.id
+                            let isTargeted = draggedSmartButtonProfileID != nil && smartButtonSwapTargetID == profile.id
                             smartButton(profile, compact: compact)
                                 .id(profile.id)
-                                .opacity(draggedSmartButtonProfileID == profile.id ? 0.02 : 1)
+                                .opacity(isDragged ? 0.12 : 1)
+                                .scaleEffect(isTargeted && reduceMotion == false ? (compact ? 1.035 : 1.028) : 1)
+                                .offset(y: isTargeted && reduceMotion == false ? -2 : 0)
                                 .background(
                                     GeometryReader { geometry in
                                         Color.clear.preference(
@@ -828,8 +841,16 @@ struct MenuBarContentView: View {
                                 .highPriorityGesture(smartButtonReorderGesture(for: profile.id))
                                 .overlay(
                                     RoundedRectangle(cornerRadius: compact ? 10 : 12, style: .continuous)
+                                        .fill(
+                                            isTargeted
+                                                ? Color.accentColor.opacity(colorScheme == .dark ? 0.18 : 0.1)
+                                                : Color.clear
+                                        )
+                                )
+                                .overlay(
+                                    RoundedRectangle(cornerRadius: compact ? 10 : 12, style: .continuous)
                                         .stroke(
-                                            draggedSmartButtonProfileID != nil && smartButtonSwapTargetID == profile.id
+                                            isTargeted
                                                 ? Color.accentColor.opacity(colorScheme == .dark ? 0.88 : 0.78)
                                                 : Color.clear,
                                             lineWidth: 2
@@ -846,19 +867,22 @@ struct MenuBarContentView: View {
                         compact: compact,
                         size: CGSize(width: draggedFrame.width, height: draggedFrame.height)
                     )
-                            .allowsHitTesting(false)
-                            .position(x: draggedFrame.midX, y: draggedFrame.midY)
-                            .offset(smartButtonDragTranslation)
-                            .shadow(color: Color.black.opacity(colorScheme == .dark ? 0.32 : 0.18), radius: 6, x: 0, y: 3)
-                            .zIndex(10)
+                        .allowsHitTesting(false)
+                        .position(x: draggedFrame.midX, y: draggedFrame.midY)
+                        .offset(smartButtonDragTranslation)
+                        .scaleEffect(reduceMotion ? 1 : (compact ? 1.04 : 1.03))
+                        .rotationEffect(.degrees(smartButtonPreviewTilt(compact: compact)))
+                        .shadow(color: Color.black.opacity(colorScheme == .dark ? 0.34 : 0.2), radius: 12, x: 0, y: 8)
+                        .zIndex(10)
                     }
                 }
                 .coordinateSpace(name: smartButtonsGridCoordinateSpace)
                 .onPreferenceChange(SmartButtonFramePreferenceKey.self) { frames in
                     smartButtonFramesByProfileID = frames
                 }
-                .animation(quickAnimation, value: smartButtonSwapTargetID)
-                .animation(draggedSmartButtonProfileID == nil ? standardAnimation : nil, value: profileManager.profiles.map(\.id))
+                .animation(reorderAnimation, value: smartButtonSwapTargetID)
+                .animation(reorderAnimation, value: displayedSmartButtonProfiles.map(\.id))
+                .animation(reorderAnimation, value: draggedSmartButtonProfileID)
             }
         }
     }
@@ -978,6 +1002,10 @@ struct MenuBarContentView: View {
             )
             .overlay(
                 RoundedRectangle(cornerRadius: compact ? 10 : 12, style: .continuous)
+                    .fill(Color.white.opacity(colorScheme == .dark ? 0.04 : 0.08))
+            )
+            .overlay(
+                RoundedRectangle(cornerRadius: compact ? 10 : 12, style: .continuous)
                     .stroke(
                         isColorless ? neutralStroke.opacity(compact ? 0.8 : 0.7) : Color.white.opacity(colorScheme == .dark ? 0.19 : 0.28),
                         lineWidth: 1
@@ -1020,7 +1048,7 @@ struct MenuBarContentView: View {
         guard let draggedID = draggedSmartButtonProfileID,
               let targetID = smartButtonSwapTargetID,
               targetID != draggedID else { return }
-        runMotion(DimlyMotion.standardSpring) {
+        runMotion(DimlyMotion.reorderSettleSpring) {
             profileManager.swapProfiles(draggedID, with: targetID)
         }
     }
@@ -1043,7 +1071,7 @@ struct MenuBarContentView: View {
 
         let orderedIDs = smartButtonProfiles.map(\.id).filter { $0 != draggedID }
         let candidates: [(id: UUID, frame: CGRect)] = orderedIDs.compactMap { id in
-            guard let frame = smartButtonFramesByProfileID[id] ?? startFrames[id] else { return nil }
+            guard let frame = startFrames[id] ?? smartButtonFramesByProfileID[id] else { return nil }
             return (id: id, frame: frame)
         }
         guard candidates.isEmpty == false else {
@@ -1051,9 +1079,7 @@ struct MenuBarContentView: View {
         }
 
         let frames = candidates.map(\.frame)
-        let fallbackStepX = (frames.map(\.width).median ?? draggedFrame.width) + 8
         let fallbackStepY = (frames.map(\.height).median ?? draggedFrame.height) + 8
-        let stepX = inferredStepX(from: frames, fallback: fallbackStepX)
         let stepY = inferredStepY(from: frames, columns: 4, fallback: fallbackStepY)
 
         // Keep target selection in the same row until the user drags far enough vertically.
@@ -1065,19 +1091,40 @@ struct MenuBarContentView: View {
             return sameRow.isEmpty ? candidates : sameRow
         }()
 
-        let dragCenter = dragRect.center
-        guard let nearest = scopedCandidates.min(by: {
-            dragCenter.distanceSquared(to: $0.frame.center) < dragCenter.distanceSquared(to: $1.frame.center)
+        let overlapThreshold: CGFloat = 0.22
+        let stickinessThreshold: CGFloat = 0.14
+        let overlapScores: [(id: UUID, overlap: CGFloat)] = scopedCandidates.map { candidate in
+            (id: candidate.id, overlap: dragRect.overlapRatio(with: candidate.frame))
+        }
+
+        if let currentTargetID = smartButtonSwapTargetID,
+           currentTargetID != draggedID,
+           let currentScore = overlapScores.first(where: { $0.id == currentTargetID })?.overlap,
+           currentScore >= stickinessThreshold {
+            return currentTargetID
+        }
+
+        guard let strongest = overlapScores.max(by: { lhs, rhs in
+            if abs(lhs.overlap - rhs.overlap) < 0.01 {
+                guard let lhsFrame = scopedCandidates.first(where: { $0.id == lhs.id })?.frame,
+                      let rhsFrame = scopedCandidates.first(where: { $0.id == rhs.id })?.frame else {
+                    return false
+                }
+                return dragRect.center.distanceSquared(to: lhsFrame.center) > dragRect.center.distanceSquared(to: rhsFrame.center)
+            }
+            return lhs.overlap < rhs.overlap
         }) else {
             return nil
         }
 
-        let maxDistance = max(stepX, stepY) * 1.2
-        let nearestDistance = dragCenter.distanceSquared(to: nearest.frame.center).squareRoot()
-        guard nearestDistance <= maxDistance else {
-            return nil
-        }
-        return nearest.id
+        return strongest.overlap >= overlapThreshold ? strongest.id : nil
+    }
+
+    /// Adds a restrained tilt so the floating drag preview feels physically connected to pointer movement.
+    private func smartButtonPreviewTilt(compact: Bool) -> Double {
+        guard reduceMotion == false else { return 0 }
+        let divisor: CGFloat = compact ? 22 : 28
+        return max(-4, min(4, smartButtonDragTranslation.width / divisor))
     }
 
     /// Infers horizontal spacing between smart buttons for drop-distance thresholds.
@@ -2220,6 +2267,15 @@ private extension CGRect {
     var area: CGFloat {
         guard isNull == false, isInfinite == false else { return 0 }
         return max(0, width) * max(0, height)
+    }
+
+    /// Returns how much of the smaller rect is covered by the intersection with another rect.
+    func overlapRatio(with other: CGRect) -> CGFloat {
+        let intersectionArea = intersection(other).area
+        guard intersectionArea > 0 else { return 0 }
+        let referenceArea = min(area, other.area)
+        guard referenceArea > 0 else { return 0 }
+        return intersectionArea / referenceArea
     }
 }
 

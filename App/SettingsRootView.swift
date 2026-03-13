@@ -497,12 +497,8 @@ struct SettingsRootView: View {
         @State private var profileDragTranslation: CGSize = .zero
         private let profileGridCoordinateSpace = "settings-profiles-grid-coordinate-space"
 
-        private var quickAnimation: Animation? {
-            reduceMotion ? nil : DimlyMotion.quickSpring
-        }
-
-        private var standardAnimation: Animation? {
-            reduceMotion ? nil : DimlyMotion.standardSpring
+        private var reorderAnimation: Animation? {
+            reduceMotion ? nil : DimlyMotion.reorderSpring
         }
 
         /// Runs animated state changes unless Reduce Motion is enabled.
@@ -850,6 +846,11 @@ struct SettingsRootView: View {
             Dictionary(uniqueKeysWithValues: profileManager.profiles.map { ($0.id, $0) })
         }
 
+        /// Drag-preview order used to animate neighboring cards before the swap is committed.
+        private var displayedProfiles: [DisplayProfile] {
+            profileManager.profiles.swappingProfiles(draggedProfileID, with: profileSwapTargetID)
+        }
+
         private var profilesDetail: some View {
             SettingsScrollView(title: String(localized: "Profiles"), subtitle: nil, contentMaxWidth: 980) {
                 SettingsCard(title: String(localized: "Profiles"), subtitle: nil) {
@@ -884,10 +885,14 @@ struct SettingsRootView: View {
                                 alignment: .leading,
                                 spacing: 10
                             ) {
-                                ForEach(profileManager.profiles) { profile in
+                                ForEach(displayedProfiles) { profile in
+                                    let isDragged = draggedProfileID == profile.id
+                                    let isTargeted = draggedProfileID != nil && profileSwapTargetID == profile.id
                                     profileTile(profile)
                                         .id(profile.id)
-                                        .opacity(draggedProfileID == profile.id ? 0.05 : 1)
+                                        .opacity(isDragged ? 0.12 : 1)
+                                        .scaleEffect(isTargeted && reduceMotion == false ? 1.016 : 1)
+                                        .offset(y: isTargeted && reduceMotion == false ? -2 : 0)
                                         .background(
                                             GeometryReader { geometry in
                                                 Color.clear.preference(
@@ -899,8 +904,12 @@ struct SettingsRootView: View {
                                         .simultaneousGesture(profileReorderGesture(for: profile.id))
                                         .overlay(
                                             RoundedRectangle(cornerRadius: 12, style: .continuous)
+                                                .fill(isTargeted ? Color.accentColor.opacity(0.08) : Color.clear)
+                                        )
+                                        .overlay(
+                                            RoundedRectangle(cornerRadius: 12, style: .continuous)
                                                 .stroke(
-                                                    draggedProfileID != nil && profileSwapTargetID == profile.id
+                                                    isTargeted
                                                         ? Color.accentColor.opacity(0.8)
                                                         : Color.clear,
                                                     lineWidth: 2
@@ -915,7 +924,9 @@ struct SettingsRootView: View {
                                     .allowsHitTesting(false)
                                     .position(x: draggedFrame.midX, y: draggedFrame.midY)
                                     .offset(profileDragTranslation)
-                                    .shadow(color: Color.black.opacity(0.18), radius: 8, x: 0, y: 4)
+                                    .scaleEffect(reduceMotion ? 1 : 1.018)
+                                    .rotationEffect(.degrees(profilePreviewTilt))
+                                    .shadow(color: Color.black.opacity(0.2), radius: 14, x: 0, y: 8)
                                     .zIndex(12)
                             }
                         }
@@ -923,8 +934,9 @@ struct SettingsRootView: View {
                         .onPreferenceChange(ProfileTileFramePreferenceKey.self) { frames in
                             profileFramesByID = frames
                         }
-                        .animation(quickAnimation, value: profileSwapTargetID)
-                        .animation(draggedProfileID == nil ? standardAnimation : nil, value: profileManager.profiles.map(\.id))
+                        .animation(reorderAnimation, value: profileSwapTargetID)
+                        .animation(reorderAnimation, value: displayedProfiles.map(\.id))
+                        .animation(reorderAnimation, value: draggedProfileID)
                         Text(String(localized: "Tip: Drag profile cards to reorder them."))
                             .font(.caption)
                             .foregroundStyle(.secondary)
@@ -1136,6 +1148,12 @@ struct SettingsRootView: View {
                 .frame(width: size.width, height: size.height, alignment: .topLeading)
         }
 
+        /// Keeps the dragged profile preview from feeling mechanically flat.
+        private var profilePreviewTilt: Double {
+            guard reduceMotion == false else { return 0 }
+            return max(-2.5, min(2.5, profileDragTranslation.width / 40))
+        }
+
         /// Drag gesture that tracks profile reordering and computes live drop targets.
         private func profileReorderGesture(for profileID: UUID) -> some Gesture {
             DragGesture(minimumDistance: 3, coordinateSpace: .named(profileGridCoordinateSpace))
@@ -1163,7 +1181,7 @@ struct SettingsRootView: View {
             guard let draggedID = draggedProfileID,
                   let targetID = profileSwapTargetID,
                   targetID != draggedID else { return }
-            runMotion(DimlyMotion.standardSpring) {
+            runMotion(DimlyMotion.reorderSettleSpring) {
                 profileManager.swapProfiles(draggedID, with: targetID)
             }
         }
@@ -1184,7 +1202,7 @@ struct SettingsRootView: View {
 
             let orderedIDs = profileManager.profiles.map(\.id).filter { $0 != draggedID }
             let candidates: [(id: UUID, frame: CGRect)] = orderedIDs.compactMap { id in
-                guard let frame = profileFramesByID[id] ?? startFrames[id] else { return nil }
+                guard let frame = startFrames[id] ?? profileFramesByID[id] else { return nil }
                 return (id: id, frame: frame)
             }
             guard candidates.isEmpty == false else {
@@ -1192,9 +1210,7 @@ struct SettingsRootView: View {
             }
 
             let frames = candidates.map(\.frame)
-            let fallbackStepX = (frames.map(\.width).median ?? draggedFrame.width) + 10
             let fallbackStepY = (frames.map(\.height).median ?? draggedFrame.height) + 10
-            let stepX = inferredProfileStepX(from: frames, fallback: fallbackStepX)
             let stepY = inferredProfileStepY(from: frames, fallback: fallbackStepY)
 
             // Keep swaps in-row unless vertical intent is explicit.
@@ -1206,19 +1222,33 @@ struct SettingsRootView: View {
                 return sameRow.isEmpty ? candidates : sameRow
             }()
 
-            let dragCenter = dragRect.center
-            guard let nearest = scopedCandidates.min(by: {
-                dragCenter.distanceSquared(to: $0.frame.center) < dragCenter.distanceSquared(to: $1.frame.center)
+            let overlapThreshold: CGFloat = 0.22
+            let stickinessThreshold: CGFloat = 0.14
+            let overlapScores: [(id: UUID, overlap: CGFloat)] = scopedCandidates.map { candidate in
+                (id: candidate.id, overlap: dragRect.overlapRatio(with: candidate.frame))
+            }
+
+            if let currentTargetID = profileSwapTargetID,
+               currentTargetID != draggedID,
+               let currentScore = overlapScores.first(where: { $0.id == currentTargetID })?.overlap,
+               currentScore >= stickinessThreshold {
+                return currentTargetID
+            }
+
+            guard let strongest = overlapScores.max(by: { lhs, rhs in
+                if abs(lhs.overlap - rhs.overlap) < 0.01 {
+                    guard let lhsFrame = scopedCandidates.first(where: { $0.id == lhs.id })?.frame,
+                          let rhsFrame = scopedCandidates.first(where: { $0.id == rhs.id })?.frame else {
+                        return false
+                    }
+                    return dragRect.center.distanceSquared(to: lhsFrame.center) > dragRect.center.distanceSquared(to: rhsFrame.center)
+                }
+                return lhs.overlap < rhs.overlap
             }) else {
                 return nil
             }
 
-            let maxDistance = max(stepX, stepY) * 1.2
-            let nearestDistance = dragCenter.distanceSquared(to: nearest.frame.center).squareRoot()
-            guard nearestDistance <= maxDistance else {
-                return nil
-            }
-            return nearest.id
+            return strongest.overlap >= overlapThreshold ? strongest.id : nil
         }
 
         /// Infers horizontal tile spacing for drag threshold calculations.
@@ -1917,6 +1947,15 @@ private extension CGRect {
     var area: CGFloat {
         guard isNull == false, isInfinite == false else { return 0 }
         return max(0, width) * max(0, height)
+    }
+
+    /// Returns how much of the smaller rect is covered by the intersection with another rect.
+    func overlapRatio(with other: CGRect) -> CGFloat {
+        let intersectionArea = intersection(other).area
+        guard intersectionArea > 0 else { return 0 }
+        let referenceArea = min(area, other.area)
+        guard referenceArea > 0 else { return 0 }
+        return intersectionArea / referenceArea
     }
 }
 
