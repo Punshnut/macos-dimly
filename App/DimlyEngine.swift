@@ -49,7 +49,6 @@ final class DimlyEngine {
     private var builtinBrightnessAnimationTasks: [String: Task<Void, Never>] = [:]
     private var externalBrightnessAnimationTasks: [String: Task<Void, Never>] = [:]
     private var synchronizedBrightnessTransitionTask: Task<Void, Never>?
-    private var lastObservedBlackoutActiveIDs: Set<String> = []
     private var lastObservedDDCSupportByDisplayID: [String: DDCSupportStatus] = [:]
     private var hotkeyManagers: [UUID: HotkeyManager] = [:]
     private let legacySleepPersistenceKey = "Sleep.activeDisplayIDs"
@@ -114,7 +113,6 @@ final class DimlyEngine {
             ddcManager: ddcManager,
             settingsStore: settingsStore
         )
-        self.lastObservedBlackoutActiveIDs = blackoutManager.activeDisplayIDs
         DiagnosticsLogger.shared.log("Engine init: managers constructed", category: "engine")
         self.launcherHotkeyManager.onHotkeyPressed = { [weak self] in
             self?.onShowWindow?()
@@ -269,12 +267,12 @@ final class DimlyEngine {
     /// Toggles blackout across all external displays.
     func toggleExternalBlackout() {
         DiagnosticsLogger.shared.log("Toggle all external blackout", category: "engine")
-        let settings = settingsStore.settings
-        blackoutManager.toggleAllExternal(
-            displays: displayManager.displays,
-            fadeOut: settings.fadeOutAnimationEnabled,
-            fadeIn: settings.fadeInAnimationEnabled
-        )
+        let externals = displayManager.displays.filter { $0.isExternal }
+        guard !externals.isEmpty else { return }
+        let shouldClear = externals.contains { blackoutManager.activeDisplayIDs.contains($0.stableIdentity) }
+        externals.forEach { display in
+            applyUserPowerState(shouldClear ? .visible : .blackout, to: display)
+        }
     }
 
     /// Requests standby for every external display.
@@ -310,6 +308,12 @@ final class DimlyEngine {
         DiagnosticsLogger.shared.log("Panic blackout invoked", category: "engine")
         wakeExternalDisplays()
         blackoutManager.panic(animated: animated)
+        let displayIDs = Set(displayManager.displays.map(\.stableIdentity))
+        settingsStore.update { settings in
+            for id in displayIDs where settings.monitorPowerStateByDisplayID[id] == .blackout {
+                settings.monitorPowerStateByDisplayID[id] = .visible
+            }
+        }
     }
 
     /// Indicates whether a display is currently in blackout mode.
@@ -322,29 +326,17 @@ final class DimlyEngine {
 
     /// Toggles blackout mode for a specific display.
     func toggleDisplayBlackout(display: DisplayInfo) {
-        let settings = settingsStore.settings
         DiagnosticsLogger.shared.log(
             "User toggle blackout id=\(display.stableIdentity) builtin=\(display.isBuiltin)",
             category: "engine"
         )
         if isDisplayBlackoutActive(display) {
-            if display.isBuiltin {
-                noteUserOverride(ofAutomaticRestoreFor: display.stableIdentity, reason: "toggleBlackoutOff")
-                applyBuiltinVisible(display, animated: settings.fadeInAnimationEnabled, persistState: true)
-            } else {
-                blackoutManager.unblackout(display, animated: settings.fadeInAnimationEnabled)
-            }
+            applyUserPowerState(.visible, to: display)
             DiagnosticsLogger.shared.log("Display blackout OFF for \(display.stableIdentity)", category: "engine")
             return
         }
 
-        if display.isBuiltin {
-            automaticRestoreSuppressedUntilByDisplayID.removeValue(forKey: display.stableIdentity)
-            applyBuiltinBlackout(display, animated: settings.fadeOutAnimationEnabled, persistState: true)
-        } else {
-            automaticRestoreSuppressedUntilByDisplayID.removeValue(forKey: display.stableIdentity)
-            blackoutManager.blackout(display, animated: settings.fadeOutAnimationEnabled)
-        }
+        applyUserPowerState(.blackout, to: display)
         DiagnosticsLogger.shared.log("Display blackout ON for \(display.stableIdentity)", category: "engine")
     }
 
@@ -715,6 +707,25 @@ final class DimlyEngine {
         persistPowerState(.visible, for: display.stableIdentity, reason: "wakeDDC")
     }
 
+    /// Applies explicit user intent for a display power state and persists it as the restore source of truth.
+    func applyUserPowerState(_ state: PersistedMonitorPowerState, to display: DisplayInfo) {
+        let settings = settingsStore.settings
+        switch state {
+        case .visible:
+            wake(display: display)
+        case .standby:
+            standby(display: display)
+        case .blackout:
+            automaticRestoreSuppressedUntilByDisplayID.removeValue(forKey: display.stableIdentity)
+            if display.isBuiltin {
+                applyBuiltinBlackout(display, animated: settings.fadeOutAnimationEnabled, persistState: true)
+            } else {
+                blackoutManager.blackout(display, animated: settings.fadeOutAnimationEnabled)
+                persistPowerState(.blackout, for: display.stableIdentity, reason: "userBlackout")
+            }
+        }
+    }
+
     /// Releases hotkeys and removes overlays before app termination.
     func cleanupBeforeExit() {
         DiagnosticsLogger.shared.log("Cleanup before exit", category: "engine")
@@ -945,12 +956,6 @@ final class DimlyEngine {
             }
             .store(in: &stateCancellables)
 
-        blackoutManager.$activeDisplayIDs
-            .sink { [weak self] activeIDs in
-                self?.syncPersistedPowerStatesFromBlackoutActiveIDs(activeIDs)
-            }
-            .store(in: &stateCancellables)
-
         ddcManager.$states
             .sink { [weak self] states in
                 self?.handleDDCStateChanges(states)
@@ -1054,8 +1059,17 @@ final class DimlyEngine {
         return now < topologySettleDeadline
     }
 
+    /// Returns whether the maximum wake stabilization window has already elapsed.
+    private func hasWakeSettleHardDeadlineElapsed() -> Bool {
+        guard let wakeSettleHardDeadline else { return false }
+        return Date() >= wakeSettleHardDeadline
+    }
+
     /// Returns whether post-wake restore decisions should still be deferred.
     private func isAutomaticRestoreStabilizationInProgress(settings: DimlySettings, displays: [DisplayInfo]) -> Bool {
+        if hasWakeSettleHardDeadlineElapsed() {
+            return false
+        }
         if isInTopologySettleGraceWindow() {
             return true
         }
@@ -1071,6 +1085,20 @@ final class DimlyEngine {
             let status = ddcManager.states[id]?.status
             return status == .unknown || status == nil
         }
+    }
+
+    /// Returns how many attempts are required to keep a restore cycle alive until wake stabilization expires.
+    private func restoreAttemptsNeededToCoverWakeStabilization(
+        initialDelayNanoseconds: UInt64,
+        retryDelayNanoseconds: UInt64
+    ) -> Int {
+        guard let wakeSettleHardDeadline else { return 0 }
+        let retryDelaySeconds = Double(retryDelayNanoseconds) / 1_000_000_000
+        guard retryDelaySeconds > 0 else { return 0 }
+        let initialDelaySeconds = Double(initialDelayNanoseconds) / 1_000_000_000
+        let remainingSeconds = wakeSettleHardDeadline.timeIntervalSinceNow - initialDelaySeconds
+        guard remainingSeconds > 0 else { return 1 }
+        return Int(ceil(remainingSeconds / retryDelaySeconds)) + 1
     }
 
     /// Emits a one-shot wake stabilization completion marker.
@@ -1121,8 +1149,15 @@ final class DimlyEngine {
         let generation = monitorRestoreGeneration
         activeRestoreCycleGeneration = generation
         let retryDelay = monitorStateRestoreRetryDelayNanoseconds
+        let attempts = max(
+            max(1, remainingAttempts),
+            restoreAttemptsNeededToCoverWakeStabilization(
+                initialDelayNanoseconds: initialDelayNanoseconds,
+                retryDelayNanoseconds: retryDelay
+            )
+        )
         DiagnosticsLogger.shared.log(
-            "Schedule restore cycle generation=\(generation) reason=\(reason) attempts=\(remainingAttempts) initialDelayMs=\(initialDelayNanoseconds / 1_000_000)",
+            "Schedule restore cycle generation=\(generation) reason=\(reason) attempts=\(attempts) requestedAttempts=\(remainingAttempts) initialDelayMs=\(initialDelayNanoseconds / 1_000_000)",
             category: "engine"
         )
         DiagnosticsLogger.shared.log(
@@ -1142,7 +1177,6 @@ final class DimlyEngine {
                     return
                 }
             }
-            let attempts = max(1, remainingAttempts)
             var restrictedIDs: Set<String>? = nil
             var lastPending: Set<String> = []
             for attempt in 0..<attempts {
@@ -1396,8 +1430,12 @@ final class DimlyEngine {
             return true
         }
         let ddcStatus = ddcManager.states[id]?.status
-        // Avoid applying fallback dim overlays during startup/wake while DDC is unresolved.
-        return ddcStatus == .supported || ddcStatus == .notSupported
+        if ddcStatus == .supported || ddcStatus == .notSupported {
+            return true
+        }
+        // Once the wake settle deadline expires, prefer restoring intent via fallback instead
+        // of indefinitely waiting for DDC capability to resolve again.
+        return hasWakeSettleHardDeadlineElapsed()
     }
 
     /// Applies restore brightness only when it actually changes intent, suppressing duplicate writes.
@@ -1444,26 +1482,6 @@ final class DimlyEngine {
             reason: reason
         )
         setBrightness(clamped, for: display, source: .automaticRestore)
-    }
-
-    /// Mirrors active blackout overlays into persisted monitor power states.
-    private func syncPersistedPowerStatesFromBlackoutActiveIDs(_ activeIDs: Set<String>) {
-        let added = activeIDs.subtracting(lastObservedBlackoutActiveIDs)
-        let removed = lastObservedBlackoutActiveIDs.subtracting(activeIDs)
-        lastObservedBlackoutActiveIDs = activeIDs
-        guard !added.isEmpty || !removed.isEmpty else { return }
-        let liveIDs = Set(displayManager.displays.map(\.stableIdentity))
-
-        settingsStore.update { settings in
-            var updated = settings.monitorPowerStateByDisplayID
-            for id in added where settings.monitorPowerStateByDisplayID[id] != .standby {
-                updated[id] = .blackout
-            }
-            for id in removed where liveIDs.contains(id) && settings.monitorPowerStateByDisplayID[id] == .blackout {
-                updated[id] = .visible
-            }
-            settings.monitorPowerStateByDisplayID = updated
-        }
     }
 
     /// Tracks monitor presence and prunes stale monitor-specific state after a retention window.

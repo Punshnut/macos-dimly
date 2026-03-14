@@ -233,7 +233,18 @@ struct ProfileMonitorState: Codable, Equatable {
     var externalDisplayOrder: [String]
     var internalDisplayOrder: [String]
     var brightnessPanelExpandedDisplayIDs: [String]
+    var monitorPowerStateByDisplayID: [String: PersistedMonitorPowerState]
     var monitorBrightnessByDisplayID: [String: Int]
+
+    private enum CodingKeys: String, CodingKey {
+        case menuBarExcludedDisplayIDs
+        case menuBarIncludedInternalDisplayIDs
+        case externalDisplayOrder
+        case internalDisplayOrder
+        case brightnessPanelExpandedDisplayIDs
+        case monitorPowerStateByDisplayID
+        case monitorBrightnessByDisplayID
+    }
 
     init(
         menuBarExcludedDisplayIDs: [String],
@@ -241,6 +252,7 @@ struct ProfileMonitorState: Codable, Equatable {
         externalDisplayOrder: [String],
         internalDisplayOrder: [String],
         brightnessPanelExpandedDisplayIDs: [String],
+        monitorPowerStateByDisplayID: [String: PersistedMonitorPowerState],
         monitorBrightnessByDisplayID: [String: Int]
     ) {
         self.menuBarExcludedDisplayIDs = menuBarExcludedDisplayIDs
@@ -248,6 +260,7 @@ struct ProfileMonitorState: Codable, Equatable {
         self.externalDisplayOrder = externalDisplayOrder
         self.internalDisplayOrder = internalDisplayOrder
         self.brightnessPanelExpandedDisplayIDs = brightnessPanelExpandedDisplayIDs
+        self.monitorPowerStateByDisplayID = monitorPowerStateByDisplayID
         self.monitorBrightnessByDisplayID = monitorBrightnessByDisplayID
     }
 
@@ -257,7 +270,30 @@ struct ProfileMonitorState: Codable, Equatable {
         externalDisplayOrder = settings.externalDisplayOrder
         internalDisplayOrder = settings.internalDisplayOrder
         brightnessPanelExpandedDisplayIDs = settings.brightnessPanelExpandedDisplayIDs
+        monitorPowerStateByDisplayID = settings.monitorPowerStateByDisplayID
         monitorBrightnessByDisplayID = settings.monitorBrightnessByDisplayID
+    }
+
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        menuBarExcludedDisplayIDs = try container.decodeIfPresent([String].self, forKey: .menuBarExcludedDisplayIDs) ?? []
+        menuBarIncludedInternalDisplayIDs = try container.decodeIfPresent([String].self, forKey: .menuBarIncludedInternalDisplayIDs) ?? []
+        externalDisplayOrder = try container.decodeIfPresent([String].self, forKey: .externalDisplayOrder) ?? []
+        internalDisplayOrder = try container.decodeIfPresent([String].self, forKey: .internalDisplayOrder) ?? []
+        brightnessPanelExpandedDisplayIDs = try container.decodeIfPresent([String].self, forKey: .brightnessPanelExpandedDisplayIDs) ?? []
+        monitorPowerStateByDisplayID = try container.decodeIfPresent([String: PersistedMonitorPowerState].self, forKey: .monitorPowerStateByDisplayID) ?? [:]
+        monitorBrightnessByDisplayID = try container.decodeIfPresent([String: Int].self, forKey: .monitorBrightnessByDisplayID) ?? [:]
+    }
+
+    func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(menuBarExcludedDisplayIDs, forKey: .menuBarExcludedDisplayIDs)
+        try container.encode(menuBarIncludedInternalDisplayIDs, forKey: .menuBarIncludedInternalDisplayIDs)
+        try container.encode(externalDisplayOrder, forKey: .externalDisplayOrder)
+        try container.encode(internalDisplayOrder, forKey: .internalDisplayOrder)
+        try container.encode(brightnessPanelExpandedDisplayIDs, forKey: .brightnessPanelExpandedDisplayIDs)
+        try container.encode(monitorPowerStateByDisplayID, forKey: .monitorPowerStateByDisplayID)
+        try container.encode(monitorBrightnessByDisplayID, forKey: .monitorBrightnessByDisplayID)
     }
 
     /// Applies captured monitor-related UI state back into live app settings.
@@ -267,6 +303,7 @@ struct ProfileMonitorState: Codable, Equatable {
         settings.externalDisplayOrder = externalDisplayOrder
         settings.internalDisplayOrder = internalDisplayOrder
         settings.brightnessPanelExpandedDisplayIDs = brightnessPanelExpandedDisplayIDs
+        settings.monitorPowerStateByDisplayID = monitorPowerStateByDisplayID
         settings.monitorBrightnessByDisplayID = monitorBrightnessByDisplayID
     }
 
@@ -278,6 +315,7 @@ struct ProfileMonitorState: Codable, Equatable {
             externalDisplayOrder: remap(externalDisplayOrder, with: idMap),
             internalDisplayOrder: remap(internalDisplayOrder, with: idMap),
             brightnessPanelExpandedDisplayIDs: remap(brightnessPanelExpandedDisplayIDs, with: idMap),
+            monitorPowerStateByDisplayID: remap(monitorPowerStateByDisplayID, with: idMap),
             monitorBrightnessByDisplayID: remap(monitorBrightnessByDisplayID, with: idMap)
         )
     }
@@ -298,6 +336,18 @@ struct ProfileMonitorState: Codable, Equatable {
     /// Remaps dictionary keys from snapshot IDs to current display IDs.
     private func remap(_ values: [String: Int], with idMap: [String: String]) -> [String: Int] {
         var remapped: [String: Int] = [:]
+        for (id, value) in values {
+            remapped[idMap[id] ?? id] = value
+        }
+        return remapped
+    }
+
+    /// Remaps dictionary keys from snapshot IDs to current display IDs.
+    private func remap(
+        _ values: [String: PersistedMonitorPowerState],
+        with idMap: [String: String]
+    ) -> [String: PersistedMonitorPowerState] {
+        var remapped: [String: PersistedMonitorPowerState] = [:]
         for (id, value) in values {
             remapped[idMap[id] ?? id] = value
         }
@@ -366,6 +416,14 @@ final class ProfileManager: ObservableObject {
     private var previousDisplayIDs: Set<String> = []
     private var profileApplyGeneration: UInt64 = 0
     private var pendingProfileBrightnessTasks: [Task<Void, Never>] = []
+    private var workspaceWakeToken: NSObjectProtocol?
+    private var workspaceScreensWakeToken: NSObjectProtocol?
+    private var workspaceSessionDidResignToken: NSObjectProtocol?
+    private var workspaceSessionDidBecomeToken: NSObjectProtocol?
+    private var distributedScreenLockedToken: NSObjectProtocol?
+    private var distributedScreenUnlockedToken: NSObjectProtocol?
+    private var automationSuppressedUntil: Date = .distantPast
+    private let wakeAutomationSuppressWindow: TimeInterval = 12
 
     /// Loads profiles and starts observing display changes for automation.
     init(
@@ -394,6 +452,91 @@ final class ProfileManager: ObservableObject {
                 self?.handleDisplayChange(displays)
             }
             .store(in: &cancellables)
+
+        workspaceWakeToken = NSWorkspace.shared.notificationCenter.addObserver(
+            forName: NSWorkspace.didWakeNotification,
+            object: nil,
+            queue: .main
+        ) { [weak self] _ in
+            Task { @MainActor [weak self] in
+                guard let self else { return }
+                self.suppressAutomation(for: self.wakeAutomationSuppressWindow, reason: "workspaceDidWake")
+            }
+        }
+        workspaceScreensWakeToken = NSWorkspace.shared.notificationCenter.addObserver(
+            forName: NSWorkspace.screensDidWakeNotification,
+            object: nil,
+            queue: .main
+        ) { [weak self] _ in
+            Task { @MainActor [weak self] in
+                guard let self else { return }
+                self.suppressAutomation(for: self.wakeAutomationSuppressWindow, reason: "workspaceScreensDidWake")
+            }
+        }
+        workspaceSessionDidResignToken = NSWorkspace.shared.notificationCenter.addObserver(
+            forName: NSWorkspace.sessionDidResignActiveNotification,
+            object: nil,
+            queue: .main
+        ) { [weak self] _ in
+            Task { @MainActor [weak self] in
+                guard let self else { return }
+                self.suppressAutomation(for: self.wakeAutomationSuppressWindow, reason: "workspaceSessionDidResign")
+            }
+        }
+        workspaceSessionDidBecomeToken = NSWorkspace.shared.notificationCenter.addObserver(
+            forName: NSWorkspace.sessionDidBecomeActiveNotification,
+            object: nil,
+            queue: .main
+        ) { [weak self] _ in
+            Task { @MainActor [weak self] in
+                guard let self else { return }
+                self.suppressAutomation(for: self.wakeAutomationSuppressWindow, reason: "workspaceSessionDidBecome")
+            }
+        }
+        let distributedCenter = DistributedNotificationCenter.default()
+        distributedScreenLockedToken = distributedCenter.addObserver(
+            forName: Notification.Name("com.apple.screenIsLocked"),
+            object: nil,
+            queue: .main
+        ) { [weak self] _ in
+            Task { @MainActor [weak self] in
+                guard let self else { return }
+                self.suppressAutomation(for: self.wakeAutomationSuppressWindow, reason: "distributedScreenLocked")
+            }
+        }
+        distributedScreenUnlockedToken = distributedCenter.addObserver(
+            forName: Notification.Name("com.apple.screenIsUnlocked"),
+            object: nil,
+            queue: .main
+        ) { [weak self] _ in
+            Task { @MainActor [weak self] in
+                guard let self else { return }
+                self.suppressAutomation(for: self.wakeAutomationSuppressWindow, reason: "distributedScreenUnlocked")
+            }
+        }
+    }
+
+    @MainActor
+    deinit {
+        if let workspaceWakeToken {
+            NSWorkspace.shared.notificationCenter.removeObserver(workspaceWakeToken)
+        }
+        if let workspaceScreensWakeToken {
+            NSWorkspace.shared.notificationCenter.removeObserver(workspaceScreensWakeToken)
+        }
+        if let workspaceSessionDidResignToken {
+            NSWorkspace.shared.notificationCenter.removeObserver(workspaceSessionDidResignToken)
+        }
+        if let workspaceSessionDidBecomeToken {
+            NSWorkspace.shared.notificationCenter.removeObserver(workspaceSessionDidBecomeToken)
+        }
+        let distributedCenter = DistributedNotificationCenter.default()
+        if let distributedScreenLockedToken {
+            distributedCenter.removeObserver(distributedScreenLockedToken)
+        }
+        if let distributedScreenUnlockedToken {
+            distributedCenter.removeObserver(distributedScreenUnlockedToken)
+        }
     }
 
     // MARK: - Profile CRUD
@@ -442,11 +585,29 @@ final class ProfileManager: ObservableObject {
         let expectedIDs = Set(profile.displays.map(\.id))
         let missing = expectedIDs.subtracting(appliedSnapshotIDs)
         let idMap = Dictionary(uniqueKeysWithValues: matched.map { ($0.snapshot.id, $0.display.stableIdentity) })
+        let remappedMonitorState = profile.monitorState?.remapped(using: idMap)
+        let runtimePowerStateByDisplayID = Dictionary(
+            uniqueKeysWithValues: matched.map { ($0.display.stableIdentity, currentRuntimePowerState(for: $0.display)) }
+        )
+        let desiredPowerStateByDisplayID = Dictionary(
+            uniqueKeysWithValues: matched.map { match in
+                (
+                    match.display.stableIdentity,
+                    desiredPowerState(
+                        for: match.snapshot,
+                        display: match.display,
+                        remappedMonitorState: remappedMonitorState
+                    )
+                )
+            }
+        )
 
-        if let monitorState = profile.monitorState {
-            let remappedState = monitorState.remapped(using: idMap)
+        if remappedMonitorState != nil || !desiredPowerStateByDisplayID.isEmpty {
             settingsStore.update { settings in
-                remappedState.apply(to: &settings)
+                remappedMonitorState?.apply(to: &settings)
+                for (displayID, powerState) in desiredPowerStateByDisplayID {
+                    settings.monitorPowerStateByDisplayID[displayID] = powerState
+                }
             }
         }
 
@@ -458,17 +619,19 @@ final class ProfileManager: ObservableObject {
         var retryBrightnessTargets: [(display: DisplayInfo, percent: Int)] = []
 
         for (snapshot, display) in matched {
-            let currentState = currentPowerState(for: display)
-            if currentState != snapshot.powerState {
-                applyPowerState(snapshot.powerState, to: display)
+            let desiredPowerState = desiredPowerStateByDisplayID[display.stableIdentity]
+                ?? desiredPowerState(for: snapshot, display: display, remappedMonitorState: remappedMonitorState)
+            let currentState = runtimePowerStateByDisplayID[display.stableIdentity] ?? .visible
+            if currentState != desiredPowerState {
+                applyPowerState(desiredPowerState, to: display)
             }
-            if snapshot.powerState == .visible, let brightness = snapshot.brightnessPercent {
+            if desiredPowerState == .visible, let brightness = snapshot.brightnessPercent {
                 let clamped = max(0, min(100, brightness))
                 let needsPostWakeStabilization = display.isExternal && (
-                    currentState == .asleep ||
+                    currentState != .visible ||
                     ddcManager.states[display.stableIdentity]?.status != .supported
                 )
-                if currentState == .asleep {
+                if currentState != .visible {
                     delayedBrightnessTargets.append((display: display, percent: clamped))
                 } else {
                     immediateBrightnessTargets.append((display: display, percent: clamped))
@@ -561,7 +724,7 @@ final class ProfileManager: ObservableObject {
     ) {
         guard profileApplyGeneration == generation else { return }
         let clamped = max(0, min(100, target.percent))
-        let currentState = currentPowerState(for: target.display)
+        let currentState = currentRuntimePowerState(for: target.display)
         let currentBrightness = engine.brightnessPercent(for: target.display)
         if currentState == .visible, abs(currentBrightness - clamped) <= 1 {
             DiagnosticsLogger.shared.log(
@@ -782,6 +945,13 @@ final class ProfileManager: ObservableObject {
 
         guard automationEnabled, !added.isEmpty, let profileID = automationProfileID,
               let profile = profiles.first(where: { $0.id == profileID }) else { return }
+        guard Date() >= automationSuppressedUntil else {
+            DiagnosticsLogger.shared.log(
+                "Skip automation during suppression added=\(added.count) until=\(automationSuppressedUntil.timeIntervalSinceNow)",
+                category: "profile"
+            )
+            return
+        }
 
         let addedExternals = displays.filter { added.contains($0.stableIdentity) && $0.isExternal }
         guard addedExternals.isEmpty == false else { return }
@@ -800,40 +970,108 @@ final class ProfileManager: ObservableObject {
         apply(profile: profile)
     }
 
-    /// Determines current power state using blackout/standby signals.
-    private func currentPowerState(for display: DisplayInfo) -> DisplayPowerState {
-        if blackoutManager.activeDisplayIDs.contains(display.stableIdentity) {
-            return .asleep
+    /// Suppresses display-connect automation during wake/lock churn so reconnects do not clobber manual state.
+    private func suppressAutomation(for duration: TimeInterval, reason: String) {
+        let until = Date().addingTimeInterval(duration)
+        if until > automationSuppressedUntil {
+            automationSuppressedUntil = until
         }
-        if ddcManager.states[display.stableIdentity]?.lastCommand == .standby {
-            return .asleep
+        DiagnosticsLogger.shared.log(
+            "Suppress automation reason=\(reason) duration=\(String(format: "%.1f", duration))s remaining=\(String(format: "%.1f", automationSuppressedUntil.timeIntervalSinceNow))s",
+            category: "profile"
+        )
+    }
+
+    /// Returns the current runtime power state from overlays/DDC without relying on persisted intent.
+    private func currentRuntimePowerState(for display: DisplayInfo) -> PersistedMonitorPowerState {
+        let id = display.stableIdentity
+        if blackoutManager.activeDisplayIDs.contains(id) {
+            return .blackout
+        }
+        if ddcManager.states[id]?.lastCommand == .standby {
+            return .standby
+        }
+        if display.isBuiltin, let persisted = settingsStore.settings.monitorPowerStateByDisplayID[id], persisted != .visible {
+            return persisted
+        }
+        return .visible
+    }
+
+    /// Returns the desired persisted power state used when saving/restoring profiles.
+    private func currentDesiredPowerState(for display: DisplayInfo) -> PersistedMonitorPowerState {
+        let id = display.stableIdentity
+        if let persisted = settingsStore.settings.monitorPowerStateByDisplayID[id] {
+            return persisted
+        }
+        if blackoutManager.activeDisplayIDs.contains(id) {
+            return .blackout
+        }
+        if ddcManager.states[id]?.lastCommand == .standby {
+            return .standby
         }
         return .visible
     }
 
     /// Applies a desired power state to a display via the engine.
-    private func applyPowerState(_ state: DisplayPowerState, to display: DisplayInfo) {
+    private func applyPowerState(_ state: PersistedMonitorPowerState, to display: DisplayInfo) {
         guard let engine else {
             logger.error("Cannot apply profile state; engine unavailable")
             return
         }
-        switch state {
-        case .asleep:
-            engine.standby(display: display)
-        case .visible:
-            engine.wake(display: display)
-        }
+        engine.applyUserPowerState(state, to: display)
     }
 
     /// Captures snapshots for all currently known displays.
     private func captureCurrentDisplaySnapshots() -> [DisplaySnapshot] {
         displayManager.displays.map { display in
-            DisplaySnapshot(
+            let powerState = currentDesiredPowerState(for: display)
+            return DisplaySnapshot(
                 from: display,
-                powerState: currentPowerState(for: display),
+                powerState: powerState == .visible ? .visible : .asleep,
                 brightnessPercent: currentBrightness(for: display)
             )
         }
+    }
+
+    /// Resolves exact per-display power intent for profile apply, preferring captured monitor-state metadata.
+    private func desiredPowerState(
+        for snapshot: DisplaySnapshot,
+        display: DisplayInfo,
+        remappedMonitorState: ProfileMonitorState?
+    ) -> PersistedMonitorPowerState {
+        if let stored = remappedMonitorState?.monitorPowerStateByDisplayID[display.stableIdentity] {
+            return stored
+        }
+        switch snapshot.powerState {
+        case .visible:
+            return .visible
+        case .asleep:
+            return inferredLegacyAsleepPowerState(for: display)
+        }
+    }
+
+    /// Infers exact power intent for older profiles that only stored `visible` vs `asleep`.
+    private func inferredLegacyAsleepPowerState(for display: DisplayInfo) -> PersistedMonitorPowerState {
+        let id = display.stableIdentity
+        if let persisted = settingsStore.settings.monitorPowerStateByDisplayID[id], persisted != .visible {
+            return persisted
+        }
+        if display.isBuiltin {
+            return .blackout
+        }
+        if settingsStore.settings.overlayOnlyDisplayIDs.contains(id) {
+            return .blackout
+        }
+        if blackoutManager.activeDisplayIDs.contains(id) {
+            return .blackout
+        }
+        if ddcManager.states[id]?.lastCommand == .standby {
+            return .standby
+        }
+        if ddcManager.states[id]?.status == .supported {
+            return .standby
+        }
+        return .blackout
     }
 
     /// Determines the current brightness for profile capture.
