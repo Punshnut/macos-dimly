@@ -902,19 +902,6 @@ struct SettingsRootView: View {
                                             }
                                         )
                                         .simultaneousGesture(profileReorderGesture(for: profile.id))
-                                        .overlay(
-                                            RoundedRectangle(cornerRadius: 12, style: .continuous)
-                                                .fill(isTargeted ? Color.accentColor.opacity(0.08) : Color.clear)
-                                        )
-                                        .overlay(
-                                            RoundedRectangle(cornerRadius: 12, style: .continuous)
-                                                .stroke(
-                                                    isTargeted
-                                                        ? Color.accentColor.opacity(0.8)
-                                                        : Color.clear,
-                                                    lineWidth: 2
-                                                )
-                                        )
                                 }
                             }
                             if let draggedID = draggedProfileID,

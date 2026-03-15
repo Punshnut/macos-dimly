@@ -839,23 +839,6 @@ struct MenuBarContentView: View {
                                     }
                                 )
                                 .highPriorityGesture(smartButtonReorderGesture(for: profile.id))
-                                .overlay(
-                                    RoundedRectangle(cornerRadius: compact ? 10 : 12, style: .continuous)
-                                        .fill(
-                                            isTargeted
-                                                ? Color.accentColor.opacity(colorScheme == .dark ? 0.18 : 0.1)
-                                                : Color.clear
-                                        )
-                                )
-                                .overlay(
-                                    RoundedRectangle(cornerRadius: compact ? 10 : 12, style: .continuous)
-                                        .stroke(
-                                            isTargeted
-                                                ? Color.accentColor.opacity(colorScheme == .dark ? 0.88 : 0.78)
-                                                : Color.clear,
-                                            lineWidth: 2
-                                        )
-                                )
                         }
                 }
 
