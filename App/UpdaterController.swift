@@ -1,9 +1,9 @@
 // MARK: - Sparkle Integration
-// Sparkle updater coordination for menu actions and window focus.
+// Sparkle updater coordination for menu actions, focus management, and fallback handling.
 import AppKit
 import Sparkle
 
-/// Sparkle updater bridge used by menu actions.
+/// App-level bridge around Sparkle's updater controller and delegate callbacks.
 @MainActor
 final class UpdaterController: NSObject, SPUStandardUserDriverDelegate, SPUUpdaterDelegate {
     private lazy var updaterController: SPUStandardUpdaterController = {
@@ -14,6 +14,7 @@ final class UpdaterController: NSObject, SPUStandardUserDriverDelegate, SPUUpdat
         )
     }()
 
+    /// Forces eager updater initialization so Sparkle hooks are ready before the first menu action.
     override init() {
         super.init()
         _ = updaterController

@@ -117,6 +117,7 @@ struct DisplaySnapshot: Codable, Equatable, Identifiable {
         case brightnessPercent
     }
 
+    /// Decodes a saved display snapshot while preserving compatibility with older profile formats.
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         id = try container.decode(String.self, forKey: .id)
@@ -161,6 +162,7 @@ struct DisplayProfile: Codable, Identifiable, Equatable {
     var showInSmartButtons: Bool = true
     var smartButtonColorPreset: SmartButtonColorPreset?
 
+    /// Creates a named profile from captured display snapshots and optional monitor metadata.
     init(
         id: UUID,
         name: String,
@@ -189,6 +191,7 @@ struct DisplayProfile: Codable, Identifiable, Equatable {
         case smartButtonColorPreset
     }
 
+    /// Decodes a saved profile and backfills newer UI metadata with sensible defaults.
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         id = try container.decode(UUID.self, forKey: .id)
@@ -246,6 +249,7 @@ struct ProfileMonitorState: Codable, Equatable {
         case monitorBrightnessByDisplayID
     }
 
+    /// Creates the monitor-specific portion of a profile snapshot.
     init(
         menuBarExcludedDisplayIDs: [String],
         menuBarIncludedInternalDisplayIDs: [String],
@@ -264,6 +268,7 @@ struct ProfileMonitorState: Codable, Equatable {
         self.monitorBrightnessByDisplayID = monitorBrightnessByDisplayID
     }
 
+    /// Captures monitor ordering and per-display state from the current live settings.
     init(from settings: DimlySettings) {
         menuBarExcludedDisplayIDs = settings.menuBarExcludedDisplayIDs
         menuBarIncludedInternalDisplayIDs = settings.menuBarIncludedInternalDisplayIDs
@@ -274,6 +279,7 @@ struct ProfileMonitorState: Codable, Equatable {
         monitorBrightnessByDisplayID = settings.monitorBrightnessByDisplayID
     }
 
+    /// Decodes saved monitor UI state while tolerating fields that may be absent in older profiles.
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         menuBarExcludedDisplayIDs = try container.decodeIfPresent([String].self, forKey: .menuBarExcludedDisplayIDs) ?? []
@@ -285,6 +291,7 @@ struct ProfileMonitorState: Codable, Equatable {
         monitorBrightnessByDisplayID = try container.decodeIfPresent([String: Int].self, forKey: .monitorBrightnessByDisplayID) ?? [:]
     }
 
+    /// Encodes monitor-specific profile state for persistence and backup export.
     func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(menuBarExcludedDisplayIDs, forKey: .menuBarExcludedDisplayIDs)
@@ -369,6 +376,7 @@ struct ProfileState: Codable {
         case automationTriggerTarget
     }
 
+    /// Creates the full persisted profile payload, including automation preferences.
     init(
         profiles: [DisplayProfile],
         automationEnabled: Bool,
@@ -381,6 +389,7 @@ struct ProfileState: Codable {
         self.automationTriggerTarget = automationTriggerTarget
     }
 
+    /// Decodes persisted profile state and defaults automation targeting for older saves.
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         profiles = try container.decode([DisplayProfile].self, forKey: .profiles)
@@ -390,7 +399,7 @@ struct ProfileState: Codable {
     }
 }
 
-/// Manages saving/applying display profiles and simple automation on external connect.
+/// Manages saved display profiles and automation triggered by external-display changes.
 @MainActor
 final class ProfileManager: ObservableObject {
     @Published private(set) var profiles: [DisplayProfile] = []

@@ -35,7 +35,7 @@ enum LaunchAtLoginManager {
 
     /// Uses `SMAppService` to register/unregister only when a state change is required.
     private static func setEnabledWithServiceManagement(_ shouldEnableLoginItem: Bool) async throws {
-        // Fast exit when the service is already in the desired state.
+        // Avoid redundant ServiceManagement calls when the current state already matches the request.
         if !needsUpdate(targetState: shouldEnableLoginItem) {
             DiagnosticsLogger.shared.log("SMAppService already \(shouldEnableLoginItem ? "enabled" : "disabled")", category: "login")
             return
@@ -55,7 +55,7 @@ enum LaunchAtLoginManager {
         case .notRegistered:
             return targetState == true
         case .requiresApproval:
-            // User still needs to approve in System Settings; keep trying.
+            // Keep reporting work as pending while macOS is waiting for user approval in System Settings.
             return true
         case .notFound:
             return true

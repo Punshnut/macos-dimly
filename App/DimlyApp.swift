@@ -13,6 +13,7 @@ struct DimlyApp: App {
     private let displayManager: DisplayManager
     private let displayLabelManager: DisplayLabelManager
 
+    /// Builds the shared app graph early so SwiftUI scenes and AppKit delegates share one engine instance.
     init() {
         DiagnosticsLogger.shared.log("App init starting", category: "app")
         DispatchQueue.main.async {
@@ -56,7 +57,7 @@ struct DimlyApp: App {
 
     /// Menu bar extra hosting the main popover UI.
     private var menuBarScene: some Scene {
-        // Show/hide without conditional SceneBuilder to avoid compiler crash.
+        // Keep the scene structure stable and drive visibility through binding updates instead.
         let showMenuBarBinding = Binding(
             get: { settingsStore.settings.showMenuBarIcon },
             set: { newValue in settingsStore.update { $0.showMenuBarIcon = newValue } }

@@ -46,6 +46,7 @@ enum HotkeyTarget: Hashable, Codable {
         case display
     }
 
+    /// Decodes the persisted target kind and restores either the global or per-display variant.
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         let kind = try container.decode(Kind.self, forKey: .kind)
@@ -78,6 +79,7 @@ struct HotkeyBinding: Identifiable, Codable, Equatable {
     var target: HotkeyTarget
     var descriptor: HotkeyDescriptor?
 
+    /// Creates one saved hotkey binding entry for the settings store.
     init(id: UUID = UUID(), action: HotkeyAction, target: HotkeyTarget, descriptor: HotkeyDescriptor?) {
         self.id = id
         self.action = action

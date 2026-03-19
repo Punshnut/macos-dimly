@@ -1,10 +1,10 @@
 // MARK: - Display Label Manager
-// On-screen display number overlays.
+// On-screen display number overlays and their window lifecycle.
 import SwiftUI
 import AppKit
 import Combine
 
-/// Manages display-number overlays.
+/// Manages on-screen numbering overlays for connected displays.
 @MainActor
 final class DisplayLabelManager {
     private let settingsStore: AppSettingsStore
@@ -50,7 +50,7 @@ final class DisplayLabelManager {
         let internalIndexMap = indexMap(for: displays.filter { $0.isBuiltin })
         let liveIDs = Set(displays.map(\.stableIdentity))
 
-        // Remove overlays for disconnected displays.
+        // Remove overlay windows for displays that are no longer present.
         let stale = overlays.keys.filter { !liveIDs.contains($0) }
         for key in stale {
             overlays[key]?.hide()
@@ -90,9 +90,9 @@ final class DisplayLabelManager {
         overlays.values.forEach { $0.hide() }
     }
 
-    /// Stable ordering for numbering internal/external displays.
+    /// Builds a deterministic numbering map for one display group.
     private func indexMap(for displays: [DisplayInfo]) -> [String: Int] {
-        // Stable, predictable ordering based on displayID.
+        // Sort by display ID so numbering stays consistent across refreshes.
         let ordered = displays.sorted { $0.displayID < $1.displayID }
         var mapping: [String: Int] = [:]
         for (index, display) in ordered.enumerated() {
@@ -112,7 +112,7 @@ final class DisplayLabelManager {
     }
 }
 
-/// Borderless window used to host the SwiftUI overlay on a screen.
+/// Borderless window that hosts the SwiftUI numbering overlay for one screen.
 private final class DisplayLabelWindow: NSWindow {
     private var hostingView: NSHostingView<DisplayLabelOverlayView>
 
@@ -159,7 +159,7 @@ private struct DisplayLabelOverlayView: View {
     let marker: String
     let title: String
 
-    /// Layout for the overlay marker and display title.
+    /// Renders the overlay marker and the resolved display title.
     var body: some View {
         ZStack {
             Color.clear

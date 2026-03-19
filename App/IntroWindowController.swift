@@ -39,6 +39,7 @@ final class IntroWindowController: NSWindowController, NSWindowDelegate {
         window.delegate = self
     }
 
+    /// Storyboard/coder construction is unsupported because this controller is always built programmatically.
     required init?(coder: NSCoder) {
         return nil
     }

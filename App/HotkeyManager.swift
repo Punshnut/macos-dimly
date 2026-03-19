@@ -19,7 +19,7 @@ struct HotkeyDescriptor: Equatable, Hashable, Codable {
         case mediaKey
     }
 
-    /// Modern modifier flags.
+    /// Exposes the persisted modifier bitset as `NSEvent.ModifierFlags`.
     var modifierFlags: NSEvent.ModifierFlags {
         NSEvent.ModifierFlags(rawValue: modifierFlagsRawValue)
     }
@@ -38,6 +38,7 @@ struct HotkeyDescriptor: Equatable, Hashable, Codable {
         keyRepresentation: "P"
     )
 
+    /// Creates a standard keyboard shortcut descriptor and normalizes modifiers for persistence.
     init(keyCode: UInt32, modifierFlags: NSEvent.ModifierFlags, keyRepresentation: String? = nil) {
         self.keyCode = keyCode
         self.modifierFlagsRawValue = HotkeyDescriptor.filtered(modifierFlags).rawValue
@@ -45,6 +46,7 @@ struct HotkeyDescriptor: Equatable, Hashable, Codable {
         self.mediaKey = nil
     }
 
+    /// Creates a media-key shortcut descriptor while preserving the same modifier filtering rules.
     init(mediaKey: MediaKey, modifierFlags: NSEvent.ModifierFlags, keyRepresentation: String? = nil) {
         self.keyCode = 0
         self.modifierFlagsRawValue = HotkeyDescriptor.filtered(modifierFlags).rawValue
@@ -52,6 +54,7 @@ struct HotkeyDescriptor: Equatable, Hashable, Codable {
         self.mediaKey = mediaKey
     }
 
+    /// Decodes a persisted shortcut and re-sanitizes modifiers so stale flag bits do not leak back in.
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         keyCode = try container.decode(UInt32.self, forKey: .keyCode)

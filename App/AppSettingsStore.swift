@@ -1,5 +1,5 @@
 // MARK: - Settings Store
-// Single source of truth for settings persistence and side effects.
+// Central store for persisted settings and their app-level side effects.
 import AppKit
 import Combine
 import OSLog
@@ -28,7 +28,7 @@ final class AppSettingsStore: ObservableObject {
     func update(_ edit: (inout DimlySettings) -> Void) {
         var copy = settings
         edit(&copy)
-        guard copy != settings else { return } // avoid no-op writes that can spam cfprefsd
+        guard copy != settings else { return } // Skip identical writes to avoid unnecessary preference churn.
         settings = copy
     }
 
@@ -49,7 +49,7 @@ final class AppSettingsStore: ObservableObject {
 
     /// Applies system-side effects after settings updates.
     private func applySideEffects(for settings: DimlySettings) {
-        // Avoid redundant system calls (e.g., failing SMAppService requests) when nothing changed.
+        // Avoid repeating system-level operations when the effective setting has not changed.
         if lastAppliedSettings?.launchAtLogin != settings.launchAtLogin {
             LaunchAtLoginManager.setEnabled(settings.launchAtLogin)
         }

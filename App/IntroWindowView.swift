@@ -3,7 +3,7 @@
 import SwiftUI
 import AppKit
 
-/// Welcome surface shown on first launch.
+/// Introductory surface shown the first time the app launches.
 struct IntroWindowView: View {
     /// Called when the user dismisses the intro window.
     let onDismiss: () -> Void
@@ -119,7 +119,7 @@ struct IntroWindowView: View {
         .ignoresSafeArea()
     }
 
-    /// Shared rounded card container for grouped intro content blocks.
+    /// Shared card container used to group related intro content.
     @ViewBuilder
     private func introCard<Content: View>(@ViewBuilder content: () -> Content) -> some View {
         VStack(alignment: .leading, spacing: 10) {
@@ -136,7 +136,7 @@ struct IntroWindowView: View {
         )
     }
 
-    /// Compact explanatory tile for a control mode (DDC or overlay).
+    /// Explanatory tile describing one display-control path.
     private func modeTile(title: String, subtitle: String, symbol: String, color: Color) -> some View {
         VStack(alignment: .leading, spacing: 8) {
             HStack(spacing: 6) {
@@ -164,7 +164,7 @@ struct IntroWindowView: View {
         )
     }
 
-    /// Small status badge shown in section headers.
+    /// Status badge used in the control-mode section header.
     private func statusPill(title: String, color: Color) -> some View {
         Text(title)
             .font(.caption2.weight(.semibold))

@@ -1,8 +1,8 @@
 // MARK: - Display Label Resolver
-// Shared naming and marker rules for display labels.
+// Shared naming and marker rules used by display-label overlays.
 import Foundation
 
-/// Helper for display titles and overlay markers.
+/// Resolves user-facing titles and markers for display overlays.
 struct DisplayLabelResolver {
     /// Resolves a friendly, user-facing name for a display.
     static func displayName(
@@ -25,7 +25,7 @@ struct DisplayLabelResolver {
             : String(localized: "Internal")
     }
 
-    /// Marker string shown in the full-screen overlay (number for most displays, a special tag for a single internal panel).
+    /// Resolves the marker shown in the full-screen overlay for a display.
     static func overlayMarker(
         for display: DisplayInfo,
         externalIndex: Int,
@@ -38,7 +38,7 @@ struct DisplayLabelResolver {
         return String(display.isExternal ? externalIndex : internalIndex)
     }
 
-    /// Trims whitespace from optional strings.
+    /// Trims surrounding whitespace from optional strings before label selection.
     private static func trimmed(_ value: String?) -> String? {
         value?.trimmingCharacters(in: .whitespacesAndNewlines)
     }

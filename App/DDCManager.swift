@@ -1,5 +1,5 @@
 // MARK: - DDC/CI Orchestration
-// DDC power and brightness orchestration for external displays.
+// DDC power and brightness coordination for external displays.
 import Foundation
 import Combine
 import CoreGraphics
@@ -47,7 +47,7 @@ final class DDCManager: ObservableObject {
     private let logger = Logger(subsystem: Bundle.main.bundleIdentifier ?? "Dimly", category: "DDC")
     private let probeRetryCount = 4
     private let probeRetryDelayNanoseconds: UInt64 = 450_000_000
-    // Keep checking UI visible for a short, bounded "cable check" window (2-5s target).
+    // Keep the transient "checking cable/DDC" state visible briefly after wake or topology changes.
     private let cableCheckWindowNanoseconds: UInt64 = 3_000_000_000
     private var probeTasks: [String: Task<Void, Never>] = [:]
     private var cableCheckClearTasks: [String: Task<Void, Never>] = [:]
@@ -58,7 +58,7 @@ final class DDCManager: ObservableObject {
     init(displayManager: DisplayManager) {
         self.displayManager = displayManager
         probeAll(markAsCableCheck: true)
-        // Re-probe whenever displays change.
+        // Re-probe after display inventory changes so capability state stays current.
         displayManager.$displays
             .removeDuplicates()
             .sink { [weak self] displays in

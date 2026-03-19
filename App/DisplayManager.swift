@@ -1,12 +1,12 @@
 // MARK: - Display Manager
-// Publishes live display inventory and normalizes change callbacks.
+// Publishes live display inventory and coalesces topology-change callbacks.
 import Foundation
 import Combine
 import OSLog
 import CoreGraphics
 import AppKit
 
-/// Publishes a live list of connected displays and logs changes.
+/// Publishes the current display inventory and logs topology changes.
 @MainActor
 final class DisplayManager: ObservableObject {
     @Published private(set) var displays: [DisplayInfo] = []
@@ -20,7 +20,7 @@ final class DisplayManager: ObservableObject {
     private var topologyRefreshTask: Task<Void, Never>?
     private var refreshGeneration: UInt64 = 0
 
-    /// Loads initial display inventory and installs change callbacks.
+    /// Loads the initial display inventory and subscribes to topology-change notifications.
     init(hardware: DisplayHardwareProviding = DisplayHardware()) {
         self.hardware = hardware
         refresh(reason: "initial boot")
@@ -102,21 +102,21 @@ final class DisplayManager: ObservableObject {
         }
     }
 
-    /// Refreshes display info off the main actor.
+    /// Refreshes display metadata off the main actor and tags the work with a generation number.
     private func refresh(reason: String) {
         refreshGeneration &+= 1
         let generation = refreshGeneration
         let currentIDs = hardware.activeDisplayIDs()
         DiagnosticsLogger.shared.log("Refresh displays (reason: \(reason)) count=\(currentIDs.count)", category: "display")
 
-        // Resolving display info can block on IOKit; perform off the main actor and marshal back.
+        // Resolving display metadata can block on IOKit, so the work runs off-main and returns asynchronously.
         Task.detached(priority: .utility) { [hardware, weak self] in
             let currentDisplays = currentIDs.map { hardware.displayInfo(for: $0) }
             await self?.applyDisplays(currentDisplays, reason: reason, generation: generation)
         }
     }
 
-    /// Applies new display info and logs changes.
+    /// Applies refreshed display metadata if it still belongs to the latest refresh generation.
     @MainActor
     private func applyDisplays(_ displays: [DisplayInfo], reason: String, generation: UInt64) {
         guard generation == refreshGeneration else {

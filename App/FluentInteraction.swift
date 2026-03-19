@@ -1,5 +1,5 @@
 // MARK: - Fluent Interaction
-// Reusable interaction effects that keep clicks and hover states responsive without heavy motion.
+// Reusable interaction effects that keep buttons and tiles responsive without over-animating the UI.
 import SwiftUI
 
 enum DimlyMotion {
@@ -10,7 +10,7 @@ enum DimlyMotion {
     static let gentleEaseOut = Animation.easeOut(duration: 0.18)
 }
 
-/// Lightweight press animation for plain/custom buttons.
+/// Compact press animation for plain and custom buttons.
 struct FluentPressButtonStyle: ButtonStyle {
     var pressedScale: CGFloat = 0.97
     var pressedOpacity: Double = 0.94

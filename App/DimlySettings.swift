@@ -327,7 +327,7 @@ extension DimlySettings.FastActionsVisibilityMode {
     }
 }
 
-/// Lightweight persistence layer for `DimlySettings` backed by `UserDefaults`.
+/// `UserDefaults`-backed persistence layer for `DimlySettings`.
 enum DimlySettingsStore {
     private static let settingsKey = "DimlySettings.v1"
 
@@ -340,7 +340,7 @@ enum DimlySettingsStore {
             let decoded = try JSONDecoder().decode(DimlySettings.self, from: data)
             return decoded
         } catch {
-            // If decoding fails, fall back to defaults instead of crashing.
+            // Fall back to defaults if a stored payload no longer decodes cleanly.
             return .default
         }
     }
@@ -351,7 +351,7 @@ enum DimlySettingsStore {
             let data = try JSONEncoder().encode(settings)
             UserDefaults.standard.set(data, forKey: settingsKey)
         } catch {
-            // Swallow persistence errors for now; logging happens in the caller.
+            // Ignore write failures here because higher layers already handle diagnostics.
         }
     }
 }

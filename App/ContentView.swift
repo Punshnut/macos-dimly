@@ -1,13 +1,13 @@
 // MARK: - Preview Playground
-// Lightweight view used only for local preview checks.
+// Preview-only view used for local SwiftUI checks.
 import SwiftUI
 
-/// Minimal preview-only view.
+/// Preview scaffold used to validate styling and interaction basics.
 struct ContentView: View {
-    /// Demo counter for preview interaction.
+    /// Temporary counter used to exercise state changes in previews.
     @State private var tapCount = 0
 
-    /// Renders a small interactive preview surface.
+    /// Renders the local preview surface.
     var body: some View {
         VStack(spacing: 16) {
             Text(String(localized: "Welcome to Dimly"))

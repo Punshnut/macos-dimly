@@ -10,6 +10,7 @@ final class LauncherWindowController: NSWindowController, NSWindowDelegate {
     private let engine: DimlyEngine
     private let updaterController: UpdaterController
 
+    /// Builds the standalone launcher window that mirrors the menu bar content for hotkey-driven access.
     init(
         settingsStore: AppSettingsStore,
         displayManager: DisplayManager,
@@ -53,6 +54,7 @@ final class LauncherWindowController: NSWindowController, NSWindowDelegate {
         window.delegate = self
     }
 
+    /// Storyboard/coder construction is unsupported because the launcher window is assembled in code.
     required init?(coder: NSCoder) {
         nil
     }

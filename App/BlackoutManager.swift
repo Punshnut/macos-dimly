@@ -471,6 +471,7 @@ final class BlackoutWindow: NSWindow {
     private final class BlackoutView: NSView {
         override var wantsUpdateLayer: Bool { true }
 
+        /// Keeps the backing layer solid black without requiring a custom draw pass.
         override func updateLayer() {
             layer?.backgroundColor = NSColor.black.cgColor
         }
@@ -495,7 +496,7 @@ final class BlackoutWindow: NSWindow {
         backgroundColor = .clear
         alphaValue = 0
         hasShadow = false
-        ignoresMouseEvents = false // blocks clicks; panic hotkey still works
+        ignoresMouseEvents = false // Intentionally intercepts clicks so the blackout behaves like a true cover layer.
         collectionBehavior = [.canJoinAllSpaces, .fullScreenAuxiliary, .stationary]
         blackoutView.wantsLayer = true
         blackoutView.layer?.opacity = 1
@@ -585,6 +586,7 @@ final class DimOverlayWindow: NSWindow {
     private final class DimOverlayView: NSView {
         override var wantsUpdateLayer: Bool { true }
 
+        /// Keeps the fallback dimming layer solid black while opacity is animated on the window.
         override func updateLayer() {
             layer?.backgroundColor = NSColor.black.cgColor
         }

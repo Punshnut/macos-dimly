@@ -2,7 +2,7 @@
 // File logger used alongside unified logging.
 import Foundation
 
-/// Small thread-safe logger for local diagnostics.
+/// Thread-safe file logger used for local diagnostics.
 final class DiagnosticsLogger: @unchecked Sendable {
     static let shared = DiagnosticsLogger()
 
@@ -20,6 +20,7 @@ final class DiagnosticsLogger: @unchecked Sendable {
     private let maxRotatedFiles = 3
     private var currentFileSizeBytes: UInt64 = 0
 
+    /// Creates the singleton logger, resolves the log file path, and opens the active log if diagnostics are enabled.
     private init() {
         let resolvedLogsDir = FileManager.default.urls(for: .libraryDirectory, in: .userDomainMask)[0]
             .appendingPathComponent("Logs", isDirectory: true)

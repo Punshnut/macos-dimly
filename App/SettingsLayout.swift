@@ -239,13 +239,13 @@ struct SettingsWindowToolbarHider: ViewModifier {
 }
 
 extension View {
-    /// Hides default settings-window toolbar artifacts while preserving window chrome.
+    /// Removes default settings-window toolbar items while preserving the native titlebar layout.
     func hideSettingsToolbar() -> some View {
         modifier(SettingsWindowToolbarHider())
     }
 }
 
-// Cleans toolbar leftovers while keeping the toolbar attached.
+// Removes AppKit-inserted toolbar items while keeping the unified toolbar container attached.
 private struct SettingsToolbarCleaner: NSViewRepresentable {
     /// Initializes the coordinator that owns toolbar cleanup.
     func makeCoordinator() -> Coordinator {
@@ -261,7 +261,7 @@ private struct SettingsToolbarCleaner: NSViewRepresentable {
         return view
     }
 
-    /// Re-attaches cleanup after view/window reparenting changes.
+    /// Reapplies toolbar cleanup if SwiftUI moves the host view into a different window.
     func updateNSView(_ nsView: NSView, context: Context) {
         Task { @MainActor in
             context.coordinator.attachToolbar(to: nsView.window)

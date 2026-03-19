@@ -161,7 +161,7 @@ struct MenuBarContentView: View {
         }
     }
 
-    /// Applies a smart-button profile with lightweight tap feedback.
+    /// Applies a smart-button profile while preserving a brief tap-feedback animation.
     private func applySmartButton(_ profile: DisplayProfile) {
         guard Date() >= suppressSmartButtonTapUntil else { return }
         flashSmartButton(profile.id)
@@ -673,7 +673,7 @@ struct MenuBarContentView: View {
         return parts.isEmpty ? String(localized: "No displays detected") : parts.joined(separator: " • ")
     }
 
-    /// Small badge highlighting blackout status.
+    /// Compact badge summarizing blackout status.
     private var statusPill: some View {
         let isBlackoutActive = blackoutActiveCount > 0
         return HStack(spacing: 4) {
@@ -1206,7 +1206,7 @@ struct MenuBarContentView: View {
         .animation(standardAnimation, value: settingsStore.settings.brightnessPanelExpandedDisplayIDs)
     }
 
-    /// Simplified per-display list for simple mode.
+    /// Reduced per-display list used in the simple layout.
     private var externalDisplaysSimpleSection: some View {
         VStack(alignment: .leading, spacing: 8) {
             sectionHeader(monitorsSectionTitle)
@@ -1230,7 +1230,7 @@ struct MenuBarContentView: View {
         displayCard(display, includeMenu: false)
     }
 
-    /// Shared display card used by both simple and advanced layouts.
+    /// Shared display card used across the simple and advanced layouts.
     private func displayCard(_ display: DisplayInfo, includeMenu: Bool) -> some View {
         let rowShape = RoundedRectangle(cornerRadius: 10, style: .continuous)
         let isExpanded = isBrightnessPanelExpanded(for: display)
@@ -1670,7 +1670,7 @@ struct MenuBarContentView: View {
         }
     }
 
-    /// Simplified app controls for simple mode.
+    /// Reduced app-control section used in the simple layout.
     private var appControlsSimpleSection: some View {
         VStack(alignment: .leading, spacing: 8) {
             sectionHeader(String(localized: "App"))
@@ -1711,7 +1711,7 @@ struct MenuBarContentView: View {
         .controlSize(.small)
     }
 
-    /// Minimal app actions shown in short mode.
+    /// Essential app actions shown in the short layout.
     private var shortModeAppActionsSection: some View {
         VStack(alignment: .leading, spacing: 8) {
             sectionHeader(String(localized: "App"))
@@ -2234,6 +2234,7 @@ struct MenuBarContentView: View {
 }
 
 private extension CGRect {
+    /// Convenience initializer used by drag previews that are positioned from a center point.
     init(center: CGPoint, size: CGSize) {
         self.init(
             x: center.x - (size.width * 0.5),
@@ -2292,10 +2293,12 @@ private extension Array where Element == CGFloat {
 private struct MenuBarWindowAnchorLock: NSViewRepresentable {
     let isEnabled: Bool
 
+    /// Creates a coordinator that keeps the menu bar window pinned to its original top edge while resizing.
     func makeCoordinator() -> Coordinator {
         Coordinator()
     }
 
+    /// Installs an invisible AppKit hook so SwiftUI can react to the hosting window's resize lifecycle.
     func makeNSView(context: Context) -> NSView {
         let view = NSView(frame: .zero)
         Task { @MainActor in
@@ -2304,12 +2307,14 @@ private struct MenuBarWindowAnchorLock: NSViewRepresentable {
         return view
     }
 
+    /// Reattaches the coordinator whenever SwiftUI moves this representable into a different window.
     func updateNSView(_ nsView: NSView, context: Context) {
         Task { @MainActor in
             context.coordinator.attach(to: nsView.window, isEnabled: isEnabled)
         }
     }
 
+    /// Removes AppKit observers when SwiftUI tears down the backing view.
     static func dismantleNSView(_ nsView: NSView, coordinator: Coordinator) {
         coordinator.detach()
     }
@@ -2320,6 +2325,7 @@ private struct MenuBarWindowAnchorLock: NSViewRepresentable {
         private var isEnabled = false
         private var lockedTopY: CGFloat?
 
+        /// Starts observing the current hosting window and captures the top edge to preserve menu bar anchoring.
         func attach(to window: NSWindow?, isEnabled: Bool) {
             self.isEnabled = isEnabled
             guard let window else { return }
@@ -2342,6 +2348,7 @@ private struct MenuBarWindowAnchorLock: NSViewRepresentable {
             }
         }
 
+        /// Stops observing the current window and clears any cached anchor state.
         func detach() {
             if let window {
                 NotificationCenter.default.removeObserver(
@@ -2360,6 +2367,7 @@ private struct MenuBarWindowAnchorLock: NSViewRepresentable {
             handleResize()
         }
 
+        /// Repositions the window after a resize so height changes expand downward instead of drifting upward.
         private func handleResize() {
             guard isEnabled, let window else { return }
             let topY = lockedTopY ?? window.frame.maxY

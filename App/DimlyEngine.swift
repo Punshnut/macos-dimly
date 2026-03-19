@@ -1401,7 +1401,7 @@ final class DimlyEngine {
         return !hasVisibleSecondary
     }
 
-    /// Best-effort visibility heuristic used by primary safety override.
+    /// Visibility heuristic used by the primary-display safety override when runtime state is incomplete.
     private func isDisplayLikelyVisibleAsSecondary(_ display: DisplayInfo, settings: DimlySettings) -> Bool {
         let id = display.stableIdentity
         let persistedPower = settings.monitorPowerStateByDisplayID[id] ?? .visible

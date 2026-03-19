@@ -5,6 +5,7 @@ enum SettingsBackupType: String, Codable {
     case monitor
     case generalAndMonitor
 
+    /// Derives the export type from the user's section-selection toggles.
     init?(includeGeneral: Bool, includeMonitor: Bool) {
         switch (includeGeneral, includeMonitor) {
         case (true, true):
@@ -51,6 +52,7 @@ struct DimlySettingsBackup: Codable {
     let monitor: MonitorSettingsPayload?
     let profileState: ProfileState?
 
+    /// Captures the requested settings sections into a versioned backup payload.
     init(
         settings: DimlySettings,
         type: SettingsBackupType,
@@ -107,6 +109,7 @@ struct GeneralSettingsPayload: Codable {
     let menuBarQuickActionsMode: Bool?
     let fastActionsVisibilityMode: DimlySettings.FastActionsVisibilityMode?
 
+    /// Snapshots general app preferences without monitor-specific state.
     init(from settings: DimlySettings) {
         launchAtLogin = settings.launchAtLogin
         showMenuBarIcon = settings.showMenuBarIcon
@@ -164,6 +167,7 @@ struct MonitorSettingsPayload: Codable {
         case monitorPowerStateByDisplayID
     }
 
+    /// Snapshots per-display ordering, aliases, brightness, and power intent.
     init(from settings: DimlySettings) {
         displayAliases = settings.displayAliases
         overlayOnlyDisplayIDs = settings.overlayOnlyDisplayIDs
@@ -178,6 +182,7 @@ struct MonitorSettingsPayload: Codable {
         monitorPowerStateByDisplayID = settings.monitorPowerStateByDisplayID
     }
 
+    /// Decodes monitor payloads defensively so older backups can omit newer fields.
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         displayAliases = try container.decodeIfPresent([String: String].self, forKey: .displayAliases) ?? [:]

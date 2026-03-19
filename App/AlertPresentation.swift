@@ -24,7 +24,7 @@ enum AlertPresentation {
     @MainActor
     private static func targetScreen(for cursorLocation: NSPoint) -> NSScreen? {
         if let containing = NSScreen.screens.first(where: { screen in
-            // Use a tiny inset so edge-aligned cursor points still resolve to a display.
+            // Expand the hit area slightly so border-adjacent cursor positions still map to a screen.
             screen.frame.insetBy(dx: -1, dy: -1).contains(cursorLocation)
         }) {
             return containing

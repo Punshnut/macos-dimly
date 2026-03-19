@@ -1918,6 +1918,7 @@ private final class HotkeyCaptureMonitor {
 }
 
 private extension CGRect {
+    /// Convenience initializer used by profile drag previews that are positioned from a center point.
     init(center: CGPoint, size: CGSize) {
         self.init(
             x: center.x - (size.width * 0.5),

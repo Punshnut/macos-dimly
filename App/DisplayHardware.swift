@@ -48,6 +48,8 @@ protocol DisplayHardwareProviding: AnyObject, Sendable {
 final class DisplayHardware: DisplayHardwareProviding, @unchecked Sendable {
     private final class CallbackBox {
         let handler: (CGDirectDisplayID, CGDisplayChangeSummaryFlags) -> Void
+
+        /// Stores the Swift closure so CoreGraphics can round-trip it through an opaque pointer.
         init(_ handler: @escaping (CGDirectDisplayID, CGDisplayChangeSummaryFlags) -> Void) { self.handler = handler }
     }
 
@@ -138,7 +140,7 @@ final class DisplayHardware: DisplayHardwareProviding, @unchecked Sendable {
         return displayServicesSetBrightness(displayID, clamped)
     }
 
-    /// Best-effort lookup for a display UUID using private CoreGraphics symbol.
+    /// Attempts to resolve a stable display UUID via the private CoreGraphics lookup API.
     private static func displayUUID(for id: CGDirectDisplayID) -> UUID? {
         typealias Fn = @convention(c) (CGDirectDisplayID) -> Unmanaged<CFUUID>?
         guard
@@ -151,6 +153,7 @@ final class DisplayHardware: DisplayHardwareProviding, @unchecked Sendable {
         return UUID(uuidString: string)
     }
 
+    /// Bridges the CoreGraphics C callback back into the boxed Swift closure.
     private static let reconfigurationCallback: CGDisplayReconfigurationCallBack = { displayID, flags, userInfo in
         guard let userInfo else { return }
         let box = Unmanaged<CallbackBox>.fromOpaque(userInfo).takeUnretainedValue()
@@ -176,7 +179,7 @@ final class DisplayHardware: DisplayHardwareProviding, @unchecked Sendable {
 
     /// Reads a user-friendly display name via IOKit/EDID.
     private static func displayName(for id: CGDirectDisplayID) -> String? {
-        // Best-effort using IOKit to read the preferred product name from EDID.
+        // Prefer the localized product name exposed by IOKit when the EDID metadata is available.
         guard let servicePort = ioServicePort(for: id) else { return nil }
         defer { IOObjectRelease(servicePort) }
 
