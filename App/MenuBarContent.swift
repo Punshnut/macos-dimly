@@ -381,6 +381,15 @@ struct MenuBarContentView: View {
         }
     }
 
+    /// Routes settings actions through the AppKit presenter so the window opens on the active display.
+    private func openSettingsWindow() {
+        NotificationCenter.default.post(name: .dimlyOpenSettingsWindow, object: nil)
+        guard presentation == .menuBar else { return }
+        DispatchQueue.main.async {
+            closeMenuBarWindow()
+        }
+    }
+
     /// Top-level switch between all supported menu bar layouts.
     private var modeSwitchRow: some View {
         HStack(spacing: 10) {
@@ -1644,7 +1653,9 @@ struct MenuBarContentView: View {
                         .minimumScaleFactor(0.85)
                         .frame(maxWidth: .infinity, alignment: .leading)
                 }
-                SettingsLink {
+                Button {
+                    openSettingsWindow()
+                } label: {
                     Label(String(localized: "Settings..."), systemImage: "gearshape")
                         .lineLimit(1)
                         .minimumScaleFactor(0.85)
@@ -1679,7 +1690,9 @@ struct MenuBarContentView: View {
                 GridItem(.flexible(), spacing: 8)
             ]
             LazyVGrid(columns: columns, alignment: .leading, spacing: 8) {
-                SettingsLink {
+                Button {
+                    openSettingsWindow()
+                } label: {
                     Label(String(localized: "Settings..."), systemImage: "gearshape")
                         .lineLimit(1)
                         .minimumScaleFactor(0.85)
@@ -1739,7 +1752,9 @@ struct MenuBarContentView: View {
 
     /// Compact settings launcher shown as an overlay badge in short mode.
     private var shortModeSettingsBadge: some View {
-        SettingsLink {
+        Button {
+            openSettingsWindow()
+        } label: {
             Image(systemName: "gearshape.fill")
                 .font(.system(size: 9, weight: .semibold))
                 .foregroundStyle(neutralSecondaryText)

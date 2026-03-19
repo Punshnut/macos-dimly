@@ -4,6 +4,10 @@ import SwiftUI
 import AppKit
 import OSLog
 
+extension Notification.Name {
+    static let dimlyOpenSettingsWindow = Notification.Name("DimlyOpenSettingsWindow")
+}
+
 /// Main app entry point.
 @main
 struct DimlyApp: App {
@@ -123,6 +127,15 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
                 self?.configureMainMenu()
             }
         }
+        NotificationCenter.default.addObserver(
+            forName: .dimlyOpenSettingsWindow,
+            object: nil,
+            queue: .main
+        ) { [weak self] _ in
+            Task { @MainActor in
+                self?.showSettingsWindow(nil)
+            }
+        }
     }
 
     /// Delays termination until overlay teardown completes.
@@ -232,6 +245,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
             action: NSSelectorFromString("showSettingsWindow:"),
             keyEquivalent: ","
         )
+        settingsItem.target = self
         appMenu.addItem(settingsItem)
 
         let updatesItem = NSMenuItem(
@@ -285,6 +299,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
             window.toolbarStyle = .unifiedCompact
             window.isMovableByWindowBackground = true
             window.isReleasedWhenClosed = false
+            window.collectionBehavior.insert([.moveToActiveSpace, .fullScreenAuxiliary])
             window.toolbar = NSToolbar(identifier: "SettingsToolbar")
             window.contentView = hostingView
             settingsWindowController = NSWindowController(window: window)
@@ -305,13 +320,34 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
     /// Centers a window on the screen under the pointer (or main screen fallback).
     private func center(window: NSWindow) {
         let mouseLocation = NSEvent.mouseLocation
-        let screen = NSScreen.screens.first { $0.frame.contains(mouseLocation) } ?? NSScreen.main
+        let screen = targetScreen(for: mouseLocation) ?? NSScreen.main
         let frame = screen?.visibleFrame ?? NSScreen.main?.visibleFrame ?? .zero
         let origin = NSPoint(
             x: frame.midX - window.frame.width / 2,
             y: frame.midY - window.frame.height / 2
         )
         window.setFrameOrigin(origin)
+    }
+
+    /// Resolves the best screen for settings presentation, including cursor positions near display edges.
+    private func targetScreen(for cursorLocation: NSPoint) -> NSScreen? {
+        if let containing = NSScreen.screens.first(where: { screen in
+            screen.frame.insetBy(dx: -1, dy: -1).contains(cursorLocation)
+        }) {
+            return containing
+        }
+        return NSScreen.screens.min { lhs, rhs in
+            distanceSquared(from: cursorLocation, to: lhs.frame) < distanceSquared(from: cursorLocation, to: rhs.frame)
+        }
+    }
+
+    /// Squared distance between a point and the nearest point in a rectangle.
+    private func distanceSquared(from point: NSPoint, to rect: NSRect) -> CGFloat {
+        let clampedX = min(max(point.x, rect.minX), rect.maxX)
+        let clampedY = min(max(point.y, rect.minY), rect.maxY)
+        let dx = point.x - clampedX
+        let dy = point.y - clampedY
+        return (dx * dx) + (dy * dy)
     }
 
     /// Nudges traffic lights to match the custom titlebar spacing used by the app.
