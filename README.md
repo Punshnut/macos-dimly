@@ -27,13 +27,6 @@ Dimly is a free, open-source macOS menu bar control center for multi-monitor set
   </details>
 </div>
 
-<p align="center">
-  <details>
-    <summary>Show screenshot</summary>
-    <img src="Media/ScreenshotMenuBarWindow.png" alt="Dimly screenshot" width="600">
-  </details>
-</p>
-
 ## Big hits
 
 - **True per-display control** - Brightness, blackout, sleep, wake, rename, and copy ID per monitor from one menu.
@@ -47,6 +40,14 @@ Dimly is a free, open-source macOS menu bar control center for multi-monitor set
 - **Backup and restore** - Import/export general settings and monitor settings independently.
 - **Stealth mode** - Hide Dock and menu bar icon while keeping hotkeys active.
 - **Universal + updates** - Intel/Apple Silicon builds with Sparkle updates through GitHub.
+
+<p align="center">
+  <a href="Media/Screenshots/Dimly_Simple_Minimized.png">
+    <img src="Media/Screenshots/Dimly_Simple_Minimized.png" alt="Dimly screenshot" width="420">
+  </a>
+  <br>
+  <sub>Screenshot: Simple mode</sub>
+</p>
 
 ## What it actually does
 
