@@ -1259,6 +1259,13 @@ struct MenuBarContentView: View {
         )
         .clipShape(rowShape)
         .contentShape(rowShape)
+        .contextMenu {
+            Button {
+                renameDisplay(display, currentName: displayName(for: display))
+            } label: {
+                Label(String(localized: "Rename Display..."), systemImage: "pencil")
+            }
+        }
     }
 
     /// Header row with status and per-display actions; click to expand brightness.
