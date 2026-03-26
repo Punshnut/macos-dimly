@@ -58,7 +58,7 @@ struct MenuBarContentView: View {
         .padding(12)
         .frame(minWidth: 300)
         .background(
-            MenuBarWindowAnchorLock(isEnabled: presentation == .menuBar && isModeTransitioning)
+            MenuBarWindowAnchorLock(isEnabled: presentation == .menuBar)
         )
         .onAppear {
             if renderedLayoutMode == nil {
@@ -2346,9 +2346,11 @@ private struct MenuBarWindowAnchorLock: NSViewRepresentable {
         private weak var window: NSWindow?
         private var isEnabled = false
         private var lockedTopY: CGFloat?
+        private var lockedScreen: NSScreen?
 
         /// Starts observing the current hosting window and captures the top edge to preserve menu bar anchoring.
         func attach(to window: NSWindow?, isEnabled: Bool) {
+            let wasEnabled = self.isEnabled
             self.isEnabled = isEnabled
             guard let window else { return }
 
@@ -2361,12 +2363,26 @@ private struct MenuBarWindowAnchorLock: NSViewRepresentable {
                     name: NSWindow.didResizeNotification,
                     object: window
                 )
+                NotificationCenter.default.addObserver(
+                    self,
+                    selector: #selector(handleResizeNotification(_:)),
+                    name: NSWindow.didMoveNotification,
+                    object: window
+                )
             }
 
             if isEnabled {
-                lockedTopY = window.frame.maxY
+                // Re-capture when first enabled, after a reset, or when the panel has moved to a
+                // different screen (e.g. opened on a fullscreen monitor after being on another screen).
+                // Never re-capture on repeat calls for the same screen — later SwiftUI animation
+                // frames may fire updateNSView after macOS has already drifted the window upward.
+                if !wasEnabled || lockedTopY == nil || window.screen !== lockedScreen {
+                    lockedTopY = window.frame.maxY
+                    lockedScreen = window.screen
+                }
             } else {
                 lockedTopY = nil
+                lockedScreen = nil
             }
         }
 
@@ -2378,9 +2394,15 @@ private struct MenuBarWindowAnchorLock: NSViewRepresentable {
                     name: NSWindow.didResizeNotification,
                     object: window
                 )
+                NotificationCenter.default.removeObserver(
+                    self,
+                    name: NSWindow.didMoveNotification,
+                    object: window
+                )
             }
             window = nil
             lockedTopY = nil
+            lockedScreen = nil
             isEnabled = false
         }
 
@@ -2389,9 +2411,19 @@ private struct MenuBarWindowAnchorLock: NSViewRepresentable {
             handleResize()
         }
 
-        /// Repositions the window after a resize so height changes expand downward instead of drifting upward.
+        /// Repositions the window after a resize/move so height changes expand downward instead of drifting upward.
         private func handleResize() {
             guard isEnabled, let window else { return }
+
+            // If the window moved to a different screen the stored anchor belongs to the old
+            // screen. Adopt the current position as the new anchor and skip any correction so
+            // the panel stays where macOS placed it on the new screen.
+            if window.screen !== lockedScreen {
+                lockedTopY = window.frame.maxY
+                lockedScreen = window.screen
+                return
+            }
+
             let topY = lockedTopY ?? window.frame.maxY
             lockedTopY = topY
 
