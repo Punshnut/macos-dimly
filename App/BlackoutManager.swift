@@ -206,6 +206,7 @@ final class BlackoutManager: ObservableObject {
 
         let opacity = fallbackOpacity(forBrightnessPercent: clamped)
         let window: DimOverlayWindow
+        let previousLevel = fallbackBrightnessLevels[display.stableIdentity]
         if let existing = brightnessFallbackOverlays[display.stableIdentity] {
             window = existing
             window.update(screen: screen)
@@ -214,6 +215,7 @@ final class BlackoutManager: ObservableObject {
             brightnessFallbackOverlays[display.stableIdentity] = created
             window = created
         }
+        guard previousLevel != clamped || brightnessFallbackOverlays[display.stableIdentity] == nil else { return }
         window.setOpacity(opacity, animated: animated)
         fallbackBrightnessLevels[display.stableIdentity] = clamped
     }
@@ -630,6 +632,9 @@ final class DimOverlayWindow: NSWindow {
         let clamped = max(0, min(1, opacity))
         guard clamped > 0 else {
             hide(animated: animated)
+            return
+        }
+        if abs(alphaValue - clamped) <= 0.001, isVisible {
             return
         }
         orderFrontRegardless()

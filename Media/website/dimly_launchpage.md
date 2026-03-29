@@ -4,7 +4,7 @@
 
 ### Over your monitors. Not under them.
 
-Dimly is the macOS menu bar control center for people with real monitor setups: mixed brands, uneven DDC support, and zero patience for friction.
+Dimly is the lightweight macOS menu bar control center for people with real monitor setups: mixed brands, uneven DDC support, and zero patience for friction.
 
 **Control brightness, blackout, sleep/wake, and profiles per display.**
 

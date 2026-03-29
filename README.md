@@ -1,6 +1,6 @@
 # Dimly
 
-Dimly is a free, open-source macOS menu bar control center for multi-monitor setups. It gives you per-display brightness and reliable per-display on/off behavior, using true DDC control when available and overlay fallback when it is not, so mixed monitor fleets behave like one coherent setup.
+Dimly is a free, open-source, lightweight macOS menu bar control center for multi-monitor setups. It gives you per-display brightness and reliable per-display on/off behavior, using true DDC control when available and overlay fallback when it is not, so mixed monitor fleets behave like one coherent setup.
 
 <p align="center">
   <img src="https://img.shields.io/badge/macOS-native-000000?style=flat&logo=apple" alt="macOS native">

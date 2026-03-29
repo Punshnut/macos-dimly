@@ -30,7 +30,7 @@ enum BrightnessChangeSource: String {
 
 /// Core, non-UI engine that owns hotkeys and display actions.
 @MainActor
-final class DimlyEngine {
+final class DimlyEngine: ObservableObject {
     private struct RestoreBrightnessWriteRecord {
         let percent: Int
         let writtenAt: Date
@@ -85,6 +85,7 @@ final class DimlyEngine {
     private var brightnessMediaKeyGlobalMonitorToken: Any?
     private var brightnessMediaKeyLocalMonitorToken: Any?
     private var builtinBrightnessReconcileTasks: [String: Task<Void, Never>] = [:]
+    @Published private(set) var builtinBrightnessLevels: [String: Int] = [:]
     let displayManager: DisplayManager
     let blackoutManager: BlackoutManager
     let ddcManager: DDCManager
@@ -134,6 +135,7 @@ final class DimlyEngine {
 
         profileManager.engine = self
         installBrightnessMediaKeyMonitors()
+        refreshBuiltinBrightnessSnapshots(reason: "startup", persistToSettings: false)
         beginTopologySettleGraceWindow(reason: "startup")
         schedulePersistedMonitorStateRestore(reason: "startup", remainingAttempts: 5)
 
@@ -145,6 +147,7 @@ final class DimlyEngine {
             Task { @MainActor [weak self] in
                 guard let self else { return }
                 self.beginTopologySettleGraceWindow(reason: "workspaceDidWake")
+                self.refreshBuiltinBrightnessSnapshots(reason: "workspaceDidWake", persistToSettings: false)
                 self.schedulePersistedMonitorStateRestore(
                     reason: "workspaceDidWake",
                     remainingAttempts: 5,
@@ -160,6 +163,7 @@ final class DimlyEngine {
             Task { @MainActor [weak self] in
                 guard let self else { return }
                 self.beginTopologySettleGraceWindow(reason: "workspaceScreensDidWake")
+                self.refreshBuiltinBrightnessSnapshots(reason: "workspaceScreensDidWake", persistToSettings: false)
                 self.schedulePersistedMonitorStateRestore(
                     reason: "workspaceScreensDidWake",
                     remainingAttempts: 5,
@@ -584,6 +588,11 @@ final class DimlyEngine {
 
     /// Returns current brightness value used for UI (0-100).
     func brightnessPercent(for display: DisplayInfo) -> Int {
+        if display.isBuiltin {
+            return builtinBrightnessLevels[display.stableIdentity]
+                ?? settingsStore.settings.monitorBrightnessByDisplayID[display.stableIdentity]
+                ?? 100
+        }
         if let pending = pendingBrightnessByDisplayID[display.stableIdentity] {
             return pending
         }
@@ -594,6 +603,38 @@ final class DimlyEngine {
             return ddcBrightness
         }
         return 100
+    }
+
+    /// Triggers a one-shot hardware refresh for a built-in display brightness snapshot.
+    func refreshBuiltinBrightnessSnapshot(for display: DisplayInfo, persistToSettings: Bool = false) {
+        guard display.isBuiltin else { return }
+        let id = display.stableIdentity
+        let resolvedBrightness = DisplayHardware.builtinDisplayBrightnessPercent(for: display.displayID)
+            ?? settingsStore.settings.monitorBrightnessByDisplayID[id]
+        guard let resolvedBrightness else { return }
+        updateBuiltinBrightnessSnapshot(resolvedBrightness, for: id)
+        guard persistToSettings else { return }
+        persistBrightness(resolvedBrightness, for: id)
+    }
+
+    /// Refreshes built-in brightness snapshots for the current or supplied display inventory.
+    func refreshBuiltinBrightnessSnapshots(
+        reason: String,
+        persistToSettings: Bool = false,
+        displays: [DisplayInfo]? = nil
+    ) {
+        let builtinDisplays = (displays ?? displayManager.displays).filter(\.isBuiltin)
+        let liveIDs = Set(builtinDisplays.map(\.stableIdentity))
+        if builtinBrightnessLevels.keys.contains(where: { !liveIDs.contains($0) }) {
+            builtinBrightnessLevels = builtinBrightnessLevels.filter { liveIDs.contains($0.key) }
+        }
+        for display in builtinDisplays {
+            refreshBuiltinBrightnessSnapshot(for: display, persistToSettings: persistToSettings)
+        }
+        DiagnosticsLogger.shared.log(
+            "Builtin brightness snapshot refresh reason=\(reason) displays=\(builtinDisplays.count) persist=\(persistToSettings)",
+            category: "engine"
+        )
     }
 
     /// Returns which brightness path is currently expected for this display.
@@ -883,9 +924,12 @@ final class DimlyEngine {
         builtinBrightnessReconcileTasks[id] = Task { @MainActor [weak self] in
             try? await Task.sleep(nanoseconds: 180_000_000)
             guard let self else { return }
-            guard let liveBrightness = DisplayHardware.builtinDisplayBrightnessPercent(for: display.displayID) else { return }
-            guard self.settingsStore.settings.monitorBrightnessByDisplayID[id] != liveBrightness else { return }
-            self.persistBrightness(liveBrightness, for: id)
+            let previousBrightness = self.settingsStore.settings.monitorBrightnessByDisplayID[id]
+            self.refreshBuiltinBrightnessSnapshot(for: display, persistToSettings: true)
+            let liveBrightness = self.builtinBrightnessLevels[id]
+                ?? self.settingsStore.settings.monitorBrightnessByDisplayID[id]
+                ?? 100
+            guard previousBrightness != liveBrightness else { return }
             DiagnosticsLogger.shared.log(
                 "Reconciled builtin brightness id=\(id) source=\(source.rawValue) value=\(liveBrightness)",
                 category: "engine"
@@ -946,6 +990,11 @@ final class DimlyEngine {
             .removeDuplicates()
             .sink { [weak self] displays in
                 guard let self else { return }
+                self.refreshBuiltinBrightnessSnapshots(
+                    reason: "displayChange",
+                    persistToSettings: false,
+                    displays: displays
+                )
                 self.recordDisplayTopologyChange(displays: displays)
                 self.trackMonitorLastSeenAndPruneStaleState(displays)
                 self.schedulePersistedMonitorStateRestore(
@@ -978,6 +1027,7 @@ final class DimlyEngine {
             deferredRestoreReasonsAfterSessionUnlock.insert("resumeAfterUnlock")
             return
         }
+        refreshBuiltinBrightnessSnapshots(reason: source, persistToSettings: false)
         flushDeferredRestoreAfterSessionUnlock(triggerSource: source)
     }
 
@@ -1629,6 +1679,9 @@ final class DimlyEngine {
 
         let applyTarget = {
             let success = DisplayHardware.setBuiltinDisplayBrightnessPercent(target, for: display.displayID)
+            if success {
+                self.updateBuiltinBrightnessSnapshot(target, for: id)
+            }
             DiagnosticsLogger.shared.log(
                 "Builtin brightness apply id=\(id) target=\(target) animated=\(animated) reason=\(reason) success=\(success)",
                 category: "engine"
@@ -1657,10 +1710,15 @@ final class DimlyEngine {
                 guard !Task.isCancelled else { return }
                 let progress = Double(step) / Double(steps)
                 let value = Int((Double(current) + (Double(delta) * progress)).rounded())
-                _ = DisplayHardware.setBuiltinDisplayBrightnessPercent(value, for: display.displayID)
+                if DisplayHardware.setBuiltinDisplayBrightnessPercent(value, for: display.displayID) {
+                    self?.updateBuiltinBrightnessSnapshot(value, for: id)
+                }
                 try? await Task.sleep(nanoseconds: sleepNanos)
             }
             let success = DisplayHardware.setBuiltinDisplayBrightnessPercent(target, for: display.displayID)
+            if success {
+                self?.updateBuiltinBrightnessSnapshot(target, for: id)
+            }
             DiagnosticsLogger.shared.log(
                 "Builtin brightness apply id=\(id) target=\(target) animated=true reason=\(reason) success=\(success)",
                 category: "engine"
@@ -1668,6 +1726,13 @@ final class DimlyEngine {
             self?.builtinBrightnessAnimationTasks.removeValue(forKey: id)
         }
         builtinBrightnessAnimationTasks[id] = task
+    }
+
+    /// Updates the built-in brightness snapshot only when the effective value changed.
+    private func updateBuiltinBrightnessSnapshot(_ brightness: Int, for id: String) {
+        let clamped = max(0, min(100, brightness))
+        guard builtinBrightnessLevels[id] != clamped else { return }
+        builtinBrightnessLevels[id] = clamped
     }
 
     /// Migrates legacy persistence keys into settings-backed monitor state.

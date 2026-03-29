@@ -11,11 +11,10 @@ struct SettingsRootView: View {
     @ObservedObject var profileManager: ProfileManager
     @ObservedObject var ddcManager: DDCManager
     @ObservedObject var blackoutManager: BlackoutManager
-    let engine: DimlyEngine
+    @ObservedObject var engine: DimlyEngine
     @State private var introWindowController: IntroWindowController?
     @State private var selection: SettingsDestination = .general
     @State private var proposedProfileName: String = ""
-    @State private var builtinBrightnessCacheByDisplayID: [CGDirectDisplayID: Int] = [:]
 
     enum SettingsDestination: Hashable {
         case general
@@ -60,6 +59,9 @@ struct SettingsRootView: View {
         }
         .frame(minWidth: 900, minHeight: 580)
         .hideSettingsToolbar()
+        .onAppear {
+            engine.refreshBuiltinBrightnessSnapshots(reason: "settingsAppear", persistToSettings: false)
+        }
         .preferredColorScheme(settingsStore.settings.appAppearancePreference.preferredColorScheme)
     }
 
@@ -439,38 +441,12 @@ struct SettingsRootView: View {
 
     /// Returns display brightness from DDC/overlay for externals, macOS for internals.
     private func brightnessPercent(for display: DisplayInfo) -> Int {
-        guard display.isBuiltin else {
-            return engine.brightnessPercent(for: display)
-        }
-
-        if let liveBrightness = DisplayHardware.builtinDisplayBrightnessPercent(for: display.displayID) {
-            if builtinBrightnessCacheByDisplayID[display.displayID] != liveBrightness {
-                DispatchQueue.main.async {
-                    builtinBrightnessCacheByDisplayID[display.displayID] = liveBrightness
-                }
-            }
-            return builtinBrightnessCacheByDisplayID[display.displayID] ?? liveBrightness
-        }
-
-        return builtinBrightnessCacheByDisplayID[display.displayID]
-            ?? settingsStore.settings.monitorBrightnessByDisplayID[display.stableIdentity]
-            ?? 100
+        engine.brightnessPercent(for: display)
     }
 
     /// Applies display brightness to the right backend for this display type.
     private func setBrightness(_ percent: Int, for display: DisplayInfo) {
         let clamped = max(0, min(100, percent))
-        if display.isBuiltin {
-            builtinBrightnessCacheByDisplayID[display.displayID] = clamped
-            engine.setBrightness(clamped, for: display, source: .slider)
-
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.08) {
-                if let confirmed = DisplayHardware.builtinDisplayBrightnessPercent(for: display.displayID) {
-                    builtinBrightnessCacheByDisplayID[display.displayID] = confirmed
-                }
-            }
-            return
-        }
         engine.setBrightness(clamped, for: display, source: .slider)
     }
 

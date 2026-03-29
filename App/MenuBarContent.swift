@@ -22,11 +22,10 @@ struct MenuBarContentView: View {
     @ObservedObject var blackoutManager: BlackoutManager
     @ObservedObject var ddcManager: DDCManager
     @ObservedObject var profileManager: ProfileManager
-    let engine: DimlyEngine
+    @ObservedObject var engine: DimlyEngine
     let updaterController: UpdaterController
     let presentation: Presentation
     @State private var modifierClickMonitor: Any?
-    @State private var builtinBrightnessCacheByDisplayID: [CGDirectDisplayID: Int] = [:]
     @State private var draggedSmartButtonProfileID: UUID?
     @State private var smartButtonFramesByProfileID: [UUID: CGRect] = [:]
     @State private var smartButtonDragStartFramesByProfileID: [UUID: CGRect] = [:]
@@ -44,7 +43,6 @@ struct MenuBarContentView: View {
     @State private var modeContentOpacity: Double = 1
     @State private var modeContentOffsetY: CGFloat = 0
     @State private var modeTransitionInvolvesCompactMode = false
-    private let builtinBrightnessRefreshTimer = Timer.publish(every: 0.4, on: .main, in: .common).autoconnect()
     private let smartButtonsGridCoordinateSpace = "smartButtonsGrid"
     @Namespace private var modeSwitchNamespace
     @Environment(\.colorScheme) private var colorScheme
@@ -76,14 +74,11 @@ struct MenuBarContentView: View {
                 renderedLayoutMode = activeLayoutMode
             }
             activateWindowIfNeeded()
-            refreshBuiltinBrightnessCache()
+            engine.refreshBuiltinBrightnessSnapshots(reason: "menuBarAppear", persistToSettings: false)
             if presentation == .menuBar {
                 handleModifierClickIfNeeded()
                 installModifierClickMonitor()
             }
-        }
-        .onReceive(builtinBrightnessRefreshTimer) { _ in
-            refreshBuiltinBrightnessCache()
         }
         .onDisappear {
             removeModifierClickMonitor()
@@ -1908,7 +1903,7 @@ struct MenuBarContentView: View {
             }
         }
         if display.isBuiltin && isExpanding {
-            refreshBuiltinBrightness(for: display, persistToSettings: true)
+            engine.refreshBuiltinBrightnessSnapshot(for: display, persistToSettings: true)
         }
     }
 
@@ -1922,60 +1917,13 @@ struct MenuBarContentView: View {
 
     /// Returns display brightness from DDC/overlay for externals, macOS for internals.
     private func brightnessPercent(for display: DisplayInfo) -> Int {
-        guard display.isBuiltin else {
-            return engine.brightnessPercent(for: display)
-        }
-
-        if let liveBrightness = DisplayHardware.builtinDisplayBrightnessPercent(for: display.displayID) {
-            if builtinBrightnessCacheByDisplayID[display.displayID] != liveBrightness {
-                DispatchQueue.main.async {
-                    builtinBrightnessCacheByDisplayID[display.displayID] = liveBrightness
-                }
-            }
-            return builtinBrightnessCacheByDisplayID[display.displayID] ?? liveBrightness
-        }
-
-        return builtinBrightnessCacheByDisplayID[display.displayID]
-            ?? settingsStore.settings.monitorBrightnessByDisplayID[display.stableIdentity]
-            ?? 100
+        engine.brightnessPercent(for: display)
     }
 
     /// Applies display brightness to the right backend for this display type.
     private func setBrightness(_ percent: Int, for display: DisplayInfo) {
         let clamped = max(0, min(100, percent))
-        if display.isBuiltin {
-            builtinBrightnessCacheByDisplayID[display.displayID] = clamped
-            engine.setBrightness(clamped, for: display, source: .slider)
-
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.08) {
-                if let confirmed = DisplayHardware.builtinDisplayBrightnessPercent(for: display.displayID) {
-                    builtinBrightnessCacheByDisplayID[display.displayID] = confirmed
-                }
-            }
-            return
-        }
         engine.setBrightness(clamped, for: display, source: .slider)
-    }
-
-    /// Keeps built-in brightness cache in sync while the menu is visible (e.g. media key changes).
-    private func refreshBuiltinBrightnessCache() {
-        guard visibleInternalDisplays.isEmpty == false else { return }
-        for display in visibleInternalDisplays {
-            refreshBuiltinBrightness(for: display, persistToSettings: false)
-        }
-    }
-
-    /// Reads current built-in brightness and updates local cache (and optionally persisted settings).
-    private func refreshBuiltinBrightness(for display: DisplayInfo, persistToSettings: Bool) {
-        guard display.isBuiltin else { return }
-        guard let liveBrightness = DisplayHardware.builtinDisplayBrightnessPercent(for: display.displayID) else { return }
-        guard builtinBrightnessCacheByDisplayID[display.displayID] != liveBrightness else { return }
-
-        builtinBrightnessCacheByDisplayID[display.displayID] = liveBrightness
-        guard persistToSettings else { return }
-        settingsStore.update { settings in
-            settings.monitorBrightnessByDisplayID[display.stableIdentity] = liveBrightness
-        }
     }
 
     /// Produces additional status rows for any non-visible displays.

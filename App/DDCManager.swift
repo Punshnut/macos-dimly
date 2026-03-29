@@ -51,19 +51,26 @@ final class DDCManager: ObservableObject {
     private let cableCheckWindowNanoseconds: UInt64 = 3_000_000_000
     private var probeTasks: [String: Task<Void, Never>] = [:]
     private var cableCheckClearTasks: [String: Task<Void, Never>] = [:]
+    private var lastObservedExternalDisplayIDByIdentity: [String: CGDirectDisplayID] = [:]
     private var workspaceWakeToken: NSObjectProtocol?
     private var workspaceScreensWakeToken: NSObjectProtocol?
 
     /// Starts probing current displays and listens for changes.
     init(displayManager: DisplayManager) {
         self.displayManager = displayManager
+        self.lastObservedExternalDisplayIDByIdentity = Dictionary(
+            uniqueKeysWithValues: displayManager.displays
+                .filter(\.isExternal)
+                .map { ($0.stableIdentity, $0.displayID) }
+        )
+        syncBuiltinStates(with: displayManager.displays)
         probeAll(markAsCableCheck: true)
-        // Re-probe after display inventory changes so capability state stays current.
         displayManager.$displays
             .removeDuplicates()
             .sink { [weak self] displays in
                 self?.reconcileForDisplayChange(displays)
-                self?.probeAll(markAsCableCheck: true)
+                self?.syncBuiltinStates(with: displays)
+                self?.probeDisplaysAddedOrReconnected(in: displays, markAsCableCheck: true)
             }
             .store(in: &cancellables)
 
@@ -101,7 +108,9 @@ final class DDCManager: ObservableObject {
 
     /// Probes every current display for DDC support.
     func probeAll(markAsCableCheck: Bool = false) {
-        for display in displayManager.displays {
+        let displays = displayManager.displays
+        syncBuiltinStates(with: displays)
+        for display in displays where display.isExternal {
             scheduleProbe(display, retriesRemaining: probeRetryCount, markAsCableCheck: markAsCableCheck)
         }
     }
@@ -180,6 +189,36 @@ final class DDCManager: ObservableObject {
             cableCheckDisplayIDs.remove(id)
             cableCheckClearTasks[id]?.cancel()
             cableCheckClearTasks.removeValue(forKey: id)
+        }
+    }
+
+    /// Marks built-in displays as not DDC-capable without starting probe work.
+    private func syncBuiltinStates(with displays: [DisplayInfo]) {
+        for display in displays where display.isBuiltin {
+            let state = DDCState(
+                status: .notSupported,
+                lastError: String(localized: "Internal panel"),
+                lastCommand: nil,
+                lastCommandAt: nil
+            )
+            setState(state, for: display)
+        }
+    }
+
+    /// Starts probe cycles only for newly added or reconnected external displays.
+    private func probeDisplaysAddedOrReconnected(in displays: [DisplayInfo], markAsCableCheck: Bool) {
+        let currentExternalIDByIdentity = Dictionary(
+            uniqueKeysWithValues: displays
+                .filter(\.isExternal)
+                .map { ($0.stableIdentity, $0.displayID) }
+        )
+        let displaysNeedingProbe = displays.filter { display in
+            guard display.isExternal else { return false }
+            return lastObservedExternalDisplayIDByIdentity[display.stableIdentity] != display.displayID
+        }
+        lastObservedExternalDisplayIDByIdentity = currentExternalIDByIdentity
+        for display in displaysNeedingProbe {
+            scheduleProbe(display, retriesRemaining: probeRetryCount, markAsCableCheck: markAsCableCheck)
         }
     }
 
