@@ -105,10 +105,12 @@ I’ve worked on desks with 8-12 mixed monitors and uneven DDC support, where fa
 
 ## Get Dimly
 
-- <a href="https://github.com/Punshnut/macos-dimly/releases/latest">Download the latest release</a> and run it from `/Applications`.
+- <a href=”https://github.com/Punshnut/macos-dimly/releases/latest”>Download the latest release</a> and run it from `/Applications`.
 - To auto-start, enable “Launch at Login” in Settings.
 
 Supports Intel and Apple Silicon Macs. Requires macOS 14+
+
+> **macOS 26.4 (Tahoe) users:** Dimly 1.4 includes visual fixes for macOS 26.4. If you are on 1.3, update to 1.4 before or immediately after upgrading to macOS 26.4 — otherwise the UI may look off. Sparkle auto-update will offer 1.4 automatically, or grab it manually from the [releases page](https://github.com/Punshnut/macos-dimly/releases/latest).
 
 ## Roadmap
 

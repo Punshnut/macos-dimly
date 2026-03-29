@@ -10,14 +10,14 @@
 
     <item>
       <title>Dimly 1.3</title>
-      <pubDate>Thu, 19 Mar 2026 09:21:17 +0100</pubDate>
+      <pubDate>Sun, 29 Mar 2026 20:31:14 +0200</pubDate>
       <enclosure
     url="https://github.com/Punshnut/macos-dimly/releases/latest/download/Dimly.dmg"
-    sparkle:shortVersionString="1.3"
-    sparkle:version="1.3"
-    length="5461522"
+    sparkle:shortVersionString="1.4"
+    sparkle:version="10"
+    length="5441870"
     type="application/octet-stream"
-    sparkle:edSignature="SLtfUjzusiedt0/HXNUMLkCHRruTgzch6OpWVQ7SxtSUvHo4xn+p/oMS70i+cj6Gp2KU/nV+u8ed3pZTyZS2Bg==" />
+    sparkle:edSignature="IxX+dcJic35ksUClAmypRysIPoFvP/g2Fk0UQzwd37E4A2gbwGWYa1H+RCL+X7HSzEVJPLLASioS0f52IpawDA==" />
       <sparkle:minimumSystemVersion>13.0</sparkle:minimumSystemVersion>
     </item>
   </channel>
