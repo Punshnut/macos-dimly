@@ -306,6 +306,7 @@
 "Emerald" = "Smeraldo";
 "Gold" = "Oro";
 "Indigo" = "Indaco";
+"Lavender" = "Lavanda";
 "Lets this profile appear under Quick Actions in the menu bar." = "Consente a questo profilo di apparire sotto Azioni rapide nella barra dei menu.";
 "Like system" = "Come il sistema";
 "Lime" = "Verde lime";
@@ -313,9 +314,11 @@
 "Mint" = "Menta";
 "No smart buttons yet. Save profiles in Settings and enable \"Show as smart button\"." = "Nessun pulsante smart per ora. Salva i profili in Impostazioni e abilita \"Mostra come pulsante smart\".";
 "Ocean" = "Oceano";
+"Pine" = "Pino";
 "Profiles stay sorted by this list order. Up to 4 smart buttons are shown per row in the menu bar." = "I profili restano ordinati secondo quest'ordine. Nella barra dei menu vengono mostrati fino a 4 pulsanti smart per riga.";
 "Quick profile shortcuts shown below Quick Actions." = "Scorciatoie rapide dei profili mostrate sotto Azioni rapide.";
 "Rose" = "Rosa";
+"Ruby" = "Rubino";
 "Show as smart button" = "Mostra come pulsante smart";
 "Sky" = "Cielo";
 "Slate" = "Ardesia";
@@ -324,6 +327,7 @@
 "Smart buttons" = "Pulsanti smart";
 "Sunset" = "Tramonto";
 "Teal" = "Verde acqua";
+"Tangerine" = "Mandarino";
 "Tip: Drag profile cards to reorder them." = "Suggerimento: trascina le schede profilo per riordinarle.";
 "Violet" = "Viola";
 

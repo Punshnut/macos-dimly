@@ -306,6 +306,7 @@
 "Emerald" = "翡翠色";
 "Gold" = "金色";
 "Indigo" = "靛蓝";
+"Lavender" = "薰衣草";
 "Lets this profile appear under Quick Actions in the menu bar." = "让此配置在菜单栏的快速操作下显示。";
 "Like system" = "跟随系统";
 "Lime" = "青柠色";
@@ -313,9 +314,11 @@
 "Mint" = "薄荷色";
 "No smart buttons yet. Save profiles in Settings and enable \"Show as smart button\"." = "目前还没有智能按钮。请在设置中保存配置，并启用 \"显示为智能按钮\"。";
 "Ocean" = "海洋";
+"Pine" = "松绿";
 "Profiles stay sorted by this list order. Up to 4 smart buttons are shown per row in the menu bar." = "配置会按此列表顺序保持排序。菜单栏每行最多显示 4 个智能按钮。";
 "Quick profile shortcuts shown below Quick Actions." = "快速配置快捷方式显示在快速操作下方。";
 "Rose" = "玫瑰色";
+"Ruby" = "宝石红";
 "Show as smart button" = "显示为智能按钮";
 "Sky" = "天空色";
 "Slate" = "石板色";
@@ -324,6 +327,7 @@
 "Smart buttons" = "智能按钮";
 "Sunset" = "日落";
 "Teal" = "蓝绿色";
+"Tangerine" = "橘色";
 "Tip: Drag profile cards to reorder them." = "提示：拖动配置卡片可重新排序。";
 "Violet" = "紫罗兰色";
 

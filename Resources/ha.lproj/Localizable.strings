@@ -306,6 +306,7 @@
 "Emerald" = "Launin emerald";
 "Gold" = "Zinariya";
 "Indigo" = "Launin indigo";
+"Lavender" = "Lavender";
 "Lets this profile appear under Quick Actions in the menu bar." = "Yana sa wannan profile ya bayyana ƙarƙashin Quick Actions a menu bar.";
 "Like system" = "Kamar tsarin";
 "Lime" = "Launin lime";
@@ -313,9 +314,11 @@
 "Mint" = "Launin mint";
 "No smart buttons yet. Save profiles in Settings and enable \"Show as smart button\"." = "Har yanzu babu maɓallan wayo. Ajiye profiles a Settings sannan ka kunna \"Nuna a matsayin maɓallin wayo\".";
 "Ocean" = "Teku";
+"Pine" = "Pine";
 "Profiles stay sorted by this list order. Up to 4 smart buttons are shown per row in the menu bar." = "Profiles za su ci gaba da kasancewa cikin wannan tsari na jeri. Ana nuna har zuwa maɓallan wayo 4 a kowane layi a menu bar.";
 "Quick profile shortcuts shown below Quick Actions." = "Gajerun hanyoyin profile masu sauri da aka nuna a ƙasa da Quick Actions.";
 "Rose" = "Launin rose";
+"Ruby" = "Ruby";
 "Show as smart button" = "Nuna a matsayin maɓallin wayo";
 "Sky" = "Sama";
 "Slate" = "Launin slate";
@@ -324,6 +327,7 @@
 "Smart buttons" = "Maɓallan wayo";
 "Sunset" = "Faduwár rana";
 "Teal" = "Launin teal";
+"Tangerine" = "Tangerine";
 "Tip: Drag profile cards to reorder them." = "Shawara: Ja katunan profile don sake tsara su.";
 "Violet" = "Launin violet";
 

@@ -306,6 +306,7 @@
 "Emerald" = "Zamrud";
 "Gold" = "Emas";
 "Indigo" = "Nila";
+"Lavender" = "Lavender";
 "Lets this profile appear under Quick Actions in the menu bar." = "Membuat profil ini muncul di bawah Aksi Cepat pada bilah menu.";
 "Like system" = "Ikuti sistem";
 "Lime" = "Limau";
@@ -313,9 +314,11 @@
 "Mint" = "Hijau mint";
 "No smart buttons yet. Save profiles in Settings and enable \"Show as smart button\"." = "Belum ada tombol pintar. Simpan profil di Pengaturan lalu aktifkan \"Tampilkan sebagai tombol pintar\".";
 "Ocean" = "Samudra";
+"Pine" = "Pinus";
 "Profiles stay sorted by this list order. Up to 4 smart buttons are shown per row in the menu bar." = "Profil tetap diurutkan menurut urutan daftar ini. Hingga 4 tombol pintar ditampilkan per baris pada bilah menu.";
 "Quick profile shortcuts shown below Quick Actions." = "Pintasan profil cepat ditampilkan di bawah Aksi Cepat.";
 "Rose" = "Mawar";
+"Ruby" = "Rubi";
 "Show as smart button" = "Tampilkan sebagai tombol pintar";
 "Sky" = "Langit";
 "Slate" = "Batu sabak";
@@ -324,6 +327,7 @@
 "Smart buttons" = "Tombol pintar";
 "Sunset" = "Matahari terbenam";
 "Teal" = "Hijau kebiruan";
+"Tangerine" = "Jeruk mandarin";
 "Tip: Drag profile cards to reorder them." = "Tip: Seret kartu profil untuk mengurutkan ulang.";
 "Violet" = "Ungu";
 

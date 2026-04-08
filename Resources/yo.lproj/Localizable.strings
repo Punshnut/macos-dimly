@@ -306,6 +306,7 @@
 "Emerald" = "Awọ emeraldi";
 "Gold" = "Awọ wúrà";
 "Indigo" = "Awọ indigo";
+"Lavender" = "Awọ lavender";
 "Lets this profile appear under Quick Actions in the menu bar." = "Eyi jẹ́ kí profaili yii hàn lábẹ́ Quick Actions nínú menu bar.";
 "Like system" = "Bíi eto";
 "Lime" = "Awọ lime";
@@ -313,9 +314,11 @@
 "Mint" = "Awọ minti";
 "No smart buttons yet. Save profiles in Settings and enable \"Show as smart button\"." = "Ko tíì sí bọtini ọlọ́gbọ́n. Fipamọ́ àwọn profaili nínú Ìṣètò kí o sì jẹ́ kí \"Fihan gẹ́gẹ́ bí bọtini ọlọ́gbọ́n\" ṣiṣẹ.";
 "Ocean" = "Òkun";
+"Pine" = "Igi pine";
 "Profiles stay sorted by this list order. Up to 4 smart buttons are shown per row in the menu bar." = "Àwọn profaili máa dúró ní títò lẹ́yìn ìtòlẹ́sẹẹsẹ yìí. Títí dé bọtini ọlọ́gbọ́n mẹ́rin ni a máa fi hàn ní ìlà kọọkan nínú menu bar.";
 "Quick profile shortcuts shown below Quick Actions." = "Àwọn ọ̀nà abuja profaili kíákíá ni a fi hàn ní isalẹ Quick Actions.";
 "Rose" = "Awọ róòsì";
+"Ruby" = "Awọ ruby";
 "Show as smart button" = "Fihan gẹ́gẹ́ bí bọtini ọlọ́gbọ́n";
 "Sky" = "Ọ̀run";
 "Slate" = "Awọ slate";
@@ -324,6 +327,7 @@
 "Smart buttons" = "àwọn bọtini ọlọ́gbọ́n";
 "Sunset" = "Ìwọ̀-oòrùn";
 "Teal" = "Awọ teal";
+"Tangerine" = "Tangerine";
 "Tip: Drag profile cards to reorder them." = "Imọ̀ràn: Fa àwọn kaadi profaili láti tún wọn ṣe ní títò.";
 "Violet" = "Awọ violet";
 

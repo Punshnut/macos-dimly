@@ -306,6 +306,7 @@
 "Emerald" = "Smaragd";
 "Gold" = "Gyllene";
 "Indigo" = "Indigoblå";
+"Lavender" = "Lavendel";
 "Lets this profile appear under Quick Actions in the menu bar." = "Visar den här profilen under Snabbåtgärder i menyraden.";
 "Like system" = "Som systemet";
 "Lime" = "Limegrön";
@@ -313,9 +314,11 @@
 "Mint" = "Mintgrön";
 "No smart buttons yet. Save profiles in Settings and enable \"Show as smart button\"." = "Inga smarta knappar ännu. Spara profiler i Inställningar och aktivera \"Visa som smart knapp\".";
 "Ocean" = "Havsblå";
+"Pine" = "Tall";
 "Profiles stay sorted by this list order. Up to 4 smart buttons are shown per row in the menu bar." = "Profiler förblir sorterade enligt den här listordningen. Upp till 4 smarta knappar visas per rad i menyraden.";
 "Quick profile shortcuts shown below Quick Actions." = "Snabba profilgenvägar visas under Snabbåtgärder.";
 "Rose" = "Ros";
+"Ruby" = "Rubin";
 "Show as smart button" = "Visa som smart knapp";
 "Sky" = "Himmel";
 "Slate" = "Skiffer";
@@ -324,6 +327,7 @@
 "Smart buttons" = "smarta knappar";
 "Sunset" = "Solnedgång";
 "Teal" = "Blågrön";
+"Tangerine" = "Mandarin";
 "Tip: Drag profile cards to reorder them." = "Tips: Dra profilkort för att ändra ordningen.";
 "Violet" = "Violett";
 

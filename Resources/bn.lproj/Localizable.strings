@@ -306,6 +306,7 @@
 "Emerald" = "পান্না";
 "Gold" = "সোনালি";
 "Indigo" = "ইন্ডিগো";
+"Lavender" = "ল্যাভেন্ডার";
 "Lets this profile appear under Quick Actions in the menu bar." = "এটি প্রোফাইলটিকে মেনু বারের দ্রুত ক্রিয়ার নিচে দেখায়।";
 "Like system" = "সিস্টেমের মতো";
 "Lime" = "লেবু-সবুজ";
@@ -313,9 +314,11 @@
 "Mint" = "মিন্ট";
 "No smart buttons yet. Save profiles in Settings and enable \"Show as smart button\"." = "এখনও কোনো স্মার্ট বোতাম নেই। সেটিংসে প্রোফাইল সেভ করুন এবং \"স্মার্ট বোতাম হিসেবে দেখান\" চালু করুন।";
 "Ocean" = "মহাসাগর";
+"Pine" = "পাইন";
 "Profiles stay sorted by this list order. Up to 4 smart buttons are shown per row in the menu bar." = "প্রোফাইলগুলো এই তালিকার ক্রম অনুযায়ী সাজানো থাকবে। মেনু বারে প্রতি সারিতে সর্বোচ্চ ৪টি স্মার্ট বোতাম দেখানো হয়।";
 "Quick profile shortcuts shown below Quick Actions." = "দ্রুত ক্রিয়ার নিচে দ্রুত প্রোফাইল শর্টকাট দেখানো হয়।";
 "Rose" = "গোলাপি";
+"Ruby" = "রুবি";
 "Show as smart button" = "স্মার্ট বোতাম হিসেবে দেখান";
 "Sky" = "আকাশ";
 "Slate" = "স্লেট";
@@ -324,6 +327,7 @@
 "Smart buttons" = "স্মার্ট বোতাম";
 "Sunset" = "সূর্যাস্ত";
 "Teal" = "টিল";
+"Tangerine" = "ট্যাঞ্জেরিন";
 "Tip: Drag profile cards to reorder them." = "টিপ: প্রোফাইল কার্ড টেনে পুনরায় সাজান।";
 "Violet" = "বেগুনি";
 

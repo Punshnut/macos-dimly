@@ -306,6 +306,7 @@
 "Emerald" = "Zümrüt";
 "Gold" = "Altın";
 "Indigo" = "Çivit";
+"Lavender" = "Lavanta";
 "Lets this profile appear under Quick Actions in the menu bar." = "Bu profilin menü çubuğunda Hızlı Eylemler altında görünmesini sağlar.";
 "Like system" = "Sistem gibi";
 "Lime" = "Limon yeşili";
@@ -313,9 +314,11 @@
 "Mint" = "Nane";
 "No smart buttons yet. Save profiles in Settings and enable \"Show as smart button\"." = "Henüz akıllı düğme yok. Profilleri Ayarlar'da kaydedin ve \"Akıllı düğme olarak göster\" seçeneğini etkinleştirin.";
 "Ocean" = "Okyanus";
+"Pine" = "Çam";
 "Profiles stay sorted by this list order. Up to 4 smart buttons are shown per row in the menu bar." = "Profiller bu liste sırasına göre sıralı kalır. Menü çubuğunda satır başına en fazla 4 akıllı düğme gösterilir.";
 "Quick profile shortcuts shown below Quick Actions." = "Hızlı profil kısayolları Hızlı Eylemler'in altında gösterilir.";
 "Rose" = "Gül";
+"Ruby" = "Yakut";
 "Show as smart button" = "Akıllı düğme olarak göster";
 "Sky" = "Gökyüzü";
 "Slate" = "Kayrak";
@@ -324,6 +327,7 @@
 "Smart buttons" = "akıllı düğmeler";
 "Sunset" = "Gün batımı";
 "Teal" = "Camgöbeği";
+"Tangerine" = "Mandalina";
 "Tip: Drag profile cards to reorder them." = "İpucu: Profil kartlarını sürükleyerek yeniden sıralayın.";
 "Violet" = "Menekşe";
 

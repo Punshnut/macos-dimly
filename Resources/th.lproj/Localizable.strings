@@ -306,6 +306,7 @@
 "Emerald" = "สีมรกต";
 "Gold" = "สีทอง";
 "Indigo" = "สีคราม";
+"Lavender" = "สีลาเวนเดอร์";
 "Lets this profile appear under Quick Actions in the menu bar." = "แสดงโปรไฟล์นี้ใต้การดำเนินการด่วนในแถบเมนู";
 "Like system" = "ตามระบบ";
 "Lime" = "สีไลม์";
@@ -313,9 +314,11 @@
 "Mint" = "สีมิ้นต์";
 "No smart buttons yet. Save profiles in Settings and enable \"Show as smart button\"." = "ยังไม่มีปุ่มอัจฉริยะ บันทึกโปรไฟล์ในการตั้งค่าแล้วเปิด \"แสดงเป็นปุ่มอัจฉริยะ\"";
 "Ocean" = "สีทะเล";
+"Pine" = "สีสนเขา";
 "Profiles stay sorted by this list order. Up to 4 smart buttons are shown per row in the menu bar." = "โปรไฟล์จะเรียงตามลำดับรายการนี้ และแสดงปุ่มอัจฉริยะได้สูงสุด 4 ปุ่มต่อแถวในแถบเมนู";
 "Quick profile shortcuts shown below Quick Actions." = "ทางลัดโปรไฟล์ด่วนจะแสดงใต้การดำเนินการด่วน";
 "Rose" = "สีกุหลาบ";
+"Ruby" = "สีทับทิม";
 "Show as smart button" = "แสดงเป็นปุ่มอัจฉริยะ";
 "Sky" = "สีฟ้า";
 "Slate" = "สีชนวน";
@@ -324,6 +327,7 @@
 "Smart buttons" = "ปุ่มอัจฉริยะ";
 "Sunset" = "พระอาทิตย์ตก";
 "Teal" = "สีเขียวอมฟ้า";
+"Tangerine" = "สีส้มแมนดาริน";
 "Tip: Drag profile cards to reorder them." = "เคล็ดลับ: ลากการ์ดโปรไฟล์เพื่อจัดลำดับใหม่";
 "Violet" = "สีม่วง";
 

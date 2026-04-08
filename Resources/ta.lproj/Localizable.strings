@@ -306,6 +306,7 @@
 "Emerald" = "மரகத";
 "Gold" = "தங்கம்";
 "Indigo" = "கருநீலம்";
+"Lavender" = "லாவெண்டர்";
 "Lets this profile appear under Quick Actions in the menu bar." = "இந்த சுயவிவரத்தை மெனு பட்டியில் விரைவு செயல்களின் கீழ் காட்டுகிறது.";
 "Like system" = "கணினி போல";
 "Lime" = "எலுமிச்சை பச்சை";
@@ -313,9 +314,11 @@
 "Mint" = "புதினா";
 "No smart buttons yet. Save profiles in Settings and enable \"Show as smart button\"." = "இன்னும் ஸ்மார்ட் பொத்தான்கள் இல்லை. அமைப்புகளில் சுயவிவரங்களை சேமித்து \"ஸ்மார்ட் பொத்தானாக காட்டு\" என்பதைக் இயக்கவும்.";
 "Ocean" = "கடல்";
+"Pine" = "பைன்";
 "Profiles stay sorted by this list order. Up to 4 smart buttons are shown per row in the menu bar." = "சுயவிவரங்கள் இந்த பட்டியல் வரிசைப்படி ஒழுங்காக இருக்கும். மெனு பட்டியில் ஒரு வரிக்கு அதிகபட்சம் 4 ஸ்மார்ட் பொத்தான்கள் காட்டப்படும்.";
 "Quick profile shortcuts shown below Quick Actions." = "விரைவு சுயவிவர குறுக்குவழிகள் விரைவு செயல்களின் கீழ் காட்டப்படும்.";
 "Rose" = "ரோஜா";
+"Ruby" = "மாணிக்கம்";
 "Show as smart button" = "ஸ்மார்ட் பொத்தானாக காட்டு";
 "Sky" = "வானம்";
 "Slate" = "சாம்பல் கல்";
@@ -324,6 +327,7 @@
 "Smart buttons" = "ஸ்மார்ட் பொத்தான்கள்";
 "Sunset" = "சூரிய அஸ்தமனம்";
 "Teal" = "நீலப்பச்சை";
+"Tangerine" = "டேன்ஜரின்";
 "Tip: Drag profile cards to reorder them." = "குறிப்பு: சுயவிவர அட்டைகளை இழுத்து மறுவரிசைப்படுத்தவும்.";
 "Violet" = "ஊதா";
 

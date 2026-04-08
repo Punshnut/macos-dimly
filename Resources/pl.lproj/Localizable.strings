@@ -306,6 +306,7 @@
 "Emerald" = "Szmaragdowy";
 "Gold" = "Złoty";
 "Indigo" = "Indygowy";
+"Lavender" = "Lawendowy";
 "Lets this profile appear under Quick Actions in the menu bar." = "Pozwala wyświetlać ten profil w Szybkich akcjach na pasku menu.";
 "Like system" = "Jak system";
 "Lime" = "Limonkowy";
@@ -313,9 +314,11 @@
 "Mint" = "Miętowy";
 "No smart buttons yet. Save profiles in Settings and enable \"Show as smart button\"." = "Brak inteligentnych przycisków. Zapisz profile w Ustawieniach i włącz \"Pokaż jako inteligentny przycisk\".";
 "Ocean" = "Oceaniczny";
+"Pine" = "Sosnowy";
 "Profiles stay sorted by this list order. Up to 4 smart buttons are shown per row in the menu bar." = "Profile pozostają posortowane według tej kolejności listy. Na pasku menu wyświetlane są maksymalnie 4 inteligentne przyciski w wierszu.";
 "Quick profile shortcuts shown below Quick Actions." = "Szybkie skróty profili pokazane pod Szybkimi akcjami.";
 "Rose" = "Różany";
+"Ruby" = "Rubinowy";
 "Show as smart button" = "Pokaż jako inteligentny przycisk";
 "Sky" = "Niebiański";
 "Slate" = "Łupkowy";
@@ -324,6 +327,7 @@
 "Smart buttons" = "inteligentne przyciski";
 "Sunset" = "Zachód słońca";
 "Teal" = "Morski";
+"Tangerine" = "Mandarynkowy";
 "Tip: Drag profile cards to reorder them." = "Wskazówka: przeciągnij karty profili, aby zmienić kolejność.";
 "Violet" = "Fioletowy";
 

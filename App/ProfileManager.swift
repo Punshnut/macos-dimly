@@ -15,21 +15,25 @@ enum DisplayPowerState: String, Codable {
 /// Curated color presets for smart profile buttons.
 enum SmartButtonColorPreset: String, Codable, CaseIterable, Identifiable {
     case sunset
-    case ocean
-    case mint
     case violet
-    case amber
+    case mint
     case rose
+    case amber
     case lime
-    case slate
+    case ruby
+    case ocean
+    case magenta
+    case pine
     case teal
-    case indigo
     case coral
-    case copper
+    case lavender
+    case gold
+    case tangerine
+    case indigo
     case emerald
     case sky
-    case magenta
-    case gold
+    case copper
+    case slate
 
     var id: String { rawValue }
 
@@ -67,6 +71,14 @@ enum SmartButtonColorPreset: String, Codable, CaseIterable, Identifiable {
             return String(localized: "Magenta")
         case .gold:
             return String(localized: "Gold")
+        case .ruby:
+            return String(localized: "Ruby")
+        case .lavender:
+            return String(localized: "Lavender")
+        case .pine:
+            return String(localized: "Pine")
+        case .tangerine:
+            return String(localized: "Tangerine")
         }
     }
 }
@@ -161,6 +173,7 @@ struct DisplayProfile: Codable, Identifiable, Equatable {
     var monitorState: ProfileMonitorState?
     var showInSmartButtons: Bool = true
     var smartButtonColorPreset: SmartButtonColorPreset?
+    var autoColorPreset: SmartButtonColorPreset?
 
     /// Creates a named profile from captured display snapshots and optional monitor metadata.
     init(
@@ -170,7 +183,8 @@ struct DisplayProfile: Codable, Identifiable, Equatable {
         displays: [DisplaySnapshot],
         monitorState: ProfileMonitorState?,
         showInSmartButtons: Bool = true,
-        smartButtonColorPreset: SmartButtonColorPreset? = nil
+        smartButtonColorPreset: SmartButtonColorPreset? = nil,
+        autoColorPreset: SmartButtonColorPreset? = nil
     ) {
         self.id = id
         self.name = name
@@ -179,6 +193,7 @@ struct DisplayProfile: Codable, Identifiable, Equatable {
         self.monitorState = monitorState
         self.showInSmartButtons = showInSmartButtons
         self.smartButtonColorPreset = smartButtonColorPreset
+        self.autoColorPreset = autoColorPreset
     }
 
     enum CodingKeys: String, CodingKey {
@@ -189,6 +204,7 @@ struct DisplayProfile: Codable, Identifiable, Equatable {
         case monitorState
         case showInSmartButtons
         case smartButtonColorPreset
+        case autoColorPreset
     }
 
     /// Decodes a saved profile and backfills newer UI metadata with sensible defaults.
@@ -201,6 +217,7 @@ struct DisplayProfile: Codable, Identifiable, Equatable {
         monitorState = try container.decodeIfPresent(ProfileMonitorState.self, forKey: .monitorState)
         showInSmartButtons = try container.decodeIfPresent(Bool.self, forKey: .showInSmartButtons) ?? true
         smartButtonColorPreset = try container.decodeIfPresent(SmartButtonColorPreset.self, forKey: .smartButtonColorPreset)
+        autoColorPreset = try container.decodeIfPresent(SmartButtonColorPreset.self, forKey: .autoColorPreset)
     }
 
     /// Encodes profile metadata and captured display snapshots.
@@ -213,6 +230,7 @@ struct DisplayProfile: Codable, Identifiable, Equatable {
         try container.encodeIfPresent(monitorState, forKey: .monitorState)
         try container.encode(showInSmartButtons, forKey: .showInSmartButtons)
         try container.encodeIfPresent(smartButtonColorPreset, forKey: .smartButtonColorPreset)
+        try container.encodeIfPresent(autoColorPreset, forKey: .autoColorPreset)
     }
 }
 
@@ -553,15 +571,27 @@ final class ProfileManager: ObservableObject {
     /// Captures the current display state into a new named profile.
     func saveCurrentProfile(named name: String) {
         let snapshots = captureCurrentDisplaySnapshots()
+        let newID = UUID()
+        let usedColors = Set(profiles.compactMap { $0.smartButtonColorPreset ?? $0.autoColorPreset })
+        let allPresets = SmartButtonColorPreset.allCases
+        let autoColor: SmartButtonColorPreset = allPresets.first(where: { !usedColors.contains($0) }) ?? {
+            var hash: UInt64 = 1469598103934665603
+            for byte in newID.uuidString.lowercased().utf8 {
+                hash ^= UInt64(byte)
+                hash &*= 1099511628211
+            }
+            return allPresets[Int(hash % UInt64(allPresets.count))]
+        }()
         let profile = DisplayProfile(
-            id: UUID(),
+            id: newID,
             name: name.isEmpty
                 ? String(format: String(localized: "ProfileDefaultNameFormat"), Int64(profiles.count + 1))
                 : name,
             createdAt: Date(),
             displays: snapshots,
             monitorState: ProfileMonitorState(from: settingsStore.settings),
-            showInSmartButtons: true
+            showInSmartButtons: true,
+            autoColorPreset: autoColor
         )
         profiles.append(profile)
         persist()

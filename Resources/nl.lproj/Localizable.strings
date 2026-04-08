@@ -306,6 +306,7 @@
 "Emerald" = "Smaragd";
 "Gold" = "Goud";
 "Indigo" = "Indigoblauw";
+"Lavender" = "Lavendel";
 "Lets this profile appear under Quick Actions in the menu bar." = "Laat dit profiel verschijnen onder Snelle acties in de menubalk.";
 "Like system" = "Zoals systeem";
 "Lime" = "Limoen";
@@ -313,9 +314,11 @@
 "Mint" = "Munt";
 "No smart buttons yet. Save profiles in Settings and enable \"Show as smart button\"." = "Nog geen slimme knoppen. Sla profielen op in Instellingen en schakel \"Tonen als slimme knop\" in.";
 "Ocean" = "Oceaan";
+"Pine" = "Den";
 "Profiles stay sorted by this list order. Up to 4 smart buttons are shown per row in the menu bar." = "Profielen blijven gesorteerd volgens deze lijstvolgorde. In de menubalk worden maximaal 4 slimme knoppen per rij getoond.";
 "Quick profile shortcuts shown below Quick Actions." = "Snelle profielsnelkoppelingen worden onder Snelle acties getoond.";
 "Rose" = "Roos";
+"Ruby" = "Robijn";
 "Show as smart button" = "Tonen als slimme knop";
 "Sky" = "Lucht";
 "Slate" = "Leisteen";
@@ -324,6 +327,7 @@
 "Smart buttons" = "slimme knoppen";
 "Sunset" = "Zonsondergang";
 "Teal" = "Blauwgroen";
+"Tangerine" = "Mandarijn";
 "Tip: Drag profile cards to reorder them." = "Tip: sleep profielkaarten om ze opnieuw te ordenen.";
 "Violet" = "Violetkleur";
 

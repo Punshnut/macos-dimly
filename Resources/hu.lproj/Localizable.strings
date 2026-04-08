@@ -306,6 +306,7 @@
 "Emerald" = "Smaragd";
 "Gold" = "Arany";
 "Indigo" = "Indigó";
+"Lavender" = "Levendula";
 "Lets this profile appear under Quick Actions in the menu bar." = "Megjeleníti ezt a profilt a Gyors műveletek alatt a menüsorban.";
 "Like system" = "Mint a rendszer";
 "Lime" = "Zöldcitrom";
@@ -313,9 +314,11 @@
 "Mint" = "Menta";
 "No smart buttons yet. Save profiles in Settings and enable \"Show as smart button\"." = "Még nincsenek intelligens gombok. Ments profilokat a Beállításokban, és engedélyezd a \"Megjelenítés intelligens gombként\" lehetőséget.";
 "Ocean" = "Óceán";
+"Pine" = "Fenyő";
 "Profiles stay sorted by this list order. Up to 4 smart buttons are shown per row in the menu bar." = "A profilok ebben a listasorrendben maradnak rendezve. A menüsorban soronként legfeljebb 4 intelligens gomb jelenik meg.";
 "Quick profile shortcuts shown below Quick Actions." = "Gyors profilparancsok a Gyors műveletek alatt.";
 "Rose" = "Rózsa";
+"Ruby" = "Rubin";
 "Show as smart button" = "Megjelenítés intelligens gombként";
 "Sky" = "Ég";
 "Slate" = "Palaszürke";
@@ -324,6 +327,7 @@
 "Smart buttons" = "Intelligens gombok";
 "Sunset" = "Naplemente";
 "Teal" = "Türkiz";
+"Tangerine" = "Mandarin";
 "Tip: Drag profile cards to reorder them." = "Tipp: Húzd a profilkártyákat az átrendezéshez.";
 "Violet" = "Ibolya";
 

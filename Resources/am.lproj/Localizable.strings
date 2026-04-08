@@ -306,6 +306,7 @@
 "Emerald" = "ኤመራልድ";
 "Gold" = "ወርቅ";
 "Indigo" = "ኢንዲጎ";
+"Lavender" = "ላቨንደር";
 "Lets this profile appear under Quick Actions in the menu bar." = "ይህ ፕሮፋይል በምናሌ አሞሌ ውስጥ በፈጣን እርምጃዎች ስር እንዲታይ ያደርጋል።";
 "Like system" = "እንደ ስርዓቱ";
 "Lime" = "ላይም";
@@ -313,9 +314,11 @@
 "Mint" = "ሚንት";
 "No smart buttons yet. Save profiles in Settings and enable \"Show as smart button\"." = "እስካሁን ምንም ስማርት ቁልፎች የሉም። ፕሮፋይሎችን በቅንብሮች ውስጥ ያስቀምጡ እና \"እንደ ስማርት ቁልፍ አሳይ\" አንቃ።";
 "Ocean" = "ውቅያኖስ";
+"Pine" = "ጥድ";
 "Profiles stay sorted by this list order. Up to 4 smart buttons are shown per row in the menu bar." = "ፕሮፋይሎች በዚህ ዝርዝር ቅደም ተከተል መሠረት የተደረደሩ ይቆያሉ። በምናሌ አሞሌ በእያንዳንዱ ረድፍ እስከ 4 ስማርት ቁልፎች ይታያሉ።";
 "Quick profile shortcuts shown below Quick Actions." = "ፈጣን የፕሮፋይል አቋራጮች ከፈጣን እርምጃዎች በታች ይታያሉ።";
 "Rose" = "ሮዝ";
+"Ruby" = "ሩቢ";
 "Show as smart button" = "እንደ ስማርት ቁልፍ አሳይ";
 "Sky" = "ሰማይ";
 "Slate" = "ስሌት";
@@ -324,6 +327,7 @@
 "Smart buttons" = "ስማርት ቁልፎች";
 "Sunset" = "ፀሐይ መጥለቅ";
 "Teal" = "ቲል";
+"Tangerine" = "ማንዳሪን";
 "Tip: Drag profile cards to reorder them." = "ጠቃሚ ምክር: የፕሮፋይል ካርዶችን በመጎተት እንደገና ያደራጁ።";
 "Violet" = "ቫዮሌት";
 

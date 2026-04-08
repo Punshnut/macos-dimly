@@ -306,6 +306,7 @@
 "Emerald" = "Изумрудный";
 "Gold" = "Золотой";
 "Indigo" = "Индиго";
+"Lavender" = "Лавандовый";
 "Lets this profile appear under Quick Actions in the menu bar." = "Показывает этот профиль в разделе Быстрые действия в строке меню.";
 "Like system" = "Как в системе";
 "Lime" = "Лаймовый";
@@ -313,9 +314,11 @@
 "Mint" = "Мятный";
 "No smart buttons yet. Save profiles in Settings and enable \"Show as smart button\"." = "Умных кнопок пока нет. Сохраните профили в Настройках и включите \"Показывать как умную кнопку\".";
 "Ocean" = "Океан";
+"Pine" = "Сосновый";
 "Profiles stay sorted by this list order. Up to 4 smart buttons are shown per row in the menu bar." = "Профили остаются отсортированными в этом порядке. В строке меню показывается до 4 умных кнопок в строке.";
 "Quick profile shortcuts shown below Quick Actions." = "Быстрые ярлыки профилей отображаются под Быстрыми действиями.";
 "Rose" = "Розовый";
+"Ruby" = "Рубиновый";
 "Show as smart button" = "Показывать как умную кнопку";
 "Sky" = "Небесный";
 "Slate" = "Сланцевый";
@@ -324,6 +327,7 @@
 "Smart buttons" = "умные кнопки";
 "Sunset" = "Закат";
 "Teal" = "Сине-зелёный";
+"Tangerine" = "Мандариновый";
 "Tip: Drag profile cards to reorder them." = "Совет: перетащите карточки профилей, чтобы изменить порядок.";
 "Violet" = "Фиолетовый";
 

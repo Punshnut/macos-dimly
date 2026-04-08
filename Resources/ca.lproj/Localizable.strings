@@ -306,6 +306,7 @@
 "Emerald" = "Maragda";
 "Gold" = "Or";
 "Indigo" = "Indi";
+"Lavender" = "Lavanda";
 "Lets this profile appear under Quick Actions in the menu bar." = "Permet que aquest perfil aparegui a Accions ràpides a la barra de menús.";
 "Like system" = "Com el sistema";
 "Lime" = "Llima";
@@ -313,9 +314,11 @@
 "Mint" = "Menta";
 "No smart buttons yet. Save profiles in Settings and enable \"Show as smart button\"." = "Encara no hi ha botons intel·ligents. Desa perfils a Configuració i activa \"Mostra com a botó intel·ligent\".";
 "Ocean" = "Oceà";
+"Pine" = "Pi";
 "Profiles stay sorted by this list order. Up to 4 smart buttons are shown per row in the menu bar." = "Els perfils es mantenen ordenats segons aquest ordre de llista. Es mostren fins a 4 botons intel·ligents per fila a la barra de menús.";
 "Quick profile shortcuts shown below Quick Actions." = "Dreceres ràpides de perfil mostrades sota Accions ràpides.";
 "Rose" = "Rosa";
+"Ruby" = "Robí";
 "Show as smart button" = "Mostra com a botó intel·ligent";
 "Sky" = "Cel";
 "Slate" = "Pissarra";
@@ -324,6 +327,7 @@
 "Smart buttons" = "Botons intel·ligents";
 "Sunset" = "Posta de sol";
 "Teal" = "Verd blavós";
+"Tangerine" = "Mandarina";
 "Tip: Drag profile cards to reorder them." = "Consell: arrossega les targetes de perfil per reordenar-les.";
 "Violet" = "Violeta";
 

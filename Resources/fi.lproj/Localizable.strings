@@ -306,6 +306,7 @@
 "Emerald" = "Smaragdi";
 "Gold" = "Kulta";
 "Indigo" = "Indigonsininen";
+"Lavender" = "Laventeli";
 "Lets this profile appear under Quick Actions in the menu bar." = "Näyttää tämän profiilin pikatoimintojen alla valikkorivillä.";
 "Like system" = "Kuten järjestelmä";
 "Lime" = "Limetti";
@@ -313,9 +314,11 @@
 "Mint" = "Minttu";
 "No smart buttons yet. Save profiles in Settings and enable \"Show as smart button\"." = "Älypainikkeita ei ole vielä. Tallenna profiilit Asetuksissa ja ota käyttöön \"Näytä älypainikkeena\".";
 "Ocean" = "Valtameri";
+"Pine" = "Mänty";
 "Profiles stay sorted by this list order. Up to 4 smart buttons are shown per row in the menu bar." = "Profiilit pysyvät tämän listajärjestyksen mukaan järjestettyinä. Valikkorivillä näytetään enintään 4 älypainiketta per rivi.";
 "Quick profile shortcuts shown below Quick Actions." = "Nopeat profiilipikakuvakkeet näytetään Pikatoimintojen alla.";
 "Rose" = "Ruusu";
+"Ruby" = "Rubiini";
 "Show as smart button" = "Näytä älypainikkeena";
 "Sky" = "Taivas";
 "Slate" = "Liuske";
@@ -324,6 +327,7 @@
 "Smart buttons" = "Älypainikkeet";
 "Sunset" = "Auringonlasku";
 "Teal" = "Sinivihreä";
+"Tangerine" = "Mandariini";
 "Tip: Drag profile cards to reorder them." = "Vinkki: Järjestä profiilikortit uudelleen vetämällä.";
 "Violet" = "Violetti";
 

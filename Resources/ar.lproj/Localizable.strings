@@ -306,6 +306,7 @@
 "Emerald" = "زمردي";
 "Gold" = "ذهبي";
 "Indigo" = "نيلي";
+"Lavender" = "خزامى";
 "Lets this profile appear under Quick Actions in the menu bar." = "يُظهر هذا الملف الشخصي ضمن الإجراءات السريعة في شريط القوائم.";
 "Like system" = "مثل النظام";
 "Lime" = "ليموني";
@@ -313,9 +314,11 @@
 "Mint" = "نعناعي";
 "No smart buttons yet. Save profiles in Settings and enable \"Show as smart button\"." = "لا توجد أزرار ذكية بعد. احفظ الملفات الشخصية في الإعدادات وفعّل \"إظهار كزر ذكي\".";
 "Ocean" = "محيط";
+"Pine" = "صنوبر";
 "Profiles stay sorted by this list order. Up to 4 smart buttons are shown per row in the menu bar." = "تبقى الملفات الشخصية مرتبة حسب هذا الترتيب. يتم عرض ما يصل إلى 4 أزرار ذكية في كل صف في شريط القوائم.";
 "Quick profile shortcuts shown below Quick Actions." = "تظهر اختصارات الملفات الشخصية السريعة أسفل الإجراءات السريعة.";
 "Rose" = "وردي";
+"Ruby" = "ياقوت";
 "Show as smart button" = "إظهار كزر ذكي";
 "Sky" = "سماء";
 "Slate" = "أردوازي";
@@ -324,6 +327,7 @@
 "Smart buttons" = "الأزرار الذكية";
 "Sunset" = "غروب الشمس";
 "Teal" = "أزرق مخضر";
+"Tangerine" = "يوسفي";
 "Tip: Drag profile cards to reorder them." = "نصيحة: اسحب بطاقات الملفات الشخصية لإعادة ترتيبها.";
 "Violet" = "بنفسجي";
 

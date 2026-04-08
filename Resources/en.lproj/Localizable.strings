@@ -309,6 +309,7 @@
 "Emerald" = "Emerald";
 "Gold" = "Gold";
 "Indigo" = "Indigo";
+"Lavender" = "Lavender";
 "Lets this profile appear under Quick Actions in the menu bar." = "Lets this profile appear under Quick Actions in the menu bar.";
 "Like system" = "Like system";
 "Lime" = "Lime";
@@ -316,9 +317,11 @@
 "Mint" = "Mint";
 "No smart buttons yet. Save profiles in Settings and enable \"Show as smart button\"." = "No smart buttons yet. Save profiles in Settings and enable \"Show as smart button\".";
 "Ocean" = "Ocean";
+"Pine" = "Pine";
 "Profiles stay sorted by this list order. Up to 4 smart buttons are shown per row in the menu bar." = "Profiles stay sorted by this list order. Up to 4 smart buttons are shown per row in the menu bar.";
 "Quick profile shortcuts shown below Quick Actions." = "Quick profile shortcuts shown below Quick Actions.";
 "Rose" = "Rose";
+"Ruby" = "Ruby";
 "Show as smart button" = "Show as smart button";
 "Sky" = "Sky";
 "Slate" = "Slate";
@@ -326,6 +329,7 @@
 "Smart button color" = "Smart button color";
 "Smart buttons" = "Smart buttons";
 "Sunset" = "Sunset";
+"Tangerine" = "Tangerine";
 "Teal" = "Teal";
 "Tip: Drag profile cards to reorder them." = "Tip: Drag profile cards to reorder them.";
 "Violet" = "Violet";

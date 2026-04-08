@@ -1170,7 +1170,9 @@ struct MenuBarContentView: View {
 
     /// Resolved gradient used by smart buttons (manual preset or deterministic auto).
     private func smartButtonGradient(for profile: DisplayProfile) -> LinearGradient {
-        let preset = profile.smartButtonColorPreset ?? autoSmartButtonColorPreset(for: profile)
+        let preset = profile.smartButtonColorPreset
+            ?? profile.autoColorPreset
+            ?? autoSmartButtonColorPreset(for: profile)
         let colors = smartButtonGradientColors(for: preset)
         let opacity: Double = colorScheme == .dark ? 0.75 : 0.93
         return LinearGradient(
@@ -1182,7 +1184,7 @@ struct MenuBarContentView: View {
 
     /// Chooses a stable auto color preset from profile metadata.
     private func autoSmartButtonColorPreset(for profile: DisplayProfile) -> SmartButtonColorPreset {
-        let seed = "\(profile.id.uuidString.lowercased())|\(profile.name.lowercased())"
+        let seed = profile.id.uuidString.lowercased()
         var hash: UInt64 = 1469598103934665603
         for byte in seed.utf8 {
             hash ^= UInt64(byte)
@@ -1228,6 +1230,14 @@ struct MenuBarContentView: View {
             return (Color(red: 0.86, green: 0.29, blue: 0.86), Color(red: 0.63, green: 0.21, blue: 0.79))
         case .gold:
             return (Color(red: 0.95, green: 0.76, blue: 0.20), Color(red: 0.86, green: 0.58, blue: 0.08))
+        case .ruby:
+            return (Color(red: 0.78, green: 0.06, blue: 0.22), Color(red: 0.58, green: 0.05, blue: 0.35))
+        case .lavender:
+            return (Color(red: 0.74, green: 0.63, blue: 0.97), Color(red: 0.56, green: 0.44, blue: 0.88))
+        case .pine:
+            return (Color(red: 0.18, green: 0.56, blue: 0.28), Color(red: 0.09, green: 0.40, blue: 0.44))
+        case .tangerine:
+            return (Color(red: 0.99, green: 0.52, blue: 0.14), Color(red: 0.94, green: 0.30, blue: 0.10))
         }
     }
 

@@ -306,6 +306,7 @@
 "Emerald" = "မြကျောက်";
 "Gold" = "ရွှေရောင်";
 "Indigo" = "နီလာရောင်";
+"Lavender" = "လာဗင်ဒါ";
 "Lets this profile appear under Quick Actions in the menu bar." = "ဤပရိုဖိုင်ကို မီနူးဘားရှိ အမြန်လုပ်ဆောင်ချက်များအောက်တွင် ပြသစေသည်။";
 "Like system" = "စနစ်အတိုင်း";
 "Lime" = "လိုင်းမ်";
@@ -313,9 +314,11 @@
 "Mint" = "မင့်";
 "No smart buttons yet. Save profiles in Settings and enable \"Show as smart button\"." = "Smart button များ မရှိသေးပါ။ Settings တွင် profile များကို သိမ်းပြီး \"Show as smart button\" ကို ဖွင့်ပါ။";
 "Ocean" = "သမုဒ္ဒရာ";
+"Pine" = "သစ်ပင်";
 "Profiles stay sorted by this list order. Up to 4 smart buttons are shown per row in the menu bar." = "Profile များကို ဤစာရင်းအစဉ်အတိုင်း စီထားမည်။ မီနူးဘားတွင် တစ်ကြောင်းလျှင် smart button ၄ ခုအထိ ပြသမည်။";
 "Quick profile shortcuts shown below Quick Actions." = "Quick Actions အောက်တွင် profile shortcut များကို ပြသထားသည်။";
 "Rose" = "နှင်းဆီ";
+"Ruby" = "ပတ္တမြား";
 "Show as smart button" = "smart button အဖြစ် ပြပါ";
 "Sky" = "ကောင်းကင်";
 "Slate" = "စလိတ်";
@@ -324,6 +327,7 @@
 "Smart buttons" = "smart button များ";
 "Sunset" = "နေဝင်ချိန်";
 "Teal" = "စိမ်းပြာရောင်";
+"Tangerine" = "တန်ဂျရင်း";
 "Tip: Drag profile cards to reorder them." = "အကြံပြုချက် - Profile ကတ်များကို ဆွဲ၍ အစဉ်ပြန်စီပါ။";
 "Violet" = "ခရမ်းရောင်";
 

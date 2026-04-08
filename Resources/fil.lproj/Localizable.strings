@@ -304,6 +304,7 @@
 "Emerald" = "Esmeralda";
 "Gold" = "Ginto";
 "Indigo" = "Asul-indigong";
+"Lavender" = "Lavendula";
 "Lets this profile appear under Quick Actions in the menu bar." = "Ipinapakita ang profile na ito sa ilalim ng Quick Actions sa menu bar.";
 "Like system" = "Gaya ng system";
 "Lime" = "Dayap";
@@ -311,9 +312,11 @@
 "Mint" = "Menta";
 "No smart buttons yet. Save profiles in Settings and enable \"Show as smart button\"." = "Wala pang matalinong mga button. I-save ang mga profile sa Settings at i-enable ang \"Ipakita bilang smart button\".";
 "Ocean" = "Karagatan";
+"Pine" = "Pino";
 "Profiles stay sorted by this list order. Up to 4 smart buttons are shown per row in the menu bar." = "Mananatiling nakaayos ang mga profile ayon sa listahang ito. Hanggang 4 na smart button ang ipinapakita bawat hilera sa menu bar.";
 "Quick profile shortcuts shown below Quick Actions." = "Mabilis na profile shortcuts na ipinapakita sa ibaba ng Quick Actions.";
 "Rose" = "Rosas";
+"Ruby" = "Rubi";
 "Show as smart button" = "Ipakita bilang smart button";
 "Sky" = "Langit";
 "Slate" = "Abuhing slate";
@@ -322,6 +325,7 @@
 "Smart buttons" = "matalinong mga button";
 "Sunset" = "Takipsilim";
 "Teal" = "Berde-asul";
+"Tangerine" = "Tangerine";
 "Tip: Drag profile cards to reorder them." = "Tip: I-drag ang mga profile card para ayusin muli.";
 "Violet" = "Lila";
 

@@ -306,6 +306,7 @@
 "Emerald" = "에메랄드";
 "Gold" = "골드";
 "Indigo" = "인디고";
+"Lavender" = "라벤더";
 "Lets this profile appear under Quick Actions in the menu bar." = "이 프로필을 메뉴 막대의 빠른 작업 아래에 표시합니다.";
 "Like system" = "시스템 설정 따르기";
 "Lime" = "라임";
@@ -313,9 +314,11 @@
 "Mint" = "민트";
 "No smart buttons yet. Save profiles in Settings and enable \"Show as smart button\"." = "아직 스마트 버튼이 없습니다. 설정에서 프로필을 저장하고 \"스마트 버튼으로 표시\"를 활성화하세요.";
 "Ocean" = "오션";
+"Pine" = "파인";
 "Profiles stay sorted by this list order. Up to 4 smart buttons are shown per row in the menu bar." = "프로필은 이 목록 순서대로 정렬됩니다. 메뉴 막대에서는 한 줄당 최대 4개의 스마트 버튼이 표시됩니다.";
 "Quick profile shortcuts shown below Quick Actions." = "빠른 작업 아래에 빠른 프로필 바로가기가 표시됩니다.";
 "Rose" = "로즈";
+"Ruby" = "루비";
 "Show as smart button" = "스마트 버튼으로 표시";
 "Sky" = "스카이";
 "Slate" = "슬레이트";
@@ -324,6 +327,7 @@
 "Smart buttons" = "스마트 버튼";
 "Sunset" = "선셋";
 "Teal" = "틸";
+"Tangerine" = "탄제린";
 "Tip: Drag profile cards to reorder them." = "팁: 프로필 카드를 드래그하여 순서를 바꾸세요.";
 "Violet" = "바이올렛";
 

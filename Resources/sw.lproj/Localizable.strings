@@ -306,6 +306,7 @@
 "Emerald" = "Zumaridi";
 "Gold" = "Dhahabu";
 "Indigo" = "Nili";
+"Lavender" = "Lavenda";
 "Lets this profile appear under Quick Actions in the menu bar." = "Hufanya profaili hii ionekane chini ya Vitendo vya Haraka kwenye upau wa menyu.";
 "Like system" = "Kama mfumo";
 "Lime" = "Limau";
@@ -313,9 +314,11 @@
 "Mint" = "Mnanaa";
 "No smart buttons yet. Save profiles in Settings and enable \"Show as smart button\"." = "Bado hakuna vitufe mahiri. Hifadhi profaili kwenye Mipangilio kisha washa \"Onyesha kama kitufe mahiri\".";
 "Ocean" = "Bahari";
+"Pine" = "Msonobari";
 "Profiles stay sorted by this list order. Up to 4 smart buttons are shown per row in the menu bar." = "Profaili hubaki zimepangwa kwa mpangilio huu wa orodha. Hadi vitufe mahiri 4 huonyeshwa kwa kila mstari kwenye upau wa menyu.";
 "Quick profile shortcuts shown below Quick Actions." = "Njia za mkato za profaili za haraka huonyeshwa chini ya Vitendo vya Haraka.";
 "Rose" = "Waridi";
+"Ruby" = "Yakuti";
 "Show as smart button" = "Onyesha kama kitufe mahiri";
 "Sky" = "Anga";
 "Slate" = "Kijivu cha slate";
@@ -324,6 +327,7 @@
 "Smart buttons" = "vitufe mahiri";
 "Sunset" = "Machweo";
 "Teal" = "Kijani-samawati";
+"Tangerine" = "Tangerini";
 "Tip: Drag profile cards to reorder them." = "Kidokezo: Buruta kadi za profaili ili kubadilisha mpangilio.";
 "Violet" = "Zambarau";
 

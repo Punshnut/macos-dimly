@@ -306,6 +306,7 @@
 "Emerald" = "Σμαραγδί";
 "Gold" = "Χρυσό";
 "Indigo" = "Λουλακί";
+"Lavender" = "Λεβάντα";
 "Lets this profile appear under Quick Actions in the menu bar." = "Επιτρέπει σε αυτό το προφίλ να εμφανίζεται στις Γρήγορες ενέργειες στη γραμμή μενού.";
 "Like system" = "Όπως το σύστημα";
 "Lime" = "Λαχανί";
@@ -313,9 +314,11 @@
 "Mint" = "Μέντα";
 "No smart buttons yet. Save profiles in Settings and enable \"Show as smart button\"." = "Δεν υπάρχουν ακόμη έξυπνα κουμπιά. Αποθηκεύστε προφίλ στις Ρυθμίσεις και ενεργοποιήστε το \"Εμφάνιση ως έξυπνο κουμπί\".";
 "Ocean" = "Ωκεανός";
+"Pine" = "Πεύκο";
 "Profiles stay sorted by this list order. Up to 4 smart buttons are shown per row in the menu bar." = "Τα προφίλ παραμένουν ταξινομημένα με αυτή τη σειρά λίστας. Στη γραμμή μενού εμφανίζονται έως 4 έξυπνα κουμπιά ανά σειρά.";
 "Quick profile shortcuts shown below Quick Actions." = "Γρήγορες συντομεύσεις προφίλ εμφανίζονται κάτω από τις Γρήγορες ενέργειες.";
 "Rose" = "Τριανταφυλλί";
+"Ruby" = "Ρουμπίνι";
 "Show as smart button" = "Εμφάνιση ως έξυπνο κουμπί";
 "Sky" = "Ουρανός";
 "Slate" = "Σχιστόλιθος";
@@ -324,6 +327,7 @@
 "Smart buttons" = "Έξυπνα κουμπιά";
 "Sunset" = "Ηλιοβασίλεμα";
 "Teal" = "Κυανόπρασινο";
+"Tangerine" = "Μανταρίνι";
 "Tip: Drag profile cards to reorder them." = "Συμβουλή: Σύρετε τις κάρτες προφίλ για να αλλάξετε σειρά.";
 "Violet" = "Βιολετί";
 

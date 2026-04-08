@@ -306,6 +306,7 @@
 "Emerald" = "Màu ngọc lục bảo";
 "Gold" = "Màu vàng";
 "Indigo" = "Chàm";
+"Lavender" = "Oải hương";
 "Lets this profile appear under Quick Actions in the menu bar." = "Cho phép hồ sơ này xuất hiện dưới Hành động nhanh trên thanh menu.";
 "Like system" = "Theo hệ thống";
 "Lime" = "Xanh chanh";
@@ -313,9 +314,11 @@
 "Mint" = "Bạc hà";
 "No smart buttons yet. Save profiles in Settings and enable \"Show as smart button\"." = "Chưa có nút thông minh. Hãy lưu hồ sơ trong Cài đặt và bật \"Hiển thị dưới dạng nút thông minh\".";
 "Ocean" = "Đại dương";
+"Pine" = "Thông";
 "Profiles stay sorted by this list order. Up to 4 smart buttons are shown per row in the menu bar." = "Các hồ sơ được giữ theo thứ tự danh sách này. Tối đa 4 nút thông minh được hiển thị trên mỗi hàng ở thanh menu.";
 "Quick profile shortcuts shown below Quick Actions." = "Các lối tắt hồ sơ nhanh hiển thị bên dưới Hành động nhanh.";
 "Rose" = "Hồng";
+"Ruby" = "Hồng ngọc";
 "Show as smart button" = "Hiển thị dưới dạng nút thông minh";
 "Sky" = "Bầu trời";
 "Slate" = "Xám đá";
@@ -324,6 +327,7 @@
 "Smart buttons" = "nút thông minh";
 "Sunset" = "Hoàng hôn";
 "Teal" = "Xanh mòng két";
+"Tangerine" = "Quýt";
 "Tip: Drag profile cards to reorder them." = "Mẹo: Kéo thẻ hồ sơ để sắp xếp lại.";
 "Violet" = "Tím";
 

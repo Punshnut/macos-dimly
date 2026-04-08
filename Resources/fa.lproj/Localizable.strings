@@ -306,6 +306,7 @@
 "Emerald" = "زمردی";
 "Gold" = "طلایی";
 "Indigo" = "نیلی";
+"Lavender" = "اسطوخودوس";
 "Lets this profile appear under Quick Actions in the menu bar." = "این گزینه باعث می‌شود این پروفایل زیر «اقدام‌های سریع» در نوار منو نمایش داده شود.";
 "Like system" = "مطابق سیستم";
 "Lime" = "لیمویی";
@@ -313,9 +314,11 @@
 "Mint" = "نعنایی";
 "No smart buttons yet. Save profiles in Settings and enable \"Show as smart button\"." = "هنوز هیچ دکمه هوشمندی وجود ندارد. پروفایل‌ها را در تنظیمات ذخیره کنید و «نمایش به‌عنوان دکمه هوشمند» را فعال کنید.";
 "Ocean" = "اقیانوس";
+"Pine" = "کاج";
 "Profiles stay sorted by this list order. Up to 4 smart buttons are shown per row in the menu bar." = "پروفایل‌ها بر اساس این ترتیب فهرست مرتب می‌مانند. حداکثر 4 دکمه هوشمند در هر ردیف در نوار منو نمایش داده می‌شود.";
 "Quick profile shortcuts shown below Quick Actions." = "میانبرهای سریع پروفایل در زیر «اقدام‌های سریع» نمایش داده می‌شوند.";
 "Rose" = "رز";
+"Ruby" = "یاقوت";
 "Show as smart button" = "نمایش به‌عنوان دکمه هوشمند";
 "Sky" = "آسمان";
 "Slate" = "اسلیت";
@@ -324,6 +327,7 @@
 "Smart buttons" = "دکمه‌های هوشمند";
 "Sunset" = "غروب";
 "Teal" = "سبزآبی";
+"Tangerine" = "نارنگی";
 "Tip: Drag profile cards to reorder them." = "نکته: برای تغییر ترتیب، کارت‌های پروفایل را بکشید.";
 "Violet" = "بنفش";
 
