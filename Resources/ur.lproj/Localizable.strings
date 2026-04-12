@@ -367,3 +367,13 @@
 "Requesting location\u2026" = "مقام کی درخواست ہو رہی ہے\u2026";
 "Delete schedule" = "شیڈول حذف کریں";
 "No profiles available. Create a profile first." = "کوئی پروفائل دستیاب نہیں۔ پہلے ایک پروفائل بنائیں۔";
+
+"ManualCoordDisclosureLabel" = "یا دستی طور پر کوآرڈینیٹ درج کریں…";
+"ManualCoordLatLabel" = "عرض بلد";
+"ManualCoordLonLabel" = "طول بلد";
+"ManualCoordSaveButton" = "مقام محفوظ کریں";
+"ManualCoordHelpText" = "ایپل میپس میں کوآرڈینیٹ تلاش کریں: کسی بھی مقام پر دائیں کلک کریں → کوآرڈینیٹ کاپی کریں۔";
+"ManualCoordErrorLatRange" = "عرض بلد -90 اور 90 کے درمیان ہونا چاہیے۔";
+"ManualCoordErrorLonRange" = "طول بلد -180 اور 180 کے درمیان ہونا چاہیے۔";
+"ManualCoordErrorLatInvalid" = "ایک درست عرض بلد نمبر درج کریں۔";
+"ManualCoordErrorLonInvalid" = "ایک درست طول بلد نمبر درج کریں۔";

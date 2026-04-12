@@ -367,3 +367,13 @@
 "Requesting location\u2026" = "Haetaan sijaintia\u2026";
 "Delete schedule" = "Poista aikataulu";
 "No profiles available. Create a profile first." = "Ei profiileja. Luo ensin profiili.";
+
+"ManualCoordDisclosureLabel" = "Tai syötä koordinaatit manuaalisesti…";
+"ManualCoordLatLabel" = "Leveysaste";
+"ManualCoordLonLabel" = "Pituusaste";
+"ManualCoordSaveButton" = "Tallenna sijainti";
+"ManualCoordHelpText" = "Etsi koordinaattisi Apple Kartoissa: napsauta hiiren kakkospainikkeella → Kopioi koordinaatit.";
+"ManualCoordErrorLatRange" = "Leveysasteen on oltava välillä -90 ja 90.";
+"ManualCoordErrorLonRange" = "Pituusasteen on oltava välillä -180 ja 180.";
+"ManualCoordErrorLatInvalid" = "Syötä kelvollinen leveysasteluku.";
+"ManualCoordErrorLonInvalid" = "Syötä kelvollinen pituusasteluku.";

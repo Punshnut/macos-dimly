@@ -367,3 +367,13 @@
 "Requesting location\u2026" = "Meminta lokasi\u2026";
 "Delete schedule" = "Padam jadual";
 "No profiles available. Create a profile first." = "Tiada profil tersedia. Buat profil dahulu.";
+
+"ManualCoordDisclosureLabel" = "Atau masukkan koordinat secara manual…";
+"ManualCoordLatLabel" = "Latitud";
+"ManualCoordLonLabel" = "Longitud";
+"ManualCoordSaveButton" = "Simpan Lokasi";
+"ManualCoordHelpText" = "Cari koordinat anda di Apple Maps: klik kanan mana-mana lokasi → Salin Koordinat.";
+"ManualCoordErrorLatRange" = "Latitud mesti antara -90 dan 90.";
+"ManualCoordErrorLonRange" = "Longitud mesti antara -180 dan 180.";
+"ManualCoordErrorLatInvalid" = "Masukkan nombor latitud yang sah.";
+"ManualCoordErrorLonInvalid" = "Masukkan nombor longitud yang sah.";

@@ -367,3 +367,13 @@
 "Requesting location\u2026" = "Konum isteniyor\u2026";
 "Delete schedule" = "Zamanlamayı sil";
 "No profiles available. Create a profile first." = "Mevcut profil yok. Önce bir profil oluştur.";
+
+"ManualCoordDisclosureLabel" = "Veya koordinatları manuel olarak girin…";
+"ManualCoordLatLabel" = "Enlem";
+"ManualCoordLonLabel" = "Boylam";
+"ManualCoordSaveButton" = "Konumu Kaydet";
+"ManualCoordHelpText" = "Apple Haritalar'da koordinatlarınızı bulun: herhangi bir konuma sağ tıklayın → Koordinatları Kopyala.";
+"ManualCoordErrorLatRange" = "Enlem -90 ile 90 arasında olmalıdır.";
+"ManualCoordErrorLonRange" = "Boylam -180 ile 180 arasında olmalıdır.";
+"ManualCoordErrorLatInvalid" = "Geçerli bir enlem numarası girin.";
+"ManualCoordErrorLonInvalid" = "Geçerli bir boylam numarası girin.";

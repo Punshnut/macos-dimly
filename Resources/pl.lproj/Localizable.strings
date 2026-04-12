@@ -367,3 +367,13 @@
 "Requesting location\u2026" = "Żądanie lokalizacji\u2026";
 "Delete schedule" = "Usuń harmonogram";
 "No profiles available. Create a profile first." = "Brak dostępnych profili. Najpierw utwórz profil.";
+
+"ManualCoordDisclosureLabel" = "Lub wpisz współrzędne ręcznie…";
+"ManualCoordLatLabel" = "Szerokość geograficzna";
+"ManualCoordLonLabel" = "Długość geograficzna";
+"ManualCoordSaveButton" = "Zapisz lokalizację";
+"ManualCoordHelpText" = "Znajdź swoje współrzędne w Apple Maps: kliknij prawym przyciskiem myszy → Skopiuj współrzędne.";
+"ManualCoordErrorLatRange" = "Szerokość geograficzna musi być między -90 a 90.";
+"ManualCoordErrorLonRange" = "Długość geograficzna musi być między -180 a 180.";
+"ManualCoordErrorLatInvalid" = "Wprowadź prawidłowy numer szerokości geograficznej.";
+"ManualCoordErrorLonInvalid" = "Wprowadź prawidłowy numer długości geograficznej.";

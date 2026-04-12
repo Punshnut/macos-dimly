@@ -367,3 +367,13 @@
 "Requesting location\u2026" = "正在请求位置\u2026";
 "Delete schedule" = "删除时间表";
 "No profiles available. Create a profile first." = "没有可用的配置文件。请先创建一个配置文件。";
+
+"ManualCoordDisclosureLabel" = "或手动输入坐标…";
+"ManualCoordLatLabel" = "纬度";
+"ManualCoordLonLabel" = "经度";
+"ManualCoordSaveButton" = "保存位置";
+"ManualCoordHelpText" = "在苹果地图中查找坐标：右键点击任意位置 → 拷贝坐标。";
+"ManualCoordErrorLatRange" = "纬度必须在 -90 到 90 之间。";
+"ManualCoordErrorLonRange" = "经度必须在 -180 到 180 之间。";
+"ManualCoordErrorLatInvalid" = "请输入有效的纬度数字。";
+"ManualCoordErrorLonInvalid" = "请输入有效的经度数字。";

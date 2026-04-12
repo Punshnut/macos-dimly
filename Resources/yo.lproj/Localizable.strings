@@ -367,3 +367,13 @@
 "Requesting location\u2026" = "Ń béèrè ibi\u2026";
 "Delete schedule" = "Pa eto àkókò rẹ̀";
 "No profiles available. Create a profile first." = "Ko sí profáìlì. Ṣẹ̀dá profáìlì kan kọ́kọ́.";
+
+"ManualCoordDisclosureLabel" = "Tabi tẹ awọn ipoidojukọ pẹlu ọwọ…";
+"ManualCoordLatLabel" = "Latitude";
+"ManualCoordLonLabel" = "Longitude";
+"ManualCoordSaveButton" = "Tọju Ipo";
+"ManualCoordHelpText" = "Wa awọn ipoidojukọ rẹ ni Apple Maps: tẹ ọtún si ibikibi → Daakọ Awọn Ipoidojukọ.";
+"ManualCoordErrorLatRange" = "Latitude gbọdọ wa laarin -90 ati 90.";
+"ManualCoordErrorLonRange" = "Longitude gbọdọ wa laarin -180 ati 180.";
+"ManualCoordErrorLatInvalid" = "Tẹ nọmba latitude to wulo.";
+"ManualCoordErrorLonInvalid" = "Tẹ nọmba longitude to wulo.";

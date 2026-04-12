@@ -367,3 +367,13 @@
 "Requesting location\u2026" = "Inaomba mahali\u2026";
 "Delete schedule" = "Futa ratiba";
 "No profiles available. Create a profile first." = "Hakuna wasifu uliopo. Unda wasifu kwanza.";
+
+"ManualCoordDisclosureLabel" = "Au ingiza kuratibu kwa mkono…";
+"ManualCoordLatLabel" = "Latitudo";
+"ManualCoordLonLabel" = "Longitudo";
+"ManualCoordSaveButton" = "Hifadhi Eneo";
+"ManualCoordHelpText" = "Pata kuratibu zako katika Apple Maps: bonyeza-kulia mahali popote → Nakili Kuratibu.";
+"ManualCoordErrorLatRange" = "Latitudo lazima iwe kati ya -90 na 90.";
+"ManualCoordErrorLonRange" = "Longitudo lazima iwe kati ya -180 na 180.";
+"ManualCoordErrorLatInvalid" = "Ingiza nambari sahihi ya latitudo.";
+"ManualCoordErrorLonInvalid" = "Ingiza nambari sahihi ya longitudo.";

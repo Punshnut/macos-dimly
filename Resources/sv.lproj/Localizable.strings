@@ -367,3 +367,13 @@
 "Requesting location\u2026" = "Begär plats\u2026";
 "Delete schedule" = "Ta bort schema";
 "No profiles available. Create a profile first." = "Inga profiler tillgängliga. Skapa en profil först.";
+
+"ManualCoordDisclosureLabel" = "Eller ange koordinater manuellt…";
+"ManualCoordLatLabel" = "Latitud";
+"ManualCoordLonLabel" = "Longitud";
+"ManualCoordSaveButton" = "Spara plats";
+"ManualCoordHelpText" = "Hitta dina koordinater i Apple Kartor: högerklicka på valfri plats → Kopiera koordinater.";
+"ManualCoordErrorLatRange" = "Latituden måste vara mellan -90 och 90.";
+"ManualCoordErrorLonRange" = "Longituden måste vara mellan -180 och 180.";
+"ManualCoordErrorLatInvalid" = "Ange ett giltigt latitudnummer.";
+"ManualCoordErrorLonInvalid" = "Ange ett giltigt longitudnummer.";

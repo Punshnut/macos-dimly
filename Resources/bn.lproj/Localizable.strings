@@ -367,3 +367,13 @@
 "Requesting location\u2026" = "অবস্থান অনুরোধ করা হচ্ছে\u2026";
 "Delete schedule" = "সময়সূচি মুছুন";
 "No profiles available. Create a profile first." = "কোনো প্রোফাইল নেই। আগে একটি প্রোফাইল তৈরি করুন।";
+
+"ManualCoordDisclosureLabel" = "বা ম্যানুয়ালি স্থানাঙ্ক লিখুন…";
+"ManualCoordLatLabel" = "অক্ষাংশ";
+"ManualCoordLonLabel" = "দ্রাঘিমাংশ";
+"ManualCoordSaveButton" = "অবস্থান সংরক্ষণ করুন";
+"ManualCoordHelpText" = "Apple Maps-এ আপনার স্থানাঙ্ক খুঁজুন: যেকোনো স্থানে ডান-ক্লিক করুন → স্থানাঙ্ক কপি করুন।";
+"ManualCoordErrorLatRange" = "অক্ষাংশ -90 থেকে 90 এর মধ্যে হতে হবে।";
+"ManualCoordErrorLonRange" = "দ্রাঘিমাংশ -180 থেকে 180 এর মধ্যে হতে হবে।";
+"ManualCoordErrorLatInvalid" = "একটি বৈধ অক্ষাংশ সংখ্যা লিখুন।";
+"ManualCoordErrorLonInvalid" = "একটি বৈধ দ্রাঘিমাংশ সংখ্যা লিখুন।";

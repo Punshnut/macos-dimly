@@ -367,3 +367,13 @@
 "Requesting location\u2026" = "స్థానం అభ్యర్థిస్తోంది\u2026";
 "Delete schedule" = "షెడ్యూల్ తొలగించు";
 "No profiles available. Create a profile first." = "ప్రొఫైల్‌లు అందుబాటులో లేవు. ముందు ప్రొఫైల్ సృష్టించు.";
+
+"ManualCoordDisclosureLabel" = "లేదా కోఆర్డినేట్లను మాన్యువల్‌గా నమోదు చేయండి…";
+"ManualCoordLatLabel" = "అక్షాంశం";
+"ManualCoordLonLabel" = "రేఖాంశం";
+"ManualCoordSaveButton" = "స్థానాన్ని సేవ్ చేయండి";
+"ManualCoordHelpText" = "Apple Maps లో కోఆర్డినేట్లు కనుగొనండి: ఏదైనా స్థానంపై రైట్-క్లిక్ చేయండి → కోఆర్డినేట్లు కాపీ చేయండి.";
+"ManualCoordErrorLatRange" = "అక్షాంశం -90 మరియు 90 మధ్య ఉండాలి.";
+"ManualCoordErrorLonRange" = "రేఖాంశం -180 మరియు 180 మధ్య ఉండాలి.";
+"ManualCoordErrorLatInvalid" = "చెల్లుబాటు అయ్యే అక్షాంశ సంఖ్యను నమోదు చేయండి.";
+"ManualCoordErrorLonInvalid" = "చెల్లుబాటు అయ్యే రేఖాంశ సంఖ్యను నమోదు చేయండి.";

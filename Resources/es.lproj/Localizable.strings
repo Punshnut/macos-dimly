@@ -367,3 +367,13 @@
 "Requesting location\u2026" = "Solicitando ubicación\u2026";
 "Delete schedule" = "Eliminar horario";
 "No profiles available. Create a profile first." = "No hay perfiles disponibles. Crea un perfil primero.";
+
+"ManualCoordDisclosureLabel" = "O introduce coordenadas manualmente…";
+"ManualCoordLatLabel" = "Latitud";
+"ManualCoordLonLabel" = "Longitud";
+"ManualCoordSaveButton" = "Guardar ubicación";
+"ManualCoordHelpText" = "Encuentra tus coordenadas en Mapas de Apple: clic derecho en cualquier lugar → Copiar coordenadas.";
+"ManualCoordErrorLatRange" = "La latitud debe estar entre -90 y 90.";
+"ManualCoordErrorLonRange" = "La longitud debe estar entre -180 y 180.";
+"ManualCoordErrorLatInvalid" = "Introduce un número de latitud válido.";
+"ManualCoordErrorLonInvalid" = "Introduce un número de longitud válido.";

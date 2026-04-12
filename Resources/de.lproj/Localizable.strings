@@ -367,3 +367,13 @@
 "Requesting location\u2026" = "Standort wird abgerufen\u2026";
 "Delete schedule" = "Zeitplan löschen";
 "No profiles available. Create a profile first." = "Keine Profile verfügbar. Erstelle zuerst ein Profil.";
+
+"ManualCoordDisclosureLabel" = "Oder Koordinaten manuell eingeben…";
+"ManualCoordLatLabel" = "Breitengrad";
+"ManualCoordLonLabel" = "Längengrad";
+"ManualCoordSaveButton" = "Standort speichern";
+"ManualCoordHelpText" = "Koordinaten in Apple Maps: Rechtsklick auf einen Ort → Koordinaten kopieren.";
+"ManualCoordErrorLatRange" = "Der Breitengrad muss zwischen -90 und 90 liegen.";
+"ManualCoordErrorLonRange" = "Der Längengrad muss zwischen -180 und 180 liegen.";
+"ManualCoordErrorLatInvalid" = "Gib eine gültige Breitengrad-Zahl ein.";
+"ManualCoordErrorLonInvalid" = "Gib eine gültige Längengrad-Zahl ein.";

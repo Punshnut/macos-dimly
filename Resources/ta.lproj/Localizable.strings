@@ -367,3 +367,13 @@
 "Requesting location\u2026" = "இடம் கேட்கிறது\u2026";
 "Delete schedule" = "அட்டவணையை நீக்கு";
 "No profiles available. Create a profile first." = "சுயவிவரங்கள் இல்லை. முதலில் ஒரு சுயவிவரம் உருவாக்கவும்.";
+
+"ManualCoordDisclosureLabel" = "அல்லது கோஆர்டினேட்களை கைமுறையாக உள்ளிடவும்…";
+"ManualCoordLatLabel" = "அட்சரேகை";
+"ManualCoordLonLabel" = "தீர்க்கரேகை";
+"ManualCoordSaveButton" = "இடத்தை சேமிக்கவும்";
+"ManualCoordHelpText" = "Apple Maps இல் கோஆர்டினேட்களை கண்டறியவும்: எந்த இடத்திலும் வலது கிளிக் → கோஆர்டினேட்களை நகலெடு.";
+"ManualCoordErrorLatRange" = "அட்சரேகை -90 மற்றும் 90 க்கு இடையில் இருக்க வேண்டும்.";
+"ManualCoordErrorLonRange" = "தீர்க்கரேகை -180 மற்றும் 180 க்கு இடையில் இருக்க வேண்டும்.";
+"ManualCoordErrorLatInvalid" = "சரியான அட்சரேகை எண்ணை உள்ளிடவும்.";
+"ManualCoordErrorLonInvalid" = "சரியான தீர்க்கரேகை எண்ணை உள்ளிடவும்.";

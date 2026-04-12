@@ -367,3 +367,13 @@
 "Requesting location\u2026" = "Ana neman wuri\u2026";
 "Delete schedule" = "Goge jadawali";
 "No profiles available. Create a profile first." = "Babu bayanin martaba. Da farko ƙirƙiri bayanin martaba.";
+
+"ManualCoordDisclosureLabel" = "Ko shigar da daidaiton wurin da hannun…";
+"ManualCoordLatLabel" = "Latitude";
+"ManualCoordLonLabel" = "Longitude";
+"ManualCoordSaveButton" = "Adana Wuri";
+"ManualCoordHelpText" = "Sami daidaiton wurin ka a cikin Apple Maps: danna-dama kan wuri kowa → Kwafi Daidaito.";
+"ManualCoordErrorLatRange" = "Latitude dole ya kasance tsakanin -90 da 90.";
+"ManualCoordErrorLonRange" = "Longitude dole ya kasance tsakanin -180 da 180.";
+"ManualCoordErrorLatInvalid" = "Shigar da lambar latitude mai inganci.";
+"ManualCoordErrorLonInvalid" = "Shigar da lambar longitude mai inganci.";

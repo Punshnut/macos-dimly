@@ -472,6 +472,10 @@ struct SettingsRootView: View {
         @Environment(\.accessibilityReduceMotion) private var reduceMotion
         @State private var includeGeneralSettings = true
         @State private var includeMonitorSettings = true
+        @State private var showManualEntry = false
+        @State private var manualLatText = ""
+        @State private var manualLonText = ""
+        @State private var manualEntryError: String? = nil
         @State private var draggedProfileID: UUID?
         @State private var profileSwapTargetID: UUID?
         @State private var profileFramesByID: [UUID: CGRect] = [:]
@@ -1352,6 +1356,7 @@ struct SettingsRootView: View {
                         ) {
                             Button(String(localized: "Use My Location")) {
                                 scheduleManager.requestLocation()
+                                showManualEntry = false
                             }
                             .buttonStyle(.bordered)
                             .controlSize(.small)
@@ -1362,9 +1367,95 @@ struct SettingsRootView: View {
                                 .font(.caption)
                                 .foregroundStyle(.secondary)
                         }
+                        Divider().opacity(0.5)
+                        Button {
+                            showManualEntry.toggle()
+                            if showManualEntry {
+                                if let c = scheduleManager.savedCoordinate {
+                                    manualLatText = String(format: "%.4f", c.latitude)
+                                    manualLonText = String(format: "%.4f", c.longitude)
+                                } else {
+                                    manualLatText = ""
+                                    manualLonText = ""
+                                }
+                                manualEntryError = nil
+                            }
+                        } label: {
+                            HStack(spacing: 4) {
+                                Image(systemName: showManualEntry ? "chevron.down" : "chevron.right")
+                                    .font(.caption2.weight(.semibold))
+                                    .foregroundStyle(.secondary)
+                                Text(String(localized: "ManualCoordDisclosureLabel"))
+                                    .font(.caption)
+                                    .foregroundStyle(.secondary)
+                            }
+                        }
+                        .buttonStyle(.plain)
+                        if showManualEntry {
+                            VStack(alignment: .leading, spacing: 8) {
+                                HStack(spacing: 12) {
+                                    VStack(alignment: .leading, spacing: 3) {
+                                        Text(String(localized: "ManualCoordLatLabel"))
+                                            .font(.caption)
+                                            .foregroundStyle(.secondary)
+                                        TextField("0.0000", text: $manualLatText)
+                                            .textFieldStyle(.roundedBorder)
+                                            .frame(width: 110)
+                                            .onSubmit { applyManualCoordinates() }
+                                    }
+                                    VStack(alignment: .leading, spacing: 3) {
+                                        Text(String(localized: "ManualCoordLonLabel"))
+                                            .font(.caption)
+                                            .foregroundStyle(.secondary)
+                                        TextField("0.0000", text: $manualLonText)
+                                            .textFieldStyle(.roundedBorder)
+                                            .frame(width: 110)
+                                            .onSubmit { applyManualCoordinates() }
+                                    }
+                                    Spacer()
+                                    Button(String(localized: "ManualCoordSaveButton")) {
+                                        applyManualCoordinates()
+                                    }
+                                    .buttonStyle(.bordered)
+                                    .controlSize(.small)
+                                }
+                                if let err = manualEntryError {
+                                    Text(err)
+                                        .font(.caption)
+                                        .foregroundStyle(.red)
+                                }
+                                Text(String(localized: "ManualCoordHelpText"))
+                                    .font(.caption2)
+                                    .foregroundStyle(.tertiary)
+                            }
+                        }
                     }
                 }
             }
+        }
+
+        private func applyManualCoordinates() {
+            manualEntryError = nil
+            let latStr = manualLatText.replacingOccurrences(of: ",", with: ".")
+            let lonStr = manualLonText.replacingOccurrences(of: ",", with: ".")
+            guard let lat = Double(latStr) else {
+                manualEntryError = String(localized: "ManualCoordErrorLatInvalid")
+                return
+            }
+            guard let lon = Double(lonStr) else {
+                manualEntryError = String(localized: "ManualCoordErrorLonInvalid")
+                return
+            }
+            guard (-90...90).contains(lat) else {
+                manualEntryError = String(localized: "ManualCoordErrorLatRange")
+                return
+            }
+            guard (-180...180).contains(lon) else {
+                manualEntryError = String(localized: "ManualCoordErrorLonRange")
+                return
+            }
+            scheduleManager.setManualCoordinate(latitude: lat, longitude: lon)
+            showManualEntry = false
         }
 
         private var scheduleLocationSubtitle: String {

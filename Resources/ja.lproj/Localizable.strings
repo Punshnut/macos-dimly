@@ -367,3 +367,13 @@
 "Requesting location\u2026" = "場所を取得中\u2026";
 "Delete schedule" = "スケジュールを削除";
 "No profiles available. Create a profile first." = "使用可能なプロファイルがありません。最初にプロファイルを作成してください。";
+
+"ManualCoordDisclosureLabel" = "または座標を手動で入力…";
+"ManualCoordLatLabel" = "緯度";
+"ManualCoordLonLabel" = "経度";
+"ManualCoordSaveButton" = "場所を保存";
+"ManualCoordHelpText" = "Apple マップで座標を確認: 任意の場所を右クリック → 座標をコピー。";
+"ManualCoordErrorLatRange" = "緯度は -90 から 90 の間でなければなりません。";
+"ManualCoordErrorLonRange" = "経度は -180 から 180 の間でなければなりません。";
+"ManualCoordErrorLatInvalid" = "有効な緯度の数値を入力してください。";
+"ManualCoordErrorLonInvalid" = "有効な経度の数値を入力してください。";

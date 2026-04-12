@@ -365,3 +365,13 @@
 "Requesting location\u2026" = "Humihiling ng lokasyon\u2026";
 "Delete schedule" = "Tanggalin ang iskedyul";
 "No profiles available. Create a profile first." = "Walang available na profile. Gumawa muna ng profile.";
+
+"ManualCoordDisclosureLabel" = "O ipasok ang mga coordinate nang mano-mano…";
+"ManualCoordLatLabel" = "Latitude";
+"ManualCoordLonLabel" = "Longitude";
+"ManualCoordSaveButton" = "I-save ang Lokasyon";
+"ManualCoordHelpText" = "Hanapin ang iyong mga coordinate sa Apple Maps: i-right-click ang anumang lokasyon → Kopyahin ang mga Coordinate.";
+"ManualCoordErrorLatRange" = "Ang latitude ay dapat nasa pagitan ng -90 at 90.";
+"ManualCoordErrorLonRange" = "Ang longitude ay dapat nasa pagitan ng -180 at 180.";
+"ManualCoordErrorLatInvalid" = "Magpasok ng wastong numero ng latitude.";
+"ManualCoordErrorLonInvalid" = "Magpasok ng wastong numero ng longitude.";

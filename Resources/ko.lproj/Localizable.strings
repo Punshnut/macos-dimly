@@ -367,3 +367,13 @@
 "Requesting location\u2026" = "위치 요청 중\u2026";
 "Delete schedule" = "일정 삭제";
 "No profiles available. Create a profile first." = "사용 가능한 프로필이 없습니다. 먼저 프로필을 만드세요.";
+
+"ManualCoordDisclosureLabel" = "또는 좌표를 수동으로 입력…";
+"ManualCoordLatLabel" = "위도";
+"ManualCoordLonLabel" = "경도";
+"ManualCoordSaveButton" = "위치 저장";
+"ManualCoordHelpText" = "Apple 지도에서 좌표 찾기: 위치 우클릭 → 좌표 복사.";
+"ManualCoordErrorLatRange" = "위도는 -90에서 90 사이여야 합니다.";
+"ManualCoordErrorLonRange" = "경도는 -180에서 180 사이여야 합니다.";
+"ManualCoordErrorLatInvalid" = "유효한 위도 숫자를 입력하세요.";
+"ManualCoordErrorLonInvalid" = "유효한 경도 숫자를 입력하세요.";

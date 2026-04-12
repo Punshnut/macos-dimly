@@ -367,3 +367,13 @@
 "Requesting location\u2026" = "Locatie aanvragen\u2026";
 "Delete schedule" = "Schema verwijderen";
 "No profiles available. Create a profile first." = "Geen profielen beschikbaar. Maak eerst een profiel aan.";
+
+"ManualCoordDisclosureLabel" = "Of voer coördinaten handmatig in…";
+"ManualCoordLatLabel" = "Breedtegraad";
+"ManualCoordLonLabel" = "Lengtegraad";
+"ManualCoordSaveButton" = "Locatie opslaan";
+"ManualCoordHelpText" = "Vind je coördinaten in Apple Kaarten: rechtsklik op een locatie → Coördinaten kopiëren.";
+"ManualCoordErrorLatRange" = "Breedtegraad moet tussen -90 en 90 liggen.";
+"ManualCoordErrorLonRange" = "Lengtegraad moet tussen -180 en 180 liggen.";
+"ManualCoordErrorLatInvalid" = "Voer een geldig breedtegraad-getal in.";
+"ManualCoordErrorLonInvalid" = "Voer een geldig lengtegraad-getal in.";

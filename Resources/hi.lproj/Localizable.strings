@@ -367,3 +367,13 @@
 "Requesting location\u2026" = "स्थान अनुरोध किया जा रहा है\u2026";
 "Delete schedule" = "समय-सारणी हटाएं";
 "No profiles available. Create a profile first." = "कोई प्रोफ़ाइल उपलब्ध नहीं है। पहले एक प्रोफ़ाइल बनाएं।";
+
+"ManualCoordDisclosureLabel" = "या निर्देशांक मैन्युअल रूप से दर्ज करें…";
+"ManualCoordLatLabel" = "अक्षांश";
+"ManualCoordLonLabel" = "देशांतर";
+"ManualCoordSaveButton" = "स्थान सहेजें";
+"ManualCoordHelpText" = "Apple Maps में निर्देशांक खोजें: किसी भी स्थान पर राइट-क्लिक करें → निर्देशांक कॉपी करें।";
+"ManualCoordErrorLatRange" = "अक्षांश -90 और 90 के बीच होना चाहिए।";
+"ManualCoordErrorLonRange" = "देशांतर -180 और 180 के बीच होना चाहिए।";
+"ManualCoordErrorLatInvalid" = "एक मान्य अक्षांश संख्या दर्ज करें।";
+"ManualCoordErrorLonInvalid" = "एक मान्य देशांतर संख्या दर्ज करें।";

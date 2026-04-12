@@ -367,3 +367,13 @@
 "Requesting location\u2026" = "Запит місця\u2026";
 "Delete schedule" = "Видалити розклад";
 "No profiles available. Create a profile first." = "Немає доступних профілів. Спочатку створіть профіль.";
+
+"ManualCoordDisclosureLabel" = "Або введіть координати вручну…";
+"ManualCoordLatLabel" = "Широта";
+"ManualCoordLonLabel" = "Довгота";
+"ManualCoordSaveButton" = "Зберегти місцезнаходження";
+"ManualCoordHelpText" = "Знайдіть координати в Apple Maps: клацніть правою кнопкою миші → Скопіювати координати.";
+"ManualCoordErrorLatRange" = "Широта має бути між -90 і 90.";
+"ManualCoordErrorLonRange" = "Довгота має бути між -180 і 180.";
+"ManualCoordErrorLatInvalid" = "Введіть дійсне число широти.";
+"ManualCoordErrorLonInvalid" = "Введіть дійсне число довготи.";

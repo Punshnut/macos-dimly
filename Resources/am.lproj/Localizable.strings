@@ -367,3 +367,13 @@
 "Requesting location\u2026" = "ቦታ እየጠየቀ ነው\u2026";
 "Delete schedule" = "መርሃ ግብር ሰርዝ";
 "No profiles available. Create a profile first." = "ምንም ፕሮፋይል የለም። መጀመሪያ ፕሮፋይል ፍጠር።";
+
+"ManualCoordDisclosureLabel" = "ወይም መጋጠሚያዎቹን በእጅ ያስሩ…";
+"ManualCoordLatLabel" = "ኬክሮስ";
+"ManualCoordLonLabel" = "ኬንትሮስ";
+"ManualCoordSaveButton" = "ቦታ አስቀምጥ";
+"ManualCoordHelpText" = "በApple Maps ውስጥ መጋጠሚያዎቻቸውን ያግኙ፡ በማናቸውም ቦታ ቀኝ-ጠቅ ያድርጉ → ጌጠኛ ቅዳ።";
+"ManualCoordErrorLatRange" = "ኬክሮስ ከ-90 እና 90 መካከል መሆን አለበት።";
+"ManualCoordErrorLonRange" = "ኬንትሮስ ከ-180 እና 180 መካከል መሆን አለበት።";
+"ManualCoordErrorLatInvalid" = "ትክክለኛ ኬክሮስ ቁጥር ያስሩ።";
+"ManualCoordErrorLonInvalid" = "ትክክለኛ ኬንትሮስ ቁጥር ያስሩ።";

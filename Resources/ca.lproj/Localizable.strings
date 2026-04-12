@@ -367,3 +367,13 @@
 "Requesting location\u2026" = "Sol·licitant ubicació\u2026";
 "Delete schedule" = "Elimina la programació";
 "No profiles available. Create a profile first." = "No hi ha perfils disponibles. Crea primer un perfil.";
+
+"ManualCoordDisclosureLabel" = "O introdueix les coordenades manualment…";
+"ManualCoordLatLabel" = "Latitud";
+"ManualCoordLonLabel" = "Longitud";
+"ManualCoordSaveButton" = "Desa la ubicació";
+"ManualCoordHelpText" = "Troba les coordenades a Apple Maps: fes clic dret en qualsevol lloc → Copia les coordenades.";
+"ManualCoordErrorLatRange" = "La latitud ha d'estar entre -90 i 90.";
+"ManualCoordErrorLonRange" = "La longitud ha d'estar entre -180 i 180.";
+"ManualCoordErrorLatInvalid" = "Introdueix un número de latitud vàlid.";
+"ManualCoordErrorLonInvalid" = "Introdueix un número de longitud vàlid.";

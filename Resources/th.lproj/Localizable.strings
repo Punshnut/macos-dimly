@@ -367,3 +367,13 @@
 "Requesting location\u2026" = "กำลังขอตำแหน่ง\u2026";
 "Delete schedule" = "ลบกำหนดการ";
 "No profiles available. Create a profile first." = "ไม่มีโปรไฟล์ กรุณาสร้างโปรไฟล์ก่อน";
+
+"ManualCoordDisclosureLabel" = "หรือป้อนพิกัดด้วยตนเอง…";
+"ManualCoordLatLabel" = "ละติจูด";
+"ManualCoordLonLabel" = "ลองจิจูด";
+"ManualCoordSaveButton" = "บันทึกตำแหน่ง";
+"ManualCoordHelpText" = "ค้นหาพิกัดของคุณใน Apple Maps: คลิกขวาที่ตำแหน่งใดก็ได้ → คัดลอกพิกัด";
+"ManualCoordErrorLatRange" = "ละติจูดต้องอยู่ระหว่าง -90 ถึง 90";
+"ManualCoordErrorLonRange" = "ลองจิจูดต้องอยู่ระหว่าง -180 ถึง 180";
+"ManualCoordErrorLatInvalid" = "ป้อนหมายเลขละติจูดที่ถูกต้อง";
+"ManualCoordErrorLonInvalid" = "ป้อนหมายเลขลองจิจูดที่ถูกต้อง";

@@ -367,3 +367,13 @@
 "Requesting location\u2026" = "Žádost o polohu\u2026";
 "Delete schedule" = "Smazat plán";
 "No profiles available. Create a profile first." = "Žádné profily nejsou k dispozici. Nejprve vytvořte profil.";
+
+"ManualCoordDisclosureLabel" = "Nebo zadat souřadnice ručně…";
+"ManualCoordLatLabel" = "Zeměpisná šířka";
+"ManualCoordLonLabel" = "Zeměpisná délka";
+"ManualCoordSaveButton" = "Uložit polohu";
+"ManualCoordHelpText" = "Najděte souřadnice v Apple Mapách: klikněte pravým tlačítkem → Kopírovat souřadnice.";
+"ManualCoordErrorLatRange" = "Zeměpisná šířka musí být mezi -90 a 90.";
+"ManualCoordErrorLonRange" = "Zeměpisná délka musí být mezi -180 a 180.";
+"ManualCoordErrorLatInvalid" = "Zadejte platné číslo zeměpisné šířky.";
+"ManualCoordErrorLonInvalid" = "Zadejte platné číslo zeměpisné délky.";

@@ -367,3 +367,13 @@
 "Requesting location\u2026" = "Helyszín lekérése\u2026";
 "Delete schedule" = "Ütemezés törlése";
 "No profiles available. Create a profile first." = "Nincs elérhető profil. Először hozzon létre egyet.";
+
+"ManualCoordDisclosureLabel" = "Vagy adja meg a koordinátákat manuálisan…";
+"ManualCoordLatLabel" = "Szélesség";
+"ManualCoordLonLabel" = "Hosszúság";
+"ManualCoordSaveButton" = "Hely mentése";
+"ManualCoordHelpText" = "Keresse koordinátáit az Apple Térképeken: jobb kattintás bármely helyre → Koordináták másolása.";
+"ManualCoordErrorLatRange" = "A szélességnek -90 és 90 között kell lennie.";
+"ManualCoordErrorLonRange" = "A hosszúságnak -180 és 180 között kell lennie.";
+"ManualCoordErrorLatInvalid" = "Adjon meg érvényes szélességi számot.";
+"ManualCoordErrorLonInvalid" = "Adjon meg érvényes hosszúsági számot.";

@@ -367,3 +367,13 @@
 "Requesting location\u2026" = "Αίτηση τοποθεσίας\u2026";
 "Delete schedule" = "Διαγραφή προγράμματος";
 "No profiles available. Create a profile first." = "Δεν υπάρχουν διαθέσιμα προφίλ. Δημιουργήστε πρώτα ένα προφίλ.";
+
+"ManualCoordDisclosureLabel" = "Ή εισάγετε συντεταγμένες χειροκίνητα…";
+"ManualCoordLatLabel" = "Γεωγραφικό πλάτος";
+"ManualCoordLonLabel" = "Γεωγραφικό μήκος";
+"ManualCoordSaveButton" = "Αποθήκευση τοποθεσίας";
+"ManualCoordHelpText" = "Βρείτε τις συντεταγμένες σας στους Χάρτες Apple: κάντε δεξί κλικ → Αντιγραφή συντεταγμένων.";
+"ManualCoordErrorLatRange" = "Το γεωγραφικό πλάτος πρέπει να είναι μεταξύ -90 και 90.";
+"ManualCoordErrorLonRange" = "Το γεωγραφικό μήκος πρέπει να είναι μεταξύ -180 και 180.";
+"ManualCoordErrorLatInvalid" = "Εισάγετε έναν έγκυρο αριθμό γεωγραφικού πλάτους.";
+"ManualCoordErrorLonInvalid" = "Εισάγετε έναν έγκυρο αριθμό γεωγραφικού μήκους.";

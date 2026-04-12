@@ -390,6 +390,12 @@ final class ScheduleManager: NSObject, ObservableObject, CLLocationManagerDelega
             self?.locationManager = nil
         }
     }
+
+    /// Sets coordinates directly from user input. No CoreLocation, no permissions, no internet.
+    func setManualCoordinate(latitude: Double, longitude: Double) {
+        savedCoordinate = SavedCoordinate(latitude: latitude, longitude: longitude, updatedAt: Date())
+        logger.info("Manual coordinate set: \(latitude), \(longitude)")
+    }
 }
 
 // MARK: - ScheduleTrigger Helpers

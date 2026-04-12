@@ -367,3 +367,13 @@
 "Requesting location\u2026" = "جاري طلب الموقع\u2026";
 "Delete schedule" = "حذف الجدول الزمني";
 "No profiles available. Create a profile first." = "لا تتوفر ملفات شخصية. أنشئ ملفاً شخصياً أولاً.";
+
+"ManualCoordDisclosureLabel" = "أو أدخل الإحداثيات يدويًا…";
+"ManualCoordLatLabel" = "خط العرض";
+"ManualCoordLonLabel" = "خط الطول";
+"ManualCoordSaveButton" = "حفظ الموقع";
+"ManualCoordHelpText" = "ابحث عن إحداثياتك في خرائط Apple: انقر بزر الماوس الأيمن على أي موقع → نسخ الإحداثيات.";
+"ManualCoordErrorLatRange" = "يجب أن يكون خط العرض بين -90 و 90.";
+"ManualCoordErrorLonRange" = "يجب أن يكون خط الطول بين -180 و 180.";
+"ManualCoordErrorLatInvalid" = "أدخل رقم خط عرض صالحًا.";
+"ManualCoordErrorLonInvalid" = "أدخل رقم خط طول صالحًا.";

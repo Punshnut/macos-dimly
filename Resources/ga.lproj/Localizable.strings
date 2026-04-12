@@ -367,3 +367,13 @@
 "Requesting location\u2026" = "Ag iarraidh suíomh\u2026";
 "Delete schedule" = "Scrios sceideal";
 "No profiles available. Create a profile first." = "Níl aon phróifíl ar fáil. Cruthaigh próifíl ar dtús.";
+
+"ManualCoordDisclosureLabel" = "Nó iontráil comhordanáidí de láimh…";
+"ManualCoordLatLabel" = "Domhanleithead";
+"ManualCoordLonLabel" = "Domhanfhad";
+"ManualCoordSaveButton" = "Sábháil Suíomh";
+"ManualCoordHelpText" = "Aimsigh do chomhordanáidí ar Mapaí Apple: cliceáil ar dheis ar áit ar bith → Cóipeáil Comhordanáidí.";
+"ManualCoordErrorLatRange" = "Ní mór go mbeadh an domhanleithead idir -90 agus 90.";
+"ManualCoordErrorLonRange" = "Ní mór go mbeadh an domhanfhad idir -180 agus 180.";
+"ManualCoordErrorLatInvalid" = "Iontráil uimhir domhanleitheadach bhailí.";
+"ManualCoordErrorLonInvalid" = "Iontráil uimhir domhanfhaid bhailí.";

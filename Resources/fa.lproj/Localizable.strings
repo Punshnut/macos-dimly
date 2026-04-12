@@ -367,3 +367,13 @@
 "Requesting location\u2026" = "در حال دریافت موقعیت\u2026";
 "Delete schedule" = "حذف زمان‌بندی";
 "No profiles available. Create a profile first." = "هیچ پروفایلی در دسترس نیست. ابتدا یک پروفایل ایجاد کنید.";
+
+"ManualCoordDisclosureLabel" = "یا مختصات را به صورت دستی وارد کنید…";
+"ManualCoordLatLabel" = "عرض جغرافیایی";
+"ManualCoordLonLabel" = "طول جغرافیایی";
+"ManualCoordSaveButton" = "ذخیره مکان";
+"ManualCoordHelpText" = "مختصات خود را در نقشه Apple پیدا کنید: روی هر مکانی کلیک راست کنید → کپی مختصات.";
+"ManualCoordErrorLatRange" = "عرض جغرافیایی باید بین -90 و 90 باشد.";
+"ManualCoordErrorLonRange" = "طول جغرافیایی باید بین -180 و 180 باشد.";
+"ManualCoordErrorLatInvalid" = "یک عدد عرض جغرافیایی معتبر وارد کنید.";
+"ManualCoordErrorLonInvalid" = "یک عدد طول جغرافیایی معتبر وارد کنید.";

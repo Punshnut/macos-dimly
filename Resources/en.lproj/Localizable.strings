@@ -357,3 +357,12 @@
 "Requesting location\u2026" = "Requesting location\u2026";
 "Delete schedule" = "Delete schedule";
 "No profiles available. Create a profile first." = "No profiles available. Create a profile first.";
+"ManualCoordDisclosureLabel" = "Or enter coordinates manually…";
+"ManualCoordLatLabel" = "Latitude";
+"ManualCoordLonLabel" = "Longitude";
+"ManualCoordSaveButton" = "Save Location";
+"ManualCoordHelpText" = "Find your coordinates in Apple Maps: right-click any location → Copy Coordinates.";
+"ManualCoordErrorLatRange" = "Latitude must be between -90 and 90.";
+"ManualCoordErrorLonRange" = "Longitude must be between -180 and 180.";
+"ManualCoordErrorLatInvalid" = "Enter a valid latitude number.";
+"ManualCoordErrorLonInvalid" = "Enter a valid longitude number.";
