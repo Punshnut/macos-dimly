@@ -148,6 +148,7 @@
 "Display service unavailable" = "Сервіс дисплея недоступний";
 "DDCOpenFailedFormat" = "Помилка відкриття DDC (0x%@)";
 "DDCRequestFailedFormat" = "Помилка запиту DDC (0x%@)";
+"DDCConnectionTypeUnsupported" = "Цей тип підключення може не підтримувати DDC (спробуйте DisplayPort)";
 "Internal panel" = "Внутрішня панель";
 
 /* Display Report */
@@ -343,3 +344,26 @@
 "Overwrite Profile" = "Перезаписати профіль";
 
 "Overwrite" = "Перезаписати";
+
+/* Settings Schedule */
+"Schedule" = "Розклад";
+"Automatically apply profiles at set times." = "Автоматично застосовувати профілі у встановлений час.";
+"Schedules" = "Розклади";
+"Enable Scheduling" = "Увімкнути розклад";
+"Automatically apply profiles at scheduled times." = "Автоматично застосовувати профілі у запланований час.";
+"No schedules yet. Add one to get started." = "Розкладів ще немає. Додайте один, щоб почати.";
+"Add Schedule" = "Додати розклад";
+"Clock" = "Годинник";
+"Sunrise" = "Схід сонця";
+"Every day" = "Щодня";
+"Trigger type" = "Тип тригера";
+"ScheduleOffsetAfterFormat" = "+%d хв";
+"ScheduleOffsetBeforeFormat" = "-%d хв";
+"Location" = "Місце";
+"Required for sunrise and sunset triggers." = "Потрібно для тригерів сходу і заходу сонця.";
+"Location for solar times" = "Місце для сонячних часів";
+"Use My Location" = "Використати моє місце";
+"ScheduleLocationUpdatedFormat" = "Оновлено %@";
+"Requesting location\u2026" = "Запит місця\u2026";
+"Delete schedule" = "Видалити розклад";
+"No profiles available. Create a profile first." = "Немає доступних профілів. Спочатку створіть профіль.";

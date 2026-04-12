@@ -12,6 +12,7 @@ struct SettingsRootView: View {
     @ObservedObject var ddcManager: DDCManager
     @ObservedObject var blackoutManager: BlackoutManager
     @ObservedObject var engine: DimlyEngine
+    @ObservedObject var scheduleManager: ScheduleManager
     @State private var introWindowController: IntroWindowController?
     @State private var selection: SettingsDestination = .general
     @State private var proposedProfileName: String = ""
@@ -21,6 +22,7 @@ struct SettingsRootView: View {
         case displays
         case shortcuts
         case profiles
+        case schedule
         case about
     }
 
@@ -37,6 +39,8 @@ struct SettingsRootView: View {
                         .tag(SettingsDestination.shortcuts)
                     Label(String(localized: "Profiles"), systemImage: "rectangle.3.group")
                         .tag(SettingsDestination.profiles)
+                    Label(String(localized: "Schedule"), systemImage: "clock")
+                        .tag(SettingsDestination.schedule)
                     Label(String(localized: "About"), systemImage: "info.circle")
                         .tag(SettingsDestination.about)
                 }
@@ -51,6 +55,7 @@ struct SettingsRootView: View {
                 profileManager: profileManager,
                 ddcManager: ddcManager,
                 engine: engine,
+                scheduleManager: scheduleManager,
                 proposedProfileName: $proposedProfileName,
                 renameProfile: renameProfile,
                 showIntroAgain: showIntroAgain,
@@ -459,6 +464,7 @@ struct SettingsRootView: View {
         @ObservedObject var profileManager: ProfileManager
         @ObservedObject var ddcManager: DDCManager
         let engine: DimlyEngine
+        @ObservedObject var scheduleManager: ScheduleManager
         @Binding var proposedProfileName: String
         let renameProfile: (DisplayProfile) -> Void
         let showIntroAgain: () -> Void
@@ -496,6 +502,8 @@ struct SettingsRootView: View {
                 shortcutsDetail
             case .profiles:
                 profilesDetail
+            case .schedule:
+                scheduleDetail
             case .about:
                 aboutDetail
             }
@@ -1264,6 +1272,290 @@ struct SettingsRootView: View {
                     Text(String(format: String(localized: "LastAppliedFormat"), applied))
                         .font(.caption)
                         .foregroundStyle(.secondary)
+                }
+            }
+        }
+
+        // MARK: - Schedule Tab
+
+        private var scheduleDetail: some View {
+            SettingsScrollView(
+                title: String(localized: "Schedule"),
+                subtitle: String(localized: "Automatically apply profiles at set times."),
+                contentMaxWidth: 980
+            ) {
+                SettingsCard(title: String(localized: "Schedules"), subtitle: nil) {
+                    SettingsToggleRow(
+                        title: String(localized: "Enable Scheduling"),
+                        subtitle: String(localized: "Automatically apply profiles at scheduled times."),
+                        systemImage: "clock.badge.checkmark",
+                        isOn: Binding(
+                            get: { scheduleManager.schedulingEnabled },
+                            set: { scheduleManager.schedulingEnabled = $0 }
+                        )
+                    )
+                    SettingsDivider()
+                    if scheduleManager.entries.isEmpty {
+                        Text(String(localized: "No schedules yet. Add one to get started."))
+                            .font(.caption)
+                            .foregroundStyle(.secondary)
+                    } else {
+                        ForEach($scheduleManager.entries) { $entry in
+                            ScheduleEntryRow(
+                                entry: $entry,
+                                profiles: profileManager.profiles,
+                                onDelete: { scheduleManager.remove(id: entry.id) }
+                            )
+                            if entry.id != scheduleManager.entries.last?.id {
+                                SettingsDivider()
+                            }
+                        }
+                    }
+                    SettingsDivider()
+                    Button {
+                        let defaultProfileID = profileManager.profiles.first?.id ?? UUID()
+                        scheduleManager.addEntry(ScheduleEntry(
+                            id: UUID(),
+                            isEnabled: true,
+                            profileID: defaultProfileID,
+                            trigger: .clockTime(hour: 8, minute: 0),
+                            daysOfWeek: []
+                        ))
+                    } label: {
+                        Label(String(localized: "Add Schedule"), systemImage: "plus.circle")
+                    }
+                    .buttonStyle(.bordered)
+                    .controlSize(.small)
+                    .disabled(profileManager.profiles.isEmpty)
+                    if profileManager.profiles.isEmpty {
+                        Text(String(localized: "No profiles available. Create a profile first."))
+                            .font(.caption)
+                            .foregroundStyle(.secondary)
+                    }
+                }
+
+                // Location card — only when at least one entry uses a solar trigger
+                let hasSolarEntry = scheduleManager.entries.contains {
+                    if case .sunrise = $0.trigger { return true }
+                    if case .sunset = $0.trigger { return true }
+                    return false
+                }
+                if hasSolarEntry {
+                    SettingsCard(
+                        title: String(localized: "Location"),
+                        subtitle: String(localized: "Required for sunrise and sunset triggers.")
+                    ) {
+                        SettingsRow(
+                            title: String(localized: "Location for solar times"),
+                            subtitle: scheduleLocationSubtitle,
+                            systemImage: "location.circle"
+                        ) {
+                            Button(String(localized: "Use My Location")) {
+                                scheduleManager.requestLocation()
+                            }
+                            .buttonStyle(.bordered)
+                            .controlSize(.small)
+                            .disabled(scheduleManager.isRequestingLocation)
+                        }
+                        if scheduleManager.isRequestingLocation {
+                            Text(String(localized: "Requesting location…"))
+                                .font(.caption)
+                                .foregroundStyle(.secondary)
+                        }
+                    }
+                }
+            }
+        }
+
+        private var scheduleLocationSubtitle: String {
+            guard let coord = scheduleManager.savedCoordinate else {
+                return String(localized: "Not set")
+            }
+            let fmt = DateFormatter()
+            fmt.dateStyle = .short
+            fmt.timeStyle = .short
+            return String(format: String(localized: "ScheduleLocationUpdatedFormat"), fmt.string(from: coord.updatedAt))
+        }
+
+        /// A single schedule entry row with trigger, time, profile and day pickers.
+        private struct ScheduleEntryRow: View {
+            @Binding var entry: ScheduleEntry
+            let profiles: [DisplayProfile]
+            let onDelete: () -> Void
+
+            var body: some View {
+                VStack(alignment: .leading, spacing: 10) {
+                    HStack(alignment: .center, spacing: 10) {
+                        Toggle("", isOn: $entry.isEnabled)
+                            .labelsHidden()
+                            .toggleStyle(.switch)
+                            .controlSize(.small)
+
+                        // Profile picker
+                        Picker(String(localized: "Profile to apply"), selection: $entry.profileID) {
+                            ForEach(profiles) { profile in
+                                Text(profile.name).tag(profile.id)
+                            }
+                        }
+                        .labelsHidden()
+                        .pickerStyle(.menu)
+                        .frame(minWidth: 120, maxWidth: 180)
+                        .disabled(profiles.isEmpty)
+
+                        Spacer(minLength: 0)
+
+                        // Delete button
+                        Button {
+                            onDelete()
+                        } label: {
+                            Image(systemName: "trash")
+                                .foregroundStyle(.secondary)
+                        }
+                        .buttonStyle(.plain)
+                        .help(String(localized: "Delete schedule"))
+                    }
+
+                    HStack(alignment: .center, spacing: 8) {
+                        // Trigger type picker
+                        Picker(String(localized: "Trigger type"), selection: triggerTypePicker) {
+                            ForEach(ScheduleTriggerType.allCases) { type in
+                                Text(type.localizedTitle).tag(type)
+                            }
+                        }
+                        .labelsHidden()
+                        .pickerStyle(.menu)
+                        .frame(width: 100)
+
+                        // Time / offset controls
+                        switch entry.trigger {
+                        case .clockTime:
+                            DatePicker("", selection: clockDateBinding, displayedComponents: .hourAndMinute)
+                                .labelsHidden()
+                                .frame(width: 90)
+                        case .sunrise(let offset), .sunset(let offset):
+                            HStack(spacing: 4) {
+                                Stepper(
+                                    offsetLabel(offset),
+                                    value: offsetBinding,
+                                    in: -180...180
+                                )
+                                .frame(minWidth: 160)
+                            }
+                        }
+                        Spacer(minLength: 0)
+                    }
+
+                    // Day-of-week picker
+                    DayOfWeekPicker(selection: $entry.daysOfWeek)
+                }
+                .opacity(entry.isEnabled ? 1 : 0.55)
+            }
+
+            // MARK: Trigger type binding (maps flat enum ↔ enum with associated values)
+
+            private var triggerTypePicker: Binding<ScheduleTriggerType> {
+                Binding(
+                    get: { entry.trigger.triggerType },
+                    set: { newType in
+                        switch newType {
+                        case .clockTime:
+                            entry.trigger = .clockTime(hour: 8, minute: 0)
+                        case .sunrise:
+                            entry.trigger = .sunrise(offsetMinutes: 0)
+                        case .sunset:
+                            entry.trigger = .sunset(offsetMinutes: 0)
+                        }
+                    }
+                )
+            }
+
+            // MARK: Clock time DatePicker binding (Date ↔ hour+minute components)
+
+            private var clockDateBinding: Binding<Date> {
+                Binding(
+                    get: {
+                        guard case .clockTime(let h, let m) = entry.trigger else {
+                            return Calendar.current.date(bySettingHour: 8, minute: 0, second: 0, of: Date()) ?? Date()
+                        }
+                        return Calendar.current.date(bySettingHour: h, minute: m, second: 0, of: Date()) ?? Date()
+                    },
+                    set: { date in
+                        let cal = Calendar.current
+                        let h = cal.component(.hour, from: date)
+                        let m = cal.component(.minute, from: date)
+                        entry.trigger = .clockTime(hour: h, minute: m)
+                    }
+                )
+            }
+
+            // MARK: Solar offset binding
+
+            private var offsetBinding: Binding<Int> {
+                Binding(
+                    get: {
+                        switch entry.trigger {
+                        case .sunrise(let o), .sunset(let o): return o
+                        default: return 0
+                        }
+                    },
+                    set: { newOffset in
+                        switch entry.trigger {
+                        case .sunrise: entry.trigger = .sunrise(offsetMinutes: newOffset)
+                        case .sunset: entry.trigger = .sunset(offsetMinutes: newOffset)
+                        default: break
+                        }
+                    }
+                )
+            }
+
+            private func offsetLabel(_ offset: Int) -> String {
+                if offset == 0 { return "±0 min" }
+                let key = offset > 0 ? "ScheduleOffsetAfterFormat" : "ScheduleOffsetBeforeFormat"
+                return String(format: String(localized: String.LocalizationValue(key)), abs(offset))
+            }
+        }
+
+        /// A row of day-of-week toggle buttons that respects the locale's first weekday and symbols.
+        private struct DayOfWeekPicker: View {
+            @Binding var selection: [Int]  // 1=Sun…7=Sat (Calendar.weekday)
+
+            /// Days ordered starting from the locale's first weekday (e.g. Sunday in US, Monday in Europe).
+            private var orderedWeekdays: [Int] {
+                let first = Calendar.current.firstWeekday
+                return (0..<7).map { offset in ((first - 1 + offset) % 7) + 1 }
+            }
+
+            /// OS-localized very short day symbols (index 0 = Sunday, 6 = Saturday).
+            private var symbols: [String] {
+                Calendar.current.veryShortWeekdaySymbols
+            }
+
+            var body: some View {
+                VStack(alignment: .leading, spacing: 4) {
+                    HStack(spacing: 4) {
+                        ForEach(orderedWeekdays, id: \.self) { day in
+                            let isOn = selection.contains(day)
+                            Button(symbols[day - 1]) {
+                                if isOn {
+                                    selection.removeAll { $0 == day }
+                                } else {
+                                    selection.append(day)
+                                }
+                            }
+                            .buttonStyle(.plain)
+                            .font(.caption2.weight(.semibold))
+                            .frame(width: 22, height: 22)
+                            .background(
+                                Circle().fill(isOn ? Color.accentColor : Color.secondary.opacity(0.15))
+                            )
+                            .foregroundStyle(isOn ? Color.white : Color.secondary)
+                        }
+                    }
+                    if selection.isEmpty {
+                        Text(String(localized: "Every day"))
+                            .font(.caption2)
+                            .foregroundStyle(.secondary)
+                    }
                 }
             }
         }

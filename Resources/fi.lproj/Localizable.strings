@@ -148,6 +148,7 @@
 "Display service unavailable" = "Näyttöpalvelu ei käytettävissä";
 "DDCOpenFailedFormat" = "DDC-avauksen epäonnistuminen (0x%@)";
 "DDCRequestFailedFormat" = "DDC-pyyntö epäonnistui (0x%@)";
+"DDCConnectionTypeUnsupported" = "Tämä yhteystyyppi ei välttämättä tue DDC:tä (kokeile DisplayPortia)";
 "Internal panel" = "Sisäinen paneeli";
 
 /* Display Report */
@@ -343,3 +344,26 @@
 "Overwrite Profile" = "Korvaa profiili";
 
 "Overwrite" = "Korvaa";
+
+/* Settings Schedule */
+"Schedule" = "Aikataulu";
+"Automatically apply profiles at set times." = "Käytä profiileja automaattisesti asetettuina aikoina.";
+"Schedules" = "Aikataulut";
+"Enable Scheduling" = "Ota aikataulu käyttöön";
+"Automatically apply profiles at scheduled times." = "Käytä profiileja automaattisesti aikataulutetuilla ajoilla.";
+"No schedules yet. Add one to get started." = "Ei aikatauluja vielä. Lisää yksi aloittaaksesi.";
+"Add Schedule" = "Lisää aikataulu";
+"Clock" = "Kello";
+"Sunrise" = "Auringonnousu";
+"Every day" = "Joka päivä";
+"Trigger type" = "Käynnistintyyppi";
+"ScheduleOffsetAfterFormat" = "+%d min";
+"ScheduleOffsetBeforeFormat" = "-%d min";
+"Location" = "Sijainti";
+"Required for sunrise and sunset triggers." = "Vaaditaan auringonnousun ja -laskun käynnistimille.";
+"Location for solar times" = "Sijainti aurinkoaikojen laskemiseen";
+"Use My Location" = "Käytä sijaintiani";
+"ScheduleLocationUpdatedFormat" = "Päivitetty %@";
+"Requesting location\u2026" = "Haetaan sijaintia\u2026";
+"Delete schedule" = "Poista aikataulu";
+"No profiles available. Create a profile first." = "Ei profiileja. Luo ensin profiili.";

@@ -36,6 +36,14 @@ struct DDCState: Equatable {
     var lastCommandAt: Date?
 }
 
+/// Unified handle for an open DDC transport session.
+private enum DDCConnection {
+    case i2c(IOI2CConnectRef)
+#if arch(arm64)
+    case avService(UnsafeRawPointer) // +1 retained IOAVService CF object
+#endif
+}
+
 /// Manages DDC probing plus power/brightness commands.
 @MainActor
 final class DDCManager: ObservableObject {
@@ -355,28 +363,65 @@ final class DDCManager: ObservableObject {
         }
     }
 
-    /// Opens an I2C connection for a display, if available.
-    nonisolated private static func openConnection(for displayID: CGDirectDisplayID) -> Result<IOI2CConnectRef, Error> {
+    /// Opens a DDC transport connection for a display, routing to the correct path per architecture.
+    nonisolated private static func openConnection(for displayID: CGDirectDisplayID) -> Result<DDCConnection, Error> {
+#if arch(arm64)
+        return openConnectionARM(for: displayID)
+#else
+        return openConnectionIntel(for: displayID)
+#endif
+    }
+
+    /// Intel (x86_64): opens an IOI2C connection via IOFramebuffer.
+    nonisolated private static func openConnectionIntel(for displayID: CGDirectDisplayID) -> Result<DDCConnection, Error> {
         guard let service = DisplayHardware.ioServicePort(for: displayID) else {
             return .failure(DDCError.serviceUnavailable)
         }
         defer { IOObjectRelease(service) }
-
         var connect: IOI2CConnectRef?
         let status = IOI2CInterfaceOpen(service, IOOptionBits(0), &connect)
         guard status == kIOReturnSuccess, let connect else {
             return .failure(DDCError.openFailed(status))
         }
-        return .success(connect)
+        return .success(.i2c(connect))
     }
 
-    /// Closes an I2C connection.
-    nonisolated private static func close(_ connection: IOI2CConnectRef) {
-        IOI2CInterfaceClose(connection, IOOptionBits(0))
+#if arch(arm64)
+    /// Apple Silicon (arm64): opens an IOAVService connection via DCPAVServiceProxy.
+    nonisolated private static func openConnectionARM(for displayID: CGDirectDisplayID) -> Result<DDCConnection, Error> {
+        guard let avService = DisplayHardware.ioAVServiceRef(for: displayID) else {
+            return .failure(DDCError.serviceUnavailable)
+        }
+        return .success(.avService(avService))
+    }
+#endif
+
+    /// Closes a DDC transport connection.
+    nonisolated private static func close(_ connection: DDCConnection) {
+        switch connection {
+        case .i2c(let ref):
+            IOI2CInterfaceClose(ref, IOOptionBits(0))
+#if arch(arm64)
+        case .avService(let ref):
+            Unmanaged<AnyObject>.fromOpaque(ref).release()
+#endif
+        }
     }
 
-    /// Sends a raw VCP command payload over I2C.
-    nonisolated private static func sendVCPCommand(connection: IOI2CConnectRef, code: UInt8, value: UInt16) -> Result<Void, Error> {
+    /// Sends a raw VCP command over the given transport connection.
+    nonisolated private static func sendVCPCommand(connection: DDCConnection, code: UInt8, value: UInt16) -> Result<Void, Error> {
+        switch connection {
+        case .i2c(let ref):
+            return sendVCPCommandIntel(connection: ref, code: code, value: value)
+#if arch(arm64)
+        case .avService(let ref):
+            return sendVCPCommandARM(avService: ref, code: code, value: value)
+#endif
+        }
+    }
+
+    /// Intel: sends a VCP command payload over IOI2C.
+    nonisolated private static func sendVCPCommandIntel(connection: IOI2CConnectRef, code: UInt8, value: UInt16) -> Result<Void, Error> {
         var request = IOI2CRequest()
         request.commFlags = 0
         request.sendAddress = 0x6E
@@ -408,6 +453,36 @@ final class DDCManager: ObservableObject {
         }
         return sent
     }
+
+#if arch(arm64)
+    /// Apple Silicon: sends a VCP command via IOAVServiceWriteI2C.
+    nonisolated private static func sendVCPCommandARM(avService: UnsafeRawPointer, code: UInt8, value: UInt16) -> Result<Void, Error> {
+        guard let writeFn = DisplayHardware.ioavServiceWriteI2C else {
+            return .failure(DDCError.serviceUnavailable)
+        }
+        // Build the full DDC/CI frame so checksum() covers all relevant bytes.
+        var fullPayload: [UInt8] = [
+            0x51,                           // Destination address (becomes IOAVService dataAddress)
+            0x84,                           // Set VCP Feature command
+            0x03,                           // Message length
+            code,                           // VCP code
+            UInt8((value >> 8) & 0xFF),
+            UInt8(value & 0xFF),
+            0                               // Checksum placeholder
+        ]
+        fullPayload[6] = Self.checksum(for: fullPayload)
+        // IOAVServiceWriteI2C takes chipAddress=0x37 and dataAddress=0x51 as separate
+        // parameters; the data buffer is the payload minus the leading 0x51.
+        var data = Array(fullPayload.dropFirst())
+        let result = data.withUnsafeMutableBytes { buf -> IOReturn in
+            guard let base = buf.baseAddress else { return kIOReturnNoMemory }
+            return writeFn(avService, 0x37, 0x51,
+                           UnsafeMutableRawPointer(mutating: base),
+                           UInt32(buf.count))
+        }
+        return result == kIOReturnSuccess ? .success(()) : .failure(DDCError.requestFailed(result))
+    }
+#endif
 
     /// Calculates the DDC checksum required by VCP commands.
     nonisolated private static func checksum(for bytes: [UInt8]) -> UInt8 {

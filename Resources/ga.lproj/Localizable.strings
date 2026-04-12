@@ -148,6 +148,7 @@
 "Display service unavailable" = "Seirbhís taispeántais ar fáil";
 "DDCOpenFailedFormat" = "Theip ar oscailt DDC (0x%@)";
 "DDCRequestFailedFormat" = "Theip ar iarratas DDC (0x%@)";
+"DDCConnectionTypeUnsupported" = "Seans nach dtacaíonn an cineál ceangail seo DDC (bain triail as DisplayPort)";
 "Internal panel" = "Painéal inmheánach";
 
 /* Display Report */
@@ -343,3 +344,26 @@
 "Overwrite Profile" = "Forscríobh próifíl";
 
 "Overwrite" = "Forscríobh";
+
+/* Settings Schedule */
+"Schedule" = "Sceideal";
+"Automatically apply profiles at set times." = "Cuir próifílí i bhfeidhm go huathoibríoch ag amanna socraithe.";
+"Schedules" = "Sceidil";
+"Enable Scheduling" = "Cumasaigh Sceidealú";
+"Automatically apply profiles at scheduled times." = "Cuir próifílí i bhfeidhm go huathoibríoch ag amanna sceidealaithe.";
+"No schedules yet. Add one to get started." = "Níl aon sceideal ann go fóill. Cuir ceann leis chun tosú.";
+"Add Schedule" = "Cuir Sceideal Leis";
+"Clock" = "Clog";
+"Sunrise" = "Éirí na gréine";
+"Every day" = "Gach lá";
+"Trigger type" = "Cineál truicéir";
+"ScheduleOffsetAfterFormat" = "+%d nóim";
+"ScheduleOffsetBeforeFormat" = "-%d nóim";
+"Location" = "Suíomh";
+"Required for sunrise and sunset triggers." = "Ag teastáil do truicéirí éirí agus luí na gréine.";
+"Location for solar times" = "Suíomh do na hamanna gréine";
+"Use My Location" = "Úsáid Mo Shuíomh";
+"ScheduleLocationUpdatedFormat" = "Nuashonraithe %@";
+"Requesting location\u2026" = "Ag iarraidh suíomh\u2026";
+"Delete schedule" = "Scrios sceideal";
+"No profiles available. Create a profile first." = "Níl aon phróifíl ar fáil. Cruthaigh próifíl ar dtús.";

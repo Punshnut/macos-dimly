@@ -148,6 +148,7 @@
 "Display service unavailable" = "காட்சி சேவை இல்லை";
 "DDCOpenFailedFormat" = "DDC திறக்க தவறியது (0x%@)";
 "DDCRequestFailedFormat" = "DDC கோரிக்கை தோல்வி (0x%@)";
+"DDCConnectionTypeUnsupported" = "இந்த இணைப்பு வகை DDC-ஐ ஆதரிக்காமல் இருக்கலாம் (DisplayPort முயற்சிக்கவும்)";
 "Internal panel" = "உள்புற பலகை";
 
 /* Display Report */
@@ -343,3 +344,26 @@
 "Overwrite Profile" = "சுயவிவரத்தை மேலெழுது";
 
 "Overwrite" = "மேலெழுது";
+
+/* Settings Schedule */
+"Schedule" = "அட்டவணை";
+"Automatically apply profiles at set times." = "நிர்ணயிக்கப்பட்ட நேரங்களில் சுயவிவரங்களை தானாக பயன்படுத்து.";
+"Schedules" = "அட்டவணைகள்";
+"Enable Scheduling" = "திட்டமிடலை இயக்கு";
+"Automatically apply profiles at scheduled times." = "திட்டமிட்ட நேரங்களில் சுயவிவரங்களை தானாக பயன்படுத்து.";
+"No schedules yet. Add one to get started." = "இன்னும் அட்டவணைகள் இல்லை. தொடங்க ஒன்றை சேர்க்கவும்.";
+"Add Schedule" = "அட்டவணை சேர்";
+"Clock" = "கடிகாரம்";
+"Sunrise" = "சூரிய உதயம்";
+"Every day" = "தினமும்";
+"Trigger type" = "தூண்டுதல் வகை";
+"ScheduleOffsetAfterFormat" = "+%d நிமிடம்";
+"ScheduleOffsetBeforeFormat" = "-%d நிமிடம்";
+"Location" = "இடம்";
+"Required for sunrise and sunset triggers." = "சூரிய உதயம் மற்றும் அஸ்தமனம் தூண்டுதல்களுக்கு தேவை.";
+"Location for solar times" = "சூரிய நேரங்களுக்கான இடம்";
+"Use My Location" = "என் இடத்தை பயன்படுத்து";
+"ScheduleLocationUpdatedFormat" = "%@ புதுப்பிக்கப்பட்டது";
+"Requesting location\u2026" = "இடம் கேட்கிறது\u2026";
+"Delete schedule" = "அட்டவணையை நீக்கு";
+"No profiles available. Create a profile first." = "சுயவிவரங்கள் இல்லை. முதலில் ஒரு சுயவிவரம் உருவாக்கவும்.";

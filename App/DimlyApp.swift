@@ -95,7 +95,8 @@ struct DimlyApp: App {
                 profileManager: engine.profileManager,
                 ddcManager: engine.ddcManager,
                 blackoutManager: engine.blackoutManager,
-                engine: engine
+                engine: engine,
+                scheduleManager: engine.scheduleManager
             )
         }
     }
@@ -284,7 +285,8 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
                 profileManager: settingsEngine.profileManager,
                 ddcManager: settingsEngine.ddcManager,
                 blackoutManager: settingsEngine.blackoutManager,
-                engine: settingsEngine
+                engine: settingsEngine,
+                scheduleManager: settingsEngine.scheduleManager
             )
             let hostingView = NSHostingView(rootView: rootView)
             let window = NSWindow(

@@ -191,6 +191,7 @@
 "DDCOpenFailedFormat" = "DDC open failed (0x%@)";
 "DDCRequestFailedFormat" = "DDC request failed (0x%@)";
 "Internal panel" = "Internal panel";
+"DDCConnectionTypeUnsupported" = "Connection type may not support DDC (try DisplayPort)";
 
 /* Display Report */
 "DisplayReportTitle" = "Dimly Display Report";
@@ -333,3 +334,26 @@
 "Teal" = "Teal";
 "Tip: Drag profile cards to reorder them." = "Tip: Drag profile cards to reorder them.";
 "Violet" = "Violet";
+
+/* Settings Schedule */
+"Schedule" = "Schedule";
+"Automatically apply profiles at set times." = "Automatically apply profiles at set times.";
+"Schedules" = "Schedules";
+"Enable Scheduling" = "Enable Scheduling";
+"Automatically apply profiles at scheduled times." = "Automatically apply profiles at scheduled times.";
+"No schedules yet. Add one to get started." = "No schedules yet. Add one to get started.";
+"Add Schedule" = "Add Schedule";
+"Clock" = "Clock";
+"Sunrise" = "Sunrise";
+"Every day" = "Every day";
+"Trigger type" = "Trigger type";
+"ScheduleOffsetAfterFormat" = "+%d min";
+"ScheduleOffsetBeforeFormat" = "-%d min";
+"Location" = "Location";
+"Required for sunrise and sunset triggers." = "Required for sunrise and sunset triggers.";
+"Location for solar times" = "Location for solar times";
+"Use My Location" = "Use My Location";
+"ScheduleLocationUpdatedFormat" = "Updated %@";
+"Requesting location\u2026" = "Requesting location\u2026";
+"Delete schedule" = "Delete schedule";
+"No profiles available. Create a profile first." = "No profiles available. Create a profile first.";

@@ -148,6 +148,7 @@
 "Display service unavailable" = "डिस्प्ले सेवा उपलब्ध नहीं";
 "DDCOpenFailedFormat" = "DDC खोलने में विफल (0x%@)";
 "DDCRequestFailedFormat" = "DDC अनुरोध विफल (0x%@)";
+"DDCConnectionTypeUnsupported" = "कनेक्शन का यह प्रकार DDC का समर्थन नहीं कर सकता (DisplayPort आज़माएँ)";
 "Internal panel" = "आंतरिक पैनल";
 
 /* Display Report */
@@ -343,3 +344,26 @@
 "Overwrite Profile" = "प्रोफ़ाइल अधिलेखित करें";
 
 "Overwrite" = "अधिलेखित करें";
+
+/* Settings Schedule */
+"Schedule" = "समय-सारणी";
+"Automatically apply profiles at set times." = "निर्धारित समय पर प्रोफ़ाइल स्वचालित रूप से लागू करें।";
+"Schedules" = "समय-सारणियाँ";
+"Enable Scheduling" = "शेड्यूलिंग सक्षम करें";
+"Automatically apply profiles at scheduled times." = "निर्धारित समय पर प्रोफ़ाइल स्वचालित रूप से लागू करें।";
+"No schedules yet. Add one to get started." = "अभी कोई समय-सारणी नहीं है। शुरू करने के लिए एक जोड़ें।";
+"Add Schedule" = "समय-सारणी जोड़ें";
+"Clock" = "घड़ी";
+"Sunrise" = "सूर्योदय";
+"Every day" = "हर दिन";
+"Trigger type" = "ट्रिगर प्रकार";
+"ScheduleOffsetAfterFormat" = "+%d मिनट";
+"ScheduleOffsetBeforeFormat" = "-%d मिनट";
+"Location" = "स्थान";
+"Required for sunrise and sunset triggers." = "सूर्योदय और सूर्यास्त ट्रिगर के लिए आवश्यक।";
+"Location for solar times" = "सौर समय के लिए स्थान";
+"Use My Location" = "मेरा स्थान उपयोग करें";
+"ScheduleLocationUpdatedFormat" = "अपडेट किया गया %@";
+"Requesting location\u2026" = "स्थान अनुरोध किया जा रहा है\u2026";
+"Delete schedule" = "समय-सारणी हटाएं";
+"No profiles available. Create a profile first." = "कोई प्रोफ़ाइल उपलब्ध नहीं है। पहले एक प्रोफ़ाइल बनाएं।";

@@ -148,6 +148,7 @@
 "Display service unavailable" = "డిస్ప్లే సేవ అందుబాటులో లేదు";
 "DDCOpenFailedFormat" = "DDC తెరవడంలో విఫలమైంది (0x%@)";
 "DDCRequestFailedFormat" = "DDC అభ్యర్థన విఫలమైంది (0x%@)";
+"DDCConnectionTypeUnsupported" = "ఈ కనెక్షన్ రకం DDC మద్దతు ఇవ్వకపోవచ్చు (DisplayPort ప్రయత్నించండి)";
 "Internal panel" = "అంతర్గత ప్యానల్";
 
 /* Display Report */
@@ -343,3 +344,26 @@
 "Overwrite Profile" = "ప్రొఫైల్‌ను ఓవర్‌రైట్ చేయి";
 
 "Overwrite" = "ఓవర్‌రైట్ చేయి";
+
+/* Settings Schedule */
+"Schedule" = "షెడ్యూల్";
+"Automatically apply profiles at set times." = "నిర్ణయించిన సమయాలలో ప్రొఫైల్‌లను స్వయంచాలకంగా వర్తింపజేయి.";
+"Schedules" = "షెడ్యూళ్ళు";
+"Enable Scheduling" = "షెడ్యూలింగ్ ఆన్ చేయి";
+"Automatically apply profiles at scheduled times." = "షెడ్యూల్ చేసిన సమయాలలో ప్రొఫైల్‌లను స్వయంచాలకంగా వర్తింపజేయి.";
+"No schedules yet. Add one to get started." = "ఇంకా షెడ్యూళ్ళు లేవు. ప్రారంభించడానికి ఒకటి జోడించు.";
+"Add Schedule" = "షెడ్యూల్ జోడించు";
+"Clock" = "గడియారం";
+"Sunrise" = "సూర్యోదయం";
+"Every day" = "ప్రతి రోజు";
+"Trigger type" = "ట్రిగ్గర్ రకం";
+"ScheduleOffsetAfterFormat" = "+%d నిమి";
+"ScheduleOffsetBeforeFormat" = "-%d నిమి";
+"Location" = "స్థానం";
+"Required for sunrise and sunset triggers." = "సూర్యోదయం మరియు సూర్యాస్తమయం ట్రిగ్గర్‌లకు అవసరం.";
+"Location for solar times" = "సౌర సమయాలకు స్థానం";
+"Use My Location" = "నా స్థానాన్ని ఉపయోగించు";
+"ScheduleLocationUpdatedFormat" = "%@ నవీకరించబడింది";
+"Requesting location\u2026" = "స్థానం అభ్యర్థిస్తోంది\u2026";
+"Delete schedule" = "షెడ్యూల్ తొలగించు";
+"No profiles available. Create a profile first." = "ప్రొఫైల్‌లు అందుబాటులో లేవు. ముందు ప్రొఫైల్ సృష్టించు.";

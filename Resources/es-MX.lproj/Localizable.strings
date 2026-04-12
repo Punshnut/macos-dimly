@@ -148,6 +148,7 @@
 "Display service unavailable" = "Servicio de pantalla no disponible";
 "DDCOpenFailedFormat" = "Error al abrir DDC (0x%@)";
 "DDCRequestFailedFormat" = "Error de solicitud DDC (0x%@)";
+"DDCConnectionTypeUnsupported" = "Es posible que este tipo de conexión no sea compatible con DDC (prueba DisplayPort)";
 "Internal panel" = "Panel interno";
 
 /* Display Report */
@@ -343,3 +344,26 @@
 "Overwrite Profile" = "Sobrescribir perfil";
 
 "Overwrite" = "Sobrescribir";
+
+/* Settings Schedule */
+"Schedule" = "Horario";
+"Automatically apply profiles at set times." = "Aplicar perfiles automáticamente en los horarios establecidos.";
+"Schedules" = "Horarios";
+"Enable Scheduling" = "Activar programación";
+"Automatically apply profiles at scheduled times." = "Aplicar perfiles automáticamente en los horarios programados.";
+"No schedules yet. Add one to get started." = "Aún no hay horarios. Agrega uno para comenzar.";
+"Add Schedule" = "Agregar horario";
+"Clock" = "Reloj";
+"Sunrise" = "Amanecer";
+"Every day" = "Cada día";
+"Trigger type" = "Tipo de activación";
+"ScheduleOffsetAfterFormat" = "+%d min";
+"ScheduleOffsetBeforeFormat" = "-%d min";
+"Location" = "Ubicación";
+"Required for sunrise and sunset triggers." = "Necesario para activadores de amanecer y atardecer.";
+"Location for solar times" = "Ubicación para horarios solares";
+"Use My Location" = "Usar mi ubicación";
+"ScheduleLocationUpdatedFormat" = "Actualizado %@";
+"Requesting location\u2026" = "Solicitando ubicación\u2026";
+"Delete schedule" = "Eliminar horario";
+"No profiles available. Create a profile first." = "No hay perfiles disponibles. Crea un perfil primero.";

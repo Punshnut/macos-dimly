@@ -73,6 +73,8 @@
 	<string>Copyright © 2026 Jan Feuerbacher</string>
 	<key>NSInputMonitoringUsageDescription</key>
 	<string>Allows Dimly to detect the configured hot corner so it can show/hide the launcher.</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>Dimly uses your location to calculate local sunrise and sunset times for scheduled profile triggers.</string>
 	<key>NSPrincipalClass</key>
 	<string>NSApplication</string>
 	<key>NSSupportsAutomaticGraphicsSwitching</key>

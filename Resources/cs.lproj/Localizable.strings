@@ -148,6 +148,7 @@
 "Display service unavailable" = "Služba displeje nedostupná";
 "DDCOpenFailedFormat" = "Otevření DDC selhalo (0x%@)";
 "DDCRequestFailedFormat" = "Požadavek DDC selhal (0x%@)";
+"DDCConnectionTypeUnsupported" = "Tento typ připojení nemusí podporovat DDC (zkuste DisplayPort)";
 "Internal panel" = "Interní panel";
 
 /* Display Report */
@@ -343,3 +344,26 @@
 "Overwrite Profile" = "Přepsat profil";
 
 "Overwrite" = "Přepsat";
+
+/* Settings Schedule */
+"Schedule" = "Plán";
+"Automatically apply profiles at set times." = "Automaticky použít profily v nastavených časech.";
+"Schedules" = "Plány";
+"Enable Scheduling" = "Povolit plánování";
+"Automatically apply profiles at scheduled times." = "Automaticky použít profily v naplánovaných časech.";
+"No schedules yet. Add one to get started." = "Zatím žádné plány. Přidejte jeden pro začátek.";
+"Add Schedule" = "Přidat plán";
+"Clock" = "Hodiny";
+"Sunrise" = "Východ slunce";
+"Every day" = "Každý den";
+"Trigger type" = "Typ spouštěče";
+"ScheduleOffsetAfterFormat" = "+%d min";
+"ScheduleOffsetBeforeFormat" = "-%d min";
+"Location" = "Poloha";
+"Required for sunrise and sunset triggers." = "Vyžadováno pro spouštěče východu a západu slunce.";
+"Location for solar times" = "Poloha pro sluneční časy";
+"Use My Location" = "Použít mou polohu";
+"ScheduleLocationUpdatedFormat" = "Aktualizováno %@";
+"Requesting location\u2026" = "Žádost o polohu\u2026";
+"Delete schedule" = "Smazat plán";
+"No profiles available. Create a profile first." = "Žádné profily nejsou k dispozici. Nejprve vytvořte profil.";

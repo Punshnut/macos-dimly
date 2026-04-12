@@ -148,6 +148,7 @@
 "Display service unavailable" = "Kijelzőszolgáltatás nem elérhető";
 "DDCOpenFailedFormat" = "DDC megnyitása sikertelen (0x%@)";
 "DDCRequestFailedFormat" = "DDC kérés sikertelen (0x%@)";
+"DDCConnectionTypeUnsupported" = "Ez a kapcsolattípus esetleg nem támogatja a DDC-t (próbálja a DisplayPortot)";
 "Internal panel" = "Belső panel";
 
 /* Display Report */
@@ -343,3 +344,26 @@
 "Overwrite Profile" = "Profil felülírása";
 
 "Overwrite" = "Felülírás";
+
+/* Settings Schedule */
+"Schedule" = "Ütemezés";
+"Automatically apply profiles at set times." = "Profilok automatikus alkalmazása meghatározott időpontokban.";
+"Schedules" = "Ütemezések";
+"Enable Scheduling" = "Ütemezés engedélyezése";
+"Automatically apply profiles at scheduled times." = "Profilok automatikus alkalmazása ütemezett időpontokban.";
+"No schedules yet. Add one to get started." = "Még nincs ütemezés. Adj hozzá egyet a kezdéshez.";
+"Add Schedule" = "Ütemezés hozzáadása";
+"Clock" = "Óra";
+"Sunrise" = "Napfelkelte";
+"Every day" = "Minden nap";
+"Trigger type" = "Kiváltó típusa";
+"ScheduleOffsetAfterFormat" = "+%d perc";
+"ScheduleOffsetBeforeFormat" = "-%d perc";
+"Location" = "Helyszín";
+"Required for sunrise and sunset triggers." = "A napfelkelte és napnyugta kiváltókhoz szükséges.";
+"Location for solar times" = "Helyszín a naptári időpontokhoz";
+"Use My Location" = "Saját helyszín használata";
+"ScheduleLocationUpdatedFormat" = "Frissítve: %@";
+"Requesting location\u2026" = "Helyszín lekérése\u2026";
+"Delete schedule" = "Ütemezés törlése";
+"No profiles available. Create a profile first." = "Nincs elérhető profil. Először hozzon létre egyet.";

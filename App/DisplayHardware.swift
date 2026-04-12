@@ -238,6 +238,80 @@ final class DisplayHardware: DisplayHardwareProviding, @unchecked Sendable {
         return 0
     }
 
+    // MARK: - IOAVService private API (Apple Silicon DDC)
+
+#if arch(arm64)
+    typealias IOAVServiceCreateWithServiceFn =
+        @convention(c) (CFAllocator?, io_service_t) -> UnsafeRawPointer?
+    typealias IOAVServiceWriteI2CFn =
+        @convention(c) (UnsafeRawPointer, UInt32, UInt32, UnsafeMutableRawPointer, UInt32) -> IOReturn
+
+    private static let ioavServiceCreateWithService: IOAVServiceCreateWithServiceFn? = {
+        guard let handle = dlopen("/System/Library/Frameworks/IOKit.framework/IOKit", RTLD_LAZY),
+              let sym = dlsym(handle, "IOAVServiceCreateWithService") else { return nil }
+        return unsafeBitCast(sym, to: IOAVServiceCreateWithServiceFn.self)
+    }()
+
+    static let ioavServiceWriteI2C: IOAVServiceWriteI2CFn? = {
+        guard let handle = dlopen("/System/Library/Frameworks/IOKit.framework/IOKit", RTLD_LAZY),
+              let sym = dlsym(handle, "IOAVServiceWriteI2C") else { return nil }
+        return unsafeBitCast(sym, to: IOAVServiceWriteI2CFn.self)
+    }()
+
+    /// Returns a +1 retained IOAVService ref for the given display, or nil.
+    /// Caller must CFRelease when done.
+    static func ioAVServiceRef(for displayID: CGDirectDisplayID) -> UnsafeRawPointer? {
+        guard let createFn = ioavServiceCreateWithService else { return nil }
+        let targetVendor  = CGDisplayVendorNumber(displayID)
+        let targetProduct = CGDisplayModelNumber(displayID)
+        let targetSerial  = CGDisplaySerialNumber(displayID)
+
+        guard let matching = IOServiceMatching("DCPAVServiceProxy") else { return nil }
+        var iterator: io_iterator_t = 0
+        guard IOServiceGetMatchingServices(kIOMainPortDefault, matching, &iterator) == KERN_SUCCESS else { return nil }
+        defer { IOObjectRelease(iterator) }
+
+        while case let proxyService = IOIteratorNext(iterator), proxyService != 0 {
+            defer { IOObjectRelease(proxyService) }
+            if findMatchingDisplayConnect(under: proxyService,
+                                          vendor: targetVendor,
+                                          product: targetProduct,
+                                          serial: targetSerial) != nil {
+                return createFn(kCFAllocatorDefault, proxyService)
+            }
+        }
+        return nil
+    }
+
+    /// Walks IO registry parents of `service` looking for an IODisplayConnect whose
+    /// EDID vendor/product/serial matches the target. Returns the matching io_service_t
+    /// (retained, caller must release), or nil. Search is bounded to 8 levels.
+    private static func findMatchingDisplayConnect(
+        under service: io_service_t,
+        vendor: UInt32, product: UInt32, serial: UInt32
+    ) -> io_service_t? {
+        var current = service
+        IOObjectRetain(current)
+        for _ in 0..<8 {
+            var parent: io_service_t = 0
+            let kr = IORegistryEntryGetParentEntry(current, kIOServicePlane, &parent)
+            IOObjectRelease(current)
+            guard kr == KERN_SUCCESS, parent != 0 else { return nil }
+            current = parent
+
+            let nodeVendor  = ioRegistryUInt32(current, key: kDisplayVendorID as CFString)
+            let nodeProduct = ioRegistryUInt32(current, key: kDisplayProductID as CFString)
+            let nodeSerial  = ioRegistryUInt32(current, key: kDisplaySerialNumber as CFString)
+            if nodeVendor == vendor && nodeProduct == product
+                && (serial == 0 || nodeSerial == serial) {
+                return current
+            }
+        }
+        IOObjectRelease(current)
+        return nil
+    }
+#endif
+
     // MARK: - DisplayServices fallback (private framework)
 
     private typealias DisplayServicesGetBrightnessFn = @convention(c) (CGDirectDisplayID, UnsafeMutablePointer<Float>) -> Int32

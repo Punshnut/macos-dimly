@@ -148,6 +148,7 @@
 "Display service unavailable" = "显示服务不可用";
 "DDCOpenFailedFormat" = "打开 DDC 失败 (0x%@)";
 "DDCRequestFailedFormat" = "DDC 请求失败 (0x%@)";
+"DDCConnectionTypeUnsupported" = "此连接类型可能不支持 DDC（请尝试 DisplayPort）";
 "Internal panel" = "内置面板";
 
 /* Display Report */
@@ -343,3 +344,26 @@
 "Overwrite Profile" = "覆盖配置文件";
 
 "Overwrite" = "覆盖";
+
+/* Settings Schedule */
+"Schedule" = "时间表";
+"Automatically apply profiles at set times." = "在设定的时间自动应用配置文件。";
+"Schedules" = "时间表";
+"Enable Scheduling" = "启用时间表";
+"Automatically apply profiles at scheduled times." = "在计划时间自动应用配置文件。";
+"No schedules yet. Add one to get started." = "尚无时间表。添加一个以开始使用。";
+"Add Schedule" = "添加时间表";
+"Clock" = "时钟";
+"Sunrise" = "日出";
+"Every day" = "每天";
+"Trigger type" = "触发类型";
+"ScheduleOffsetAfterFormat" = "+%d 分钟";
+"ScheduleOffsetBeforeFormat" = "-%d 分钟";
+"Location" = "位置";
+"Required for sunrise and sunset triggers." = "日出和日落触发器所需。";
+"Location for solar times" = "太阳时间的位置";
+"Use My Location" = "使用我的位置";
+"ScheduleLocationUpdatedFormat" = "已更新 %@";
+"Requesting location\u2026" = "正在请求位置\u2026";
+"Delete schedule" = "删除时间表";
+"No profiles available. Create a profile first." = "没有可用的配置文件。请先创建一个配置文件。";

@@ -148,6 +148,7 @@
 "Display service unavailable" = "บริการจอไม่พร้อมใช้งาน";
 "DDCOpenFailedFormat" = "เปิด DDC ล้มเหลว (0x%@)";
 "DDCRequestFailedFormat" = "คำขอ DDC ล้มเหลว (0x%@)";
+"DDCConnectionTypeUnsupported" = "ประเภทการเชื่อมต่อนี้อาจไม่รองรับ DDC (ลอง DisplayPort)";
 "Internal panel" = "พาเนลภายใน";
 
 /* Display Report */
@@ -343,3 +344,26 @@
 "Overwrite Profile" = "เขียนทับโปรไฟล์";
 
 "Overwrite" = "เขียนทับ";
+
+/* Settings Schedule */
+"Schedule" = "กำหนดการ";
+"Automatically apply profiles at set times." = "ใช้โปรไฟล์โดยอัตโนมัติตามเวลาที่กำหนด";
+"Schedules" = "กำหนดการ";
+"Enable Scheduling" = "เปิดใช้การกำหนดเวลา";
+"Automatically apply profiles at scheduled times." = "ใช้โปรไฟล์โดยอัตโนมัติตามเวลาที่ตั้งไว้";
+"No schedules yet. Add one to get started." = "ยังไม่มีกำหนดการ เพิ่มรายการเพื่อเริ่มต้น";
+"Add Schedule" = "เพิ่มกำหนดการ";
+"Clock" = "นาฬิกา";
+"Sunrise" = "พระอาทิตย์ขึ้น";
+"Every day" = "ทุกวัน";
+"Trigger type" = "ประเภทตัวกระตุ้น";
+"ScheduleOffsetAfterFormat" = "+%d นาที";
+"ScheduleOffsetBeforeFormat" = "-%d นาที";
+"Location" = "ตำแหน่ง";
+"Required for sunrise and sunset triggers." = "จำเป็นสำหรับตัวกระตุ้นพระอาทิตย์ขึ้นและตก";
+"Location for solar times" = "ตำแหน่งสำหรับเวลาแสงอาทิตย์";
+"Use My Location" = "ใช้ตำแหน่งของฉัน";
+"ScheduleLocationUpdatedFormat" = "อัปเดตแล้ว %@";
+"Requesting location\u2026" = "กำลังขอตำแหน่ง\u2026";
+"Delete schedule" = "ลบกำหนดการ";
+"No profiles available. Create a profile first." = "ไม่มีโปรไฟล์ กรุณาสร้างโปรไฟล์ก่อน";

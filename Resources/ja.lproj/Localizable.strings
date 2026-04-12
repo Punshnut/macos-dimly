@@ -148,6 +148,7 @@
 "Display service unavailable" = "ディスプレイサービス利用不可";
 "DDCOpenFailedFormat" = "DDC のオープンに失敗しました (0x%@)";
 "DDCRequestFailedFormat" = "DDC リクエストに失敗しました (0x%@)";
+"DDCConnectionTypeUnsupported" = "この接続タイプはDDCに対応していない可能性があります（DisplayPortをお試しください）";
 "Internal panel" = "内蔵パネル";
 
 /* Display Report */
@@ -343,3 +344,26 @@
 "Overwrite Profile" = "プロファイルを上書き";
 
 "Overwrite" = "上書き";
+
+/* Settings Schedule */
+"Schedule" = "スケジュール";
+"Automatically apply profiles at set times." = "設定した時間にプロファイルを自動的に適用します。";
+"Schedules" = "スケジュール";
+"Enable Scheduling" = "スケジュールを有効にする";
+"Automatically apply profiles at scheduled times." = "スケジュールされた時間にプロファイルを自動的に適用します。";
+"No schedules yet. Add one to get started." = "まだスケジュールがありません。追加して始めましょう。";
+"Add Schedule" = "スケジュールを追加";
+"Clock" = "時計";
+"Sunrise" = "日の出";
+"Every day" = "毎日";
+"Trigger type" = "トリガータイプ";
+"ScheduleOffsetAfterFormat" = "+%d分";
+"ScheduleOffsetBeforeFormat" = "-%d分";
+"Location" = "場所";
+"Required for sunrise and sunset triggers." = "日の出と日没のトリガーに必要です。";
+"Location for solar times" = "太陽時刻の場所";
+"Use My Location" = "現在地を使用";
+"ScheduleLocationUpdatedFormat" = "%@ に更新";
+"Requesting location\u2026" = "場所を取得中\u2026";
+"Delete schedule" = "スケジュールを削除";
+"No profiles available. Create a profile first." = "使用可能なプロファイルがありません。最初にプロファイルを作成してください。";

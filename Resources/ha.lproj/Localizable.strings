@@ -148,6 +148,7 @@
 "Display service unavailable" = "Bai samu sabis na allo ba";
 "DDCOpenFailedFormat" = "Buɗe DDC ya kasa (0x%@)";
 "DDCRequestFailedFormat" = "Neman DDC ya kasa (0x%@)";
+"DDCConnectionTypeUnsupported" = "Nau'in haɗin na iya rashin goyan bayan DDC (gwada DisplayPort)";
 "Internal panel" = "Allon ciki";
 
 /* Display Report */
@@ -343,3 +344,26 @@
 "Overwrite Profile" = "Maye gurbin bayanin martaba";
 
 "Overwrite" = "Maye gurbinsa";
+
+/* Settings Schedule */
+"Schedule" = "Jadawali";
+"Automatically apply profiles at set times." = "Amfani da bayanin martaba ta atomatik a lokutan da aka tsara.";
+"Schedules" = "Jadawalai";
+"Enable Scheduling" = "Kunna Tsarin Jadawali";
+"Automatically apply profiles at scheduled times." = "Amfani da bayanin martaba ta atomatik a lokutan da aka tsayar.";
+"No schedules yet. Add one to get started." = "Babu jadawali tukuna. Ƙara ɗaya don fara.";
+"Add Schedule" = "Ƙara Jadawali";
+"Clock" = "Agogo";
+"Sunrise" = "Fitowar rana";
+"Every day" = "Kowace rana";
+"Trigger type" = "Nau'in abin da ya kunna";
+"ScheduleOffsetAfterFormat" = "+%d min";
+"ScheduleOffsetBeforeFormat" = "-%d min";
+"Location" = "Wuri";
+"Required for sunrise and sunset triggers." = "Ana bukata don abubuwan kunna fitowar da faduwar rana.";
+"Location for solar times" = "Wuri don lokatai na rana";
+"Use My Location" = "Yi amfani da wurina";
+"ScheduleLocationUpdatedFormat" = "An sabunta %@";
+"Requesting location\u2026" = "Ana neman wuri\u2026";
+"Delete schedule" = "Goge jadawali";
+"No profiles available. Create a profile first." = "Babu bayanin martaba. Da farko ƙirƙiri bayanin martaba.";

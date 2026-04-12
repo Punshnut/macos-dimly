@@ -169,6 +169,7 @@
 "Display service unavailable" = "Hindi magagamit ang serbisyo ng display";
 "DDCOpenFailedFormat" = "Nabigong buksan ang DDC (0x%@)";
 "DDCRequestFailedFormat" = "Nabigong request ng DDC (0x%@)";
+"DDCConnectionTypeUnsupported" = "Ang uri ng koneksyon ay maaaring hindi sumusuporta sa DDC (subukan ang DisplayPort)";
 "Internal panel" = "Panloob na panel";
 
 /* Display Report */
@@ -341,3 +342,26 @@
 "Overwrite Profile" = "I-overwrite ang profile";
 
 "Overwrite" = "I-overwrite";
+
+/* Settings Schedule */
+"Schedule" = "Iskedyul";
+"Automatically apply profiles at set times." = "Awtomatikong ilapat ang mga profile sa mga nakatakdang oras.";
+"Schedules" = "Mga Iskedyul";
+"Enable Scheduling" = "Paganahin ang Pag-iskedyul";
+"Automatically apply profiles at scheduled times." = "Awtomatikong ilapat ang mga profile sa mga nakatalagang oras.";
+"No schedules yet. Add one to get started." = "Wala pang iskedyul. Magdagdag ng isa para magsimula.";
+"Add Schedule" = "Magdagdag ng Iskedyul";
+"Clock" = "Orasan";
+"Sunrise" = "Pagsikat ng araw";
+"Every day" = "Araw-araw";
+"Trigger type" = "Uri ng trigger";
+"ScheduleOffsetAfterFormat" = "+%d min";
+"ScheduleOffsetBeforeFormat" = "-%d min";
+"Location" = "Lokasyon";
+"Required for sunrise and sunset triggers." = "Kailangan para sa mga trigger ng pagsikat at paglubog ng araw.";
+"Location for solar times" = "Lokasyon para sa mga oras ng araw";
+"Use My Location" = "Gamitin ang Aking Lokasyon";
+"ScheduleLocationUpdatedFormat" = "Na-update %@";
+"Requesting location\u2026" = "Humihiling ng lokasyon\u2026";
+"Delete schedule" = "Tanggalin ang iskedyul";
+"No profiles available. Create a profile first." = "Walang available na profile. Gumawa muna ng profile.";

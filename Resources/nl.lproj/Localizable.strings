@@ -148,6 +148,7 @@
 "Display service unavailable" = "Displayservice niet beschikbaar";
 "DDCOpenFailedFormat" = "DDC openen mislukt (0x%@)";
 "DDCRequestFailedFormat" = "DDC-verzoek mislukt (0x%@)";
+"DDCConnectionTypeUnsupported" = "Dit verbindingstype ondersteunt DDC mogelijk niet (probeer DisplayPort)";
 "Internal panel" = "Intern paneel";
 
 /* Display Report */
@@ -343,3 +344,26 @@
 "Overwrite Profile" = "Profiel overschrijven";
 
 "Overwrite" = "Overschrijven";
+
+/* Settings Schedule */
+"Schedule" = "Schema";
+"Automatically apply profiles at set times." = "Pas profielen automatisch toe op ingestelde tijden.";
+"Schedules" = "Schema's";
+"Enable Scheduling" = "Planning inschakelen";
+"Automatically apply profiles at scheduled times." = "Pas profielen automatisch toe op geplande tijden.";
+"No schedules yet. Add one to get started." = "Nog geen schema's. Voeg er een toe om te beginnen.";
+"Add Schedule" = "Schema toevoegen";
+"Clock" = "Klok";
+"Sunrise" = "Zonsopgang";
+"Every day" = "Elke dag";
+"Trigger type" = "Triggertype";
+"ScheduleOffsetAfterFormat" = "+%d min";
+"ScheduleOffsetBeforeFormat" = "-%d min";
+"Location" = "Locatie";
+"Required for sunrise and sunset triggers." = "Vereist voor zonsopgang- en zonsondergangtriggers.";
+"Location for solar times" = "Locatie voor zonnetijden";
+"Use My Location" = "Mijn locatie gebruiken";
+"ScheduleLocationUpdatedFormat" = "Bijgewerkt %@";
+"Requesting location\u2026" = "Locatie aanvragen\u2026";
+"Delete schedule" = "Schema verwijderen";
+"No profiles available. Create a profile first." = "Geen profielen beschikbaar. Maak eerst een profiel aan.";

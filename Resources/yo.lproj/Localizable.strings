@@ -148,6 +148,7 @@
 "Display service unavailable" = "Ìṣẹ́ ìfihàn kò sí";
 "DDCOpenFailedFormat" = "Àṣiṣe ṣiṣí DDC (0x%@)";
 "DDCRequestFailedFormat" = "Àṣìṣe ìbéèrè DDC (0x%@)";
+"DDCConnectionTypeUnsupported" = "Irú ìsopọ̀ yìí lè má ṣàtìlẹ́yìn DDC (gbìyànjú DisplayPort)";
 "Internal panel" = "Pánẹ́lù inú";
 
 /* Display Report */
@@ -343,3 +344,26 @@
 "Overwrite Profile" = "Kọ kọ lori profaili";
 
 "Overwrite" = "Kọ kọ lori";
+
+/* Settings Schedule */
+"Schedule" = "Eto àkókò";
+"Automatically apply profiles at set times." = "Lo àwọn profáìlì fún àwọn àkókò tí a ti sẹ̀ àtọ̀nà.";
+"Schedules" = "Àwọn eto àkókò";
+"Enable Scheduling" = "Mú eto àkókò ṣiṣẹ́";
+"Automatically apply profiles at scheduled times." = "Lo àwọn profáìlì fún àkókò tí a ti gbèrò.";
+"No schedules yet. Add one to get started." = "Ko sí eto àkókò. Ṣàfikún ọ̀kan láti bẹ̀rẹ̀.";
+"Add Schedule" = "Ṣàfikún eto àkókò";
+"Clock" = "Ago";
+"Sunrise" = "Ìmọ̀lẹ̀ ọjọ́";
+"Every day" = "Gbogbo ọjọ́";
+"Trigger type" = "Irú ìmúṣẹ";
+"ScheduleOffsetAfterFormat" = "+%d min";
+"ScheduleOffsetBeforeFormat" = "-%d min";
+"Location" = "Ibi";
+"Required for sunrise and sunset triggers." = "Nilo fun ìmúṣẹ ìmọ̀lẹ̀ ọjọ́ àti ìwọ̀ orun.";
+"Location for solar times" = "Ibi fún àwọn àkókò oòrùn";
+"Use My Location" = "Lo ibi mi";
+"ScheduleLocationUpdatedFormat" = "Ti ṣe imudojuiwọn %@";
+"Requesting location\u2026" = "Ń béèrè ibi\u2026";
+"Delete schedule" = "Pa eto àkókò rẹ̀";
+"No profiles available. Create a profile first." = "Ko sí profáìlì. Ṣẹ̀dá profáìlì kan kọ́kọ́.";

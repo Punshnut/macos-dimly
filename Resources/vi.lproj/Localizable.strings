@@ -148,6 +148,7 @@
 "Display service unavailable" = "Dịch vụ màn hình không khả dụng";
 "DDCOpenFailedFormat" = "Mở DDC thất bại (0x%@)";
 "DDCRequestFailedFormat" = "Yêu cầu DDC thất bại (0x%@)";
+"DDCConnectionTypeUnsupported" = "Loại kết nối này có thể không hỗ trợ DDC (thử DisplayPort)";
 "Internal panel" = "Tấm trong";
 
 /* Display Report */
@@ -343,3 +344,26 @@
 "Overwrite Profile" = "Ghi đè hồ sơ";
 
 "Overwrite" = "Ghi đè";
+
+/* Settings Schedule */
+"Schedule" = "Lịch trình";
+"Automatically apply profiles at set times." = "Tự động áp dụng hồ sơ vào các thời gian đã đặt.";
+"Schedules" = "Lịch trình";
+"Enable Scheduling" = "Bật lập lịch";
+"Automatically apply profiles at scheduled times." = "Tự động áp dụng hồ sơ vào các thời gian đã lên lịch.";
+"No schedules yet. Add one to get started." = "Chưa có lịch trình. Thêm một lịch để bắt đầu.";
+"Add Schedule" = "Thêm lịch trình";
+"Clock" = "Đồng hồ";
+"Sunrise" = "Bình minh";
+"Every day" = "Mỗi ngày";
+"Trigger type" = "Loại kích hoạt";
+"ScheduleOffsetAfterFormat" = "+%d phút";
+"ScheduleOffsetBeforeFormat" = "-%d phút";
+"Location" = "Vị trí";
+"Required for sunrise and sunset triggers." = "Bắt buộc cho các kích hoạt bình minh và hoàng hôn.";
+"Location for solar times" = "Vị trí cho giờ mặt trời";
+"Use My Location" = "Dùng vị trí của tôi";
+"ScheduleLocationUpdatedFormat" = "Đã cập nhật %@";
+"Requesting location\u2026" = "Đang yêu cầu vị trí\u2026";
+"Delete schedule" = "Xóa lịch trình";
+"No profiles available. Create a profile first." = "Không có hồ sơ nào. Vui lòng tạo hồ sơ trước.";

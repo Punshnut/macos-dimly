@@ -90,6 +90,7 @@ final class DimlyEngine: ObservableObject {
     let blackoutManager: BlackoutManager
     let ddcManager: DDCManager
     let profileManager: ProfileManager
+    let scheduleManager: ScheduleManager
     var onShowWindow: (() -> Void)?
     var onToggleWindow: (() -> Void)?
 
@@ -114,6 +115,7 @@ final class DimlyEngine: ObservableObject {
             ddcManager: ddcManager,
             settingsStore: settingsStore
         )
+        self.scheduleManager = ScheduleManager()
         DiagnosticsLogger.shared.log("Engine init: managers constructed", category: "engine")
         self.launcherHotkeyManager.onHotkeyPressed = { [weak self] in
             self?.onShowWindow?()
@@ -134,6 +136,7 @@ final class DimlyEngine: ObservableObject {
             }
 
         profileManager.engine = self
+        scheduleManager.profileManager = profileManager
         installBrightnessMediaKeyMonitors()
         refreshBuiltinBrightnessSnapshots(reason: "startup", persistToSettings: false)
         beginTopologySettleGraceWindow(reason: "startup")

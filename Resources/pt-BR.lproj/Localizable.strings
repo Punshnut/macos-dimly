@@ -148,6 +148,7 @@
 "Display service unavailable" = "Serviço de display indisponível";
 "DDCOpenFailedFormat" = "Falha ao abrir DDC (0x%@)";
 "DDCRequestFailedFormat" = "Falha na requisição DDC (0x%@)";
+"DDCConnectionTypeUnsupported" = "Este tipo de conexão pode não suportar DDC (tente DisplayPort)";
 "Internal panel" = "Painel interno";
 
 /* Display Report */
@@ -343,3 +344,26 @@
 "Overwrite Profile" = "Sobrescrever perfil";
 
 "Overwrite" = "Sobrescrever";
+
+/* Settings Schedule */
+"Schedule" = "Agenda";
+"Automatically apply profiles at set times." = "Aplicar perfis automaticamente nos horários definidos.";
+"Schedules" = "Agendas";
+"Enable Scheduling" = "Ativar agendamento";
+"Automatically apply profiles at scheduled times." = "Aplicar perfis automaticamente nos horários agendados.";
+"No schedules yet. Add one to get started." = "Nenhuma agenda ainda. Adicione uma para começar.";
+"Add Schedule" = "Adicionar agenda";
+"Clock" = "Relógio";
+"Sunrise" = "Nascer do sol";
+"Every day" = "Todo dia";
+"Trigger type" = "Tipo de gatilho";
+"ScheduleOffsetAfterFormat" = "+%d min";
+"ScheduleOffsetBeforeFormat" = "-%d min";
+"Location" = "Localização";
+"Required for sunrise and sunset triggers." = "Necessário para gatilhos de nascer e pôr do sol.";
+"Location for solar times" = "Localização para horários solares";
+"Use My Location" = "Usar minha localização";
+"ScheduleLocationUpdatedFormat" = "Atualizado %@";
+"Requesting location\u2026" = "Solicitando localização\u2026";
+"Delete schedule" = "Excluir agenda";
+"No profiles available. Create a profile first." = "Nenhum perfil disponível. Crie um perfil primeiro.";

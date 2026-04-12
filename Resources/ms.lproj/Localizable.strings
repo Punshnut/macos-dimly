@@ -148,6 +148,7 @@
 "Display service unavailable" = "Perkhidmatan paparan tidak tersedia";
 "DDCOpenFailedFormat" = "Gagal membuka DDC (0x%@)";
 "DDCRequestFailedFormat" = "Permintaan DDC gagal (0x%@)";
+"DDCConnectionTypeUnsupported" = "Jenis sambungan ini mungkin tidak menyokong DDC (cuba DisplayPort)";
 "Internal panel" = "Panel dalaman";
 
 /* Display Report */
@@ -343,3 +344,26 @@
 "Overwrite Profile" = "Tulis ganti profil";
 
 "Overwrite" = "Tulis ganti";
+
+/* Settings Schedule */
+"Schedule" = "Jadual";
+"Automatically apply profiles at set times." = "Gunakan profil secara automatik pada waktu yang ditetapkan.";
+"Schedules" = "Jadual";
+"Enable Scheduling" = "Dayakan Penjadualan";
+"Automatically apply profiles at scheduled times." = "Gunakan profil secara automatik pada waktu yang dijadualkan.";
+"No schedules yet. Add one to get started." = "Tiada jadual lagi. Tambah satu untuk bermula.";
+"Add Schedule" = "Tambah Jadual";
+"Clock" = "Jam";
+"Sunrise" = "Matahari terbit";
+"Every day" = "Setiap hari";
+"Trigger type" = "Jenis pencetus";
+"ScheduleOffsetAfterFormat" = "+%d min";
+"ScheduleOffsetBeforeFormat" = "-%d min";
+"Location" = "Lokasi";
+"Required for sunrise and sunset triggers." = "Diperlukan untuk pencetus matahari terbit dan terbenam.";
+"Location for solar times" = "Lokasi untuk waktu suria";
+"Use My Location" = "Gunakan Lokasi Saya";
+"ScheduleLocationUpdatedFormat" = "Dikemas kini %@";
+"Requesting location\u2026" = "Meminta lokasi\u2026";
+"Delete schedule" = "Padam jadual";
+"No profiles available. Create a profile first." = "Tiada profil tersedia. Buat profil dahulu.";

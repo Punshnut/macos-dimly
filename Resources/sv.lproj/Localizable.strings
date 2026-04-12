@@ -148,6 +148,7 @@
 "Display service unavailable" = "Skärmtjänst ej tillgänglig";
 "DDCOpenFailedFormat" = "Kunde inte öppna DDC (0x%@)";
 "DDCRequestFailedFormat" = "DDC-begäran misslyckades (0x%@)";
+"DDCConnectionTypeUnsupported" = "Den här anslutningstypen kanske inte stöder DDC (prova DisplayPort)";
 "Internal panel" = "Intern panel";
 
 /* Display Report */
@@ -343,3 +344,26 @@
 "Overwrite Profile" = "Skriv över profil";
 
 "Overwrite" = "Skriv över";
+
+/* Settings Schedule */
+"Schedule" = "Schema";
+"Automatically apply profiles at set times." = "Tillämpa profiler automatiskt vid inställda tider.";
+"Schedules" = "Scheman";
+"Enable Scheduling" = "Aktivera schemaläggning";
+"Automatically apply profiles at scheduled times." = "Tillämpa profiler automatiskt vid schemalagda tider.";
+"No schedules yet. Add one to get started." = "Inga scheman ännu. Lägg till ett för att börja.";
+"Add Schedule" = "Lägg till schema";
+"Clock" = "Klocka";
+"Sunrise" = "Soluppgång";
+"Every day" = "Varje dag";
+"Trigger type" = "Utlösartyp";
+"ScheduleOffsetAfterFormat" = "+%d min";
+"ScheduleOffsetBeforeFormat" = "-%d min";
+"Location" = "Plats";
+"Required for sunrise and sunset triggers." = "Krävs för utlösare för soluppgång och solnedgång.";
+"Location for solar times" = "Plats för soltider";
+"Use My Location" = "Använd min plats";
+"ScheduleLocationUpdatedFormat" = "Uppdaterad %@";
+"Requesting location\u2026" = "Begär plats\u2026";
+"Delete schedule" = "Ta bort schema";
+"No profiles available. Create a profile first." = "Inga profiler tillgängliga. Skapa en profil först.";

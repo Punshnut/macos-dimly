@@ -148,6 +148,7 @@
 "Display service unavailable" = "Ekran servisi kullanılamıyor";
 "DDCOpenFailedFormat" = "DDC açma hatası (0x%@)";
 "DDCRequestFailedFormat" = "DDC isteği başarısız (0x%@)";
+"DDCConnectionTypeUnsupported" = "Bu bağlantı türü DDC'yi desteklemeyebilir (DisplayPort'u deneyin)";
 "Internal panel" = "Dahili panel";
 
 /* Display Report */
@@ -343,3 +344,26 @@
 "Overwrite Profile" = "Profili üzerine yaz";
 
 "Overwrite" = "Üzerine yaz";
+
+/* Settings Schedule */
+"Schedule" = "Zamanlama";
+"Automatically apply profiles at set times." = "Belirlenen saatlerde profilleri otomatik olarak uygula.";
+"Schedules" = "Zamanlamalar";
+"Enable Scheduling" = "Zamanlamayı Etkinleştir";
+"Automatically apply profiles at scheduled times." = "Zamanlanan saatlerde profilleri otomatik olarak uygula.";
+"No schedules yet. Add one to get started." = "Henüz zamanlama yok. Başlamak için bir tane ekle.";
+"Add Schedule" = "Zamanlama Ekle";
+"Clock" = "Saat";
+"Sunrise" = "Gün doğumu";
+"Every day" = "Her gün";
+"Trigger type" = "Tetikleyici türü";
+"ScheduleOffsetAfterFormat" = "+%d dk";
+"ScheduleOffsetBeforeFormat" = "-%d dk";
+"Location" = "Konum";
+"Required for sunrise and sunset triggers." = "Gün doğumu ve batımı tetikleyicileri için gereklidir.";
+"Location for solar times" = "Güneş saatleri için konum";
+"Use My Location" = "Konumumu Kullan";
+"ScheduleLocationUpdatedFormat" = "Güncellendi %@";
+"Requesting location\u2026" = "Konum isteniyor\u2026";
+"Delete schedule" = "Zamanlamayı sil";
+"No profiles available. Create a profile first." = "Mevcut profil yok. Önce bir profil oluştur.";

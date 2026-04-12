@@ -148,6 +148,7 @@
 "Display service unavailable" = "ডিসপ্লে পরিষেবা অনুপলব্ধ";
 "DDCOpenFailedFormat" = "DDC খোলা ব্যর্থ (0x%@)";
 "DDCRequestFailedFormat" = "DDC অনুরোধ ব্যর্থ (0x%@)";
+"DDCConnectionTypeUnsupported" = "সংযোগের ধরন DDC সমর্থন না-ও করতে পারে (DisplayPort ব্যবহার করে দেখুন)";
 "Internal panel" = "অভ্যন্তরীণ প্যানেল";
 
 /* Display Report */
@@ -343,3 +344,26 @@
 "Overwrite Profile" = "প্রোফাইল ওভাররাইট করুন";
 
 "Overwrite" = "ওভাররাইট";
+
+/* Settings Schedule */
+"Schedule" = "সময়সূচি";
+"Automatically apply profiles at set times." = "নির্ধারিত সময়ে স্বয়ংক্রিয়ভাবে প্রোফাইল প্রয়োগ করুন।";
+"Schedules" = "সময়সূচি";
+"Enable Scheduling" = "সময়সূচি চালু করুন";
+"Automatically apply profiles at scheduled times." = "নির্ধারিত সময়ে স্বয়ংক্রিয়ভাবে প্রোফাইল প্রয়োগ করুন।";
+"No schedules yet. Add one to get started." = "এখনো কোনো সময়সূচি নেই। শুরু করতে একটি যোগ করুন।";
+"Add Schedule" = "সময়সূচি যোগ করুন";
+"Clock" = "ঘড়ি";
+"Sunrise" = "সূর্যোদয়";
+"Every day" = "প্রতিদিন";
+"Trigger type" = "ট্রিগারের ধরন";
+"ScheduleOffsetAfterFormat" = "+%d মিনিট";
+"ScheduleOffsetBeforeFormat" = "-%d মিনিট";
+"Location" = "অবস্থান";
+"Required for sunrise and sunset triggers." = "সূর্যোদয় ও সূর্যাস্তের ট্রিগারের জন্য প্রয়োজন।";
+"Location for solar times" = "সৌর সময়ের জন্য অবস্থান";
+"Use My Location" = "আমার অবস্থান ব্যবহার করুন";
+"ScheduleLocationUpdatedFormat" = "আপডেট হয়েছে %@";
+"Requesting location\u2026" = "অবস্থান অনুরোধ করা হচ্ছে\u2026";
+"Delete schedule" = "সময়সূচি মুছুন";
+"No profiles available. Create a profile first." = "কোনো প্রোফাইল নেই। আগে একটি প্রোফাইল তৈরি করুন।";

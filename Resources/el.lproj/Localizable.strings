@@ -148,6 +148,7 @@
 "Display service unavailable" = "Η υπηρεσία οθόνης δεν είναι διαθέσιμη";
 "DDCOpenFailedFormat" = "Αποτυχία ανοίγματος DDC (0x%@)";
 "DDCRequestFailedFormat" = "Αποτυχία αιτήματος DDC (0x%@)";
+"DDCConnectionTypeUnsupported" = "Ο τύπος σύνδεσης ενδέχεται να μην υποστηρίζει DDC (δοκιμάστε DisplayPort)";
 "Internal panel" = "Εσωτερικό πάνελ";
 
 /* Display Report */
@@ -343,3 +344,26 @@
 "Overwrite Profile" = "Αντικατάσταση προφίλ";
 
 "Overwrite" = "Αντικατάσταση";
+
+/* Settings Schedule */
+"Schedule" = "Πρόγραμμα";
+"Automatically apply profiles at set times." = "Αυτόματη εφαρμογή προφίλ σε καθορισμένες ώρες.";
+"Schedules" = "Προγράμματα";
+"Enable Scheduling" = "Ενεργοποίηση προγραμματισμού";
+"Automatically apply profiles at scheduled times." = "Αυτόματη εφαρμογή προφίλ σε προγραμματισμένες ώρες.";
+"No schedules yet. Add one to get started." = "Δεν υπάρχουν προγράμματα ακόμα. Προσθέστε ένα για να ξεκινήσετε.";
+"Add Schedule" = "Προσθήκη προγράμματος";
+"Clock" = "Ρολόι";
+"Sunrise" = "Ανατολή";
+"Every day" = "Κάθε μέρα";
+"Trigger type" = "Τύπος ενεργοποίησης";
+"ScheduleOffsetAfterFormat" = "+%d λεπτά";
+"ScheduleOffsetBeforeFormat" = "-%d λεπτά";
+"Location" = "Τοποθεσία";
+"Required for sunrise and sunset triggers." = "Απαιτείται για ενεργοποίηση ανατολής και δύσης.";
+"Location for solar times" = "Τοποθεσία για ηλιακές ώρες";
+"Use My Location" = "Χρήση της τοποθεσίας μου";
+"ScheduleLocationUpdatedFormat" = "Ενημερώθηκε %@";
+"Requesting location\u2026" = "Αίτηση τοποθεσίας\u2026";
+"Delete schedule" = "Διαγραφή προγράμματος";
+"No profiles available. Create a profile first." = "Δεν υπάρχουν διαθέσιμα προφίλ. Δημιουργήστε πρώτα ένα προφίλ.";

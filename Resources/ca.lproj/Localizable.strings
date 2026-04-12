@@ -148,6 +148,7 @@
 "Display service unavailable" = "Servei de pantalla no disponible";
 "DDCOpenFailedFormat" = "Error en obrir DDC (0x%@)";
 "DDCRequestFailedFormat" = "Error en la sol·licitud DDC (0x%@)";
+"DDCConnectionTypeUnsupported" = "El tipus de connexió pot no admetre DDC (prova amb DisplayPort)";
 "Internal panel" = "Panell intern";
 
 /* Display Report */
@@ -343,3 +344,26 @@
 "Overwrite Profile" = "Sobreescriu el perfil";
 
 "Overwrite" = "Sobreescriu";
+
+/* Settings Schedule */
+"Schedule" = "Programació";
+"Automatically apply profiles at set times." = "Aplica perfils automàticament a les hores establertes.";
+"Schedules" = "Programacions";
+"Enable Scheduling" = "Activa la programació";
+"Automatically apply profiles at scheduled times." = "Aplica perfils automàticament a les hores programades.";
+"No schedules yet. Add one to get started." = "Encara no hi ha programacions. Afegeix-ne una per começar.";
+"Add Schedule" = "Afegeix programació";
+"Clock" = "Rellotge";
+"Sunrise" = "Sortida del sol";
+"Every day" = "Cada dia";
+"Trigger type" = "Tipus d'activació";
+"ScheduleOffsetAfterFormat" = "+%d min";
+"ScheduleOffsetBeforeFormat" = "-%d min";
+"Location" = "Ubicació";
+"Required for sunrise and sunset triggers." = "Necessari per a les activacions de sortida i posta de sol.";
+"Location for solar times" = "Ubicació per als horaris solars";
+"Use My Location" = "Utilitza la meva ubicació";
+"ScheduleLocationUpdatedFormat" = "Actualitzat %@";
+"Requesting location\u2026" = "Sol·licitant ubicació\u2026";
+"Delete schedule" = "Elimina la programació";
+"No profiles available. Create a profile first." = "No hi ha perfils disponibles. Crea primer un perfil.";

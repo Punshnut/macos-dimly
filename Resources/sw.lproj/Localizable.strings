@@ -148,6 +148,7 @@
 "Display service unavailable" = "Huduma ya skrini haipatikani";
 "DDCOpenFailedFormat" = "Kufungua DDC kumeharibika (0x%@)";
 "DDCRequestFailedFormat" = "Ombi la DDC limeshindwa (0x%@)";
+"DDCConnectionTypeUnsupported" = "Aina hii ya muunganisho inaweza kutosaidia DDC (jaribu DisplayPort)";
 "Internal panel" = "Paneli ya ndani";
 
 /* Display Report */
@@ -343,3 +344,26 @@
 "Overwrite Profile" = "Andika juu ya wasifu";
 
 "Overwrite" = "Andika juu";
+
+/* Settings Schedule */
+"Schedule" = "Ratiba";
+"Automatically apply profiles at set times." = "Tumia wasifu kiotomatiki kwa nyakati zilizowekwa.";
+"Schedules" = "Ratiba";
+"Enable Scheduling" = "Wezesha Upangaji wa Ratiba";
+"Automatically apply profiles at scheduled times." = "Tumia wasifu kiotomatiki kwa nyakati zilizopangwa.";
+"No schedules yet. Add one to get started." = "Hakuna ratiba bado. Ongeza moja ili kuanza.";
+"Add Schedule" = "Ongeza Ratiba";
+"Clock" = "Saa";
+"Sunrise" = "Machomeo ya jua";
+"Every day" = "Kila siku";
+"Trigger type" = "Aina ya kichocheo";
+"ScheduleOffsetAfterFormat" = "+%d min";
+"ScheduleOffsetBeforeFormat" = "-%d min";
+"Location" = "Mahali";
+"Required for sunrise and sunset triggers." = "Inahitajika kwa vichocheo vya machomeo na machweo ya jua.";
+"Location for solar times" = "Mahali kwa nyakati za jua";
+"Use My Location" = "Tumia Mahali Pangu";
+"ScheduleLocationUpdatedFormat" = "Imesasishwa %@";
+"Requesting location\u2026" = "Inaomba mahali\u2026";
+"Delete schedule" = "Futa ratiba";
+"No profiles available. Create a profile first." = "Hakuna wasifu uliopo. Unda wasifu kwanza.";

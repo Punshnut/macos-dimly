@@ -96,6 +96,145 @@ I’ve worked on desks with 8-12 mixed monitors and uneven DDC support, where fa
 - Hide the menu bar icon if you want a stealth setup; hotkeys keep working.
 - Use **Copy Display Report** or **Open Diagnostics Log** for fast support/debugging.
 
+## DDC/CI and external monitors
+
+**What is DDC/CI and what does Dimly do with it?**
+
+DDC/CI (Display Data Channel Command Interface) is the protocol Dimly uses to send hardware brightness and sleep/wake commands to external monitors over the display cable. When it works, the monitor's actual hardware brightness changes. When it doesn't, Dimly automatically falls back to **overlay mode**, which dims the screen visually without touching hardware. Both modes are fully functional - DDC is just better when available.
+
+Whether DDC works depends on three things in combination: your **Mac architecture**, the **cable and connection type**, and the **monitor itself**. The sections below cover each.
+
+</details>
+
+---
+
+<details>
+<summary><strong>Apple Silicon Macs (M1, M2, M3, M4 and later)</strong></summary>
+<br>
+
+Apple Silicon replaced the old IOFramebuffer display stack with a new DCP (Display Controller Processor) architecture. The legacy IOKit I2C APIs that Intel-era apps rely on do not function on M-series hardware - they silently fail at the driver level, causing DDC to appear unsupported for all external monitors.
+
+**Dimly 1.5+ uses the correct Apple Silicon DDC path** via `IOAVService` APIs (the same approach used by MonitorControl, Lunar, m1ddc, and BetterDisplay). DDC now works on M-series Macs - but only with compatible connection types.
+
+**Apple Silicon DDC checklist:**
+
+- Use **USB-C with DisplayPort Alt Mode** or a direct **Thunderbolt cable** to the monitor. This is the highest-reliability connection on M-series Macs.
+- **HDMI does not support DDC on Apple Silicon.** This is a hardware limitation of Apple's HDMI port on all M-series Macs and Mac mini (2018+). Switching from HDMI to USB-C/DisplayPort will fix DDC.
+- Mini DisplayPort via a Thunderbolt adapter also works on most monitors.
+- If you upgraded from an older Dimly build and DDC suddenly works - this is why.
+
+</details>
+
+---
+
+<details>
+<summary><strong>Intel Macs</strong></summary>
+<br>
+
+The traditional IOKit I2C path used on Intel Macs is well-established and stable. DDC generally works over DisplayPort, DVI, and most HDMI connections on Intel hardware.
+
+If DDC doesn't work on your Intel Mac, the most common causes are:
+- A dock, hub, or KVM sitting between the Mac and monitor (see the docks section below).
+- DDC/CI disabled in the monitor's OSD menu.
+- A cheap passive adapter that doesn't pass DDC through.
+
+</details>
+
+---
+
+<details>
+<summary><strong>Dell monitors</strong></summary>
+<br>
+
+Dell monitors support DDC/CI but **require it to be enabled in the OSD menu** - it is off by default on most models and may have been reset after a firmware update.
+
+**How to enable DDC/CI on a Dell monitor:**
+1. Press the physical menu button on the monitor.
+2. Navigate to **Other Settings** (some models label it **Menu → Others**).
+3. Find **DDC/CI** and set it to **Enable**.
+4. Exit the OSD. Dimly will re-probe within a few seconds and show DDC as supported.
+
+**Dell series breakdown:**
+
+| Series | DDC on macOS | Notes |
+|---|---|---|
+| U-series (U2422H, U2720Q, U2723QE…) | Yes | Works via DisplayPort and USB-C. Best option for DDC. |
+| P-series (P2422HE, P2415Q…) | Unlikely | Dell's own display manager lists no DDC/CI support on macOS for P-series. Overlay mode will be used. |
+| S-series (S2421H…) | Inconsistent | Varies by model and firmware. Dimly detects and falls back as needed. |
+
+**Additional Dell notes:**
+- DDC/CI is not available over USB (the upstream USB-B port on the monitor). Always use the video cable (USB-C, DisplayPort, or HDMI) for DDC.
+- Some Dell monitors accept DDC write commands but reject values outside a narrow range (e.g. refusing contrast below their OSD minimum). Dimly sends standard VCP commands; if those are rejected, the monitor falls back to overlay.
+- Connecting via a Dell DisplayLink dock (D6000, D1000, WD22TB, UD22…) disables DDC - see the docks section.
+
+</details>
+
+---
+
+<details>
+<summary><strong>Docks, KVMs, and adapters</strong></summary>
+<br>
+
+DDC/CI breaks in most signal-passthrough scenarios. This is not a Dimly limitation - the dock or hub strips DDC before it reaches macOS.
+
+| Device type | DDC? | Details |
+|---|---|---|
+| DisplayLink dock (Dell D6000, D1000, WD22TB, UD22…) | No | DisplayLink does not pass DDC on macOS at all. |
+| MST hub (DisplayPort daisy-chain) | No | Multi-Stream Transport breaks DDC for all downstream monitors. |
+| KVM switch | Usually no | Most KVMs strip DDC. Some enterprise KVMs preserve it - check the spec sheet. |
+| Thunderbolt dock with direct DP output (not MST) | Usually yes | Look for "DDC passthrough" in the dock's specs. CalDigit, OWC, and Belkin docks generally pass DDC. |
+| Simple passive USB-C → DP / USB-C → HDMI adapter | Usually yes | Works unless the adapter is low-quality and cuts corners on the AUX channel. |
+| Active USB-C → HDMI adapter on Apple Silicon | No | HDMI on Apple Silicon carries no DDC regardless of adapter quality. |
+
+**If you use a dock:** the fastest fix is a direct cable from Mac to monitor while testing. If DDC appears in Dimly with a direct cable but not through the dock, the dock is the cause.
+
+</details>
+
+---
+
+<details>
+<summary><strong>Other monitors and brands</strong></summary>
+<br>
+
+DDC/CI behaviour varies widely across brands. Common patterns:
+
+- **LG UltraFine (Thunderbolt models)**: Use Apple's proprietary brightness protocol, not standard DDC/CI. Dimly uses overlay mode for these.
+- **LG standard monitors** (27UK850, 27GP950…): DDC/CI generally works well on both Intel and Apple Silicon via DisplayPort/USB-C.
+- **Samsung**: DDC/CI support varies by model. Most mid-range and high-end panels support it; budget panels often don't.
+- **BenQ / ViewSonic**: Generally good DDC/CI support. Enable it in OSD if not working.
+- **ASUS ProArt / ROG**: Good support on DisplayPort. Some models require DDC/CI to be enabled in OSD.
+- **Monitors marketed as "USB-C monitors"**: Usually work well on Apple Silicon via their USB-C input; DDC/CI is typically enabled by default.
+
+If your monitor isn't listed, try enabling DDC/CI in the OSD first, then try a direct DisplayPort or USB-C connection. If it still shows Overlay mode, DDC may simply not be supported on that model - overlay mode will work fine.
+
+</details>
+
+---
+
+<details>
+<summary><strong>Reading Dimly's DDC status indicators</strong></summary>
+<br>
+
+Each display row shows its current control mode:
+
+| Status shown | Meaning |
+|---|---|
+| **DDC** | Hardware control active. Brightness and sleep/wake go to the monitor directly. |
+| **Checking DDC** | Dimly is still probing - normal for a few seconds after connecting, waking, or launching. |
+| **Overlay mode** | DDC unavailable. Brightness uses a screen overlay; blackout is used for sleep/wake. |
+
+If a display stays on Overlay mode and you expected DDC:
+1. Check the cable type (HDMI on Apple Silicon → switch to USB-C/DP).
+2. Enable DDC/CI in the monitor's OSD menu.
+3. Try a direct cable, bypassing any dock or hub.
+4. Reconnect the monitor - Dimly re-probes on every reconnect and system wake.
+
+Overlay mode is full-featured and reliable. It's not a degraded state - just software rather than hardware control.
+
+</details>
+
+---
+
 ## Updates, signing, and safety
 
 - Updates are delivered via Sparkle with ed25519 signatures; the feed lives in `Resources/Info.plist`.
@@ -110,7 +249,7 @@ I’ve worked on desks with 8-12 mixed monitors and uneven DDC support, where fa
 
 Supports Intel and Apple Silicon Macs. Requires macOS 14+
 
-> **macOS 26.4 (Tahoe) users:** Dimly 1.4 includes visual fixes for macOS 26.4. If you are on 1.3, update to 1.4 before or immediately after upgrading to macOS 26.4 — otherwise the UI may look off. Sparkle auto-update will offer 1.4 automatically, or grab it manually from the [releases page](https://github.com/Punshnut/macos-dimly/releases/latest).
+> **macOS 26.4 (Tahoe) users:** Dimly 1.4 includes visual fixes for macOS 26.4. If you are on 1.3, update to 1.4 before or immediately after upgrading to macOS 26.4 - otherwise the UI may look off. Sparkle auto-update will offer 1.4 automatically, or grab it manually from the [releases page](https://github.com/Punshnut/macos-dimly/releases/latest).
 
 ## Roadmap
 

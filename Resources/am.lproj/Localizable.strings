@@ -148,6 +148,7 @@
 "Display service unavailable" = "የማሳያ አገልግሎት አልተገኘም";
 "DDCOpenFailedFormat" = "DDC መክፈት አልተሳካም (0x%@)";
 "DDCRequestFailedFormat" = "የDDC ጥያቄ አልተሳካም (0x%@)";
+"DDCConnectionTypeUnsupported" = "የግንኙነት አይነቱ DDC ሊደግፍ አይችልም (DisplayPort ይሞክሩ)";
 "Internal panel" = "ውስጣዊ ፓነል";
 
 /* Display Report */
@@ -343,3 +344,26 @@
 "Overwrite Profile" = "መገለጫን ተካ";
 
 "Overwrite" = "ተካ";
+
+/* Settings Schedule */
+"Schedule" = "መርሃ ግብር";
+"Automatically apply profiles at set times." = "ፕሮፋይሎችን በተወሰኑ ጊዜያት ራስ-ሰር ተግብር።";
+"Schedules" = "መርሃ ግብሮች";
+"Enable Scheduling" = "ጊዜ ቅደም ተከተል አስቻለ";
+"Automatically apply profiles at scheduled times." = "ፕሮፋይሎችን በታቀዱ ጊዜያት ራስ-ሰር ተግብር።";
+"No schedules yet. Add one to get started." = "እስካሁን ምንም መርሃ ግብር የለም። ለጀምር አንድ ጨምር።";
+"Add Schedule" = "መርሃ ግብር ጨምር";
+"Clock" = "ሰዓት";
+"Sunrise" = "የፀሐይ መውጫ";
+"Every day" = "ሁሉ ቀን";
+"Trigger type" = "አስነሽ አይነት";
+"ScheduleOffsetAfterFormat" = "+%d min";
+"ScheduleOffsetBeforeFormat" = "-%d min";
+"Location" = "ቦታ";
+"Required for sunrise and sunset triggers." = "ለፀሐይ መውጫ እና መውረጃ አስነሾዎች ያስፈልጋል።";
+"Location for solar times" = "ለፀሐይ ጊዜያት ቦታ";
+"Use My Location" = "የእኔን ቦታ ተጠቀም";
+"ScheduleLocationUpdatedFormat" = "ተዘምኗል %@";
+"Requesting location\u2026" = "ቦታ እየጠየቀ ነው\u2026";
+"Delete schedule" = "መርሃ ግብር ሰርዝ";
+"No profiles available. Create a profile first." = "ምንም ፕሮፋይል የለም። መጀመሪያ ፕሮፋይል ፍጠር።";

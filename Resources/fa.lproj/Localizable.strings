@@ -148,6 +148,7 @@
 "Display service unavailable" = "سرویس نمایشگر در دسترس نیست";
 "DDCOpenFailedFormat" = "باز کردن DDC ناموفق بود (0x%@)";
 "DDCRequestFailedFormat" = "درخواست DDC ناموفق بود (0x%@)";
+"DDCConnectionTypeUnsupported" = "این نوع اتصال ممکن است از DDC پشتیبانی نکند (DisplayPort را امتحان کنید)";
 "Internal panel" = "پنل داخلی";
 
 /* Display Report */
@@ -343,3 +344,26 @@
 "Overwrite Profile" = "بازنویسی نمایه";
 
 "Overwrite" = "بازنویسی";
+
+/* Settings Schedule */
+"Schedule" = "زمان‌بندی";
+"Automatically apply profiles at set times." = "پروفایل‌ها را به‌طور خودکار در زمان‌های تعیین‌شده اعمال کنید.";
+"Schedules" = "زمان‌بندی‌ها";
+"Enable Scheduling" = "فعال‌سازی زمان‌بندی";
+"Automatically apply profiles at scheduled times." = "پروفایل‌ها را به‌طور خودکار در زمان‌های برنامه‌ریزی‌شده اعمال کنید.";
+"No schedules yet. Add one to get started." = "هنوز زمان‌بندی‌ای وجود ندارد. برای شروع یکی اضافه کنید.";
+"Add Schedule" = "افزودن زمان‌بندی";
+"Clock" = "ساعت";
+"Sunrise" = "طلوع آفتاب";
+"Every day" = "هر روز";
+"Trigger type" = "نوع محرک";
+"ScheduleOffsetAfterFormat" = "+%d دقیقه";
+"ScheduleOffsetBeforeFormat" = "-%d دقیقه";
+"Location" = "مکان";
+"Required for sunrise and sunset triggers." = "برای محرک‌های طلوع و غروب آفتاب لازم است.";
+"Location for solar times" = "مکان برای اوقات خورشیدی";
+"Use My Location" = "استفاده از موقعیت من";
+"ScheduleLocationUpdatedFormat" = "به‌روز شد %@";
+"Requesting location\u2026" = "در حال دریافت موقعیت\u2026";
+"Delete schedule" = "حذف زمان‌بندی";
+"No profiles available. Create a profile first." = "هیچ پروفایلی در دسترس نیست. ابتدا یک پروفایل ایجاد کنید.";

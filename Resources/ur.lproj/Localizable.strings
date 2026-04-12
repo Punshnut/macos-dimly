@@ -148,6 +148,7 @@
 "Display service unavailable" = "ڈسپلے سروس دستیاب نہیں";
 "DDCOpenFailedFormat" = "DDC کھولنے میں ناکامی (0x%@)";
 "DDCRequestFailedFormat" = "DDC درخواست ناکام (0x%@)";
+"DDCConnectionTypeUnsupported" = "یہ کنکشن قسم DDC کو سپورٹ نہیں کر سکتی (DisplayPort آزمائیں)";
 "Internal panel" = "اندرونی پینل";
 
 /* Display Report */
@@ -343,3 +344,26 @@
 "Overwrite Profile" = "پروفائل اووررائٹ کریں";
 
 "Overwrite" = "اووررائٹ کریں";
+
+/* Settings Schedule */
+"Schedule" = "شیڈول";
+"Automatically apply profiles at set times." = "مقررہ اوقات میں خود بخود پروفائلز لاگو کریں۔";
+"Schedules" = "شیڈولز";
+"Enable Scheduling" = "شیڈولنگ فعال کریں";
+"Automatically apply profiles at scheduled times." = "شیڈول اوقات میں خود بخود پروفائلز لاگو کریں۔";
+"No schedules yet. Add one to get started." = "ابھی تک کوئی شیڈول نہیں۔ شروع کرنے کے لیے ایک شامل کریں۔";
+"Add Schedule" = "شیڈول شامل کریں";
+"Clock" = "گھڑی";
+"Sunrise" = "طلوع آفتاب";
+"Every day" = "ہر روز";
+"Trigger type" = "ٹرگر کی قسم";
+"ScheduleOffsetAfterFormat" = "+%d منٹ";
+"ScheduleOffsetBeforeFormat" = "-%d منٹ";
+"Location" = "مقام";
+"Required for sunrise and sunset triggers." = "طلوع و غروب آفتاب ٹرگرز کے لیے ضروری ہے۔";
+"Location for solar times" = "شمسی اوقات کے لیے مقام";
+"Use My Location" = "میرا مقام استعمال کریں";
+"ScheduleLocationUpdatedFormat" = "اپ ڈیٹ ہوا %@";
+"Requesting location\u2026" = "مقام کی درخواست ہو رہی ہے\u2026";
+"Delete schedule" = "شیڈول حذف کریں";
+"No profiles available. Create a profile first." = "کوئی پروفائل دستیاب نہیں۔ پہلے ایک پروفائل بنائیں۔";

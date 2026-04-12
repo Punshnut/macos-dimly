@@ -148,6 +148,7 @@
 "Display service unavailable" = "ပြသမှု ဝန်ဆောင်မှု မရနိုင်";
 "DDCOpenFailedFormat" = "DDC ဖွင့်ခြင်း မအောင်မြင် (0x%@)";
 "DDCRequestFailedFormat" = "DDC တောင်းဆိုမှု မအောင်မြင် (0x%@)";
+"DDCConnectionTypeUnsupported" = "ဤချိတ်ဆက်မှု အမျိုးအစားသည် DDC ကို ပံ့ပိုးမပေးနိုင်ပါ (DisplayPort သုံးကြည့်ပါ)";
 "Internal panel" = "အတွင်းပိုင်း ဘုတ်";
 
 /* Display Report */
@@ -343,3 +344,26 @@
 "Overwrite Profile" = "ပရိုဖိုင်ကို အစားထိုးရေးပါ";
 
 "Overwrite" = "အစားထိုးရေးပါ";
+
+/* Settings Schedule */
+"Schedule" = "အချိန်ဇယား";
+"Automatically apply profiles at set times." = "သတ်မှတ်ထားသောအချိန်များတွင် ပရိုဖိုင်များကို အလိုအလျောက် ကျင့်သုံးပါ။";
+"Schedules" = "အချိန်ဇယားများ";
+"Enable Scheduling" = "အချိန်ဇယားချခြင်းကို ဖွင့်ပါ";
+"Automatically apply profiles at scheduled times." = "ကြိုတင်သတ်မှတ်ထားသောအချိန်များတွင် ပရိုဖိုင်များကို အလိုအလျောက် ကျင့်သုံးပါ။";
+"No schedules yet. Add one to get started." = "အချိန်ဇယားများ မရှိသေးပါ။ စတင်ရန် တစ်ခု ထည့်ပါ။";
+"Add Schedule" = "အချိန်ဇယား ထည့်ပါ";
+"Clock" = "နာရီ";
+"Sunrise" = "နေထွက်ချိန်";
+"Every day" = "နေ့တိုင်း";
+"Trigger type" = "အစပျိုးမှု အမျိုးအစား";
+"ScheduleOffsetAfterFormat" = "+%d မိနစ်";
+"ScheduleOffsetBeforeFormat" = "-%d မိနစ်";
+"Location" = "တည်နေရာ";
+"Required for sunrise and sunset triggers." = "နေထွက်နေဝင် အစပျိုးမှုများအတွက် လိုအပ်သည်။";
+"Location for solar times" = "နေတည်နေရာ အချိန်များအတွက် တည်နေရာ";
+"Use My Location" = "ကျွန်ုပ်၏ တည်နေရာ အသုံးပြုပါ";
+"ScheduleLocationUpdatedFormat" = "%@ တွင် မွမ်းမံထားသည်";
+"Requesting location\u2026" = "တည်နေရာ တောင်းဆိုနေသည်\u2026";
+"Delete schedule" = "အချိန်ဇယား ဖျက်ပါ";
+"No profiles available. Create a profile first." = "ပရိုဖိုင်များ မရှိပါ။ ဦးစွာ ပရိုဖိုင် ဖန်တီးပါ။";

@@ -148,6 +148,7 @@
 "Display service unavailable" = "خدمة الشاشة غير متاحة";
 "DDCOpenFailedFormat" = "فشل فتح DDC (0x%@)";
 "DDCRequestFailedFormat" = "فشل طلب DDC (0x%@)";
+"DDCConnectionTypeUnsupported" = "نوع الاتصال قد لا يدعم DDC (جرّب DisplayPort)";
 "Internal panel" = "لوحة داخلية";
 
 /* Display Report */
@@ -343,3 +344,26 @@
 "Overwrite Profile" = "استبدال الملف الشخصي";
 
 "Overwrite" = "استبدال";
+
+/* Settings Schedule */
+"Schedule" = "الجدول الزمني";
+"Automatically apply profiles at set times." = "تطبيق الملفات الشخصية تلقائياً في الأوقات المحددة.";
+"Schedules" = "الجداول الزمنية";
+"Enable Scheduling" = "تمكين الجدولة";
+"Automatically apply profiles at scheduled times." = "تطبيق الملفات الشخصية تلقائياً في الأوقات المجدولة.";
+"No schedules yet. Add one to get started." = "لا توجد جداول زمنية بعد. أضف جدولاً للبدء.";
+"Add Schedule" = "إضافة جدول زمني";
+"Clock" = "ساعة";
+"Sunrise" = "شروق الشمس";
+"Every day" = "كل يوم";
+"Trigger type" = "نوع المشغل";
+"ScheduleOffsetAfterFormat" = "+%d دقيقة";
+"ScheduleOffsetBeforeFormat" = "-%d دقيقة";
+"Location" = "الموقع";
+"Required for sunrise and sunset triggers." = "مطلوب لمشغلات شروق وغروب الشمس.";
+"Location for solar times" = "الموقع لأوقات الشمس";
+"Use My Location" = "استخدام موقعي";
+"ScheduleLocationUpdatedFormat" = "تم التحديث %@";
+"Requesting location\u2026" = "جاري طلب الموقع\u2026";
+"Delete schedule" = "حذف الجدول الزمني";
+"No profiles available. Create a profile first." = "لا تتوفر ملفات شخصية. أنشئ ملفاً شخصياً أولاً.";
