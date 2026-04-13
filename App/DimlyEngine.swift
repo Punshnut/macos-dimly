@@ -400,8 +400,15 @@ final class DimlyEngine: ObservableObject {
             return
         }
 
+        let transitionMultiplier = settingsStore.settings.transitionSpeed.multiplier
+        guard transitionMultiplier > 0 else {
+            normalizedTargets.forEach { target in
+                setBrightness(target.percent, for: target.display, animated: false)
+            }
+            return
+        }
         let steps = min(22, max(8, maxDelta))
-        let sleepNanos = UInt64((0.36 / Double(steps)) * 1_000_000_000)
+        let sleepNanos = UInt64((0.36 * transitionMultiplier / Double(steps)) * 1_000_000_000)
         synchronizedBrightnessTransitionTask = Task { @MainActor [weak self] in
             guard let self else { return }
             for step in 1...steps {
@@ -564,8 +571,13 @@ final class DimlyEngine: ObservableObject {
             return
         }
         let delta = target - start
+        let transitionMultiplier = settingsStore.settings.transitionSpeed.multiplier
+        guard transitionMultiplier > 0 else {
+            applyExternalBrightness(target, for: display, persist: true, fallbackAnimated: false)
+            return
+        }
         let steps = min(22, max(8, abs(delta)))
-        let sleepNanos = UInt64((0.36 / Double(steps)) * 1_000_000_000)
+        let sleepNanos = UInt64((0.36 * transitionMultiplier / Double(steps)) * 1_000_000_000)
 
         let task = Task { @MainActor [weak self] in
             guard let self else { return }
@@ -793,6 +805,7 @@ final class DimlyEngine: ObservableObject {
         launcherHotkeyManager.activate()
         updateHotkeys(settings.hotkeyBindings)
         panicHotkeyManager.activate()
+        blackoutManager.transitionSpeedMultiplier = settings.transitionSpeed.multiplier
     }
 
     /// Registers all configured hotkeys and de-duplicates by descriptor.
@@ -1705,8 +1718,13 @@ final class DimlyEngine: ObservableObject {
         }
 
         let delta = target - current
+        let transitionMultiplier = settingsStore.settings.transitionSpeed.multiplier
+        guard transitionMultiplier > 0 else {
+            applyTarget()
+            return
+        }
         let steps = min(24, max(8, abs(delta)))
-        let sleepNanos = UInt64((0.28 / Double(steps)) * 1_000_000_000)
+        let sleepNanos = UInt64((0.28 * transitionMultiplier / Double(steps)) * 1_000_000_000)
 
         let task = Task { @MainActor [weak self] in
             for step in 1...steps {

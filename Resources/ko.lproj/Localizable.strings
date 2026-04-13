@@ -60,9 +60,22 @@
 
 /* Settings Tabs */
 "General" = "일반";
+"Displays" = "디스플레이";
+"Visuals" = "Visuals";
 "Shortcuts" = "단축키";
 "Profiles" = "프로필";
 "About" = "정보";
+
+
+/* Settings Visuals */
+"Transitions" = "Transitions";
+"Transition speed" = "Transition speed";
+"Controls how fast brightness and profile changes animate." = "Controls how fast brightness and profile changes animate.";
+"Instant" = "Instant";
+"Fast" = "Fast";
+"Balanced" = "Balanced";
+"Smooth" = "Smooth";
+"Cinematic" = "Cinematic";
 
 /* Settings General */
 "Autostart" = "자동 시작";
@@ -73,7 +86,6 @@
 "Hide Dock icon" = "Dock 아이콘 숨기기";
 "Hide the Dock icon and app switcher entry." = "Dock 아이콘과 앱 전환 항목을 숨깁니다.";
 "Dimly stays running for hotkeys even when the menu bar icon is hidden." = "메뉴 아이콘이 숨겨져 있어도 Dimly는 단축키를 위해 실행됩니다.";
-"Displays" = "디스플레이";
 "Fade out on sleep/blackout" = "잠자기/블랙아웃 시 페이드아웃";
 "Fade in on wake/restore" = "깨우기/복원 시 페이드인";
 "Show display numbers on screens" = "화면에 디스플레이 번호 표시";

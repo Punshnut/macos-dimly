@@ -60,9 +60,22 @@
 
 /* Settings Tabs */
 "General" = "通用";
+"Displays" = "显示器";
+"Visuals" = "Visuals";
 "Shortcuts" = "快捷键";
 "Profiles" = "配置";
 "About" = "关于";
+
+
+/* Settings Visuals */
+"Transitions" = "Transitions";
+"Transition speed" = "Transition speed";
+"Controls how fast brightness and profile changes animate." = "Controls how fast brightness and profile changes animate.";
+"Instant" = "Instant";
+"Fast" = "Fast";
+"Balanced" = "Balanced";
+"Smooth" = "Smooth";
+"Cinematic" = "Cinematic";
 
 /* Settings General */
 "Autostart" = "自动启动";
@@ -73,7 +86,6 @@
 "Hide Dock icon" = "隐藏 Dock 图标";
 "Hide the Dock icon and app switcher entry." = "隐藏 Dock 图标和应用切换项。";
 "Dimly stays running for hotkeys even when the menu bar icon is hidden." = "即使菜单栏图标被隐藏，Dimly 仍保持运行以响应快捷键。";
-"Displays" = "显示器";
 "Fade out on sleep/blackout" = "睡眠/黑屏时淡出";
 "Fade in on wake/restore" = "唤醒/恢复时淡入";
 "Show display numbers on screens" = "在屏幕上显示编号";

@@ -60,9 +60,22 @@
 
 /* Settings Tabs */
 "General" = "Chung";
+"Displays" = "Màn hình";
+"Visuals" = "Visuals";
 "Shortcuts" = "Phím tắt";
 "Profiles" = "Hồ sơ";
 "About" = "Giới thiệu";
+
+
+/* Settings Visuals */
+"Transitions" = "Transitions";
+"Transition speed" = "Transition speed";
+"Controls how fast brightness and profile changes animate." = "Controls how fast brightness and profile changes animate.";
+"Instant" = "Instant";
+"Fast" = "Fast";
+"Balanced" = "Balanced";
+"Smooth" = "Smooth";
+"Cinematic" = "Cinematic";
 
 /* Settings General */
 "Autostart" = "Khởi động tự động";
@@ -73,7 +86,6 @@
 "Hide Dock icon" = "Ẩn biểu tượng Dock";
 "Hide the Dock icon and app switcher entry." = "Ẩn biểu tượng Dock và mục chuyển đổi ứng dụng.";
 "Dimly stays running for hotkeys even when the menu bar icon is hidden." = "Dimly vẫn chạy cho phím tắt ngay cả khi biểu tượng thanh menu bị ẩn.";
-"Displays" = "Màn hình";
 "Fade out on sleep/blackout" = "Mờ dần khi ngủ/blackout";
 "Fade in on wake/restore" = "Sáng dần khi đánh thức/khôi phục";
 "Show display numbers on screens" = "Hiển thị số màn hình trên màn hình";

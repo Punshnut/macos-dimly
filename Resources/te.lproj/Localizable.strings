@@ -60,9 +60,22 @@
 
 /* Settings Tabs */
 "General" = "సాధారణ";
+"Displays" = "డిస్ప్లేలు";
+"Visuals" = "Visuals";
 "Shortcuts" = "షార్ట్‌కట్లు";
 "Profiles" = "ప్రొఫైళ్లు";
 "About" = "గురించి";
+
+
+/* Settings Visuals */
+"Transitions" = "Transitions";
+"Transition speed" = "Transition speed";
+"Controls how fast brightness and profile changes animate." = "Controls how fast brightness and profile changes animate.";
+"Instant" = "Instant";
+"Fast" = "Fast";
+"Balanced" = "Balanced";
+"Smooth" = "Smooth";
+"Cinematic" = "Cinematic";
 
 /* Settings General */
 "Autostart" = "స్వయంచాలక ప్రారంభం";
@@ -73,7 +86,6 @@
 "Hide Dock icon" = "డాక్ ఐకాన్ దాచు";
 "Hide the Dock icon and app switcher entry." = "డాక్ ఐకాన్ మరియు యాప్ స్విచ్చర్ ఎంట్రీను దాచుతుంది.";
 "Dimly stays running for hotkeys even when the menu bar icon is hidden." = "మెనూ ఐకాన్ దాగి ఉన్నప్పటికీ హాట్‌కీల కోసం Dimly కొనసాగుతుంది.";
-"Displays" = "డిస్ప్లేలు";
 "Fade out on sleep/blackout" = "నిద్ర/బ్లాకౌట్ సమయంలో మసకబార్చు";
 "Fade in on wake/restore" = "మేల్కొన్నప్పుడు/పునరుద్ధరించేటప్పుడు మెల్లగా తెచ్చు";
 "Show display numbers on screens" = "స్క్రీన్లపై డిస్ప్లే సంఖ్యలను చూపు";

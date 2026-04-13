@@ -60,9 +60,22 @@
 
 /* Settings Tabs */
 "General" = "ทั่วไป";
+"Displays" = "จอ";
+"Visuals" = "Visuals";
 "Shortcuts" = "ทางลัด";
 "Profiles" = "โปรไฟล์";
 "About" = "เกี่ยวกับ";
+
+
+/* Settings Visuals */
+"Transitions" = "Transitions";
+"Transition speed" = "Transition speed";
+"Controls how fast brightness and profile changes animate." = "Controls how fast brightness and profile changes animate.";
+"Instant" = "Instant";
+"Fast" = "Fast";
+"Balanced" = "Balanced";
+"Smooth" = "Smooth";
+"Cinematic" = "Cinematic";
 
 /* Settings General */
 "Autostart" = "เริ่มอัตโนมัติ";
@@ -73,7 +86,6 @@
 "Hide Dock icon" = "ซ่อนไอคอน Dock";
 "Hide the Dock icon and app switcher entry." = "ซ่อนไอคอน Dock และรายการตัวสลับแอป";
 "Dimly stays running for hotkeys even when the menu bar icon is hidden." = "Dimly ยังทำงานสำหรับฮอตคีย์แม้ไอคอนจะถูกซ่อนไว้";
-"Displays" = "จอ";
 "Fade out on sleep/blackout" = "ค่อยๆ มืดเมื่อสลีป/มืดจอ";
 "Fade in on wake/restore" = "ค่อยๆ สว่างเมื่อปลุก/กู้คืน";
 "Show display numbers on screens" = "แสดงหมายเลขจอบนหน้าจอ";

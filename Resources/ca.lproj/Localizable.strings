@@ -60,9 +60,22 @@
 
 /* Settings Tabs */
 "General" = "General";
+"Displays" = "Pantalles";
+"Visuals" = "Visuals";
 "Shortcuts" = "Dreceres";
 "Profiles" = "Perfils";
 "About" = "Quant a";
+
+
+/* Settings Visuals */
+"Transitions" = "Transitions";
+"Transition speed" = "Transition speed";
+"Controls how fast brightness and profile changes animate." = "Controls how fast brightness and profile changes animate.";
+"Instant" = "Instant";
+"Fast" = "Fast";
+"Balanced" = "Balanced";
+"Smooth" = "Smooth";
+"Cinematic" = "Cinematic";
 
 /* Settings General */
 "Autostart" = "Inici automàtic";
@@ -73,7 +86,6 @@
 "Hide Dock icon" = "Amaga la icona del Dock";
 "Hide the Dock icon and app switcher entry." = "Amaga la icona del Dock i l'entrada del commutador d'apps.";
 "Dimly stays running for hotkeys even when the menu bar icon is hidden." = "Dimly segueix funcionant per a dreceres encara que la icona estigui oculta.";
-"Displays" = "Pantalles";
 "Fade out on sleep/blackout" = "Esvaeix en repòs/blackout";
 "Fade in on wake/restore" = "Apareix en despertar/restaurar";
 "Show display numbers on screens" = "Mostra números de pantalla";

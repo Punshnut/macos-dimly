@@ -60,9 +60,22 @@
 
 /* Settings Tabs */
 "General" = "Jumla";
+"Displays" = "Skrini";
+"Visuals" = "Visuals";
 "Shortcuts" = "Vifupisho";
 "Profiles" = "Profaili";
 "About" = "Kuhusu";
+
+
+/* Settings Visuals */
+"Transitions" = "Transitions";
+"Transition speed" = "Transition speed";
+"Controls how fast brightness and profile changes animate." = "Controls how fast brightness and profile changes animate.";
+"Instant" = "Instant";
+"Fast" = "Fast";
+"Balanced" = "Balanced";
+"Smooth" = "Smooth";
+"Cinematic" = "Cinematic";
 
 /* Settings General */
 "Autostart" = "Anzisho la kiotomatiki";
@@ -73,7 +86,6 @@
 "Hide Dock icon" = "Ficha ikoni ya Dock";
 "Hide the Dock icon and app switcher entry." = "Huficha ikoni ya Dock na ingizo la kubadilisha app.";
 "Dimly stays running for hotkeys even when the menu bar icon is hidden." = "Dimly inaendelea kwa hotkey hata ikoni ya mwambaa ikifichwa.";
-"Displays" = "Skrini";
 "Fade out on sleep/blackout" = "Fade out ukiweka kulala/blackout";
 "Fade in on wake/restore" = "Fade in unapoamka/kurejesha";
 "Show display numbers on screens" = "Onyesha nambari za skrini";

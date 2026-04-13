@@ -60,9 +60,22 @@
 
 /* Settings Tabs */
 "General" = "አጠቃላይ";
+"Displays" = "ማሳያዎች";
+"Visuals" = "Visuals";
 "Shortcuts" = "አቋራጮች";
 "Profiles" = "ፕሮፋይሎች";
 "About" = "ስለ";
+
+
+/* Settings Visuals */
+"Transitions" = "Transitions";
+"Transition speed" = "Transition speed";
+"Controls how fast brightness and profile changes animate." = "Controls how fast brightness and profile changes animate.";
+"Instant" = "Instant";
+"Fast" = "Fast";
+"Balanced" = "Balanced";
+"Smooth" = "Smooth";
+"Cinematic" = "Cinematic";
 
 /* Settings General */
 "Autostart" = "ራስ-ጀምር";
@@ -73,7 +86,6 @@
 "Hide Dock icon" = "የDock አዶን ደብቅ";
 "Hide the Dock icon and app switcher entry." = "የDock አዶንን እና የመቀየሪያ መግቢያን ደብቅ።";
 "Dimly stays running for hotkeys even when the menu bar icon is hidden." = "የሜኑ አዶ ተደብቆም Dimly ለሙሉ ቁልፎች ይሰራል።";
-"Displays" = "ማሳያዎች";
 "Fade out on sleep/blackout" = "በእንቅልፍ/ጥቁር ላይ ቀስ በቀስ ጠፋ";
 "Fade in on wake/restore" = "በንቃት/መመለስ ላይ ቀስ በቀስ ገባ";
 "Show display numbers on screens" = "በማሳያዎች ላይ ቁጥሮችን አሳይ";

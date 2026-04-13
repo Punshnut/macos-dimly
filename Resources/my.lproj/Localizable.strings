@@ -60,9 +60,22 @@
 
 /* Settings Tabs */
 "General" = "ယေဘုယျ";
+"Displays" = "ပြသမှုများ";
+"Visuals" = "Visuals";
 "Shortcuts" = "ဖတ်ရှည်များ";
 "Profiles" = "ပရိုဖိုင်များ";
 "About" = "အကြောင်း";
+
+
+/* Settings Visuals */
+"Transitions" = "Transitions";
+"Transition speed" = "Transition speed";
+"Controls how fast brightness and profile changes animate." = "Controls how fast brightness and profile changes animate.";
+"Instant" = "Instant";
+"Fast" = "Fast";
+"Balanced" = "Balanced";
+"Smooth" = "Smooth";
+"Cinematic" = "Cinematic";
 
 /* Settings General */
 "Autostart" = "အလိုအလျောက် စတင်";
@@ -73,7 +86,6 @@
 "Hide Dock icon" = "Dock အိုင်ကွန် ဝှက်";
 "Hide the Dock icon and app switcher entry." = "Dock အိုင်ကွန်နှင့် အပ္ပ်ပြောင်း မှတ်တမ်းကို ဝှက်ထားသည်။";
 "Dimly stays running for hotkeys even when the menu bar icon is hidden." = "မီနူးဘားအိုင်ကွန် ဝှက်ထားသောအခါတွင်တောင် Dimly သည် ဟော့ကီးများအတွက် ဆက်လက် လည်ပတ်သည်။";
-"Displays" = "ပြသမှုများ";
 "Fade out on sleep/blackout" = "အနားပေး/အမည်းဖုံး 时 တိတ်တဆိတ်သွား";
 "Fade in on wake/restore" = "ဖွင့်/ပြန်သွား 时 တိတ်တဆိတ်ဝင်";
 "Show display numbers on screens" = "စခရင်တွင် ပြသမှုနံပါတ်များ ပြ";

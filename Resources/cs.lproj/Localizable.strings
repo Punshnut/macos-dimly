@@ -60,9 +60,22 @@
 
 /* Settings Tabs */
 "General" = "Obecné";
+"Displays" = "Displeje";
+"Visuals" = "Visuals";
 "Shortcuts" = "Zkratky";
 "Profiles" = "Profily";
 "About" = "O aplikaci";
+
+
+/* Settings Visuals */
+"Transitions" = "Transitions";
+"Transition speed" = "Transition speed";
+"Controls how fast brightness and profile changes animate." = "Controls how fast brightness and profile changes animate.";
+"Instant" = "Instant";
+"Fast" = "Fast";
+"Balanced" = "Balanced";
+"Smooth" = "Smooth";
+"Cinematic" = "Cinematic";
 
 /* Settings General */
 "Autostart" = "Automatické spuštění";
@@ -73,7 +86,6 @@
 "Hide Dock icon" = "Skrýt ikonu v Docku";
 "Hide the Dock icon and app switcher entry." = "Skryje ikonu v Docku a položku v přepínači aplikací.";
 "Dimly stays running for hotkeys even when the menu bar icon is hidden." = "Dimly zůstane běžet pro klávesové zkratky i když je ikona skrytá.";
-"Displays" = "Displeje";
 "Fade out on sleep/blackout" = "Při usnutí/blackoutu ztlumit";
 "Fade in on wake/restore" = "Při probuzení/obnovení zesílit";
 "Show display numbers on screens" = "Zobrazit čísla displejů";

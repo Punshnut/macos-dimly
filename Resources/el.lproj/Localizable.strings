@@ -60,9 +60,22 @@
 
 /* Settings Tabs */
 "General" = "Γενικά";
+"Displays" = "Οθόνες";
+"Visuals" = "Visuals";
 "Shortcuts" = "Συντομεύσεις";
 "Profiles" = "Προφίλ";
 "About" = "Πληροφορίες";
+
+
+/* Settings Visuals */
+"Transitions" = "Transitions";
+"Transition speed" = "Transition speed";
+"Controls how fast brightness and profile changes animate." = "Controls how fast brightness and profile changes animate.";
+"Instant" = "Instant";
+"Fast" = "Fast";
+"Balanced" = "Balanced";
+"Smooth" = "Smooth";
+"Cinematic" = "Cinematic";
 
 /* Settings General */
 "Autostart" = "Αυτόματη εκκίνηση";
@@ -73,7 +86,6 @@
 "Hide Dock icon" = "Απόκρυψη εικονιδίου Dock";
 "Hide the Dock icon and app switcher entry." = "Απόκρυψη εικονιδίου Dock και της καταχώρησης εναλλαγής εφαρμογών.";
 "Dimly stays running for hotkeys even when the menu bar icon is hidden." = "Το Dimly μένει ενεργό για συντομεύσεις ακόμη κι αν το εικονίδιο είναι κρυφό.";
-"Displays" = "Οθόνες";
 "Fade out on sleep/blackout" = "Σβήσιμο σε ύπνο/blackout";
 "Fade in on wake/restore" = "Άναμμα σε αφύπνιση/επαναφορά";
 "Show display numbers on screens" = "Εμφάνιση αριθμών στις οθόνες";

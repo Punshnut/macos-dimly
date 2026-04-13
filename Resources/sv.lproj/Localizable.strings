@@ -60,9 +60,22 @@
 
 /* Settings Tabs */
 "General" = "Allmänt";
+"Displays" = "Skärmar";
+"Visuals" = "Visuals";
 "Shortcuts" = "Genvägar";
 "Profiles" = "Profiler";
 "About" = "Om";
+
+
+/* Settings Visuals */
+"Transitions" = "Transitions";
+"Transition speed" = "Transition speed";
+"Controls how fast brightness and profile changes animate." = "Controls how fast brightness and profile changes animate.";
+"Instant" = "Instant";
+"Fast" = "Fast";
+"Balanced" = "Balanced";
+"Smooth" = "Smooth";
+"Cinematic" = "Cinematic";
 
 /* Settings General */
 "Autostart" = "Autostart";
@@ -73,7 +86,6 @@
 "Hide Dock icon" = "Dölj Dock-ikon";
 "Hide the Dock icon and app switcher entry." = "Döljer Dock-ikonen och posten i appväxlaren.";
 "Dimly stays running for hotkeys even when the menu bar icon is hidden." = "Dimly fortsätter köras för snabbkommandon även när ikonen är dold.";
-"Displays" = "Skärmar";
 "Fade out on sleep/blackout" = "Tona ut vid vila/blackout";
 "Fade in on wake/restore" = "Tona in vid väckning/återställning";
 "Show display numbers on screens" = "Visa skärmnummer på skärmar";

@@ -60,9 +60,22 @@
 
 /* Settings Tabs */
 "General" = "عمومی";
+"Displays" = "ڈسپلے";
+"Visuals" = "Visuals";
 "Shortcuts" = "شارٹ کٹس";
 "Profiles" = "پروفائلز";
 "About" = "متعلق";
+
+
+/* Settings Visuals */
+"Transitions" = "Transitions";
+"Transition speed" = "Transition speed";
+"Controls how fast brightness and profile changes animate." = "Controls how fast brightness and profile changes animate.";
+"Instant" = "Instant";
+"Fast" = "Fast";
+"Balanced" = "Balanced";
+"Smooth" = "Smooth";
+"Cinematic" = "Cinematic";
 
 /* Settings General */
 "Autostart" = "خودکار آغاز";
@@ -73,7 +86,6 @@
 "Hide Dock icon" = "Dock آئیکن چھپائیں";
 "Hide the Dock icon and app switcher entry." = "Dock آئیکن اور ایپ سوئچر اندراج کو چھپاتا ہے.";
 "Dimly stays running for hotkeys even when the menu bar icon is hidden." = "مینو بار آئیکن مخفی ہونے پر بھی Dimly ہاٹکیز کے لیے چلتا رہتا ہے.";
-"Displays" = "ڈسپلے";
 "Fade out on sleep/blackout" = "سلیپ/بلیک آؤٹ پر مدھم کریں";
 "Fade in on wake/restore" = "ویك/بحالی پر ظاہر کریں";
 "Show display numbers on screens" = "اسکرینز پر ڈسپلے نمبر دکھائیں";

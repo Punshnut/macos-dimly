@@ -9,6 +9,28 @@ enum PersistedMonitorPowerState: String, Codable, Equatable {
     case standby
 }
 
+/// Speed of brightness transitions and profile-change animations.
+enum TransitionSpeed: String, Codable, Equatable, CaseIterable, Identifiable {
+    case instant
+    case fast
+    case balanced
+    case smooth
+    case cinematic
+
+    var id: String { rawValue }
+
+    /// Multiplier applied to all animation durations. Zero means no animation.
+    var multiplier: Double {
+        switch self {
+        case .instant:   return 0.0
+        case .fast:      return 0.5
+        case .balanced:  return 1.0
+        case .smooth:    return 1.8
+        case .cinematic: return 3.0
+        }
+    }
+}
+
 /// Persisted app appearance preference.
 enum AppAppearancePreference: String, Codable, Equatable, CaseIterable, Identifiable {
     case system
@@ -41,6 +63,7 @@ struct DimlySettings: Codable, Equatable {
     var hotkeyBindings: [HotkeyBinding]
     var showDisplayNumbers: Bool
     var displayAliases: [String: String]
+    var transitionSpeed: TransitionSpeed
     var fadeOutAnimationEnabled: Bool
     var fadeInAnimationEnabled: Bool
     var overlayOnlyDisplayIDs: [String]
@@ -69,6 +92,7 @@ struct DimlySettings: Codable, Equatable {
         case primaryHotkey
         case showDisplayNumbers
         case displayAliases
+        case transitionSpeed
         case fadeOutAnimationEnabled
         case fadeInAnimationEnabled
         case overlayOnlyDisplayIDs
@@ -118,6 +142,7 @@ struct DimlySettings: Codable, Equatable {
         ],
         showDisplayNumbers: false,
         displayAliases: [:],
+        transitionSpeed: .balanced,
         fadeOutAnimationEnabled: true,
         fadeInAnimationEnabled: true,
         overlayOnlyDisplayIDs: [],
@@ -147,6 +172,7 @@ struct DimlySettings: Codable, Equatable {
         hotkeyBindings: [HotkeyBinding],
         showDisplayNumbers: Bool,
         displayAliases: [String: String],
+        transitionSpeed: TransitionSpeed,
         fadeOutAnimationEnabled: Bool,
         fadeInAnimationEnabled: Bool,
         overlayOnlyDisplayIDs: [String],
@@ -173,6 +199,7 @@ struct DimlySettings: Codable, Equatable {
         self.hotkeyBindings = hotkeyBindings
         self.showDisplayNumbers = showDisplayNumbers
         self.displayAliases = displayAliases
+        self.transitionSpeed = transitionSpeed
         self.fadeOutAnimationEnabled = fadeOutAnimationEnabled
         self.fadeInAnimationEnabled = fadeInAnimationEnabled
         self.overlayOnlyDisplayIDs = overlayOnlyDisplayIDs
@@ -204,6 +231,7 @@ struct DimlySettings: Codable, Equatable {
         let legacyPrimaryHotkey = try container.decodeIfPresent(HotkeyDescriptor.self, forKey: .primaryHotkey)
         let showDisplayNumbers = try container.decodeIfPresent(Bool.self, forKey: .showDisplayNumbers) ?? DimlySettings.default.showDisplayNumbers
         let displayAliases = try container.decodeIfPresent([String: String].self, forKey: .displayAliases) ?? DimlySettings.default.displayAliases
+        let transitionSpeed = try container.decodeIfPresent(TransitionSpeed.self, forKey: .transitionSpeed) ?? DimlySettings.default.transitionSpeed
         let fadeOutAnimationEnabled = try container.decodeIfPresent(Bool.self, forKey: .fadeOutAnimationEnabled) ?? DimlySettings.default.fadeOutAnimationEnabled
         let fadeInAnimationEnabled = try container.decodeIfPresent(Bool.self, forKey: .fadeInAnimationEnabled) ?? DimlySettings.default.fadeInAnimationEnabled
         let overlayOnlyDisplayIDs = try container.decodeIfPresent([String].self, forKey: .overlayOnlyDisplayIDs) ?? DimlySettings.default.overlayOnlyDisplayIDs
@@ -256,6 +284,7 @@ struct DimlySettings: Codable, Equatable {
             hotkeyBindings: resolvedBindings,
             showDisplayNumbers: showDisplayNumbers,
             displayAliases: displayAliases,
+            transitionSpeed: transitionSpeed,
             fadeOutAnimationEnabled: fadeOutAnimationEnabled,
             fadeInAnimationEnabled: fadeInAnimationEnabled,
             overlayOnlyDisplayIDs: overlayOnlyDisplayIDs,
@@ -287,6 +316,7 @@ struct DimlySettings: Codable, Equatable {
         try container.encode(hotkeyBindings, forKey: .hotkeyBindings)
         try container.encode(showDisplayNumbers, forKey: .showDisplayNumbers)
         try container.encode(displayAliases, forKey: .displayAliases)
+        try container.encode(transitionSpeed, forKey: .transitionSpeed)
         try container.encode(fadeOutAnimationEnabled, forKey: .fadeOutAnimationEnabled)
         try container.encode(fadeInAnimationEnabled, forKey: .fadeInAnimationEnabled)
         try container.encode(overlayOnlyDisplayIDs, forKey: .overlayOnlyDisplayIDs)
@@ -311,6 +341,18 @@ struct DimlySettings: Codable, Equatable {
     /// Clamps smart-button row limits to the supported range.
     private static func normalizedSmartButtonsLimit(_ value: Int) -> Int {
         max(4, min(16, value))
+    }
+}
+
+extension TransitionSpeed {
+    var localizedTitle: String {
+        switch self {
+        case .instant:   return String(localized: "Instant")
+        case .fast:      return String(localized: "Fast")
+        case .balanced:  return String(localized: "Balanced")
+        case .smooth:    return String(localized: "Smooth")
+        case .cinematic: return String(localized: "Cinematic")
+        }
     }
 }
 

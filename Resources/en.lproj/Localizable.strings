@@ -70,6 +70,8 @@
 
 /* Settings Tabs */
 "General" = "General";
+"Displays" = "Displays";
+"Visuals" = "Visuals";
 "Shortcuts" = "Shortcuts";
 "Profiles" = "Profiles";
 "About" = "About";
@@ -88,7 +90,6 @@
 "Show on every screen" = "Show on every screen";
 "Hide the Dock icon and app switcher entry." = "Hide the Dock icon and app switcher entry.";
 "Dimly stays running for hotkeys even when the menu bar icon is hidden." = "Dimly stays running for hotkeys even when the menu bar icon is hidden.";
-"Displays" = "Displays";
 "Fade out on sleep/blackout" = "Fade out on sleep/blackout";
 "Fade in on wake/restore" = "Fade in on wake/restore";
 "Show display numbers on screens" = "Show display numbers on screens";
@@ -116,6 +117,16 @@
 "This backup does not include monitor settings." = "This backup does not include monitor settings.";
 "Could not decode the selected backup file." = "Could not decode the selected backup file.";
 "Could not save the backup file." = "Could not save the backup file.";
+
+/* Settings Visuals */
+"Transitions" = "Transitions";
+"Transition speed" = "Transition speed";
+"Controls how fast brightness and profile changes animate." = "Controls how fast brightness and profile changes animate.";
+"Instant" = "Instant";
+"Fast" = "Fast";
+"Balanced" = "Balanced";
+"Smooth" = "Smooth";
+"Cinematic" = "Cinematic";
 
 /* Settings Displays */
 "Internal" = "Internal";

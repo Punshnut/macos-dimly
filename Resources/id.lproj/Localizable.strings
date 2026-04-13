@@ -60,9 +60,22 @@
 
 /* Settings Tabs */
 "General" = "Umum";
+"Displays" = "Layar";
+"Visuals" = "Visuals";
 "Shortcuts" = "Pintasan";
 "Profiles" = "Profil";
 "About" = "Tentang";
+
+
+/* Settings Visuals */
+"Transitions" = "Transitions";
+"Transition speed" = "Transition speed";
+"Controls how fast brightness and profile changes animate." = "Controls how fast brightness and profile changes animate.";
+"Instant" = "Instant";
+"Fast" = "Fast";
+"Balanced" = "Balanced";
+"Smooth" = "Smooth";
+"Cinematic" = "Cinematic";
 
 /* Settings General */
 "Autostart" = "Mulai otomatis";
@@ -73,7 +86,6 @@
 "Hide Dock icon" = "Sembunyikan ikon Dock";
 "Hide the Dock icon and app switcher entry." = "Sembunyikan ikon Dock dan entri pengalih aplikasi.";
 "Dimly stays running for hotkeys even when the menu bar icon is hidden." = "Dimly tetap berjalan untuk hotkey meski ikon bilah menu disembunyikan.";
-"Displays" = "Layar";
 "Fade out on sleep/blackout" = "Fade out saat tidur/blackout";
 "Fade in on wake/restore" = "Fade in saat bangun/pulih";
 "Show display numbers on screens" = "Tampilkan nomor layar di layar";

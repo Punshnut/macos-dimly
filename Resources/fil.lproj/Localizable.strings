@@ -61,9 +61,22 @@
 
 /* Settings Tabs */
 "General" = "Pangkalahatan";
+"Displays" = "Mga display";
+"Visuals" = "Visuals";
 "Shortcuts" = "Mga shortcut";
 "Profiles" = "Mga profile";
 "About" = "Tungkol";
+
+
+/* Settings Visuals */
+"Transitions" = "Transitions";
+"Transition speed" = "Transition speed";
+"Controls how fast brightness and profile changes animate." = "Controls how fast brightness and profile changes animate.";
+"Instant" = "Instant";
+"Fast" = "Fast";
+"Balanced" = "Balanced";
+"Smooth" = "Smooth";
+"Cinematic" = "Cinematic";
 
 /* Settings General */
 "Autostart" = "Awtomatikong pagsisimula";
@@ -74,7 +87,6 @@
 "Hide Dock icon" = "Itago ang icon sa Dock";
 "Hide the Dock icon and app switcher entry." = "Itinatago ang icon sa Dock at entry sa app switcher.";
 "Dimly stays running for hotkeys even when the menu bar icon is hidden." = "Patuloy na tumatakbo ang Dimly para sa hotkeys kahit nakatago ang icon sa menu bar.";
-"Displays" = "Mga display";
 "Fade out on sleep/blackout" = "Mag-fade out kapag sleep/blackout";
 "Fade in on wake/restore" = "Mag-fade in kapag wake/restore";
 "Show display numbers on screens" = "Ipakita ang mga numero ng display sa screen";

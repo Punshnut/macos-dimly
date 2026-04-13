@@ -60,9 +60,22 @@
 
 /* Settings Tabs */
 "General" = "Yleiset";
+"Displays" = "Näytöt";
+"Visuals" = "Visuals";
 "Shortcuts" = "Pikanäppäimet";
 "Profiles" = "Profiilit";
 "About" = "Tietoja";
+
+
+/* Settings Visuals */
+"Transitions" = "Transitions";
+"Transition speed" = "Transition speed";
+"Controls how fast brightness and profile changes animate." = "Controls how fast brightness and profile changes animate.";
+"Instant" = "Instant";
+"Fast" = "Fast";
+"Balanced" = "Balanced";
+"Smooth" = "Smooth";
+"Cinematic" = "Cinematic";
 
 /* Settings General */
 "Autostart" = "Automaattinen käynnistys";
@@ -73,7 +86,6 @@
 "Hide Dock icon" = "Piilota Dock-kuvake";
 "Hide the Dock icon and app switcher entry." = "Piilottaa Dock-kuvakkeen ja sovellusten vaihtajan kohdan.";
 "Dimly stays running for hotkeys even when the menu bar icon is hidden." = "Dimly pysyy käynnissä pikanäppäimiä varten, vaikka kuvake olisi piilossa.";
-"Displays" = "Näytöt";
 "Fade out on sleep/blackout" = "Häivytä unessa/pimennyksessä";
 "Fade in on wake/restore" = "Häivytä esiin herätessä/palauttaessa";
 "Show display numbers on screens" = "Näytä näyttönumerot";

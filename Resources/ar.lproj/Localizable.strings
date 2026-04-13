@@ -60,9 +60,22 @@
 
 /* Settings Tabs */
 "General" = "عام";
+"Displays" = "الشاشات";
+"Visuals" = "Visuals";
 "Shortcuts" = "اختصارات";
 "Profiles" = "ملفات التعريف";
 "About" = "حول";
+
+
+/* Settings Visuals */
+"Transitions" = "Transitions";
+"Transition speed" = "Transition speed";
+"Controls how fast brightness and profile changes animate." = "Controls how fast brightness and profile changes animate.";
+"Instant" = "Instant";
+"Fast" = "Fast";
+"Balanced" = "Balanced";
+"Smooth" = "Smooth";
+"Cinematic" = "Cinematic";
 
 /* Settings General */
 "Autostart" = "التشغيل التلقائي";
@@ -73,7 +86,6 @@
 "Hide Dock icon" = "إخفاء أيقونة Dock";
 "Hide the Dock icon and app switcher entry." = "إخفاء أيقونة Dock ومدخل مبدّل التطبيقات.";
 "Dimly stays running for hotkeys even when the menu bar icon is hidden." = "يبقى Dimly قيد التشغيل للاختصارات حتى عند إخفاء الأيقونة.";
-"Displays" = "الشاشات";
 "Fade out on sleep/blackout" = "تلاشي عند السكون/التعتيم";
 "Fade in on wake/restore" = "ظهور تدريجي عند الإيقاظ/الاستعادة";
 "Show display numbers on screens" = "عرض أرقام الشاشات";

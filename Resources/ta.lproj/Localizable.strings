@@ -60,9 +60,22 @@
 
 /* Settings Tabs */
 "General" = "பொது";
+"Displays" = "காட்சிகள்";
+"Visuals" = "Visuals";
 "Shortcuts" = "குறுக்குவழிகள்";
 "Profiles" = "சுயவிவரங்கள்";
 "About" = "பற்றி";
+
+
+/* Settings Visuals */
+"Transitions" = "Transitions";
+"Transition speed" = "Transition speed";
+"Controls how fast brightness and profile changes animate." = "Controls how fast brightness and profile changes animate.";
+"Instant" = "Instant";
+"Fast" = "Fast";
+"Balanced" = "Balanced";
+"Smooth" = "Smooth";
+"Cinematic" = "Cinematic";
 
 /* Settings General */
 "Autostart" = "தானியங்கு தொடக்கம்";
@@ -73,7 +86,6 @@
 "Hide Dock icon" = "Dock ஐகானை மறை";
 "Hide the Dock icon and app switcher entry." = "Dock ஐகானையும் பயன்பாடு மாறி நுழைவை மறைக்கிறது.";
 "Dimly stays running for hotkeys even when the menu bar icon is hidden." = "மெனு ஐகான் மறைந்திருந்தாலும் Dimly குறுக்குவழிகளுக்காக இயங்கிக் கொண்டே இருக்கும்.";
-"Displays" = "காட்சிகள்";
 "Fade out on sleep/blackout" = "உறக்கம்/கருமையில் மங்கச் செய்";
 "Fade in on wake/restore" = "எழுச்சி/மீட்டெடுப்பில் தெளிவாக்கு";
 "Show display numbers on screens" = "திரைகளில் காட்சி எண்களை காட்டு";

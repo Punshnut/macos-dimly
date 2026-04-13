@@ -20,6 +20,7 @@ struct SettingsRootView: View {
     enum SettingsDestination: Hashable {
         case general
         case displays
+        case visuals
         case shortcuts
         case profiles
         case schedule
@@ -35,6 +36,8 @@ struct SettingsRootView: View {
                         .tag(SettingsDestination.general)
                     Label(String(localized: "Displays"), systemImage: "display")
                         .tag(SettingsDestination.displays)
+                    Label(String(localized: "Visuals"), systemImage: "paintbrush")
+                        .tag(SettingsDestination.visuals)
                     Label(String(localized: "Shortcuts"), systemImage: "keyboard")
                         .tag(SettingsDestination.shortcuts)
                     Label(String(localized: "Profiles"), systemImage: "rectangle.3.group")
@@ -502,6 +505,8 @@ struct SettingsRootView: View {
                 generalDetail
             case .displays:
                 displaysDetail
+            case .visuals:
+                visualsDetail
             case .shortcuts:
                 shortcutsDetail
             case .profiles:
@@ -545,28 +550,6 @@ struct SettingsRootView: View {
                             set: { newValue in settingsStore.update { $0.hideDockIcon = newValue } }
                         )
                     )
-                    SettingsDivider()
-                    SettingsRow(
-                        title: String(localized: "Appearance"),
-                        subtitle: String(localized: "Choose how Dimly looks."),
-                        systemImage: "circle.lefthalf.filled"
-                    ) {
-                        Picker(
-                            String(localized: "Appearance"),
-                            selection: Binding(
-                                get: { settingsStore.settings.appAppearancePreference },
-                                set: { newValue in settingsStore.update { $0.appAppearancePreference = newValue } }
-                            )
-                        ) {
-                            ForEach(AppAppearancePreference.allCases) { preference in
-                                Text(preference.localizedTitle)
-                                    .tag(preference)
-                            }
-                        }
-                        .labelsHidden()
-                        .pickerStyle(.menu)
-                        .frame(width: 150)
-                    }
                     SettingsDivider()
                     SettingsRow(
                         title: String(localized: "Fast Actions visibility"),
@@ -652,26 +635,6 @@ struct SettingsRootView: View {
             SettingsScrollView(title: String(localized: "Displays"), subtitle: nil) {
                 SettingsCard(title: String(localized: "Displays"), subtitle: nil) {
                     SettingsToggleRow(
-                        title: String(localized: "Fade out on sleep/blackout"),
-                        subtitle: nil,
-                        systemImage: "moon.zzz",
-                        isOn: Binding(
-                            get: { settingsStore.settings.fadeOutAnimationEnabled },
-                            set: { newValue in settingsStore.update { $0.fadeOutAnimationEnabled = newValue } }
-                        )
-                    )
-                    SettingsDivider()
-                    SettingsToggleRow(
-                        title: String(localized: "Fade in on wake/restore"),
-                        subtitle: nil,
-                        systemImage: "sun.max",
-                        isOn: Binding(
-                            get: { settingsStore.settings.fadeInAnimationEnabled },
-                            set: { newValue in settingsStore.update { $0.fadeInAnimationEnabled = newValue } }
-                        )
-                    )
-                    SettingsDivider()
-                    SettingsToggleRow(
                         title: String(localized: "Show display numbers on screens"),
                         subtitle: nil,
                         systemImage: "number",
@@ -754,6 +717,94 @@ struct SettingsRootView: View {
             let remaining = allDisplays.filter { order.contains($0.stableIdentity) == false }
                 .sorted { $0.displayID < $1.displayID }
             return ordered + remaining
+        }
+
+        private var visualsDetail: some View {
+            SettingsScrollView(title: String(localized: "Visuals"), subtitle: nil) {
+                SettingsCard(title: String(localized: "Appearance"), subtitle: nil) {
+                    SettingsRow(
+                        title: String(localized: "Appearance"),
+                        subtitle: String(localized: "Choose how Dimly looks."),
+                        systemImage: "circle.lefthalf.filled"
+                    ) {
+                        Picker(
+                            String(localized: "Appearance"),
+                            selection: Binding(
+                                get: { settingsStore.settings.appAppearancePreference },
+                                set: { newValue in settingsStore.update { $0.appAppearancePreference = newValue } }
+                            )
+                        ) {
+                            ForEach(AppAppearancePreference.allCases) { preference in
+                                Text(preference.localizedTitle)
+                                    .tag(preference)
+                            }
+                        }
+                        .labelsHidden()
+                        .pickerStyle(.menu)
+                        .frame(width: 150)
+                    }
+                }
+
+                SettingsCard(title: String(localized: "Transitions"), subtitle: nil) {
+                    SettingsRow(
+                        title: String(localized: "Transition speed"),
+                        subtitle: String(localized: "Controls how fast brightness and profile changes animate."),
+                        systemImage: "slider.horizontal.3"
+                    ) {
+                        transitionSpeedSlider
+                    }
+                    SettingsDivider()
+                    SettingsToggleRow(
+                        title: String(localized: "Fade out on sleep/blackout"),
+                        subtitle: nil,
+                        systemImage: "moon.zzz",
+                        isOn: Binding(
+                            get: { settingsStore.settings.fadeOutAnimationEnabled },
+                            set: { newValue in settingsStore.update { $0.fadeOutAnimationEnabled = newValue } }
+                        )
+                    )
+                    SettingsDivider()
+                    SettingsToggleRow(
+                        title: String(localized: "Fade in on wake/restore"),
+                        subtitle: nil,
+                        systemImage: "sun.max",
+                        isOn: Binding(
+                            get: { settingsStore.settings.fadeInAnimationEnabled },
+                            set: { newValue in settingsStore.update { $0.fadeInAnimationEnabled = newValue } }
+                        )
+                    )
+                }
+
+                SettingsCard(title: String(localized: "Smart Buttons"), subtitle: nil) {
+                    smartButtonsConfigurationSection
+                }
+            }
+        }
+
+        private var transitionSpeedSlider: some View {
+            let allCases = TransitionSpeed.allCases
+            let speedBinding = Binding<Double>(
+                get: {
+                    Double(allCases.firstIndex(of: settingsStore.settings.transitionSpeed) ?? 2)
+                },
+                set: { newValue in
+                    let index = max(0, min(allCases.count - 1, Int(newValue.rounded())))
+                    settingsStore.update { $0.transitionSpeed = allCases[index] }
+                }
+            )
+            return VStack(alignment: .leading, spacing: 4) {
+                Slider(value: speedBinding, in: 0...Double(allCases.count - 1), step: 1)
+                    .frame(width: 200)
+                HStack(spacing: 0) {
+                    ForEach(allCases) { speed in
+                        Text(speed.localizedTitle)
+                            .font(.caption2)
+                            .foregroundStyle(.secondary)
+                            .frame(maxWidth: .infinity)
+                    }
+                }
+                .frame(width: 200)
+            }
         }
 
         private var shortcutsDetail: some View {
@@ -853,9 +904,6 @@ struct SettingsRootView: View {
                             .textFieldStyle(.roundedBorder)
                             .frame(width: 210)
                     }
-
-                    SettingsDivider()
-                    smartButtonsConfigurationSection
 
                     SettingsDivider()
 

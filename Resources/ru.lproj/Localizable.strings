@@ -60,9 +60,22 @@
 
 /* Settings Tabs */
 "General" = "Общие";
+"Displays" = "Дисплеи";
+"Visuals" = "Visuals";
 "Shortcuts" = "Ярлыки";
 "Profiles" = "Профили";
 "About" = "О программе";
+
+
+/* Settings Visuals */
+"Transitions" = "Transitions";
+"Transition speed" = "Transition speed";
+"Controls how fast brightness and profile changes animate." = "Controls how fast brightness and profile changes animate.";
+"Instant" = "Instant";
+"Fast" = "Fast";
+"Balanced" = "Balanced";
+"Smooth" = "Smooth";
+"Cinematic" = "Cinematic";
 
 /* Settings General */
 "Autostart" = "Автозапуск";
@@ -73,7 +86,6 @@
 "Hide Dock icon" = "Скрыть значок в Dock";
 "Hide the Dock icon and app switcher entry." = "Скрывает значок Dock и пункт переключателя приложений.";
 "Dimly stays running for hotkeys even when the menu bar icon is hidden." = "Dimly продолжает работать для горячих клавиш, даже если значок скрыт.";
-"Displays" = "Дисплеи";
 "Fade out on sleep/blackout" = "Плавно гасить при сне/blackout";
 "Fade in on wake/restore" = "Плавно появляться при пробуждении/восстановлении";
 "Show display numbers on screens" = "Показывать номера на экранах";

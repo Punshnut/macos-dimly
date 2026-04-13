@@ -60,9 +60,22 @@
 
 /* Settings Tabs */
 "General" = "Genel";
+"Displays" = "Ekranlar";
+"Visuals" = "Visuals";
 "Shortcuts" = "Kısayollar";
 "Profiles" = "Profiller";
 "About" = "Hakkında";
+
+
+/* Settings Visuals */
+"Transitions" = "Transitions";
+"Transition speed" = "Transition speed";
+"Controls how fast brightness and profile changes animate." = "Controls how fast brightness and profile changes animate.";
+"Instant" = "Instant";
+"Fast" = "Fast";
+"Balanced" = "Balanced";
+"Smooth" = "Smooth";
+"Cinematic" = "Cinematic";
 
 /* Settings General */
 "Autostart" = "Otomatik başlat";
@@ -73,7 +86,6 @@
 "Hide Dock icon" = "Dock simgesini gizle";
 "Hide the Dock icon and app switcher entry." = "Dock simgesini ve uygulama değiştirici girişini gizler.";
 "Dimly stays running for hotkeys even when the menu bar icon is hidden." = "Menü simgesi gizli olsa bile Dimly kısayollar için çalışır.";
-"Displays" = "Ekranlar";
 "Fade out on sleep/blackout" = "Uyku/karartmada karart";
 "Fade in on wake/restore" = "Uyanış/geri yüklemede aydınlat";
 "Show display numbers on screens" = "Ekran numaralarını ekranda göster";

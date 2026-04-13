@@ -60,9 +60,22 @@
 
 /* Settings Tabs */
 "General" = "Gbogbogbo";
+"Displays" = "Àfihàn";
+"Visuals" = "Visuals";
 "Shortcuts" = "Ọ̀nà abuja";
 "Profiles" = "Àwọn profaili";
 "About" = "Nípa";
+
+
+/* Settings Visuals */
+"Transitions" = "Transitions";
+"Transition speed" = "Transition speed";
+"Controls how fast brightness and profile changes animate." = "Controls how fast brightness and profile changes animate.";
+"Instant" = "Instant";
+"Fast" = "Fast";
+"Balanced" = "Balanced";
+"Smooth" = "Smooth";
+"Cinematic" = "Cinematic";
 
 /* Settings General */
 "Autostart" = "Ibẹrẹ laifọwọyi";
@@ -73,7 +86,6 @@
 "Hide Dock icon" = "Fi àmì Dock pamọ́";
 "Hide the Dock icon and app switcher entry." = "Fi àmì Dock àti ohun ìyípadà app pamọ́.";
 "Dimly stays running for hotkeys even when the menu bar icon is hidden." = "Dimly máa ń ṣiṣẹ́ fún bọtìnì abuja bó tilẹ̀ jẹ́ pé àmì pátákó àkójọ ti farapamọ́.";
-"Displays" = "Àfihàn";
 "Fade out on sleep/blackout" = "Dín kúrò ní sùúrù ní sùn/ìdàmú dudu";
 "Fade in on wake/restore" = "Dín wọlé ní jí/ìmúlòpadà";
 "Show display numbers on screens" = "Fi nọ́mbà àfihàn hàn lórí iboju";

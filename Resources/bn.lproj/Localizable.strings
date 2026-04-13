@@ -60,9 +60,22 @@
 
 /* Settings Tabs */
 "General" = "সাধারণ";
+"Displays" = "ডিসপ্লে";
+"Visuals" = "Visuals";
 "Shortcuts" = "শর্টকাট";
 "Profiles" = "প্রোফাইল";
 "About" = "সম্পর্কে";
+
+
+/* Settings Visuals */
+"Transitions" = "Transitions";
+"Transition speed" = "Transition speed";
+"Controls how fast brightness and profile changes animate." = "Controls how fast brightness and profile changes animate.";
+"Instant" = "Instant";
+"Fast" = "Fast";
+"Balanced" = "Balanced";
+"Smooth" = "Smooth";
+"Cinematic" = "Cinematic";
 
 /* Settings General */
 "Autostart" = "স্বয়ংক্রিয় চালু";
@@ -73,7 +86,6 @@
 "Hide Dock icon" = "ডক আইকন লুকান";
 "Hide the Dock icon and app switcher entry." = "ডক আইকন ও অ্যাপ সুইচার এন্ট্রি লুকিয়ে রাখুন।";
 "Dimly stays running for hotkeys even when the menu bar icon is hidden." = "মেনু বারের আইকন লুকানো থাকলেও হটকি জন্য Dimly চলমান থাকে।";
-"Displays" = "ডিসপ্লে";
 "Fade out on sleep/blackout" = "স্লিপ/ব্ল্যাকআউটে ফেইড আউট";
 "Fade in on wake/restore" = "ওয়েক/রিস্টোরে ফেইড ইন";
 "Show display numbers on screens" = "স্ক্রিনে ডিসপ্লে নম্বর দেখান";

@@ -60,9 +60,22 @@
 
 /* Settings Tabs */
 "General" = "Загальні";
+"Displays" = "Дисплеї";
+"Visuals" = "Visuals";
 "Shortcuts" = "Ярлики";
 "Profiles" = "Профілі";
 "About" = "Про";
+
+
+/* Settings Visuals */
+"Transitions" = "Transitions";
+"Transition speed" = "Transition speed";
+"Controls how fast brightness and profile changes animate." = "Controls how fast brightness and profile changes animate.";
+"Instant" = "Instant";
+"Fast" = "Fast";
+"Balanced" = "Balanced";
+"Smooth" = "Smooth";
+"Cinematic" = "Cinematic";
 
 /* Settings General */
 "Autostart" = "Автозапуск";
@@ -73,7 +86,6 @@
 "Hide Dock icon" = "Приховати іконку Dock";
 "Hide the Dock icon and app switcher entry." = "Приховує іконку Dock та пункт перемикача програм.";
 "Dimly stays running for hotkeys even when the menu bar icon is hidden." = "Dimly продовжує працювати для гарячих клавіш, навіть якщо іконку приховано.";
-"Displays" = "Дисплеї";
 "Fade out on sleep/blackout" = "Поступово гасити при сні/затемненні";
 "Fade in on wake/restore" = "Поступово вмикати при пробудженні/відновленні";
 "Show display numbers on screens" = "Показувати номери на екранах";

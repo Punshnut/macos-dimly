@@ -60,9 +60,22 @@
 
 /* Settings Tabs */
 "General" = "Általános";
+"Displays" = "Kijelzők";
+"Visuals" = "Visuals";
 "Shortcuts" = "Gyorsbillentyűk";
 "Profiles" = "Profilok";
 "About" = "Névjegy";
+
+
+/* Settings Visuals */
+"Transitions" = "Transitions";
+"Transition speed" = "Transition speed";
+"Controls how fast brightness and profile changes animate." = "Controls how fast brightness and profile changes animate.";
+"Instant" = "Instant";
+"Fast" = "Fast";
+"Balanced" = "Balanced";
+"Smooth" = "Smooth";
+"Cinematic" = "Cinematic";
 
 /* Settings General */
 "Autostart" = "Automatikus indítás";
@@ -73,7 +86,6 @@
 "Hide Dock icon" = "Dock ikon elrejtése";
 "Hide the Dock icon and app switcher entry." = "Elrejti a Dock ikont és az appváltó bejegyzést.";
 "Dimly stays running for hotkeys even when the menu bar icon is hidden." = "A Dimly fut a gyorsbillentyűkért, még ha az ikon el van rejtve is.";
-"Displays" = "Kijelzők";
 "Fade out on sleep/blackout" = "Halványítás alvás/elsötétítéskor";
 "Fade in on wake/restore" = "Halványítás vissza ébredés/visszaállításkor";
 "Show display numbers on screens" = "Kijelzőszámok megjelenítése a képernyőkön";

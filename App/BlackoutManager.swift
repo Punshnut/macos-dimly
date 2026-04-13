@@ -23,6 +23,17 @@ final class BlackoutManager: ObservableObject {
     private let startupFadeDelay: TimeInterval = 0.12
     private var didReplayStartupFade = false
 
+    /// Multiplier applied to all overlay fade durations. Updated by DimlyEngine when settings change.
+    var transitionSpeedMultiplier: Double = 1.0 {
+        didSet {
+            let blackoutDuration = 0.45 * transitionSpeedMultiplier
+            let dimDuration = 0.2 * transitionSpeedMultiplier
+            overlays.values.forEach { $0.animationDuration = blackoutDuration }
+            transitionOverlays.values.forEach { $0.animationDuration = blackoutDuration }
+            brightnessFallbackOverlays.values.forEach { $0.animationDuration = dimDuration }
+        }
+    }
+
     /// Initializes the manager and restores persisted blackout state.
     init(displayManager: DisplayManager, startupRestoreAnimated: Bool) {
         self.displayManager = displayManager
@@ -76,6 +87,7 @@ final class BlackoutManager: ObservableObject {
             return
         }
         let window = BlackoutWindow(screen: screen)
+        window.animationDuration = 0.45 * transitionSpeedMultiplier
         overlays[display.stableIdentity] = window
         if !deferShow {
             show(window, animated: animated, delay: delay)
@@ -212,6 +224,7 @@ final class BlackoutManager: ObservableObject {
             window.update(screen: screen)
         } else {
             let created = DimOverlayWindow(screen: screen)
+            created.animationDuration = 0.2 * transitionSpeedMultiplier
             brightnessFallbackOverlays[display.stableIdentity] = created
             window = created
         }
@@ -412,6 +425,7 @@ final class BlackoutManager: ObservableObject {
             return
         }
         let window = BlackoutWindow(screen: screen)
+        window.animationDuration = 0.45 * transitionSpeedMultiplier
         transitionOverlays[display.stableIdentity] = window
         window.show(animated: animated, completion: completion)
     }
@@ -465,9 +479,7 @@ final class BlackoutManager: ObservableObject {
 
 /// Borderless black window pinned to a display.
 final class BlackoutWindow: NSWindow {
-    private enum Animation {
-        static let duration: TimeInterval = 0.45
-    }
+    var animationDuration: TimeInterval = 0.45
 
     /// Backing view that paints black.
     private final class BlackoutView: NSView {
@@ -517,7 +529,7 @@ final class BlackoutWindow: NSWindow {
     func show(animated: Bool, completion: (() -> Void)? = nil) {
         animationToken += 1
         let token = animationToken
-        guard animated else {
+        guard animated && animationDuration > 0 else {
             alphaValue = 1
             orderFrontRegardless()
             completion?()
@@ -527,7 +539,7 @@ final class BlackoutWindow: NSWindow {
         orderFrontRegardless()
         alphaValue = 0
         NSAnimationContext.runAnimationGroup { context in
-            context.duration = Animation.duration
+            context.duration = animationDuration
             context.timingFunction = CAMediaTimingFunction(name: .easeInEaseOut)
             animator().alphaValue = 1
         } completionHandler: { [weak self] in
@@ -541,7 +553,7 @@ final class BlackoutWindow: NSWindow {
     func hide(animated: Bool, completion: (() -> Void)? = nil) {
         animationToken += 1
         let token = animationToken
-        guard animated else {
+        guard animated && animationDuration > 0 else {
             alphaValue = 0
             orderOut(nil)
             completion?()
@@ -549,7 +561,7 @@ final class BlackoutWindow: NSWindow {
         }
         enqueueCompletion(completion, token: token)
         NSAnimationContext.runAnimationGroup { context in
-            context.duration = Animation.duration
+            context.duration = animationDuration
             context.timingFunction = CAMediaTimingFunction(name: .easeInEaseOut)
             animator().alphaValue = 0
         } completionHandler: { [weak self] in
@@ -581,9 +593,7 @@ final class BlackoutWindow: NSWindow {
 
 /// Borderless, non-interactive black overlay used for fallback brightness dimming.
 final class DimOverlayWindow: NSWindow {
-    private enum Animation {
-        static let duration: TimeInterval = 0.2
-    }
+    var animationDuration: TimeInterval = 0.2
 
     private final class DimOverlayView: NSView {
         override var wantsUpdateLayer: Bool { true }
@@ -638,12 +648,12 @@ final class DimOverlayWindow: NSWindow {
             return
         }
         orderFrontRegardless()
-        guard animated else {
+        guard animated && animationDuration > 0 else {
             alphaValue = clamped
             return
         }
         NSAnimationContext.runAnimationGroup { context in
-            context.duration = Animation.duration
+            context.duration = animationDuration
             context.timingFunction = CAMediaTimingFunction(name: .easeInEaseOut)
             animator().alphaValue = clamped
         }
@@ -653,7 +663,7 @@ final class DimOverlayWindow: NSWindow {
     func hide(animated: Bool, completion: (() -> Void)? = nil) {
         animationToken += 1
         let token = animationToken
-        guard animated else {
+        guard animated && animationDuration > 0 else {
             alphaValue = 0
             orderOut(nil)
             completion?()
@@ -661,7 +671,7 @@ final class DimOverlayWindow: NSWindow {
         }
         enqueueCompletion(completion, token: token)
         NSAnimationContext.runAnimationGroup { context in
-            context.duration = Animation.duration
+            context.duration = animationDuration
             context.timingFunction = CAMediaTimingFunction(name: .easeInEaseOut)
             animator().alphaValue = 0
         } completionHandler: { [weak self] in

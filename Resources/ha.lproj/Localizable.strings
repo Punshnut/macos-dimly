@@ -60,9 +60,22 @@
 
 /* Settings Tabs */
 "General" = "Janar";
+"Displays" = "Allo";
+"Visuals" = "Visuals";
 "Shortcuts" = "Gajerun hanyoyi";
 "Profiles" = "Fayilolin bayanai";
 "About" = "Game da";
+
+
+/* Settings Visuals */
+"Transitions" = "Transitions";
+"Transition speed" = "Transition speed";
+"Controls how fast brightness and profile changes animate." = "Controls how fast brightness and profile changes animate.";
+"Instant" = "Instant";
+"Fast" = "Fast";
+"Balanced" = "Balanced";
+"Smooth" = "Smooth";
+"Cinematic" = "Cinematic";
 
 /* Settings General */
 "Autostart" = "Farawa ta atomatik";
@@ -73,7 +86,6 @@
 "Hide Dock icon" = "Boye gunkin Dock";
 "Hide the Dock icon and app switcher entry." = "Ya ɓoye gunkin Dock da shigar mai musanya apps.";
 "Dimly stays running for hotkeys even when the menu bar icon is hidden." = "Dimly na ci gaba da gudana don gajerun hanyoyi ko da gunkin menu ya ɓoye.";
-"Displays" = "Allo";
 "Fade out on sleep/blackout" = "Raguwa yayin barci/damarar duhu";
 "Fade in on wake/restore" = "Shigowa yayin tashi/dawo";
 "Show display numbers on screens" = "Nuna lambobin allo a kan allo";

@@ -60,9 +60,22 @@
 
 /* Settings Tabs */
 "General" = "Ginearálta";
+"Displays" = "Taispeántais";
+"Visuals" = "Visuals";
 "Shortcuts" = "Aicearraí";
 "Profiles" = "Próifílí";
 "About" = "Maidir";
+
+
+/* Settings Visuals */
+"Transitions" = "Transitions";
+"Transition speed" = "Transition speed";
+"Controls how fast brightness and profile changes animate." = "Controls how fast brightness and profile changes animate.";
+"Instant" = "Instant";
+"Fast" = "Fast";
+"Balanced" = "Balanced";
+"Smooth" = "Smooth";
+"Cinematic" = "Cinematic";
 
 /* Settings General */
 "Autostart" = "Uath-thosú";
@@ -73,7 +86,6 @@
 "Hide Dock icon" = "Folaigh deilbhín an Duga";
 "Hide the Dock icon and app switcher entry." = "Folaíonn sé deilbhín an Duga agus iontráil an mhalartóra aipe.";
 "Dimly stays running for hotkeys even when the menu bar icon is hidden." = "Fanann Dimly ag rith do aicearraí fiú má tá an deilbhín folaithe.";
-"Displays" = "Taispeántais";
 "Fade out on sleep/blackout" = "Céimnigh amach ag codladh/dorchadas";
 "Fade in on wake/restore" = "Céimnigh isteach ag múscailt/athchóiriú";
 "Show display numbers on screens" = "Taispeáin uimhreacha ar na scáileáin";

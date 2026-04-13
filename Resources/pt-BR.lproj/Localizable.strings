@@ -60,9 +60,22 @@
 
 /* Settings Tabs */
 "General" = "Geral";
+"Displays" = "Monitores";
+"Visuals" = "Visuals";
 "Shortcuts" = "Atalhos";
 "Profiles" = "Perfis";
 "About" = "Sobre";
+
+
+/* Settings Visuals */
+"Transitions" = "Transitions";
+"Transition speed" = "Transition speed";
+"Controls how fast brightness and profile changes animate." = "Controls how fast brightness and profile changes animate.";
+"Instant" = "Instant";
+"Fast" = "Fast";
+"Balanced" = "Balanced";
+"Smooth" = "Smooth";
+"Cinematic" = "Cinematic";
 
 /* Settings General */
 "Autostart" = "Inicialização automática";
@@ -73,7 +86,6 @@
 "Hide Dock icon" = "Ocultar ícone do Dock";
 "Hide the Dock icon and app switcher entry." = "Oculta o ícone do Dock e a entrada do alternador de apps.";
 "Dimly stays running for hotkeys even when the menu bar icon is hidden." = "O Dimly continua rodando para atalhos mesmo com o ícone oculto.";
-"Displays" = "Monitores";
 "Fade out on sleep/blackout" = "Desvanecer ao suspender/blackout";
 "Fade in on wake/restore" = "Aparecer ao ativar/restaurar";
 "Show display numbers on screens" = "Mostrar números nos monitores";
