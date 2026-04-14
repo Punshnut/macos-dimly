@@ -61,21 +61,21 @@
 /* Settings Tabs */
 "General" = "አጠቃላይ";
 "Displays" = "ማሳያዎች";
-"Visuals" = "Visuals";
+"Visuals" = "ምስሎች";
 "Shortcuts" = "አቋራጮች";
 "Profiles" = "ፕሮፋይሎች";
 "About" = "ስለ";
 
 
 /* Settings Visuals */
-"Transitions" = "Transitions";
-"Transition speed" = "Transition speed";
-"Controls how fast brightness and profile changes animate." = "Controls how fast brightness and profile changes animate.";
-"Instant" = "Instant";
-"Fast" = "Fast";
-"Balanced" = "Balanced";
-"Smooth" = "Smooth";
-"Cinematic" = "Cinematic";
+"Transitions" = "ሽግግሮች";
+"Transition speed" = "የሽግግር ፍጥነት";
+"Controls how fast brightness and profile changes animate." = "ብሩህነት እና ፕሮፋይል ለውጦች ምን ያህል ፈጣን እንደሆኑ ይቆጣጠራል።";
+"Instant" = "ወዲያውኑ";
+"Fast" = "ፈጣን";
+"Balanced" = "ሚዛናዊ";
+"Smooth" = "ለስላሳ";
+"Cinematic" = "ሲኒማዊ";
 
 /* Settings General */
 "Autostart" = "ራስ-ጀምር";

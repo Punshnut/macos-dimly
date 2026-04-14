@@ -68,14 +68,14 @@
 
 
 /* Settings Visuals */
-"Transitions" = "Transitions";
-"Transition speed" = "Transition speed";
-"Controls how fast brightness and profile changes animate." = "Controls how fast brightness and profile changes animate.";
-"Instant" = "Instant";
-"Fast" = "Fast";
-"Balanced" = "Balanced";
-"Smooth" = "Smooth";
-"Cinematic" = "Cinematic";
+"Transitions" = "Transicions";
+"Transition speed" = "Velocitat de transició";
+"Controls how fast brightness and profile changes animate." = "Controla la velocitat a la qual s'animen els canvis de brillantor i de perfil.";
+"Instant" = "Instantani";
+"Fast" = "Ràpid";
+"Balanced" = "Equilibrat";
+"Smooth" = "Suau";
+"Cinematic" = "Cinemàtic";
 
 /* Settings General */
 "Autostart" = "Inici automàtic";

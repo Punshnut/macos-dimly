@@ -61,21 +61,21 @@
 /* Settings Tabs */
 "General" = "Gbogbogbo";
 "Displays" = "Àfihàn";
-"Visuals" = "Visuals";
+"Visuals" = "Àwòrán";
 "Shortcuts" = "Ọ̀nà abuja";
 "Profiles" = "Àwọn profaili";
 "About" = "Nípa";
 
 
 /* Settings Visuals */
-"Transitions" = "Transitions";
-"Transition speed" = "Transition speed";
-"Controls how fast brightness and profile changes animate." = "Controls how fast brightness and profile changes animate.";
-"Instant" = "Instant";
-"Fast" = "Fast";
-"Balanced" = "Balanced";
-"Smooth" = "Smooth";
-"Cinematic" = "Cinematic";
+"Transitions" = "Àyípadà";
+"Transition speed" = "Ìyára àyípadà";
+"Controls how fast brightness and profile changes animate." = "Ṣàkóso bí ìyípadà ìmọ́lẹ̀ àti àdàkọ ṣe máa ń yára ṣẹlẹ̀.";
+"Instant" = "Lẹsẹkẹsẹ";
+"Fast" = "Yára";
+"Balanced" = "Dọ́gba";
+"Smooth" = "Dídán";
+"Cinematic" = "Bí fíìmù";
 
 /* Settings General */
 "Autostart" = "Ibẹrẹ laifọwọyi";

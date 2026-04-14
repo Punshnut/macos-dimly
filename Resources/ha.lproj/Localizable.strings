@@ -61,21 +61,21 @@
 /* Settings Tabs */
 "General" = "Janar";
 "Displays" = "Allo";
-"Visuals" = "Visuals";
+"Visuals" = "Hoto";
 "Shortcuts" = "Gajerun hanyoyi";
 "Profiles" = "Fayilolin bayanai";
 "About" = "Game da";
 
 
 /* Settings Visuals */
-"Transitions" = "Transitions";
-"Transition speed" = "Transition speed";
-"Controls how fast brightness and profile changes animate." = "Controls how fast brightness and profile changes animate.";
-"Instant" = "Instant";
-"Fast" = "Fast";
-"Balanced" = "Balanced";
-"Smooth" = "Smooth";
-"Cinematic" = "Cinematic";
+"Transitions" = "Canjin yanayi";
+"Transition speed" = "Gudun canjin yanayi";
+"Controls how fast brightness and profile changes animate." = "Yana sarrafa yadda canjin haske da martabar ke bayyana cikin sauri.";
+"Instant" = "Nan take";
+"Fast" = "Da sauri";
+"Balanced" = "Mai daidaito";
+"Smooth" = "Da laushi";
+"Cinematic" = "Kamar fina-finai";
 
 /* Settings General */
 "Autostart" = "Farawa ta atomatik";

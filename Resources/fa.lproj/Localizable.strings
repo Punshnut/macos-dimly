@@ -61,21 +61,21 @@
 /* Settings Tabs */
 "General" = "عمومی";
 "Displays" = "نمایشگرها";
-"Visuals" = "Visuals";
+"Visuals" = "تصویری";
 "Shortcuts" = "میانبرها";
 "Profiles" = "پروفایل‌ها";
 "About" = "درباره";
 
 
 /* Settings Visuals */
-"Transitions" = "Transitions";
-"Transition speed" = "Transition speed";
-"Controls how fast brightness and profile changes animate." = "Controls how fast brightness and profile changes animate.";
-"Instant" = "Instant";
-"Fast" = "Fast";
-"Balanced" = "Balanced";
-"Smooth" = "Smooth";
-"Cinematic" = "Cinematic";
+"Transitions" = "انتقال‌ها";
+"Transition speed" = "سرعت انتقال";
+"Controls how fast brightness and profile changes animate." = "کنترل می‌کند که تغییرات روشنایی و پروفایل با چه سرعتی متحرک می‌شوند.";
+"Instant" = "فوری";
+"Fast" = "سریع";
+"Balanced" = "متعادل";
+"Smooth" = "روان";
+"Cinematic" = "سینمایی";
 
 /* Settings General */
 "Autostart" = "شروع خودکار";

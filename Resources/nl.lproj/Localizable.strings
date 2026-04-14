@@ -68,14 +68,14 @@
 
 
 /* Settings Visuals */
-"Transitions" = "Transitions";
-"Transition speed" = "Transition speed";
-"Controls how fast brightness and profile changes animate." = "Controls how fast brightness and profile changes animate.";
-"Instant" = "Instant";
-"Fast" = "Fast";
-"Balanced" = "Balanced";
-"Smooth" = "Smooth";
-"Cinematic" = "Cinematic";
+"Transitions" = "Overgangen";
+"Transition speed" = "Overgangssnelheid";
+"Controls how fast brightness and profile changes animate." = "Bepaalt hoe snel helderheids- en profielwijzigingen animeren.";
+"Instant" = "Direct";
+"Fast" = "Snel";
+"Balanced" = "Evenwichtig";
+"Smooth" = "Vloeiend";
+"Cinematic" = "Cinematisch";
 
 /* Settings General */
 "Autostart" = "Automatisch starten";

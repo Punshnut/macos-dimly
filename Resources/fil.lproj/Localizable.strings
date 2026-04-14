@@ -62,21 +62,21 @@
 /* Settings Tabs */
 "General" = "Pangkalahatan";
 "Displays" = "Mga display";
-"Visuals" = "Visuals";
+"Visuals" = "Mga Visual";
 "Shortcuts" = "Mga shortcut";
 "Profiles" = "Mga profile";
 "About" = "Tungkol";
 
 
 /* Settings Visuals */
-"Transitions" = "Transitions";
-"Transition speed" = "Transition speed";
-"Controls how fast brightness and profile changes animate." = "Controls how fast brightness and profile changes animate.";
-"Instant" = "Instant";
-"Fast" = "Fast";
-"Balanced" = "Balanced";
-"Smooth" = "Smooth";
-"Cinematic" = "Cinematic";
+"Transitions" = "Mga Transisyon";
+"Transition speed" = "Bilis ng transisyon";
+"Controls how fast brightness and profile changes animate." = "Kinokontrol kung gaano kabilis mag-animate ang mga pagbabago ng liwanag at profile.";
+"Instant" = "Agaran";
+"Fast" = "Mabilis";
+"Balanced" = "Balanse";
+"Smooth" = "Maayos";
+"Cinematic" = "Sinematiko";
 
 /* Settings General */
 "Autostart" = "Awtomatikong pagsisimula";

@@ -61,21 +61,21 @@
 /* Settings Tabs */
 "General" = "Загальні";
 "Displays" = "Дисплеї";
-"Visuals" = "Visuals";
+"Visuals" = "Візуальні";
 "Shortcuts" = "Ярлики";
 "Profiles" = "Профілі";
 "About" = "Про";
 
 
 /* Settings Visuals */
-"Transitions" = "Transitions";
-"Transition speed" = "Transition speed";
-"Controls how fast brightness and profile changes animate." = "Controls how fast brightness and profile changes animate.";
-"Instant" = "Instant";
-"Fast" = "Fast";
-"Balanced" = "Balanced";
-"Smooth" = "Smooth";
-"Cinematic" = "Cinematic";
+"Transitions" = "Переходи";
+"Transition speed" = "Швидкість переходу";
+"Controls how fast brightness and profile changes animate." = "Контролює швидкість анімації змін яскравості та профілю.";
+"Instant" = "Миттєво";
+"Fast" = "Швидко";
+"Balanced" = "Збалансовано";
+"Smooth" = "Плавно";
+"Cinematic" = "Кінематографічно";
 
 /* Settings General */
 "Autostart" = "Автозапуск";

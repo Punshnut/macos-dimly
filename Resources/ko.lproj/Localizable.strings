@@ -61,21 +61,21 @@
 /* Settings Tabs */
 "General" = "일반";
 "Displays" = "디스플레이";
-"Visuals" = "Visuals";
+"Visuals" = "비주얼";
 "Shortcuts" = "단축키";
 "Profiles" = "프로필";
 "About" = "정보";
 
 
 /* Settings Visuals */
-"Transitions" = "Transitions";
-"Transition speed" = "Transition speed";
-"Controls how fast brightness and profile changes animate." = "Controls how fast brightness and profile changes animate.";
-"Instant" = "Instant";
-"Fast" = "Fast";
-"Balanced" = "Balanced";
-"Smooth" = "Smooth";
-"Cinematic" = "Cinematic";
+"Transitions" = "전환";
+"Transition speed" = "전환 속도";
+"Controls how fast brightness and profile changes animate." = "밝기 및 프로필 변경이 얼마나 빠르게 애니메이션되는지 제어합니다.";
+"Instant" = "즉시";
+"Fast" = "빠름";
+"Balanced" = "균형";
+"Smooth" = "부드러움";
+"Cinematic" = "시네마틱";
 
 /* Settings General */
 "Autostart" = "자동 시작";

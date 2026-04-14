@@ -61,21 +61,21 @@
 /* Settings Tabs */
 "General" = "Ginearálta";
 "Displays" = "Taispeántais";
-"Visuals" = "Visuals";
+"Visuals" = "Amhairc";
 "Shortcuts" = "Aicearraí";
 "Profiles" = "Próifílí";
 "About" = "Maidir";
 
 
 /* Settings Visuals */
-"Transitions" = "Transitions";
-"Transition speed" = "Transition speed";
-"Controls how fast brightness and profile changes animate." = "Controls how fast brightness and profile changes animate.";
-"Instant" = "Instant";
-"Fast" = "Fast";
-"Balanced" = "Balanced";
-"Smooth" = "Smooth";
-"Cinematic" = "Cinematic";
+"Transitions" = "Aistrithe";
+"Transition speed" = "Luas aistrithe";
+"Controls how fast brightness and profile changes animate." = "Rialaíonn sé cé chomh tapa is a bhíonn gluaiseacht sna hathruithe gile agus próifíle.";
+"Instant" = "Láithreach";
+"Fast" = "Tapa";
+"Balanced" = "Cothrom";
+"Smooth" = "Mín";
+"Cinematic" = "Scannánaíoch";
 
 /* Settings General */
 "Autostart" = "Uath-thosú";

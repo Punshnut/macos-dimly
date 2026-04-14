@@ -61,21 +61,21 @@
 /* Settings Tabs */
 "General" = "Obecné";
 "Displays" = "Displeje";
-"Visuals" = "Visuals";
+"Visuals" = "Vizuály";
 "Shortcuts" = "Zkratky";
 "Profiles" = "Profily";
 "About" = "O aplikaci";
 
 
 /* Settings Visuals */
-"Transitions" = "Transitions";
-"Transition speed" = "Transition speed";
-"Controls how fast brightness and profile changes animate." = "Controls how fast brightness and profile changes animate.";
-"Instant" = "Instant";
-"Fast" = "Fast";
-"Balanced" = "Balanced";
-"Smooth" = "Smooth";
-"Cinematic" = "Cinematic";
+"Transitions" = "Přechody";
+"Transition speed" = "Rychlost přechodu";
+"Controls how fast brightness and profile changes animate." = "Určuje, jak rychle se animují změny jasu a profilu.";
+"Instant" = "Okamžitě";
+"Fast" = "Rychle";
+"Balanced" = "Vyváženě";
+"Smooth" = "Plynule";
+"Cinematic" = "Filmově";
 
 /* Settings General */
 "Autostart" = "Automatické spuštění";

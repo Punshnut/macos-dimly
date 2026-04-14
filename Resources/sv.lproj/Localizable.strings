@@ -61,21 +61,21 @@
 /* Settings Tabs */
 "General" = "Allmänt";
 "Displays" = "Skärmar";
-"Visuals" = "Visuals";
+"Visuals" = "Visuellt";
 "Shortcuts" = "Genvägar";
 "Profiles" = "Profiler";
 "About" = "Om";
 
 
 /* Settings Visuals */
-"Transitions" = "Transitions";
-"Transition speed" = "Transition speed";
-"Controls how fast brightness and profile changes animate." = "Controls how fast brightness and profile changes animate.";
-"Instant" = "Instant";
-"Fast" = "Fast";
-"Balanced" = "Balanced";
-"Smooth" = "Smooth";
-"Cinematic" = "Cinematic";
+"Transitions" = "Övergångar";
+"Transition speed" = "Övergångshastighet";
+"Controls how fast brightness and profile changes animate." = "Styr hur snabbt ljusstyrke- och profiländringar animeras.";
+"Instant" = "Direkt";
+"Fast" = "Snabbt";
+"Balanced" = "Balanserat";
+"Smooth" = "Mjukt";
+"Cinematic" = "Filmiskt";
 
 /* Settings General */
 "Autostart" = "Autostart";

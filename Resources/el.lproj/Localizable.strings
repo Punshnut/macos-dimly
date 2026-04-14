@@ -61,21 +61,21 @@
 /* Settings Tabs */
 "General" = "Γενικά";
 "Displays" = "Οθόνες";
-"Visuals" = "Visuals";
+"Visuals" = "Οπτικά";
 "Shortcuts" = "Συντομεύσεις";
 "Profiles" = "Προφίλ";
 "About" = "Πληροφορίες";
 
 
 /* Settings Visuals */
-"Transitions" = "Transitions";
-"Transition speed" = "Transition speed";
-"Controls how fast brightness and profile changes animate." = "Controls how fast brightness and profile changes animate.";
-"Instant" = "Instant";
-"Fast" = "Fast";
-"Balanced" = "Balanced";
-"Smooth" = "Smooth";
-"Cinematic" = "Cinematic";
+"Transitions" = "Μεταβάσεις";
+"Transition speed" = "Ταχύτητα μετάβασης";
+"Controls how fast brightness and profile changes animate." = "Ελέγχει πόσο γρήγορα κινούνται οι αλλαγές φωτεινότητας και προφίλ.";
+"Instant" = "Άμεσα";
+"Fast" = "Γρήγορα";
+"Balanced" = "Ισορροπημένα";
+"Smooth" = "Ομαλά";
+"Cinematic" = "Κινηματογραφικά";
 
 /* Settings General */
 "Autostart" = "Αυτόματη εκκίνηση";

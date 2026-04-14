@@ -61,21 +61,21 @@
 /* Settings Tabs */
 "General" = "通用";
 "Displays" = "显示器";
-"Visuals" = "Visuals";
+"Visuals" = "视觉效果";
 "Shortcuts" = "快捷键";
 "Profiles" = "配置";
 "About" = "关于";
 
 
 /* Settings Visuals */
-"Transitions" = "Transitions";
-"Transition speed" = "Transition speed";
-"Controls how fast brightness and profile changes animate." = "Controls how fast brightness and profile changes animate.";
-"Instant" = "Instant";
-"Fast" = "Fast";
-"Balanced" = "Balanced";
-"Smooth" = "Smooth";
-"Cinematic" = "Cinematic";
+"Transitions" = "过渡效果";
+"Transition speed" = "过渡速度";
+"Controls how fast brightness and profile changes animate." = "控制亮度和配置文件更改的动画速度。";
+"Instant" = "即时";
+"Fast" = "快速";
+"Balanced" = "均衡";
+"Smooth" = "平滑";
+"Cinematic" = "电影感";
 
 /* Settings General */
 "Autostart" = "自动启动";

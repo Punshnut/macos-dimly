@@ -61,21 +61,21 @@
 /* Settings Tabs */
 "General" = "ယေဘုယျ";
 "Displays" = "ပြသမှုများ";
-"Visuals" = "Visuals";
+"Visuals" = "မြင်ကွင်းများ";
 "Shortcuts" = "ဖတ်ရှည်များ";
 "Profiles" = "ပရိုဖိုင်များ";
 "About" = "အကြောင်း";
 
 
 /* Settings Visuals */
-"Transitions" = "Transitions";
-"Transition speed" = "Transition speed";
-"Controls how fast brightness and profile changes animate." = "Controls how fast brightness and profile changes animate.";
-"Instant" = "Instant";
-"Fast" = "Fast";
-"Balanced" = "Balanced";
-"Smooth" = "Smooth";
-"Cinematic" = "Cinematic";
+"Transitions" = "အကူးအပြောင်းများ";
+"Transition speed" = "အကူးအပြောင်း အမြန်နှုန်း";
+"Controls how fast brightness and profile changes animate." = "အလင်းအမှောင်နှင့် ပရိုဖိုင် ပြောင်းလဲမှုများ မည်မျှ မြန်မြန်ဆန်ဆန် ပြသသည်ကို ထိန်းချုပ်သည်။";
+"Instant" = "ချက်ချင်း";
+"Fast" = "မြန်";
+"Balanced" = "မျှတသော";
+"Smooth" = "သပ်သပ်ရပ်ရပ်";
+"Cinematic" = "ရုပ်ရှင်ဆန်သော";
 
 /* Settings General */
 "Autostart" = "အလိုအလျောက် စတင်";

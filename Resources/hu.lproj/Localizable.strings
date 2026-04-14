@@ -61,21 +61,21 @@
 /* Settings Tabs */
 "General" = "Általános";
 "Displays" = "Kijelzők";
-"Visuals" = "Visuals";
+"Visuals" = "Vizuális";
 "Shortcuts" = "Gyorsbillentyűk";
 "Profiles" = "Profilok";
 "About" = "Névjegy";
 
 
 /* Settings Visuals */
-"Transitions" = "Transitions";
-"Transition speed" = "Transition speed";
-"Controls how fast brightness and profile changes animate." = "Controls how fast brightness and profile changes animate.";
-"Instant" = "Instant";
-"Fast" = "Fast";
-"Balanced" = "Balanced";
-"Smooth" = "Smooth";
-"Cinematic" = "Cinematic";
+"Transitions" = "Átmenetek";
+"Transition speed" = "Átmenet sebessége";
+"Controls how fast brightness and profile changes animate." = "Meghatározza, milyen gyorsan animálódnak a fényerő- és profilváltások.";
+"Instant" = "Azonnali";
+"Fast" = "Gyors";
+"Balanced" = "Kiegyensúlyozott";
+"Smooth" = "Sima";
+"Cinematic" = "Filmes";
 
 /* Settings General */
 "Autostart" = "Automatikus indítás";

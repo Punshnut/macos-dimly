@@ -61,21 +61,21 @@
 /* Settings Tabs */
 "General" = "Chung";
 "Displays" = "Màn hình";
-"Visuals" = "Visuals";
+"Visuals" = "Hình ảnh";
 "Shortcuts" = "Phím tắt";
 "Profiles" = "Hồ sơ";
 "About" = "Giới thiệu";
 
 
 /* Settings Visuals */
-"Transitions" = "Transitions";
-"Transition speed" = "Transition speed";
-"Controls how fast brightness and profile changes animate." = "Controls how fast brightness and profile changes animate.";
-"Instant" = "Instant";
-"Fast" = "Fast";
-"Balanced" = "Balanced";
-"Smooth" = "Smooth";
-"Cinematic" = "Cinematic";
+"Transitions" = "Chuyển đổi";
+"Transition speed" = "Tốc độ chuyển đổi";
+"Controls how fast brightness and profile changes animate." = "Kiểm soát tốc độ hiệu ứng chuyển đổi của các thay đổi độ sáng và hồ sơ.";
+"Instant" = "Tức thì";
+"Fast" = "Nhanh";
+"Balanced" = "Cân bằng";
+"Smooth" = "Mượt";
+"Cinematic" = "Điện ảnh";
 
 /* Settings General */
 "Autostart" = "Khởi động tự động";

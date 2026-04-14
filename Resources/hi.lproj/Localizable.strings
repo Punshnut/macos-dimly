@@ -61,21 +61,21 @@
 /* Settings Tabs */
 "General" = "सामान्य";
 "Displays" = "डिस्प्ले";
-"Visuals" = "Visuals";
+"Visuals" = "दृश्य";
 "Shortcuts" = "शॉर्टकट";
 "Profiles" = "प्रोफ़ाइल";
 "About" = "परिचय";
 
 
 /* Settings Visuals */
-"Transitions" = "Transitions";
-"Transition speed" = "Transition speed";
-"Controls how fast brightness and profile changes animate." = "Controls how fast brightness and profile changes animate.";
-"Instant" = "Instant";
-"Fast" = "Fast";
-"Balanced" = "Balanced";
-"Smooth" = "Smooth";
-"Cinematic" = "Cinematic";
+"Transitions" = "ट्रांज़िशन";
+"Transition speed" = "ट्रांज़िशन गति";
+"Controls how fast brightness and profile changes animate." = "नियंत्रित करता है कि चमक और प्रोफ़ाइल परिवर्तन कितनी तेज़ी से एनिमेट होते हैं।";
+"Instant" = "तुरंत";
+"Fast" = "तेज़";
+"Balanced" = "संतुलित";
+"Smooth" = "सहज";
+"Cinematic" = "सिनेमाई";
 
 /* Settings General */
 "Autostart" = "स्वतः शुरू";

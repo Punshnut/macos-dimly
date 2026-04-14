@@ -61,21 +61,21 @@
 /* Settings Tabs */
 "General" = "一般";
 "Displays" = "ディスプレイ";
-"Visuals" = "Visuals";
+"Visuals" = "ビジュアル";
 "Shortcuts" = "ショートカット";
 "Profiles" = "プロファイル";
 "About" = "情報";
 
 
 /* Settings Visuals */
-"Transitions" = "Transitions";
-"Transition speed" = "Transition speed";
-"Controls how fast brightness and profile changes animate." = "Controls how fast brightness and profile changes animate.";
-"Instant" = "Instant";
-"Fast" = "Fast";
-"Balanced" = "Balanced";
-"Smooth" = "Smooth";
-"Cinematic" = "Cinematic";
+"Transitions" = "トランジション";
+"Transition speed" = "トランジション速度";
+"Controls how fast brightness and profile changes animate." = "輝度とプロファイルの変更のアニメーション速度を制御します。";
+"Instant" = "即時";
+"Fast" = "速い";
+"Balanced" = "バランス";
+"Smooth" = "スムーズ";
+"Cinematic" = "シネマティック";
 
 /* Settings General */
 "Autostart" = "自動起動";

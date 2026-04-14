@@ -61,21 +61,21 @@
 /* Settings Tabs */
 "General" = "பொது";
 "Displays" = "காட்சிகள்";
-"Visuals" = "Visuals";
+"Visuals" = "காட்சிகள்";
 "Shortcuts" = "குறுக்குவழிகள்";
 "Profiles" = "சுயவிவரங்கள்";
 "About" = "பற்றி";
 
 
 /* Settings Visuals */
-"Transitions" = "Transitions";
-"Transition speed" = "Transition speed";
-"Controls how fast brightness and profile changes animate." = "Controls how fast brightness and profile changes animate.";
-"Instant" = "Instant";
-"Fast" = "Fast";
-"Balanced" = "Balanced";
-"Smooth" = "Smooth";
-"Cinematic" = "Cinematic";
+"Transitions" = "மாற்றங்கள்";
+"Transition speed" = "மாற்ற வேகம்";
+"Controls how fast brightness and profile changes animate." = "ஒளிர்வு மற்றும் சுயவிவர மாற்றங்கள் எவ்வளவு விரைவாக அசைவாடுகின்றன என்பதை கட்டுப்படுத்துகிறது.";
+"Instant" = "உடனடி";
+"Fast" = "வேகமான";
+"Balanced" = "சமநிலை";
+"Smooth" = "மென்மையான";
+"Cinematic" = "சினிமாட்டிக்";
 
 /* Settings General */
 "Autostart" = "தானியங்கு தொடக்கம்";

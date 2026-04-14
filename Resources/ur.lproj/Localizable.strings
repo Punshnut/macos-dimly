@@ -61,21 +61,21 @@
 /* Settings Tabs */
 "General" = "عمومی";
 "Displays" = "ڈسپلے";
-"Visuals" = "Visuals";
+"Visuals" = "بصریات";
 "Shortcuts" = "شارٹ کٹس";
 "Profiles" = "پروفائلز";
 "About" = "متعلق";
 
 
 /* Settings Visuals */
-"Transitions" = "Transitions";
-"Transition speed" = "Transition speed";
-"Controls how fast brightness and profile changes animate." = "Controls how fast brightness and profile changes animate.";
-"Instant" = "Instant";
-"Fast" = "Fast";
-"Balanced" = "Balanced";
-"Smooth" = "Smooth";
-"Cinematic" = "Cinematic";
+"Transitions" = "منتقلی";
+"Transition speed" = "منتقلی کی رفتار";
+"Controls how fast brightness and profile changes animate." = "روشنی اور پروفائل تبدیلیاں کتنی تیزی سے متحرک ہوتی ہیں یہ کنٹرول کرتا ہے۔";
+"Instant" = "فوری";
+"Fast" = "تیز";
+"Balanced" = "متوازن";
+"Smooth" = "ہموار";
+"Cinematic" = "سنیماتی";
 
 /* Settings General */
 "Autostart" = "خودکار آغاز";

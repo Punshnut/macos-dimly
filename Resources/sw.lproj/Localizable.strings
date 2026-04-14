@@ -61,21 +61,21 @@
 /* Settings Tabs */
 "General" = "Jumla";
 "Displays" = "Skrini";
-"Visuals" = "Visuals";
+"Visuals" = "Picha";
 "Shortcuts" = "Vifupisho";
 "Profiles" = "Profaili";
 "About" = "Kuhusu";
 
 
 /* Settings Visuals */
-"Transitions" = "Transitions";
-"Transition speed" = "Transition speed";
-"Controls how fast brightness and profile changes animate." = "Controls how fast brightness and profile changes animate.";
-"Instant" = "Instant";
-"Fast" = "Fast";
-"Balanced" = "Balanced";
-"Smooth" = "Smooth";
-"Cinematic" = "Cinematic";
+"Transitions" = "Mabadiliko";
+"Transition speed" = "Kasi ya mabadiliko";
+"Controls how fast brightness and profile changes animate." = "Inadhibiti jinsi mabadiliko ya mwangaza na wasifu yanavyoanimishwa haraka.";
+"Instant" = "Mara moja";
+"Fast" = "Haraka";
+"Balanced" = "Wastani";
+"Smooth" = "Laini";
+"Cinematic" = "Kama sinema";
 
 /* Settings General */
 "Autostart" = "Anzisho la kiotomatiki";

@@ -61,21 +61,21 @@
 /* Settings Tabs */
 "General" = "Общие";
 "Displays" = "Дисплеи";
-"Visuals" = "Visuals";
+"Visuals" = "Визуальные";
 "Shortcuts" = "Ярлыки";
 "Profiles" = "Профили";
 "About" = "О программе";
 
 
 /* Settings Visuals */
-"Transitions" = "Transitions";
-"Transition speed" = "Transition speed";
-"Controls how fast brightness and profile changes animate." = "Controls how fast brightness and profile changes animate.";
-"Instant" = "Instant";
-"Fast" = "Fast";
-"Balanced" = "Balanced";
-"Smooth" = "Smooth";
-"Cinematic" = "Cinematic";
+"Transitions" = "Переходы";
+"Transition speed" = "Скорость перехода";
+"Controls how fast brightness and profile changes animate." = "Управляет скоростью анимации изменений яркости и профиля.";
+"Instant" = "Мгновенно";
+"Fast" = "Быстро";
+"Balanced" = "Сбалансированно";
+"Smooth" = "Плавно";
+"Cinematic" = "Кинематографично";
 
 /* Settings General */
 "Autostart" = "Автозапуск";

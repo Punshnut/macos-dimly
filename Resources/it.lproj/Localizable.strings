@@ -61,21 +61,21 @@
 /* Settings Tabs */
 "General" = "Generali";
 "Displays" = "Display";
-"Visuals" = "Visuals";
+"Visuals" = "Elementi visivi";
 "Shortcuts" = "Scorciatoie";
 "Profiles" = "Profili";
 "About" = "Info";
 
 
 /* Settings Visuals */
-"Transitions" = "Transitions";
-"Transition speed" = "Transition speed";
-"Controls how fast brightness and profile changes animate." = "Controls how fast brightness and profile changes animate.";
-"Instant" = "Instant";
-"Fast" = "Fast";
-"Balanced" = "Balanced";
-"Smooth" = "Smooth";
-"Cinematic" = "Cinematic";
+"Transitions" = "Transizioni";
+"Transition speed" = "Velocità di transizione";
+"Controls how fast brightness and profile changes animate." = "Controlla la velocità con cui le modifiche di luminosità e profilo si animano.";
+"Instant" = "Istantaneo";
+"Fast" = "Veloce";
+"Balanced" = "Bilanciato";
+"Smooth" = "Fluido";
+"Cinematic" = "Cinematografico";
 
 /* Settings General */
 "Autostart" = "Avvio automatico";
