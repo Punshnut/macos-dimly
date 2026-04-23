@@ -407,14 +407,15 @@ final class DimlyEngine: ObservableObject {
             }
             return
         }
-        let steps = min(22, max(8, maxDelta))
-        let sleepNanos = UInt64((0.36 * transitionMultiplier / Double(steps)) * 1_000_000_000)
+        let totalDuration = 0.36 * transitionMultiplier
         synchronizedBrightnessTransitionTask = Task { @MainActor [weak self] in
             guard let self else { return }
-            for step in 1...steps {
+            let startTime = Date.now
+            while true {
                 guard !Task.isCancelled else { return }
-                let progress = Double(step) / Double(steps)
-                let isFinalStep = step == steps
+                let elapsed = Date.now.timeIntervalSince(startTime)
+                let progress = min(1.0, elapsed / totalDuration)
+                let isFinal = progress >= 1.0
                 for target in normalizedTargets {
                     let display = target.display
                     let id = display.stableIdentity
@@ -423,7 +424,7 @@ final class DimlyEngine: ObservableObject {
                     let value = Int((Double(start) + (Double(delta) * progress)).rounded())
                     if display.isBuiltin {
                         setBuiltinBrightness(value, for: display, animated: false)
-                        if isFinalStep {
+                        if isFinal {
                             persistBrightness(target.percent, for: id)
                         }
                         continue
@@ -431,13 +432,12 @@ final class DimlyEngine: ObservableObject {
                     applyExternalBrightness(
                         value,
                         for: display,
-                        persist: isFinalStep,
+                        persist: isFinal,
                         fallbackAnimated: false
                     )
                 }
-                if !isFinalStep {
-                    try? await Task.sleep(nanoseconds: sleepNanos)
-                }
+                if isFinal { break }
+                try? await Task.sleep(nanoseconds: 16_666_667)
             }
             self.synchronizedBrightnessTransitionTask = nil
         }
@@ -576,25 +576,25 @@ final class DimlyEngine: ObservableObject {
             applyExternalBrightness(target, for: display, persist: true, fallbackAnimated: false)
             return
         }
-        let steps = min(22, max(8, abs(delta)))
-        let sleepNanos = UInt64((0.36 * transitionMultiplier / Double(steps)) * 1_000_000_000)
+        let totalDuration = 0.36 * transitionMultiplier
 
         let task = Task { @MainActor [weak self] in
             guard let self else { return }
-            for step in 1...steps {
+            let startTime = Date.now
+            while true {
                 guard !Task.isCancelled else { return }
-                let progress = Double(step) / Double(steps)
+                let elapsed = Date.now.timeIntervalSince(startTime)
+                let progress = min(1.0, elapsed / totalDuration)
+                let isFinal = progress >= 1.0
                 let value = Int((Double(start) + (Double(delta) * progress)).rounded())
-                let isFinalStep = step == steps
                 self.applyExternalBrightness(
                     value,
                     for: display,
-                    persist: isFinalStep,
+                    persist: isFinal,
                     fallbackAnimated: true
                 )
-                if !isFinalStep {
-                    try? await Task.sleep(nanoseconds: sleepNanos)
-                }
+                if isFinal { break }
+                try? await Task.sleep(nanoseconds: 16_666_667)
             }
             self.externalBrightnessAnimationTasks.removeValue(forKey: id)
         }
@@ -1723,25 +1723,24 @@ final class DimlyEngine: ObservableObject {
             applyTarget()
             return
         }
-        let steps = min(24, max(8, abs(delta)))
-        let sleepNanos = UInt64((0.28 * transitionMultiplier / Double(steps)) * 1_000_000_000)
+        let totalDuration = 0.28 * transitionMultiplier
 
         let task = Task { @MainActor [weak self] in
-            for step in 1...steps {
+            let startTime = Date.now
+            while true {
                 guard !Task.isCancelled else { return }
-                let progress = Double(step) / Double(steps)
+                let elapsed = Date.now.timeIntervalSince(startTime)
+                let progress = min(1.0, elapsed / totalDuration)
+                let isFinal = progress >= 1.0
                 let value = Int((Double(current) + (Double(delta) * progress)).rounded())
                 if DisplayHardware.setBuiltinDisplayBrightnessPercent(value, for: display.displayID) {
                     self?.updateBuiltinBrightnessSnapshot(value, for: id)
                 }
-                try? await Task.sleep(nanoseconds: sleepNanos)
-            }
-            let success = DisplayHardware.setBuiltinDisplayBrightnessPercent(target, for: display.displayID)
-            if success {
-                self?.updateBuiltinBrightnessSnapshot(target, for: id)
+                if isFinal { break }
+                try? await Task.sleep(nanoseconds: 16_666_667)
             }
             DiagnosticsLogger.shared.log(
-                "Builtin brightness apply id=\(id) target=\(target) animated=true reason=\(reason) success=\(success)",
+                "Builtin brightness apply id=\(id) target=\(target) animated=true reason=\(reason)",
                 category: "engine"
             )
             self?.builtinBrightnessAnimationTasks.removeValue(forKey: id)
