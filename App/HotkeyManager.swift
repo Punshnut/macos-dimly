@@ -282,11 +282,36 @@ struct HotkeyDescriptor: Equatable, Hashable, Codable {
         UInt32(kVK_ANSI_KeypadEquals): "Keypad ="
     ]
 
+    private static let labelKeys: [String: String] = [
+        "Return": "HotkeyKeyReturnLabel", "Tab": "HotkeyKeyTabLabel",
+        "Space": "HotkeyKeySpaceLabel", "Forward Delete": "HotkeyKeyForwardDeleteLabel",
+        "Esc": "HotkeyKeyEscLabel", "Help": "HotkeyKeyHelpLabel",
+        "Fn": "HotkeyKeyFnLabel", "Home": "HotkeyKeyHomeLabel",
+        "End": "HotkeyKeyEndLabel", "Page Up": "HotkeyKeyPageUpLabel",
+        "Page Down": "HotkeyKeyPageDownLabel",
+        "Left Arrow": "HotkeyKeyLeftArrowLabel", "Right Arrow": "HotkeyKeyRightArrowLabel",
+        "Up Arrow": "HotkeyKeyUpArrowLabel", "Down Arrow": "HotkeyKeyDownArrowLabel",
+        "Keypad 0": "HotkeyKeyKeypad0Label", "Keypad 1": "HotkeyKeyKeypad1Label",
+        "Keypad 2": "HotkeyKeyKeypad2Label", "Keypad 3": "HotkeyKeyKeypad3Label",
+        "Keypad 4": "HotkeyKeyKeypad4Label", "Keypad 5": "HotkeyKeyKeypad5Label",
+        "Keypad 6": "HotkeyKeyKeypad6Label", "Keypad 7": "HotkeyKeyKeypad7Label",
+        "Keypad 8": "HotkeyKeyKeypad8Label", "Keypad 9": "HotkeyKeyKeypad9Label",
+        "Keypad ,": "HotkeyKeyKeypadCommaLabel", "Keypad .": "HotkeyKeyKeypadPeriodLabel",
+        "Keypad Enter": "HotkeyKeyKeypadEnterLabel", "Keypad +": "HotkeyKeyKeypadPlusLabel",
+        "Keypad -": "HotkeyKeyKeypadMinusLabel", "Keypad *": "HotkeyKeyKeypadMultiplyLabel",
+        "Keypad /": "HotkeyKeyKeypadDivideLabel", "Keypad =": "HotkeyKeyKeypadEqualsLabel",
+        "Cmd": "HotkeyModCmdLabel", "Option": "HotkeyModOptionLabel",
+        "Shift": "HotkeyModShiftLabel", "Ctrl": "HotkeyModCtrlLabel",
+    ]
+
     /// Localizes non-symbol key labels while preserving single-character/F-key strings.
     private static func localizedLabel(_ label: String) -> String {
         if label.count == 1 { return label }
         if label.hasPrefix("F"), label.dropFirst().allSatisfy({ $0.isNumber }) { return label }
-        return String(localized: String.LocalizationValue(label))
+        if let key = labelKeys[label] {
+            return String(localized: String.LocalizationValue(key))
+        }
+        return label
     }
 
     /// Fallback text for unknown key codes.
@@ -314,31 +339,31 @@ enum MediaKey: UInt16, Codable, CaseIterable {
     var displayName: String {
         switch self {
         case .volumeUp:
-            return String(localized: "Volume Up")
+            return String(localized: "HotkeyKeyVolumeUpLabel")
         case .volumeDown:
-            return String(localized: "Volume Down")
+            return String(localized: "HotkeyKeyVolumeDownLabel")
         case .brightnessUp:
-            return String(localized: "Brightness Up")
+            return String(localized: "HotkeyKeyBrightnessUpLabel")
         case .brightnessDown:
-            return String(localized: "Brightness Down")
+            return String(localized: "HotkeyKeyBrightnessDownLabel")
         case .mute:
-            return String(localized: "Mute")
+            return String(localized: "HotkeyKeyMuteLabel")
         case .playPause:
-            return String(localized: "Play/Pause")
+            return String(localized: "HotkeyKeyPlayPauseLabel")
         case .nextTrack:
-            return String(localized: "Next Track")
+            return String(localized: "HotkeyKeyNextTrackLabel")
         case .previousTrack:
-            return String(localized: "Previous Track")
+            return String(localized: "HotkeyKeyPreviousTrackLabel")
         case .fastForward:
-            return String(localized: "Fast Forward")
+            return String(localized: "HotkeyKeyFastForwardLabel")
         case .rewind:
-            return String(localized: "Rewind")
+            return String(localized: "HotkeyKeyRewindLabel")
         case .illuminationUp:
-            return String(localized: "Keyboard Brightness Up")
+            return String(localized: "HotkeyKeyKbdBrightnessUpLabel")
         case .illuminationDown:
-            return String(localized: "Keyboard Brightness Down")
+            return String(localized: "HotkeyKeyKbdBrightnessDownLabel")
         case .illuminationToggle:
-            return String(localized: "Keyboard Brightness Toggle")
+            return String(localized: "HotkeyKeyKbdBrightnessToggleLabel")
         }
     }
 }

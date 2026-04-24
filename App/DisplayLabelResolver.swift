@@ -22,7 +22,7 @@ struct DisplayLabelResolver {
         }
         return internalIndex > 1
             ? String(format: String(localized: "DisplayNameInternalFormat"), Int64(internalIndex))
-            : String(localized: "Internal")
+            : String(localized: "DisplayTypeInternalLabel")
     }
 
     /// Resolves the marker shown in the full-screen overlay for a display.

@@ -68,7 +68,7 @@ struct DimlyApp: App {
         )
 
         return MenuBarExtra(
-            String(localized: "Dimly"),
+            String(localized: "AppName"),
             systemImage: "display",
             isInserted: showMenuBarBinding
         ) {
@@ -225,13 +225,13 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
     private func configureMainMenu() {
         let mainMenu = NSMenu()
         let appMenuItem = NSMenuItem()
-        appMenuItem.title = String(localized: "Dimly")
+        appMenuItem.title = String(localized: "AppName")
         mainMenu.addItem(appMenuItem)
 
         let appMenu = NSMenu()
         appMenuItem.submenu = appMenu
 
-        let aboutTitle = String(localized: "About Dimly")
+        let aboutTitle = String(localized: "AppAboutMenuTitle")
         let aboutItem = NSMenuItem(
             title: aboutTitle,
             action: #selector(NSApplication.orderFrontStandardAboutPanel(_:)),
@@ -240,7 +240,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         appMenu.addItem(aboutItem)
         appMenu.addItem(.separator())
 
-        let settingsTitle = String(localized: "Settings...")
+        let settingsTitle = String(localized: "MenuSettingsItem")
         let settingsItem = NSMenuItem(
             title: settingsTitle,
             action: NSSelectorFromString("showSettingsWindow:"),
@@ -250,7 +250,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         appMenu.addItem(settingsItem)
 
         let updatesItem = NSMenuItem(
-            title: String(localized: "Check for Updates..."),
+            title: String(localized: "MenuCheckUpdatesItem"),
             action: #selector(UpdaterController.checkForUpdates(_:)),
             keyEquivalent: ""
         )
@@ -259,7 +259,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
 
         appMenu.addItem(.separator())
 
-        let quitTitle = String(localized: "Quit Dimly")
+        let quitTitle = String(localized: "MenuQuitItem")
         let quitItem = NSMenuItem(
             title: quitTitle,
             action: #selector(NSApplication.terminate(_:)),
@@ -295,7 +295,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
                 backing: .buffered,
                 defer: false
             )
-            window.title = String(localized: "Settings")
+            window.title = String(localized: "AppSettingsTitle")
             window.titlebarAppearsTransparent = true
             window.titlebarSeparatorStyle = .none
             window.toolbarStyle = .unifiedCompact

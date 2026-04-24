@@ -40,45 +40,45 @@ enum SmartButtonColorPreset: String, Codable, CaseIterable, Identifiable {
     var localizedTitle: String {
         switch self {
         case .sunset:
-            return String(localized: "Sunset")
+            return String(localized: "ColorSunsetLabel")
         case .ocean:
-            return String(localized: "Ocean")
+            return String(localized: "ColorOceanLabel")
         case .mint:
-            return String(localized: "Mint")
+            return String(localized: "ColorMintLabel")
         case .violet:
-            return String(localized: "Violet")
+            return String(localized: "ColorVioletLabel")
         case .amber:
-            return String(localized: "Amber")
+            return String(localized: "ColorAmberLabel")
         case .rose:
-            return String(localized: "Rose")
+            return String(localized: "ColorRoseLabel")
         case .lime:
-            return String(localized: "Lime")
+            return String(localized: "ColorLimeLabel")
         case .slate:
-            return String(localized: "Slate")
+            return String(localized: "ColorSlateLabel")
         case .teal:
-            return String(localized: "Teal")
+            return String(localized: "ColorTealLabel")
         case .indigo:
-            return String(localized: "Indigo")
+            return String(localized: "ColorIndigoLabel")
         case .coral:
-            return String(localized: "Coral")
+            return String(localized: "ColorCoralLabel")
         case .copper:
-            return String(localized: "Copper")
+            return String(localized: "ColorCopperLabel")
         case .emerald:
-            return String(localized: "Emerald")
+            return String(localized: "ColorEmeraldLabel")
         case .sky:
-            return String(localized: "Sky")
+            return String(localized: "ColorSkyLabel")
         case .magenta:
-            return String(localized: "Magenta")
+            return String(localized: "ColorMagentaLabel")
         case .gold:
-            return String(localized: "Gold")
+            return String(localized: "ColorGoldLabel")
         case .ruby:
-            return String(localized: "Ruby")
+            return String(localized: "ColorRubyLabel")
         case .lavender:
-            return String(localized: "Lavender")
+            return String(localized: "ColorLavenderLabel")
         case .pine:
-            return String(localized: "Pine")
+            return String(localized: "ColorPineLabel")
         case .tangerine:
-            return String(localized: "Tangerine")
+            return String(localized: "ColorTangerineLabel")
         }
     }
 }

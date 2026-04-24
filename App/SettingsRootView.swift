@@ -31,20 +31,20 @@ struct SettingsRootView: View {
     var body: some View {
         NavigationSplitView(columnVisibility: .constant(.all)) {
             List(selection: $selection) {
-                Section(String(localized: "Dimly")) {
-                    Label(String(localized: "General"), systemImage: "gearshape")
+                Section(String(localized: "AppName")) {
+                    Label(String(localized: "SettingsTabGeneralLabel"), systemImage: "gearshape")
                         .tag(SettingsDestination.general)
-                    Label(String(localized: "Displays"), systemImage: "display")
+                    Label(String(localized: "SettingsTabDisplaysLabel"), systemImage: "display")
                         .tag(SettingsDestination.displays)
-                    Label(String(localized: "Visuals"), systemImage: "paintbrush")
+                    Label(String(localized: "SettingsTabVisualsLabel"), systemImage: "paintbrush")
                         .tag(SettingsDestination.visuals)
-                    Label(String(localized: "Shortcuts"), systemImage: "keyboard")
+                    Label(String(localized: "SettingsTabShortcutsLabel"), systemImage: "keyboard")
                         .tag(SettingsDestination.shortcuts)
-                    Label(String(localized: "Profiles"), systemImage: "rectangle.3.group")
+                    Label(String(localized: "ProfilesSectionTitle"), systemImage: "rectangle.3.group")
                         .tag(SettingsDestination.profiles)
-                    Label(String(localized: "Schedule"), systemImage: "clock")
+                    Label(String(localized: "ScheduleTabLabel"), systemImage: "clock")
                         .tag(SettingsDestination.schedule)
-                    Label(String(localized: "About"), systemImage: "info.circle")
+                    Label(String(localized: "SettingsTabAboutLabel"), systemImage: "info.circle")
                         .tag(SettingsDestination.about)
                 }
             }
@@ -89,10 +89,10 @@ struct SettingsRootView: View {
     /// Prompts the user to rename an existing profile.
     private func renameProfile(_ profile: DisplayProfile) {
         let alert = NSAlert()
-        alert.messageText = String(localized: "Rename Profile")
-        alert.informativeText = String(localized: "Enter a new name for this profile.")
-        alert.addButton(withTitle: String(localized: "Save"))
-        alert.addButton(withTitle: String(localized: "Cancel"))
+        alert.messageText = String(localized: "RenameProfileAlertTitle")
+        alert.informativeText = String(localized: "RenameProfileAlertSubtitle")
+        alert.addButton(withTitle: String(localized: "ActionSaveButton"))
+        alert.addButton(withTitle: String(localized: "ActionCancelButton"))
         let input = NSTextField(string: profile.name)
         input.frame = NSRect(x: 0, y: 0, width: 240, height: 24)
         alert.accessoryView = input
@@ -117,13 +117,13 @@ struct SettingsRootView: View {
     /// Computes the human-friendly status text for a display.
     private func displayStatus(for display: DisplayInfo) -> String {
         if blackoutManager.activeDisplayIDs.contains(display.stableIdentity) {
-            return String(localized: "Blackout")
+            return String(localized: "DisplayStatusBlackoutLabel")
         }
         if settingsStore.settings.overlayOnlyDisplayIDs.contains(display.stableIdentity) == false,
            engine.ddcManager.states[display.stableIdentity]?.lastCommand == .standby {
-            return String(localized: "Sleep requested")
+            return String(localized: "DisplayStatusSleepLabel")
         }
-        return String(localized: "Visible")
+        return String(localized: "DisplayStatusVisibleLabel")
     }
 
     /// External display numbering map used for labels and markers.
@@ -154,10 +154,10 @@ struct SettingsRootView: View {
     /// Prompts to rename a display and persists the alias in settings.
     private func renameDisplay(_ display: DisplayInfo, currentName: String) {
         let alert = NSAlert()
-        alert.messageText = String(localized: "Rename Display")
-        alert.informativeText = String(localized: "Give this display a friendly name.")
-        alert.addButton(withTitle: String(localized: "Save"))
-        alert.addButton(withTitle: String(localized: "Cancel"))
+        alert.messageText = String(localized: "RenameDisplayAlertTitle")
+        alert.informativeText = String(localized: "RenameDisplayAlertSubtitle")
+        alert.addButton(withTitle: String(localized: "ActionSaveButton"))
+        alert.addButton(withTitle: String(localized: "ActionCancelButton"))
         let input = NSTextField(string: currentName)
         input.frame = NSRect(x: 0, y: 0, width: 240, height: 24)
         alert.accessoryView = input
@@ -179,7 +179,7 @@ struct SettingsRootView: View {
     private func displayRowView(for display: DisplayInfo) -> some View {
         let name = displayName(for: display)
         let status = displayStatus(for: display)
-        let typeLabel = display.isBuiltin ? String(localized: "Internal") : String(localized: "External")
+        let typeLabel = display.isBuiltin ? String(localized: "DisplayTypeInternalLabel") : String(localized: "DisplayTypeExternalLabel")
         let state = ddcManager.states[display.stableIdentity] ?? DDCState(status: .unknown, lastError: nil, lastCommand: nil, lastCommandAt: nil)
         let ddcSupported = state.status == .supported
         let overlayOnly = settingsStore.settings.overlayOnlyDisplayIDs.contains(display.stableIdentity)
@@ -192,9 +192,9 @@ struct SettingsRootView: View {
             case .ddc:
                 return (.green, String(localized: "DDC"))
             case .fallback:
-                return (.blue, String(localized: "Overlay mode"))
+                return (.blue, String(localized: "DisplayModeOverlayLabel"))
             case .checking:
-                return (.orange, String(localized: "Checking DDC"))
+                return (.orange, String(localized: "DDCCheckingLabel"))
             }
         }()
         let brightnessTint = brightnessPresentation.0
@@ -219,7 +219,7 @@ struct SettingsRootView: View {
                             .foregroundStyle(.secondary)
                     }
                     Spacer()
-                    Button(String(localized: "Rename")) {
+                    Button(String(localized: "ActionRenameLabel")) {
                         renameDisplay(display, currentName: name)
                     }
                     .buttonStyle(.bordered)
@@ -277,12 +277,12 @@ struct SettingsRootView: View {
             }
 
             HStack(spacing: 8) {
-                Button(String(localized: "Standby")) { engine.standby(display: display) }
+                Button(String(localized: "ActionStandbyButton")) { engine.standby(display: display) }
                     .tint(controlTint)
                     .disabled(!canControl)
                     .buttonStyle(.bordered)
                     .controlSize(.small)
-                Button(String(localized: "Wake")) { engine.wake(display: display) }
+                Button(String(localized: "ActionWakeButton")) { engine.wake(display: display) }
                     .tint(controlTint)
                     .disabled(!canControl)
                     .buttonStyle(.bordered)
@@ -293,7 +293,7 @@ struct SettingsRootView: View {
             if display.isExternal || display.isBuiltin {
                 VStack(alignment: .leading, spacing: 8) {
                     HStack(spacing: 8) {
-                        Label(String(localized: "Brightness"), systemImage: "sun.max.fill")
+                        Label(String(localized: "BrightnessSectionLabel"), systemImage: "sun.max.fill")
                             .font(.caption.weight(.semibold))
                             .foregroundStyle(brightnessTint)
                         Spacer()
@@ -326,7 +326,7 @@ struct SettingsRootView: View {
                         }
                         .buttonStyle(FluentPressButtonStyle(pressedScale: 0.84, pressedOpacity: 0.82))
                         .foregroundStyle(.secondary)
-                        .help(String(localized: "Decrease brightness"))
+                        .help(String(localized: "ActionDecreaseBrightnessHint"))
 
                         Slider(
                             value: Binding(
@@ -348,7 +348,7 @@ struct SettingsRootView: View {
                         }
                         .buttonStyle(FluentPressButtonStyle(pressedScale: 0.84, pressedOpacity: 0.82))
                         .foregroundStyle(.secondary)
-                        .help(String(localized: "Increase brightness"))
+                        .help(String(localized: "ActionIncreaseBrightnessHint"))
                     }
                 }
                 .padding(8)
@@ -365,7 +365,7 @@ struct SettingsRootView: View {
                     Divider()
 
                     HStack(spacing: 10) {
-                        Text(String(localized: "Overlay Only (Never Sleep)"))
+                        Text(String(localized: "DisplayOverlayOnlyLabel"))
                             .font(.caption)
                             .foregroundStyle(.secondary)
                         Spacer()
@@ -391,10 +391,10 @@ struct SettingsRootView: View {
 
                 HStack(spacing: 10) {
                     VStack(alignment: .leading, spacing: 2) {
-                        Text(String(localized: "Show in Dimly"))
+                        Text(String(localized: "DisplayShowInDimlyTitle"))
                             .font(.caption)
                             .foregroundStyle(.secondary)
-                        Text(String(localized: "Show this monitor in the Dimly monitor list."))
+                        Text(String(localized: "DisplayShowInDimlySubtitle"))
                             .font(.caption2)
                             .foregroundStyle(.tertiary)
                     }
@@ -519,11 +519,11 @@ struct SettingsRootView: View {
         }
 
         private var generalDetail: some View {
-            SettingsScrollView(title: String(localized: "Dimly settings"), subtitle: nil, contentMaxWidth: 980) {
-                SettingsCard(title: String(localized: "General"), subtitle: nil) {
+            SettingsScrollView(title: String(localized: "SettingsSectionTitle"), subtitle: nil, contentMaxWidth: 980) {
+                SettingsCard(title: String(localized: "SettingsTabGeneralLabel"), subtitle: nil) {
                     SettingsToggleRow(
-                        title: String(localized: "Autostart"),
-                        subtitle: String(localized: "Start Dimly automatically when you log in."),
+                        title: String(localized: "GeneralAutostartTitle"),
+                        subtitle: String(localized: "GeneralAutostartSubtitle"),
                         systemImage: "power.circle",
                         isOn: Binding(
                             get: { settingsStore.settings.launchAtLogin },
@@ -532,7 +532,7 @@ struct SettingsRootView: View {
                     )
                     SettingsDivider()
                     SettingsToggleRow(
-                        title: String(localized: "Show menu bar icon"),
+                        title: String(localized: "GeneralMenuBarIconTitle"),
                         subtitle: nil,
                         systemImage: "menubar.rectangle",
                         isOn: Binding(
@@ -542,7 +542,7 @@ struct SettingsRootView: View {
                     )
                     SettingsDivider()
                     SettingsToggleRow(
-                        title: String(localized: "Hide Dock icon"),
+                        title: String(localized: "GeneralHideDockIconTitle"),
                         subtitle: nil,
                         systemImage: "dock.rectangle",
                         isOn: Binding(
@@ -552,12 +552,12 @@ struct SettingsRootView: View {
                     )
                     SettingsDivider()
                     SettingsRow(
-                        title: String(localized: "Fast Actions visibility"),
-                        subtitle: String(localized: "Control where the Quick Actions section appears."),
+                        title: String(localized: "GeneralQuickActionsVisibilityTitle"),
+                        subtitle: String(localized: "GeneralQuickActionsVisibilitySubtitle"),
                         systemImage: "bolt.badge.clock"
                     ) {
                         Picker(
-                            String(localized: "Fast Actions visibility"),
+                            String(localized: "GeneralQuickActionsVisibilityTitle"),
                             selection: Binding(
                                 get: { settingsStore.settings.fastActionsVisibilityMode },
                                 set: { newValue in settingsStore.update { $0.fastActionsVisibilityMode = newValue } }
@@ -574,31 +574,31 @@ struct SettingsRootView: View {
                     }
                     SettingsDivider()
                     VStack(alignment: .leading, spacing: 6) {
-                        Text(String(localized: "Hide the Dock icon and app switcher entry."))
+                        Text(String(localized: "GeneralHideDockIconNote"))
                             .font(.caption)
                             .foregroundStyle(.secondary)
-                        Text(String(localized: "Dimly stays running for hotkeys even when the menu bar icon is hidden."))
+                        Text(String(localized: "GeneralMenuBarIconHiddenNote"))
                             .font(.caption)
                             .foregroundStyle(.secondary)
                     }
                     SettingsDivider()
-                    Button(String(localized: "Show introduction again")) {
+                    Button(String(localized: "GeneralShowIntroButton")) {
                         showIntroAgain()
                     }
                     .buttonStyle(.bordered)
                     .controlSize(.small)
                 }
 
-                SettingsCard(title: String(localized: "Settings backup"), subtitle: String(localized: "Choose what to import or export.")) {
+                SettingsCard(title: String(localized: "GeneralBackupTitle"), subtitle: String(localized: "GeneralBackupSubtitle")) {
                     HStack(alignment: .top, spacing: 10) {
                         backupSelectionTile(
-                            title: String(localized: "General settings"),
+                            title: String(localized: "BackupGeneralSettingsTitle"),
                             details: String(localized: "BackupGeneralRowDetails"),
                             systemImage: "gearshape.2",
                             isOn: $includeGeneralSettings
                         )
                         backupSelectionTile(
-                            title: String(localized: "Monitor settings"),
+                            title: String(localized: "BackupMonitorSettingsTitle"),
                             details: String(localized: "BackupMonitorRowDetails"),
                             systemImage: "display.2",
                             isOn: $includeMonitorSettings
@@ -607,23 +607,23 @@ struct SettingsRootView: View {
 
                     HStack(alignment: .top, spacing: 10) {
                         backupActionTile(
-                            title: String(localized: "Import selected settings"),
+                            title: String(localized: "BackupImportActionTitle"),
                             systemImage: "square.and.arrow.down",
-                            buttonTitle: String(localized: "Import"),
+                            buttonTitle: String(localized: "ActionImportButton"),
                             disabled: selectedBackupType == nil,
                             action: importSelectedSettings
                         )
                         backupActionTile(
-                            title: String(localized: "Export selected settings"),
+                            title: String(localized: "BackupExportActionTitle"),
                             systemImage: "square.and.arrow.up",
-                            buttonTitle: String(localized: "Export"),
+                            buttonTitle: String(localized: "ActionExportButton"),
                             disabled: selectedBackupType == nil,
                             action: exportSelectedSettings
                         )
                     }
 
                     if selectedBackupType == nil {
-                        Text(String(localized: "Select at least one settings category."))
+                        Text(String(localized: "BackupSelectCategoryError"))
                             .font(.caption)
                             .foregroundStyle(.secondary)
                     }
@@ -632,10 +632,10 @@ struct SettingsRootView: View {
         }
 
         private var displaysDetail: some View {
-            SettingsScrollView(title: String(localized: "Displays"), subtitle: nil) {
-                SettingsCard(title: String(localized: "Displays"), subtitle: nil) {
+            SettingsScrollView(title: String(localized: "SettingsTabDisplaysLabel"), subtitle: nil) {
+                SettingsCard(title: String(localized: "SettingsTabDisplaysLabel"), subtitle: nil) {
                     SettingsToggleRow(
-                        title: String(localized: "Show display numbers on screens"),
+                        title: String(localized: "DisplaysShowNumbersTitle"),
                         subtitle: nil,
                         systemImage: "number",
                         isOn: Binding(
@@ -645,7 +645,7 @@ struct SettingsRootView: View {
                     )
                     SettingsDivider()
                     SettingsToggleRow(
-                        title: String(localized: "Merge internal and external monitor order"),
+                        title: String(localized: "DisplaysMergeOrderTitle"),
                         subtitle: nil,
                         systemImage: "rectangle.3.group.bubble.left",
                         isOn: Binding(
@@ -654,12 +654,12 @@ struct SettingsRootView: View {
                         )
                     )
                     SettingsDivider()
-                    Text(String(localized: "Tip: Turn this on to arrange visible built-in and external monitors in one shared list."))
+                    Text(String(localized: "DisplaysMergeOrderTip"))
                         .font(.caption)
                         .foregroundStyle(.secondary)
                     SettingsDivider()
                     if displayManager.displays.isEmpty {
-                        Text(String(localized: "No active displays detected."))
+                        Text(String(localized: "DisplaysEmptyLabel"))
                             .font(.caption)
                             .foregroundStyle(.secondary)
                     } else {
@@ -720,15 +720,15 @@ struct SettingsRootView: View {
         }
 
         private var visualsDetail: some View {
-            SettingsScrollView(title: String(localized: "Visuals"), subtitle: nil) {
-                SettingsCard(title: String(localized: "Appearance"), subtitle: nil) {
+            SettingsScrollView(title: String(localized: "SettingsTabVisualsLabel"), subtitle: nil) {
+                SettingsCard(title: String(localized: "VisualsAppearanceTitle"), subtitle: nil) {
                     SettingsRow(
-                        title: String(localized: "Appearance"),
-                        subtitle: String(localized: "Choose how Dimly looks."),
+                        title: String(localized: "VisualsAppearanceTitle"),
+                        subtitle: String(localized: "VisualsAppearanceSubtitle"),
                         systemImage: "circle.lefthalf.filled"
                     ) {
                         Picker(
-                            String(localized: "Appearance"),
+                            String(localized: "VisualsAppearanceTitle"),
                             selection: Binding(
                                 get: { settingsStore.settings.appAppearancePreference },
                                 set: { newValue in settingsStore.update { $0.appAppearancePreference = newValue } }
@@ -745,17 +745,17 @@ struct SettingsRootView: View {
                     }
                 }
 
-                SettingsCard(title: String(localized: "Transitions"), subtitle: nil) {
+                SettingsCard(title: String(localized: "VisualsTransitionsTitle"), subtitle: nil) {
                     SettingsRow(
-                        title: String(localized: "Transition speed"),
-                        subtitle: String(localized: "Controls how fast brightness and profile changes animate."),
+                        title: String(localized: "VisualsTransitionSpeedTitle"),
+                        subtitle: String(localized: "VisualsTransitionSpeedSubtitle"),
                         systemImage: "slider.horizontal.3"
                     ) {
                         transitionSpeedSlider
                     }
                     SettingsDivider()
                     SettingsToggleRow(
-                        title: String(localized: "Fade out on sleep/blackout"),
+                        title: String(localized: "VisualsTransitionFadeOutTitle"),
                         subtitle: nil,
                         systemImage: "moon.zzz",
                         isOn: Binding(
@@ -765,7 +765,7 @@ struct SettingsRootView: View {
                     )
                     SettingsDivider()
                     SettingsToggleRow(
-                        title: String(localized: "Fade in on wake/restore"),
+                        title: String(localized: "VisualsTransitionFadeInTitle"),
                         subtitle: nil,
                         systemImage: "sun.max",
                         isOn: Binding(
@@ -775,7 +775,7 @@ struct SettingsRootView: View {
                     )
                 }
 
-                SettingsCard(title: String(localized: "Smart Buttons"), subtitle: nil) {
+                SettingsCard(title: String(localized: "SmartButtonsSectionTitle"), subtitle: nil) {
                     smartButtonsConfigurationSection
                 }
             }
@@ -808,8 +808,8 @@ struct SettingsRootView: View {
         }
 
         private var shortcutsDetail: some View {
-            SettingsScrollView(title: String(localized: "Shortcuts"), subtitle: nil, contentMaxWidth: 980) {
-                SettingsCard(title: String(localized: "Global shortcuts"), subtitle: nil) {
+            SettingsScrollView(title: String(localized: "SettingsTabShortcutsLabel"), subtitle: nil, contentMaxWidth: 980) {
+                SettingsCard(title: String(localized: "ShortcutsGlobalTitle"), subtitle: nil) {
                     if settingsStore.settings.hotkeyBindings.isEmpty {
                         emptyHotkeysCard
                     } else {
@@ -851,7 +851,7 @@ struct SettingsRootView: View {
                             )
                         }
                     } label: {
-                        Label(String(localized: "Add Hotkey"), systemImage: "plus.circle")
+                        Label(String(localized: "ActionAddHotkeyButton"), systemImage: "plus.circle")
                     }
                     .buttonStyle(.bordered)
                     .controlSize(.small)
@@ -859,7 +859,7 @@ struct SettingsRootView: View {
                     SettingsDivider()
 
                     SettingsRow(
-                        title: String(localized: "Panic hotkey (fixed):"),
+                        title: String(localized: "ShortcutsPanicHotkeyLabel"),
                         subtitle: nil,
                         systemImage: "bolt.fill"
                     ) {
@@ -873,9 +873,9 @@ struct SettingsRootView: View {
 
         private var emptyHotkeysCard: some View {
             VStack(alignment: .leading, spacing: 6) {
-                Text(String(localized: "No hotkeys set yet"))
+                Text(String(localized: "ShortcutsEmptyLabel"))
                     .font(.callout.weight(.semibold))
-                Text(String(localized: "Add a hotkey to quickly toggle blackout or sleep/wake."))
+                Text(String(localized: "ShortcutsEmptyHint"))
                     .font(.caption)
                     .foregroundStyle(.secondary)
             }
@@ -891,16 +891,16 @@ struct SettingsRootView: View {
         }
 
         private var profilesDetail: some View {
-            SettingsScrollView(title: String(localized: "Profiles"), subtitle: nil, contentMaxWidth: 980) {
-                SettingsCard(title: String(localized: "Profiles"), subtitle: nil) {
+            SettingsScrollView(title: String(localized: "ProfilesSectionTitle"), subtitle: nil, contentMaxWidth: 980) {
+                SettingsCard(title: String(localized: "ProfilesSectionTitle"), subtitle: nil) {
                     HStack(alignment: .center, spacing: 8) {
-                        Button(String(localized: "Save Current Setup")) {
+                        Button(String(localized: "ActionSaveCurrentSetupButton")) {
                             profileManager.saveCurrentProfile(named: proposedProfileName)
                             proposedProfileName = ""
                         }
                         .buttonStyle(.bordered)
                         .controlSize(.small)
-                        TextField(String(localized: "Profile name"), text: $proposedProfileName)
+                        TextField(String(localized: "ProfileNamePlaceholder"), text: $proposedProfileName)
                             .textFieldStyle(.roundedBorder)
                             .frame(width: 210)
                     }
@@ -908,7 +908,7 @@ struct SettingsRootView: View {
                     SettingsDivider()
 
                     if profileManager.profiles.isEmpty {
-                        Text(String(localized: "No profiles yet. Save the current display setup to create one."))
+                        Text(String(localized: "ProfilesSettingsEmptyLabel"))
                             .font(.caption)
                             .foregroundStyle(.secondary)
                     } else {
@@ -960,7 +960,7 @@ struct SettingsRootView: View {
                         .animation(reorderAnimation, value: profileSwapTargetID)
                         .animation(reorderAnimation, value: displayedProfiles.map(\.id))
                         .animation(reorderAnimation, value: draggedProfileID)
-                        Text(String(localized: "Tip: Drag profile cards to reorder them."))
+                        Text(String(localized: "ProfileReorderTip"))
                             .font(.caption)
                             .foregroundStyle(.secondary)
                     }
@@ -1031,10 +1031,10 @@ struct SettingsRootView: View {
                     }
                 )) {
                     VStack(alignment: .leading, spacing: 2) {
-                        Text(String(localized: "Show as smart button"))
+                        Text(String(localized: "ProfileSmartButtonToggleTitle"))
                             .font(.caption)
                             .foregroundStyle(.secondary)
-                        Text(String(localized: "Lets this profile appear under Quick Actions in the menu bar."))
+                        Text(String(localized: "ProfileSmartButtonToggleSubtitle"))
                             .font(.caption2)
                             .foregroundStyle(.tertiary)
                     }
@@ -1043,12 +1043,12 @@ struct SettingsRootView: View {
                 .controlSize(.small)
 
                 HStack(spacing: 8) {
-                    Text(String(localized: "Smart button color"))
+                    Text(String(localized: "SmartButtonColorPickerLabel"))
                         .font(.caption)
                         .foregroundStyle(.secondary)
                     Spacer()
                     Picker(
-                        String(localized: "Smart button color"),
+                        String(localized: "SmartButtonColorPickerLabel"),
                         selection: Binding<SmartButtonColorPreset?>(
                             get: { profile.smartButtonColorPreset },
                             set: { newValue in
@@ -1056,7 +1056,7 @@ struct SettingsRootView: View {
                             }
                         )
                     ) {
-                        Text(String(localized: "Auto")).tag(Optional<SmartButtonColorPreset>.none)
+                        Text(String(localized: "SmartButtonColorAutoLabel")).tag(Optional<SmartButtonColorPreset>.none)
                         ForEach(SmartButtonColorPreset.allCases) { preset in
                             Text(preset.localizedTitle).tag(Optional(preset))
                         }
@@ -1070,22 +1070,22 @@ struct SettingsRootView: View {
                 .opacity(profile.showInSmartButtons ? 1 : 0.58)
 
                 HStack(spacing: 6) {
-                    Button(String(localized: "Apply")) { profileManager.apply(profile: profile) }
+                    Button(String(localized: "ActionApplyButton")) { profileManager.apply(profile: profile) }
                         .buttonStyle(.borderedProminent)
                         .controlSize(.small)
-                    Button(String(localized: "Rename")) {
+                    Button(String(localized: "ActionRenameLabel")) {
                         renameProfile(profile)
                     }
                     .buttonStyle(.bordered)
                     .controlSize(.small)
-                    Button(String(localized: "Overwrite")) {
+                    Button(String(localized: "ActionOverwriteButton")) {
                         confirmAndOverwriteProfile(profile)
                     }
                     .buttonStyle(.bordered)
                     .controlSize(.small)
                     Spacer(minLength: 0)
                     Button(role: .destructive, action: { profileManager.delete(profile: profile) }) {
-                        Text(String(localized: "Delete"))
+                        Text(String(localized: "ActionDeleteButton"))
                     }
                     .buttonStyle(.bordered)
                     .controlSize(.small)
@@ -1106,10 +1106,10 @@ struct SettingsRootView: View {
         /// Confirms profile overwrite before replacing saved values with current settings.
         private func confirmAndOverwriteProfile(_ profile: DisplayProfile) {
             let alert = NSAlert()
-            alert.messageText = String(localized: "Overwrite Profile")
+            alert.messageText = String(localized: "ActionOverwriteProfileMenuLabel")
             alert.informativeText = profile.name
-            alert.addButton(withTitle: String(localized: "Overwrite"))
-            alert.addButton(withTitle: String(localized: "Cancel"))
+            alert.addButton(withTitle: String(localized: "ActionOverwriteButton"))
+            alert.addButton(withTitle: String(localized: "ActionCancelButton"))
             if AlertPresentation.runModalOnCursorScreen(alert) == .alertFirstButtonReturn {
                 profileManager.overwriteProfileWithCurrentSettings(profile)
             }
@@ -1118,12 +1118,12 @@ struct SettingsRootView: View {
         private var smartButtonsConfigurationSection: some View {
             VStack(alignment: .leading, spacing: 8) {
                 SettingsRow(
-                    title: String(localized: "Smart buttons"),
-                    subtitle: String(localized: "Quick profile shortcuts shown below Quick Actions."),
+                    title: String(localized: "SmartButtonsToggleTitle"),
+                    subtitle: String(localized: "SmartButtonsSubtitle"),
                     systemImage: "square.grid.2x2"
                 ) {
                     Picker(
-                        String(localized: "Smart buttons"),
+                        String(localized: "SmartButtonsToggleTitle"),
                         selection: Binding(
                             get: { max(4, min(16, settingsStore.settings.menuBarSmartButtonsLimit)) },
                             set: { newValue in
@@ -1143,7 +1143,7 @@ struct SettingsRootView: View {
                     .frame(width: 88)
                 }
                 HStack(spacing: 8) {
-                    Text(String(localized: "Colorless mode"))
+                    Text(String(localized: "SmartButtonColorlessLabel"))
                         .font(.caption)
                         .foregroundStyle(.secondary)
                     Spacer()
@@ -1159,7 +1159,7 @@ struct SettingsRootView: View {
                     .toggleStyle(.switch)
                     .controlSize(.small)
                 }
-                Text(String(localized: "Profiles stay sorted by this list order. Up to 4 smart buttons are shown per row in the menu bar."))
+                Text(String(localized: "SmartButtonsOrderNote"))
                     .font(.caption)
                     .foregroundStyle(.secondary)
             }
@@ -1299,11 +1299,11 @@ struct SettingsRootView: View {
 
         private var automationSection: some View {
             VStack(alignment: .leading, spacing: 8) {
-                Toggle(String(localized: "Auto-apply profile when an external display connects"), isOn: $profileManager.automationEnabled)
+                Toggle(String(localized: "ProfileAutoApplyTitle"), isOn: $profileManager.automationEnabled)
                     .toggleStyle(.switch)
                     .controlSize(.large)
                 Picker(
-                    String(localized: "Trigger monitor connection"),
+                    String(localized: "ProfileAutoApplyTriggerLabel"),
                     selection: $profileManager.automationTriggerTarget
                 ) {
                     ForEach(automationDisplayOptions(for: profileManager.automationTriggerTarget)) { option in
@@ -1311,7 +1311,7 @@ struct SettingsRootView: View {
                     }
                 }
                 .disabled(profileManager.automationEnabled == false)
-                Picker(String(localized: "Profile to apply"), selection: Binding(
+                Picker(String(localized: "ProfileAutoApplyPickerLabel"), selection: Binding(
                     get: { profileManager.automationProfileID ?? profileManager.profiles.first?.id },
                     set: { profileManager.automationProfileID = $0 }
                 )) {
@@ -1332,14 +1332,14 @@ struct SettingsRootView: View {
 
         private var scheduleDetail: some View {
             SettingsScrollView(
-                title: String(localized: "Schedule"),
-                subtitle: String(localized: "Automatically apply profiles at set times."),
+                title: String(localized: "ScheduleTabLabel"),
+                subtitle: String(localized: "ScheduleTabSubtitle"),
                 contentMaxWidth: 980
             ) {
-                SettingsCard(title: String(localized: "Schedules"), subtitle: nil) {
+                SettingsCard(title: String(localized: "ScheduleCardTitle"), subtitle: nil) {
                     SettingsToggleRow(
-                        title: String(localized: "Enable Scheduling"),
-                        subtitle: String(localized: "Automatically apply profiles at scheduled times."),
+                        title: String(localized: "ScheduleEnableTitle"),
+                        subtitle: String(localized: "ScheduleEnableSubtitle"),
                         systemImage: "clock.badge.checkmark",
                         isOn: Binding(
                             get: { scheduleManager.schedulingEnabled },
@@ -1348,7 +1348,7 @@ struct SettingsRootView: View {
                     )
                     SettingsDivider()
                     if scheduleManager.entries.isEmpty {
-                        Text(String(localized: "No schedules yet. Add one to get started."))
+                        Text(String(localized: "ScheduleEmptyLabel"))
                             .font(.caption)
                             .foregroundStyle(.secondary)
                     } else {
@@ -1374,13 +1374,13 @@ struct SettingsRootView: View {
                             daysOfWeek: []
                         ))
                     } label: {
-                        Label(String(localized: "Add Schedule"), systemImage: "plus.circle")
+                        Label(String(localized: "ActionAddScheduleButton"), systemImage: "plus.circle")
                     }
                     .buttonStyle(.bordered)
                     .controlSize(.small)
                     .disabled(profileManager.profiles.isEmpty)
                     if profileManager.profiles.isEmpty {
-                        Text(String(localized: "No profiles available. Create a profile first."))
+                        Text(String(localized: "ScheduleNoProfilesLabel"))
                             .font(.caption)
                             .foregroundStyle(.secondary)
                     }
@@ -1394,15 +1394,15 @@ struct SettingsRootView: View {
                 }
                 if hasSolarEntry {
                     SettingsCard(
-                        title: String(localized: "Location"),
-                        subtitle: String(localized: "Required for sunrise and sunset triggers.")
+                        title: String(localized: "ScheduleLocationTitle"),
+                        subtitle: String(localized: "ScheduleLocationSubtitle")
                     ) {
                         SettingsRow(
-                            title: String(localized: "Location for solar times"),
+                            title: String(localized: "ScheduleLocationRowTitle"),
                             subtitle: scheduleLocationSubtitle,
                             systemImage: "location.circle"
                         ) {
-                            Button(String(localized: "Use My Location")) {
+                            Button(String(localized: "ActionUseMyLocationButton")) {
                                 scheduleManager.requestLocation()
                                 showManualEntry = false
                             }
@@ -1411,7 +1411,7 @@ struct SettingsRootView: View {
                             .disabled(scheduleManager.isRequestingLocation)
                         }
                         if scheduleManager.isRequestingLocation {
-                            Text(String(localized: "Requesting location…"))
+                            Text(String(localized: "ScheduleLocationRequestingLabel"))
                                 .font(.caption)
                                 .foregroundStyle(.secondary)
                         }
@@ -1508,7 +1508,7 @@ struct SettingsRootView: View {
 
         private var scheduleLocationSubtitle: String {
             guard let coord = scheduleManager.savedCoordinate else {
-                return String(localized: "Not set")
+                return String(localized: "HotkeyNotSetLabel")
             }
             let fmt = DateFormatter()
             fmt.dateStyle = .short
@@ -1531,7 +1531,7 @@ struct SettingsRootView: View {
                             .controlSize(.small)
 
                         // Profile picker
-                        Picker(String(localized: "Profile to apply"), selection: $entry.profileID) {
+                        Picker(String(localized: "ProfileAutoApplyPickerLabel"), selection: $entry.profileID) {
                             ForEach(profiles) { profile in
                                 Text(profile.name).tag(profile.id)
                             }
@@ -1551,12 +1551,12 @@ struct SettingsRootView: View {
                                 .foregroundStyle(.secondary)
                         }
                         .buttonStyle(.plain)
-                        .help(String(localized: "Delete schedule"))
+                        .help(String(localized: "ActionDeleteScheduleHint"))
                     }
 
                     HStack(alignment: .center, spacing: 8) {
                         // Trigger type picker
-                        Picker(String(localized: "Trigger type"), selection: triggerTypePicker) {
+                        Picker(String(localized: "ScheduleTriggerTypePickerLabel"), selection: triggerTypePicker) {
                             ForEach(ScheduleTriggerType.allCases) { type in
                                 Text(type.localizedTitle).tag(type)
                             }
@@ -1691,7 +1691,7 @@ struct SettingsRootView: View {
                         }
                     }
                     if selection.isEmpty {
-                        Text(String(localized: "Every day"))
+                        Text(String(localized: "ScheduleRecurrenceEveryDayLabel"))
                             .font(.caption2)
                             .foregroundStyle(.secondary)
                     }
@@ -1700,8 +1700,8 @@ struct SettingsRootView: View {
         }
 
         private var aboutDetail: some View {
-            SettingsScrollView(title: String(localized: "About"), subtitle: nil, contentMaxWidth: 980) {
-                SettingsCard(title: String(localized: "Dimly"), subtitle: nil) {
+            SettingsScrollView(title: String(localized: "SettingsTabAboutLabel"), subtitle: nil, contentMaxWidth: 980) {
+                SettingsCard(title: String(localized: "AppName"), subtitle: nil) {
                     let version = Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String ?? ""
                     let build = Bundle.main.object(forInfoDictionaryKey: "CFBundleVersion") as? String ?? ""
                     let versionLabel: String = {
@@ -1722,12 +1722,12 @@ struct SettingsRootView: View {
                                 .shadow(radius: 6, y: 2)
                         }
                         VStack(alignment: .leading, spacing: 4) {
-                            Text(String(localized: "Dimly"))
+                            Text(String(localized: "AppName"))
                                 .font(.title2.bold())
                             Text(versionLabel)
                                 .font(.caption)
                                 .foregroundStyle(.secondary)
-                            Text(String(localized: "© 2026 Jan Feuerbacher"))
+                            Text(String(localized: "AboutCopyrightLabel"))
                                 .font(.caption)
                                 .foregroundStyle(.secondary)
                         }
@@ -1736,18 +1736,18 @@ struct SettingsRootView: View {
                     SettingsDivider()
 
                     VStack(alignment: .leading, spacing: 10) {
-                        Text(String(localized: "Dimly is a native Swift macOS utility for quickly blacking out external displays and managing sleep/wake."))
+                        Text(String(localized: "AboutDescriptionText"))
                             .font(.caption)
                             .foregroundStyle(.secondary)
-                        Text(String(localized: "Made in my free time - thanks for the support."))
+                        Text(String(localized: "AboutMadeByText"))
                             .font(.caption)
                             .foregroundStyle(.secondary)
                     }
                 }
 
                 SettingsCard(
-                    title: String(localized: "Community"),
-                    subtitle: String(localized: "Open source links and support")
+                    title: String(localized: "AboutCommunityTitle"),
+                    subtitle: String(localized: "AboutCommunitySubtitle")
                 ) {
                     VStack(alignment: .leading, spacing: 12) {
                         VStack(alignment: .leading, spacing: 8) {
@@ -1760,12 +1760,12 @@ struct SettingsRootView: View {
                                         RoundedRectangle(cornerRadius: 8, style: .continuous)
                                             .fill(.white.opacity(0.22))
                                     )
-                                Text(String(localized: "Built in public on GitHub"))
+                                Text(String(localized: "AboutBuiltOnGitHubLabel"))
                                     .font(.callout.weight(.semibold))
                                     .foregroundStyle(.white)
                                 Spacer()
                             }
-                            Text(String(localized: "Follow releases, track development, and share feedback."))
+                            Text(String(localized: "AboutGitHubFollowText"))
                                 .font(.caption)
                                 .foregroundStyle(.white.opacity(0.9))
                         }
@@ -1788,8 +1788,8 @@ struct SettingsRootView: View {
 
                         Link(destination: URL(string: "https://github.com/Punshnut/macos-dimly")!) {
                             aboutActionTile(
-                                title: String(localized: "GitHub Repo"),
-                                subtitle: String(localized: "Source code, changelog, and releases"),
+                                title: String(localized: "AboutGitHubRepoTitle"),
+                                subtitle: String(localized: "AboutGitHubRepoSubtitle"),
                                 systemImage: "chevron.left.forwardslash.chevron.right",
                                 tint: Color(red: 0.16, green: 0.50, blue: 0.89)
                             )
@@ -1801,8 +1801,8 @@ struct SettingsRootView: View {
                             HStack(spacing: 10) {
                                 Link(destination: URL(string: "https://github.com/Punshnut/macos-dimly/issues/new")!) {
                                     aboutActionTile(
-                                        title: String(localized: "Report an Issue"),
-                                        subtitle: String(localized: "Bug reports and ideas"),
+                                        title: String(localized: "AboutReportIssueTitle"),
+                                        subtitle: String(localized: "AboutReportIssueSubtitle"),
                                         systemImage: "exclamationmark.bubble.fill",
                                         tint: Color(red: 0.93, green: 0.52, blue: 0.19)
                                     )
@@ -1812,8 +1812,8 @@ struct SettingsRootView: View {
 
                                 Link(destination: URL(string: "https://ko-fi.com/janfeuerbacher")!) {
                                     aboutActionTile(
-                                        title: String(localized: "Donate"),
-                                        subtitle: String(localized: "Support development"),
+                                        title: String(localized: "AboutDonateTitle"),
+                                        subtitle: String(localized: "AboutDonateSubtitle"),
                                         systemImage: "heart.fill",
                                         tint: Color(red: 0.86, green: 0.26, blue: 0.35)
                                     )
@@ -1825,8 +1825,8 @@ struct SettingsRootView: View {
                             VStack(spacing: 10) {
                                 Link(destination: URL(string: "https://github.com/Punshnut/macos-dimly/issues/new")!) {
                                     aboutActionTile(
-                                        title: String(localized: "Report an Issue"),
-                                        subtitle: String(localized: "Bug reports and ideas"),
+                                        title: String(localized: "AboutReportIssueTitle"),
+                                        subtitle: String(localized: "AboutReportIssueSubtitle"),
                                         systemImage: "exclamationmark.bubble.fill",
                                         tint: Color(red: 0.93, green: 0.52, blue: 0.19)
                                     )
@@ -1836,8 +1836,8 @@ struct SettingsRootView: View {
 
                                 Link(destination: URL(string: "https://ko-fi.com/janfeuerbacher")!) {
                                     aboutActionTile(
-                                        title: String(localized: "Donate"),
-                                        subtitle: String(localized: "Support development"),
+                                        title: String(localized: "AboutDonateTitle"),
+                                        subtitle: String(localized: "AboutDonateSubtitle"),
                                         systemImage: "heart.fill",
                                         tint: Color(red: 0.86, green: 0.26, blue: 0.35)
                                     )
@@ -1993,8 +1993,8 @@ struct SettingsRootView: View {
         private func importSelectedSettings() {
             guard selectedBackupType != nil else {
                 showBackupAlert(
-                    title: String(localized: "Could not import settings backup"),
-                    message: String(localized: "Select at least one settings category.")
+                    title: String(localized: "BackupImportErrorTitle"),
+                    message: String(localized: "BackupSelectCategoryError")
                 )
                 return
             }
@@ -2004,7 +2004,7 @@ struct SettingsRootView: View {
             panel.canChooseDirectories = false
             panel.allowsMultipleSelection = false
             panel.allowedContentTypes = [backupContentType, .json]
-            panel.message = String(localized: "Choose a Dimly backup file to import.")
+            panel.message = String(localized: "BackupImportFilePrompt")
 
             guard panel.runModal() == .OK, let url = panel.url else { return }
 
@@ -2024,18 +2024,18 @@ struct SettingsRootView: View {
                 }
             } catch SettingsBackupApplyError.missingGeneralSettings {
                 showBackupAlert(
-                    title: String(localized: "Could not import settings backup"),
-                    message: String(localized: "This backup does not include general settings.")
+                    title: String(localized: "BackupImportErrorTitle"),
+                    message: String(localized: "BackupImportMissingGeneralError")
                 )
             } catch SettingsBackupApplyError.missingMonitorSettings {
                 showBackupAlert(
-                    title: String(localized: "Could not import settings backup"),
-                    message: String(localized: "This backup does not include monitor settings.")
+                    title: String(localized: "BackupImportErrorTitle"),
+                    message: String(localized: "BackupImportMissingMonitorError")
                 )
             } catch {
                 showBackupAlert(
-                    title: String(localized: "Could not import settings backup"),
-                    message: String(localized: "Could not decode the selected backup file.")
+                    title: String(localized: "BackupImportErrorTitle"),
+                    message: String(localized: "BackupImportDecodeError")
                 )
             }
         }
@@ -2044,8 +2044,8 @@ struct SettingsRootView: View {
         private func exportSelectedSettings() {
             guard let selectedBackupType else {
                 showBackupAlert(
-                    title: String(localized: "Could not export settings backup"),
-                    message: String(localized: "Select at least one settings category.")
+                    title: String(localized: "BackupExportErrorTitle"),
+                    message: String(localized: "BackupSelectCategoryError")
                 )
                 return
             }
@@ -2071,8 +2071,8 @@ struct SettingsRootView: View {
                 try data.write(to: destinationURL, options: .atomic)
             } catch {
                 showBackupAlert(
-                    title: String(localized: "Could not export settings backup"),
-                    message: String(localized: "Could not save the backup file.")
+                    title: String(localized: "BackupExportErrorTitle"),
+                    message: String(localized: "BackupExportSaveError")
                 )
             }
         }
@@ -2109,7 +2109,7 @@ struct SettingsRootView: View {
                     guard option.id == .allExternalDisplays else { return option }
                     return DisplayOption(
                         id: option.id,
-                        label: String(localized: "Any External Monitor")
+                        label: String(localized: "ProfileAutoApplyAnyMonitorLabel")
                     )
                 }
         }
@@ -2117,7 +2117,7 @@ struct SettingsRootView: View {
         /// Returns external display picker options plus stale IDs if the selected target is missing.
         private func externalDisplayOptions(includingMissingTarget target: HotkeyTarget) -> [DisplayOption] {
             var options: [DisplayOption] = [
-                DisplayOption(id: .allExternalDisplays, label: String(localized: "All External Displays"))
+                DisplayOption(id: .allExternalDisplays, label: String(localized: "HotkeyTargetAllExternalLabel"))
             ]
             let externals = displayManager.displays.filter { $0.isExternal }
             options.append(contentsOf: externals.map { display in
@@ -2172,11 +2172,11 @@ private extension AppAppearancePreference {
     var localizedTitle: String {
         switch self {
         case .system:
-            String(localized: "Like system")
+            String(localized: "AppearanceSystemLabel")
         case .light:
-            String(localized: "Always light")
+            String(localized: "AppearanceLightLabel")
         case .dark:
-            String(localized: "Always dark")
+            String(localized: "AppearanceDarkLabel")
         }
     }
 }
@@ -2200,14 +2200,14 @@ private struct HotkeyBindingRow: View {
         HStack(alignment: .center, spacing: 14) {
             SettingsIcon(systemName: "command")
             VStack(alignment: .leading, spacing: 8) {
-                Picker(String(localized: "Display"), selection: $binding.target) {
+                Picker(String(localized: "HotkeyDisplayPickerLabel"), selection: $binding.target) {
                     ForEach(displayOptions) { option in
                         Text(option.label).tag(option.id)
                     }
                 }
                 .disabled(binding.action.usesTarget == false)
                 .opacity(binding.action.usesTarget ? 1.0 : 0.5)
-                Picker(String(localized: "Action"), selection: $binding.action) {
+                Picker(String(localized: "HotkeyActionPickerLabel"), selection: $binding.action) {
                     ForEach(HotkeyAction.allCases) { action in
                         Text(action.title).tag(action)
                     }
@@ -2215,7 +2215,7 @@ private struct HotkeyBindingRow: View {
             }
             Spacer(minLength: 12)
             VStack(alignment: .trailing, spacing: 6) {
-                Text(binding.descriptor?.displayString ?? String(localized: "Not set"))
+                Text(binding.descriptor?.displayString ?? String(localized: "HotkeyNotSetLabel"))
                     .font(.caption)
                     .foregroundStyle(.secondary)
                 HotkeyRecorder(descriptor: $binding.descriptor)
@@ -2255,7 +2255,7 @@ private struct HotkeyRecorder: View {
                 .frame(width: 170, height: 36)
             HStack(spacing: 8) {
                 Image(systemName: isRecording ? "dot.radiowaves.left.and.right" : "record.circle")
-                Text(isRecording ? String(localized: "Press keys") : String(localized: "Change"))
+                Text(isRecording ? String(localized: "HotkeyRecordingLabel") : String(localized: "ActionChangeButton"))
             }
             .font(.callout)
         }

@@ -162,7 +162,7 @@ final class DisplayHardware: DisplayHardwareProviding, @unchecked Sendable {
 
     /// Returns a localized resolution string (with a scaled suffix if needed).
     private static func resolutionString(for id: CGDirectDisplayID) -> String {
-        guard let mode = CGDisplayCopyDisplayMode(id) else { return String(localized: "Unknown") }
+        guard let mode = CGDisplayCopyDisplayMode(id) else { return String(localized: "DDCUnknownLabel") }
         let width = Int(mode.width)
         let height = Int(mode.height)
         let scaling = mode.pixelWidth != mode.width || mode.pixelHeight != mode.height

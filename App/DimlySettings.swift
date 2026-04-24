@@ -347,11 +347,11 @@ struct DimlySettings: Codable, Equatable {
 extension TransitionSpeed {
     var localizedTitle: String {
         switch self {
-        case .instant:   return String(localized: "Instant")
-        case .fast:      return String(localized: "Fast")
-        case .balanced:  return String(localized: "Balanced")
-        case .smooth:    return String(localized: "Smooth")
-        case .cinematic: return String(localized: "Cinematic")
+        case .instant:   return String(localized: "TransitionSpeedInstantLabel")
+        case .fast:      return String(localized: "TransitionSpeedFastLabel")
+        case .balanced:  return String(localized: "TransitionSpeedBalancedLabel")
+        case .smooth:    return String(localized: "TransitionSpeedSmoothLabel")
+        case .cinematic: return String(localized: "TransitionSpeedCinematicLabel")
         }
     }
 }
@@ -360,11 +360,11 @@ extension DimlySettings.FastActionsVisibilityMode {
     var localizedTitle: String {
         switch self {
         case .hideInCompact:
-            return String(localized: "Hide in compact")
+            return String(localized: "QuickActionsVisibilityHideCompactLabel")
         case .advancedOnly:
-            return String(localized: "Only in advanced")
+            return String(localized: "QuickActionsVisibilityAdvancedOnlyLabel")
         case .showEverywhere:
-            return String(localized: "Show on every screen")
+            return String(localized: "QuickActionsVisibilityAlwaysShowLabel")
         }
     }
 }

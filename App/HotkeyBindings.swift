@@ -13,11 +13,11 @@ enum HotkeyAction: String, Codable, CaseIterable, Identifiable {
     var title: String {
         switch self {
         case .toggleWindow:
-            return String(localized: "Toggle Window")
+            return String(localized: "HotkeyActionToggleWindowLabel")
         case .toggleBlackout:
-            return String(localized: "Toggle Blackout")
+            return String(localized: "HotkeyActionToggleBlackoutLabel")
         case .toggleSleepWake:
-            return String(localized: "Toggle Sleep/Wake")
+            return String(localized: "HotkeyActionToggleSleepWakeLabel")
         }
     }
 

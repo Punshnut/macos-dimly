@@ -417,18 +417,18 @@ struct MenuBarContentView: View {
     /// Top-level switch between all supported menu bar layouts.
     private var modeSwitchRow: some View {
         HStack(spacing: 10) {
-            Text(String(localized: "Mode"))
+            Text(String(localized: "MenuModeHeader"))
                 .font(.caption.weight(.semibold))
                 .foregroundStyle(neutralSecondaryText)
             Spacer()
             HStack(spacing: 6) {
-                modeSwitchButton(title: String(localized: "Simple"), isActive: activeLayoutMode == .simple) {
+                modeSwitchButton(title: String(localized: "MenuModeSimpleLabel"), isActive: activeLayoutMode == .simple) {
                     setLayoutMode(.simple)
                 }
-                modeSwitchButton(title: String(localized: "Advanced"), isActive: activeLayoutMode == .advanced) {
+                modeSwitchButton(title: String(localized: "MenuModeAdvancedLabel"), isActive: activeLayoutMode == .advanced) {
                     setLayoutMode(.advanced)
                 }
-                modeSwitchButton(title: String(localized: "Short"), isActive: activeLayoutMode == .short) {
+                modeSwitchButton(title: String(localized: "MenuModeCompactLabel"), isActive: activeLayoutMode == .short) {
                     setLayoutMode(.short)
                 }
             }
@@ -709,7 +709,7 @@ struct MenuBarContentView: View {
         if visibleInternalDisplayCount > 0 {
             parts.append(String(format: String(localized: "InternalCountFormat"), Int64(visibleInternalDisplayCount)))
         }
-        return parts.isEmpty ? String(localized: "No displays detected") : parts.joined(separator: " • ")
+        return parts.isEmpty ? String(localized: "MenuNoDisplaysLabel") : parts.joined(separator: " • ")
     }
 
     /// Compact badge summarizing blackout status.
@@ -717,7 +717,7 @@ struct MenuBarContentView: View {
         let isBlackoutActive = blackoutActiveCount > 0
         return HStack(spacing: 4) {
             animatedSymbol(isBlackoutActive ? "moon.fill" : "sparkles", size: 9, value: isBlackoutActive)
-            Text(isBlackoutActive ? String(localized: "Blackout On") : String(localized: "Ready"))
+            Text(isBlackoutActive ? String(localized: "MenuStatusBlackoutOnLabel") : String(localized: "MenuStatusReadyLabel"))
                 .font(.caption2.weight(.semibold))
         }
         .padding(.horizontal, 8)
@@ -734,7 +734,7 @@ struct MenuBarContentView: View {
         let rows = extendedStatusRows()
         if rows.isEmpty {
             return AnyView(
-                Text(String(localized: "All displays active"))
+                Text(String(localized: "MenuAllDisplaysActiveLabel"))
                     .font(.caption)
                     .foregroundStyle(neutralSecondaryText)
             )
@@ -753,11 +753,11 @@ struct MenuBarContentView: View {
     /// Prominent actions for global blackout/sleep/wake.
     private func quickActionsSection(includeShowNumbers: Bool) -> some View {
         VStack(alignment: .leading, spacing: 8) {
-            sectionHeader(String(localized: "Quick Actions"))
+            sectionHeader(String(localized: "MenuQuickActionsHeader"))
             Button {
                 engine.toggleExternalBlackout()
             } label: {
-                Label(String(localized: "Toggle External Blackout"), systemImage: "moon.fill")
+                Label(String(localized: "ActionToggleExternalBlackoutLabel"), systemImage: "moon.fill")
                     .frame(maxWidth: .infinity)
             }
             .buttonStyle(.borderedProminent)
@@ -768,7 +768,7 @@ struct MenuBarContentView: View {
             Button {
                 engine.panicBlackout(animated: settingsStore.settings.fadeInAnimationEnabled)
             } label: {
-                Label(String(localized: "Panic: All On"), systemImage: "exclamationmark.triangle.fill")
+                Label(String(localized: "ActionPanicAllOnLabel"), systemImage: "exclamationmark.triangle.fill")
                     .frame(maxWidth: .infinity)
             }
             .buttonStyle(.bordered)
@@ -780,7 +780,7 @@ struct MenuBarContentView: View {
                     get: { settingsStore.settings.showDisplayNumbers },
                     set: { newValue in settingsStore.update { $0.showDisplayNumbers = newValue } }
                 )) {
-                    Label(String(localized: "Show Display Numbers"), systemImage: "number.circle")
+                    Label(String(localized: "ActionShowDisplayNumbersLabel"), systemImage: "number.circle")
                 }
                 .toggleStyle(.switch)
             }
@@ -794,7 +794,7 @@ struct MenuBarContentView: View {
             Button {
                 engine.wakeExternalDisplays()
             } label: {
-                Label(String(localized: "Wake Externals"), systemImage: "sun.max.fill")
+                Label(String(localized: "ActionWakeExternalsLabel"), systemImage: "sun.max.fill")
                     .frame(maxWidth: .infinity)
             }
         }
@@ -812,7 +812,7 @@ struct MenuBarContentView: View {
         let button = Button {
             engine.sleepExternalDisplays()
         } label: {
-            Label(String(localized: "Sleep Externals"), systemImage: "moon.zzz")
+            Label(String(localized: "ActionSleepExternalsLabel"), systemImage: "moon.zzz")
                 .frame(maxWidth: .infinity)
         }
         .tint(tint)
@@ -820,7 +820,7 @@ struct MenuBarContentView: View {
             RoundedRectangle(cornerRadius: 8, style: .continuous)
                 .stroke(strokeColor, lineWidth: 2)
         )
-        .help(String(localized: "Sleep Externals"))
+        .help(String(localized: "ActionSleepExternalsLabel"))
 
         if state == .full {
             return AnyView(button.buttonStyle(BorderedProminentButtonStyle()))
@@ -852,9 +852,9 @@ struct MenuBarContentView: View {
     /// Grid of smart profile buttons laid out in 4 columns.
     private func smartButtonsSection(compact: Bool) -> some View {
         VStack(alignment: .leading, spacing: 8) {
-            sectionHeader(String(localized: "Smart Buttons"))
+            sectionHeader(String(localized: "SmartButtonsSectionTitle"))
             if smartButtonProfiles.isEmpty {
-                Text(String(localized: "No smart buttons yet. Save profiles in Settings and enable \"Show as smart button\"."))
+                Text(String(localized: "SmartButtonsEmptyLabel"))
                     .font(.caption)
                     .foregroundStyle(neutralSecondaryText)
             } else {
@@ -940,7 +940,7 @@ struct MenuBarContentView: View {
             Button {
                 renameProfile(profile)
             } label: {
-                Label(String(localized: "Rename"), systemImage: "pencil")
+                Label(String(localized: "ActionRenameLabel"), systemImage: "pencil")
             }
         }
         .buttonStyle(FluentPressButtonStyle(pressedScale: compact ? 0.962 : 0.952, pressedOpacity: 0.88))
@@ -1303,7 +1303,7 @@ struct MenuBarContentView: View {
             Button {
                 renameDisplay(display, currentName: displayName(for: display))
             } label: {
-                Label(String(localized: "Rename Display..."), systemImage: "pencil")
+                Label(String(localized: "ActionRenameDisplayMenuLabel"), systemImage: "pencil")
             }
         }
     }
@@ -1311,7 +1311,7 @@ struct MenuBarContentView: View {
     /// Header row with status and per-display actions; click to expand brightness.
     private func displayRowHeader(_ display: DisplayInfo, includeMenu: Bool, isExpanded: Bool) -> some View {
         let isBlackoutActive = engine.isDisplayBlackoutActive(display)
-        let ddcState = ddcManager.states[display.stableIdentity]?.status.localizedDescription ?? String(localized: "Unknown")
+        let ddcState = ddcManager.states[display.stableIdentity]?.status.localizedDescription ?? String(localized: "DDCUnknownLabel")
         let name = displayName(for: display)
         let status = displayStatus(for: display)
         let marker = displayOverlayMarker(for: display)
@@ -1357,13 +1357,13 @@ struct MenuBarContentView: View {
                 sleepWakeButton(for: display)
                 if includeMenu {
                     Menu {
-                        Button(isBlackoutActive ? String(localized: "Restore Display") : String(localized: "Blackout Display")) {
+                        Button(isBlackoutActive ? String(localized: "ActionRestoreDisplayLabel") : String(localized: "ActionBlackoutDisplayLabel")) {
                             engine.toggleDisplayBlackout(display: display)
                         }
-                        Button(String(localized: "Sleep Display")) {
+                        Button(String(localized: "ActionSleepDisplayLabel")) {
                             engine.standby(display: display)
                         }
-                        Button(String(localized: "Wake Display")) {
+                        Button(String(localized: "ActionWakeDisplayLabel")) {
                             engine.wake(display: display)
                         }
                         Toggle(isOn: Binding(
@@ -1380,13 +1380,13 @@ struct MenuBarContentView: View {
                                 }
                             }
                         )) {
-                            Text(String(localized: "Overlay Only (Never Sleep)"))
+                            Text(String(localized: "DisplayOverlayOnlyLabel"))
                         }
                         Divider()
-                        Button(String(localized: "Rename Display...")) {
+                        Button(String(localized: "ActionRenameDisplayMenuLabel")) {
                             renameDisplay(display, currentName: name)
                         }
-                        Button(String(localized: "Copy Display ID")) {
+                        Button(String(localized: "ActionCopyDisplayIDLabel")) {
                             copyDisplayID(display.stableIdentity)
                         }
                     } label: {
@@ -1417,16 +1417,16 @@ struct MenuBarContentView: View {
             modeLabel = String(localized: "DDC")
         case .fallback:
             tint = .blue
-            modeLabel = String(localized: "Overlay mode")
+            modeLabel = String(localized: "DisplayModeOverlayLabel")
         case .checking:
             tint = .orange
-            modeLabel = String(localized: "Checking DDC")
+            modeLabel = String(localized: "DDCCheckingLabel")
         }
         let level = brightnessPercent(for: display)
 
         return VStack(alignment: .leading, spacing: 8) {
             HStack(spacing: 8) {
-                Label(String(localized: "Brightness"), systemImage: "sun.max.fill")
+                Label(String(localized: "BrightnessSectionLabel"), systemImage: "sun.max.fill")
                     .font(.caption.weight(.semibold))
                     .foregroundStyle(tint)
                 Spacer()
@@ -1456,7 +1456,7 @@ struct MenuBarContentView: View {
                 }
                 .buttonStyle(FluentPressButtonStyle(pressedScale: 0.84, pressedOpacity: 0.84))
                 .foregroundStyle(neutralSecondaryText)
-                .help(String(localized: "Decrease brightness"))
+                .help(String(localized: "ActionDecreaseBrightnessHint"))
 
                 Slider(
                     value: Binding(
@@ -1477,7 +1477,7 @@ struct MenuBarContentView: View {
                 }
                 .buttonStyle(FluentPressButtonStyle(pressedScale: 0.84, pressedOpacity: 0.84))
                 .foregroundStyle(neutralSecondaryText)
-                .help(String(localized: "Increase brightness"))
+                .help(String(localized: "ActionIncreaseBrightnessHint"))
             }
         }
         .padding(8)
@@ -1495,7 +1495,7 @@ struct MenuBarContentView: View {
     private func sleepWakeButton(for display: DisplayInfo) -> AnyView {
         if display.isBuiltin {
             let isBlackoutActive = engine.isDisplayBlackoutActive(display)
-            let label = isBlackoutActive ? String(localized: "Restore Display") : String(localized: "Blackout Display")
+            let label = isBlackoutActive ? String(localized: "ActionRestoreDisplayLabel") : String(localized: "ActionBlackoutDisplayLabel")
             let icon = isBlackoutActive ? "moon.fill" : "sun.max.fill"
             let tint: Color = isBlackoutActive ? .green : .secondary
 
@@ -1526,7 +1526,7 @@ struct MenuBarContentView: View {
         let isAsleep = overlayOnly
             ? blackoutManager.activeDisplayIDs.contains(display.stableIdentity)
             : (ddcSupported ? (state.lastCommand == .standby) : fallbackActive)
-        let label = isAsleep ? String(localized: "Wake Display") : String(localized: "Sleep Display")
+        let label = isAsleep ? String(localized: "ActionWakeDisplayLabel") : String(localized: "ActionSleepDisplayLabel")
         let icon = isAsleep ? "moon.zzz" : "sun.max.fill"
         let tint: Color = (ddcSupported && !overlayOnly) ? .green : (fallbackActive ? .blue : .secondary)
 
@@ -1603,18 +1603,18 @@ struct MenuBarContentView: View {
             .opacity(canMoveDown ? 1 : 0.48)
             .disabled(!canMoveDown)
         }
-        .help(String(localized: "Reorder Display")))
+        .help(String(localized: "ActionReorderDisplayLabel")))
     }
 
     /// UI to save/apply display profiles.
     private var profilesSection: some View {
         VStack(alignment: .leading, spacing: 8) {
-            sectionHeader(String(localized: "Profiles"))
+            sectionHeader(String(localized: "ProfilesSectionTitle"))
             HStack(spacing: 8) {
                 Button {
                     saveCurrentProfileWithPrompt()
                 } label: {
-                    Label(String(localized: "Save Current Profile"), systemImage: "square.and.arrow.down")
+                    Label(String(localized: "ActionSaveCurrentProfileLabel"), systemImage: "square.and.arrow.down")
                         .frame(maxWidth: .infinity)
                 }
                 overwriteProfileMenuButton(maxWidth: .infinity)
@@ -1629,7 +1629,7 @@ struct MenuBarContentView: View {
     private func applyProfileMenuButton(maxWidth: CGFloat? = nil) -> some View {
         Menu {
             if profileManager.profiles.isEmpty {
-                Button(String(localized: "No profiles yet")) {}
+                Button(String(localized: "ProfilesMenuEmptyLabel")) {}
                     .disabled(true)
             } else {
                 ForEach(profileManager.profiles) { profile in
@@ -1639,7 +1639,7 @@ struct MenuBarContentView: View {
                 }
             }
         } label: {
-            Label(String(localized: "Apply Profile"), systemImage: "rectangle.3.group")
+            Label(String(localized: "ActionApplyProfileMenuLabel"), systemImage: "rectangle.3.group")
                 .frame(maxWidth: maxWidth)
         }
     }
@@ -1648,7 +1648,7 @@ struct MenuBarContentView: View {
     private func overwriteProfileMenuButton(maxWidth: CGFloat? = nil) -> some View {
         Menu {
             if profileManager.profiles.isEmpty {
-                Button(String(localized: "No profiles yet")) {}
+                Button(String(localized: "ProfilesMenuEmptyLabel")) {}
                     .disabled(true)
             } else {
                 ForEach(profileManager.profiles) { profile in
@@ -1658,7 +1658,7 @@ struct MenuBarContentView: View {
                 }
             }
         } label: {
-            Label(String(localized: "Overwrite Profile"), systemImage: "arrow.triangle.2.circlepath")
+            Label(String(localized: "ActionOverwriteProfileMenuLabel"), systemImage: "arrow.triangle.2.circlepath")
                 .frame(maxWidth: maxWidth)
         }
     }
@@ -1666,10 +1666,10 @@ struct MenuBarContentView: View {
     /// Confirms profile overwrite before replacing saved values with current settings.
     private func confirmAndOverwriteProfile(_ profile: DisplayProfile) {
         let alert = NSAlert()
-        alert.messageText = String(localized: "Overwrite Profile")
+        alert.messageText = String(localized: "ActionOverwriteProfileMenuLabel")
         alert.informativeText = profile.name
-        alert.addButton(withTitle: String(localized: "Overwrite"))
-        alert.addButton(withTitle: String(localized: "Cancel"))
+        alert.addButton(withTitle: String(localized: "ActionOverwriteButton"))
+        alert.addButton(withTitle: String(localized: "ActionCancelButton"))
         if AlertPresentation.runModalOnCursorScreen(alert) == .alertFirstButtonReturn {
             profileManager.overwriteProfileWithCurrentSettings(profile)
         }
@@ -1678,7 +1678,7 @@ struct MenuBarContentView: View {
     /// App-level utilities such as settings, diagnostics, and quit.
     private var appControlsSection: some View {
         VStack(alignment: .leading, spacing: 8) {
-            sectionHeader(String(localized: "App"))
+            sectionHeader(String(localized: "MenuAppHeader"))
             let columns = [
                 GridItem(.flexible(), spacing: 8),
                 GridItem(.flexible(), spacing: 8)
@@ -1687,7 +1687,7 @@ struct MenuBarContentView: View {
                 Button {
                     copyDisplayReport()
                 } label: {
-                    Label(String(localized: "Copy Display Report"), systemImage: "doc.on.doc")
+                    Label(String(localized: "ActionCopyDisplayReportLabel"), systemImage: "doc.on.doc")
                         .lineLimit(1)
                         .minimumScaleFactor(0.85)
                         .frame(maxWidth: .infinity, alignment: .leading)
@@ -1695,7 +1695,7 @@ struct MenuBarContentView: View {
                 Button {
                     openDiagnosticsLog()
                 } label: {
-                    Label(String(localized: "Open Diagnostics Log"), systemImage: "doc.text.magnifyingglass")
+                    Label(String(localized: "ActionOpenDiagnosticsLabel"), systemImage: "doc.text.magnifyingglass")
                         .lineLimit(1)
                         .minimumScaleFactor(0.85)
                         .frame(maxWidth: .infinity, alignment: .leading)
@@ -1703,7 +1703,7 @@ struct MenuBarContentView: View {
                 Button {
                     openSettingsWindow()
                 } label: {
-                    Label(String(localized: "Settings..."), systemImage: "gearshape")
+                    Label(String(localized: "MenuSettingsItem"), systemImage: "gearshape")
                         .lineLimit(1)
                         .minimumScaleFactor(0.85)
                         .frame(maxWidth: .infinity, alignment: .leading)
@@ -1711,7 +1711,7 @@ struct MenuBarContentView: View {
                 Button {
                     updaterController.checkForUpdates(nil)
                 } label: {
-                    Label(String(localized: "Check for Updates..."), systemImage: "arrow.triangle.2.circlepath")
+                    Label(String(localized: "MenuCheckUpdatesItem"), systemImage: "arrow.triangle.2.circlepath")
                         .lineLimit(1)
                         .minimumScaleFactor(0.85)
                         .frame(maxWidth: .infinity, alignment: .leading)
@@ -1723,7 +1723,7 @@ struct MenuBarContentView: View {
             Button(role: .destructive) {
                 NSApp.terminate(nil)
             } label: {
-                Label(String(localized: "Quit Dimly"), systemImage: "power")
+                Label(String(localized: "MenuQuitItem"), systemImage: "power")
             }
         }
     }
@@ -1731,7 +1731,7 @@ struct MenuBarContentView: View {
     /// Reduced app-control section used in the simple layout.
     private var appControlsSimpleSection: some View {
         VStack(alignment: .leading, spacing: 8) {
-            sectionHeader(String(localized: "App"))
+            sectionHeader(String(localized: "MenuAppHeader"))
             let columns = [
                 GridItem(.flexible(), spacing: 8),
                 GridItem(.flexible(), spacing: 8)
@@ -1740,7 +1740,7 @@ struct MenuBarContentView: View {
                 Button {
                     openSettingsWindow()
                 } label: {
-                    Label(String(localized: "Settings..."), systemImage: "gearshape")
+                    Label(String(localized: "MenuSettingsItem"), systemImage: "gearshape")
                         .lineLimit(1)
                         .minimumScaleFactor(0.85)
                         .frame(maxWidth: .infinity, alignment: .leading)
@@ -1748,7 +1748,7 @@ struct MenuBarContentView: View {
                 Button {
                     updaterController.checkForUpdates(nil)
                 } label: {
-                    Label(String(localized: "Check for Updates..."), systemImage: "arrow.triangle.2.circlepath")
+                    Label(String(localized: "MenuCheckUpdatesItem"), systemImage: "arrow.triangle.2.circlepath")
                         .lineLimit(1)
                         .minimumScaleFactor(0.85)
                         .frame(maxWidth: .infinity, alignment: .leading)
@@ -1761,7 +1761,7 @@ struct MenuBarContentView: View {
                 Button(role: .destructive) {
                     NSApp.terminate(nil)
                 } label: {
-                    Label(String(localized: "Quit Dimly"), systemImage: "power")
+                    Label(String(localized: "MenuQuitItem"), systemImage: "power")
                 }
                 Spacer(minLength: 0)
                 applyProfileMenuButton()
@@ -1774,12 +1774,12 @@ struct MenuBarContentView: View {
     /// Essential app actions shown in the short layout.
     private var shortModeAppActionsSection: some View {
         VStack(alignment: .leading, spacing: 8) {
-            sectionHeader(String(localized: "App"))
+            sectionHeader(String(localized: "MenuAppHeader"))
             HStack(spacing: 8) {
                 Button(role: .destructive) {
                     NSApp.terminate(nil)
                 } label: {
-                    Label(String(localized: "Quit Dimly"), systemImage: "power")
+                    Label(String(localized: "MenuQuitItem"), systemImage: "power")
                 }
                 .overlay(alignment: .topTrailing) {
                     shortModeUpdatesBadge
@@ -1817,7 +1817,7 @@ struct MenuBarContentView: View {
         }
         .buttonStyle(FluentPressButtonStyle(pressedScale: 0.9, pressedOpacity: 0.84))
         .dimlyHoverLift(hoverScale: 1.04, shadowOpacity: 0.08)
-        .help(String(localized: "Settings..."))
+        .help(String(localized: "MenuSettingsItem"))
     }
 
     /// Compact update launcher shown as an overlay badge in short mode.
@@ -1840,14 +1840,14 @@ struct MenuBarContentView: View {
         }
         .buttonStyle(FluentPressButtonStyle(pressedScale: 0.9, pressedOpacity: 0.84))
         .dimlyHoverLift(hoverScale: 1.04, shadowOpacity: 0.08)
-        .help(String(localized: "Check for Updates..."))
+        .help(String(localized: "MenuCheckUpdatesItem"))
     }
 
     private var monitorsSectionTitle: String {
         if visibleExternalDisplays.isEmpty == false && visibleInternalDisplays.isEmpty == false {
-            return String(localized: "Monitors")
+            return String(localized: "MenuMonitorsHeader")
         }
-        return String(localized: "External Displays")
+        return String(localized: "MenuExternalDisplaysHeader")
     }
 
     /// Standard section header styling used in the popover.
@@ -1873,13 +1873,13 @@ struct MenuBarContentView: View {
     /// Computes the visibility/sleep/blackout status for a display.
     private func displayStatus(for display: DisplayInfo) -> String {
         if engine.isDisplayBlackoutActive(display) {
-            return String(localized: "Blackout")
+            return String(localized: "DisplayStatusBlackoutLabel")
         }
         if settingsStore.settings.overlayOnlyDisplayIDs.contains(display.stableIdentity) == false,
            ddcManager.states[display.stableIdentity]?.lastCommand == .standby {
-            return String(localized: "Sleep requested")
+            return String(localized: "DisplayStatusSleepLabel")
         }
-        return String(localized: "Visible")
+        return String(localized: "DisplayStatusVisibleLabel")
     }
 
     /// Determines the overlay label shown on-screen for a display.
@@ -1938,7 +1938,7 @@ struct MenuBarContentView: View {
 
     /// Produces additional status rows for any non-visible displays.
     private func extendedStatusRows() -> [String] {
-        let visibleText = String(localized: "Visible")
+        let visibleText = String(localized: "DisplayStatusVisibleLabel")
         return displayManager.displays.compactMap { display in
             if shouldShowInDimly(display) == false {
                 return nil
@@ -2144,10 +2144,10 @@ struct MenuBarContentView: View {
     /// Presents a prompt to rename the given display.
     private func renameDisplay(_ display: DisplayInfo, currentName: String) {
         let alert = NSAlert()
-        alert.messageText = String(localized: "Rename Display")
-        alert.informativeText = String(localized: "Give this display a friendly name.")
-        alert.addButton(withTitle: String(localized: "Save"))
-        alert.addButton(withTitle: String(localized: "Cancel"))
+        alert.messageText = String(localized: "RenameDisplayAlertTitle")
+        alert.informativeText = String(localized: "RenameDisplayAlertSubtitle")
+        alert.addButton(withTitle: String(localized: "ActionSaveButton"))
+        alert.addButton(withTitle: String(localized: "ActionCancelButton"))
         let input = NSTextField(string: currentName)
         input.frame = NSRect(x: 0, y: 0, width: 240, height: 24)
         alert.accessoryView = input
@@ -2167,12 +2167,12 @@ struct MenuBarContentView: View {
     /// Prompts for a profile name before saving from the advanced menu.
     private func saveCurrentProfileWithPrompt() {
         let alert = NSAlert()
-        alert.messageText = String(localized: "Save Current Profile")
-        alert.informativeText = String(localized: "Profile name")
-        alert.addButton(withTitle: String(localized: "Save"))
-        alert.addButton(withTitle: String(localized: "Cancel"))
+        alert.messageText = String(localized: "ActionSaveCurrentProfileLabel")
+        alert.informativeText = String(localized: "ProfileNamePlaceholder")
+        alert.addButton(withTitle: String(localized: "ActionSaveButton"))
+        alert.addButton(withTitle: String(localized: "ActionCancelButton"))
         let input = NSTextField(string: "")
-        input.placeholderString = String(localized: "Profile name")
+        input.placeholderString = String(localized: "ProfileNamePlaceholder")
         input.frame = NSRect(x: 0, y: 0, width: 240, height: 24)
         alert.accessoryView = input
         let response = AlertPresentation.runModalOnCursorScreen(alert)
@@ -2183,10 +2183,10 @@ struct MenuBarContentView: View {
     /// Prompts to rename an existing profile directly from a smart button.
     private func renameProfile(_ profile: DisplayProfile) {
         let alert = NSAlert()
-        alert.messageText = String(localized: "Rename Profile")
-        alert.informativeText = String(localized: "Enter a new name for this profile.")
-        alert.addButton(withTitle: String(localized: "Save"))
-        alert.addButton(withTitle: String(localized: "Cancel"))
+        alert.messageText = String(localized: "RenameProfileAlertTitle")
+        alert.informativeText = String(localized: "RenameProfileAlertSubtitle")
+        alert.addButton(withTitle: String(localized: "ActionSaveButton"))
+        alert.addButton(withTitle: String(localized: "ActionCancelButton"))
         let input = NSTextField(string: profile.name)
         input.frame = NSRect(x: 0, y: 0, width: 240, height: 24)
         alert.accessoryView = input
@@ -2207,10 +2207,10 @@ struct MenuBarContentView: View {
 
         for display in displayManager.displays {
             let name = displayName(for: display)
-            let type = display.isExternal ? String(localized: "External") : String(localized: "Internal")
+            let type = display.isExternal ? String(localized: "DisplayTypeExternalLabel") : String(localized: "DisplayTypeInternalLabel")
             let refresh = display.refreshRateHz.map { String(format: String(localized: "DisplayReportRefreshRateFormat"), $0) } ?? String(localized: "DisplayReportRefreshNA")
-            let ddc = ddcManager.states[display.stableIdentity]?.status.localizedDescription ?? String(localized: "Unknown")
-            let blackout = engine.isDisplayBlackoutActive(display) ? String(localized: "Blackout On") : String(localized: "Blackout Off")
+            let ddc = ddcManager.states[display.stableIdentity]?.status.localizedDescription ?? String(localized: "DDCUnknownLabel")
+            let blackout = engine.isDisplayBlackoutActive(display) ? String(localized: "MenuStatusBlackoutOnLabel") : String(localized: "MenuStatusBlackoutOffLabel")
             lines.append(String(format: String(localized: "DisplayReportLineFormat"), name, type))
             lines.append(String(format: String(localized: "DisplayReportResolutionFormat"), display.resolution))
             lines.append(String(format: String(localized: "DisplayReportRefreshFormat"), refresh))

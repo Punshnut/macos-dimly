@@ -18,7 +18,11 @@ enum DDCSupportStatus: String {
 
 extension DDCSupportStatus {
     var localizedDescription: String {
-        String(localized: String.LocalizationValue(rawValue))
+        switch self {
+        case .supported:    return String(localized: "DDCSupportedLabel")
+        case .notSupported: return String(localized: "DDCNotSupportedLabel")
+        case .unknown:      return String(localized: "DDCUnknownLabel")
+        }
     }
 }
 
@@ -205,7 +209,7 @@ final class DDCManager: ObservableObject {
         for display in displays where display.isBuiltin {
             let state = DDCState(
                 status: .notSupported,
-                lastError: String(localized: "Internal panel"),
+                lastError: String(localized: "DDCInternalPanelLabel"),
                 lastCommand: nil,
                 lastCommandAt: nil
             )
@@ -235,7 +239,7 @@ final class DDCManager: ObservableObject {
         let id = display.stableIdentity
         probeTasks[id]?.cancel()
         if display.isBuiltin {
-            setState(DDCState(status: .notSupported, lastError: String(localized: "Internal panel"), lastCommand: nil, lastCommandAt: nil), for: display)
+            setState(DDCState(status: .notSupported, lastError: String(localized: "DDCInternalPanelLabel"), lastCommand: nil, lastCommandAt: nil), for: display)
             probeTasks[id] = nil
             return
         }
@@ -502,9 +506,9 @@ enum DDCError: LocalizedError {
     var errorDescription: String? {
         switch self {
         case .notSupported:
-            return String(localized: "DDC not supported")
+            return String(localized: "DDCNotSupportedErrorLabel")
         case .serviceUnavailable:
-            return String(localized: "Display service unavailable")
+            return String(localized: "DDCServiceUnavailableLabel")
         case .openFailed(let status):
             return String(format: String(localized: "DDCOpenFailedFormat"), String(status, radix: 16))
         case .requestFailed(let status):

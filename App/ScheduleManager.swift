@@ -421,9 +421,9 @@ enum ScheduleTriggerType: String, CaseIterable, Identifiable {
 
     var localizedTitle: String {
         switch self {
-        case .clockTime: return String(localized: "Clock")
-        case .sunrise: return String(localized: "Sunrise")
-        case .sunset: return String(localized: "Sunset")
+        case .clockTime: return String(localized: "ScheduleTriggerClockLabel")
+        case .sunrise: return String(localized: "ScheduleTriggerSunriseLabel")
+        case .sunset: return String(localized: "ScheduleTriggerSunsetLabel")
         }
     }
 }

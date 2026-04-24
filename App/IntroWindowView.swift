@@ -25,18 +25,18 @@ struct IntroWindowView: View {
                     .frame(width: 44, height: 44)
 
                     VStack(alignment: .leading, spacing: 4) {
-                        Text(String(localized: "Welcome to Dimly"))
+                        Text(String(localized: "IntroWelcomeTitle"))
                             .font(.title2.bold())
-                        Text(String(localized: "Your displays, one click away."))
+                        Text(String(localized: "IntroWelcomeSubtitle"))
                             .foregroundStyle(.secondary)
                     }
                 }
 
                 introCard {
                     VStack(alignment: .leading, spacing: 10) {
-                        Text(String(localized: "Dimly lives in the menu bar."))
+                        Text(String(localized: "IntroMenuBarTitle"))
                             .font(.headline)
-                        Text(String(localized: "Look at the top-right of your screen for the display icon."))
+                        Text(String(localized: "IntroMenuBarHint"))
                             .foregroundStyle(.secondary)
                     }
                 }
@@ -44,11 +44,11 @@ struct IntroWindowView: View {
                 introCard {
                     VStack(alignment: .leading, spacing: 10) {
                         HStack {
-                            Text(String(localized: "How control mode works"))
+                            Text(String(localized: "IntroControlModeTitle"))
                                 .font(.headline)
                             Spacer()
                             statusPill(
-                                title: String(localized: "Checking DDC"),
+                                title: String(localized: "DDCCheckingLabel"),
                                 color: .orange
                             )
                         }
@@ -56,13 +56,13 @@ struct IntroWindowView: View {
                         HStack(spacing: 10) {
                             modeTile(
                                 title: String(localized: "DDC"),
-                                subtitle: String(localized: "Direct monitor control for brightness and sleep/wake."),
+                                subtitle: String(localized: "IntroControlDDCSubtitle"),
                                 symbol: "cable.connector",
                                 color: .green
                             )
                             modeTile(
-                                title: String(localized: "Overlay mode"),
-                                subtitle: String(localized: "Fallback dimming layer when DDC is unavailable or disabled."),
+                                title: String(localized: "DisplayModeOverlayLabel"),
+                                subtitle: String(localized: "IntroControlOverlaySubtitle"),
                                 symbol: "square.stack.3d.down.right.fill",
                                 color: .blue
                             )
@@ -72,7 +72,7 @@ struct IntroWindowView: View {
                             Image(systemName: "arrow.triangle.branch")
                                 .font(.caption.weight(.semibold))
                                 .foregroundStyle(.secondary)
-                            Text(String(localized: "Dimly tries DDC first, then safely falls back to overlay mode."))
+                            Text(String(localized: "IntroControlFallbackNote"))
                                 .font(.caption)
                                 .foregroundStyle(.secondary)
                         }
@@ -80,7 +80,7 @@ struct IntroWindowView: View {
                 }
 
                 HStack(spacing: 12) {
-                    Button(String(localized: "Got it")) {
+                    Button(String(localized: "IntroGotItButton")) {
                         onDismiss()
                     }
                     .keyboardShortcut(.defaultAction)
@@ -91,7 +91,7 @@ struct IntroWindowView: View {
             .padding(.bottom, 20)
 
             VStack(alignment: .trailing, spacing: 6) {
-                Text(String(localized: "Menu bar"))
+                Text(String(localized: "IntroMenuBarTabLabel"))
                     .font(.caption)
                     .foregroundStyle(.secondary)
                 Image(systemName: "arrow.up.right")

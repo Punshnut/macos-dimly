@@ -85,10 +85,10 @@ final class UpdaterController: NSObject, SPUStandardUserDriverDelegate, SPUUpdat
 
         Task { @MainActor in
             let alert = NSAlert()
-            alert.messageText = String(localized: "Update could not be verified")
-            alert.informativeText = String(localized: "Dimly couldn't verify the downloaded update. Please download the latest release directly from GitHub instead.")
-            alert.addButton(withTitle: String(localized: "Open GitHub"))
-            alert.addButton(withTitle: String(localized: "Cancel"))
+            alert.messageText = String(localized: "UpdateVerifyErrorTitle")
+            alert.informativeText = String(localized: "UpdateVerifyErrorMessage")
+            alert.addButton(withTitle: String(localized: "UpdateVerifyOpenGitHubButton"))
+            alert.addButton(withTitle: String(localized: "ActionCancelButton"))
 
             let response = alert.runModal()
             if response == .alertFirstButtonReturn,

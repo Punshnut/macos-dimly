@@ -10,17 +10,17 @@ struct ContentView: View {
     /// Renders the local preview surface.
     var body: some View {
         VStack(spacing: 16) {
-            Text(String(localized: "Welcome to Dimly"))
+            Text(String(localized: "IntroWelcomeTitle"))
                 .font(.largeTitle)
                 .bold()
-            Text(String(localized: "This SwiftUI scaffold is ready for your ideas."))
+            Text(String(localized: "PreviewScaffoldLabel"))
                 .foregroundStyle(.secondary)
             Button(action: { tapCount += 1 }) {
-                Label(String(localized: "Increase Counter"), systemImage: "plus")
+                Label(String(localized: "PreviewIncrementButton"), systemImage: "plus")
             }
             Text(
                 String.localizedStringWithFormat(
-                    String(localized: "Counter: %lld"),
+                    String(localized: "PreviewCounterFormat"),
                     tapCount
                 )
             )
