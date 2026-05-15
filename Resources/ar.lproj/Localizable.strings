@@ -376,7 +376,7 @@
 "ScheduleLocationRowTitle" = "الموقع لأوقات الشمس";
 "ActionUseMyLocationButton" = "استخدام موقعي";
 "ScheduleLocationUpdatedFormat" = "تم التحديث %@";
-"Requesting location\u2026" = "جاري طلب الموقع\u2026";
+"ScheduleLocationRequestingLabel" = "جاري طلب الموقع\u2026";
 "ActionDeleteScheduleHint" = "حذف الجدول الزمني";
 "ScheduleNoProfilesLabel" = "لا تتوفر ملفات شخصية. أنشئ ملفاً شخصياً أولاً.";
 
@@ -389,3 +389,5 @@
 "ManualCoordErrorLonRange" = "يجب أن يكون خط الطول بين -180 و 180.";
 "ManualCoordErrorLatInvalid" = "أدخل رقم خط عرض صالحًا.";
 "ManualCoordErrorLonInvalid" = "أدخل رقم خط طول صالحًا.";
+
+"AutoBrightnessHint" = "السطوع التلقائي";

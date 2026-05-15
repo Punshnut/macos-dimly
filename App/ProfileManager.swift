@@ -664,7 +664,8 @@ final class ProfileManager: ObservableObject {
             if currentState != desiredPowerState {
                 applyPowerState(desiredPowerState, to: display)
             }
-            if desiredPowerState == .visible, let brightness = snapshot.brightnessPercent {
+            if desiredPowerState == .visible, let brightness = snapshot.brightnessPercent,
+               !display.isAutoBrightnessActive {
                 let clamped = max(0, min(100, brightness))
                 let needsPostWakeStabilization = display.isExternal && (
                     currentState != .visible ||

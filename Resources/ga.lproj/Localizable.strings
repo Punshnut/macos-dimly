@@ -376,7 +376,7 @@
 "ScheduleLocationRowTitle" = "Suíomh do na hamanna gréine";
 "ActionUseMyLocationButton" = "Úsáid Mo Shuíomh";
 "ScheduleLocationUpdatedFormat" = "Nuashonraithe %@";
-"Requesting location\u2026" = "Ag iarraidh suíomh\u2026";
+"ScheduleLocationRequestingLabel" = "Ag iarraidh suíomh\u2026";
 "ActionDeleteScheduleHint" = "Scrios sceideal";
 "ScheduleNoProfilesLabel" = "Níl aon phróifíl ar fáil. Cruthaigh próifíl ar dtús.";
 
@@ -389,3 +389,5 @@
 "ManualCoordErrorLonRange" = "Ní mór go mbeadh an domhanfhad idir -180 agus 180.";
 "ManualCoordErrorLatInvalid" = "Iontráil uimhir domhanleitheadach bhailí.";
 "ManualCoordErrorLonInvalid" = "Iontráil uimhir domhanfhaid bhailí.";
+
+"AutoBrightnessHint" = "Gile Uathoibríoch";

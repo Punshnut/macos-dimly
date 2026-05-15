@@ -376,7 +376,7 @@
 "ScheduleLocationRowTitle" = "Poloha pro sluneční časy";
 "ActionUseMyLocationButton" = "Použít mou polohu";
 "ScheduleLocationUpdatedFormat" = "Aktualizováno %@";
-"Requesting location\u2026" = "Žádost o polohu\u2026";
+"ScheduleLocationRequestingLabel" = "Žádost o polohu\u2026";
 "ActionDeleteScheduleHint" = "Smazat plán";
 "ScheduleNoProfilesLabel" = "Žádné profily nejsou k dispozici. Nejprve vytvořte profil.";
 
@@ -389,3 +389,5 @@
 "ManualCoordErrorLonRange" = "Zeměpisná délka musí být mezi -180 a 180.";
 "ManualCoordErrorLatInvalid" = "Zadejte platné číslo zeměpisné šířky.";
 "ManualCoordErrorLonInvalid" = "Zadejte platné číslo zeměpisné délky.";
+
+"AutoBrightnessHint" = "Automatický jas";

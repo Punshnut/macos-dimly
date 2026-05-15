@@ -376,7 +376,7 @@
 "ScheduleLocationRowTitle" = "Lokasi untuk waktu matahari";
 "ActionUseMyLocationButton" = "Gunakan Lokasi Saya";
 "ScheduleLocationUpdatedFormat" = "Diperbarui %@";
-"Requesting location\u2026" = "Meminta lokasi\u2026";
+"ScheduleLocationRequestingLabel" = "Meminta lokasi\u2026";
 "ActionDeleteScheduleHint" = "Hapus jadwal";
 "ScheduleNoProfilesLabel" = "Tidak ada profil tersedia. Buat profil terlebih dahulu.";
 
@@ -389,3 +389,5 @@
 "ManualCoordErrorLonRange" = "Bujur harus antara -180 dan 180.";
 "ManualCoordErrorLatInvalid" = "Masukkan angka lintang yang valid.";
 "ManualCoordErrorLonInvalid" = "Masukkan angka bujur yang valid.";
+
+"AutoBrightnessHint" = "Kecerahan Otomatis";

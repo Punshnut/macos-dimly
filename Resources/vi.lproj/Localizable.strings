@@ -376,7 +376,7 @@
 "ScheduleLocationRowTitle" = "Vị trí cho giờ mặt trời";
 "ActionUseMyLocationButton" = "Dùng vị trí của tôi";
 "ScheduleLocationUpdatedFormat" = "Đã cập nhật %@";
-"Requesting location\u2026" = "Đang yêu cầu vị trí\u2026";
+"ScheduleLocationRequestingLabel" = "Đang yêu cầu vị trí\u2026";
 "ActionDeleteScheduleHint" = "Xóa lịch trình";
 "ScheduleNoProfilesLabel" = "Không có hồ sơ nào. Vui lòng tạo hồ sơ trước.";
 
@@ -389,3 +389,5 @@
 "ManualCoordErrorLonRange" = "Kinh độ phải nằm trong khoảng -180 đến 180.";
 "ManualCoordErrorLatInvalid" = "Nhập số vĩ độ hợp lệ.";
 "ManualCoordErrorLonInvalid" = "Nhập số kinh độ hợp lệ.";
+
+"AutoBrightnessHint" = "Độ sáng tự động";

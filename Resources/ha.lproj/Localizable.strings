@@ -376,7 +376,7 @@
 "ScheduleLocationRowTitle" = "Wuri don lokatai na rana";
 "ActionUseMyLocationButton" = "Yi amfani da wurina";
 "ScheduleLocationUpdatedFormat" = "An sabunta %@";
-"Requesting location\u2026" = "Ana neman wuri\u2026";
+"ScheduleLocationRequestingLabel" = "Ana neman wuri\u2026";
 "ActionDeleteScheduleHint" = "Goge jadawali";
 "ScheduleNoProfilesLabel" = "Babu bayanin martaba. Da farko ƙirƙiri bayanin martaba.";
 
@@ -389,3 +389,5 @@
 "ManualCoordErrorLonRange" = "Longitude dole ya kasance tsakanin -180 da 180.";
 "ManualCoordErrorLatInvalid" = "Shigar da lambar latitude mai inganci.";
 "ManualCoordErrorLonInvalid" = "Shigar da lambar longitude mai inganci.";
+
+"AutoBrightnessHint" = "Haske Mai Atomatik";

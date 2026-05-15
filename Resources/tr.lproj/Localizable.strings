@@ -376,7 +376,7 @@
 "ScheduleLocationRowTitle" = "Güneş saatleri için konum";
 "ActionUseMyLocationButton" = "Konumumu Kullan";
 "ScheduleLocationUpdatedFormat" = "Güncellendi %@";
-"Requesting location\u2026" = "Konum isteniyor\u2026";
+"ScheduleLocationRequestingLabel" = "Konum isteniyor\u2026";
 "ActionDeleteScheduleHint" = "Zamanlamayı sil";
 "ScheduleNoProfilesLabel" = "Mevcut profil yok. Önce bir profil oluştur.";
 
@@ -389,3 +389,5 @@
 "ManualCoordErrorLonRange" = "Boylam -180 ile 180 arasında olmalıdır.";
 "ManualCoordErrorLatInvalid" = "Geçerli bir enlem numarası girin.";
 "ManualCoordErrorLonInvalid" = "Geçerli bir boylam numarası girin.";
+
+"AutoBrightnessHint" = "Otomatik Parlaklık";

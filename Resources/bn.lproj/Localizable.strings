@@ -376,7 +376,7 @@
 "ScheduleLocationRowTitle" = "সৌর সময়ের জন্য অবস্থান";
 "ActionUseMyLocationButton" = "আমার অবস্থান ব্যবহার করুন";
 "ScheduleLocationUpdatedFormat" = "আপডেট হয়েছে %@";
-"Requesting location\u2026" = "অবস্থান অনুরোধ করা হচ্ছে\u2026";
+"ScheduleLocationRequestingLabel" = "অবস্থান অনুরোধ করা হচ্ছে\u2026";
 "ActionDeleteScheduleHint" = "সময়সূচি মুছুন";
 "ScheduleNoProfilesLabel" = "কোনো প্রোফাইল নেই। আগে একটি প্রোফাইল তৈরি করুন।";
 
@@ -389,3 +389,5 @@
 "ManualCoordErrorLonRange" = "দ্রাঘিমাংশ -180 থেকে 180 এর মধ্যে হতে হবে।";
 "ManualCoordErrorLatInvalid" = "একটি বৈধ অক্ষাংশ সংখ্যা লিখুন।";
 "ManualCoordErrorLonInvalid" = "একটি বৈধ দ্রাঘিমাংশ সংখ্যা লিখুন।";
+
+"AutoBrightnessHint" = "স্বয়ংক্রিয় উজ্জ্বলতা";

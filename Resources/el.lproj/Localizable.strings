@@ -376,7 +376,7 @@
 "ScheduleLocationRowTitle" = "Τοποθεσία για ηλιακές ώρες";
 "ActionUseMyLocationButton" = "Χρήση της τοποθεσίας μου";
 "ScheduleLocationUpdatedFormat" = "Ενημερώθηκε %@";
-"Requesting location\u2026" = "Αίτηση τοποθεσίας\u2026";
+"ScheduleLocationRequestingLabel" = "Αίτηση τοποθεσίας\u2026";
 "ActionDeleteScheduleHint" = "Διαγραφή προγράμματος";
 "ScheduleNoProfilesLabel" = "Δεν υπάρχουν διαθέσιμα προφίλ. Δημιουργήστε πρώτα ένα προφίλ.";
 
@@ -389,3 +389,5 @@
 "ManualCoordErrorLonRange" = "Το γεωγραφικό μήκος πρέπει να είναι μεταξύ -180 και 180.";
 "ManualCoordErrorLatInvalid" = "Εισάγετε έναν έγκυρο αριθμό γεωγραφικού πλάτους.";
 "ManualCoordErrorLonInvalid" = "Εισάγετε έναν έγκυρο αριθμό γεωγραφικού μήκους.";
+
+"AutoBrightnessHint" = "Αυτόματη φωτεινότητα";

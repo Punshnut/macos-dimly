@@ -376,7 +376,7 @@
 "ScheduleLocationRowTitle" = "Местоположение для солнечного времени";
 "ActionUseMyLocationButton" = "Использовать моё местоположение";
 "ScheduleLocationUpdatedFormat" = "Обновлено %@";
-"Requesting location\u2026" = "Запрос местоположения\u2026";
+"ScheduleLocationRequestingLabel" = "Запрос местоположения\u2026";
 "ActionDeleteScheduleHint" = "Удалить расписание";
 "ScheduleNoProfilesLabel" = "Нет доступных профилей. Сначала создайте профиль.";
 
@@ -389,3 +389,5 @@
 "ManualCoordErrorLonRange" = "Долгота должна быть между -180 и 180.";
 "ManualCoordErrorLatInvalid" = "Введите допустимое число широты.";
 "ManualCoordErrorLonInvalid" = "Введите допустимое число долготы.";
+
+"AutoBrightnessHint" = "Автоматическая яркость";

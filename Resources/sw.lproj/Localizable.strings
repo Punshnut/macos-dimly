@@ -376,7 +376,7 @@
 "ScheduleLocationRowTitle" = "Mahali kwa nyakati za jua";
 "ActionUseMyLocationButton" = "Tumia Mahali Pangu";
 "ScheduleLocationUpdatedFormat" = "Imesasishwa %@";
-"Requesting location\u2026" = "Inaomba mahali\u2026";
+"ScheduleLocationRequestingLabel" = "Inaomba mahali\u2026";
 "ActionDeleteScheduleHint" = "Futa ratiba";
 "ScheduleNoProfilesLabel" = "Hakuna wasifu uliopo. Unda wasifu kwanza.";
 
@@ -389,3 +389,5 @@
 "ManualCoordErrorLonRange" = "Longitudo lazima iwe kati ya -180 na 180.";
 "ManualCoordErrorLatInvalid" = "Ingiza nambari sahihi ya latitudo.";
 "ManualCoordErrorLonInvalid" = "Ingiza nambari sahihi ya longitudo.";
+
+"AutoBrightnessHint" = "Mwanga wa Kiotomati";

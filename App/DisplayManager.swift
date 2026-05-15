@@ -15,6 +15,7 @@ final class DisplayManager: ObservableObject {
     private let logger = Logger(subsystem: Bundle.main.bundleIdentifier ?? "Dimly", category: "DisplayManager")
     private var callbackToken: AnyObject?
     private var appScreenChangeToken: NSObjectProtocol?
+    private var appBecameActiveToken: NSObjectProtocol?
     private var workspaceWakeToken: NSObjectProtocol?
     private var workspaceScreensWakeToken: NSObjectProtocol?
     private var topologyRefreshTask: Task<Void, Never>?
@@ -36,6 +37,15 @@ final class DisplayManager: ObservableObject {
         ) { [weak self] _ in
             Task { @MainActor [weak self] in
                 self?.scheduleTopologyRefresh(reason: "didChangeScreenParameters")
+            }
+        }
+        appBecameActiveToken = NotificationCenter.default.addObserver(
+            forName: NSApplication.didBecomeActiveNotification,
+            object: nil,
+            queue: .main
+        ) { [weak self] _ in
+            Task { @MainActor [weak self] in
+                self?.refresh(reason: "appBecameActive")
             }
         }
         workspaceWakeToken = NSWorkspace.shared.notificationCenter.addObserver(
@@ -67,6 +77,9 @@ final class DisplayManager: ObservableObject {
         }
         if let appScreenChangeToken {
             NotificationCenter.default.removeObserver(appScreenChangeToken)
+        }
+        if let appBecameActiveToken {
+            NotificationCenter.default.removeObserver(appBecameActiveToken)
         }
         if let workspaceWakeToken {
             NSWorkspace.shared.notificationCenter.removeObserver(workspaceWakeToken)

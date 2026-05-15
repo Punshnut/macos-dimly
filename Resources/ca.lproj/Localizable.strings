@@ -376,7 +376,7 @@
 "ScheduleLocationRowTitle" = "Ubicació per als horaris solars";
 "ActionUseMyLocationButton" = "Utilitza la meva ubicació";
 "ScheduleLocationUpdatedFormat" = "Actualitzat %@";
-"Requesting location\u2026" = "Sol·licitant ubicació\u2026";
+"ScheduleLocationRequestingLabel" = "Sol·licitant ubicació\u2026";
 "ActionDeleteScheduleHint" = "Elimina la programació";
 "ScheduleNoProfilesLabel" = "No hi ha perfils disponibles. Crea primer un perfil.";
 
@@ -389,3 +389,5 @@
 "ManualCoordErrorLonRange" = "La longitud ha d'estar entre -180 i 180.";
 "ManualCoordErrorLatInvalid" = "Introdueix un número de latitud vàlid.";
 "ManualCoordErrorLonInvalid" = "Introdueix un número de longitud vàlid.";
+
+"AutoBrightnessHint" = "Brillantor automàtica";

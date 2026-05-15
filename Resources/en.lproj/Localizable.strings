@@ -365,7 +365,7 @@
 "ScheduleLocationRowTitle" = "Location for solar times";
 "ActionUseMyLocationButton" = "Use My Location";
 "ScheduleLocationUpdatedFormat" = "Updated %@";
-"Requesting location\u2026" = "Requesting location\u2026";
+"ScheduleLocationRequestingLabel" = "Requesting location\u2026";
 "ActionDeleteScheduleHint" = "Delete schedule";
 "ScheduleNoProfilesLabel" = "No profiles available. Create a profile first.";
 "ManualCoordDisclosureLabel" = "Or enter coordinates manually…";
@@ -377,3 +377,5 @@
 "ManualCoordErrorLonRange" = "Longitude must be between -180 and 180.";
 "ManualCoordErrorLatInvalid" = "Enter a valid latitude number.";
 "ManualCoordErrorLonInvalid" = "Enter a valid longitude number.";
+
+"AutoBrightnessHint" = "Auto Brightness";

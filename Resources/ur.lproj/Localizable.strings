@@ -376,7 +376,7 @@
 "ScheduleLocationRowTitle" = "شمسی اوقات کے لیے مقام";
 "ActionUseMyLocationButton" = "میرا مقام استعمال کریں";
 "ScheduleLocationUpdatedFormat" = "اپ ڈیٹ ہوا %@";
-"Requesting location\u2026" = "مقام کی درخواست ہو رہی ہے\u2026";
+"ScheduleLocationRequestingLabel" = "مقام کی درخواست ہو رہی ہے\u2026";
 "ActionDeleteScheduleHint" = "شیڈول حذف کریں";
 "ScheduleNoProfilesLabel" = "کوئی پروفائل دستیاب نہیں۔ پہلے ایک پروفائل بنائیں۔";
 
@@ -389,3 +389,5 @@
 "ManualCoordErrorLonRange" = "طول بلد -180 اور 180 کے درمیان ہونا چاہیے۔";
 "ManualCoordErrorLatInvalid" = "ایک درست عرض بلد نمبر درج کریں۔";
 "ManualCoordErrorLonInvalid" = "ایک درست طول بلد نمبر درج کریں۔";
+
+"AutoBrightnessHint" = "خودکار روشنی";

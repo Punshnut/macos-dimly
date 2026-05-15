@@ -376,7 +376,7 @@
 "ScheduleLocationRowTitle" = "太陽時刻の場所";
 "ActionUseMyLocationButton" = "現在地を使用";
 "ScheduleLocationUpdatedFormat" = "%@ に更新";
-"Requesting location\u2026" = "場所を取得中\u2026";
+"ScheduleLocationRequestingLabel" = "場所を取得中\u2026";
 "ActionDeleteScheduleHint" = "スケジュールを削除";
 "ScheduleNoProfilesLabel" = "使用可能なプロファイルがありません。最初にプロファイルを作成してください。";
 
@@ -389,3 +389,5 @@
 "ManualCoordErrorLonRange" = "経度は -180 から 180 の間でなければなりません。";
 "ManualCoordErrorLatInvalid" = "有効な緯度の数値を入力してください。";
 "ManualCoordErrorLonInvalid" = "有効な経度の数値を入力してください。";
+
+"AutoBrightnessHint" = "自動輝度調節";

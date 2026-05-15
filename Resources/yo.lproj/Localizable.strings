@@ -376,7 +376,7 @@
 "ScheduleLocationRowTitle" = "Ibi fún àwọn àkókò oòrùn";
 "ActionUseMyLocationButton" = "Lo ibi mi";
 "ScheduleLocationUpdatedFormat" = "Ti ṣe imudojuiwọn %@";
-"Requesting location\u2026" = "Ń béèrè ibi\u2026";
+"ScheduleLocationRequestingLabel" = "Ń béèrè ibi\u2026";
 "ActionDeleteScheduleHint" = "Pa eto àkókò rẹ̀";
 "ScheduleNoProfilesLabel" = "Ko sí profáìlì. Ṣẹ̀dá profáìlì kan kọ́kọ́.";
 
@@ -389,3 +389,5 @@
 "ManualCoordErrorLonRange" = "Longitude gbọdọ wa laarin -180 ati 180.";
 "ManualCoordErrorLatInvalid" = "Tẹ nọmba latitude to wulo.";
 "ManualCoordErrorLonInvalid" = "Tẹ nọmba longitude to wulo.";
+
+"AutoBrightnessHint" = "Imọlẹ Aifọwọyi";

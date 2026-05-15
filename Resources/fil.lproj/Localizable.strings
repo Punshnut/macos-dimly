@@ -374,7 +374,7 @@
 "ScheduleLocationRowTitle" = "Lokasyon para sa mga oras ng araw";
 "ActionUseMyLocationButton" = "Gamitin ang Aking Lokasyon";
 "ScheduleLocationUpdatedFormat" = "Na-update %@";
-"Requesting location\u2026" = "Humihiling ng lokasyon\u2026";
+"ScheduleLocationRequestingLabel" = "Humihiling ng lokasyon\u2026";
 "ActionDeleteScheduleHint" = "Tanggalin ang iskedyul";
 "ScheduleNoProfilesLabel" = "Walang available na profile. Gumawa muna ng profile.";
 
@@ -387,3 +387,5 @@
 "ManualCoordErrorLonRange" = "Ang longitude ay dapat nasa pagitan ng -180 at 180.";
 "ManualCoordErrorLatInvalid" = "Magpasok ng wastong numero ng latitude.";
 "ManualCoordErrorLonInvalid" = "Magpasok ng wastong numero ng longitude.";
+
+"AutoBrightnessHint" = "Auto Brightness";

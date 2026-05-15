@@ -376,7 +376,7 @@
 "ScheduleLocationRowTitle" = "Helyszín a naptári időpontokhoz";
 "ActionUseMyLocationButton" = "Saját helyszín használata";
 "ScheduleLocationUpdatedFormat" = "Frissítve: %@";
-"Requesting location\u2026" = "Helyszín lekérése\u2026";
+"ScheduleLocationRequestingLabel" = "Helyszín lekérése\u2026";
 "ActionDeleteScheduleHint" = "Ütemezés törlése";
 "ScheduleNoProfilesLabel" = "Nincs elérhető profil. Először hozzon létre egyet.";
 
@@ -389,3 +389,5 @@
 "ManualCoordErrorLonRange" = "A hosszúságnak -180 és 180 között kell lennie.";
 "ManualCoordErrorLatInvalid" = "Adjon meg érvényes szélességi számot.";
 "ManualCoordErrorLonInvalid" = "Adjon meg érvényes hosszúsági számot.";
+
+"AutoBrightnessHint" = "Automatikus fényerő";

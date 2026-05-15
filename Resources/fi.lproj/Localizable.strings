@@ -376,7 +376,7 @@
 "ScheduleLocationRowTitle" = "Sijainti aurinkoaikojen laskemiseen";
 "ActionUseMyLocationButton" = "Käytä sijaintiani";
 "ScheduleLocationUpdatedFormat" = "Päivitetty %@";
-"Requesting location\u2026" = "Haetaan sijaintia\u2026";
+"ScheduleLocationRequestingLabel" = "Haetaan sijaintia\u2026";
 "ActionDeleteScheduleHint" = "Poista aikataulu";
 "ScheduleNoProfilesLabel" = "Ei profiileja. Luo ensin profiili.";
 
@@ -389,3 +389,5 @@
 "ManualCoordErrorLonRange" = "Pituusasteen on oltava välillä -180 ja 180.";
 "ManualCoordErrorLatInvalid" = "Syötä kelvollinen leveysasteluku.";
 "ManualCoordErrorLonInvalid" = "Syötä kelvollinen pituusasteluku.";
+
+"AutoBrightnessHint" = "Automaattinen kirkkaus";

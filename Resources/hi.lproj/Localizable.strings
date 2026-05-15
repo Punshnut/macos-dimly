@@ -376,7 +376,7 @@
 "ScheduleLocationRowTitle" = "सौर समय के लिए स्थान";
 "ActionUseMyLocationButton" = "मेरा स्थान उपयोग करें";
 "ScheduleLocationUpdatedFormat" = "अपडेट किया गया %@";
-"Requesting location\u2026" = "स्थान अनुरोध किया जा रहा है\u2026";
+"ScheduleLocationRequestingLabel" = "स्थान अनुरोध किया जा रहा है\u2026";
 "ActionDeleteScheduleHint" = "समय-सारणी हटाएं";
 "ScheduleNoProfilesLabel" = "कोई प्रोफ़ाइल उपलब्ध नहीं है। पहले एक प्रोफ़ाइल बनाएं।";
 
@@ -389,3 +389,5 @@
 "ManualCoordErrorLonRange" = "देशांतर -180 और 180 के बीच होना चाहिए।";
 "ManualCoordErrorLatInvalid" = "एक मान्य अक्षांश संख्या दर्ज करें।";
 "ManualCoordErrorLonInvalid" = "एक मान्य देशांतर संख्या दर्ज करें।";
+
+"AutoBrightnessHint" = "स्वत: चमक";

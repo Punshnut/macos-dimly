@@ -376,7 +376,7 @@
 "ScheduleLocationRowTitle" = "சூரிய நேரங்களுக்கான இடம்";
 "ActionUseMyLocationButton" = "என் இடத்தை பயன்படுத்து";
 "ScheduleLocationUpdatedFormat" = "%@ புதுப்பிக்கப்பட்டது";
-"Requesting location\u2026" = "இடம் கேட்கிறது\u2026";
+"ScheduleLocationRequestingLabel" = "இடம் கேட்கிறது\u2026";
 "ActionDeleteScheduleHint" = "அட்டவணையை நீக்கு";
 "ScheduleNoProfilesLabel" = "சுயவிவரங்கள் இல்லை. முதலில் ஒரு சுயவிவரம் உருவாக்கவும்.";
 
@@ -389,3 +389,5 @@
 "ManualCoordErrorLonRange" = "தீர்க்கரேகை -180 மற்றும் 180 க்கு இடையில் இருக்க வேண்டும்.";
 "ManualCoordErrorLatInvalid" = "சரியான அட்சரேகை எண்ணை உள்ளிடவும்.";
 "ManualCoordErrorLonInvalid" = "சரியான தீர்க்கரேகை எண்ணை உள்ளிடவும்.";
+
+"AutoBrightnessHint" = "தானியங்கி பிரகாசம்";

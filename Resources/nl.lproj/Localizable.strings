@@ -376,7 +376,7 @@
 "ScheduleLocationRowTitle" = "Locatie voor zonnetijden";
 "ActionUseMyLocationButton" = "Mijn locatie gebruiken";
 "ScheduleLocationUpdatedFormat" = "Bijgewerkt %@";
-"Requesting location\u2026" = "Locatie aanvragen\u2026";
+"ScheduleLocationRequestingLabel" = "Locatie aanvragen\u2026";
 "ActionDeleteScheduleHint" = "Schema verwijderen";
 "ScheduleNoProfilesLabel" = "Geen profielen beschikbaar. Maak eerst een profiel aan.";
 
@@ -389,3 +389,5 @@
 "ManualCoordErrorLonRange" = "Lengtegraad moet tussen -180 en 180 liggen.";
 "ManualCoordErrorLatInvalid" = "Voer een geldig breedtegraad-getal in.";
 "ManualCoordErrorLonInvalid" = "Voer een geldig lengtegraad-getal in.";
+
+"AutoBrightnessHint" = "Automatische helderheid";

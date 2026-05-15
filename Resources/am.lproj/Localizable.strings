@@ -376,7 +376,7 @@
 "ScheduleLocationRowTitle" = "ለፀሐይ ጊዜያት ቦታ";
 "ActionUseMyLocationButton" = "የእኔን ቦታ ተጠቀም";
 "ScheduleLocationUpdatedFormat" = "ተዘምኗል %@";
-"Requesting location\u2026" = "ቦታ እየጠየቀ ነው\u2026";
+"ScheduleLocationRequestingLabel" = "ቦታ እየጠየቀ ነው\u2026";
 "ActionDeleteScheduleHint" = "መርሃ ግብር ሰርዝ";
 "ScheduleNoProfilesLabel" = "ምንም ፕሮፋይል የለም። መጀመሪያ ፕሮፋይል ፍጠር።";
 
@@ -389,3 +389,5 @@
 "ManualCoordErrorLonRange" = "ኬንትሮስ ከ-180 እና 180 መካከል መሆን አለበት።";
 "ManualCoordErrorLatInvalid" = "ትክክለኛ ኬክሮስ ቁጥር ያስሩ።";
 "ManualCoordErrorLonInvalid" = "ትክክለኛ ኬንትሮስ ቁጥር ያስሩ።";
+
+"AutoBrightnessHint" = "Auto Brightness";

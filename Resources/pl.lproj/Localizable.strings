@@ -376,7 +376,7 @@
 "ScheduleLocationRowTitle" = "Lokalizacja dla czasu słonecznego";
 "ActionUseMyLocationButton" = "Użyj mojej lokalizacji";
 "ScheduleLocationUpdatedFormat" = "Zaktualizowano %@";
-"Requesting location\u2026" = "Żądanie lokalizacji\u2026";
+"ScheduleLocationRequestingLabel" = "Żądanie lokalizacji\u2026";
 "ActionDeleteScheduleHint" = "Usuń harmonogram";
 "ScheduleNoProfilesLabel" = "Brak dostępnych profili. Najpierw utwórz profil.";
 
@@ -389,3 +389,5 @@
 "ManualCoordErrorLonRange" = "Długość geograficzna musi być między -180 a 180.";
 "ManualCoordErrorLatInvalid" = "Wprowadź prawidłowy numer szerokości geograficznej.";
 "ManualCoordErrorLonInvalid" = "Wprowadź prawidłowy numer długości geograficznej.";
+
+"AutoBrightnessHint" = "Automatyczna jasność";

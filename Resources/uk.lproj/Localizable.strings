@@ -376,7 +376,7 @@
 "ScheduleLocationRowTitle" = "Місце для сонячних часів";
 "ActionUseMyLocationButton" = "Використати моє місце";
 "ScheduleLocationUpdatedFormat" = "Оновлено %@";
-"Requesting location\u2026" = "Запит місця\u2026";
+"ScheduleLocationRequestingLabel" = "Запит місця\u2026";
 "ActionDeleteScheduleHint" = "Видалити розклад";
 "ScheduleNoProfilesLabel" = "Немає доступних профілів. Спочатку створіть профіль.";
 
@@ -389,3 +389,5 @@
 "ManualCoordErrorLonRange" = "Довгота має бути між -180 і 180.";
 "ManualCoordErrorLatInvalid" = "Введіть дійсне число широти.";
 "ManualCoordErrorLonInvalid" = "Введіть дійсне число довготи.";
+
+"AutoBrightnessHint" = "Автоматична яскравість";

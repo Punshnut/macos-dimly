@@ -376,7 +376,7 @@
 "ScheduleLocationRowTitle" = "ตำแหน่งสำหรับเวลาแสงอาทิตย์";
 "ActionUseMyLocationButton" = "ใช้ตำแหน่งของฉัน";
 "ScheduleLocationUpdatedFormat" = "อัปเดตแล้ว %@";
-"Requesting location\u2026" = "กำลังขอตำแหน่ง\u2026";
+"ScheduleLocationRequestingLabel" = "กำลังขอตำแหน่ง\u2026";
 "ActionDeleteScheduleHint" = "ลบกำหนดการ";
 "ScheduleNoProfilesLabel" = "ไม่มีโปรไฟล์ กรุณาสร้างโปรไฟล์ก่อน";
 
@@ -389,3 +389,5 @@
 "ManualCoordErrorLonRange" = "ลองจิจูดต้องอยู่ระหว่าง -180 ถึง 180";
 "ManualCoordErrorLatInvalid" = "ป้อนหมายเลขละติจูดที่ถูกต้อง";
 "ManualCoordErrorLonInvalid" = "ป้อนหมายเลขลองจิจูดที่ถูกต้อง";
+
+"AutoBrightnessHint" = "ความสว่างอัตโนมัติ";

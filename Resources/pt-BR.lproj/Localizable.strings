@@ -376,7 +376,7 @@
 "ScheduleLocationRowTitle" = "Localização para horários solares";
 "ActionUseMyLocationButton" = "Usar minha localização";
 "ScheduleLocationUpdatedFormat" = "Atualizado %@";
-"Requesting location\u2026" = "Solicitando localização\u2026";
+"ScheduleLocationRequestingLabel" = "Solicitando localização\u2026";
 "ActionDeleteScheduleHint" = "Excluir agenda";
 "ScheduleNoProfilesLabel" = "Nenhum perfil disponível. Crie um perfil primeiro.";
 
@@ -389,3 +389,5 @@
 "ManualCoordErrorLonRange" = "A longitude deve ser entre -180 e 180.";
 "ManualCoordErrorLatInvalid" = "Insira um número de latitude válido.";
 "ManualCoordErrorLonInvalid" = "Insira um número de longitude válido.";
+
+"AutoBrightnessHint" = "Brilho automático";

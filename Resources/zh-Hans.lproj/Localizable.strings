@@ -376,7 +376,7 @@
 "ScheduleLocationRowTitle" = "太阳时间的位置";
 "ActionUseMyLocationButton" = "使用我的位置";
 "ScheduleLocationUpdatedFormat" = "已更新 %@";
-"Requesting location\u2026" = "正在请求位置\u2026";
+"ScheduleLocationRequestingLabel" = "正在请求位置\u2026";
 "ActionDeleteScheduleHint" = "删除时间表";
 "ScheduleNoProfilesLabel" = "没有可用的配置文件。请先创建一个配置文件。";
 
@@ -389,3 +389,5 @@
 "ManualCoordErrorLonRange" = "经度必须在 -180 到 180 之间。";
 "ManualCoordErrorLatInvalid" = "请输入有效的纬度数字。";
 "ManualCoordErrorLonInvalid" = "请输入有效的经度数字。";
+
+"AutoBrightnessHint" = "自动亮度";

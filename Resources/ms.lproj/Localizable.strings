@@ -376,7 +376,7 @@
 "ScheduleLocationRowTitle" = "Lokasi untuk waktu suria";
 "ActionUseMyLocationButton" = "Gunakan Lokasi Saya";
 "ScheduleLocationUpdatedFormat" = "Dikemas kini %@";
-"Requesting location\u2026" = "Meminta lokasi\u2026";
+"ScheduleLocationRequestingLabel" = "Meminta lokasi\u2026";
 "ActionDeleteScheduleHint" = "Padam jadual";
 "ScheduleNoProfilesLabel" = "Tiada profil tersedia. Buat profil dahulu.";
 
@@ -389,3 +389,5 @@
 "ManualCoordErrorLonRange" = "Longitud mesti antara -180 dan 180.";
 "ManualCoordErrorLatInvalid" = "Masukkan nombor latitud yang sah.";
 "ManualCoordErrorLonInvalid" = "Masukkan nombor longitud yang sah.";
+
+"AutoBrightnessHint" = "Kecerahan Automatik";

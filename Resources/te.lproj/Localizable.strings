@@ -376,7 +376,7 @@
 "ScheduleLocationRowTitle" = "సౌర సమయాలకు స్థానం";
 "ActionUseMyLocationButton" = "నా స్థానాన్ని ఉపయోగించు";
 "ScheduleLocationUpdatedFormat" = "%@ నవీకరించబడింది";
-"Requesting location\u2026" = "స్థానం అభ్యర్థిస్తోంది\u2026";
+"ScheduleLocationRequestingLabel" = "స్థానం అభ్యర్థిస్తోంది\u2026";
 "ActionDeleteScheduleHint" = "షెడ్యూల్ తొలగించు";
 "ScheduleNoProfilesLabel" = "ప్రొఫైల్‌లు అందుబాటులో లేవు. ముందు ప్రొఫైల్ సృష్టించు.";
 
@@ -389,3 +389,5 @@
 "ManualCoordErrorLonRange" = "రేఖాంశం -180 మరియు 180 మధ్య ఉండాలి.";
 "ManualCoordErrorLatInvalid" = "చెల్లుబాటు అయ్యే అక్షాంశ సంఖ్యను నమోదు చేయండి.";
 "ManualCoordErrorLonInvalid" = "చెల్లుబాటు అయ్యే రేఖాంశ సంఖ్యను నమోదు చేయండి.";
+
+"AutoBrightnessHint" = "స్వయంచాలక ప్రకాశం";

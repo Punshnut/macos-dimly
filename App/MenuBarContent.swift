@@ -1337,6 +1337,12 @@ struct MenuBarContentView: View {
                             .font(.caption.monospacedDigit())
                             .foregroundStyle(neutralSecondaryText)
                     }
+                    if display.isAutoBrightnessActive {
+                        Image(systemName: "sun.max")
+                            .font(.caption)
+                            .foregroundStyle(neutralSecondaryText)
+                            .help(String(localized: "AutoBrightnessHint"))
+                    }
                 }
                 HStack(spacing: 6) {
                     Text(String(format: String(localized: "DisplayRowStatusFormat"), display.resolution, ddcState, status))

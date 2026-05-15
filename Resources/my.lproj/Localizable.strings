@@ -376,7 +376,7 @@
 "ScheduleLocationRowTitle" = "နေတည်နေရာ အချိန်များအတွက် တည်နေရာ";
 "ActionUseMyLocationButton" = "ကျွန်ုပ်၏ တည်နေရာ အသုံးပြုပါ";
 "ScheduleLocationUpdatedFormat" = "%@ တွင် မွမ်းမံထားသည်";
-"Requesting location\u2026" = "တည်နေရာ တောင်းဆိုနေသည်\u2026";
+"ScheduleLocationRequestingLabel" = "တည်နေရာ တောင်းဆိုနေသည်\u2026";
 "ActionDeleteScheduleHint" = "အချိန်ဇယား ဖျက်ပါ";
 "ScheduleNoProfilesLabel" = "ပရိုဖိုင်များ မရှိပါ။ ဦးစွာ ပရိုဖိုင် ဖန်တီးပါ။";
 
@@ -389,3 +389,5 @@
 "ManualCoordErrorLonRange" = "လောင်ဂျီတုဒ် -180 နှင့် 180 ကြားတွင် ရှိရမည်။";
 "ManualCoordErrorLatInvalid" = "မှန်ကန်သော လတ္တီတုဒ် နံပါတ်ထည့်ပါ။";
 "ManualCoordErrorLonInvalid" = "မှန်ကန်သော လောင်ဂျီတုဒ် နံပါတ်ထည့်ပါ။";
+
+"AutoBrightnessHint" = "အလိုအလျောက် အလင်းထု";

@@ -376,7 +376,7 @@
 "ScheduleLocationRowTitle" = "مکان برای اوقات خورشیدی";
 "ActionUseMyLocationButton" = "استفاده از موقعیت من";
 "ScheduleLocationUpdatedFormat" = "به‌روز شد %@";
-"Requesting location\u2026" = "در حال دریافت موقعیت\u2026";
+"ScheduleLocationRequestingLabel" = "در حال دریافت موقعیت\u2026";
 "ActionDeleteScheduleHint" = "حذف زمان‌بندی";
 "ScheduleNoProfilesLabel" = "هیچ پروفایلی در دسترس نیست. ابتدا یک پروفایل ایجاد کنید.";
 
@@ -389,3 +389,5 @@
 "ManualCoordErrorLonRange" = "طول جغرافیایی باید بین -180 و 180 باشد.";
 "ManualCoordErrorLatInvalid" = "یک عدد عرض جغرافیایی معتبر وارد کنید.";
 "ManualCoordErrorLonInvalid" = "یک عدد طول جغرافیایی معتبر وارد کنید.";
+
+"AutoBrightnessHint" = "روشنایی خودکار";
