@@ -365,6 +365,7 @@
 "ScheduleEnableSubtitle" = "Appliquer automatiquement des profils aux heures planifiées.";
 "ScheduleEmptyLabel" = "Aucune planification pour l'instant. Ajoutez-en une pour commencer.";
 "ActionAddScheduleButton" = "Ajouter une planification";
+"ActionAddConnectionRuleButton" = "Ajouter une règle";
 "ScheduleTriggerClockLabel" = "Horloge";
 "ScheduleTriggerSunriseLabel" = "Lever du soleil";
 "ScheduleRecurrenceEveryDayLabel" = "Chaque jour";

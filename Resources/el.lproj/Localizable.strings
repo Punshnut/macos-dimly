@@ -365,6 +365,7 @@
 "ScheduleEnableSubtitle" = "Αυτόματη εφαρμογή προφίλ σε προγραμματισμένες ώρες.";
 "ScheduleEmptyLabel" = "Δεν υπάρχουν προγράμματα ακόμα. Προσθέστε ένα για να ξεκινήσετε.";
 "ActionAddScheduleButton" = "Προσθήκη προγράμματος";
+"ActionAddConnectionRuleButton" = "Προσθήκη κανόνα";
 "ScheduleTriggerClockLabel" = "Ρολόι";
 "ScheduleTriggerSunriseLabel" = "Ανατολή";
 "ScheduleRecurrenceEveryDayLabel" = "Κάθε μέρα";

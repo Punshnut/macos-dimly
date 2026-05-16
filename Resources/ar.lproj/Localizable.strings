@@ -365,6 +365,7 @@
 "ScheduleEnableSubtitle" = "تطبيق الملفات الشخصية تلقائياً في الأوقات المجدولة.";
 "ScheduleEmptyLabel" = "لا توجد جداول زمنية بعد. أضف جدولاً للبدء.";
 "ActionAddScheduleButton" = "إضافة جدول زمني";
+"ActionAddConnectionRuleButton" = "إضافة قاعدة";
 "ScheduleTriggerClockLabel" = "ساعة";
 "ScheduleTriggerSunriseLabel" = "شروق الشمس";
 "ScheduleRecurrenceEveryDayLabel" = "كل يوم";

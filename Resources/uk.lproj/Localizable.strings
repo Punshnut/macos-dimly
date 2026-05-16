@@ -365,6 +365,7 @@
 "ScheduleEnableSubtitle" = "Автоматично застосовувати профілі у запланований час.";
 "ScheduleEmptyLabel" = "Розкладів ще немає. Додайте один, щоб почати.";
 "ActionAddScheduleButton" = "Додати розклад";
+"ActionAddConnectionRuleButton" = "Додати правило";
 "ScheduleTriggerClockLabel" = "Годинник";
 "ScheduleTriggerSunriseLabel" = "Схід сонця";
 "ScheduleRecurrenceEveryDayLabel" = "Щодня";

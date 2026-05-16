@@ -365,6 +365,7 @@
 "ScheduleEnableSubtitle" = "Aplicar perfis automaticamente nas horas agendadas.";
 "ScheduleEmptyLabel" = "Ainda não há agendas. Adicione uma para começar.";
 "ActionAddScheduleButton" = "Adicionar agenda";
+"ActionAddConnectionRuleButton" = "Adicionar regra";
 "ScheduleTriggerClockLabel" = "Relógio";
 "ScheduleTriggerSunriseLabel" = "Nascer do sol";
 "ScheduleRecurrenceEveryDayLabel" = "Todos os dias";

@@ -164,6 +164,17 @@ struct DisplaySnapshot: Codable, Equatable, Identifiable {
     }
 }
 
+/// Maps a display connection event to a profile to auto-apply.
+struct DisplayConnectionRule: Codable, Identifiable, Equatable {
+    var id: UUID
+    var isEnabled: Bool
+    var profileID: UUID
+    /// stableIdentity of the triggering display; empty string means any external display.
+    var displayID: String
+    /// Cached display name for showing the rule when the display is offline.
+    var displayName: String?
+}
+
 /// A named set of display snapshots captured at a point in time.
 struct DisplayProfile: Codable, Identifiable, Equatable {
     let id: UUID
@@ -386,12 +397,14 @@ struct ProfileState: Codable {
     var automationEnabled: Bool
     var automationProfileID: UUID?
     var automationTriggerTarget: HotkeyTarget
+    var connectionRules: [DisplayConnectionRule]
 
     private enum CodingKeys: String, CodingKey {
         case profiles
         case automationEnabled
         case automationProfileID
         case automationTriggerTarget
+        case connectionRules
     }
 
     /// Creates the full persisted profile payload, including automation preferences.
@@ -399,21 +412,35 @@ struct ProfileState: Codable {
         profiles: [DisplayProfile],
         automationEnabled: Bool,
         automationProfileID: UUID?,
-        automationTriggerTarget: HotkeyTarget
+        automationTriggerTarget: HotkeyTarget,
+        connectionRules: [DisplayConnectionRule]
     ) {
         self.profiles = profiles
         self.automationEnabled = automationEnabled
         self.automationProfileID = automationProfileID
         self.automationTriggerTarget = automationTriggerTarget
+        self.connectionRules = connectionRules
     }
 
-    /// Decodes persisted profile state and defaults automation targeting for older saves.
+    /// Decodes persisted profile state, migrating old single-rule automation to connectionRules if needed.
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         profiles = try container.decode([DisplayProfile].self, forKey: .profiles)
-        automationEnabled = try container.decode(Bool.self, forKey: .automationEnabled)
+        automationEnabled = try container.decodeIfPresent(Bool.self, forKey: .automationEnabled) ?? false
         automationProfileID = try container.decodeIfPresent(UUID.self, forKey: .automationProfileID)
         automationTriggerTarget = try container.decodeIfPresent(HotkeyTarget.self, forKey: .automationTriggerTarget) ?? .allExternalDisplays
+
+        var rules = try container.decodeIfPresent([DisplayConnectionRule].self, forKey: .connectionRules) ?? []
+        // Migrate from the old single-rule format on first load.
+        if rules.isEmpty, let oldProfileID = automationProfileID, automationEnabled {
+            let displayID: String
+            switch automationTriggerTarget {
+            case .allExternalDisplays: displayID = ""
+            case .display(let id): displayID = id
+            }
+            rules = [DisplayConnectionRule(id: UUID(), isEnabled: true, profileID: oldProfileID, displayID: displayID, displayName: nil)]
+        }
+        connectionRules = rules
     }
 }
 
@@ -428,6 +455,9 @@ final class ProfileManager: ObservableObject {
         didSet { persist() }
     }
     @Published var automationTriggerTarget: HotkeyTarget = .allExternalDisplays {
+        didSet { persist() }
+    }
+    @Published var connectionRules: [DisplayConnectionRule] = [] {
         didSet { persist() }
     }
     @Published var lastAppliedProfileName: String?
@@ -471,6 +501,7 @@ final class ProfileManager: ObservableObject {
         automationEnabled = loaded.automationEnabled
         automationProfileID = loaded.automationProfileID
         automationTriggerTarget = loaded.automationTriggerTarget
+        connectionRules = loaded.connectionRules
 
         previousDisplayIDs = Set(displayManager.displays.map(\.stableIdentity))
 
@@ -975,16 +1006,40 @@ final class ProfileManager: ObservableObject {
         persist()
     }
 
+    // MARK: - Connection Rules CRUD
+
+    /// Appends a new default connection rule (any external display → first profile).
+    func addConnectionRule() {
+        let rule = DisplayConnectionRule(
+            id: UUID(),
+            isEnabled: true,
+            profileID: profiles.first?.id ?? UUID(),
+            displayID: "",
+            displayName: nil
+        )
+        connectionRules.append(rule)
+    }
+
+    /// Removes the connection rule with the given ID.
+    func removeConnectionRule(id: UUID) {
+        connectionRules.removeAll { $0.id == id }
+    }
+
+    /// Replaces the matching connection rule in-place.
+    func updateConnectionRule(_ rule: DisplayConnectionRule) {
+        guard let index = connectionRules.firstIndex(where: { $0.id == rule.id }) else { return }
+        connectionRules[index] = rule
+    }
+
     // MARK: - Automation
 
-    /// Triggers automation when new external displays appear and match the selected trigger target.
+    /// Triggers automation when new external displays appear and match connection rules.
     private func handleDisplayChange(_ displays: [DisplayInfo]) {
         let current = Set(displays.map(\.stableIdentity))
         let added = current.subtracting(previousDisplayIDs)
         previousDisplayIDs = current
 
-        guard automationEnabled, !added.isEmpty, let profileID = automationProfileID,
-              let profile = profiles.first(where: { $0.id == profileID }) else { return }
+        guard automationEnabled, !added.isEmpty else { return }
         guard Date() >= automationSuppressedUntil else {
             DiagnosticsLogger.shared.log(
                 "Skip automation during suppression added=\(added.count) until=\(automationSuppressedUntil.timeIntervalSinceNow)",
@@ -993,20 +1048,19 @@ final class ProfileManager: ObservableObject {
             return
         }
 
-        let addedExternals = displays.filter { added.contains($0.stableIdentity) && $0.isExternal }
-        guard addedExternals.isEmpty == false else { return }
+        let addedExternalIDs = Set(displays.filter { added.contains($0.stableIdentity) && $0.isExternal }.map(\.stableIdentity))
+        guard !addedExternalIDs.isEmpty else { return }
 
-        let shouldTrigger: Bool = {
-            switch automationTriggerTarget {
-            case .allExternalDisplays:
-                return true
-            case .display(let id):
-                return addedExternals.contains { $0.stableIdentity == id }
-            }
-        }()
-        guard shouldTrigger else { return }
+        let matching = connectionRules.filter { rule in
+            guard rule.isEnabled, profiles.contains(where: { $0.id == rule.profileID }) else { return false }
+            return rule.displayID.isEmpty || addedExternalIDs.contains(rule.displayID)
+        }
+        // Specific-display rules take priority over catch-all "any external" rules.
+        let best = matching.first(where: { !$0.displayID.isEmpty }) ?? matching.first
+        guard let rule = best, let profile = profiles.first(where: { $0.id == rule.profileID }) else { return }
 
         logger.notice("Automation triggered on display connect; applying profile \(profile.name, privacy: .public)")
+        lastAppliedProfileName = profile.name
         apply(profile: profile)
     }
 
@@ -1144,7 +1198,8 @@ final class ProfileManager: ObservableObject {
             profiles: profiles,
             automationEnabled: automationEnabled,
             automationProfileID: automationProfileID,
-            automationTriggerTarget: automationTriggerTarget
+            automationTriggerTarget: automationTriggerTarget,
+            connectionRules: connectionRules
         )
     }
 
@@ -1154,6 +1209,7 @@ final class ProfileManager: ObservableObject {
         automationEnabled = state.automationEnabled
         automationProfileID = state.automationProfileID
         automationTriggerTarget = state.automationTriggerTarget
+        connectionRules = state.connectionRules
         persist()
     }
 
@@ -1175,7 +1231,8 @@ struct ProfileStore {
                 profiles: [],
                 automationEnabled: false,
                 automationProfileID: nil,
-                automationTriggerTarget: .allExternalDisplays
+                automationTriggerTarget: .allExternalDisplays,
+                connectionRules: []
             )
         }
         do {
@@ -1185,7 +1242,8 @@ struct ProfileStore {
                 profiles: [],
                 automationEnabled: false,
                 automationProfileID: nil,
-                automationTriggerTarget: .allExternalDisplays
+                automationTriggerTarget: .allExternalDisplays,
+                connectionRules: []
             )
         }
     }

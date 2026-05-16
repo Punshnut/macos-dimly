@@ -365,6 +365,7 @@
 "ScheduleEnableSubtitle" = "Zamanlanan saatlerde profilleri otomatik olarak uygula.";
 "ScheduleEmptyLabel" = "Henüz zamanlama yok. Başlamak için bir tane ekle.";
 "ActionAddScheduleButton" = "Zamanlama Ekle";
+"ActionAddConnectionRuleButton" = "Kural ekle";
 "ScheduleTriggerClockLabel" = "Saat";
 "ScheduleTriggerSunriseLabel" = "Gün doğumu";
 "ScheduleRecurrenceEveryDayLabel" = "Her gün";

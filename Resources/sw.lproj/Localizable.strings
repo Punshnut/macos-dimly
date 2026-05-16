@@ -365,6 +365,7 @@
 "ScheduleEnableSubtitle" = "Tumia wasifu kiotomatiki kwa nyakati zilizopangwa.";
 "ScheduleEmptyLabel" = "Hakuna ratiba bado. Ongeza moja ili kuanza.";
 "ActionAddScheduleButton" = "Ongeza Ratiba";
+"ActionAddConnectionRuleButton" = "Ongeza sheria";
 "ScheduleTriggerClockLabel" = "Saa";
 "ScheduleTriggerSunriseLabel" = "Machomeo ya jua";
 "ScheduleRecurrenceEveryDayLabel" = "Kila siku";

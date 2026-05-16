@@ -365,6 +365,7 @@
 "ScheduleEnableSubtitle" = "Automaticky použít profily v naplánovaných časech.";
 "ScheduleEmptyLabel" = "Zatím žádné plány. Přidejte jeden pro začátek.";
 "ActionAddScheduleButton" = "Přidat plán";
+"ActionAddConnectionRuleButton" = "Přidat pravidlo";
 "ScheduleTriggerClockLabel" = "Hodiny";
 "ScheduleTriggerSunriseLabel" = "Východ slunce";
 "ScheduleRecurrenceEveryDayLabel" = "Každý den";

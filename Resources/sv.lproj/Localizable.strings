@@ -365,6 +365,7 @@
 "ScheduleEnableSubtitle" = "Tillämpa profiler automatiskt vid schemalagda tider.";
 "ScheduleEmptyLabel" = "Inga scheman ännu. Lägg till ett för att börja.";
 "ActionAddScheduleButton" = "Lägg till schema";
+"ActionAddConnectionRuleButton" = "Lägg till regel";
 "ScheduleTriggerClockLabel" = "Klocka";
 "ScheduleTriggerSunriseLabel" = "Soluppgång";
 "ScheduleRecurrenceEveryDayLabel" = "Varje dag";

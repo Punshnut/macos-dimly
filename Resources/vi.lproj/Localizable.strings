@@ -365,6 +365,7 @@
 "ScheduleEnableSubtitle" = "Tự động áp dụng hồ sơ vào các thời gian đã lên lịch.";
 "ScheduleEmptyLabel" = "Chưa có lịch trình. Thêm một lịch để bắt đầu.";
 "ActionAddScheduleButton" = "Thêm lịch trình";
+"ActionAddConnectionRuleButton" = "Thêm quy tắc";
 "ScheduleTriggerClockLabel" = "Đồng hồ";
 "ScheduleTriggerSunriseLabel" = "Bình minh";
 "ScheduleRecurrenceEveryDayLabel" = "Mỗi ngày";

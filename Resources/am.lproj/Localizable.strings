@@ -365,6 +365,7 @@
 "ScheduleEnableSubtitle" = "ፕሮፋይሎችን በታቀዱ ጊዜያት ራስ-ሰር ተግብር።";
 "ScheduleEmptyLabel" = "እስካሁን ምንም መርሃ ግብር የለም። ለጀምር አንድ ጨምር።";
 "ActionAddScheduleButton" = "መርሃ ግብር ጨምር";
+"ActionAddConnectionRuleButton" = "ደንብ ጨምር";
 "ScheduleTriggerClockLabel" = "ሰዓት";
 "ScheduleTriggerSunriseLabel" = "የፀሐይ መውጫ";
 "ScheduleRecurrenceEveryDayLabel" = "ሁሉ ቀን";

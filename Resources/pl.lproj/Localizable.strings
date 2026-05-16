@@ -365,6 +365,7 @@
 "ScheduleEnableSubtitle" = "Automatycznie stosuj profile o zaplanowanych godzinach.";
 "ScheduleEmptyLabel" = "Brak harmonogramów. Dodaj jeden, aby rozpocząć.";
 "ActionAddScheduleButton" = "Dodaj harmonogram";
+"ActionAddConnectionRuleButton" = "Dodaj regułę";
 "ScheduleTriggerClockLabel" = "Zegar";
 "ScheduleTriggerSunriseLabel" = "Wschód słońca";
 "ScheduleRecurrenceEveryDayLabel" = "Każdego dnia";

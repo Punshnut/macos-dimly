@@ -365,6 +365,7 @@
 "ScheduleEnableSubtitle" = "షెడ్యూల్ చేసిన సమయాలలో ప్రొఫైల్‌లను స్వయంచాలకంగా వర్తింపజేయి.";
 "ScheduleEmptyLabel" = "ఇంకా షెడ్యూళ్ళు లేవు. ప్రారంభించడానికి ఒకటి జోడించు.";
 "ActionAddScheduleButton" = "షెడ్యూల్ జోడించు";
+"ActionAddConnectionRuleButton" = "నియమాన్ని జోడించండి";
 "ScheduleTriggerClockLabel" = "గడియారం";
 "ScheduleTriggerSunriseLabel" = "సూర్యోదయం";
 "ScheduleRecurrenceEveryDayLabel" = "ప్రతి రోజు";

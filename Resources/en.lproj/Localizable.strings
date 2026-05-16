@@ -354,6 +354,7 @@
 "ScheduleEnableSubtitle" = "Automatically apply profiles at scheduled times.";
 "ScheduleEmptyLabel" = "No schedules yet. Add one to get started.";
 "ActionAddScheduleButton" = "Add Schedule";
+"ActionAddConnectionRuleButton" = "Add Rule";
 "ScheduleTriggerClockLabel" = "Clock";
 "ScheduleTriggerSunriseLabel" = "Sunrise";
 "ScheduleRecurrenceEveryDayLabel" = "Every day";

@@ -365,6 +365,7 @@
 "ScheduleEnableSubtitle" = "নির্ধারিত সময়ে স্বয়ংক্রিয়ভাবে প্রোফাইল প্রয়োগ করুন।";
 "ScheduleEmptyLabel" = "এখনো কোনো সময়সূচি নেই। শুরু করতে একটি যোগ করুন।";
 "ActionAddScheduleButton" = "সময়সূচি যোগ করুন";
+"ActionAddConnectionRuleButton" = "নিয়ম যোগ করুন";
 "ScheduleTriggerClockLabel" = "ঘড়ি";
 "ScheduleTriggerSunriseLabel" = "সূর্যোদয়";
 "ScheduleRecurrenceEveryDayLabel" = "প্রতিদিন";

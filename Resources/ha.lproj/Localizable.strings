@@ -365,6 +365,7 @@
 "ScheduleEnableSubtitle" = "Amfani da bayanin martaba ta atomatik a lokutan da aka tsayar.";
 "ScheduleEmptyLabel" = "Babu jadawali tukuna. Ƙara ɗaya don fara.";
 "ActionAddScheduleButton" = "Ƙara Jadawali";
+"ActionAddConnectionRuleButton" = "Ƙara ƙa'ida";
 "ScheduleTriggerClockLabel" = "Agogo";
 "ScheduleTriggerSunriseLabel" = "Fitowar rana";
 "ScheduleRecurrenceEveryDayLabel" = "Kowace rana";

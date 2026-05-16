@@ -365,6 +365,7 @@
 "ScheduleEnableSubtitle" = "Cuir próifílí i bhfeidhm go huathoibríoch ag amanna sceidealaithe.";
 "ScheduleEmptyLabel" = "Níl aon sceideal ann go fóill. Cuir ceann leis chun tosú.";
 "ActionAddScheduleButton" = "Cuir Sceideal Leis";
+"ActionAddConnectionRuleButton" = "Cuir riail leis";
 "ScheduleTriggerClockLabel" = "Clog";
 "ScheduleTriggerSunriseLabel" = "Éirí na gréine";
 "ScheduleRecurrenceEveryDayLabel" = "Gach lá";

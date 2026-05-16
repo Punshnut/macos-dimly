@@ -365,6 +365,7 @@
 "ScheduleEnableSubtitle" = "Terapkan profil secara otomatis pada waktu yang dijadwalkan.";
 "ScheduleEmptyLabel" = "Belum ada jadwal. Tambahkan satu untuk memulai.";
 "ActionAddScheduleButton" = "Tambah Jadwal";
+"ActionAddConnectionRuleButton" = "Tambah aturan";
 "ScheduleTriggerClockLabel" = "Jam";
 "ScheduleTriggerSunriseLabel" = "Matahari terbit";
 "ScheduleRecurrenceEveryDayLabel" = "Setiap hari";

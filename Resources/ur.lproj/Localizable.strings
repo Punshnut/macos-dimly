@@ -365,6 +365,7 @@
 "ScheduleEnableSubtitle" = "شیڈول اوقات میں خود بخود پروفائلز لاگو کریں۔";
 "ScheduleEmptyLabel" = "ابھی تک کوئی شیڈول نہیں۔ شروع کرنے کے لیے ایک شامل کریں۔";
 "ActionAddScheduleButton" = "شیڈول شامل کریں";
+"ActionAddConnectionRuleButton" = "اصول شامل کریں";
 "ScheduleTriggerClockLabel" = "گھڑی";
 "ScheduleTriggerSunriseLabel" = "طلوع آفتاب";
 "ScheduleRecurrenceEveryDayLabel" = "ہر روز";

@@ -365,6 +365,7 @@
 "ScheduleEnableSubtitle" = "Käytä profiileja automaattisesti aikataulutetuilla ajoilla.";
 "ScheduleEmptyLabel" = "Ei aikatauluja vielä. Lisää yksi aloittaaksesi.";
 "ActionAddScheduleButton" = "Lisää aikataulu";
+"ActionAddConnectionRuleButton" = "Lisää sääntö";
 "ScheduleTriggerClockLabel" = "Kello";
 "ScheduleTriggerSunriseLabel" = "Auringonnousu";
 "ScheduleRecurrenceEveryDayLabel" = "Joka päivä";

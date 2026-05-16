@@ -365,6 +365,7 @@
 "ScheduleEnableSubtitle" = "スケジュールされた時間にプロファイルを自動的に適用します。";
 "ScheduleEmptyLabel" = "まだスケジュールがありません。追加して始めましょう。";
 "ActionAddScheduleButton" = "スケジュールを追加";
+"ActionAddConnectionRuleButton" = "ルールを追加";
 "ScheduleTriggerClockLabel" = "時計";
 "ScheduleTriggerSunriseLabel" = "日の出";
 "ScheduleRecurrenceEveryDayLabel" = "毎日";

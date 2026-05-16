@@ -365,6 +365,7 @@
 "ScheduleEnableSubtitle" = "திட்டமிட்ட நேரங்களில் சுயவிவரங்களை தானாக பயன்படுத்து.";
 "ScheduleEmptyLabel" = "இன்னும் அட்டவணைகள் இல்லை. தொடங்க ஒன்றை சேர்க்கவும்.";
 "ActionAddScheduleButton" = "அட்டவணை சேர்";
+"ActionAddConnectionRuleButton" = "விதி சேர்க்கவும்";
 "ScheduleTriggerClockLabel" = "கடிகாரம்";
 "ScheduleTriggerSunriseLabel" = "சூரிய உதயம்";
 "ScheduleRecurrenceEveryDayLabel" = "தினமும்";

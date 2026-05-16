@@ -1302,30 +1302,74 @@ struct SettingsRootView: View {
                 Toggle(String(localized: "ProfileAutoApplyTitle"), isOn: $profileManager.automationEnabled)
                     .toggleStyle(.switch)
                     .controlSize(.large)
-                Picker(
-                    String(localized: "ProfileAutoApplyTriggerLabel"),
-                    selection: $profileManager.automationTriggerTarget
-                ) {
-                    ForEach(automationDisplayOptions(for: profileManager.automationTriggerTarget)) { option in
-                        Text(option.label).tag(option.id)
+
+                VStack(alignment: .leading, spacing: 0) {
+                    ForEach($profileManager.connectionRules) { $rule in
+                        ConnectionRuleRow(
+                            rule: $rule,
+                            profiles: profileManager.profiles,
+                            displayOptions: connectionRuleDisplayOptions(currentRuleID: rule.displayID),
+                            onDelete: { profileManager.removeConnectionRule(id: rule.id) }
+                        )
+                        if rule.id != profileManager.connectionRules.last?.id {
+                            SettingsDivider()
+                        }
                     }
-                }
-                .disabled(profileManager.automationEnabled == false)
-                Picker(String(localized: "ProfileAutoApplyPickerLabel"), selection: Binding(
-                    get: { profileManager.automationProfileID ?? profileManager.profiles.first?.id },
-                    set: { profileManager.automationProfileID = $0 }
-                )) {
-                    ForEach(profileManager.profiles) { profile in
-                        Text(profile.name).tag(Optional(profile.id))
+                    if !profileManager.connectionRules.isEmpty {
+                        SettingsDivider()
                     }
+                    Button {
+                        profileManager.addConnectionRule()
+                    } label: {
+                        Label(String(localized: "ActionAddConnectionRuleButton"), systemImage: "plus.circle")
+                    }
+                    .buttonStyle(.bordered)
+                    .controlSize(.small)
+                    .disabled(profileManager.profiles.isEmpty)
+                    .padding(.top, profileManager.connectionRules.isEmpty ? 0 : 6)
                 }
-                .disabled(profileManager.profiles.isEmpty || profileManager.automationEnabled == false)
+                .disabled(!profileManager.automationEnabled)
+                .opacity(profileManager.automationEnabled ? 1 : 0.55)
+
                 if let applied = profileManager.lastAppliedProfileName {
                     Text(String(format: String(localized: "LastAppliedFormat"), applied))
                         .font(.caption)
                         .foregroundStyle(.secondary)
                 }
             }
+        }
+
+        /// Builds the display options list for a connection rule picker.
+        /// Includes currently connected external displays and any offline displays from saved profiles.
+        private func connectionRuleDisplayOptions(currentRuleID: String) -> [(id: String, label: String)] {
+            var options: [(id: String, label: String)] = [
+                (id: "", label: String(localized: "ProfileAutoApplyAnyMonitorLabel"))
+            ]
+            var seen = Set<String>()
+
+            for display in displayManager.displays where display.isExternal {
+                let id = display.stableIdentity
+                if seen.insert(id).inserted {
+                    let name = settingsStore.settings.displayAliases[id] ?? display.name ?? id
+                    options.append((id: id, label: name))
+                }
+            }
+
+            for profile in profileManager.profiles {
+                for snapshot in profile.displays where snapshot.isBuiltin != true {
+                    let id = snapshot.id
+                    if seen.insert(id).inserted {
+                        options.append((id: id, label: snapshot.name ?? id))
+                    }
+                }
+            }
+
+            // Preserve an unrecognised stale ID currently selected in this rule.
+            if !currentRuleID.isEmpty, !seen.contains(currentRuleID) {
+                options.append((id: currentRuleID, label: String(format: String(localized: "MissingDisplayFormat"), currentRuleID)))
+            }
+
+            return options
         }
 
         // MARK: - Schedule Tab
@@ -1517,6 +1561,58 @@ struct SettingsRootView: View {
         }
 
         /// A single schedule entry row with trigger, time, profile and day pickers.
+        private struct ConnectionRuleRow: View {
+            @Binding var rule: DisplayConnectionRule
+            let profiles: [DisplayProfile]
+            let displayOptions: [(id: String, label: String)]
+            let onDelete: () -> Void
+
+            var body: some View {
+                HStack(alignment: .center, spacing: 8) {
+                    Toggle("", isOn: $rule.isEnabled)
+                        .labelsHidden()
+                        .toggleStyle(.switch)
+                        .controlSize(.mini)
+
+                    Picker("", selection: $rule.displayID) {
+                        ForEach(displayOptions, id: \.id) { option in
+                            Text(option.label).tag(option.id)
+                        }
+                    }
+                    .labelsHidden()
+                    .pickerStyle(.menu)
+                    .frame(minWidth: 130, maxWidth: 180)
+
+                    Image(systemName: "arrow.right")
+                        .font(.caption)
+                        .foregroundStyle(.secondary)
+
+                    Picker("", selection: $rule.profileID) {
+                        ForEach(profiles) { profile in
+                            Text(profile.name).tag(profile.id)
+                        }
+                    }
+                    .labelsHidden()
+                    .pickerStyle(.menu)
+                    .frame(minWidth: 110, maxWidth: 160)
+                    .disabled(profiles.isEmpty)
+
+                    Spacer(minLength: 0)
+
+                    Button {
+                        onDelete()
+                    } label: {
+                        Image(systemName: "trash")
+                            .foregroundStyle(.secondary)
+                    }
+                    .buttonStyle(.plain)
+                    .help(String(localized: "ActionDeleteButton"))
+                }
+                .padding(.vertical, 4)
+                .opacity(rule.isEnabled ? 1 : 0.55)
+            }
+        }
+
         private struct ScheduleEntryRow: View {
             @Binding var entry: ScheduleEntry
             let profiles: [DisplayProfile]

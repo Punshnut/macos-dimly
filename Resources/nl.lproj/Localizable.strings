@@ -365,6 +365,7 @@
 "ScheduleEnableSubtitle" = "Pas profielen automatisch toe op geplande tijden.";
 "ScheduleEmptyLabel" = "Nog geen schema's. Voeg er een toe om te beginnen.";
 "ActionAddScheduleButton" = "Schema toevoegen";
+"ActionAddConnectionRuleButton" = "Regel toevoegen";
 "ScheduleTriggerClockLabel" = "Klok";
 "ScheduleTriggerSunriseLabel" = "Zonsopgang";
 "ScheduleRecurrenceEveryDayLabel" = "Elke dag";

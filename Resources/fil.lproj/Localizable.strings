@@ -363,6 +363,7 @@
 "ScheduleEnableSubtitle" = "Awtomatikong ilapat ang mga profile sa mga nakatalagang oras.";
 "ScheduleEmptyLabel" = "Wala pang iskedyul. Magdagdag ng isa para magsimula.";
 "ActionAddScheduleButton" = "Magdagdag ng Iskedyul";
+"ActionAddConnectionRuleButton" = "Magdagdag ng panuntunan";
 "ScheduleTriggerClockLabel" = "Orasan";
 "ScheduleTriggerSunriseLabel" = "Pagsikat ng araw";
 "ScheduleRecurrenceEveryDayLabel" = "Araw-araw";

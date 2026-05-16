@@ -365,6 +365,7 @@
 "ScheduleEnableSubtitle" = "Profile automatisch zu geplanten Zeiten anwenden.";
 "ScheduleEmptyLabel" = "Noch keine Zeitpläne. Füge einen hinzu, um zu beginnen.";
 "ActionAddScheduleButton" = "Zeitplan hinzufügen";
+"ActionAddConnectionRuleButton" = "Regel hinzufügen";
 "ScheduleTriggerClockLabel" = "Uhr";
 "ScheduleTriggerSunriseLabel" = "Sonnenaufgang";
 "ScheduleRecurrenceEveryDayLabel" = "Jeden Tag";

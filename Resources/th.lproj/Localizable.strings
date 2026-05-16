@@ -365,6 +365,7 @@
 "ScheduleEnableSubtitle" = "ใช้โปรไฟล์โดยอัตโนมัติตามเวลาที่ตั้งไว้";
 "ScheduleEmptyLabel" = "ยังไม่มีกำหนดการ เพิ่มรายการเพื่อเริ่มต้น";
 "ActionAddScheduleButton" = "เพิ่มกำหนดการ";
+"ActionAddConnectionRuleButton" = "เพิ่มกฎ";
 "ScheduleTriggerClockLabel" = "นาฬิกา";
 "ScheduleTriggerSunriseLabel" = "พระอาทิตย์ขึ้น";
 "ScheduleRecurrenceEveryDayLabel" = "ทุกวัน";

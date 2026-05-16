@@ -365,6 +365,7 @@
 "ScheduleEnableSubtitle" = "ကြိုတင်သတ်မှတ်ထားသောအချိန်များတွင် ပရိုဖိုင်များကို အလိုအလျောက် ကျင့်သုံးပါ။";
 "ScheduleEmptyLabel" = "အချိန်ဇယားများ မရှိသေးပါ။ စတင်ရန် တစ်ခု ထည့်ပါ။";
 "ActionAddScheduleButton" = "အချိန်ဇယား ထည့်ပါ";
+"ActionAddConnectionRuleButton" = "စည်းမျဉ်းထည့်ပါ";
 "ScheduleTriggerClockLabel" = "နာရီ";
 "ScheduleTriggerSunriseLabel" = "နေထွက်ချိန်";
 "ScheduleRecurrenceEveryDayLabel" = "နေ့တိုင်း";

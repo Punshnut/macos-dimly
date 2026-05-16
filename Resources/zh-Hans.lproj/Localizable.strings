@@ -365,6 +365,7 @@
 "ScheduleEnableSubtitle" = "在计划时间自动应用配置文件。";
 "ScheduleEmptyLabel" = "尚无时间表。添加一个以开始使用。";
 "ActionAddScheduleButton" = "添加时间表";
+"ActionAddConnectionRuleButton" = "添加规则";
 "ScheduleTriggerClockLabel" = "时钟";
 "ScheduleTriggerSunriseLabel" = "日出";
 "ScheduleRecurrenceEveryDayLabel" = "每天";

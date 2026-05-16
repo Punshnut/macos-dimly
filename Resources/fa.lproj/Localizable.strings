@@ -365,6 +365,7 @@
 "ScheduleEnableSubtitle" = "پروفایل‌ها را به‌طور خودکار در زمان‌های برنامه‌ریزی‌شده اعمال کنید.";
 "ScheduleEmptyLabel" = "هنوز زمان‌بندی‌ای وجود ندارد. برای شروع یکی اضافه کنید.";
 "ActionAddScheduleButton" = "افزودن زمان‌بندی";
+"ActionAddConnectionRuleButton" = "افزودن قانون";
 "ScheduleTriggerClockLabel" = "ساعت";
 "ScheduleTriggerSunriseLabel" = "طلوع آفتاب";
 "ScheduleRecurrenceEveryDayLabel" = "هر روز";

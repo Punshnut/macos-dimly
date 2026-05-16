@@ -365,6 +365,7 @@
 "ScheduleEnableSubtitle" = "निर्धारित समय पर प्रोफ़ाइल स्वचालित रूप से लागू करें।";
 "ScheduleEmptyLabel" = "अभी कोई समय-सारणी नहीं है। शुरू करने के लिए एक जोड़ें।";
 "ActionAddScheduleButton" = "समय-सारणी जोड़ें";
+"ActionAddConnectionRuleButton" = "नियम जोड़ें";
 "ScheduleTriggerClockLabel" = "घड़ी";
 "ScheduleTriggerSunriseLabel" = "सूर्योदय";
 "ScheduleRecurrenceEveryDayLabel" = "हर दिन";

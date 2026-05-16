@@ -365,6 +365,7 @@
 "ScheduleEnableSubtitle" = "Profilok automatikus alkalmazása ütemezett időpontokban.";
 "ScheduleEmptyLabel" = "Még nincs ütemezés. Adj hozzá egyet a kezdéshez.";
 "ActionAddScheduleButton" = "Ütemezés hozzáadása";
+"ActionAddConnectionRuleButton" = "Szabály hozzáadása";
 "ScheduleTriggerClockLabel" = "Óra";
 "ScheduleTriggerSunriseLabel" = "Napfelkelte";
 "ScheduleRecurrenceEveryDayLabel" = "Minden nap";

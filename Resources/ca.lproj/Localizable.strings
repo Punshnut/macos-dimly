@@ -365,6 +365,7 @@
 "ScheduleEnableSubtitle" = "Aplica perfils automàticament a les hores programades.";
 "ScheduleEmptyLabel" = "Encara no hi ha programacions. Afegeix-ne una per começar.";
 "ActionAddScheduleButton" = "Afegeix programació";
+"ActionAddConnectionRuleButton" = "Afegeix regla";
 "ScheduleTriggerClockLabel" = "Rellotge";
 "ScheduleTriggerSunriseLabel" = "Sortida del sol";
 "ScheduleRecurrenceEveryDayLabel" = "Cada dia";

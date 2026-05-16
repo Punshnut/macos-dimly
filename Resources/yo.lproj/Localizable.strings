@@ -365,6 +365,7 @@
 "ScheduleEnableSubtitle" = "Lo àwọn profáìlì fún àkókò tí a ti gbèrò.";
 "ScheduleEmptyLabel" = "Ko sí eto àkókò. Ṣàfikún ọ̀kan láti bẹ̀rẹ̀.";
 "ActionAddScheduleButton" = "Ṣàfikún eto àkókò";
+"ActionAddConnectionRuleButton" = "Fi ofin kun";
 "ScheduleTriggerClockLabel" = "Ago";
 "ScheduleTriggerSunriseLabel" = "Ìmọ̀lẹ̀ ọjọ́";
 "ScheduleRecurrenceEveryDayLabel" = "Gbogbo ọjọ́";

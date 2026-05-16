@@ -365,6 +365,7 @@
 "ScheduleEnableSubtitle" = "예약된 시간에 프로필을 자동으로 적용합니다.";
 "ScheduleEmptyLabel" = "아직 일정이 없습니다. 시작하려면 추가하세요.";
 "ActionAddScheduleButton" = "일정 추가";
+"ActionAddConnectionRuleButton" = "규칙 추가";
 "ScheduleTriggerClockLabel" = "시계";
 "ScheduleTriggerSunriseLabel" = "일출";
 "ScheduleRecurrenceEveryDayLabel" = "매일";

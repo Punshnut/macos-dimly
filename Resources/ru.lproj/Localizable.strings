@@ -365,6 +365,7 @@
 "ScheduleEnableSubtitle" = "Автоматически применять профили по расписанию.";
 "ScheduleEmptyLabel" = "Расписаний пока нет. Добавьте одно, чтобы начать.";
 "ActionAddScheduleButton" = "Добавить расписание";
+"ActionAddConnectionRuleButton" = "Добавить правило";
 "ScheduleTriggerClockLabel" = "Часы";
 "ScheduleTriggerSunriseLabel" = "Восход солнца";
 "ScheduleRecurrenceEveryDayLabel" = "Каждый день";
