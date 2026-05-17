@@ -1347,19 +1347,31 @@ struct SettingsRootView: View {
             ]
             var seen = Set<String>()
 
-            for display in displayManager.displays where display.isExternal {
+            // Live displays: alias → hardware name → "External N" — no bullet marker needed in a picker.
+            let sortedExternals = displayManager.displays.filter { $0.isExternal }.sorted { $0.displayID < $1.displayID }
+            for (index, display) in sortedExternals.enumerated() {
                 let id = display.stableIdentity
                 if seen.insert(id).inserted {
-                    let name = settingsStore.settings.displayAliases[id] ?? display.name ?? id
-                    options.append((id: id, label: name))
+                    let label = DisplayLabelResolver.displayName(
+                        for: display,
+                        settings: settingsStore.settings,
+                        externalIndex: index + 1,
+                        internalIndex: 1
+                    )
+                    options.append((id: id, label: label))
                 }
             }
 
+            // Offline displays sourced from saved profiles: alias → hardware name → generic "External".
             for profile in profileManager.profiles {
                 for snapshot in profile.displays where snapshot.isBuiltin != true {
                     let id = snapshot.id
                     if seen.insert(id).inserted {
-                        options.append((id: id, label: snapshot.name ?? id))
+                        let label = settingsStore.settings.displayAliases[id]
+                            .flatMap { $0.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty ? nil : $0 }
+                            ?? snapshot.name
+                            ?? String(localized: "DisplayTypeExternalLabel")
+                        options.append((id: id, label: label))
                     }
                 }
             }
