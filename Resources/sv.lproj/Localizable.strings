@@ -391,4 +391,5 @@
 "ManualCoordErrorLatInvalid" = "Ange ett giltigt latitudnummer.";
 "ManualCoordErrorLonInvalid" = "Ange ett giltigt longitudnummer.";
 
-"AutoBrightnessHint" = "Automatisk ljusstyrka";
+"AutoBrightnessActiveHint" = "Automatisk ljusstyrka";
+"AutoBrightnessInactiveHint" = "Automatisk ljusstyrka av";

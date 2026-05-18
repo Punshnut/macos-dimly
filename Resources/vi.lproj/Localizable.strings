@@ -391,4 +391,5 @@
 "ManualCoordErrorLatInvalid" = "Nhập số vĩ độ hợp lệ.";
 "ManualCoordErrorLonInvalid" = "Nhập số kinh độ hợp lệ.";
 
-"AutoBrightnessHint" = "Độ sáng tự động";
+"AutoBrightnessActiveHint" = "Độ sáng tự động";
+"AutoBrightnessInactiveHint" = "Độ sáng tự động tắt";

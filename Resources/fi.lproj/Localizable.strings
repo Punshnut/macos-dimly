@@ -391,4 +391,5 @@
 "ManualCoordErrorLatInvalid" = "Syötä kelvollinen leveysasteluku.";
 "ManualCoordErrorLonInvalid" = "Syötä kelvollinen pituusasteluku.";
 
-"AutoBrightnessHint" = "Automaattinen kirkkaus";
+"AutoBrightnessActiveHint" = "Automaattinen kirkkaus";
+"AutoBrightnessInactiveHint" = "Automaattinen kirkkaus pois";

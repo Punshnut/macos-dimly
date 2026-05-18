@@ -391,4 +391,5 @@
 "ManualCoordErrorLatInvalid" = "유효한 위도 숫자를 입력하세요.";
 "ManualCoordErrorLonInvalid" = "유효한 경도 숫자를 입력하세요.";
 
-"AutoBrightnessHint" = "자동 밝기";
+"AutoBrightnessActiveHint" = "자동 밝기";
+"AutoBrightnessInactiveHint" = "자동 밝기 꺼짐";

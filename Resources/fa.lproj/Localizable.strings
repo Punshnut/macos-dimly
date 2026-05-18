@@ -391,4 +391,5 @@
 "ManualCoordErrorLatInvalid" = "یک عدد عرض جغرافیایی معتبر وارد کنید.";
 "ManualCoordErrorLonInvalid" = "یک عدد طول جغرافیایی معتبر وارد کنید.";
 
-"AutoBrightnessHint" = "روشنایی خودکار";
+"AutoBrightnessActiveHint" = "روشنایی خودکار";
+"AutoBrightnessInactiveHint" = "روشنایی خودکار غیرفعال";

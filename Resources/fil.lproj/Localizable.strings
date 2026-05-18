@@ -389,4 +389,5 @@
 "ManualCoordErrorLatInvalid" = "Magpasok ng wastong numero ng latitude.";
 "ManualCoordErrorLonInvalid" = "Magpasok ng wastong numero ng longitude.";
 
-"AutoBrightnessHint" = "Auto Brightness";
+"AutoBrightnessActiveHint" = "Auto-brightness on";
+"AutoBrightnessInactiveHint" = "Auto Brightness off";

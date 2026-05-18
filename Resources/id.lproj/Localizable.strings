@@ -391,4 +391,5 @@
 "ManualCoordErrorLatInvalid" = "Masukkan angka lintang yang valid.";
 "ManualCoordErrorLonInvalid" = "Masukkan angka bujur yang valid.";
 
-"AutoBrightnessHint" = "Kecerahan Otomatis";
+"AutoBrightnessActiveHint" = "Kecerahan Otomatis";
+"AutoBrightnessInactiveHint" = "Kecerahan Otomatis nonaktif";

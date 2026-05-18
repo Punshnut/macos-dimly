@@ -391,4 +391,5 @@
 "ManualCoordErrorLatInvalid" = "Введите допустимое число широты.";
 "ManualCoordErrorLonInvalid" = "Введите допустимое число долготы.";
 
-"AutoBrightnessHint" = "Автоматическая яркость";
+"AutoBrightnessActiveHint" = "Автоматическая яркость";
+"AutoBrightnessInactiveHint" = "Автоматическая яркость выключена";

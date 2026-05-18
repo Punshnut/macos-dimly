@@ -391,4 +391,5 @@
 "ManualCoordErrorLatInvalid" = "சரியான அட்சரேகை எண்ணை உள்ளிடவும்.";
 "ManualCoordErrorLonInvalid" = "சரியான தீர்க்கரேகை எண்ணை உள்ளிடவும்.";
 
-"AutoBrightnessHint" = "தானியங்கி பிரகாசம்";
+"AutoBrightnessActiveHint" = "தானியங்கி பிரகாசம்";
+"AutoBrightnessInactiveHint" = "தானியங்கி பிரகாசம் அணைந்துள்ளது";

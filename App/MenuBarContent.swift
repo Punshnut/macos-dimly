@@ -1337,11 +1337,11 @@ struct MenuBarContentView: View {
                             .font(.caption.monospacedDigit())
                             .foregroundStyle(neutralSecondaryText)
                     }
-                    if display.isAutoBrightnessActive {
-                        Image(systemName: "sun.max")
+                    if display.hasAmbientLightSensor {
+                        Image(systemName: display.isAutoBrightnessEnabled ? "sun.max.fill" : "sun.max")
                             .font(.caption)
-                            .foregroundStyle(neutralSecondaryText)
-                            .help(String(localized: "AutoBrightnessHint"))
+                            .foregroundStyle(display.isAutoBrightnessEnabled ? neutralSecondaryText : neutralTertiaryText)
+                            .help(String(localized: display.isAutoBrightnessEnabled ? "AutoBrightnessActiveHint" : "AutoBrightnessInactiveHint"))
                     }
                 }
                 HStack(spacing: 6) {

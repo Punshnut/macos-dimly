@@ -20,7 +20,8 @@ struct DisplayInfo: Identifiable, Equatable {
     let isExternal: Bool
     let resolution: String
     let refreshRateHz: Double?
-    let isAutoBrightnessActive: Bool
+    let hasAmbientLightSensor: Bool
+    let isAutoBrightnessEnabled: Bool
 
     /// Stable cross-session identifier (UUID, serial, or display ID fallback).
     var stableIdentity: String {
@@ -75,7 +76,8 @@ final class DisplayHardware: DisplayHardwareProviding, @unchecked Sendable {
         let refresh = Self.refreshRate(for: id)
         let name = Self.displayName(for: id)
 
-        let autoBrightnessActive = Self.isAutoBrightnessEnabled(id)
+        let hasSensor = Self.hasAmbientLightSensor(id)
+        let autoBrightnessEnabled = hasSensor && Self.isAutoBrightnessEnabled(id)
 
         return DisplayInfo(
             displayID: id,
@@ -88,7 +90,8 @@ final class DisplayHardware: DisplayHardwareProviding, @unchecked Sendable {
             isExternal: !builtIn,
             resolution: resolution,
             refreshRateHz: refresh,
-            isAutoBrightnessActive: autoBrightnessActive
+            hasAmbientLightSensor: hasSensor,
+            isAutoBrightnessEnabled: autoBrightnessEnabled
         )
     }
 
@@ -321,6 +324,7 @@ final class DisplayHardware: DisplayHardwareProviding, @unchecked Sendable {
     private typealias DisplayServicesGetBrightnessFn = @convention(c) (CGDirectDisplayID, UnsafeMutablePointer<Float>) -> Int32
     private typealias DisplayServicesSetBrightnessFn = @convention(c) (CGDirectDisplayID, Float) -> Int32
     private typealias DisplayServicesHasAmbientLightCompFn = @convention(c) (CGDirectDisplayID) -> Bool
+    private typealias DisplayServicesIsAmbientLightCompEnabledFn = @convention(c) (CGDirectDisplayID) -> Bool
 
     private static let displayServicesGetBrightnessSymbol: DisplayServicesGetBrightnessFn? = {
         guard
@@ -353,9 +357,25 @@ final class DisplayHardware: DisplayHardwareProviding, @unchecked Sendable {
         return unsafeBitCast(symbol, to: DisplayServicesHasAmbientLightCompFn.self)
     }()
 
-    /// Returns whether macOS system auto-brightness is currently active for the display.
-    static func isAutoBrightnessEnabled(_ displayID: CGDirectDisplayID) -> Bool {
+    private static let displayServicesIsAmbientLightCompEnabledSymbol: DisplayServicesIsAmbientLightCompEnabledFn? = {
+        guard
+            let address = displayServicesHandleAddress,
+            let handle = UnsafeMutableRawPointer(bitPattern: address),
+            let symbol = dlsym(handle, "DisplayServicesIsAmbientLightCompensationEnabled")
+        else { return nil }
+        return unsafeBitCast(symbol, to: DisplayServicesIsAmbientLightCompEnabledFn.self)
+    }()
+
+    /// Returns whether the display hardware has an ambient light sensor.
+    static func hasAmbientLightSensor(_ displayID: CGDirectDisplayID) -> Bool {
         guard let fn = displayServicesHasAmbientLightCompSymbol else { return false }
+        return fn(displayID)
+    }
+
+    /// Returns whether the user has auto-brightness enabled for this display.
+    /// Falls back to `false` if the private symbol is unavailable on this macOS version.
+    static func isAutoBrightnessEnabled(_ displayID: CGDirectDisplayID) -> Bool {
+        guard let fn = displayServicesIsAmbientLightCompEnabledSymbol else { return false }
         return fn(displayID)
     }
 

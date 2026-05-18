@@ -391,4 +391,5 @@
 "ManualCoordErrorLatInvalid" = "Ingiza nambari sahihi ya latitudo.";
 "ManualCoordErrorLonInvalid" = "Ingiza nambari sahihi ya longitudo.";
 
-"AutoBrightnessHint" = "Mwanga wa Kiotomati";
+"AutoBrightnessActiveHint" = "Mwanga wa Kiotomati";
+"AutoBrightnessInactiveHint" = "Mwanga wa Kiotomati umezimwa";

@@ -391,4 +391,5 @@
 "ManualCoordErrorLatInvalid" = "Iontráil uimhir domhanleitheadach bhailí.";
 "ManualCoordErrorLonInvalid" = "Iontráil uimhir domhanfhaid bhailí.";
 
-"AutoBrightnessHint" = "Gile Uathoibríoch";
+"AutoBrightnessActiveHint" = "Gile Uathoibríoch";
+"AutoBrightnessInactiveHint" = "Gile Uathoibríoch as";

@@ -391,4 +391,5 @@
 "ManualCoordErrorLatInvalid" = "एक मान्य अक्षांश संख्या दर्ज करें।";
 "ManualCoordErrorLonInvalid" = "एक मान्य देशांतर संख्या दर्ज करें।";
 
-"AutoBrightnessHint" = "स्वत: चमक";
+"AutoBrightnessActiveHint" = "स्वत: चमक";
+"AutoBrightnessInactiveHint" = "स्वत: चमक बंद";

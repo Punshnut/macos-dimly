@@ -391,4 +391,5 @@
 "ManualCoordErrorLatInvalid" = "Voer een geldig breedtegraad-getal in.";
 "ManualCoordErrorLonInvalid" = "Voer een geldig lengtegraad-getal in.";
 
-"AutoBrightnessHint" = "Automatische helderheid";
+"AutoBrightnessActiveHint" = "Automatische helderheid";
+"AutoBrightnessInactiveHint" = "Automatische helderheid uit";

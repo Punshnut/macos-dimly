@@ -391,4 +391,5 @@
 "ManualCoordErrorLatInvalid" = "ایک درست عرض بلد نمبر درج کریں۔";
 "ManualCoordErrorLonInvalid" = "ایک درست طول بلد نمبر درج کریں۔";
 
-"AutoBrightnessHint" = "خودکار روشنی";
+"AutoBrightnessActiveHint" = "خودکار روشنی";
+"AutoBrightnessInactiveHint" = "خودکار روشنی بند";

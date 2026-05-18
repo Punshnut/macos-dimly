@@ -391,4 +391,5 @@
 "ManualCoordErrorLatInvalid" = "একটি বৈধ অক্ষাংশ সংখ্যা লিখুন।";
 "ManualCoordErrorLonInvalid" = "একটি বৈধ দ্রাঘিমাংশ সংখ্যা লিখুন।";
 
-"AutoBrightnessHint" = "স্বয়ংক্রিয় উজ্জ্বলতা";
+"AutoBrightnessActiveHint" = "স্বয়ংক্রিয় উজ্জ্বলতা";
+"AutoBrightnessInactiveHint" = "স্বয়ংক্রিয় উজ্জ্বলতা বন্ধ";

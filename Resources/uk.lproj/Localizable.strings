@@ -391,4 +391,5 @@
 "ManualCoordErrorLatInvalid" = "Введіть дійсне число широти.";
 "ManualCoordErrorLonInvalid" = "Введіть дійсне число довготи.";
 
-"AutoBrightnessHint" = "Автоматична яскравість";
+"AutoBrightnessActiveHint" = "Автоматична яскравість";
+"AutoBrightnessInactiveHint" = "Автоматична яскравість вимкнена";

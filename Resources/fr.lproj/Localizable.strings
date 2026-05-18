@@ -391,4 +391,5 @@
 "ManualCoordErrorLatInvalid" = "Entrez un nombre de latitude valide.";
 "ManualCoordErrorLonInvalid" = "Entrez un nombre de longitude valide.";
 
-"AutoBrightnessHint" = "Luminosité automatique";
+"AutoBrightnessActiveHint" = "Luminosité automatique";
+"AutoBrightnessInactiveHint" = "Luminosité automatique désactivée";

@@ -391,4 +391,5 @@
 "ManualCoordErrorLatInvalid" = "Tẹ nọmba latitude to wulo.";
 "ManualCoordErrorLonInvalid" = "Tẹ nọmba longitude to wulo.";
 
-"AutoBrightnessHint" = "Imọlẹ Aifọwọyi";
+"AutoBrightnessActiveHint" = "Imọlẹ Aifọwọyi";
+"AutoBrightnessInactiveHint" = "Imọlẹ Aifọwọyi pa";

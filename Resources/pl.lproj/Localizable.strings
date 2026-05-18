@@ -391,4 +391,5 @@
 "ManualCoordErrorLatInvalid" = "Wprowadź prawidłowy numer szerokości geograficznej.";
 "ManualCoordErrorLonInvalid" = "Wprowadź prawidłowy numer długości geograficznej.";
 
-"AutoBrightnessHint" = "Automatyczna jasność";
+"AutoBrightnessActiveHint" = "Automatyczna jasność";
+"AutoBrightnessInactiveHint" = "Automatyczna jasność wyłączona";

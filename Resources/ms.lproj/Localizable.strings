@@ -391,4 +391,5 @@
 "ManualCoordErrorLatInvalid" = "Masukkan nombor latitud yang sah.";
 "ManualCoordErrorLonInvalid" = "Masukkan nombor longitud yang sah.";
 
-"AutoBrightnessHint" = "Kecerahan Automatik";
+"AutoBrightnessActiveHint" = "Kecerahan Automatik";
+"AutoBrightnessInactiveHint" = "Kecerahan Automatik dimatikan";

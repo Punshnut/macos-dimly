@@ -391,4 +391,5 @@
 "ManualCoordErrorLatInvalid" = "Shigar da lambar latitude mai inganci.";
 "ManualCoordErrorLonInvalid" = "Shigar da lambar longitude mai inganci.";
 
-"AutoBrightnessHint" = "Haske Mai Atomatik";
+"AutoBrightnessActiveHint" = "Haske Mai Atomatik";
+"AutoBrightnessInactiveHint" = "Haske Mai Atomatik kashe";

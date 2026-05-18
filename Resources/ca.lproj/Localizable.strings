@@ -391,4 +391,5 @@
 "ManualCoordErrorLatInvalid" = "Introdueix un número de latitud vàlid.";
 "ManualCoordErrorLonInvalid" = "Introdueix un número de longitud vàlid.";
 
-"AutoBrightnessHint" = "Brillantor automàtica";
+"AutoBrightnessActiveHint" = "Brillantor automàtica";
+"AutoBrightnessInactiveHint" = "Brillantor automàtica desactivada";

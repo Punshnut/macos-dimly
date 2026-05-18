@@ -391,4 +391,5 @@
 "ManualCoordErrorLatInvalid" = "ትክክለኛ ኬክሮስ ቁጥር ያስሩ።";
 "ManualCoordErrorLonInvalid" = "ትክክለኛ ኬንትሮስ ቁጥር ያስሩ።";
 
-"AutoBrightnessHint" = "Auto Brightness";
+"AutoBrightnessActiveHint" = "Auto-brightness on";
+"AutoBrightnessInactiveHint" = "Auto-brightness off";

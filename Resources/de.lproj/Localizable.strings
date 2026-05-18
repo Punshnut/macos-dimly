@@ -391,4 +391,5 @@
 "ManualCoordErrorLatInvalid" = "Gib eine gültige Breitengrad-Zahl ein.";
 "ManualCoordErrorLonInvalid" = "Gib eine gültige Längengrad-Zahl ein.";
 
-"AutoBrightnessHint" = "Automatische Helligkeit";
+"AutoBrightnessActiveHint" = "Automatische Helligkeit";
+"AutoBrightnessInactiveHint" = "Automatische Helligkeit aus";

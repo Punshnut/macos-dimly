@@ -391,4 +391,5 @@
 "ManualCoordErrorLatInvalid" = "Zadejte platné číslo zeměpisné šířky.";
 "ManualCoordErrorLonInvalid" = "Zadejte platné číslo zeměpisné délky.";
 
-"AutoBrightnessHint" = "Automatický jas";
+"AutoBrightnessActiveHint" = "Automatický jas";
+"AutoBrightnessInactiveHint" = "Automatický jas vypnutý";

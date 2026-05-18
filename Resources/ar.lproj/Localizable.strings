@@ -391,4 +391,5 @@
 "ManualCoordErrorLatInvalid" = "أدخل رقم خط عرض صالحًا.";
 "ManualCoordErrorLonInvalid" = "أدخل رقم خط طول صالحًا.";
 
-"AutoBrightnessHint" = "السطوع التلقائي";
+"AutoBrightnessActiveHint" = "السطوع التلقائي";
+"AutoBrightnessInactiveHint" = "السطوع التلقائي معطل";

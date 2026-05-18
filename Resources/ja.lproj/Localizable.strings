@@ -391,4 +391,5 @@
 "ManualCoordErrorLatInvalid" = "有効な緯度の数値を入力してください。";
 "ManualCoordErrorLonInvalid" = "有効な経度の数値を入力してください。";
 
-"AutoBrightnessHint" = "自動輝度調節";
+"AutoBrightnessActiveHint" = "自動輝度調節";
+"AutoBrightnessInactiveHint" = "自動輝度調節オフ";

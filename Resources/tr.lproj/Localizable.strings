@@ -391,4 +391,5 @@
 "ManualCoordErrorLatInvalid" = "Geçerli bir enlem numarası girin.";
 "ManualCoordErrorLonInvalid" = "Geçerli bir boylam numarası girin.";
 
-"AutoBrightnessHint" = "Otomatik Parlaklık";
+"AutoBrightnessActiveHint" = "Otomatik Parlaklık";
+"AutoBrightnessInactiveHint" = "Otomatik Parlaklık kapalı";

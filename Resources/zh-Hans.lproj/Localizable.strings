@@ -391,4 +391,5 @@
 "ManualCoordErrorLatInvalid" = "请输入有效的纬度数字。";
 "ManualCoordErrorLonInvalid" = "请输入有效的经度数字。";
 
-"AutoBrightnessHint" = "自动亮度";
+"AutoBrightnessActiveHint" = "自动亮度";
+"AutoBrightnessInactiveHint" = "自动亮度关闭";

@@ -391,4 +391,5 @@
 "ManualCoordErrorLatInvalid" = "Adjon meg érvényes szélességi számot.";
 "ManualCoordErrorLonInvalid" = "Adjon meg érvényes hosszúsági számot.";
 
-"AutoBrightnessHint" = "Automatikus fényerő";
+"AutoBrightnessActiveHint" = "Automatikus fényerő";
+"AutoBrightnessInactiveHint" = "Automatikus fényerő kikapcsolva";

@@ -391,4 +391,5 @@
 "ManualCoordErrorLatInvalid" = "Εισάγετε έναν έγκυρο αριθμό γεωγραφικού πλάτους.";
 "ManualCoordErrorLonInvalid" = "Εισάγετε έναν έγκυρο αριθμό γεωγραφικού μήκους.";
 
-"AutoBrightnessHint" = "Αυτόματη φωτεινότητα";
+"AutoBrightnessActiveHint" = "Αυτόματη φωτεινότητα";
+"AutoBrightnessInactiveHint" = "Αυτόματη φωτεινότητα ανενεργή";

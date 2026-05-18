@@ -391,4 +391,5 @@
 "ManualCoordErrorLatInvalid" = "မှန်ကန်သော လတ္တီတုဒ် နံပါတ်ထည့်ပါ။";
 "ManualCoordErrorLonInvalid" = "မှန်ကန်သော လောင်ဂျီတုဒ် နံပါတ်ထည့်ပါ။";
 
-"AutoBrightnessHint" = "အလိုအလျောက် အလင်းထု";
+"AutoBrightnessActiveHint" = "အလိုအလျောက် အလင်းထု";
+"AutoBrightnessInactiveHint" = "အလိုအလျောက် အလင်းထု ပိတ်";

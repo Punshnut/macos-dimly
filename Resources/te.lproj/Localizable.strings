@@ -391,4 +391,5 @@
 "ManualCoordErrorLatInvalid" = "చెల్లుబాటు అయ్యే అక్షాంశ సంఖ్యను నమోదు చేయండి.";
 "ManualCoordErrorLonInvalid" = "చెల్లుబాటు అయ్యే రేఖాంశ సంఖ్యను నమోదు చేయండి.";
 
-"AutoBrightnessHint" = "స్వయంచాలక ప్రకాశం";
+"AutoBrightnessActiveHint" = "స్వయంచాలక ప్రకాశం";
+"AutoBrightnessInactiveHint" = "స్వయంచాలక ప్రకాశం ఆఫ్";

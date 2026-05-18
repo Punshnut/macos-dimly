@@ -391,4 +391,5 @@
 "ManualCoordErrorLatInvalid" = "ป้อนหมายเลขละติจูดที่ถูกต้อง";
 "ManualCoordErrorLonInvalid" = "ป้อนหมายเลขลองจิจูดที่ถูกต้อง";
 
-"AutoBrightnessHint" = "ความสว่างอัตโนมัติ";
+"AutoBrightnessActiveHint" = "ความสว่างอัตโนมัติ";
+"AutoBrightnessInactiveHint" = "ความสว่างอัตโนมัติปิด";

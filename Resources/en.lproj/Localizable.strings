@@ -379,4 +379,5 @@
 "ManualCoordErrorLatInvalid" = "Enter a valid latitude number.";
 "ManualCoordErrorLonInvalid" = "Enter a valid longitude number.";
 
-"AutoBrightnessHint" = "Auto Brightness";
+"AutoBrightnessActiveHint" = "Auto-brightness on";
+"AutoBrightnessInactiveHint" = "Auto-brightness off";
