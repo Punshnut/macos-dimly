@@ -1685,42 +1685,42 @@ struct MenuBarContentView: View {
     private var appControlsSection: some View {
         VStack(alignment: .leading, spacing: 8) {
             sectionHeader(String(localized: "MenuAppHeader"))
-            let columns = [
-                GridItem(.flexible(), spacing: 8),
-                GridItem(.flexible(), spacing: 8)
-            ]
-            LazyVGrid(columns: columns, alignment: .leading, spacing: 8) {
-                Button {
-                    copyDisplayReport()
-                } label: {
-                    Label(String(localized: "ActionCopyDisplayReportLabel"), systemImage: "doc.on.doc")
-                        .lineLimit(1)
-                        .minimumScaleFactor(0.85)
-                        .frame(maxWidth: .infinity, alignment: .leading)
+            VStack(spacing: 8) {
+                HStack(spacing: 8) {
+                    Button {
+                        copyDisplayReport()
+                    } label: {
+                        Label(String(localized: "ActionCopyDisplayReportLabel"), systemImage: "doc.on.doc")
+                            .lineLimit(1)
+                            .minimumScaleFactor(0.85)
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                    }
+                    Button {
+                        openDiagnosticsLog()
+                    } label: {
+                        Label(String(localized: "ActionOpenDiagnosticsLabel"), systemImage: "doc.text.magnifyingglass")
+                            .lineLimit(1)
+                            .minimumScaleFactor(0.85)
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                    }
                 }
-                Button {
-                    openDiagnosticsLog()
-                } label: {
-                    Label(String(localized: "ActionOpenDiagnosticsLabel"), systemImage: "doc.text.magnifyingglass")
-                        .lineLimit(1)
-                        .minimumScaleFactor(0.85)
-                        .frame(maxWidth: .infinity, alignment: .leading)
-                }
-                Button {
-                    openSettingsWindow()
-                } label: {
-                    Label(String(localized: "MenuSettingsItem"), systemImage: "gearshape")
-                        .lineLimit(1)
-                        .minimumScaleFactor(0.85)
-                        .frame(maxWidth: .infinity, alignment: .leading)
-                }
-                Button {
-                    updaterController.checkForUpdates(nil)
-                } label: {
-                    Label(String(localized: "MenuCheckUpdatesItem"), systemImage: "arrow.triangle.2.circlepath")
-                        .lineLimit(1)
-                        .minimumScaleFactor(0.85)
-                        .frame(maxWidth: .infinity, alignment: .leading)
+                HStack(spacing: 8) {
+                    Button {
+                        openSettingsWindow()
+                    } label: {
+                        Label(String(localized: "MenuSettingsItem"), systemImage: "gearshape")
+                            .lineLimit(1)
+                            .minimumScaleFactor(0.85)
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                    }
+                    Button {
+                        updaterController.checkForUpdates(nil)
+                    } label: {
+                        Label(String(localized: "MenuCheckUpdatesItem"), systemImage: "arrow.triangle.2.circlepath")
+                            .lineLimit(1)
+                            .minimumScaleFactor(0.85)
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                    }
                 }
             }
             .buttonStyle(.bordered)
@@ -1738,11 +1738,7 @@ struct MenuBarContentView: View {
     private var appControlsSimpleSection: some View {
         VStack(alignment: .leading, spacing: 8) {
             sectionHeader(String(localized: "MenuAppHeader"))
-            let columns = [
-                GridItem(.flexible(), spacing: 8),
-                GridItem(.flexible(), spacing: 8)
-            ]
-            LazyVGrid(columns: columns, alignment: .leading, spacing: 8) {
+            HStack(spacing: 8) {
                 Button {
                     openSettingsWindow()
                 } label: {
