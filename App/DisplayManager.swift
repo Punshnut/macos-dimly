@@ -20,6 +20,7 @@ final class DisplayManager: ObservableObject {
     private var workspaceScreensWakeToken: NSObjectProtocol?
     private var topologyRefreshTask: Task<Void, Never>?
     private var refreshGeneration: UInt64 = 0
+    private var autoBrightnessObserverPtr: UnsafeMutableRawPointer?
 
     /// Loads the initial display inventory and subscribes to topology-change notifications.
     init(hardware: DisplayHardwareProviding = DisplayHardware()) {
@@ -66,6 +67,22 @@ final class DisplayManager: ObservableObject {
                 self?.scheduleTopologyRefresh(reason: "workspaceScreensDidWake")
             }
         }
+        let selfPtr = Unmanaged.passUnretained(self).toOpaque()
+        autoBrightnessObserverPtr = selfPtr
+        CFNotificationCenterAddObserver(
+            CFNotificationCenterGetDarwinNotifyCenter(),
+            selfPtr,
+            { _, observer, _, _, _ in
+                guard let observer else { return }
+                let manager = Unmanaged<DisplayManager>.fromOpaque(observer).takeUnretainedValue()
+                Task { @MainActor in
+                    manager.scheduleTopologyRefresh(reason: "autoBrightnessPreferenceChanged")
+                }
+            },
+            "com.apple.BezelServices.BMDStatus" as CFString,
+            nil,
+            .deliverImmediately
+        )
         DiagnosticsLogger.shared.log("DisplayManager init", category: "display")
     }
 
@@ -86,6 +103,14 @@ final class DisplayManager: ObservableObject {
         }
         if let workspaceScreensWakeToken {
             NSWorkspace.shared.notificationCenter.removeObserver(workspaceScreensWakeToken)
+        }
+        if let ptr = autoBrightnessObserverPtr {
+            CFNotificationCenterRemoveObserver(
+                CFNotificationCenterGetDarwinNotifyCenter(),
+                ptr,
+                CFNotificationName("com.apple.BezelServices.BMDStatus" as CFString),
+                nil
+            )
         }
     }
 
