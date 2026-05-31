@@ -5,6 +5,7 @@ import SwiftUI
 enum DimlyMotion {
     static let quickSpring = Animation.spring(response: 0.16, dampingFraction: 0.88)
     static let standardSpring = Animation.spring(response: 0.24, dampingFraction: 0.84)
+    static let panelSpring = Animation.spring(response: 0.22, dampingFraction: 0.86)
     static let reorderSpring = Animation.interactiveSpring(response: 0.26, dampingFraction: 0.82, blendDuration: 0.12)
     static let reorderSettleSpring = Animation.interactiveSpring(response: 0.32, dampingFraction: 0.86, blendDuration: 0.18)
     static let gentleEaseOut = Animation.easeOut(duration: 0.18)

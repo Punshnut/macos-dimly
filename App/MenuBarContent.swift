@@ -40,6 +40,7 @@ struct MenuBarContentView: View {
     @State private var modeHeightsByLayout: [LayoutMode: CGFloat] = [:]
     @State private var modeContainerHeight: CGFloat?
     @State private var panelContentSize: CGSize = .zero
+    @State private var panelIsPresented = false
     @State private var modeContentOpacity: Double = 1
     @State private var modeContentOffsetY: CGFloat = 0
     @State private var modeTransitionInvolvesCompactMode = false
@@ -68,6 +69,15 @@ struct MenuBarContentView: View {
                 targetContentSize: panelContentSize
             )
         )
+        .background {
+            if presentation == .menuBar {
+                Rectangle().fill(.regularMaterial)
+            }
+        }
+        .scaleEffect(
+            (presentation == .menuBar && !panelIsPresented && !reduceMotion) ? 0.97 : 1.0,
+            anchor: .top
+        )
         .onPreferenceChange(PanelContentSizePreferenceKey.self) { panelContentSize = $0 }
         .onAppear {
             if renderedLayoutMode == nil {
@@ -78,9 +88,15 @@ struct MenuBarContentView: View {
             if presentation == .menuBar {
                 handleModifierClickIfNeeded()
                 installModifierClickMonitor()
+                DispatchQueue.main.async {
+                    withAnimation(reduceMotion ? nil : DimlyMotion.standardSpring) {
+                        panelIsPresented = true
+                    }
+                }
             }
         }
         .onDisappear {
+            panelIsPresented = false
             removeModifierClickMonitor()
         }
         .preferredColorScheme(preferredColorSchemeSelection)
@@ -132,8 +148,8 @@ struct MenuBarContentView: View {
             return .opacity
         }
         return .asymmetric(
-            insertion: .opacity.combined(with: .move(edge: .top)),
-            removal: .opacity
+            insertion: .opacity.combined(with: .scale(scale: 0.96, anchor: .top)),
+            removal:   .opacity.combined(with: .scale(scale: 0.96, anchor: .top))
         )
     }
 
@@ -341,7 +357,7 @@ struct MenuBarContentView: View {
         }
     }
 
-    /// Brings the menu bar popover window forward for better keyboard focus.
+    /// Brings the menu bar popover window forward and configures it for glass appearance and fade animation.
     private func activateWindowIfNeeded() {
         DispatchQueue.main.async {
             NSApp.activate(ignoringOtherApps: true)
@@ -350,6 +366,12 @@ struct MenuBarContentView: View {
                     window.level == .statusBar || window.level == .popUpMenu
                 }
                 : NSApp.keyWindow
+            if presentation == .menuBar, let window = candidate {
+                window.animationBehavior = .utilityWindow
+                window.isOpaque = false
+                window.backgroundColor = .clear
+                window.hasShadow = true
+            }
             candidate?.makeKeyAndOrderFront(nil)
         }
     }
@@ -1247,12 +1269,16 @@ struct MenuBarContentView: View {
             sectionHeader(monitorsSectionTitle)
             ForEach(menuBarDisplays) { display in
                 displayRow(display)
+                    .transition(.asymmetric(
+                        insertion: .opacity.combined(with: .scale(scale: 0.97)),
+                        removal: .opacity
+                    ))
             }
         }
         .animation(standardAnimation, value: orderedExternalIDs())
         .animation(standardAnimation, value: orderedInternalIDs())
         .animation(standardAnimation, value: orderedMergedIDs())
-        .animation(standardAnimation, value: settingsStore.settings.brightnessPanelExpandedDisplayIDs)
+        .animation(reduceMotion ? nil : DimlyMotion.panelSpring, value: settingsStore.settings.brightnessPanelExpandedDisplayIDs)
     }
 
     /// Reduced per-display list used in the simple layout.
@@ -1261,12 +1287,16 @@ struct MenuBarContentView: View {
             sectionHeader(monitorsSectionTitle)
             ForEach(menuBarDisplays) { display in
                 displayRowSimple(display)
+                    .transition(.asymmetric(
+                        insertion: .opacity.combined(with: .scale(scale: 0.97)),
+                        removal: .opacity
+                    ))
             }
         }
         .animation(standardAnimation, value: orderedExternalIDs())
         .animation(standardAnimation, value: orderedInternalIDs())
         .animation(standardAnimation, value: orderedMergedIDs())
-        .animation(standardAnimation, value: settingsStore.settings.brightnessPanelExpandedDisplayIDs)
+        .animation(reduceMotion ? nil : DimlyMotion.panelSpring, value: settingsStore.settings.brightnessPanelExpandedDisplayIDs)
     }
 
     /// Renders a single display row with actions and status.
@@ -1584,7 +1614,8 @@ struct MenuBarContentView: View {
                     moveInternalDisplayUp(display.stableIdentity)
                 }
             } label: {
-                animatedSymbol("chevron.up", size: 10, value: order)
+                Image(systemName: "chevron.up")
+                    .font(.system(size: 10, weight: .semibold))
                     .frame(width: 18, height: 12)
             }
             .buttonStyle(FluentPressButtonStyle(pressedScale: 0.84, pressedOpacity: 0.82))
@@ -1601,7 +1632,8 @@ struct MenuBarContentView: View {
                     moveInternalDisplayDown(display.stableIdentity)
                 }
             } label: {
-                animatedSymbol("chevron.down", size: 10, value: order)
+                Image(systemName: "chevron.down")
+                    .font(.system(size: 10, weight: .semibold))
                     .frame(width: 18, height: 12)
             }
             .buttonStyle(FluentPressButtonStyle(pressedScale: 0.84, pressedOpacity: 0.82))
