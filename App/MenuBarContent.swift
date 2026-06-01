@@ -69,15 +69,15 @@ struct MenuBarContentView: View {
                 targetContentSize: panelContentSize
             )
         )
+        .scaleEffect(
+            (presentation == .menuBar && !panelIsPresented && !reduceMotion) ? 0.97 : 1.0,
+            anchor: .top
+        )
         .background {
             if presentation == .menuBar {
                 Rectangle().fill(.regularMaterial)
             }
         }
-        .scaleEffect(
-            (presentation == .menuBar && !panelIsPresented && !reduceMotion) ? 0.97 : 1.0,
-            anchor: .top
-        )
         .onPreferenceChange(PanelContentSizePreferenceKey.self) { panelContentSize = $0 }
         .onAppear {
             if renderedLayoutMode == nil {
@@ -99,7 +99,7 @@ struct MenuBarContentView: View {
             panelIsPresented = false
             removeModifierClickMonitor()
         }
-        .preferredColorScheme(preferredColorSchemeSelection)
+        .preferredColorScheme(settingsStore.effectiveColorScheme)
     }
 
     private var sectionSpacing: CGFloat { 12 }
@@ -344,17 +344,6 @@ struct MenuBarContentView: View {
 
     private var neutralStroke: Color {
         colorScheme == .dark ? Color.white.opacity(0.2) : Color.black.opacity(0.11)
-    }
-
-    private var preferredColorSchemeSelection: ColorScheme? {
-        switch settingsStore.settings.appAppearancePreference {
-        case .system:
-            nil
-        case .light:
-            .light
-        case .dark:
-            .dark
-        }
     }
 
     /// Brings the menu bar popover window forward and configures it for glass appearance and fade animation.

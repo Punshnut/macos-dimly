@@ -70,7 +70,7 @@ struct SettingsRootView: View {
         .onAppear {
             engine.refreshBuiltinBrightnessSnapshots(reason: "settingsAppear", persistToSettings: false)
         }
-        .preferredColorScheme(settingsStore.settings.appAppearancePreference.preferredColorScheme)
+        .preferredColorScheme(settingsStore.effectiveColorScheme)
     }
 
     /// Forces the intro window to reappear for the current session.

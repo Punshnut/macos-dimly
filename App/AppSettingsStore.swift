@@ -3,6 +3,7 @@
 import AppKit
 import Combine
 import OSLog
+import SwiftUI
 
 /// Observable settings store used across the app.
 @MainActor
@@ -14,9 +15,14 @@ final class AppSettingsStore: ObservableObject {
         }
     }
 
+    /// The concrete color scheme currently in effect. Always a definite value — never nil —
+    /// so SwiftUI views can bind directly and receive instant updates via @Published.
+    @Published private(set) var effectiveColorScheme: ColorScheme = .light
+
     private let logger = Logger(subsystem: Bundle.main.bundleIdentifier ?? "Dimly", category: "Settings")
     private var lastAppliedSettings: DimlySettings?
     private static let persistenceQueue = DispatchQueue(label: "com.punshnut.dimly.settings.persist", qos: .utility)
+    private var systemAppearanceObserver: NSObjectProtocol?
 
     /// Loads persisted settings and applies side effects immediately.
     init(initial: DimlySettings = DimlySettingsStore.load()) {
@@ -72,21 +78,40 @@ final class AppSettingsStore: ObservableObject {
         }
     }
 
-    /// Updates AppKit appearance so non-SwiftUI surfaces match the selected mode.
+    /// Updates AppKit appearance and effectiveColorScheme for the selected preference.
     private func applyAppAppearance(_ preference: AppAppearancePreference) {
-        let app = NSApplication.shared
+        if let observer = systemAppearanceObserver {
+            DistributedNotificationCenter.default().removeObserver(observer)
+            systemAppearanceObserver = nil
+        }
+
         switch preference {
         case .system:
-            app.appearance = NSAppearance(named: isSystemInDarkMode ? .darkAqua : .aqua)
+            applySystemAppearanceNow()
+            // Keep effectiveColorScheme in sync whenever macOS changes its theme.
+            systemAppearanceObserver = DistributedNotificationCenter.default().addObserver(
+                forName: NSNotification.Name("AppleInterfaceThemeChangedNotification"),
+                object: nil,
+                queue: .main
+            ) { [weak self] _ in
+                Task { @MainActor [weak self] in
+                    guard let self, self.settings.appAppearancePreference == .system else { return }
+                    self.applySystemAppearanceNow()
+                }
+            }
         case .light:
-            app.appearance = NSAppearance(named: .aqua)
+            effectiveColorScheme = .light
+            NSApplication.shared.appearance = NSAppearance(named: .aqua)
         case .dark:
-            app.appearance = NSAppearance(named: .darkAqua)
+            effectiveColorScheme = .dark
+            NSApplication.shared.appearance = NSAppearance(named: .darkAqua)
         }
     }
 
-    /// Reads the current system appearance preference from user defaults.
-    private var isSystemInDarkMode: Bool {
-        UserDefaults.standard.string(forKey: "AppleInterfaceStyle") == "Dark"
+    /// Resolves and applies the current OS appearance, updating both NSApp and effectiveColorScheme.
+    private func applySystemAppearanceNow() {
+        let isDark = UserDefaults.standard.string(forKey: "AppleInterfaceStyle") == "Dark"
+        effectiveColorScheme = isDark ? .dark : .light
+        NSApplication.shared.appearance = NSAppearance(named: isDark ? .darkAqua : .aqua)
     }
 }
