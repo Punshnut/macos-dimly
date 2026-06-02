@@ -123,6 +123,9 @@
 "ActionChangeButton" = "Thay đổi";
 
 /* Settings Profiles */
+"ProfileBehaviorTitle" = "Hành vi";
+"ProfileRestoreTilesTitle" = "Khôi phục bố cục ô";
+"ProfileRestoreTilesSubtitle" = "Khi áp dụng hồ sơ, mở rộng hoặc thu gọn các ô để khớp với bố cục đã lưu.";
 "ActionSaveCurrentSetupButton" = "Lưu cấu hình hiện tại";
 "ProfileNamePlaceholder" = "Tên hồ sơ";
 "ProfilesSettingsEmptyLabel" = "Chưa có hồ sơ. Lưu cấu hình màn hình hiện tại để tạo.";

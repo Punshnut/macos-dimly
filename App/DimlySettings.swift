@@ -79,6 +79,7 @@ struct DimlySettings: Codable, Equatable {
     var menuBarSmartButtonsLimit: Int
     var menuBarSmartButtonsColorlessMode: Bool
     var brightnessPanelExpandedDisplayIDs: [String]
+    var profileRestoresTileLayout: Bool
     var monitorBrightnessByDisplayID: [String: Int]
     var monitorPowerStateByDisplayID: [String: PersistedMonitorPowerState]
     var monitorLastSeenAtByDisplayID: [String: Date]
@@ -109,6 +110,7 @@ struct DimlySettings: Codable, Equatable {
         case menuBarSmartButtonsLimit
         case menuBarSmartButtonsColorlessMode
         case brightnessPanelExpandedDisplayIDs
+        case profileRestoresTileLayout
         case monitorBrightnessByDisplayID
         case monitorPowerStateByDisplayID
         case monitorLastSeenAtByDisplayID
@@ -158,6 +160,7 @@ struct DimlySettings: Codable, Equatable {
         menuBarSmartButtonsLimit: 8,
         menuBarSmartButtonsColorlessMode: false,
         brightnessPanelExpandedDisplayIDs: [],
+        profileRestoresTileLayout: true,
         monitorBrightnessByDisplayID: [:],
         monitorPowerStateByDisplayID: [:],
         monitorLastSeenAtByDisplayID: [:]
@@ -188,6 +191,7 @@ struct DimlySettings: Codable, Equatable {
         menuBarSmartButtonsLimit: Int,
         menuBarSmartButtonsColorlessMode: Bool,
         brightnessPanelExpandedDisplayIDs: [String],
+        profileRestoresTileLayout: Bool,
         monitorBrightnessByDisplayID: [String: Int],
         monitorPowerStateByDisplayID: [String: PersistedMonitorPowerState],
         monitorLastSeenAtByDisplayID: [String: Date]
@@ -215,6 +219,7 @@ struct DimlySettings: Codable, Equatable {
         self.menuBarSmartButtonsLimit = Self.normalizedSmartButtonsLimit(menuBarSmartButtonsLimit)
         self.menuBarSmartButtonsColorlessMode = menuBarSmartButtonsColorlessMode
         self.brightnessPanelExpandedDisplayIDs = brightnessPanelExpandedDisplayIDs
+        self.profileRestoresTileLayout = profileRestoresTileLayout
         self.monitorBrightnessByDisplayID = monitorBrightnessByDisplayID
         self.monitorPowerStateByDisplayID = monitorPowerStateByDisplayID
         self.monitorLastSeenAtByDisplayID = monitorLastSeenAtByDisplayID
@@ -253,6 +258,7 @@ struct DimlySettings: Codable, Equatable {
         let menuBarSmartButtonsLimit = try container.decodeIfPresent(Int.self, forKey: .menuBarSmartButtonsLimit) ?? DimlySettings.default.menuBarSmartButtonsLimit
         let menuBarSmartButtonsColorlessMode = try container.decodeIfPresent(Bool.self, forKey: .menuBarSmartButtonsColorlessMode) ?? DimlySettings.default.menuBarSmartButtonsColorlessMode
         let brightnessPanelExpandedDisplayIDs = try container.decodeIfPresent([String].self, forKey: .brightnessPanelExpandedDisplayIDs) ?? DimlySettings.default.brightnessPanelExpandedDisplayIDs
+        let profileRestoresTileLayout = try container.decodeIfPresent(Bool.self, forKey: .profileRestoresTileLayout) ?? DimlySettings.default.profileRestoresTileLayout
         let monitorBrightnessByDisplayID = try container.decodeIfPresent([String: Int].self, forKey: .monitorBrightnessByDisplayID) ?? DimlySettings.default.monitorBrightnessByDisplayID
         let monitorPowerStateByDisplayID = try container.decodeIfPresent([String: PersistedMonitorPowerState].self, forKey: .monitorPowerStateByDisplayID) ?? DimlySettings.default.monitorPowerStateByDisplayID
         let monitorLastSeenAtByDisplayID = try container.decodeIfPresent([String: Date].self, forKey: .monitorLastSeenAtByDisplayID) ?? DimlySettings.default.monitorLastSeenAtByDisplayID
@@ -300,6 +306,7 @@ struct DimlySettings: Codable, Equatable {
             menuBarSmartButtonsLimit: menuBarSmartButtonsLimit,
             menuBarSmartButtonsColorlessMode: menuBarSmartButtonsColorlessMode,
             brightnessPanelExpandedDisplayIDs: brightnessPanelExpandedDisplayIDs,
+            profileRestoresTileLayout: profileRestoresTileLayout,
             monitorBrightnessByDisplayID: monitorBrightnessByDisplayID,
             monitorPowerStateByDisplayID: monitorPowerStateByDisplayID,
             monitorLastSeenAtByDisplayID: monitorLastSeenAtByDisplayID
@@ -333,6 +340,7 @@ struct DimlySettings: Codable, Equatable {
         try container.encode(Self.normalizedSmartButtonsLimit(menuBarSmartButtonsLimit), forKey: .menuBarSmartButtonsLimit)
         try container.encode(menuBarSmartButtonsColorlessMode, forKey: .menuBarSmartButtonsColorlessMode)
         try container.encode(brightnessPanelExpandedDisplayIDs, forKey: .brightnessPanelExpandedDisplayIDs)
+        try container.encode(profileRestoresTileLayout, forKey: .profileRestoresTileLayout)
         try container.encode(monitorBrightnessByDisplayID, forKey: .monitorBrightnessByDisplayID)
         try container.encode(monitorPowerStateByDisplayID, forKey: .monitorPowerStateByDisplayID)
         try container.encode(monitorLastSeenAtByDisplayID, forKey: .monitorLastSeenAtByDisplayID)

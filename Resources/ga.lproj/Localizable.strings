@@ -123,6 +123,9 @@
 "ActionChangeButton" = "Athraigh";
 
 /* Settings Profiles */
+"ProfileBehaviorTitle" = "Iompar";
+"ProfileRestoreTilesTitle" = "Athchóirigh leagan amach na dteileanna";
+"ProfileRestoreTilesSubtitle" = "Agus próifíl á cur i bhfeidhm, leathnaigh nó crap na teileanna chun teacht leis an leagan amach sábháilte.";
 "ActionSaveCurrentSetupButton" = "Sábháil an socrú reatha";
 "ProfileNamePlaceholder" = "Ainm próifíle";
 "ProfilesSettingsEmptyLabel" = "Níl próifílí fós. Sábháil an socrú taispeántais chun ceann a chruthú.";

@@ -123,6 +123,9 @@
 "ActionChangeButton" = "เปลี่ยน";
 
 /* Settings Profiles */
+"ProfileBehaviorTitle" = "พฤติกรรม";
+"ProfileRestoreTilesTitle" = "คืนค่าเลย์เอาต์ไทล์";
+"ProfileRestoreTilesSubtitle" = "เมื่อใช้โปรไฟล์ ให้ขยายหรือยุบไทล์เพื่อให้ตรงกับเลย์เอาต์ที่บันทึกไว้";
 "ActionSaveCurrentSetupButton" = "บันทึกการตั้งค่าปัจจุบัน";
 "ProfileNamePlaceholder" = "ชื่อโปรไฟล์";
 "ProfilesSettingsEmptyLabel" = "ยังไม่มีโปรไฟล์ บันทึกการตั้งค่าปัจจุบันเพื่อสร้าง";

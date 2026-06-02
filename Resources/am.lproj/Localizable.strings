@@ -123,6 +123,9 @@
 "ActionChangeButton" = "ቀይር";
 
 /* Settings Profiles */
+"ProfileBehaviorTitle" = "ባህሪ";
+"ProfileRestoreTilesTitle" = "የሰሌዳ አቀማመጥን ወደ ነበረበት መልስ";
+"ProfileRestoreTilesSubtitle" = "ፕሮፋይልን ሲተገብሩ፣ የተቀመጠውን አቀማመጥ ለማዛመድ ሰሌዳዎችን ዘርጋ ወይም ሰብስብ።";
 "ActionSaveCurrentSetupButton" = "አሁንን ማስተካከያ አስቀምጥ";
 "ProfileNamePlaceholder" = "የፕሮፋይል ስም";
 "ProfilesSettingsEmptyLabel" = "እስካሁን ፕሮፋይል የለም። አንድን ለመፍጠር የአሁኑን ማሳያ ማስተካከያ አስቀምጥ።";

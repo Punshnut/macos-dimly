@@ -123,6 +123,9 @@
 "ActionChangeButton" = "Wijzig";
 
 /* Settings Profiles */
+"ProfileBehaviorTitle" = "Gedrag";
+"ProfileRestoreTilesTitle" = "Tegelindeling herstellen";
+"ProfileRestoreTilesSubtitle" = "Wanneer een profiel wordt toegepast, vouw tegels uit of in om overeen te komen met de opgeslagen indeling.";
 "ActionSaveCurrentSetupButton" = "Huidige setup opslaan";
 "ProfileNamePlaceholder" = "Profielnaam";
 "ProfilesSettingsEmptyLabel" = "Nog geen profielen. Sla de huidige schermsetup op om er een te maken.";

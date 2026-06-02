@@ -123,6 +123,9 @@
 "ActionChangeButton" = "Modifier";
 
 /* Settings Profiles */
+"ProfileBehaviorTitle" = "Comportement";
+"ProfileRestoreTilesTitle" = "Restaurer la disposition des tuiles";
+"ProfileRestoreTilesSubtitle" = "Lors de l'application d'un profil, développez ou réduisez les tuiles pour correspondre à la disposition enregistrée.";
 "ActionSaveCurrentSetupButton" = "Enregistrer la configuration actuelle";
 "ProfileNamePlaceholder" = "Nom du profil";
 "ProfilesSettingsEmptyLabel" = "Pas encore de profils. Enregistrez la configuration actuelle pour en créer un.";

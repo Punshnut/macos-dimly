@@ -123,6 +123,9 @@
 "ActionChangeButton" = "تغيير";
 
 /* Settings Profiles */
+"ProfileBehaviorTitle" = "السلوك";
+"ProfileRestoreTilesTitle" = "استعادة تخطيط اللوحات";
+"ProfileRestoreTilesSubtitle" = "عند تطبيق ملف تعريف، قم بتوسيع أو طي اللوحات لتطابق التخطيط المحفوظ.";
 "ActionSaveCurrentSetupButton" = "حفظ الإعداد الحالي";
 "ProfileNamePlaceholder" = "اسم الملف";
 "ProfilesSettingsEmptyLabel" = "لا توجد ملفات تعريف. احفظ الإعداد الحالي للشاشات لإنشاء واحد.";

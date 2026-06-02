@@ -338,7 +338,9 @@ struct ProfileMonitorState: Codable, Equatable {
         settings.menuBarIncludedInternalDisplayIDs = menuBarIncludedInternalDisplayIDs
         settings.externalDisplayOrder = externalDisplayOrder
         settings.internalDisplayOrder = internalDisplayOrder
-        settings.brightnessPanelExpandedDisplayIDs = brightnessPanelExpandedDisplayIDs
+        if settings.profileRestoresTileLayout {
+            settings.brightnessPanelExpandedDisplayIDs = brightnessPanelExpandedDisplayIDs
+        }
         settings.monitorPowerStateByDisplayID = monitorPowerStateByDisplayID
         settings.monitorBrightnessByDisplayID = monitorBrightnessByDisplayID
     }

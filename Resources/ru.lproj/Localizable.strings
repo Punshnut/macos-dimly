@@ -123,6 +123,9 @@
 "ActionChangeButton" = "Изменить";
 
 /* Settings Profiles */
+"ProfileBehaviorTitle" = "Поведение";
+"ProfileRestoreTilesTitle" = "Восстановить расположение блоков";
+"ProfileRestoreTilesSubtitle" = "При применении профиля разворачивайте или сворачивайте блоки в соответствии с сохранённым расположением.";
 "ActionSaveCurrentSetupButton" = "Сохранить текущую схему";
 "ProfileNamePlaceholder" = "Имя профиля";
 "ProfilesSettingsEmptyLabel" = "Профилей нет. Сохраните текущую схему дисплеев, чтобы создать.";

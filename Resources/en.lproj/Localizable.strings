@@ -161,6 +161,9 @@
 "ActionChangeButton" = "Change";
 
 /* Settings Profiles */
+"ProfileBehaviorTitle" = "Behavior";
+"ProfileRestoreTilesTitle" = "Restore tile layout";
+"ProfileRestoreTilesSubtitle" = "When applying a profile, expand or collapse tiles to match the saved layout.";
 "ActionSaveCurrentSetupButton" = "Save Current Setup";
 "ProfileNamePlaceholder" = "Profile name";
 "ProfilesSettingsEmptyLabel" = "No profiles yet. Save the current display setup to create one.";

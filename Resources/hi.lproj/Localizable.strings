@@ -123,6 +123,9 @@
 "ActionChangeButton" = "बदलें";
 
 /* Settings Profiles */
+"ProfileBehaviorTitle" = "व्यवहार";
+"ProfileRestoreTilesTitle" = "टाइल लेआउट पुनर्स्थापित करें";
+"ProfileRestoreTilesSubtitle" = "प्रोफ़ाइल लागू करते समय, सहेजे गए लेआउट से मिलान करने के लिए टाइलें विस्तृत या संकुचित करें।";
 "ActionSaveCurrentSetupButton" = "वर्तमान सेटअप सहेजें";
 "ProfileNamePlaceholder" = "प्रोफ़ाइल नाम";
 "ProfilesSettingsEmptyLabel" = "अभी कोई प्रोफ़ाइल नहीं। एक बनाने के लिए वर्तमान डिस्प्ले सेटअप सहेजें।";

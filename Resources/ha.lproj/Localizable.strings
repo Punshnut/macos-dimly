@@ -123,6 +123,9 @@
 "ActionChangeButton" = "Canja";
 
 /* Settings Profiles */
+"ProfileBehaviorTitle" = "Hali";
+"ProfileRestoreTilesTitle" = "Maido da tsarin allo";
+"ProfileRestoreTilesSubtitle" = "Lokacin amfani da bayanin martaba, faɗaɗa ko rufe allon don daidaita tsarin da aka adana.";
 "ActionSaveCurrentSetupButton" = "Ajiye saitin yanzu";
 "ProfileNamePlaceholder" = "Sunan fayil";
 "ProfilesSettingsEmptyLabel" = "Babu fayil tukuna. Ajiye saitin allo na yanzu don ƙirƙirar ɗaya.";

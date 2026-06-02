@@ -123,6 +123,9 @@
 "ActionChangeButton" = "تبدیل کریں";
 
 /* Settings Profiles */
+"ProfileBehaviorTitle" = "طرزِ عمل";
+"ProfileRestoreTilesTitle" = "ٹائل لے آؤٹ بحال کریں";
+"ProfileRestoreTilesSubtitle" = "پروفائل لگاتے وقت، محفوظ شدہ لے آؤٹ سے ملانے کے لیے ٹائلز کو پھیلائیں یا سکیڑیں۔";
 "ActionSaveCurrentSetupButton" = "موجودہ سیٹ اپ محفوظ کریں";
 "ProfileNamePlaceholder" = "پروفائل کا نام";
 "ProfilesSettingsEmptyLabel" = "ابھی کوئی پروفائل نہیں۔ ایک بنانے کے لیے موجودہ ڈسپلے سیٹ اپ محفوظ کریں.";

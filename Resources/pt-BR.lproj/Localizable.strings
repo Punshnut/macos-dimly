@@ -123,6 +123,9 @@
 "ActionChangeButton" = "Alterar";
 
 /* Settings Profiles */
+"ProfileBehaviorTitle" = "Comportamento";
+"ProfileRestoreTilesTitle" = "Restaurar layout dos blocos";
+"ProfileRestoreTilesSubtitle" = "Ao aplicar um perfil, expanda ou recolha os blocos para corresponder ao layout salvo.";
 "ActionSaveCurrentSetupButton" = "Salvar configuração atual";
 "ProfileNamePlaceholder" = "Nome do perfil";
 "ProfilesSettingsEmptyLabel" = "Nenhum perfil ainda. Salve a configuração atual para criar um.";

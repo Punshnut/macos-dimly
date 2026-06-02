@@ -123,6 +123,9 @@
 "ActionChangeButton" = "Cambiar";
 
 /* Settings Profiles */
+"ProfileBehaviorTitle" = "Comportamiento";
+"ProfileRestoreTilesTitle" = "Restaurar disposición de paneles";
+"ProfileRestoreTilesSubtitle" = "Al aplicar un perfil, expande o colapsa los paneles para que coincidan con la disposición guardada.";
 "ActionSaveCurrentSetupButton" = "Guardar configuración actual";
 "ProfileNamePlaceholder" = "Nombre del perfil";
 "ProfilesSettingsEmptyLabel" = "Aún no hay perfiles. Guarda la configuración actual para crear uno.";

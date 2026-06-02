@@ -892,6 +892,17 @@ struct SettingsRootView: View {
 
         private var profilesDetail: some View {
             SettingsScrollView(title: String(localized: "ProfilesSectionTitle"), subtitle: nil, contentMaxWidth: 980) {
+                SettingsCard(title: String(localized: "ProfileBehaviorTitle"), subtitle: nil) {
+                    SettingsToggleRow(
+                        title: String(localized: "ProfileRestoreTilesTitle"),
+                        subtitle: String(localized: "ProfileRestoreTilesSubtitle"),
+                        systemImage: "rectangle.expand.diagonal",
+                        isOn: Binding(
+                            get: { settingsStore.settings.profileRestoresTileLayout },
+                            set: { newValue in settingsStore.update { $0.profileRestoresTileLayout = newValue } }
+                        )
+                    )
+                }
                 SettingsCard(title: String(localized: "ProfilesSectionTitle"), subtitle: nil) {
                     HStack(alignment: .center, spacing: 8) {
                         Button(String(localized: "ActionSaveCurrentSetupButton")) {

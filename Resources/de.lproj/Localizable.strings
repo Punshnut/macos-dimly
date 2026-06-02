@@ -123,6 +123,9 @@
 "ActionChangeButton" = "Ändern";
 
 /* Settings Profiles */
+"ProfileBehaviorTitle" = "Verhalten";
+"ProfileRestoreTilesTitle" = "Kacheldarstellung wiederherstellen";
+"ProfileRestoreTilesSubtitle" = "Beim Anwenden eines Profils werden die Kacheln entsprechend dem gespeicherten Layout aus- oder eingeklappt.";
 "ActionSaveCurrentSetupButton" = "Aktuelle Konfiguration speichern";
 "ProfileNamePlaceholder" = "Profilname";
 "ProfilesSettingsEmptyLabel" = "Noch keine Profile. Speichere die aktuelle Display-Konfiguration, um eines zu erstellen.";

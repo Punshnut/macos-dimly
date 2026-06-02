@@ -123,6 +123,9 @@
 "ActionChangeButton" = "Cambia";
 
 /* Settings Profiles */
+"ProfileBehaviorTitle" = "Comportamento";
+"ProfileRestoreTilesTitle" = "Ripristina il layout dei riquadri";
+"ProfileRestoreTilesSubtitle" = "Quando si applica un profilo, espandi o comprimi i riquadri per corrispondere al layout salvato.";
 "ActionSaveCurrentSetupButton" = "Salva configurazione attuale";
 "ProfileNamePlaceholder" = "Nome profilo";
 "ProfilesSettingsEmptyLabel" = "Nessun profilo. Salva la configurazione attuale per crearne uno.";

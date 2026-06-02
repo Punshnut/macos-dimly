@@ -123,6 +123,9 @@
 "ActionChangeButton" = "Zmień";
 
 /* Settings Profiles */
+"ProfileBehaviorTitle" = "Zachowanie";
+"ProfileRestoreTilesTitle" = "Przywróć układ kafelków";
+"ProfileRestoreTilesSubtitle" = "Podczas stosowania profilu rozwiń lub zwiń kafelki, aby dopasować je do zapisanego układu.";
 "ActionSaveCurrentSetupButton" = "Zapisz bieżącą konfigurację";
 "ProfileNamePlaceholder" = "Nazwa profilu";
 "ProfilesSettingsEmptyLabel" = "Brak profili. Zapisz bieżącą konfigurację wyświetlaczy, aby utworzyć.";

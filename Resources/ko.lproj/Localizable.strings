@@ -123,6 +123,9 @@
 "ActionChangeButton" = "변경";
 
 /* Settings Profiles */
+"ProfileBehaviorTitle" = "동작";
+"ProfileRestoreTilesTitle" = "타일 레이아웃 복원";
+"ProfileRestoreTilesSubtitle" = "프로필을 적용할 때 저장된 레이아웃에 맞게 타일을 펼치거나 접습니다.";
 "ActionSaveCurrentSetupButton" = "현재 설정 저장";
 "ProfileNamePlaceholder" = "프로필 이름";
 "ProfilesSettingsEmptyLabel" = "아직 프로필이 없습니다. 만들려면 현재 디스플레이 설정을 저장하세요.";

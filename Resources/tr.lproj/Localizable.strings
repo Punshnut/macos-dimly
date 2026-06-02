@@ -123,6 +123,9 @@
 "ActionChangeButton" = "Değiştir";
 
 /* Settings Profiles */
+"ProfileBehaviorTitle" = "Davranış";
+"ProfileRestoreTilesTitle" = "Döşeme düzenini geri yükle";
+"ProfileRestoreTilesSubtitle" = "Bir profil uygulanırken, kaydedilen düzene uyacak şekilde döşemeleri genişlet veya daralt.";
 "ActionSaveCurrentSetupButton" = "Geçerli kurulumu kaydet";
 "ProfileNamePlaceholder" = "Profil adı";
 "ProfilesSettingsEmptyLabel" = "Henüz profil yok. Oluşturmak için geçerli ekran kurulumunu kaydedin.";

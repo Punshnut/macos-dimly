@@ -123,6 +123,9 @@
 "ActionChangeButton" = "Ṣàtúnṣe";
 
 /* Settings Profiles */
+"ProfileBehaviorTitle" = "Ìwà";
+"ProfileRestoreTilesTitle" = "Tún ìtò àwọn pàǹtẹ̀ padà";
+"ProfileRestoreTilesSubtitle" = "Nígbà tí a bá lo àwòrán, fẹ àwọn pàǹtẹ̀ sí tàbí dín wọn kù láti baramu ìtò tí a tọ́jú.";
 "ActionSaveCurrentSetupButton" = "Fipamọ́ ìtòlẹ́sẹẹsẹ lọwọlọwọ";
 "ProfileNamePlaceholder" = "Orúkọ profaili";
 "ProfilesSettingsEmptyLabel" = "Kò tíì sí profaili. Fipamọ́ ìtòlẹ́sẹẹsẹ àfihàn lọwọlọwọ láti dá ọ̀kan ṣẹ̀dá.";

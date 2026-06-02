@@ -123,6 +123,9 @@
 "ActionChangeButton" = "Canvia";
 
 /* Settings Profiles */
+"ProfileBehaviorTitle" = "Comportament";
+"ProfileRestoreTilesTitle" = "Restaura la disposició dels blocs";
+"ProfileRestoreTilesSubtitle" = "Quan s'aplica un perfil, expandeix o redueix els blocs per coincidir amb la disposició desada.";
 "ActionSaveCurrentSetupButton" = "Desa la configuració actual";
 "ProfileNamePlaceholder" = "Nom del perfil";
 "ProfilesSettingsEmptyLabel" = "Encara no hi ha perfils. Desa la configuració actual per crear-ne un.";

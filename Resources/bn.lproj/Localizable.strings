@@ -123,6 +123,9 @@
 "ActionChangeButton" = "পরিবর্তন";
 
 /* Settings Profiles */
+"ProfileBehaviorTitle" = "আচরণ";
+"ProfileRestoreTilesTitle" = "টাইল লেআউট পুনরুদ্ধার করুন";
+"ProfileRestoreTilesSubtitle" = "একটি প্রোফাইল প্রয়োগ করার সময়, সংরক্ষিত লেআউটের সাথে মেলানোর জন্য টাইলগুলি প্রসারিত বা সংকুচিত করুন।";
 "ActionSaveCurrentSetupButton" = "বর্তমান সেটআপ সংরক্ষণ";
 "ProfileNamePlaceholder" = "প্রোফাইল নাম";
 "ProfilesSettingsEmptyLabel" = "এখনো কোনো প্রোফাইল নেই। একটি তৈরি করতে বর্তমান ডিসপ্লে সেটআপ সংরক্ষণ করুন।";

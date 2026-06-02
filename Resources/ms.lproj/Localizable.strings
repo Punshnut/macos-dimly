@@ -123,6 +123,9 @@
 "ActionChangeButton" = "Tukar";
 
 /* Settings Profiles */
+"ProfileBehaviorTitle" = "Kelakuan";
+"ProfileRestoreTilesTitle" = "Pulihkan tataletak jubin";
+"ProfileRestoreTilesSubtitle" = "Semasa menggunakan profil, kembangkan atau runtuhkan jubin untuk memadankan tataletak yang disimpan.";
 "ActionSaveCurrentSetupButton" = "Simpan tetapan semasa";
 "ProfileNamePlaceholder" = "Nama profil";
 "ProfilesSettingsEmptyLabel" = "Belum ada profil. Simpan tetapan paparan semasa untuk membuat satu.";

@@ -123,6 +123,9 @@
 "ActionChangeButton" = "Badilisha";
 
 /* Settings Profiles */
+"ProfileBehaviorTitle" = "Tabia";
+"ProfileRestoreTilesTitle" = "Rejesha mpangilio wa vipande";
+"ProfileRestoreTilesSubtitle" = "Wakati wa kutumia wasifu, panua au funga vipande ili kulingana na mpangilio uliohifadhiwa.";
 "ActionSaveCurrentSetupButton" = "Hifadhi usanidi wa sasa";
 "ProfileNamePlaceholder" = "Jina la profaili";
 "ProfilesSettingsEmptyLabel" = "Bado hakuna profaili. Hifadhi usanidi wa skrini wa sasa ili kuunda.";

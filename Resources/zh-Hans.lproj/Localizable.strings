@@ -123,6 +123,9 @@
 "ActionChangeButton" = "更改";
 
 /* Settings Profiles */
+"ProfileBehaviorTitle" = "行为";
+"ProfileRestoreTilesTitle" = "恢复磁贴布局";
+"ProfileRestoreTilesSubtitle" = "应用配置文件时，展开或折叠磁贴以匹配已保存的布局。";
 "ActionSaveCurrentSetupButton" = "保存当前布局";
 "ProfileNamePlaceholder" = "配置名称";
 "ProfilesSettingsEmptyLabel" = "尚无配置。保存当前显示布局以创建。";

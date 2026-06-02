@@ -123,6 +123,9 @@
 "ActionChangeButton" = "Změnit";
 
 /* Settings Profiles */
+"ProfileBehaviorTitle" = "Chování";
+"ProfileRestoreTilesTitle" = "Obnovit rozvržení dlaždic";
+"ProfileRestoreTilesSubtitle" = "Při použití profilu rozbalte nebo sbalte dlaždice tak, aby odpovídaly uloženému rozvržení.";
 "ActionSaveCurrentSetupButton" = "Uložit aktuální nastavení";
 "ProfileNamePlaceholder" = "Název profilu";
 "ProfilesSettingsEmptyLabel" = "Zatím žádné profily. Ulož aktuální nastavení displejů pro vytvoření.";

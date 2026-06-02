@@ -123,6 +123,9 @@
 "ActionChangeButton" = "மாற்று";
 
 /* Settings Profiles */
+"ProfileBehaviorTitle" = "நடத்தை";
+"ProfileRestoreTilesTitle" = "நெகிழ் தட்டு அமைவை மீட்டமை";
+"ProfileRestoreTilesSubtitle" = "ஒரு சுயவிவரத்தைப் பயன்படுத்தும்போது, சேமித்த அமைவுக்கு பொருந்துமாறு நெகிழ் தட்டுகளை விரிக்கவும் அல்லது சுருக்கவும்.";
 "ActionSaveCurrentSetupButton" = "தற்போதைய அமைப்பைச் சேமி";
 "ProfileNamePlaceholder" = "சுயவிவர பெயர்";
 "ProfilesSettingsEmptyLabel" = "இன்னும் சுயவிவரங்கள் இல்லை. ஒன்றை உருவாக்க தற்போது உள்ள காட்சி அமைப்பைச் சேமிக்கவும்.";

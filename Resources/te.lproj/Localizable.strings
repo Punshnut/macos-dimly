@@ -123,6 +123,9 @@
 "ActionChangeButton" = "మార్చు";
 
 /* Settings Profiles */
+"ProfileBehaviorTitle" = "ప్రవర్తన";
+"ProfileRestoreTilesTitle" = "టైల్ లేఅవుట్‌ను పునరుద్ధరించు";
+"ProfileRestoreTilesSubtitle" = "ప్రొఫైల్ వర్తింపజేసేటప్పుడు, సేవ్ చేసిన లేఅవుట్‌తో సరిపోలేలా టైల్‌లను విస్తరించు లేదా కుదించు.";
 "ActionSaveCurrentSetupButton" = "ప్రస్తుత అమరిక సేవ్ చేయి";
 "ProfileNamePlaceholder" = "ప్రొఫైల్ పేరు";
 "ProfilesSettingsEmptyLabel" = "ఇంకా ప్రొఫైళ్లు లేవు. ఒకదాన్ని సృష్టించడానికి ప్రస్తుత డిస్ప్లే అమరికను సేవ్ చేయండి.";

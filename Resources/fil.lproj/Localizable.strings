@@ -144,6 +144,9 @@
 "ActionChangeButton" = "Palitan";
 
 /* Settings Profiles */
+"ProfileBehaviorTitle" = "Gawi";
+"ProfileRestoreTilesTitle" = "Ibalik ang layout ng mga tile";
+"ProfileRestoreTilesSubtitle" = "Kapag nag-apply ng profile, i-expand o i-collapse ang mga tile para tumugma sa naka-save na layout.";
 "ActionSaveCurrentSetupButton" = "I-save ang kasalukuyang setup";
 "ProfileNamePlaceholder" = "Pangalan ng profile";
 "ProfilesSettingsEmptyLabel" = "Wala pang profile. I-save ang kasalukuyang setup ng display upang gumawa ng isa.";

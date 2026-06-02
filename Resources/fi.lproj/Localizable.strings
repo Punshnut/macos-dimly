@@ -123,6 +123,9 @@
 "ActionChangeButton" = "Vaihda";
 
 /* Settings Profiles */
+"ProfileBehaviorTitle" = "Toiminta";
+"ProfileRestoreTilesTitle" = "Palauta ruutujen asettelu";
+"ProfileRestoreTilesSubtitle" = "Kun profiilia käytetään, laajenna tai pienennä ruutuja tallennettua asettelua vastaavaksi.";
 "ActionSaveCurrentSetupButton" = "Tallenna nykyinen asetus";
 "ProfileNamePlaceholder" = "Profiilin nimi";
 "ProfilesSettingsEmptyLabel" = "Ei profiileja. Tallenna nykyinen näyttöasetus luodaksesi yhden.";

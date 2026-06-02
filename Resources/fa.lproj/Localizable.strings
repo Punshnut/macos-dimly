@@ -123,6 +123,9 @@
 "ActionChangeButton" = "تغییر";
 
 /* Settings Profiles */
+"ProfileBehaviorTitle" = "رفتار";
+"ProfileRestoreTilesTitle" = "بازیابی چیدمان کاشی‌ها";
+"ProfileRestoreTilesSubtitle" = "هنگام اعمال یک نمایه، کاشی‌ها را برای تطابق با چیدمان ذخیره‌شده باز یا جمع کنید.";
 "ActionSaveCurrentSetupButton" = "ذخیره تنظیم فعلی";
 "ProfileNamePlaceholder" = "نام پروفایل";
 "ProfilesSettingsEmptyLabel" = "هنوز پروفایلی نیست. برای ساخت یکی، تنظیم فعلی نمایشگر را ذخیره کنید.";

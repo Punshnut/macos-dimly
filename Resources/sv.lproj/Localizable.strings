@@ -123,6 +123,9 @@
 "ActionChangeButton" = "Ändra";
 
 /* Settings Profiles */
+"ProfileBehaviorTitle" = "Beteende";
+"ProfileRestoreTilesTitle" = "Återställ panelernas layout";
+"ProfileRestoreTilesSubtitle" = "När en profil tillämpas, expandera eller dölj paneler för att matcha den sparade layouten.";
 "ActionSaveCurrentSetupButton" = "Spara aktuell konfiguration";
 "ProfileNamePlaceholder" = "Profilnamn";
 "ProfilesSettingsEmptyLabel" = "Inga profiler ännu. Spara den aktuella skärmkonfigurationen för att skapa en.";

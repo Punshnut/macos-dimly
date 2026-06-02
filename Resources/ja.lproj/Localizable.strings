@@ -123,6 +123,9 @@
 "ActionChangeButton" = "変更";
 
 /* Settings Profiles */
+"ProfileBehaviorTitle" = "動作";
+"ProfileRestoreTilesTitle" = "タイルのレイアウトを復元";
+"ProfileRestoreTilesSubtitle" = "プロファイルを適用するとき、保存されたレイアウトに合わせてタイルを展開または折りたたみます。";
 "ActionSaveCurrentSetupButton" = "現在の構成を保存";
 "ProfileNamePlaceholder" = "プロファイル名";
 "ProfilesSettingsEmptyLabel" = "まだプロファイルがありません。作成するには現在のディスプレイ構成を保存してください。";

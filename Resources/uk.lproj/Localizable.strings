@@ -123,6 +123,9 @@
 "ActionChangeButton" = "Змінити";
 
 /* Settings Profiles */
+"ProfileBehaviorTitle" = "Поведінка";
+"ProfileRestoreTilesTitle" = "Відновити розташування плиток";
+"ProfileRestoreTilesSubtitle" = "Під час застосування профілю розгортайте або згортайте плитки відповідно до збереженого розташування.";
 "ActionSaveCurrentSetupButton" = "Зберегти поточну схему";
 "ProfileNamePlaceholder" = "Назва профілю";
 "ProfilesSettingsEmptyLabel" = "Профілів немає. Збережіть поточну схему дисплеїв, щоб створити.";

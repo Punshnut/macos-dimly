@@ -123,6 +123,9 @@
 "ActionChangeButton" = "Változtatás";
 
 /* Settings Profiles */
+"ProfileBehaviorTitle" = "Viselkedés";
+"ProfileRestoreTilesTitle" = "Csempék elrendezésének visszaállítása";
+"ProfileRestoreTilesSubtitle" = "Profil alkalmazásakor bontsa ki vagy csukja össze a csempéket a mentett elrendezésnek megfelelően.";
 "ActionSaveCurrentSetupButton" = "Aktuális beállítás mentése";
 "ProfileNamePlaceholder" = "Profil neve";
 "ProfilesSettingsEmptyLabel" = "Még nincs profil. Mentsd az aktuális kijelző-beállítást egy létrehozásához.";

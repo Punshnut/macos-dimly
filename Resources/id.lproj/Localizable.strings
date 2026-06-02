@@ -123,6 +123,9 @@
 "ActionChangeButton" = "Ubah";
 
 /* Settings Profiles */
+"ProfileBehaviorTitle" = "Perilaku";
+"ProfileRestoreTilesTitle" = "Pulihkan tata letak ubin";
+"ProfileRestoreTilesSubtitle" = "Saat menerapkan profil, perluas atau ciutkan ubin agar sesuai dengan tata letak yang tersimpan.";
 "ActionSaveCurrentSetupButton" = "Simpan setelan saat ini";
 "ProfileNamePlaceholder" = "Nama profil";
 "ProfilesSettingsEmptyLabel" = "Belum ada profil. Simpan setelan layar saat ini untuk membuat satu.";

@@ -123,6 +123,9 @@
 "ActionChangeButton" = "ပြောင်း";
 
 /* Settings Profiles */
+"ProfileBehaviorTitle" = "အပြုအမူ";
+"ProfileRestoreTilesTitle" = "ကြွေပြားအပြင်အဆင်ကို ပြန်လည်ရယူပါ";
+"ProfileRestoreTilesSubtitle" = "ပရိုဖိုင်တစ်ခုကို ကျင့်သုံးသောအခါ သိမ်းဆည်းထားသော အပြင်အဆင်နှင့် ကိုက်ညီစေရန် ကြွေပြားများကို ချဲ့ သို့မဟုတ် ခေါက်ပါ။";
 "ActionSaveCurrentSetupButton" = "လက်ရှိ စနစ်သိမ်း";
 "ProfileNamePlaceholder" = "ပရိုဖိုင်အမည်";
 "ProfilesSettingsEmptyLabel" = "ပရိုဖိုင် မရှိသေးပါ။ တစ်ခု ဖန်တီးရန် လက်ရှိ ပြသမှုသီးသန့်ကို သိမ်းပါ။";

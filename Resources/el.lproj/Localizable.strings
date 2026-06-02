@@ -123,6 +123,9 @@
 "ActionChangeButton" = "Αλλαγή";
 
 /* Settings Profiles */
+"ProfileBehaviorTitle" = "Συμπεριφορά";
+"ProfileRestoreTilesTitle" = "Επαναφορά διάταξης πλακιδίων";
+"ProfileRestoreTilesSubtitle" = "Κατά την εφαρμογή ενός προφίλ, αναπτύξτε ή συμπτύξτε τα πλακίδια ώστε να ταιριάζουν με την αποθηκευμένη διάταξη.";
 "ActionSaveCurrentSetupButton" = "Αποθήκευση τρέχουσας διάταξης";
 "ProfileNamePlaceholder" = "Όνομα προφίλ";
 "ProfilesSettingsEmptyLabel" = "Δεν υπάρχουν προφίλ. Αποθήκευσε την τρέχουσα διάταξη για να δημιουργήσεις ένα.";
