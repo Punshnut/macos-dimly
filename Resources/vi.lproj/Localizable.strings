@@ -396,3 +396,10 @@
 
 "AutoBrightnessActiveHint" = "Độ sáng tự động";
 "AutoBrightnessInactiveHint" = "Độ sáng tự động tắt";
+/* Previously Seen Monitors */
+"ActionForgetMonitorButton" = "Quên";
+"ForgetMonitorAlertTitle" = "Quên màn hình này?";
+"ForgetMonitorAlertSubtitle" = "Điều này xóa tên đã lưu, tùy chọn và lịch sử độ sáng của màn hình này. Cài đặt sẽ trở về mặc định khi kết nối lại.";
+"PreviouslySeenMonitorsSectionTitle" = "Màn hình đã thấy trước đây";
+"PreviouslySeenMonitorsSectionSubtitle" = "Dimly ghi nhớ màn hình trong 90 ngày. Quên một màn hình sẽ xóa tên đã lưu và tùy chọn của nó.";
+"MonitorLastSeenLabel" = "Lần cuối thấy";

@@ -396,3 +396,10 @@
 
 "AutoBrightnessActiveHint" = "خودکار روشنی";
 "AutoBrightnessInactiveHint" = "خودکار روشنی بند";
+/* Previously Seen Monitors */
+"ActionForgetMonitorButton" = "بھولیں";
+"ForgetMonitorAlertTitle" = "کیا یہ مانیٹر بھول جائیں؟";
+"ForgetMonitorAlertSubtitle" = "یہ اس مانیٹر کا محفوظ نام، ترجیحات اور روشنی کی تاریخ حذف کر دے گا۔ دوبارہ منسلک ہونے پر ترتیبات ڈیفالٹ پر واپس آ جائیں گی۔";
+"PreviouslySeenMonitorsSectionTitle" = "پہلے دیکھے گئے مانیٹر";
+"PreviouslySeenMonitorsSectionSubtitle" = "Dimly مانیٹروں کو 90 دن تک یاد رکھتا ہے۔ مانیٹر کو بھولنے سے اس کا محفوظ نام اور ترجیحات ہٹ جاتی ہیں۔";
+"MonitorLastSeenLabel" = "آخری بار دیکھا گیا";

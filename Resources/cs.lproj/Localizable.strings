@@ -396,3 +396,10 @@
 
 "AutoBrightnessActiveHint" = "Automatický jas";
 "AutoBrightnessInactiveHint" = "Automatický jas vypnutý";
+/* Previously Seen Monitors */
+"ActionForgetMonitorButton" = "Zapomenout";
+"ForgetMonitorAlertTitle" = "Zapomenout na tento monitor?";
+"ForgetMonitorAlertSubtitle" = "Tím se vymaže uložený název, předvolby a historie jasu tohoto monitoru. Nastavení se obnoví na výchozí hodnoty po opětovném připojení.";
+"PreviouslySeenMonitorsSectionTitle" = "Dříve viděné monitory";
+"PreviouslySeenMonitorsSectionSubtitle" = "Dimly si pamatuje monitory po dobu 90 dnů. Zapomenutí monitoru odstraní jeho uložený název a předvolby.";
+"MonitorLastSeenLabel" = "Naposledy viděno";

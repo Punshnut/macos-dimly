@@ -396,3 +396,10 @@
 
 "AutoBrightnessActiveHint" = "自動輝度調節";
 "AutoBrightnessInactiveHint" = "自動輝度調節オフ";
+/* Previously Seen Monitors */
+"ActionForgetMonitorButton" = "削除";
+"ForgetMonitorAlertTitle" = "このモニターを削除しますか？";
+"ForgetMonitorAlertSubtitle" = "このモニターの保存済みの名前、設定、および輝度履歴が消去されます。再接続時に設定がデフォルトに戻ります。";
+"PreviouslySeenMonitorsSectionTitle" = "以前に検出されたモニター";
+"PreviouslySeenMonitorsSectionSubtitle" = "Dimlyはモニターを90日間記憶します。モニターを削除すると、保存済みの名前と設定が消去されます。";
+"MonitorLastSeenLabel" = "最終確認";

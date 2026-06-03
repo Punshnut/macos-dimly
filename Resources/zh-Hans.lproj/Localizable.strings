@@ -396,3 +396,10 @@
 
 "AutoBrightnessActiveHint" = "自动亮度";
 "AutoBrightnessInactiveHint" = "自动亮度关闭";
+/* Previously Seen Monitors */
+"ActionForgetMonitorButton" = "忘记";
+"ForgetMonitorAlertTitle" = "忘记此显示器？";
+"ForgetMonitorAlertSubtitle" = "这将清除此显示器的已保存名称、偏好设置和亮度历史记录。重新连接时设置将恢复为默认值。";
+"PreviouslySeenMonitorsSectionTitle" = "之前检测到的显示器";
+"PreviouslySeenMonitorsSectionSubtitle" = "Dimly 会记住显示器 90 天。忘记显示器将删除其已保存的名称和偏好设置。";
+"MonitorLastSeenLabel" = "上次出现";

@@ -396,3 +396,10 @@
 
 "AutoBrightnessActiveHint" = "Imọlẹ Aifọwọyi";
 "AutoBrightnessInactiveHint" = "Imọlẹ Aifọwọyi pa";
+/* Previously Seen Monitors */
+"ActionForgetMonitorButton" = "Gbagbe";
+"ForgetMonitorAlertTitle" = "Gbagbe atẹle yii?";
+"ForgetMonitorAlertSubtitle" = "Eyi yoo pa orukọ ti a fipamọ, awọn ayanfẹ, ati itan imọlẹ ti atẹle yii. Awọn eto yoo pada si awọn aiyipada nigbati o tun sopọ.";
+"PreviouslySeenMonitorsSectionTitle" = "Awọn atẹle ti a ti rii tẹlẹ";
+"PreviouslySeenMonitorsSectionSubtitle" = "Dimly ranti awọn atẹle fun ọjọ 90. Gbagbe atẹle kan yoo yọ orukọ ti a fipamọ ati awọn ayanfẹ rẹ kuro.";
+"MonitorLastSeenLabel" = "Kẹhin ti a rii";

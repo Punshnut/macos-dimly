@@ -396,3 +396,10 @@
 
 "AutoBrightnessActiveHint" = "স্বয়ংক্রিয় উজ্জ্বলতা";
 "AutoBrightnessInactiveHint" = "স্বয়ংক্রিয় উজ্জ্বলতা বন্ধ";
+/* Previously Seen Monitors */
+"ActionForgetMonitorButton" = "ভুলুন";
+"ForgetMonitorAlertTitle" = "এই মনিটর ভুলবেন?";
+"ForgetMonitorAlertSubtitle" = "এটি এই মনিটরের সংরক্ষিত নাম, পছন্দ এবং উজ্জ্বলতার ইতিহাস মুছে দেবে। পুনরায় সংযুক্ত হলে সেটিংস ডিফল্টে ফিরে আসবে।";
+"PreviouslySeenMonitorsSectionTitle" = "আগে দেখা মনিটর";
+"PreviouslySeenMonitorsSectionSubtitle" = "Dimly ৯০ দিনের জন্য মনিটর মনে রাখে। একটি মনিটর ভুলে গেলে এর সংরক্ষিত নাম এবং পছন্দ মুছে যায়।";
+"MonitorLastSeenLabel" = "সর্বশেষ দেখা";

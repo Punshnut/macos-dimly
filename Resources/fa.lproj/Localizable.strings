@@ -396,3 +396,10 @@
 
 "AutoBrightnessActiveHint" = "روشنایی خودکار";
 "AutoBrightnessInactiveHint" = "روشنایی خودکار غیرفعال";
+/* Previously Seen Monitors */
+"ActionForgetMonitorButton" = "فراموش کردن";
+"ForgetMonitorAlertTitle" = "این مانیتور فراموش شود؟";
+"ForgetMonitorAlertSubtitle" = "این نام ذخیره‌شده، تنظیمات برگزیده و تاریخچه روشنایی این مانیتور را پاک می‌کند. با اتصال مجدد، تنظیمات به پیش‌فرض بازمی‌گردند.";
+"PreviouslySeenMonitorsSectionTitle" = "مانیتورهای دیده‌شده قبلاً";
+"PreviouslySeenMonitorsSectionSubtitle" = "Dimly مانیتورها را به مدت ۹۰ روز به خاطر می‌سپارد. فراموش کردن یک مانیتور، نام ذخیره‌شده و تنظیمات برگزیده آن را حذف می‌کند.";
+"MonitorLastSeenLabel" = "آخرین مشاهده";

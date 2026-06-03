@@ -396,3 +396,10 @@
 
 "AutoBrightnessActiveHint" = "Automatische helderheid";
 "AutoBrightnessInactiveHint" = "Automatische helderheid uit";
+/* Previously Seen Monitors */
+"ActionForgetMonitorButton" = "Vergeten";
+"ForgetMonitorAlertTitle" = "Deze monitor vergeten?";
+"ForgetMonitorAlertSubtitle" = "Hiermee worden de opgeslagen naam, voorkeuren en helderheidsgeschiedenis van deze monitor gewist. Instellingen keren terug naar de standaardwaarden wanneer deze opnieuw wordt verbonden.";
+"PreviouslySeenMonitorsSectionTitle" = "Eerder geziene monitoren";
+"PreviouslySeenMonitorsSectionSubtitle" = "Dimly onthoudt monitoren 90 dagen. Een monitor vergeten verwijdert de opgeslagen naam en voorkeuren.";
+"MonitorLastSeenLabel" = "Laatst gezien";

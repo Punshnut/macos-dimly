@@ -396,3 +396,10 @@
 
 "AutoBrightnessActiveHint" = "Automatisk ljusstyrka";
 "AutoBrightnessInactiveHint" = "Automatisk ljusstyrka av";
+/* Previously Seen Monitors */
+"ActionForgetMonitorButton" = "Glöm";
+"ForgetMonitorAlertTitle" = "Glöm den här skärmen?";
+"ForgetMonitorAlertSubtitle" = "Detta rensar det sparade namnet, inställningarna och ljusstyrkans historik för den här skärmen. Inställningarna återgår till standardvärden när den ansluts igen.";
+"PreviouslySeenMonitorsSectionTitle" = "Tidigare sedda skärmar";
+"PreviouslySeenMonitorsSectionSubtitle" = "Dimly kommer ihåg skärmar i 90 dagar. Att glömma en skärm tar bort dess sparade namn och inställningar.";
+"MonitorLastSeenLabel" = "Senast sedd";

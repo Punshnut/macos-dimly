@@ -396,3 +396,10 @@
 
 "AutoBrightnessActiveHint" = "Kecerahan Automatik";
 "AutoBrightnessInactiveHint" = "Kecerahan Automatik dimatikan";
+/* Previously Seen Monitors */
+"ActionForgetMonitorButton" = "Lupakan";
+"ForgetMonitorAlertTitle" = "Lupakan monitor ini?";
+"ForgetMonitorAlertSubtitle" = "Ini membersihkan nama tersimpan, keutamaan dan sejarah kecerahan monitor ini. Tetapan akan kembali kepada lalai apabila disambungkan semula.";
+"PreviouslySeenMonitorsSectionTitle" = "Monitor yang pernah dilihat";
+"PreviouslySeenMonitorsSectionSubtitle" = "Dimly mengingat monitor selama 90 hari. Melupakan monitor akan membuang nama tersimpan dan keutamaannya.";
+"MonitorLastSeenLabel" = "Terakhir dilihat";

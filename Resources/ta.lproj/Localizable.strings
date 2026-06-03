@@ -396,3 +396,10 @@
 
 "AutoBrightnessActiveHint" = "தானியங்கி பிரகாசம்";
 "AutoBrightnessInactiveHint" = "தானியங்கி பிரகாசம் அணைந்துள்ளது";
+/* Previously Seen Monitors */
+"ActionForgetMonitorButton" = "மறந்திடு";
+"ForgetMonitorAlertTitle" = "இந்த மானிட்டரை மறந்திடவா?";
+"ForgetMonitorAlertSubtitle" = "இது இந்த மானிட்டரின் சேமிக்கப்பட்ட பெயர், விருப்பத்தேர்வுகள் மற்றும் பிரகாசம் வரலாற்றை அழிக்கும். மீண்டும் இணைக்கும்போது அமைப்புகள் இயல்புநிலைக்குத் திரும்பும்.";
+"PreviouslySeenMonitorsSectionTitle" = "முன்பு பார்க்கப்பட்ட மானிட்டர்கள்";
+"PreviouslySeenMonitorsSectionSubtitle" = "Dimly மானிட்டர்களை 90 நாட்கள் நினைவில் வைத்திருக்கும். ஒரு மானிட்டரை மறந்திடுவது சேமிக்கப்பட்ட பெயரையும் விருப்பத்தேர்வுகளையும் நீக்கும்.";
+"MonitorLastSeenLabel" = "கடைசியாக பார்க்கப்பட்டது";

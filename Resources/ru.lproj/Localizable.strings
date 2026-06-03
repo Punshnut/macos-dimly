@@ -396,3 +396,10 @@
 
 "AutoBrightnessActiveHint" = "Автоматическая яркость";
 "AutoBrightnessInactiveHint" = "Автоматическая яркость выключена";
+/* Previously Seen Monitors */
+"ActionForgetMonitorButton" = "Забыть";
+"ForgetMonitorAlertTitle" = "Забыть этот монитор?";
+"ForgetMonitorAlertSubtitle" = "Это удалит сохранённое имя, настройки и историю яркости этого монитора. При повторном подключении настройки вернутся к значениям по умолчанию.";
+"PreviouslySeenMonitorsSectionTitle" = "Ранее использованные мониторы";
+"PreviouslySeenMonitorsSectionSubtitle" = "Dimly запоминает мониторы на 90 дней. Удаление монитора из памяти удалит его сохранённое имя и настройки.";
+"MonitorLastSeenLabel" = "Последнее подключение";

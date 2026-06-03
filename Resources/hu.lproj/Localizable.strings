@@ -396,3 +396,10 @@
 
 "AutoBrightnessActiveHint" = "Automatikus fényerő";
 "AutoBrightnessInactiveHint" = "Automatikus fényerő kikapcsolva";
+/* Previously Seen Monitors */
+"ActionForgetMonitorButton" = "Elfelejt";
+"ForgetMonitorAlertTitle" = "Elfelejteni ezt a monitort?";
+"ForgetMonitorAlertSubtitle" = "Ez törli a monitor mentett nevét, beállításait és fényerő-előzményeit. A beállítások alapértékekre állnak vissza az újracsatlakozáskor.";
+"PreviouslySeenMonitorsSectionTitle" = "Korábban látott monitorok";
+"PreviouslySeenMonitorsSectionSubtitle" = "A Dimly 90 napig emlékszik a monitorokra. Egy monitor elfelejtése eltávolítja a mentett nevét és beállításait.";
+"MonitorLastSeenLabel" = "Utoljára látva";

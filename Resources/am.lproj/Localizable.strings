@@ -396,3 +396,10 @@
 
 "AutoBrightnessActiveHint" = "Auto-brightness on";
 "AutoBrightnessInactiveHint" = "Auto-brightness off";
+/* Previously Seen Monitors */
+"ActionForgetMonitorButton" = "ዘንጋ";
+"ForgetMonitorAlertTitle" = "ይህን ሞኒተር ትዘነጋለህ?";
+"ForgetMonitorAlertSubtitle" = "ይህ የዚህን ሞኒተር የተቀመጠ ስም፣ ምርጫዎች እና የብሩህነት ታሪክ ያጸዳል። ሲያገናኝ ቅንብሮቹ ወደ ነባሪ ይመለሳሉ።";
+"PreviouslySeenMonitorsSectionTitle" = "ቀደም ሲል የታዩ ሞኒተሮች";
+"PreviouslySeenMonitorsSectionSubtitle" = "Dimly ሞኒተሮችን ለ90 ቀናት ያስታውሳል። ሞኒተርን መዘንጋት የተቀመጠ ስሙን እና ምርጫዎቹን ያስወጣል።";
+"MonitorLastSeenLabel" = "ለመጨረሻ ጊዜ የታየ";

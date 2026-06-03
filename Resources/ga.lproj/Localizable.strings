@@ -396,3 +396,10 @@
 
 "AutoBrightnessActiveHint" = "Gile Uathoibríoch";
 "AutoBrightnessInactiveHint" = "Gile Uathoibríoch as";
+/* Previously Seen Monitors */
+"ActionForgetMonitorButton" = "Déan dearmad";
+"ForgetMonitorAlertTitle" = "Déan dearmad den mhonatóir seo?";
+"ForgetMonitorAlertSubtitle" = "Glanann sé seo an t-ainm sábháilte, na roghanna agus stair gile an mhonatóra seo. Fillfidh na socruithe ar na réamhshocruithe nuair a nasctar arís é.";
+"PreviouslySeenMonitorsSectionTitle" = "Monatóirí a chonacthas roimhe seo";
+"PreviouslySeenMonitorsSectionSubtitle" = "Cuimhníonn Dimly ar mhonatóirí ar feadh 90 lá. Má dhéantar dearmad de mhonatóir, bainfear a ainm sábháilte agus a roghanna.";
+"MonitorLastSeenLabel" = "Feicthe den uair dheireanach";

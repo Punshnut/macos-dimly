@@ -396,3 +396,10 @@
 
 "AutoBrightnessActiveHint" = "Automatyczna jasność";
 "AutoBrightnessInactiveHint" = "Automatyczna jasność wyłączona";
+/* Previously Seen Monitors */
+"ActionForgetMonitorButton" = "Zapomnij";
+"ForgetMonitorAlertTitle" = "Zapomnieć ten monitor?";
+"ForgetMonitorAlertSubtitle" = "Spowoduje to wyczyszczenie zapisanej nazwy, preferencji i historii jasności tego monitora. Ustawienia zostaną przywrócone do domyślnych po ponownym podłączeniu.";
+"PreviouslySeenMonitorsSectionTitle" = "Wcześniej widziane monitory";
+"PreviouslySeenMonitorsSectionSubtitle" = "Dimly zapamiętuje monitory przez 90 dni. Zapomnienie monitora usuwa jego zapisaną nazwę i preferencje.";
+"MonitorLastSeenLabel" = "Ostatnio widziany";

@@ -396,3 +396,10 @@
 
 "AutoBrightnessActiveHint" = "Автоматична яскравість";
 "AutoBrightnessInactiveHint" = "Автоматична яскравість вимкнена";
+/* Previously Seen Monitors */
+"ActionForgetMonitorButton" = "Забути";
+"ForgetMonitorAlertTitle" = "Забути цей монітор?";
+"ForgetMonitorAlertSubtitle" = "Це видалить збережену назву, налаштування та журнал яскравості цього монітора. Налаштування повернуться до стандартних значень після повторного підключення.";
+"PreviouslySeenMonitorsSectionTitle" = "Раніше підключені монітори";
+"PreviouslySeenMonitorsSectionSubtitle" = "Dimly запам'ятовує монітори протягом 90 днів. Забувши монітор, ви видалите його збережену назву та налаштування.";
+"MonitorLastSeenLabel" = "Останнє підключення";

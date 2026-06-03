@@ -396,3 +396,10 @@
 
 "AutoBrightnessActiveHint" = "స్వయంచాలక ప్రకాశం";
 "AutoBrightnessInactiveHint" = "స్వయంచాలక ప్రకాశం ఆఫ్";
+/* Previously Seen Monitors */
+"ActionForgetMonitorButton" = "మర్చిపో";
+"ForgetMonitorAlertTitle" = "ఈ మానిటర్‌ను మర్చిపోవాలా?";
+"ForgetMonitorAlertSubtitle" = "ఇది ఈ మానిటర్ యొక్క సేవ్ చేసిన పేరు, ప్రాధాన్యతలు మరియు ప్రకాశం చరిత్రను తొలగిస్తుంది. తిరిగి కనెక్ట్ అయినప్పుడు సెట్టింగ్‌లు డిఫాల్ట్‌లకు తిరిగి వస్తాయి.";
+"PreviouslySeenMonitorsSectionTitle" = "గతంలో చూసిన మానిటర్లు";
+"PreviouslySeenMonitorsSectionSubtitle" = "Dimly మానిటర్లను 90 రోజులు గుర్తుంచుకుంటుంది. మానిటర్‌ను మర్చిపోవడం దాని సేవ్ చేసిన పేరు మరియు ప్రాధాన్యతలను తొలగిస్తుంది.";
+"MonitorLastSeenLabel" = "చివరిగా చూసిన సమయం";

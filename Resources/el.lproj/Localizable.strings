@@ -396,3 +396,10 @@
 
 "AutoBrightnessActiveHint" = "Αυτόματη φωτεινότητα";
 "AutoBrightnessInactiveHint" = "Αυτόματη φωτεινότητα ανενεργή";
+/* Previously Seen Monitors */
+"ActionForgetMonitorButton" = "Ξεχάσε";
+"ForgetMonitorAlertTitle" = "Ξεχάσεις αυτή την οθόνη;";
+"ForgetMonitorAlertSubtitle" = "Αυτό διαγράφει το αποθηκευμένο όνομα, τις προτιμήσεις και το ιστορικό φωτεινότητας αυτής της οθόνης. Οι ρυθμίσεις επανέρχονται στις προεπιλογές όταν συνδεθεί ξανά.";
+"PreviouslySeenMonitorsSectionTitle" = "Οθόνες που εντοπίστηκαν προηγουμένως";
+"PreviouslySeenMonitorsSectionSubtitle" = "Το Dimly θυμάται τις οθόνες για 90 ημέρες. Η λήθη μιας οθόνης αφαιρεί το αποθηκευμένο όνομα και τις προτιμήσεις της.";
+"MonitorLastSeenLabel" = "Τελευταία εμφάνιση";

@@ -396,3 +396,10 @@
 
 "AutoBrightnessActiveHint" = "Automaattinen kirkkaus";
 "AutoBrightnessInactiveHint" = "Automaattinen kirkkaus pois";
+/* Previously Seen Monitors */
+"ActionForgetMonitorButton" = "Unohda";
+"ForgetMonitorAlertTitle" = "Unohdetaanko tämä näyttö?";
+"ForgetMonitorAlertSubtitle" = "Tämä poistaa tämän näytön tallennetun nimen, asetukset ja kirkkauden historian. Asetukset palautuvat oletusarvoihin, kun näyttö yhdistetään uudelleen.";
+"PreviouslySeenMonitorsSectionTitle" = "Aiemmin nähdyt näytöt";
+"PreviouslySeenMonitorsSectionSubtitle" = "Dimly muistaa näytöt 90 päivää. Näytön unohtaminen poistaa sen tallennetun nimen ja asetukset.";
+"MonitorLastSeenLabel" = "Viimeksi nähty";

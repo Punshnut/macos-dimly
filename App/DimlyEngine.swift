@@ -782,6 +782,23 @@ final class DimlyEngine: ObservableObject {
         }
     }
 
+    /// Removes all stored state for a monitor, as if it was never seen.
+    func forgetMonitor(id: String) {
+        settingsStore.update { settings in
+            settings.monitorBrightnessByDisplayID.removeValue(forKey: id)
+            settings.monitorPowerStateByDisplayID.removeValue(forKey: id)
+            settings.displayAliases.removeValue(forKey: id)
+            settings.overlayOnlyDisplayIDs.removeAll { $0 == id }
+            settings.menuBarExcludedDisplayIDs.removeAll { $0 == id }
+            settings.menuBarIncludedInternalDisplayIDs.removeAll { $0 == id }
+            settings.externalDisplayOrder.removeAll { $0 == id }
+            settings.internalDisplayOrder.removeAll { $0 == id }
+            settings.mergedDisplayOrder.removeAll { $0 == id }
+            settings.brightnessPanelExpandedDisplayIDs.removeAll { $0 == id }
+            settings.monitorLastSeenAtByDisplayID.removeValue(forKey: id)
+        }
+    }
+
     /// Releases hotkeys and removes overlays before app termination.
     func cleanupBeforeExit() {
         DiagnosticsLogger.shared.log("Cleanup before exit", category: "engine")
@@ -1557,35 +1574,17 @@ final class DimlyEngine: ObservableObject {
         let cutoff = now.addingTimeInterval(-TimeInterval(monitorStateRetentionDays * 24 * 60 * 60))
 
         settingsStore.update { settings in
-            var lastSeen = settings.monitorLastSeenAtByDisplayID
             for id in liveIDs {
-                lastSeen[id] = now
+                settings.monitorLastSeenAtByDisplayID[id] = now
             }
+        }
 
-            let staleIDs = lastSeen.compactMap { id, seenAt -> String? in
-                guard liveIDs.contains(id) == false else { return nil }
-                return seenAt < cutoff ? id : nil
-            }
-            guard staleIDs.isEmpty == false else {
-                settings.monitorLastSeenAtByDisplayID = lastSeen
-                return
-            }
-
-            let staleSet = Set(staleIDs)
-            staleSet.forEach { id in
-                lastSeen.removeValue(forKey: id)
-                settings.monitorBrightnessByDisplayID.removeValue(forKey: id)
-                settings.monitorPowerStateByDisplayID.removeValue(forKey: id)
-                settings.displayAliases.removeValue(forKey: id)
-            }
-            settings.overlayOnlyDisplayIDs.removeAll { staleSet.contains($0) }
-            settings.menuBarExcludedDisplayIDs.removeAll { staleSet.contains($0) }
-            settings.menuBarIncludedInternalDisplayIDs.removeAll { staleSet.contains($0) }
-            settings.externalDisplayOrder.removeAll { staleSet.contains($0) }
-            settings.internalDisplayOrder.removeAll { staleSet.contains($0) }
-            settings.mergedDisplayOrder.removeAll { staleSet.contains($0) }
-            settings.brightnessPanelExpandedDisplayIDs.removeAll { staleSet.contains($0) }
-            settings.monitorLastSeenAtByDisplayID = lastSeen
+        let staleIDs = settingsStore.settings.monitorLastSeenAtByDisplayID.compactMap { id, seenAt -> String? in
+            guard liveIDs.contains(id) == false else { return nil }
+            return seenAt < cutoff ? id : nil
+        }
+        for id in staleIDs {
+            forgetMonitor(id: id)
         }
     }
 

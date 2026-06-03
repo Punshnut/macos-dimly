@@ -384,3 +384,11 @@
 
 "AutoBrightnessActiveHint" = "Auto-brightness on";
 "AutoBrightnessInactiveHint" = "Auto-brightness off";
+
+/* Previously Seen Monitors */
+"ActionForgetMonitorButton" = "Forget";
+"ForgetMonitorAlertTitle" = "Forget This Monitor?";
+"ForgetMonitorAlertSubtitle" = "This clears the saved name, preferences, and brightness history for this monitor. Settings return to defaults when it reconnects.";
+"PreviouslySeenMonitorsSectionTitle" = "Previously Seen Monitors";
+"PreviouslySeenMonitorsSectionSubtitle" = "Dimly remembers monitors for 90 days. Forgetting a monitor removes its saved name and preferences.";
+"MonitorLastSeenLabel" = "Last seen";

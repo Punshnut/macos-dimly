@@ -394,3 +394,10 @@
 
 "AutoBrightnessActiveHint" = "Auto-brightness on";
 "AutoBrightnessInactiveHint" = "Auto Brightness off";
+/* Previously Seen Monitors */
+"ActionForgetMonitorButton" = "Kalimutan";
+"ForgetMonitorAlertTitle" = "Kalimutang ang monitor na ito?";
+"ForgetMonitorAlertSubtitle" = "Aalisin nito ang nakaimbak na pangalan, mga kagustuhan, at kasaysayan ng liwanag ng monitor na ito. Mababalik sa mga default ang mga setting kapag muling nakakonekta.";
+"PreviouslySeenMonitorsSectionTitle" = "Mga monitor na nakita noon";
+"PreviouslySeenMonitorsSectionSubtitle" = "Itinatanda ng Dimly ang mga monitor nang 90 araw. Ang pagkalimot sa isang monitor ay aalisin ang nakaimbak na pangalan at mga kagustuhan nito.";
+"MonitorLastSeenLabel" = "Huling nakita";

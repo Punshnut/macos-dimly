@@ -396,3 +396,10 @@
 
 "AutoBrightnessActiveHint" = "အလိုအလျောက် အလင်းထု";
 "AutoBrightnessInactiveHint" = "အလိုအလျောက် အလင်းထု ပိတ်";
+/* Previously Seen Monitors */
+"ActionForgetMonitorButton" = "မေ့မြစ်";
+"ForgetMonitorAlertTitle" = "ဤမော်နီတာကို မေ့မြစ်မည်လား?";
+"ForgetMonitorAlertSubtitle" = "ဤသည် ဤမော်နီတာ၏ သိမ်းဆည်းထားသောအမည်၊ နှစ်သက်မှုများနှင့် အတောက်ပမှ မှတ်တမ်းကို ဖျက်သည်။ ပြန်ချိတ်ဆက်သောအခါ ဆက်တင်များသည် မူလတန်ဖိုးများသို့ ပြန်လာမည်။";
+"PreviouslySeenMonitorsSectionTitle" = "ယခင်ကတွေ့ဖူးသောမော်နီတာများ";
+"PreviouslySeenMonitorsSectionSubtitle" = "Dimly သည် မော်နီတာများကို ၉၀ ရက်ကြာ မှတ်သားထားသည်။ မော်နီတာကို မေ့မြစ်ခြင်းသည် သိမ်းဆည်းထားသောအမည်နှင့် နှစ်သက်မှုများကို ဖျက်သည်။";
+"MonitorLastSeenLabel" = "နောက်ဆုံးတွေ့ဆုံ";

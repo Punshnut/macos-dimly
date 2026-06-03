@@ -396,3 +396,10 @@
 
 "AutoBrightnessActiveHint" = "Otomatik Parlaklık";
 "AutoBrightnessInactiveHint" = "Otomatik Parlaklık kapalı";
+/* Previously Seen Monitors */
+"ActionForgetMonitorButton" = "Unut";
+"ForgetMonitorAlertTitle" = "Bu monitör unutulsun mu?";
+"ForgetMonitorAlertSubtitle" = "Bu, monitörün kayıtlı adını, tercihlerini ve parlaklık geçmişini temizler. Yeniden bağlandığında ayarlar varsayılanlara döner.";
+"PreviouslySeenMonitorsSectionTitle" = "Daha önce görülen monitörler";
+"PreviouslySeenMonitorsSectionSubtitle" = "Dimly, monitörleri 90 gün boyunca hatırlar. Bir monitörü unutmak, kaydedilen adını ve tercihlerini siler.";
+"MonitorLastSeenLabel" = "Son görülme";

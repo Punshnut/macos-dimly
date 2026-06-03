@@ -396,3 +396,10 @@
 
 "AutoBrightnessActiveHint" = "स्वत: चमक";
 "AutoBrightnessInactiveHint" = "स्वत: चमक बंद";
+/* Previously Seen Monitors */
+"ActionForgetMonitorButton" = "भूलें";
+"ForgetMonitorAlertTitle" = "इस मॉनीटर को भूलें?";
+"ForgetMonitorAlertSubtitle" = "यह इस मॉनीटर का सहेजा गया नाम, प्राथमिकताएं और चमक का इतिहास हटा देता है। पुनः जुड़ने पर सेटिंग डिफ़ॉल्ट पर वापस आ जाएगी।";
+"PreviouslySeenMonitorsSectionTitle" = "पहले देखे गए मॉनीटर";
+"PreviouslySeenMonitorsSectionSubtitle" = "Dimly मॉनीटर को 90 दिनों तक याद रखता है। मॉनीटर भूलने से उसका सहेजा गया नाम और प्राथमिकताएं हट जाती हैं।";
+"MonitorLastSeenLabel" = "अंतिम बार देखा";

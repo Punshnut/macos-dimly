@@ -396,3 +396,10 @@
 
 "AutoBrightnessActiveHint" = "Luminosità automatica";
 "AutoBrightnessInactiveHint" = "Luminosità automatica disattivata";
+/* Previously Seen Monitors */
+"ActionForgetMonitorButton" = "Dimentica";
+"ForgetMonitorAlertTitle" = "Dimenticare questo monitor?";
+"ForgetMonitorAlertSubtitle" = "Questo cancella il nome salvato, le preferenze e la cronologia della luminosità di questo monitor. Le impostazioni tornano ai valori predefiniti quando viene ricollegato.";
+"PreviouslySeenMonitorsSectionTitle" = "Monitor visti in precedenza";
+"PreviouslySeenMonitorsSectionSubtitle" = "Dimly ricorda i monitor per 90 giorni. Dimenticare un monitor ne rimuove il nome salvato e le preferenze.";
+"MonitorLastSeenLabel" = "Ultima visione";

@@ -396,3 +396,10 @@
 
 "AutoBrightnessActiveHint" = "السطوع التلقائي";
 "AutoBrightnessInactiveHint" = "السطوع التلقائي معطل";
+/* Previously Seen Monitors */
+"ActionForgetMonitorButton" = "نسيان";
+"ForgetMonitorAlertTitle" = "هل تريد نسيان هذه الشاشة؟";
+"ForgetMonitorAlertSubtitle" = "سيؤدي هذا إلى مسح الاسم المحفوظ والتفضيلات وسجل السطوع لهذه الشاشة. ستعود الإعدادات إلى الافتراضية عند إعادة الاتصال.";
+"PreviouslySeenMonitorsSectionTitle" = "الشاشات التي تمت رؤيتها سابقًا";
+"PreviouslySeenMonitorsSectionSubtitle" = "يتذكر Dimly الشاشات لمدة 90 يومًا. نسيان شاشة يزيل اسمها المحفوظ وتفضيلاتها.";
+"MonitorLastSeenLabel" = "آخر ظهور";

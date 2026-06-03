@@ -151,6 +151,18 @@ struct SettingsRootView: View {
         return mapping
     }
 
+    /// Confirms and removes all stored state for a monitor.
+    private func confirmAndForgetMonitor(_ display: DisplayInfo) {
+        let alert = NSAlert()
+        alert.messageText = String(localized: "ForgetMonitorAlertTitle")
+        alert.informativeText = String(localized: "ForgetMonitorAlertSubtitle")
+        alert.addButton(withTitle: String(localized: "ActionForgetMonitorButton"))
+        alert.addButton(withTitle: String(localized: "ActionCancelButton"))
+        if AlertPresentation.runModalOnCursorScreen(alert) == .alertFirstButtonReturn {
+            engine.forgetMonitor(id: display.stableIdentity)
+        }
+    }
+
     /// Prompts to rename a display and persists the alias in settings.
     private func renameDisplay(_ display: DisplayInfo, currentName: String) {
         let alert = NSAlert()
@@ -221,6 +233,11 @@ struct SettingsRootView: View {
                     Spacer()
                     Button(String(localized: "ActionRenameLabel")) {
                         renameDisplay(display, currentName: name)
+                    }
+                    .buttonStyle(.bordered)
+                    .controlSize(.small)
+                    Button(String(localized: "ActionForgetMonitorButton")) {
+                        confirmAndForgetMonitor(display)
                     }
                     .buttonStyle(.bordered)
                     .controlSize(.small)
@@ -686,6 +703,61 @@ struct SettingsRootView: View {
                         }
                     }
                 }
+
+                let offline = offlineRememberedMonitors
+                if !offline.isEmpty {
+                    SettingsCard(
+                        title: String(localized: "PreviouslySeenMonitorsSectionTitle"),
+                        subtitle: String(localized: "PreviouslySeenMonitorsSectionSubtitle")
+                    ) {
+                        ForEach(offline, id: \.id) { monitor in
+                            HStack(alignment: .center, spacing: 10) {
+                                SettingsIcon(systemName: "display.trianglebadge.exclamationmark")
+                                VStack(alignment: .leading, spacing: 2) {
+                                    Text(monitor.name)
+                                        .font(.callout.weight(.semibold))
+                                    HStack(spacing: 4) {
+                                        Text(String(localized: "MonitorLastSeenLabel"))
+                                        Text(monitor.lastSeen, style: .date)
+                                    }
+                                    .font(.caption)
+                                    .foregroundStyle(.secondary)
+                                }
+                                Spacer()
+                                Button(String(localized: "ActionForgetMonitorButton")) {
+                                    engine.forgetMonitor(id: monitor.id)
+                                }
+                                .buttonStyle(.bordered)
+                                .controlSize(.small)
+                            }
+                            .padding(.vertical, 2)
+                            if monitor.id != offline.last?.id {
+                                SettingsDivider()
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        /// Offline monitors that Dimly still has stored state for, sorted most-recent-first.
+        private var offlineRememberedMonitors: [(id: String, lastSeen: Date, name: String)] {
+            let liveIDs = Set(displayManager.displays.map(\.stableIdentity))
+            let remembered = settingsStore.settings.monitorLastSeenAtByDisplayID
+                .filter { !liveIDs.contains($0.key) }
+                .map { (id: $0.key, lastSeen: $0.value) }
+                .sorted { $0.lastSeen > $1.lastSeen }
+            return remembered.map { entry in
+                if let alias = settingsStore.settings.displayAliases[entry.id],
+                   !alias.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
+                    return (id: entry.id, lastSeen: entry.lastSeen, name: alias)
+                }
+                for profile in profileManager.profiles {
+                    for snapshot in profile.displays where snapshot.id == entry.id {
+                        if let snapshotName = snapshot.name { return (id: entry.id, lastSeen: entry.lastSeen, name: snapshotName) }
+                    }
+                }
+                return (id: entry.id, lastSeen: entry.lastSeen, name: String(localized: "DisplayTypeExternalLabel"))
             }
         }
 

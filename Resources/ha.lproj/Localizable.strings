@@ -396,3 +396,10 @@
 
 "AutoBrightnessActiveHint" = "Haske Mai Atomatik";
 "AutoBrightnessInactiveHint" = "Haske Mai Atomatik kashe";
+/* Previously Seen Monitors */
+"ActionForgetMonitorButton" = "Manta";
+"ForgetMonitorAlertTitle" = "Mantan wannan allo?";
+"ForgetMonitorAlertSubtitle" = "Wannan zai share sunan da aka adana, zaɓuɓɓuka, da tarihin haske na wannan allon. Saitunan za su koma na asali idan aka sake haɗa.";
+"PreviouslySeenMonitorsSectionTitle" = "Allauna da aka gani a baya";
+"PreviouslySeenMonitorsSectionSubtitle" = "Dimly yana tunawa da allauna na kwanaki 90. Mantawa da allo zai cire sunansa da aka adana da zaɓuɓɓukansa.";
+"MonitorLastSeenLabel" = "Karshen ganawa";

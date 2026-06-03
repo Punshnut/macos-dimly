@@ -396,3 +396,10 @@
 
 "AutoBrightnessActiveHint" = "Mwanga wa Kiotomati";
 "AutoBrightnessInactiveHint" = "Mwanga wa Kiotomati umezimwa";
+/* Previously Seen Monitors */
+"ActionForgetMonitorButton" = "Sahau";
+"ForgetMonitorAlertTitle" = "Sahau mfuatiliaji huu?";
+"ForgetMonitorAlertSubtitle" = "Hii itafuta jina lililohifadhiwa, mapendeleo na historia ya mwangaza wa mfuatiliaji huu. Mipangilio itarudi kwa mipangilio chaguo-msingi inapounganishwa tena.";
+"PreviouslySeenMonitorsSectionTitle" = "Mfuatiliaji walioonekana awali";
+"PreviouslySeenMonitorsSectionSubtitle" = "Dimly inakumbuka mfuatiliaji kwa siku 90. Kusahau mfuatiliaji kunaondoa jina lake lililohifadhiwa na mapendeleo.";
+"MonitorLastSeenLabel" = "Ilionekana mwisho";

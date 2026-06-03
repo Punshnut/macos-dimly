@@ -396,3 +396,10 @@
 
 "AutoBrightnessActiveHint" = "자동 밝기";
 "AutoBrightnessInactiveHint" = "자동 밝기 꺼짐";
+/* Previously Seen Monitors */
+"ActionForgetMonitorButton" = "삭제";
+"ForgetMonitorAlertTitle" = "이 모니터를 잊어버릴까요?";
+"ForgetMonitorAlertSubtitle" = "이 모니터의 저장된 이름, 환경설정 및 밝기 기록이 지워집니다. 다시 연결하면 설정이 기본값으로 돌아옵니다.";
+"PreviouslySeenMonitorsSectionTitle" = "이전에 감지된 모니터";
+"PreviouslySeenMonitorsSectionSubtitle" = "Dimly는 90일 동안 모니터를 기억합니다. 모니터를 잊으면 저장된 이름과 환경설정이 삭제됩니다.";
+"MonitorLastSeenLabel" = "마지막으로 확인됨";

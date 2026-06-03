@@ -396,3 +396,10 @@
 
 "AutoBrightnessActiveHint" = "Brillantor automàtica";
 "AutoBrightnessInactiveHint" = "Brillantor automàtica desactivada";
+/* Previously Seen Monitors */
+"ActionForgetMonitorButton" = "Oblida";
+"ForgetMonitorAlertTitle" = "Oblidar aquest monitor?";
+"ForgetMonitorAlertSubtitle" = "Això esborra el nom desat, les preferències i l'historial de brillantor d'aquest monitor. La configuració tornarà als valors predeterminats quan es torni a connectar.";
+"PreviouslySeenMonitorsSectionTitle" = "Monitors vistos anteriorment";
+"PreviouslySeenMonitorsSectionSubtitle" = "Dimly recorda els monitors durant 90 dies. Oblidar un monitor elimina el seu nom desat i les seves preferències.";
+"MonitorLastSeenLabel" = "Vist per última vegada";

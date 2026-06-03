@@ -396,3 +396,10 @@
 
 "AutoBrightnessActiveHint" = "ความสว่างอัตโนมัติ";
 "AutoBrightnessInactiveHint" = "ความสว่างอัตโนมัติปิด";
+/* Previously Seen Monitors */
+"ActionForgetMonitorButton" = "ลืม";
+"ForgetMonitorAlertTitle" = "ลืมจอภาพนี้?";
+"ForgetMonitorAlertSubtitle" = "การดำเนินการนี้จะล้างชื่อที่บันทึก ค่ากำหนด และประวัติความสว่างของจอภาพนี้ การตั้งค่าจะกลับสู่ค่าเริ่มต้นเมื่อเชื่อมต่ออีกครั้ง";
+"PreviouslySeenMonitorsSectionTitle" = "จอภาพที่เคยตรวจพบ";
+"PreviouslySeenMonitorsSectionSubtitle" = "Dimly จดจำจอภาพไว้ 90 วัน การลืมจอภาพจะลบชื่อที่บันทึกและค่ากำหนดออก";
+"MonitorLastSeenLabel" = "เห็นล่าสุด";

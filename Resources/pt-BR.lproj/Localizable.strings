@@ -396,3 +396,10 @@
 
 "AutoBrightnessActiveHint" = "Brilho automático";
 "AutoBrightnessInactiveHint" = "Brilho automático desativado";
+/* Previously Seen Monitors */
+"ActionForgetMonitorButton" = "Esquecer";
+"ForgetMonitorAlertTitle" = "Esquecer este monitor?";
+"ForgetMonitorAlertSubtitle" = "Isso apaga o nome salvo, as preferências e o histórico de brilho deste monitor. As configurações voltam aos padrões quando ele for reconectado.";
+"PreviouslySeenMonitorsSectionTitle" = "Monitores vistos anteriormente";
+"PreviouslySeenMonitorsSectionSubtitle" = "O Dimly lembra os monitores por 90 dias. Esquecer um monitor remove seu nome salvo e suas preferências.";
+"MonitorLastSeenLabel" = "Visto pela última vez";
