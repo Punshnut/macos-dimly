@@ -1,6 +1,6 @@
 # Dimly
 
-Dimly is a free, open-source, lightweight macOS menu bar control center for multi-monitor setups. It gives you per-display brightness and reliable per-display on/off behavior, using true DDC control when available and overlay fallback when it is not, so mixed monitor fleets behave like one coherent setup.
+Dimly is a free, open-source macOS menu bar app for multi-monitor brightness and display control. It uses true DDC/CI hardware control when available, and automatically falls back to overlay mode when it isn't - so every display in a mixed setup stays controllable from one place.
 
 <p align="center">
   <img src="https://img.shields.io/badge/macOS-native-000000?style=flat&logo=apple" alt="macOS native">
@@ -27,19 +27,19 @@ Dimly is a free, open-source, lightweight macOS menu bar control center for mult
   </details>
 </div>
 
-## Big hits
+---
 
-- **True per-display control** - Brightness, blackout, sleep, wake, rename, and copy ID per monitor from one menu.
-- **DDC first, overlay fallback** - Hardware brightness and sleep/wake when possible; smooth fallback when DDC is unavailable.
-- **Instant blackout + safe recovery** - Fast glare kill plus fixed panic hotkey to restore all displays.
-- **Profiles + smart buttons** - Save monitor states, reorder profiles, and pin up to 4 smart profile buttons per row.
-- **Profile automation** - Auto-apply a selected profile when external displays connect.
-- **Targeted shortcuts** - Global hotkeys for all externals or specific displays.
-- **Visibility controls** - Show display numbers, merge internal/external ordering, and hide selected monitors from the menu list.
-- **Flexible interface** - Simple/advanced mode, appearance options (system/light/dark), and optional colorless smart buttons.
-- **Backup and restore** - Import/export general settings and monitor settings independently.
-- **Stealth mode** - Hide Dock and menu bar icon while keeping hotkeys active.
-- **Universal + updates** - Intel/Apple Silicon builds with Sparkle updates through GitHub.
+## Features
+
+- **Per-display brightness** - hardware DDC control or smooth overlay fallback, per monitor
+- **Sleep, wake, and blackout** - instant blackout overlay plus true DDC standby when supported
+- **Profiles** - save and apply named display setups in one click; pin them as Smart Buttons in the menu bar
+- **Schedule** - auto-apply profiles at fixed times or at sunrise/sunset based on your location
+- **Global hotkeys** - assign keyboard shortcuts per display or for all externals at once
+- **Profile automation** - auto-apply a profile when a specific external display connects
+- **Stealth mode** - hide the menu bar icon and Dock entry; hotkeys keep working
+- **Backup and restore** - export and import general settings and monitor settings independently
+- **Panic hotkey** - `Ctrl` + `Option` + `Shift` + `P` always restores all displays, no matter what
 
 <p align="center">
   <a href="Media/Screenshots/Dimly_Simple_Minimized.png">
@@ -49,79 +49,31 @@ Dimly is a free, open-source, lightweight macOS menu bar control center for mult
   <sub>Screenshot: Simple mode</sub>
 </p>
 
-## What it actually does
-
-- **Display inventory + tracking** - live monitor list, reconnect handling, and stable per-display identity.
-- **Brightness pipeline** - DDC brightness where supported, overlay brightness where not.
-- **Power controls** - DDC standby/wake with immediate blackout fallback when unsupported.
-- **State persistence** - blackout and profile state survives monitor reconnects.
-- **Hotkey system** - fixed panic hotkey plus customizable targeted bindings.
-- **Profiles workflow** - save, apply, rename, reorder, and optional smart-button surfacing in Quick Actions.
-- **Automation** - optional profile auto-apply when external monitors connect.
-- **Settings backup** - selective import/export for general app settings and monitor-specific settings.
-- **Diagnostics** - copy display report and open local diagnostics log quickly.
-- **App behavior controls** - launch at login, hide Dock icon, hide menu icon, and keep running for shortcuts.
-
 ## How it works
 
-1. Dimly sits in your menu bar. Click it or hit your hotkey.
-2. Open a display tile and set **Brightness** per display.
-3. If the monitor supports DDC/CI, Dimly uses true hardware brightness and standby/wake.
-4. If it does not support DDC/CI, Dimly automatically uses **Overlay mode** for brightness and blackout fallback for on/off behavior.
-5. Dimly tracks display changes, keeps state consistent, and can show numbered overlays for quick identification.
-
-## Why this exists
-
-I’ve worked on desks with 8-12 mixed monitors and uneven DDC support, where fast control matters more than perfect hardware. Dimly is built so every screen stays controllable in one clean flow.
-
-## Keyboard & mouse
-
-- **Show/hide Dimly menu popup:** default `Cmd` + `Ctrl` + `Option` + `M` (falls back to normal application window when menu bar icon is hidden).
-- **Set your own hotkeys:** assign bindings for blackout, sleep/wake, or menu toggle for all externals or specific displays.
-- **Option-click icon:** toggle blackout overlay on all externals.
-- **Control-click icon:** toggle sleep/wake (with blackout fallback).
-- **Restore everything:** fixed panic hotkey `Ctrl` + `Option` + `Shift` + `P`.
-- **Per-display actions:** brightness, sleep, wake, blackout, rename, and copy IDs from each display row.
-- **Close quickly:** press Esc or click away; the menu bar extra behaves like built-in menus.
-
-## Quick tips
-
-- Turn on **Show Display Numbers** when rearranging or labeling screens.
-- Rename displays once so menus show friendly names instead of model strings.
-- Use per-display **Brightness** first, then sleep/wake only when you actually want displays off.
-- In mixed monitor setups, expect a blend of DDC and overlay mode; this is exactly what Dimly is designed for.
-- If DDC/CI is supported, prefer **Sleep** for true power-off; otherwise blackout remains instant and reliable.
-- Use **Profiles** + **Show as smart button** to pin your most-used monitor setups into Quick Actions.
-- Use **Settings backup** before major changes so you can import just general or monitor settings later.
-- Hide the menu bar icon if you want a stealth setup; hotkeys keep working.
-- Use **Copy Display Report** or **Open Diagnostics Log** for fast support/debugging.
+1. Dimly sits in the menu bar. Click it to open the panel.
+2. Expand a display tile and drag the **Brightness** slider.
+3. If the monitor supports DDC/CI, brightness and sleep/wake go directly to the hardware.
+4. If not, Dimly uses **Overlay mode** - a transparent dimming layer that works on every display.
+5. Save your current setup as a **Profile** to restore it anytime, automatically, or on a schedule.
 
 ## DDC/CI and external monitors
 
-**What is DDC/CI and what does Dimly do with it?**
+DDC/CI is the protocol Dimly uses to send hardware brightness and standby commands over the display cable. When it works, the monitor's actual hardware brightness changes. When it doesn't, Dimly falls back to overlay mode automatically. Both are fully functional - DDC is just better when available.
 
-DDC/CI (Display Data Channel Command Interface) is the protocol Dimly uses to send hardware brightness and sleep/wake commands to external monitors over the display cable. When it works, the monitor's actual hardware brightness changes. When it doesn't, Dimly automatically falls back to **overlay mode**, which dims the screen visually without touching hardware. Both modes are fully functional - DDC is just better when available.
-
-Whether DDC works depends on three things in combination: your **Mac architecture**, the **cable and connection type**, and the **monitor itself**. The sections below cover each.
-
-</details>
-
----
+Whether DDC works depends on your **Mac architecture**, **cable type**, and the **monitor itself**.
 
 <details>
 <summary><strong>Apple Silicon Macs (M1, M2, M3, M4 and later)</strong></summary>
 <br>
 
-Apple Silicon replaced the old IOFramebuffer display stack with a new DCP (Display Controller Processor) architecture. The legacy IOKit I2C APIs that Intel-era apps rely on do not function on M-series hardware - they silently fail at the driver level, causing DDC to appear unsupported for all external monitors.
+Apple Silicon uses a new DCP display stack. Legacy IOKit I2C APIs silently fail on M-series hardware, so Dimly uses `IOAVService` APIs instead - the same approach as MonitorControl, Lunar, and BetterDisplay.
 
-**Dimly 1.5+ uses the correct Apple Silicon DDC path** via `IOAVService` APIs (the same approach used by MonitorControl, Lunar, m1ddc, and BetterDisplay). DDC now works on M-series Macs - but only with compatible connection types.
+**DDC works on Apple Silicon, but only with compatible connections:**
 
-**Apple Silicon DDC checklist:**
-
-- Use **USB-C with DisplayPort Alt Mode** or a direct **Thunderbolt cable** to the monitor. This is the highest-reliability connection on M-series Macs.
-- **HDMI does not support DDC on Apple Silicon.** This is a hardware limitation of Apple's HDMI port on all M-series Macs and Mac mini (2018+). Switching from HDMI to USB-C/DisplayPort will fix DDC.
-- Mini DisplayPort via a Thunderbolt adapter also works on most monitors.
-- If you upgraded from an older Dimly build and DDC suddenly works - this is why.
+- **USB-C (DisplayPort Alt Mode)** or **Thunderbolt** - highest reliability
+- **HDMI does not carry DDC on Apple Silicon** - a hardware limitation on all M-series Macs and Mac mini (2018+). Switch to USB-C/DisplayPort to get DDC.
+- Mini DisplayPort via Thunderbolt adapter also works on most monitors.
 
 </details>
 
@@ -131,12 +83,12 @@ Apple Silicon replaced the old IOFramebuffer display stack with a new DCP (Displ
 <summary><strong>Intel Macs</strong></summary>
 <br>
 
-The traditional IOKit I2C path used on Intel Macs is well-established and stable. DDC generally works over DisplayPort, DVI, and most HDMI connections on Intel hardware.
+The IOKit I2C path on Intel is stable. DDC works over DisplayPort, DVI, and most HDMI connections.
 
-If DDC doesn't work on your Intel Mac, the most common causes are:
-- A dock, hub, or KVM sitting between the Mac and monitor (see the docks section below).
-- DDC/CI disabled in the monitor's OSD menu.
-- A cheap passive adapter that doesn't pass DDC through.
+Common reasons it doesn't work:
+- A dock, hub, or KVM between the Mac and monitor (see below)
+- DDC/CI disabled in the monitor's OSD menu
+- A cheap passive adapter that doesn't pass DDC through
 
 </details>
 
@@ -146,26 +98,17 @@ If DDC doesn't work on your Intel Mac, the most common causes are:
 <summary><strong>Dell monitors</strong></summary>
 <br>
 
-Dell monitors support DDC/CI but **require it to be enabled in the OSD menu** - it is off by default on most models and may have been reset after a firmware update.
+Dell requires DDC/CI to be **enabled in the OSD** - it's off by default and may reset after a firmware update.
 
-**How to enable DDC/CI on a Dell monitor:**
-1. Press the physical menu button on the monitor.
-2. Navigate to **Other Settings** (some models label it **Menu → Others**).
-3. Find **DDC/CI** and set it to **Enable**.
-4. Exit the OSD. Dimly will re-probe within a few seconds and show DDC as supported.
-
-**Dell series breakdown:**
+**To enable:** physical menu button → **Other Settings** (or **Menu → Others**) → **DDC/CI** → **Enable** → exit OSD. Dimly re-probes within seconds.
 
 | Series | DDC on macOS | Notes |
 |---|---|---|
-| U-series (U2422H, U2720Q, U2723QE…) | Yes | Works via DisplayPort and USB-C. Best option for DDC. |
-| P-series (P2422HE, P2415Q…) | Unlikely | Dell's own display manager lists no DDC/CI support on macOS for P-series. Overlay mode will be used. |
-| S-series (S2421H…) | Inconsistent | Varies by model and firmware. Dimly detects and falls back as needed. |
+| U-series (U2422H, U2720Q, U2723QE…) | Yes | Works via DisplayPort and USB-C. |
+| P-series (P2422HE, P2415Q…) | Unlikely | No DDC/CI support on macOS per Dell's own docs. |
+| S-series (S2421H…) | Inconsistent | Varies by model and firmware. |
 
-**Additional Dell notes:**
-- DDC/CI is not available over USB (the upstream USB-B port on the monitor). Always use the video cable (USB-C, DisplayPort, or HDMI) for DDC.
-- Some Dell monitors accept DDC write commands but reject values outside a narrow range (e.g. refusing contrast below their OSD minimum). Dimly sends standard VCP commands; if those are rejected, the monitor falls back to overlay.
-- Connecting via a Dell DisplayLink dock (D6000, D1000, WD22TB, UD22…) disables DDC - see the docks section.
+DDC is not available over the USB-B upstream port - always use the video cable. DisplayLink docks (D6000, D1000, WD22TB…) also break DDC.
 
 </details>
 
@@ -175,18 +118,18 @@ Dell monitors support DDC/CI but **require it to be enabled in the OSD menu** - 
 <summary><strong>Docks, KVMs, and adapters</strong></summary>
 <br>
 
-DDC/CI breaks in most signal-passthrough scenarios. This is not a Dimly limitation - the dock or hub strips DDC before it reaches macOS.
+Most docks strip DDC before it reaches macOS. This is not a Dimly limitation.
 
-| Device type | DDC? | Details |
+| Device | DDC? | Notes |
 |---|---|---|
-| DisplayLink dock (Dell D6000, D1000, WD22TB, UD22…) | No | DisplayLink does not pass DDC on macOS at all. |
-| MST hub (DisplayPort daisy-chain) | No | Multi-Stream Transport breaks DDC for all downstream monitors. |
-| KVM switch | Usually no | Most KVMs strip DDC. Some enterprise KVMs preserve it - check the spec sheet. |
-| Thunderbolt dock with direct DP output (not MST) | Usually yes | Look for "DDC passthrough" in the dock's specs. CalDigit, OWC, and Belkin docks generally pass DDC. |
-| Simple passive USB-C → DP / USB-C → HDMI adapter | Usually yes | Works unless the adapter is low-quality and cuts corners on the AUX channel. |
-| Active USB-C → HDMI adapter on Apple Silicon | No | HDMI on Apple Silicon carries no DDC regardless of adapter quality. |
+| DisplayLink dock | No | DDC not passed on macOS |
+| MST hub (DP daisy-chain) | No | Breaks DDC for all downstream monitors |
+| KVM switch | Usually no | Some enterprise KVMs preserve it - check specs |
+| Thunderbolt dock (direct DP, not MST) | Usually yes | CalDigit, OWC, Belkin generally pass DDC |
+| Passive USB-C → DP adapter | Usually yes | Fails only if adapter cuts corners on the AUX channel |
+| USB-C → HDMI on Apple Silicon | No | HDMI carries no DDC on M-series regardless of adapter |
 
-**If you use a dock:** the fastest fix is a direct cable from Mac to monitor while testing. If DDC appears in Dimly with a direct cable but not through the dock, the dock is the cause.
+**Quick test:** connect directly to the Mac without a dock. If DDC appears, the dock is the cause.
 
 </details>
 
@@ -196,67 +139,52 @@ DDC/CI breaks in most signal-passthrough scenarios. This is not a Dimly limitati
 <summary><strong>Other monitors and brands</strong></summary>
 <br>
 
-DDC/CI behaviour varies widely across brands. Common patterns:
+- **LG UltraFine (Thunderbolt)** - uses Apple's proprietary brightness protocol, not DDC/CI. Overlay mode is used.
+- **LG standard monitors** (27UK850, 27GP950…) - DDC works well via DisplayPort/USB-C on Intel and Apple Silicon.
+- **Samsung** - varies by model. Mid-range and up usually support DDC/CI; budget panels often don't.
+- **BenQ / ViewSonic** - generally good support. Enable DDC/CI in OSD if not detected.
+- **ASUS ProArt / ROG** - good on DisplayPort. Some models need DDC/CI enabled in OSD.
+- **USB-C monitors** - usually work well on Apple Silicon via USB-C; DDC/CI typically enabled by default.
 
-- **LG UltraFine (Thunderbolt models)**: Use Apple's proprietary brightness protocol, not standard DDC/CI. Dimly uses overlay mode for these.
-- **LG standard monitors** (27UK850, 27GP950…): DDC/CI generally works well on both Intel and Apple Silicon via DisplayPort/USB-C.
-- **Samsung**: DDC/CI support varies by model. Most mid-range and high-end panels support it; budget panels often don't.
-- **BenQ / ViewSonic**: Generally good DDC/CI support. Enable it in OSD if not working.
-- **ASUS ProArt / ROG**: Good support on DisplayPort. Some models require DDC/CI to be enabled in OSD.
-- **Monitors marketed as "USB-C monitors"**: Usually work well on Apple Silicon via their USB-C input; DDC/CI is typically enabled by default.
-
-If your monitor isn't listed, try enabling DDC/CI in the OSD first, then try a direct DisplayPort or USB-C connection. If it still shows Overlay mode, DDC may simply not be supported on that model - overlay mode will work fine.
+If your monitor isn't listed: enable DDC/CI in the OSD first, then try a direct DisplayPort or USB-C connection. If it still shows Overlay mode, the monitor likely doesn't support DDC/CI - overlay mode works fully regardless.
 
 </details>
 
 ---
 
 <details>
-<summary><strong>Reading Dimly's DDC status indicators</strong></summary>
+<summary><strong>DDC status indicators</strong></summary>
 <br>
 
-Each display row shows its current control mode:
-
-| Status shown | Meaning |
+| Badge | Meaning |
 |---|---|
-| **DDC** | Hardware control active. Brightness and sleep/wake go to the monitor directly. |
-| **Checking DDC** | Dimly is still probing - normal for a few seconds after connecting, waking, or launching. |
-| **Overlay mode** | DDC unavailable. Brightness uses a screen overlay; blackout is used for sleep/wake. |
+| **DDC** | Hardware control active |
+| **Checking DDC** | Probing in progress - normal for a few seconds after connect or wake |
+| **Overlay mode** | DDC unavailable; software control in use |
 
-If a display stays on Overlay mode and you expected DDC:
-1. Check the cable type (HDMI on Apple Silicon → switch to USB-C/DP).
-2. Enable DDC/CI in the monitor's OSD menu.
-3. Try a direct cable, bypassing any dock or hub.
-4. Reconnect the monitor - Dimly re-probes on every reconnect and system wake.
-
-Overlay mode is full-featured and reliable. It's not a degraded state - just software rather than hardware control.
+If a display stays on Overlay mode: check the cable type, enable DDC/CI in the OSD, test without a dock, then reconnect. See [Troubleshooting](docs/troubleshooting.md) for a full diagnosis guide.
 
 </details>
 
 ---
 
-## Updates, signing, and safety
-
-- Updates are delivered via Sparkle with ed25519 signatures; the feed lives in `Resources/Info.plist`.
-- If signature verification fails, Dimly offers a GitHub download fallback.
-- Notarization and hardened runtime are part of the release scripts; binaries ship notarized.
-- No telemetry, no background daemons; Dimly runs only in the menu bar or at login.
-
 ## Get Dimly
 
-- <a href=”https://github.com/Punshnut/macos-dimly/releases/latest”>Download the latest release</a> and run it from `/Applications`.
-- To auto-start, enable “Launch at Login” in Settings.
+[Download the latest release](https://github.com/Punshnut/macos-dimly/releases/latest) and run it from `/Applications`. Enable **Launch at Login** in Settings to start it automatically.
 
-Supports Intel and Apple Silicon Macs. Requires macOS 14+
+Requires macOS 14+. Supports Intel and Apple Silicon.
 
-> **macOS 26.4 (Tahoe) users:** Dimly 1.4 includes visual fixes for macOS 26.4. If you are on 1.3, update to 1.4 before or immediately after upgrading to macOS 26.4 - otherwise the UI may look off. Sparkle auto-update will offer 1.4 automatically, or grab it manually from the [releases page](https://github.com/Punshnut/macos-dimly/releases/latest).
+> **macOS 26.4 (Tahoe) users:** update to Dimly 1.4 before or right after upgrading - otherwise the UI may look off. Sparkle will offer it automatically, or grab it from the [releases page](https://github.com/Punshnut/macos-dimly/releases/latest).
+
+## User Guide
+
+Full documentation is in the [`docs/`](docs/README.md) folder: display controls, profiles, scheduling, shortcuts, settings, and troubleshooting.
 
 ## Roadmap
 
-- **Adaptive dimming** - remember per-location or time-of-day preferences.
-- **Profile actions** - apply brightness + blackout/sleep rules when a saved setup is selected.
-- **Per-app triggers** - auto-dim when select apps enter full screen.
-- **Script hooks** - call custom scripts before/after blackout.
+- **Adaptive dimming** - remember per-location or time-of-day preferences
+- **Per-app triggers** - auto-dim when select apps enter full screen
+- **Script hooks** - call custom scripts before/after blackout
 
 [Donate (Ko-Fi)](https://ko-fi.com/janfeuerbacher)
 
