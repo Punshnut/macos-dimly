@@ -207,18 +207,18 @@ final class BlackoutManager: ObservableObject {
     }
 
     /// Applies non-blocking brightness fallback via black overlay opacity.
-    func setBrightnessFallback(_ percent: Int, for display: DisplayInfo, animated: Bool) {
+    /// Accepts a precise Double brightness so animation frames use full float precision
+    /// rather than integer-quantized opacity steps.
+    func setBrightnessFallback(_ percent: Double, for display: DisplayInfo, animated: Bool) {
         guard display.isExternal else { return }
-        let clamped = max(0, min(100, percent))
-        guard clamped < 100 else {
+        let clamped = max(0.0, min(100.0, percent))
+        guard clamped < 100.0 else {
             clearBrightnessFallback(for: display, animated: animated)
             return
         }
         guard let screen = screen(for: display.displayID) else { return }
 
-        let opacity = fallbackOpacity(forBrightnessPercent: clamped)
         let window: DimOverlayWindow
-        let previousLevel = fallbackBrightnessLevels[display.stableIdentity]
         if let existing = brightnessFallbackOverlays[display.stableIdentity] {
             window = existing
             window.update(screen: screen)
@@ -228,9 +228,9 @@ final class BlackoutManager: ObservableObject {
             brightnessFallbackOverlays[display.stableIdentity] = created
             window = created
         }
-        guard previousLevel != clamped || brightnessFallbackOverlays[display.stableIdentity] == nil else { return }
+        let opacity = fallbackOpacity(forBrightnessPercent: clamped)
         window.setOpacity(opacity, animated: animated)
-        fallbackBrightnessLevels[display.stableIdentity] = clamped
+        fallbackBrightnessLevels[display.stableIdentity] = Int(clamped.rounded())
     }
 
     /// Clears a non-blocking brightness fallback overlay for a display.
@@ -390,10 +390,14 @@ final class BlackoutManager: ObservableObject {
         return Set(stored)
     }
 
-    /// Converts brightness percentage into black-overlay opacity.
+    /// Converts brightness percentage into black-overlay opacity (integer overload for reconcile/restore).
     private func fallbackOpacity(forBrightnessPercent percent: Int) -> CGFloat {
-        let clamped = max(0, min(100, percent))
-        return CGFloat((100 - clamped)) / 100.0
+        fallbackOpacity(forBrightnessPercent: Double(percent))
+    }
+
+    /// Converts a precise brightness percentage into black-overlay opacity.
+    private func fallbackOpacity(forBrightnessPercent percent: Double) -> CGFloat {
+        CGFloat((100.0 - max(0, min(100, percent))) / 100.0)
     }
 
     // MARK: - Transition overlays
@@ -598,7 +602,7 @@ final class DimOverlayWindow: NSWindow {
     private final class DimOverlayView: NSView {
         override var wantsUpdateLayer: Bool { true }
 
-        /// Keeps the fallback dimming layer solid black while opacity is animated on the window.
+        /// Solid black layer — opacity is animated on the view, not the window.
         override func updateLayer() {
             layer?.backgroundColor = NSColor.black.cgColor
         }
@@ -621,11 +625,15 @@ final class DimOverlayWindow: NSWindow {
         isReleasedWhenClosed = false
         isOpaque = false
         backgroundColor = .clear
-        alphaValue = 0
+        // Keep window always fully opaque; control visibility through the view's
+        // CALayer opacity so every change goes through CoreAnimation and is
+        // committed at vsync rather than via async IPC to the window server.
+        alphaValue = 1
         hasShadow = false
         ignoresMouseEvents = true
         collectionBehavior = [.canJoinAllSpaces, .fullScreenAuxiliary, .stationary]
         overlayView.wantsLayer = true
+        overlayView.alphaValue = 0   // start transparent
         overlayView.autoresizingMask = [.width, .height]
         contentView = overlayView
         update(screen: screen)
@@ -637,25 +645,31 @@ final class DimOverlayWindow: NSWindow {
         overlayView.frame = CGRect(origin: .zero, size: screen.frame.size)
     }
 
-    /// Sets the overlay alpha (0-1) and ensures visibility when non-zero.
+    /// Current rendered opacity (reads from the view's CA layer).
+    private var currentOpacity: CGFloat {
+        CGFloat(overlayView.layer?.opacity ?? 0)
+    }
+
+    /// Sets the overlay opacity (0-1) and ensures window visibility.
     func setOpacity(_ opacity: CGFloat, animated: Bool) {
         let clamped = max(0, min(1, opacity))
         guard clamped > 0 else {
             hide(animated: animated)
             return
         }
-        if abs(alphaValue - clamped) <= 0.001, isVisible {
+        if isVisible, abs(currentOpacity - clamped) <= 0.0005 {
             return
         }
         orderFrontRegardless()
         guard animated && animationDuration > 0 else {
-            alphaValue = clamped
+            // Direct layer assignment is batched by CoreAnimation and committed at vsync.
+            overlayView.layer?.opacity = Float(clamped)
             return
         }
         NSAnimationContext.runAnimationGroup { context in
             context.duration = animationDuration
             context.timingFunction = CAMediaTimingFunction(name: .easeInEaseOut)
-            animator().alphaValue = clamped
+            overlayView.animator().alphaValue = clamped
         }
     }
 
@@ -664,7 +678,7 @@ final class DimOverlayWindow: NSWindow {
         animationToken += 1
         let token = animationToken
         guard animated && animationDuration > 0 else {
-            alphaValue = 0
+            overlayView.layer?.opacity = 0
             orderOut(nil)
             completion?()
             return
@@ -673,7 +687,7 @@ final class DimOverlayWindow: NSWindow {
         NSAnimationContext.runAnimationGroup { context in
             context.duration = animationDuration
             context.timingFunction = CAMediaTimingFunction(name: .easeInEaseOut)
-            animator().alphaValue = 0
+            overlayView.animator().alphaValue = 0
         } completionHandler: { [weak self] in
             Task { @MainActor in
                 self?.completeAnimation(token: token)

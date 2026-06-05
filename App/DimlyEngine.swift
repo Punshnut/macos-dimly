@@ -46,9 +46,7 @@ final class DimlyEngine: ObservableObject {
     private var pendingBrightnessByDisplayID: [String: Int] = [:]
     private var brightnessRequestRevisionByDisplayID: [String: Int] = [:]
     private var builtinRestoreBrightnessByDisplayID: [String: Int] = [:]
-    private var builtinBrightnessAnimationTasks: [String: Task<Void, Never>] = [:]
-    private var externalBrightnessAnimationTasks: [String: Task<Void, Never>] = [:]
-    private var synchronizedBrightnessTransitionTask: Task<Void, Never>?
+    private let animationDriver = BrightnessAnimationDriver()
     private var lastObservedDDCSupportByDisplayID: [String: DDCSupportStatus] = [:]
     private var hotkeyManagers: [UUID: HotkeyManager] = [:]
     private let legacySleepPersistenceKey = "Sleep.activeDisplayIDs"
@@ -86,6 +84,7 @@ final class DimlyEngine: ObservableObject {
     private var brightnessMediaKeyLocalMonitorToken: Any?
     private var builtinBrightnessReconcileTasks: [String: Task<Void, Never>] = [:]
     @Published private(set) var builtinBrightnessLevels: [String: Int] = [:]
+    @Published private(set) var preciseBrightnessLevels: [String: Double] = [:]
     let displayManager: DisplayManager
     let blackoutManager: BlackoutManager
     let ddcManager: DDCManager
@@ -225,9 +224,7 @@ final class DimlyEngine: ObservableObject {
 
     @MainActor
     deinit {
-        synchronizedBrightnessTransitionTask?.cancel()
-        builtinBrightnessAnimationTasks.values.forEach { $0.cancel() }
-        externalBrightnessAnimationTasks.values.forEach { $0.cancel() }
+        animationDriver.cancelAll()
         builtinBrightnessReconcileTasks.values.forEach { $0.cancel() }
         monitorRestoreTask?.cancel()
         if let brightnessMediaKeyGlobalMonitorToken {
@@ -360,12 +357,7 @@ final class DimlyEngine: ObservableObject {
     /// Applies brightness to multiple displays using one synchronized transition timeline.
     func setBrightnessSynchronously(_ targets: [(display: DisplayInfo, percent: Int)], animated: Bool) {
         guard !targets.isEmpty else { return }
-        synchronizedBrightnessTransitionTask?.cancel()
-        synchronizedBrightnessTransitionTask = nil
-        builtinBrightnessAnimationTasks.values.forEach { $0.cancel() }
-        builtinBrightnessAnimationTasks.removeAll()
-        externalBrightnessAnimationTasks.values.forEach { $0.cancel() }
-        externalBrightnessAnimationTasks.removeAll()
+        animationDriver.cancelAll()
 
         let normalizedTargets: [(display: DisplayInfo, percent: Int)] = targets.map { target in
             (display: target.display, percent: max(0, min(100, target.percent)))
@@ -408,38 +400,34 @@ final class DimlyEngine: ObservableObject {
             return
         }
         let totalDuration = 0.36 * transitionMultiplier
-        synchronizedBrightnessTransitionTask = Task { @MainActor [weak self] in
+        let syncScreen = bestAnimationScreen(for: normalizedTargets.map(\.display))
+        animationDriver.start(id: "syncTransition", screen: syncScreen, duration: totalDuration) { [weak self] progress in
             guard let self else { return }
-            let startTime = Date.now
-            while true {
-                guard !Task.isCancelled else { return }
-                let elapsed = Date.now.timeIntervalSince(startTime)
-                let progress = min(1.0, elapsed / totalDuration)
-                let isFinal = progress >= 1.0
-                for target in normalizedTargets {
-                    let display = target.display
-                    let id = display.stableIdentity
-                    let start = startByDisplayID[id] ?? target.percent
-                    let delta = target.percent - start
-                    let value = Int((Double(start) + (Double(delta) * progress)).rounded())
-                    if display.isBuiltin {
-                        setBuiltinBrightness(value, for: display, animated: false)
-                        if isFinal {
-                            persistBrightness(target.percent, for: id)
-                        }
-                        continue
-                    }
-                    applyExternalBrightness(
-                        value,
-                        for: display,
-                        persist: isFinal,
-                        fallbackAnimated: false
-                    )
+            for target in normalizedTargets {
+                let display = target.display
+                let id = display.stableIdentity
+                let start = startByDisplayID[id] ?? target.percent
+                let exact = Double(start) + Double(target.percent - start) * progress
+                preciseBrightnessLevels[id] = exact
+                let value = Int(exact.rounded())
+                if display.isBuiltin {
+                    setBuiltinBrightness(value, for: display, animated: false)
+                } else {
+                    applyExternalBrightness(value, for: display, persist: false, fallbackAnimated: false, precise: exact)
                 }
-                if isFinal { break }
-                try? await Task.sleep(nanoseconds: 16_666_667)
             }
-            self.synchronizedBrightnessTransitionTask = nil
+        } onComplete: { [weak self] in
+            guard let self else { return }
+            for target in normalizedTargets {
+                let id = target.display.stableIdentity
+                preciseBrightnessLevels.removeValue(forKey: id)
+                if target.display.isBuiltin {
+                    setBuiltinBrightness(target.percent, for: target.display, animated: false)
+                    persistBrightness(target.percent, for: id)
+                } else {
+                    applyExternalBrightness(target.percent, for: target.display, persist: true, fallbackAnimated: false)
+                }
+            }
         }
     }
 
@@ -471,8 +459,7 @@ final class DimlyEngine: ObservableObject {
             return
         }
         guard display.isExternal else { return }
-        externalBrightnessAnimationTasks[display.stableIdentity]?.cancel()
-        externalBrightnessAnimationTasks.removeValue(forKey: display.stableIdentity)
+        animationDriver.cancel(id: display.stableIdentity)
         if animated {
             animateExternalBrightness(to: clamped, for: display)
             return
@@ -481,7 +468,7 @@ final class DimlyEngine: ObservableObject {
     }
 
     /// Applies one external brightness value immediately.
-    private func applyExternalBrightness(_ percent: Int, for display: DisplayInfo, persist: Bool, fallbackAnimated: Bool) {
+    private func applyExternalBrightness(_ percent: Int, for display: DisplayInfo, persist: Bool, fallbackAnimated: Bool, precise: Double? = nil) {
         let clamped = max(0, min(100, percent))
         guard display.isExternal else { return }
         if persist {
@@ -500,7 +487,7 @@ final class DimlyEngine: ObservableObject {
         )
         if overlayOnly {
             blackoutManager.setBrightnessFallback(
-                clamped,
+                precise ?? Double(clamped),
                 for: display,
                 animated: fallbackAnimated
             )
@@ -513,7 +500,7 @@ final class DimlyEngine: ObservableObject {
         }
         if ddcStatus == .unknown || ddcStatus == nil {
             blackoutManager.setBrightnessFallback(
-                clamped,
+                precise ?? Double(clamped),
                 for: display,
                 animated: fallbackAnimated
             )
@@ -542,7 +529,7 @@ final class DimlyEngine: ObservableObject {
                     category: "engine"
                 )
                 self.blackoutManager.setBrightnessFallback(
-                    clamped,
+                    precise ?? Double(clamped),
                     for: display,
                     animated: fallbackAnimated
                 )
@@ -551,7 +538,7 @@ final class DimlyEngine: ObservableObject {
             return
         }
         blackoutManager.setBrightnessFallback(
-            clamped,
+            precise ?? Double(clamped),
             for: display,
             animated: fallbackAnimated
         )
@@ -577,28 +564,18 @@ final class DimlyEngine: ObservableObject {
             return
         }
         let totalDuration = 0.36 * transitionMultiplier
-
-        let task = Task { @MainActor [weak self] in
+        let isFinalAnimated = settingsStore.settings.fadeOutAnimationEnabled
+        let displayScreen = animationScreen(for: display)
+        animationDriver.start(id: id, screen: displayScreen, duration: totalDuration) { [weak self] progress in
             guard let self else { return }
-            let startTime = Date.now
-            while true {
-                guard !Task.isCancelled else { return }
-                let elapsed = Date.now.timeIntervalSince(startTime)
-                let progress = min(1.0, elapsed / totalDuration)
-                let isFinal = progress >= 1.0
-                let value = Int((Double(start) + (Double(delta) * progress)).rounded())
-                self.applyExternalBrightness(
-                    value,
-                    for: display,
-                    persist: isFinal,
-                    fallbackAnimated: true
-                )
-                if isFinal { break }
-                try? await Task.sleep(nanoseconds: 16_666_667)
-            }
-            self.externalBrightnessAnimationTasks.removeValue(forKey: id)
+            let exact = Double(start) + Double(delta) * progress
+            self.preciseBrightnessLevels[id] = exact
+            self.applyExternalBrightness(Int(exact.rounded()), for: display, persist: false, fallbackAnimated: false, precise: exact)
+        } onComplete: { [weak self] in
+            guard let self else { return }
+            self.preciseBrightnessLevels.removeValue(forKey: id)
+            self.applyExternalBrightness(target, for: display, persist: true, fallbackAnimated: isFinalAnimated)
         }
-        externalBrightnessAnimationTasks[id] = task
     }
 
     /// Returns current brightness value used for UI (0-100).
@@ -618,6 +595,26 @@ final class DimlyEngine: ObservableObject {
             return ddcBrightness
         }
         return 100
+    }
+
+    /// Returns precise (sub-integer) brightness during animation, falling back to integer when idle.
+    func preciseBrightnessLevel(for display: DisplayInfo) -> Double {
+        preciseBrightnessLevels[display.stableIdentity] ?? Double(brightnessPercent(for: display))
+    }
+
+    /// Returns the NSScreen corresponding to a display, used to pick the correct display link.
+    private func animationScreen(for display: DisplayInfo) -> NSScreen? {
+        NSScreen.screens.first {
+            ($0.deviceDescription[NSDeviceDescriptionKey("NSScreenNumber")] as? NSNumber)
+                .map { CGDirectDisplayID($0.uint32Value) == display.displayID } ?? false
+        }
+    }
+
+    /// Returns the highest-refresh-rate screen among a set of displays, or the main screen.
+    private func bestAnimationScreen(for displays: [DisplayInfo]) -> NSScreen? {
+        displays.compactMap { animationScreen(for: $0) }
+            .max { ($0.maximumFramesPerSecond) < ($1.maximumFramesPerSecond) }
+            ?? NSScreen.main
     }
 
     /// Triggers a one-shot hardware refresh for a built-in display brightness snapshot.
@@ -1628,7 +1625,7 @@ final class DimlyEngine: ObservableObject {
                 continue
             }
             if status == .notSupported {
-                blackoutManager.setBrightnessFallback(target, for: display, animated: false)
+                blackoutManager.setBrightnessFallback(Double(target), for: display, animated: false)
                 pendingBrightnessByDisplayID.removeValue(forKey: id)
             }
         }
@@ -1690,7 +1687,7 @@ final class DimlyEngine: ObservableObject {
     private func setBuiltinBrightness(_ percent: Int, for display: DisplayInfo, animated: Bool, reason: String = "unspecified") {
         let id = display.stableIdentity
         let target = max(0, min(100, percent))
-        builtinBrightnessAnimationTasks[id]?.cancel()
+        animationDriver.cancel(id: "builtin:\(id)")
 
         let applyTarget = {
             let success = DisplayHardware.setBuiltinDisplayBrightnessPercent(target, for: display.displayID)
@@ -1723,28 +1720,25 @@ final class DimlyEngine: ObservableObject {
             return
         }
         let totalDuration = 0.28 * transitionMultiplier
-
-        let task = Task { @MainActor [weak self] in
-            let startTime = Date.now
-            while true {
-                guard !Task.isCancelled else { return }
-                let elapsed = Date.now.timeIntervalSince(startTime)
-                let progress = min(1.0, elapsed / totalDuration)
-                let isFinal = progress >= 1.0
-                let value = Int((Double(current) + (Double(delta) * progress)).rounded())
-                if DisplayHardware.setBuiltinDisplayBrightnessPercent(value, for: display.displayID) {
-                    self?.updateBuiltinBrightnessSnapshot(value, for: id)
-                }
-                if isFinal { break }
-                try? await Task.sleep(nanoseconds: 16_666_667)
+        animationDriver.start(id: "builtin:\(id)", screen: animationScreen(for: display), duration: totalDuration) { [weak self] progress in
+            guard let self else { return }
+            let exact = Double(current) + Double(delta) * progress
+            self.preciseBrightnessLevels[id] = exact
+            let value = Int(exact.rounded())
+            if DisplayHardware.setBuiltinDisplayBrightnessPercent(value, for: display.displayID) {
+                self.updateBuiltinBrightnessSnapshot(value, for: id)
+            }
+        } onComplete: { [weak self] in
+            guard let self else { return }
+            self.preciseBrightnessLevels.removeValue(forKey: id)
+            if DisplayHardware.setBuiltinDisplayBrightnessPercent(target, for: display.displayID) {
+                self.updateBuiltinBrightnessSnapshot(target, for: id)
             }
             DiagnosticsLogger.shared.log(
                 "Builtin brightness apply id=\(id) target=\(target) animated=true reason=\(reason)",
                 category: "engine"
             )
-            self?.builtinBrightnessAnimationTasks.removeValue(forKey: id)
         }
-        builtinBrightnessAnimationTasks[id] = task
     }
 
     /// Updates the built-in brightness snapshot only when the effective value changed.

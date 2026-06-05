@@ -1447,7 +1447,8 @@ struct MenuBarContentView: View {
             tint = .orange
             modeLabel = String(localized: "DDCCheckingLabel")
         }
-        let level = brightnessPercent(for: display)
+        let preciseLevel = preciseBrightnessLevel(for: display)
+        let level = Int(preciseLevel.rounded())
 
         return VStack(alignment: .leading, spacing: 8) {
             HStack(spacing: 8) {
@@ -1485,7 +1486,7 @@ struct MenuBarContentView: View {
 
                 Slider(
                     value: Binding(
-                        get: { Double(brightnessPercent(for: display)) },
+                        get: { preciseLevel },
                         set: { newValue in
                             setBrightness(Int(newValue.rounded()), for: display)
                         }
@@ -1951,6 +1952,11 @@ struct MenuBarContentView: View {
     /// Returns display brightness from DDC/overlay for externals, macOS for internals.
     private func brightnessPercent(for display: DisplayInfo) -> Int {
         engine.brightnessPercent(for: display)
+    }
+
+    /// Returns sub-integer brightness during animation for smooth slider rendering.
+    private func preciseBrightnessLevel(for display: DisplayInfo) -> Double {
+        engine.preciseBrightnessLevel(for: display)
     }
 
     /// Applies display brightness to the right backend for this display type.
