@@ -9,11 +9,11 @@
     <language>en</language>
 
     <item>
-      <title>Dimly 1.4</title>
+      <title>Dimly 2026.5.1</title>
       <pubDate>Sun, 29 Mar 2026 20:31:14 +0200</pubDate>
       <enclosure
     url="https://github.com/Punshnut/macos-dimly/releases/latest/download/Dimly.dmg"
-    sparkle:shortVersionString="1.4"
+    sparkle:shortVersionString="2026.5.1"
     sparkle:version="10"
     length="5441870"
     type="application/octet-stream"
