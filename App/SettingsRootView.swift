@@ -198,7 +198,7 @@ struct SettingsRootView: View {
         let fallbackActive = (!ddcSupported || overlayOnly) && blackoutManager.activeDisplayIDs.contains(display.stableIdentity)
         let controlTint: Color = (ddcSupported && !overlayOnly) ? .green : (fallbackActive ? .blue : .secondary)
         let canControl = display.isExternal
-        let brightnessMode = engine.brightnessMode(for: display)
+        let brightnessMode = display.isBuiltin ? BrightnessControlMode.ddc : engine.brightnessMode(for: display)
         let brightnessPresentation: (Color, String) = {
             switch brightnessMode {
             case .ddc:
@@ -322,15 +322,13 @@ struct SettingsRootView: View {
                         )
                         .font(.caption.monospacedDigit())
                         .foregroundStyle(.secondary)
-                        if display.isExternal {
-                            Text(brightnessModeLabel)
-                                .font(.caption2.weight(.semibold))
-                                .padding(.horizontal, 6)
-                                .padding(.vertical, 3)
-                                .background(brightnessTint.opacity(0.18))
-                                .foregroundStyle(brightnessTint)
-                                .clipShape(Capsule())
-                        }
+                        Text(brightnessModeLabel)
+                            .font(.caption2.weight(.semibold))
+                            .padding(.horizontal, 6)
+                            .padding(.vertical, 3)
+                            .background(brightnessTint.opacity(0.18))
+                            .foregroundStyle(brightnessTint)
+                            .clipShape(Capsule())
                     }
 
                     HStack(spacing: 8) {
