@@ -403,3 +403,8 @@
 "PreviouslySeenMonitorsSectionTitle" = "پہلے دیکھے گئے مانیٹر";
 "PreviouslySeenMonitorsSectionSubtitle" = "Dimly مانیٹروں کو 90 دن تک یاد رکھتا ہے۔ مانیٹر کو بھولنے سے اس کا محفوظ نام اور ترجیحات ہٹ جاتی ہیں۔";
 "MonitorLastSeenLabel" = "آخری بار دیکھا گیا";
+
+"CompactShowMonitorTilesTitle" = "مانیٹر ٹائلز دکھائیں";
+"CompactShowMonitorTilesSubtitle" = "کمپیکٹ موڈ میں ہر مانیٹر کے لیے روشنی اور نیند کے کنٹرول دکھائیں۔";
+"CompactSmartButtonsCompactTitle" = "کمپیکٹ سمارٹ بٹن سائز";
+"CompactSmartButtonsCompactSubtitle" = "کمپیکٹ موڈ میں چھوٹی بٹن ٹائلز استعمال کریں، ایڈوانسڈ موڈ لے آؤٹ سے ملاتے ہوئے۔";

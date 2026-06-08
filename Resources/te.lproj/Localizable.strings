@@ -403,3 +403,8 @@
 "PreviouslySeenMonitorsSectionTitle" = "గతంలో చూసిన మానిటర్లు";
 "PreviouslySeenMonitorsSectionSubtitle" = "Dimly మానిటర్లను 90 రోజులు గుర్తుంచుకుంటుంది. మానిటర్‌ను మర్చిపోవడం దాని సేవ్ చేసిన పేరు మరియు ప్రాధాన్యతలను తొలగిస్తుంది.";
 "MonitorLastSeenLabel" = "చివరిగా చూసిన సమయం";
+
+"CompactShowMonitorTilesTitle" = "మానిటర్ టైల్స్ చూపించు";
+"CompactShowMonitorTilesSubtitle" = "కాంపాక్ట్ మోడ్‌లో ప్రతి మానిటర్‌కు బ్రైట్‌నెస్ మరియు స్లీప్ నియంత్రణలను చూపించు.";
+"CompactSmartButtonsCompactTitle" = "కాంపాక్ట్ స్మార్ట్ బటన్ పరిమాణం";
+"CompactSmartButtonsCompactSubtitle" = "కాంపాక్ట్ మోడ్‌లో చిన్న బటన్ టైల్స్ ఉపయోగించండి, అడ్వాన్స్‌డ్ మోడ్ లేఅవుట్‌కు సరిపోలేలా.";

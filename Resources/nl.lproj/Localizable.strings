@@ -403,3 +403,8 @@
 "PreviouslySeenMonitorsSectionTitle" = "Eerder geziene monitoren";
 "PreviouslySeenMonitorsSectionSubtitle" = "Dimly onthoudt monitoren 90 dagen. Een monitor vergeten verwijdert de opgeslagen naam en voorkeuren.";
 "MonitorLastSeenLabel" = "Laatst gezien";
+
+"CompactShowMonitorTilesTitle" = "Monitortegels weergeven";
+"CompactShowMonitorTilesSubtitle" = "Helderheids- en slaapbesturingen per monitor weergeven in de compacte modus.";
+"CompactSmartButtonsCompactTitle" = "Compacte snelknopgrootte";
+"CompactSmartButtonsCompactSubtitle" = "Gebruik kleinere knoptegels in de compacte modus, overeenkomend met de lay-out van de geavanceerde modus.";

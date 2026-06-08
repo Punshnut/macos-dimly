@@ -1243,6 +1243,41 @@ struct SettingsRootView: View {
                 Text(String(localized: "SmartButtonsOrderNote"))
                     .font(.caption)
                     .foregroundStyle(.secondary)
+                SettingsDivider()
+                HStack(spacing: 8) {
+                    VStack(alignment: .leading, spacing: 2) {
+                        Text(String(localized: "CompactShowMonitorTilesTitle"))
+                            .font(.caption.weight(.medium))
+                        Text(String(localized: "CompactShowMonitorTilesSubtitle"))
+                            .font(.caption)
+                            .foregroundStyle(.secondary)
+                    }
+                    Spacer()
+                    Toggle("", isOn: Binding(
+                        get: { settingsStore.settings.compactShowMonitorTiles },
+                        set: { newValue in settingsStore.update { $0.compactShowMonitorTiles = newValue } }
+                    ))
+                    .labelsHidden()
+                    .toggleStyle(.switch)
+                    .controlSize(.small)
+                }
+                HStack(spacing: 8) {
+                    VStack(alignment: .leading, spacing: 2) {
+                        Text(String(localized: "CompactSmartButtonsCompactTitle"))
+                            .font(.caption.weight(.medium))
+                        Text(String(localized: "CompactSmartButtonsCompactSubtitle"))
+                            .font(.caption)
+                            .foregroundStyle(.secondary)
+                    }
+                    Spacer()
+                    Toggle("", isOn: Binding(
+                        get: { settingsStore.settings.compactSmartButtonsCompact },
+                        set: { newValue in settingsStore.update { $0.compactSmartButtonsCompact = newValue } }
+                    ))
+                    .labelsHidden()
+                    .toggleStyle(.switch)
+                    .controlSize(.small)
+                }
             }
         }
 

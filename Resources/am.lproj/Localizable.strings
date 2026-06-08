@@ -403,3 +403,8 @@
 "PreviouslySeenMonitorsSectionTitle" = "ቀደም ሲል የታዩ ሞኒተሮች";
 "PreviouslySeenMonitorsSectionSubtitle" = "Dimly ሞኒተሮችን ለ90 ቀናት ያስታውሳል። ሞኒተርን መዘንጋት የተቀመጠ ስሙን እና ምርጫዎቹን ያስወጣል።";
 "MonitorLastSeenLabel" = "ለመጨረሻ ጊዜ የታየ";
+
+"CompactShowMonitorTilesTitle" = "የሞኒተር ሰሌዳዎችን አሳይ";
+"CompactShowMonitorTilesSubtitle" = "በጥቅል ሁኔታ ውስጥ ለእያንዳንዱ ሞኒተር የብሩህነት እና የእንቅልፍ መቆጣጠሪያዎችን አሳይ።";
+"CompactSmartButtonsCompactTitle" = "ጥቅል የፈጣን አዝራር መጠን";
+"CompactSmartButtonsCompactSubtitle" = "በጥቅል ሁኔታ ውስጥ አነስተኛ የአዝራር ሰሌዳዎችን ተጠቀም፣ ከላቀ ሁኔታ አቀማመጥ ጋር ተዛምዶ።";

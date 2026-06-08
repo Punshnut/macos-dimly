@@ -403,3 +403,8 @@
 "PreviouslySeenMonitorsSectionTitle" = "Écrans vus précédemment";
 "PreviouslySeenMonitorsSectionSubtitle" = "Dimly se souvient des écrans pendant 90 jours. Oublier un écran supprime son nom enregistré et ses préférences.";
 "MonitorLastSeenLabel" = "Vu la dernière fois";
+
+"CompactShowMonitorTilesTitle" = "Afficher les tuiles de moniteur";
+"CompactShowMonitorTilesSubtitle" = "Afficher les commandes de luminosité et de veille par moniteur en mode compact.";
+"CompactSmartButtonsCompactTitle" = "Taille compacte des boutons rapides";
+"CompactSmartButtonsCompactSubtitle" = "Utiliser des tuiles de boutons plus petites en mode compact, correspondant à la disposition du mode avancé.";

@@ -403,3 +403,8 @@
 "PreviouslySeenMonitorsSectionTitle" = "Daha önce görülen monitörler";
 "PreviouslySeenMonitorsSectionSubtitle" = "Dimly, monitörleri 90 gün boyunca hatırlar. Bir monitörü unutmak, kaydedilen adını ve tercihlerini siler.";
 "MonitorLastSeenLabel" = "Son görülme";
+
+"CompactShowMonitorTilesTitle" = "Monitör kartlarını göster";
+"CompactShowMonitorTilesSubtitle" = "Kompakt modda her monitör için parlaklık ve uyku kontrollerini göster.";
+"CompactSmartButtonsCompactTitle" = "Kompakt hızlı düğme boyutu";
+"CompactSmartButtonsCompactSubtitle" = "Kompakt modda daha küçük düğme kartları kullan, gelişmiş mod düzenine uygun olarak.";

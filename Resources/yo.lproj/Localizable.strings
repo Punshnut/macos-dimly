@@ -403,3 +403,8 @@
 "PreviouslySeenMonitorsSectionTitle" = "Awọn atẹle ti a ti rii tẹlẹ";
 "PreviouslySeenMonitorsSectionSubtitle" = "Dimly ranti awọn atẹle fun ọjọ 90. Gbagbe atẹle kan yoo yọ orukọ ti a fipamọ ati awọn ayanfẹ rẹ kuro.";
 "MonitorLastSeenLabel" = "Kẹhin ti a rii";
+
+"CompactShowMonitorTilesTitle" = "Ṣafihan awọn alẹmọ atẹ";
+"CompactShowMonitorTilesSubtitle" = "Ṣafihan awọn iṣakoso imọlẹ ati oorun fun atẹ kọọkan ni ipo ti o kuru.";
+"CompactSmartButtonsCompactTitle" = "Iwọn bọtini yara kekere";
+"CompactSmartButtonsCompactSubtitle" = "Lo awọn alẹmọ bọtini kekere ni ipo ti o kuru, ni ibamu pẹlu ipilẹṣẹ ipo ilọsiwaju.";

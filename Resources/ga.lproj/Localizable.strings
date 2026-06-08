@@ -403,3 +403,8 @@
 "PreviouslySeenMonitorsSectionTitle" = "Monatóirí a chonacthas roimhe seo";
 "PreviouslySeenMonitorsSectionSubtitle" = "Cuimhníonn Dimly ar mhonatóirí ar feadh 90 lá. Má dhéantar dearmad de mhonatóir, bainfear a ainm sábháilte agus a roghanna.";
 "MonitorLastSeenLabel" = "Feicthe den uair dheireanach";
+
+"CompactShowMonitorTilesTitle" = "Taispeáin tíleanna monatóra";
+"CompactShowMonitorTilesSubtitle" = "Taispeáin rialuithe gile agus codlata in aghaidh gach monatóra sa mód dlúth.";
+"CompactSmartButtonsCompactTitle" = "Méid dlúth na gcnaipí tapa";
+"CompactSmartButtonsCompactSubtitle" = "Úsáid tíleanna cnaipí níos lú sa mód dlúth, ag meaitseáil leagan amach an mhóid ardleibhéil.";

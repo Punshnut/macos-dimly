@@ -403,3 +403,8 @@
 "PreviouslySeenMonitorsSectionTitle" = "Monitor yang pernah dilihat";
 "PreviouslySeenMonitorsSectionSubtitle" = "Dimly mengingat monitor selama 90 hari. Melupakan monitor akan membuang nama tersimpan dan keutamaannya.";
 "MonitorLastSeenLabel" = "Terakhir dilihat";
+
+"CompactShowMonitorTilesTitle" = "Tunjukkan jubin monitor";
+"CompactShowMonitorTilesSubtitle" = "Paparkan kawalan kecerahan dan tidur setiap monitor dalam mod padat.";
+"CompactSmartButtonsCompactTitle" = "Saiz butang pintar padat";
+"CompactSmartButtonsCompactSubtitle" = "Gunakan jubin butang yang lebih kecil dalam mod padat, sepadan dengan susun atur mod lanjutan.";

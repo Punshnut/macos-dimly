@@ -403,3 +403,8 @@
 "PreviouslySeenMonitorsSectionTitle" = "Раніше підключені монітори";
 "PreviouslySeenMonitorsSectionSubtitle" = "Dimly запам'ятовує монітори протягом 90 днів. Забувши монітор, ви видалите його збережену назву та налаштування.";
 "MonitorLastSeenLabel" = "Останнє підключення";
+
+"CompactShowMonitorTilesTitle" = "Показати плитки моніторів";
+"CompactShowMonitorTilesSubtitle" = "Відображати елементи керування яскравістю та сном для кожного монітора в компактному режимі.";
+"CompactSmartButtonsCompactTitle" = "Компактний розмір кнопок швидких дій";
+"CompactSmartButtonsCompactSubtitle" = "Використовувати менші плитки кнопок у компактному режимі, відповідно до макету розширеного режиму.";

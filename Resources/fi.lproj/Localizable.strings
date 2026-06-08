@@ -403,3 +403,8 @@
 "PreviouslySeenMonitorsSectionTitle" = "Aiemmin nähdyt näytöt";
 "PreviouslySeenMonitorsSectionSubtitle" = "Dimly muistaa näytöt 90 päivää. Näytön unohtaminen poistaa sen tallennetun nimen ja asetukset.";
 "MonitorLastSeenLabel" = "Viimeksi nähty";
+
+"CompactShowMonitorTilesTitle" = "Näytä näyttöruudut";
+"CompactShowMonitorTilesSubtitle" = "Näytä kirkkauden ja lepotilan hallintalaitteet näyttökohtaisesti kompaktissa tilassa.";
+"CompactSmartButtonsCompactTitle" = "Kompakti pikapainikkeiden koko";
+"CompactSmartButtonsCompactSubtitle" = "Käytä pienempiä painikeruutuja kompaktissa tilassa, vastaten edistyneen tilan asettelua.";

@@ -403,3 +403,8 @@
 "PreviouslySeenMonitorsSectionTitle" = "Monitor yang pernah terdeteksi";
 "PreviouslySeenMonitorsSectionSubtitle" = "Dimly mengingat monitor selama 90 hari. Melupakan monitor akan menghapus nama tersimpan dan preferensinya.";
 "MonitorLastSeenLabel" = "Terakhir terlihat";
+
+"CompactShowMonitorTilesTitle" = "Tampilkan ubin monitor";
+"CompactShowMonitorTilesSubtitle" = "Tampilkan kontrol kecerahan dan tidur per monitor dalam mode kompak.";
+"CompactSmartButtonsCompactTitle" = "Ukuran tombol cepat kompak";
+"CompactSmartButtonsCompactSubtitle" = "Gunakan ubin tombol yang lebih kecil dalam mode kompak, sesuai dengan tata letak mode lanjutan.";

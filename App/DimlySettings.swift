@@ -78,6 +78,8 @@ struct DimlySettings: Codable, Equatable {
     var fastActionsVisibilityMode: FastActionsVisibilityMode
     var menuBarSmartButtonsLimit: Int
     var menuBarSmartButtonsColorlessMode: Bool
+    var compactShowMonitorTiles: Bool
+    var compactSmartButtonsCompact: Bool
     var brightnessPanelExpandedDisplayIDs: [String]
     var profileRestoresTileLayout: Bool
     var monitorBrightnessByDisplayID: [String: Int]
@@ -109,6 +111,8 @@ struct DimlySettings: Codable, Equatable {
         case fastActionsVisibilityMode
         case menuBarSmartButtonsLimit
         case menuBarSmartButtonsColorlessMode
+        case compactShowMonitorTiles
+        case compactSmartButtonsCompact
         case brightnessPanelExpandedDisplayIDs
         case profileRestoresTileLayout
         case monitorBrightnessByDisplayID
@@ -159,6 +163,8 @@ struct DimlySettings: Codable, Equatable {
         fastActionsVisibilityMode: .advancedOnly,
         menuBarSmartButtonsLimit: 8,
         menuBarSmartButtonsColorlessMode: false,
+        compactShowMonitorTiles: true,
+        compactSmartButtonsCompact: false,
         brightnessPanelExpandedDisplayIDs: [],
         profileRestoresTileLayout: true,
         monitorBrightnessByDisplayID: [:],
@@ -190,6 +196,8 @@ struct DimlySettings: Codable, Equatable {
         fastActionsVisibilityMode: FastActionsVisibilityMode,
         menuBarSmartButtonsLimit: Int,
         menuBarSmartButtonsColorlessMode: Bool,
+        compactShowMonitorTiles: Bool,
+        compactSmartButtonsCompact: Bool,
         brightnessPanelExpandedDisplayIDs: [String],
         profileRestoresTileLayout: Bool,
         monitorBrightnessByDisplayID: [String: Int],
@@ -218,6 +226,8 @@ struct DimlySettings: Codable, Equatable {
         self.fastActionsVisibilityMode = fastActionsVisibilityMode
         self.menuBarSmartButtonsLimit = Self.normalizedSmartButtonsLimit(menuBarSmartButtonsLimit)
         self.menuBarSmartButtonsColorlessMode = menuBarSmartButtonsColorlessMode
+        self.compactShowMonitorTiles = compactShowMonitorTiles
+        self.compactSmartButtonsCompact = compactSmartButtonsCompact
         self.brightnessPanelExpandedDisplayIDs = brightnessPanelExpandedDisplayIDs
         self.profileRestoresTileLayout = profileRestoresTileLayout
         self.monitorBrightnessByDisplayID = monitorBrightnessByDisplayID
@@ -257,6 +267,8 @@ struct DimlySettings: Codable, Equatable {
             ?? DimlySettings.default.fastActionsVisibilityMode
         let menuBarSmartButtonsLimit = try container.decodeIfPresent(Int.self, forKey: .menuBarSmartButtonsLimit) ?? DimlySettings.default.menuBarSmartButtonsLimit
         let menuBarSmartButtonsColorlessMode = try container.decodeIfPresent(Bool.self, forKey: .menuBarSmartButtonsColorlessMode) ?? DimlySettings.default.menuBarSmartButtonsColorlessMode
+        let compactShowMonitorTiles = try container.decodeIfPresent(Bool.self, forKey: .compactShowMonitorTiles) ?? DimlySettings.default.compactShowMonitorTiles
+        let compactSmartButtonsCompact = try container.decodeIfPresent(Bool.self, forKey: .compactSmartButtonsCompact) ?? DimlySettings.default.compactSmartButtonsCompact
         let brightnessPanelExpandedDisplayIDs = try container.decodeIfPresent([String].self, forKey: .brightnessPanelExpandedDisplayIDs) ?? DimlySettings.default.brightnessPanelExpandedDisplayIDs
         let profileRestoresTileLayout = try container.decodeIfPresent(Bool.self, forKey: .profileRestoresTileLayout) ?? DimlySettings.default.profileRestoresTileLayout
         let monitorBrightnessByDisplayID = try container.decodeIfPresent([String: Int].self, forKey: .monitorBrightnessByDisplayID) ?? DimlySettings.default.monitorBrightnessByDisplayID
@@ -305,6 +317,8 @@ struct DimlySettings: Codable, Equatable {
             fastActionsVisibilityMode: fastActionsVisibilityMode,
             menuBarSmartButtonsLimit: menuBarSmartButtonsLimit,
             menuBarSmartButtonsColorlessMode: menuBarSmartButtonsColorlessMode,
+            compactShowMonitorTiles: compactShowMonitorTiles,
+            compactSmartButtonsCompact: compactSmartButtonsCompact,
             brightnessPanelExpandedDisplayIDs: brightnessPanelExpandedDisplayIDs,
             profileRestoresTileLayout: profileRestoresTileLayout,
             monitorBrightnessByDisplayID: monitorBrightnessByDisplayID,
@@ -339,6 +353,8 @@ struct DimlySettings: Codable, Equatable {
         try container.encode(fastActionsVisibilityMode, forKey: .fastActionsVisibilityMode)
         try container.encode(Self.normalizedSmartButtonsLimit(menuBarSmartButtonsLimit), forKey: .menuBarSmartButtonsLimit)
         try container.encode(menuBarSmartButtonsColorlessMode, forKey: .menuBarSmartButtonsColorlessMode)
+        try container.encode(compactShowMonitorTiles, forKey: .compactShowMonitorTiles)
+        try container.encode(compactSmartButtonsCompact, forKey: .compactSmartButtonsCompact)
         try container.encode(brightnessPanelExpandedDisplayIDs, forKey: .brightnessPanelExpandedDisplayIDs)
         try container.encode(profileRestoresTileLayout, forKey: .profileRestoresTileLayout)
         try container.encode(monitorBrightnessByDisplayID, forKey: .monitorBrightnessByDisplayID)

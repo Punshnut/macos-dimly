@@ -403,3 +403,8 @@
 "PreviouslySeenMonitorsSectionTitle" = "之前检测到的显示器";
 "PreviouslySeenMonitorsSectionSubtitle" = "Dimly 会记住显示器 90 天。忘记显示器将删除其已保存的名称和偏好设置。";
 "MonitorLastSeenLabel" = "上次出现";
+
+"CompactShowMonitorTilesTitle" = "显示显示器磁贴";
+"CompactShowMonitorTilesSubtitle" = "在紧凑模式下显示每台显示器的亮度和睡眠控制。";
+"CompactSmartButtonsCompactTitle" = "紧凑型快捷按钮大小";
+"CompactSmartButtonsCompactSubtitle" = "在紧凑模式下使用更小的按钮磁贴，与高级模式布局保持一致。";

@@ -403,3 +403,8 @@
 "PreviouslySeenMonitorsSectionTitle" = "مانیتورهای دیده‌شده قبلاً";
 "PreviouslySeenMonitorsSectionSubtitle" = "Dimly مانیتورها را به مدت ۹۰ روز به خاطر می‌سپارد. فراموش کردن یک مانیتور، نام ذخیره‌شده و تنظیمات برگزیده آن را حذف می‌کند.";
 "MonitorLastSeenLabel" = "آخرین مشاهده";
+
+"CompactShowMonitorTilesTitle" = "نمایش کاشی‌های مانیتور";
+"CompactShowMonitorTilesSubtitle" = "نمایش کنترل‌های روشنایی و خواب برای هر مانیتور در حالت فشرده.";
+"CompactSmartButtonsCompactTitle" = "اندازه فشرده دکمه‌های هوشمند";
+"CompactSmartButtonsCompactSubtitle" = "استفاده از کاشی‌های دکمه کوچکتر در حالت فشرده، مطابق با طرح‌بندی حالت پیشرفته.";

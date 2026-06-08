@@ -403,3 +403,8 @@
 "PreviouslySeenMonitorsSectionTitle" = "이전에 감지된 모니터";
 "PreviouslySeenMonitorsSectionSubtitle" = "Dimly는 90일 동안 모니터를 기억합니다. 모니터를 잊으면 저장된 이름과 환경설정이 삭제됩니다.";
 "MonitorLastSeenLabel" = "마지막으로 확인됨";
+
+"CompactShowMonitorTilesTitle" = "모니터 타일 표시";
+"CompactShowMonitorTilesSubtitle" = "컴팩트 모드에서 각 모니터의 밝기 및 절전 제어를 표시합니다.";
+"CompactSmartButtonsCompactTitle" = "컴팩트 스마트 버튼 크기";
+"CompactSmartButtonsCompactSubtitle" = "컴팩트 모드에서 더 작은 버튼 타일을 사용하여 고급 모드 레이아웃과 맞춥니다.";

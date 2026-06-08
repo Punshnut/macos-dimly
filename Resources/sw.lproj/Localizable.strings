@@ -403,3 +403,8 @@
 "PreviouslySeenMonitorsSectionTitle" = "Mfuatiliaji walioonekana awali";
 "PreviouslySeenMonitorsSectionSubtitle" = "Dimly inakumbuka mfuatiliaji kwa siku 90. Kusahau mfuatiliaji kunaondoa jina lake lililohifadhiwa na mapendeleo.";
 "MonitorLastSeenLabel" = "Ilionekana mwisho";
+
+"CompactShowMonitorTilesTitle" = "Onyesha vigae vya mfuatiliaji";
+"CompactShowMonitorTilesSubtitle" = "Onyesha vidhibiti vya mwangaza na usingizi kwa kila mfuatiliaji katika hali ya kompakti.";
+"CompactSmartButtonsCompactTitle" = "Ukubwa wa kitufe cha haraka cha kompakti";
+"CompactSmartButtonsCompactSubtitle" = "Tumia vigae vidogo vya vitufe katika hali ya kompakti, kulingana na mpangilio wa hali ya juu.";

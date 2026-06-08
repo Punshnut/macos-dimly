@@ -403,3 +403,8 @@
 "PreviouslySeenMonitorsSectionTitle" = "Allauna da aka gani a baya";
 "PreviouslySeenMonitorsSectionSubtitle" = "Dimly yana tunawa da allauna na kwanaki 90. Mantawa da allo zai cire sunansa da aka adana da zaɓuɓɓukansa.";
 "MonitorLastSeenLabel" = "Karshen ganawa";
+
+"CompactShowMonitorTilesTitle" = "Nuna faifan kallo";
+"CompactShowMonitorTilesSubtitle" = "Nuna sarrafa haske da barci a kowane kallo a yanayin taƙaitaccen.";
+"CompactSmartButtonsCompactTitle" = "Ƙananan girman maɓallin sauri";
+"CompactSmartButtonsCompactSubtitle" = "Yi amfani da ƙananan faifan maɓalli a yanayin taƙaitaccen, kamar tsarin yanayin ci gaba.";

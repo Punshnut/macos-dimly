@@ -403,3 +403,8 @@
 "PreviouslySeenMonitorsSectionTitle" = "Màn hình đã thấy trước đây";
 "PreviouslySeenMonitorsSectionSubtitle" = "Dimly ghi nhớ màn hình trong 90 ngày. Quên một màn hình sẽ xóa tên đã lưu và tùy chọn của nó.";
 "MonitorLastSeenLabel" = "Lần cuối thấy";
+
+"CompactShowMonitorTilesTitle" = "Hiển thị ô màn hình";
+"CompactShowMonitorTilesSubtitle" = "Hiển thị các điều khiển độ sáng và ngủ cho từng màn hình trong chế độ thu gọn.";
+"CompactSmartButtonsCompactTitle" = "Kích thước nút nhanh gọn";
+"CompactSmartButtonsCompactSubtitle" = "Sử dụng các ô nút nhỏ hơn trong chế độ thu gọn, phù hợp với bố cục chế độ nâng cao.";

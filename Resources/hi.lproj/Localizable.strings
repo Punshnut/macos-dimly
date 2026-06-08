@@ -403,3 +403,8 @@
 "PreviouslySeenMonitorsSectionTitle" = "पहले देखे गए मॉनीटर";
 "PreviouslySeenMonitorsSectionSubtitle" = "Dimly मॉनीटर को 90 दिनों तक याद रखता है। मॉनीटर भूलने से उसका सहेजा गया नाम और प्राथमिकताएं हट जाती हैं।";
 "MonitorLastSeenLabel" = "अंतिम बार देखा";
+
+"CompactShowMonitorTilesTitle" = "मॉनिटर टाइलें दिखाएं";
+"CompactShowMonitorTilesSubtitle" = "कॉम्पैक्ट मोड में प्रत्येक मॉनिटर के लिए चमक और नींद नियंत्रण प्रदर्शित करें।";
+"CompactSmartButtonsCompactTitle" = "कॉम्पैक्ट स्मार्ट बटन आकार";
+"CompactSmartButtonsCompactSubtitle" = "कॉम्पैक्ट मोड में छोटे बटन टाइल का उपयोग करें, उन्नत मोड लेआउट से मिलाकर।";

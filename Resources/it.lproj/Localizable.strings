@@ -403,3 +403,8 @@
 "PreviouslySeenMonitorsSectionTitle" = "Monitor visti in precedenza";
 "PreviouslySeenMonitorsSectionSubtitle" = "Dimly ricorda i monitor per 90 giorni. Dimenticare un monitor ne rimuove il nome salvato e le preferenze.";
 "MonitorLastSeenLabel" = "Ultima visione";
+
+"CompactShowMonitorTilesTitle" = "Mostra riquadri monitor";
+"CompactShowMonitorTilesSubtitle" = "Mostra i controlli di luminosità e sospensione per ogni monitor in modalità compatta.";
+"CompactSmartButtonsCompactTitle" = "Dimensione compatta dei pulsanti rapidi";
+"CompactSmartButtonsCompactSubtitle" = "Usa riquadri di pulsanti più piccoli in modalità compatta, corrispondente al layout della modalità avanzata.";

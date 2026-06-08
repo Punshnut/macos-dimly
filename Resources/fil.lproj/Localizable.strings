@@ -401,3 +401,8 @@
 "PreviouslySeenMonitorsSectionTitle" = "Mga monitor na nakita noon";
 "PreviouslySeenMonitorsSectionSubtitle" = "Itinatanda ng Dimly ang mga monitor nang 90 araw. Ang pagkalimot sa isang monitor ay aalisin ang nakaimbak na pangalan at mga kagustuhan nito.";
 "MonitorLastSeenLabel" = "Huling nakita";
+
+"CompactShowMonitorTilesTitle" = "Ipakita ang mga monitor tile";
+"CompactShowMonitorTilesSubtitle" = "Ipakita ang mga kontrol sa liwanag at tulog bawat monitor sa compact na mode.";
+"CompactSmartButtonsCompactTitle" = "Compact na laki ng smart button";
+"CompactSmartButtonsCompactSubtitle" = "Gumamit ng mas maliliit na button tile sa compact na mode, katulad ng layout ng advanced na mode.";

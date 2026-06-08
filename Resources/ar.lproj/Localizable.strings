@@ -403,3 +403,8 @@
 "PreviouslySeenMonitorsSectionTitle" = "الشاشات التي تمت رؤيتها سابقًا";
 "PreviouslySeenMonitorsSectionSubtitle" = "يتذكر Dimly الشاشات لمدة 90 يومًا. نسيان شاشة يزيل اسمها المحفوظ وتفضيلاتها.";
 "MonitorLastSeenLabel" = "آخر ظهور";
+
+"CompactShowMonitorTilesTitle" = "إظهار بلاطات الشاشة";
+"CompactShowMonitorTilesSubtitle" = "عرض عناصر التحكم في السطوع والنوم لكل شاشة في الوضع المضغوط.";
+"CompactSmartButtonsCompactTitle" = "حجم أزرار الإجراءات السريعة المضغوطة";
+"CompactSmartButtonsCompactSubtitle" = "استخدام بلاطات أزرار أصغر في الوضع المضغوط، بما يتوافق مع تخطيط الوضع المتقدم.";

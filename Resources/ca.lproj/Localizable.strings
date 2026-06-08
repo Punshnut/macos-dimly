@@ -403,3 +403,8 @@
 "PreviouslySeenMonitorsSectionTitle" = "Monitors vistos anteriorment";
 "PreviouslySeenMonitorsSectionSubtitle" = "Dimly recorda els monitors durant 90 dies. Oblidar un monitor elimina el seu nom desat i les seves preferències.";
 "MonitorLastSeenLabel" = "Vist per última vegada";
+
+"CompactShowMonitorTilesTitle" = "Mostra les rajoles de monitor";
+"CompactShowMonitorTilesSubtitle" = "Mostra els controls de brillantor i son per a cada monitor en mode compacte.";
+"CompactSmartButtonsCompactTitle" = "Mida compacta dels botons ràpids";
+"CompactSmartButtonsCompactSubtitle" = "Utilitza rajoles de botons més petites en mode compacte, coincidint amb el disseny del mode avançat.";

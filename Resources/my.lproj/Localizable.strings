@@ -403,3 +403,8 @@
 "PreviouslySeenMonitorsSectionTitle" = "ယခင်ကတွေ့ဖူးသောမော်နီတာများ";
 "PreviouslySeenMonitorsSectionSubtitle" = "Dimly သည် မော်နီတာများကို ၉၀ ရက်ကြာ မှတ်သားထားသည်။ မော်နီတာကို မေ့မြစ်ခြင်းသည် သိမ်းဆည်းထားသောအမည်နှင့် နှစ်သက်မှုများကို ဖျက်သည်။";
 "MonitorLastSeenLabel" = "နောက်ဆုံးတွေ့ဆုံ";
+
+"CompactShowMonitorTilesTitle" = "မော်နီတာ ကြွေးများ ပြသပါ";
+"CompactShowMonitorTilesSubtitle" = "ကျစ်လစ်သော မုဒ်တွင် မော်နီတာတစ်ခုချင်းစီအတွက် အလင်းရောင်နှင့် အိပ်ခြင်း ထိန်းချုပ်မှုများ ပြသပါ။";
+"CompactSmartButtonsCompactTitle" = "ကျစ်လစ်သော စမတ်ခလုတ် အရွယ်အစား";
+"CompactSmartButtonsCompactSubtitle" = "ကျစ်လစ်သော မုဒ်တွင် သေးငယ်သော ခလုတ် ကြွေးများ သုံးပါ၊ အဆင့်မြင့် မုဒ် ပုံစံနှင့် ကိုက်ညီစေရန်။";

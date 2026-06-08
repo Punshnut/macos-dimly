@@ -34,6 +34,16 @@ struct MenuBarContentView: View {
     @State private var suppressSmartButtonTapUntil: Date = .distantPast
     @State private var smartButtonFlashIDs: Set<UUID> = []
     @State private var smartButtonPulseIDs: Set<UUID> = []
+    @State private var draggedDisplayMiniTileID: String? = nil
+    @State private var displayMiniTileFramesByID: [String: CGRect] = [:]
+    @State private var displayMiniTileDragStartFramesByID: [String: CGRect] = [:]
+    @State private var displayMiniTileDragTranslation: CGSize = .zero
+    @State private var displayMiniTileSwapTargetID: String? = nil
+    @State private var draggedDisplayRowID: String? = nil
+    @State private var displayRowFramesByID: [String: CGRect] = [:]
+    @State private var displayRowDragStartFramesByID: [String: CGRect] = [:]
+    @State private var displayRowDragTranslation: CGSize = .zero
+    @State private var displayRowSwapTargetID: String? = nil
     @State private var isModeTransitioning = false
     @State private var modeTransitionToken: Int = 0
     @State private var renderedLayoutMode: LayoutMode?
@@ -45,6 +55,8 @@ struct MenuBarContentView: View {
     @State private var modeContentOffsetY: CGFloat = 0
     @State private var modeTransitionInvolvesCompactMode = false
     private let smartButtonsGridCoordinateSpace = "smartButtonsGrid"
+    private let compactDisplayMiniTileCoordinateSpace = "compactDisplayMiniTileGrid"
+    private let displayRowCoordinateSpace = "displayRowGrid"
     @Namespace private var modeSwitchNamespace
     @Environment(\.colorScheme) private var colorScheme
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
@@ -301,7 +313,10 @@ struct MenuBarContentView: View {
             if shouldShowQuickActions(in: .short) {
                 quickActionsSection(includeShowNumbers: false)
             }
-            smartButtonsSection(compact: false)
+            smartButtonsSection(compact: settingsStore.settings.compactSmartButtonsCompact)
+            if !menuBarDisplays.isEmpty && settingsStore.settings.compactShowMonitorTiles {
+                compactDisplayMiniTilesSection
+            }
             shortModeAppActionsSection
         }
     }
@@ -1256,36 +1271,371 @@ struct MenuBarContentView: View {
     private var externalDisplaysSection: some View {
         VStack(alignment: .leading, spacing: 8) {
             sectionHeader(monitorsSectionTitle)
-            ForEach(menuBarDisplays) { display in
-                displayRow(display)
-                    .transition(.asymmetric(
-                        insertion: .opacity.combined(with: .scale(scale: 0.97)),
-                        removal: .opacity
-                    ))
+            ZStack(alignment: .topLeading) {
+                VStack(spacing: 8) {
+                    ForEach(menuBarDisplays) { display in
+                        let isDragged = draggedDisplayRowID == display.stableIdentity
+                        let isTargeted = draggedDisplayRowID != nil && displayRowSwapTargetID == display.stableIdentity
+                        displayRow(display)
+                            .opacity(isDragged ? 0.12 : 1)
+                            .scaleEffect(isTargeted && !reduceMotion ? 1.018 : 1)
+                            .offset(y: isTargeted && !reduceMotion ? -2 : 0)
+                            .transition(.asymmetric(
+                                insertion: .opacity.combined(with: .scale(scale: 0.97)),
+                                removal: .opacity
+                            ))
+                            .background(
+                                GeometryReader { geo in
+                                    Color.clear.preference(
+                                        key: DisplayRowFramePreferenceKey.self,
+                                        value: [display.stableIdentity: geo.frame(in: .named(displayRowCoordinateSpace))]
+                                    )
+                                }
+                            )
+                    }
+                }
+                .animation(standardAnimation, value: orderedExternalIDs())
+                .animation(standardAnimation, value: orderedInternalIDs())
+                .animation(standardAnimation, value: orderedMergedIDs())
+                .animation(reduceMotion ? nil : DimlyMotion.panelSpring, value: settingsStore.settings.brightnessPanelExpandedDisplayIDs)
+
+                if let draggedID = draggedDisplayRowID,
+                   let display = menuBarDisplays.first(where: { $0.stableIdentity == draggedID }),
+                   let startFrame = displayRowDragStartFramesByID[draggedID] ?? displayRowFramesByID[draggedID] {
+                    displayRowDragPreview(display)
+                        .frame(width: startFrame.width)
+                        .allowsHitTesting(false)
+                        .position(x: startFrame.midX, y: startFrame.midY)
+                        .offset(displayRowDragTranslation)
+                        .scaleEffect(reduceMotion ? 1 : 1.025)
+                        .shadow(color: Color.black.opacity(colorScheme == .dark ? 0.34 : 0.2), radius: 12, x: 0, y: 8)
+                        .zIndex(10)
+                }
             }
+            .coordinateSpace(name: displayRowCoordinateSpace)
+            .onPreferenceChange(DisplayRowFramePreferenceKey.self) { frames in
+                displayRowFramesByID = frames
+            }
+            .animation(reorderAnimation, value: displayRowSwapTargetID)
+            .animation(reorderAnimation, value: menuBarDisplays.map(\.stableIdentity))
+            .animation(reorderAnimation, value: draggedDisplayRowID)
         }
-        .animation(standardAnimation, value: orderedExternalIDs())
-        .animation(standardAnimation, value: orderedInternalIDs())
-        .animation(standardAnimation, value: orderedMergedIDs())
-        .animation(reduceMotion ? nil : DimlyMotion.panelSpring, value: settingsStore.settings.brightnessPanelExpandedDisplayIDs)
     }
 
     /// Reduced per-display list used in the simple layout.
     private var externalDisplaysSimpleSection: some View {
         VStack(alignment: .leading, spacing: 8) {
             sectionHeader(monitorsSectionTitle)
-            ForEach(menuBarDisplays) { display in
-                displayRowSimple(display)
-                    .transition(.asymmetric(
-                        insertion: .opacity.combined(with: .scale(scale: 0.97)),
-                        removal: .opacity
-                    ))
+            ZStack(alignment: .topLeading) {
+                VStack(spacing: 8) {
+                    ForEach(menuBarDisplays) { display in
+                        let isDragged = draggedDisplayRowID == display.stableIdentity
+                        let isTargeted = draggedDisplayRowID != nil && displayRowSwapTargetID == display.stableIdentity
+                        displayRowSimple(display)
+                            .opacity(isDragged ? 0.12 : 1)
+                            .scaleEffect(isTargeted && !reduceMotion ? 1.018 : 1)
+                            .offset(y: isTargeted && !reduceMotion ? -2 : 0)
+                            .transition(.asymmetric(
+                                insertion: .opacity.combined(with: .scale(scale: 0.97)),
+                                removal: .opacity
+                            ))
+                            .background(
+                                GeometryReader { geo in
+                                    Color.clear.preference(
+                                        key: DisplayRowFramePreferenceKey.self,
+                                        value: [display.stableIdentity: geo.frame(in: .named(displayRowCoordinateSpace))]
+                                    )
+                                }
+                            )
+                    }
+                }
+                .animation(standardAnimation, value: orderedExternalIDs())
+                .animation(standardAnimation, value: orderedInternalIDs())
+                .animation(standardAnimation, value: orderedMergedIDs())
+                .animation(reduceMotion ? nil : DimlyMotion.panelSpring, value: settingsStore.settings.brightnessPanelExpandedDisplayIDs)
+
+                if let draggedID = draggedDisplayRowID,
+                   let display = menuBarDisplays.first(where: { $0.stableIdentity == draggedID }),
+                   let startFrame = displayRowDragStartFramesByID[draggedID] ?? displayRowFramesByID[draggedID] {
+                    displayRowDragPreview(display)
+                        .frame(width: startFrame.width)
+                        .allowsHitTesting(false)
+                        .position(x: startFrame.midX, y: startFrame.midY)
+                        .offset(displayRowDragTranslation)
+                        .scaleEffect(reduceMotion ? 1 : 1.025)
+                        .shadow(color: Color.black.opacity(colorScheme == .dark ? 0.34 : 0.2), radius: 12, x: 0, y: 8)
+                        .zIndex(10)
+                }
             }
+            .coordinateSpace(name: displayRowCoordinateSpace)
+            .onPreferenceChange(DisplayRowFramePreferenceKey.self) { frames in
+                displayRowFramesByID = frames
+            }
+            .animation(reorderAnimation, value: displayRowSwapTargetID)
+            .animation(reorderAnimation, value: menuBarDisplays.map(\.stableIdentity))
+            .animation(reorderAnimation, value: draggedDisplayRowID)
         }
-        .animation(standardAnimation, value: orderedExternalIDs())
-        .animation(standardAnimation, value: orderedInternalIDs())
-        .animation(standardAnimation, value: orderedMergedIDs())
-        .animation(reduceMotion ? nil : DimlyMotion.panelSpring, value: settingsStore.settings.brightnessPanelExpandedDisplayIDs)
+    }
+
+    /// Compact mini-tile grid used in short mode: one tile per display with toggle buttons.
+    private var compactDisplayMiniTilesSection: some View {
+        let displays = menuBarDisplays
+        let colCount = min(max(displays.count, 1), 4)
+        let columns = Array(repeating: GridItem(.flexible(), spacing: 6), count: colCount)
+        return VStack(alignment: .leading, spacing: 8) {
+            sectionHeader(monitorsSectionTitle)
+            ZStack(alignment: .topLeading) {
+                LazyVGrid(columns: columns, alignment: .leading, spacing: 6) {
+                    ForEach(Array(displays.enumerated()), id: \.element.stableIdentity) { index, display in
+                        let isDragged = draggedDisplayMiniTileID == display.stableIdentity
+                        let isTargeted = draggedDisplayMiniTileID != nil && displayMiniTileSwapTargetID == display.stableIdentity
+                        displayMiniTile(display, index: index)
+                            .opacity(isDragged ? 0.12 : 1)
+                            .scaleEffect(isTargeted && !reduceMotion ? 1.04 : 1)
+                            .offset(y: isTargeted && !reduceMotion ? -2 : 0)
+                            .background(
+                                GeometryReader { geo in
+                                    Color.clear.preference(
+                                        key: DisplayMiniTileFramePreferenceKey.self,
+                                        value: [display.stableIdentity: geo.frame(in: .named(compactDisplayMiniTileCoordinateSpace))]
+                                    )
+                                }
+                            )
+                            // drag gesture is on the name area inside the tile itself
+                    }
+                }
+                if let draggedID = draggedDisplayMiniTileID,
+                   let display = menuBarDisplays.first(where: { $0.stableIdentity == draggedID }),
+                   let startFrame = displayMiniTileDragStartFramesByID[draggedID] ?? displayMiniTileFramesByID[draggedID] {
+                    displayMiniTileFloatingPreview(display, size: CGSize(width: startFrame.width, height: startFrame.height))
+                        .allowsHitTesting(false)
+                        .position(x: startFrame.midX, y: startFrame.midY)
+                        .offset(displayMiniTileDragTranslation)
+                        .scaleEffect(reduceMotion ? 1 : 1.05)
+                        .rotationEffect(.degrees(displayMiniTilePreviewTilt()))
+                        .shadow(color: Color.black.opacity(colorScheme == .dark ? 0.34 : 0.2), radius: 10, x: 0, y: 6)
+                        .zIndex(10)
+                }
+            }
+            .coordinateSpace(name: compactDisplayMiniTileCoordinateSpace)
+            .onPreferenceChange(DisplayMiniTileFramePreferenceKey.self) { frames in
+                displayMiniTileFramesByID = frames
+            }
+            .animation(reorderAnimation, value: displayMiniTileSwapTargetID)
+            .animation(reorderAnimation, value: menuBarDisplays.map(\.stableIdentity))
+            .animation(reorderAnimation, value: draggedDisplayMiniTileID)
+        }
+    }
+
+    /// A single compact tile for one display in short mode.
+    /// Name row is the drag handle; button row has sleep/wake + brightness ±.
+    private func displayMiniTile(_ display: DisplayInfo, index: Int) -> some View {
+        let tileShape = RoundedRectangle(cornerRadius: 11, style: .continuous)
+        let name = displayName(for: display)
+        let isBlackoutActive = engine.isDisplayBlackoutActive(display)
+        let ddcState = ddcManager.states[display.stableIdentity]
+        let ddcSupported = ddcState?.status == .supported
+        let overlayOnly = settingsStore.settings.overlayOnlyDisplayIDs.contains(display.stableIdentity)
+        let fallbackActive = (!ddcSupported || overlayOnly) && blackoutManager.activeDisplayIDs.contains(display.stableIdentity)
+        let isAsleep: Bool = display.isBuiltin
+            ? isBlackoutActive
+            : (overlayOnly
+                ? blackoutManager.activeDisplayIDs.contains(display.stableIdentity)
+                : (ddcSupported ? (ddcState?.lastCommand == .standby) : fallbackActive))
+        let sleepTint: Color = display.isBuiltin
+            ? (isBlackoutActive ? .green : .secondary)
+            : ((ddcSupported && !overlayOnly) ? .green : (fallbackActive ? .blue : .secondary))
+        let sleepIcon = display.isBuiltin
+            ? (isBlackoutActive ? "moon.fill" : "sun.max.fill")
+            : (isAsleep ? "moon.zzz" : "sun.max.fill")
+        let indexLabel = display.isBuiltin ? "INT" : "\(index + 1)"
+        let brightnessLabel = "\(brightnessPercent(for: display))%"
+
+        return VStack(spacing: 0) {
+            // ── Name / drag handle ──────────────────────────────
+            HStack(alignment: .top, spacing: 3) {
+                Text(name)
+                    .font(.system(size: 8.5, weight: .semibold))
+                    .lineLimit(1)
+                    .minimumScaleFactor(0.65)
+                    .foregroundStyle(neutralPrimaryText)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                VStack(alignment: .trailing, spacing: 0) {
+                    Text(indexLabel)
+                        .font(.system(size: 6, weight: .medium))
+                        .foregroundStyle(neutralTertiaryText)
+                    Text(brightnessLabel)
+                        .font(.system(size: 6, weight: .regular).monospacedDigit())
+                        .foregroundStyle(neutralTertiaryText)
+                }
+            }
+            .padding(.horizontal, 5)
+            .padding(.top, 5)
+            .padding(.bottom, 3)
+            .contentShape(Rectangle())
+            .highPriorityGesture(displayMiniTileReorderGesture(for: display.stableIdentity))
+
+            // ── Action buttons: sleep/wake + brightness pill, grouped and centred ──
+            HStack(spacing: 0) {
+                Spacer(minLength: 0)
+                HStack(spacing: 5) {
+                    Button {
+                        if display.isBuiltin {
+                            engine.toggleDisplayBlackout(display: display)
+                        } else if isAsleep {
+                            engine.wake(display: display)
+                        } else {
+                            engine.standby(display: display)
+                        }
+                    } label: {
+                        animatedSymbol(sleepIcon, size: 10, value: isAsleep)
+                            .foregroundStyle(sleepTint)
+                            .frame(width: 20, height: 20)
+                            .background(Circle().fill(sleepTint.opacity(0.12)))
+                    }
+                    .buttonStyle(FluentPressButtonStyle(pressedScale: 0.88, pressedOpacity: 0.82))
+                    .scaleEffect(isAsleep && !reduceMotion ? 1.05 : 1)
+                    .animation(quickAnimation, value: isAsleep)
+                    .help(isAsleep ? String(localized: "ActionWakeDisplayLabel") : String(localized: "ActionSleepDisplayLabel"))
+
+                    // Brightness stepper pill  ▼ | ▲
+                    HStack(spacing: 0) {
+                        BrightnessHoldButton(action: { nudgeBrightness(for: display, delta: -1) }) {
+                            Image(systemName: "chevron.down")
+                                .font(.system(size: 6.5, weight: .medium))
+                                .foregroundStyle(neutralTertiaryText)
+                                .frame(width: 14, height: 18)
+                        }
+                        .help(String(localized: "ActionDecreaseBrightnessHint"))
+                        Rectangle()
+                            .fill(neutralStroke.opacity(0.35))
+                            .frame(width: 0.5, height: 9)
+                        BrightnessHoldButton(action: { nudgeBrightness(for: display, delta: 1) }) {
+                            Image(systemName: "chevron.up")
+                                .font(.system(size: 6.5, weight: .medium))
+                                .foregroundStyle(neutralTertiaryText)
+                                .frame(width: 14, height: 18)
+                        }
+                        .help(String(localized: "ActionIncreaseBrightnessHint"))
+                    }
+                    .background(
+                        RoundedRectangle(cornerRadius: 7, style: .continuous)
+                            .fill(neutralChromeFill.opacity(0.8))
+                    )
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 7, style: .continuous)
+                            .stroke(neutralStroke.opacity(0.35), lineWidth: 0.5)
+                    )
+                    .clipShape(RoundedRectangle(cornerRadius: 7, style: .continuous))
+                }
+                Spacer(minLength: 0)
+            }
+            .padding(.bottom, 6)
+        }
+        .frame(maxWidth: .infinity)
+        .background(neutralCardFill)
+        .overlay(tileShape.stroke(neutralStroke.opacity(0.78), lineWidth: 1))
+        .clipShape(tileShape)
+        .contentShape(tileShape)
+    }
+
+    /// Fixed-size floating preview shown while dragging a compact display mini-tile.
+    private func displayMiniTileFloatingPreview(_ display: DisplayInfo, size: CGSize) -> some View {
+        let tileShape = RoundedRectangle(cornerRadius: 11, style: .continuous)
+        let name = displayName(for: display)
+        return Text(name)
+            .font(.system(size: 8.5, weight: .semibold))
+            .lineLimit(1)
+            .minimumScaleFactor(0.65)
+            .foregroundStyle(neutralPrimaryText)
+            .frame(width: max(32, size.width), height: max(32, size.height))
+            .background(neutralCardFillStrong)
+            .overlay(
+                tileShape.fill(Color.white.opacity(colorScheme == .dark ? 0.04 : 0.07))
+            )
+            .overlay(tileShape.stroke(neutralStroke.opacity(0.78), lineWidth: 1))
+            .clipShape(tileShape)
+    }
+
+    /// Adds a gentle tilt to the compact mini-tile drag preview.
+    private func displayMiniTilePreviewTilt() -> Double {
+        guard !reduceMotion else { return 0 }
+        return max(-4, min(4, displayMiniTileDragTranslation.width / 24))
+    }
+
+    /// Drag gesture for reordering compact display mini-tiles.
+    private func displayMiniTileReorderGesture(for id: String) -> some Gesture {
+        DragGesture(minimumDistance: 3, coordinateSpace: .named(compactDisplayMiniTileCoordinateSpace))
+            .onChanged { value in
+                if draggedDisplayMiniTileID != id {
+                    draggedDisplayMiniTileID = id
+                    displayMiniTileDragStartFramesByID = displayMiniTileFramesByID
+                    if displayMiniTileDragStartFramesByID[id] == nil,
+                       let liveFrame = displayMiniTileFramesByID[id] {
+                        displayMiniTileDragStartFramesByID[id] = liveFrame
+                    }
+                    displayMiniTileSwapTargetID = nil
+                }
+                displayMiniTileDragTranslation = value.translation
+                displayMiniTileSwapTargetID = displayMiniTileSwapTarget(for: value.translation, draggedID: id)
+            }
+            .onEnded { _ in
+                applyDisplayMiniTileSwapIfNeeded()
+                draggedDisplayMiniTileID = nil
+                displayMiniTileDragStartFramesByID.removeAll()
+                displayMiniTileDragTranslation = .zero
+                displayMiniTileSwapTargetID = nil
+            }
+    }
+
+    /// Commits the pending mini-tile swap to the persisted display order.
+    private func applyDisplayMiniTileSwapIfNeeded() {
+        guard let draggedID = draggedDisplayMiniTileID,
+              let targetID = displayMiniTileSwapTargetID,
+              targetID != draggedID else { return }
+        swapDisplayOrder(draggedID: draggedID, targetID: targetID)
+    }
+
+    /// Resolves which mini-tile should swap with the dragged one using overlap-ratio detection.
+    private func displayMiniTileSwapTarget(for translation: CGSize, draggedID: String) -> String? {
+        let startFrames = displayMiniTileDragStartFramesByID.isEmpty ? displayMiniTileFramesByID : displayMiniTileDragStartFramesByID
+        guard let draggedFrame = startFrames[draggedID] else { return nil }
+        if abs(translation.width) < 5 && abs(translation.height) < 5 { return nil }
+
+        let dragRect = draggedFrame.offsetBy(dx: translation.width, dy: translation.height)
+        let cancelPadding = max(draggedFrame.width, draggedFrame.height) * 0.45
+        if draggedFrame.insetBy(dx: -cancelPadding, dy: -cancelPadding).contains(dragRect.center) {
+            return nil
+        }
+
+        let orderedIDs = menuBarDisplays.map(\.stableIdentity).filter { $0 != draggedID }
+        let candidates: [(id: String, frame: CGRect)] = orderedIDs.compactMap { id in
+            guard let frame = startFrames[id] ?? displayMiniTileFramesByID[id] else { return nil }
+            return (id: id, frame: frame)
+        }
+        guard !candidates.isEmpty else { return nil }
+
+        let stickinessThreshold: CGFloat = 0.14
+        let overlapThreshold: CGFloat = 0.22
+        let overlapScores = candidates.map { (id: $0.id, overlap: dragRect.overlapRatio(with: $0.frame)) }
+
+        if let currentTargetID = displayMiniTileSwapTargetID,
+           currentTargetID != draggedID,
+           let currentScore = overlapScores.first(where: { $0.id == currentTargetID })?.overlap,
+           currentScore >= stickinessThreshold {
+            return currentTargetID
+        }
+
+        guard let strongest = overlapScores.max(by: { lhs, rhs in
+            if abs(lhs.overlap - rhs.overlap) < 0.01 {
+                guard let lhsFrame = candidates.first(where: { $0.id == lhs.id })?.frame,
+                      let rhsFrame = candidates.first(where: { $0.id == rhs.id })?.frame else { return false }
+                return dragRect.center.distanceSquared(to: lhsFrame.center) > dragRect.center.distanceSquared(to: rhsFrame.center)
+            }
+            return lhs.overlap < rhs.overlap
+        }) else { return nil }
+
+        return strongest.overlap >= overlapThreshold ? strongest.id : nil
     }
 
     /// Renders a single display row with actions and status.
@@ -1377,6 +1727,8 @@ struct MenuBarContentView: View {
             .onTapGesture {
                 toggleBrightnessPanel(for: display)
             }
+            // Drag-to-reorder lives only on the name strip — keeps brightness buttons fully interactive.
+            .highPriorityGesture(displayRowReorderGesture(for: display.stableIdentity))
             HStack(spacing: 6) {
                 displayOrderButtons(for: display)
                 sleepWakeButton(for: display)
@@ -1474,14 +1826,11 @@ struct MenuBarContentView: View {
             }
 
             HStack(spacing: 8) {
-                Button {
-                    nudgeBrightness(for: display, delta: -1)
-                } label: {
+                BrightnessHoldButton(action: { nudgeBrightness(for: display, delta: -1) }) {
                     animatedSymbol("chevron.left", size: 10, value: level)
+                        .foregroundStyle(neutralSecondaryText)
                         .frame(width: 18, height: 18)
                 }
-                .buttonStyle(FluentPressButtonStyle(pressedScale: 0.84, pressedOpacity: 0.84))
-                .foregroundStyle(neutralSecondaryText)
                 .help(String(localized: "ActionDecreaseBrightnessHint"))
 
                 Slider(
@@ -1495,14 +1844,11 @@ struct MenuBarContentView: View {
                 )
                 .tint(tint)
 
-                Button {
-                    nudgeBrightness(for: display, delta: 1)
-                } label: {
+                BrightnessHoldButton(action: { nudgeBrightness(for: display, delta: 1) }) {
                     animatedSymbol("chevron.right", size: 10, value: level)
+                        .foregroundStyle(neutralSecondaryText)
                         .frame(width: 18, height: 18)
                 }
-                .buttonStyle(FluentPressButtonStyle(pressedScale: 0.84, pressedOpacity: 0.84))
-                .foregroundStyle(neutralSecondaryText)
                 .help(String(localized: "ActionIncreaseBrightnessHint"))
             }
         }
@@ -2157,6 +2503,128 @@ struct MenuBarContentView: View {
         }
     }
 
+    /// Swaps two displays in their persisted order list, animated with the reorder spring.
+    private func swapDisplayOrder(draggedID: String, targetID: String) {
+        if mergeInternalAndExternalDisplays {
+            var order = orderedMergedIDs()
+            guard let fromIndex = order.firstIndex(of: draggedID),
+                  let toIndex = order.firstIndex(of: targetID),
+                  fromIndex != toIndex else { return }
+            order.swapAt(fromIndex, toIndex)
+            runMotion(DimlyMotion.reorderSettleSpring) {
+                settingsStore.update { settings in
+                    settings.mergedDisplayOrder = order
+                }
+            }
+        } else {
+            var exOrder = orderedExternalIDs()
+            if let fromIndex = exOrder.firstIndex(of: draggedID),
+               let toIndex = exOrder.firstIndex(of: targetID),
+               fromIndex != toIndex {
+                exOrder.swapAt(fromIndex, toIndex)
+                runMotion(DimlyMotion.reorderSettleSpring) {
+                    settingsStore.update { settings in
+                        settings.externalDisplayOrder = exOrder
+                    }
+                }
+            } else {
+                var inOrder = orderedInternalIDs()
+                guard let fromIndex = inOrder.firstIndex(of: draggedID),
+                      let toIndex = inOrder.firstIndex(of: targetID),
+                      fromIndex != toIndex else { return }
+                inOrder.swapAt(fromIndex, toIndex)
+                runMotion(DimlyMotion.reorderSettleSpring) {
+                    settingsStore.update { settings in
+                        settings.internalDisplayOrder = inOrder
+                    }
+                }
+            }
+        }
+    }
+
+    /// Drag gesture that enables holding-and-dragging display rows to reorder them.
+    private func displayRowReorderGesture(for id: String) -> some Gesture {
+        DragGesture(minimumDistance: 3, coordinateSpace: .named(displayRowCoordinateSpace))
+            .onChanged { value in
+                if draggedDisplayRowID != id {
+                    draggedDisplayRowID = id
+                    displayRowDragStartFramesByID = displayRowFramesByID
+                    if displayRowDragStartFramesByID[id] == nil,
+                       let liveFrame = displayRowFramesByID[id] {
+                        displayRowDragStartFramesByID[id] = liveFrame
+                    }
+                    displayRowSwapTargetID = nil
+                }
+                displayRowDragTranslation = value.translation
+                displayRowSwapTargetID = displayRowSwapTarget(for: value.translation, draggedID: id)
+            }
+            .onEnded { _ in
+                applyDisplayRowSwapIfNeeded()
+                draggedDisplayRowID = nil
+                displayRowDragStartFramesByID.removeAll()
+                displayRowDragTranslation = .zero
+                displayRowSwapTargetID = nil
+            }
+    }
+
+    /// Commits the pending display row swap to the persisted display order.
+    private func applyDisplayRowSwapIfNeeded() {
+        guard let draggedID = draggedDisplayRowID,
+              let targetID = displayRowSwapTargetID,
+              targetID != draggedID else { return }
+        swapDisplayOrder(draggedID: draggedID, targetID: targetID)
+    }
+
+    /// Resolves which display row should swap with the dragged one.
+    /// Uses vertical midpoint proximity: swap fires as soon as the dragged card's
+    /// center crosses the midpoint of an adjacent row — no overshoot required.
+    private func displayRowSwapTarget(for translation: CGSize, draggedID: String) -> String? {
+        let startFrames = displayRowDragStartFramesByID.isEmpty ? displayRowFramesByID : displayRowDragStartFramesByID
+        guard let draggedFrame = startFrames[draggedID] else { return nil }
+        // Dead zone: require at least 25% of row height before evaluating.
+        guard abs(translation.height) >= draggedFrame.height * 0.25 else { return nil }
+
+        let dragMidY = draggedFrame.midY + translation.height
+
+        let candidates = menuBarDisplays.map(\.stableIdentity)
+            .filter { $0 != draggedID }
+            .compactMap { id -> (id: String, midY: CGFloat)? in
+                guard let frame = startFrames[id] ?? displayRowFramesByID[id] else { return nil }
+                return (id: id, midY: frame.midY)
+            }
+        guard let closest = candidates.min(by: { abs($0.midY - dragMidY) < abs($1.midY - dragMidY) }) else {
+            return nil
+        }
+        // Only commit when within one row-height of the target mid — prevents
+        // accidental swaps when dragging past the last or first row.
+        guard abs(closest.midY - dragMidY) < draggedFrame.height else { return nil }
+        return closest.id
+    }
+
+    /// Compact floating card shown while dragging a display row.
+    private func displayRowDragPreview(_ display: DisplayInfo) -> some View {
+        let rowShape = RoundedRectangle(cornerRadius: 10, style: .continuous)
+        let name = displayName(for: display)
+        return HStack(spacing: 8) {
+            Image(systemName: display.isBuiltin ? "laptopcomputer" : "display")
+                .font(.system(size: 12, weight: .medium))
+                .foregroundStyle(neutralSecondaryText)
+            Text(name)
+                .font(.subheadline.weight(.semibold))
+                .foregroundStyle(neutralPrimaryText)
+                .lineLimit(1)
+            Spacer(minLength: 0)
+        }
+        .padding(.horizontal, 10)
+        .padding(.vertical, 10)
+        .background(neutralCardFillStrong)
+        .overlay(
+            rowShape.fill(Color.white.opacity(colorScheme == .dark ? 0.04 : 0.06))
+        )
+        .overlay(rowShape.stroke(neutralStroke.opacity(0.78), lineWidth: 1))
+        .clipShape(rowShape)
+    }
+
     /// Copies a plain-text report of all displays to the clipboard.
     private func copyDisplayReport() {
         let report = buildDisplayReport()
@@ -2263,6 +2731,22 @@ struct MenuBarContentView: View {
 
         /// Merges per-button frame snapshots for drag/drop hit testing.
         static func reduce(value: inout [UUID: CGRect], nextValue: () -> [UUID: CGRect]) {
+            value.merge(nextValue()) { _, new in new }
+        }
+    }
+
+    private struct DisplayMiniTileFramePreferenceKey: PreferenceKey {
+        static let defaultValue: [String: CGRect] = [:]
+
+        static func reduce(value: inout [String: CGRect], nextValue: () -> [String: CGRect]) {
+            value.merge(nextValue()) { _, new in new }
+        }
+    }
+
+    private struct DisplayRowFramePreferenceKey: PreferenceKey {
+        static let defaultValue: [String: CGRect] = [:]
+
+        static func reduce(value: inout [String: CGRect], nextValue: () -> [String: CGRect]) {
             value.merge(nextValue()) { _, new in new }
         }
     }
@@ -2602,6 +3086,47 @@ private struct MenuBarWindowAnchorLock: NSViewRepresentable {
 
             return nil
         }
+    }
+}
+
+/// Tap fires once on press-down; hold repeats after 1 s at 0.12 s intervals.
+/// Uses onLongPressGesture so it works even when a DragGesture lives on an ancestor view.
+private struct BrightnessHoldButton<Label: View>: View {
+    let action: () -> Void
+    let label: () -> Label
+
+    @State private var repeatTask: Task<Void, Never>?
+    @State private var isHeld = false
+    @Environment(\.accessibilityReduceMotion) private var reduceMotion
+
+    init(action: @escaping () -> Void, @ViewBuilder label: @escaping () -> Label) {
+        self.action = action
+        self.label = label
+    }
+
+    var body: some View {
+        label()
+            .scaleEffect(isHeld && !reduceMotion ? 0.84 : 1)
+            .opacity(isHeld ? 0.78 : 1)
+            .animation(reduceMotion ? nil : DimlyMotion.quickSpring, value: isHeld)
+            .onLongPressGesture(minimumDuration: 0, pressing: { pressing in
+                isHeld = pressing
+                if pressing {
+                    action()
+                    repeatTask = Task {
+                        do {
+                            try await Task.sleep(nanoseconds: 1_000_000_000) // 1 s before repeat
+                            while !Task.isCancelled {
+                                action()
+                                try await Task.sleep(nanoseconds: 120_000_000) // ~8 steps/s
+                            }
+                        } catch {}
+                    }
+                } else {
+                    repeatTask?.cancel()
+                    repeatTask = nil
+                }
+            }, perform: {})
     }
 }
 

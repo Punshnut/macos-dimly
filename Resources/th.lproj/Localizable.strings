@@ -403,3 +403,8 @@
 "PreviouslySeenMonitorsSectionTitle" = "จอภาพที่เคยตรวจพบ";
 "PreviouslySeenMonitorsSectionSubtitle" = "Dimly จดจำจอภาพไว้ 90 วัน การลืมจอภาพจะลบชื่อที่บันทึกและค่ากำหนดออก";
 "MonitorLastSeenLabel" = "เห็นล่าสุด";
+
+"CompactShowMonitorTilesTitle" = "แสดงไทล์จอมอนิเตอร์";
+"CompactShowMonitorTilesSubtitle" = "แสดงตัวควบคุมความสว่างและโหมดสลีปสำหรับแต่ละจอมอนิเตอร์ในโหมดกะทัดรัด";
+"CompactSmartButtonsCompactTitle" = "ขนาดปุ่มลัดแบบกะทัดรัด";
+"CompactSmartButtonsCompactSubtitle" = "ใช้ไทล์ปุ่มขนาดเล็กลงในโหมดกะทัดรัด ซึ่งสอดคล้องกับเลย์เอาต์โหมดขั้นสูง";

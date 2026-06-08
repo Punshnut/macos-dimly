@@ -403,3 +403,8 @@
 "PreviouslySeenMonitorsSectionTitle" = "முன்பு பார்க்கப்பட்ட மானிட்டர்கள்";
 "PreviouslySeenMonitorsSectionSubtitle" = "Dimly மானிட்டர்களை 90 நாட்கள் நினைவில் வைத்திருக்கும். ஒரு மானிட்டரை மறந்திடுவது சேமிக்கப்பட்ட பெயரையும் விருப்பத்தேர்வுகளையும் நீக்கும்.";
 "MonitorLastSeenLabel" = "கடைசியாக பார்க்கப்பட்டது";
+
+"CompactShowMonitorTilesTitle" = "மானிட்டர் டைல்களை காட்டு";
+"CompactShowMonitorTilesSubtitle" = "கம்பாக்ட் முறையில் ஒவ்வொரு மானிட்டருக்கும் பிரகாசம் மற்றும் தூக்க கட்டுப்பாடுகளை காட்டு.";
+"CompactSmartButtonsCompactTitle" = "கம்பாக்ட் ஸ்மார்ட் பட்டன் அளவு";
+"CompactSmartButtonsCompactSubtitle" = "கம்பாக்ட் முறையில் சிறிய பட்டன் டைல்களை பயன்படுத்தவும், மேம்பட்ட முறை தளவமைப்புடன் பொருத்தமாக.";

@@ -403,3 +403,8 @@
 "PreviouslySeenMonitorsSectionTitle" = "Zuletzt gesehene Monitore";
 "PreviouslySeenMonitorsSectionSubtitle" = "Dimly merkt sich Monitore für 90 Tage. Das Vergessen eines Monitors entfernt den gespeicherten Namen und die Einstellungen.";
 "MonitorLastSeenLabel" = "Zuletzt gesehen";
+
+"CompactShowMonitorTilesTitle" = "Monitorkacheln anzeigen";
+"CompactShowMonitorTilesSubtitle" = "Helligkeits- und Schlafsteuerungen pro Monitor im kompakten Modus anzeigen.";
+"CompactSmartButtonsCompactTitle" = "Kompakte Schnelltasten-Größe";
+"CompactSmartButtonsCompactSubtitle" = "Kleinere Schaltflächenkacheln im kompakten Modus verwenden, passend zum Layout des erweiterten Modus.";

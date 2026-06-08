@@ -403,3 +403,8 @@
 "PreviouslySeenMonitorsSectionTitle" = "Οθόνες που εντοπίστηκαν προηγουμένως";
 "PreviouslySeenMonitorsSectionSubtitle" = "Το Dimly θυμάται τις οθόνες για 90 ημέρες. Η λήθη μιας οθόνης αφαιρεί το αποθηκευμένο όνομα και τις προτιμήσεις της.";
 "MonitorLastSeenLabel" = "Τελευταία εμφάνιση";
+
+"CompactShowMonitorTilesTitle" = "Εμφάνιση πλακιδίων οθόνης";
+"CompactShowMonitorTilesSubtitle" = "Εμφάνιση στοιχείων ελέγχου φωτεινότητας και αδράνειας ανά οθόνη σε συμπαγή λειτουργία.";
+"CompactSmartButtonsCompactTitle" = "Συμπαγές μέγεθος έξυπνων κουμπιών";
+"CompactSmartButtonsCompactSubtitle" = "Χρήση μικρότερων πλακιδίων κουμπιών σε συμπαγή λειτουργία, αντίστοιχα με τη διάταξη προχωρημένης λειτουργίας.";

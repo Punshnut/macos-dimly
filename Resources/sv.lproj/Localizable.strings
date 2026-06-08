@@ -403,3 +403,8 @@
 "PreviouslySeenMonitorsSectionTitle" = "Tidigare sedda skärmar";
 "PreviouslySeenMonitorsSectionSubtitle" = "Dimly kommer ihåg skärmar i 90 dagar. Att glömma en skärm tar bort dess sparade namn och inställningar.";
 "MonitorLastSeenLabel" = "Senast sedd";
+
+"CompactShowMonitorTilesTitle" = "Visa skärmbrickor";
+"CompactShowMonitorTilesSubtitle" = "Visa ljusstyrke- och vilokontroller per skärm i kompakt läge.";
+"CompactSmartButtonsCompactTitle" = "Kompakt storlek på snabbknappar";
+"CompactSmartButtonsCompactSubtitle" = "Använd mindre knappar i kompakt läge, matchande layouten i avancerat läge.";

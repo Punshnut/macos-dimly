@@ -403,3 +403,8 @@
 "PreviouslySeenMonitorsSectionTitle" = "Ранее использованные мониторы";
 "PreviouslySeenMonitorsSectionSubtitle" = "Dimly запоминает мониторы на 90 дней. Удаление монитора из памяти удалит его сохранённое имя и настройки.";
 "MonitorLastSeenLabel" = "Последнее подключение";
+
+"CompactShowMonitorTilesTitle" = "Показывать плитки мониторов";
+"CompactShowMonitorTilesSubtitle" = "Отображать элементы управления яркостью и сном для каждого монитора в компактном режиме.";
+"CompactSmartButtonsCompactTitle" = "Компактный размер кнопок быстрых действий";
+"CompactSmartButtonsCompactSubtitle" = "Использовать меньшие плитки кнопок в компактном режиме, соответствующие макету расширенного режима.";

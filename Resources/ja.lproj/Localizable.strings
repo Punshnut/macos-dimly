@@ -403,3 +403,8 @@
 "PreviouslySeenMonitorsSectionTitle" = "以前に検出されたモニター";
 "PreviouslySeenMonitorsSectionSubtitle" = "Dimlyはモニターを90日間記憶します。モニターを削除すると、保存済みの名前と設定が消去されます。";
 "MonitorLastSeenLabel" = "最終確認";
+
+"CompactShowMonitorTilesTitle" = "モニタータイルを表示";
+"CompactShowMonitorTilesSubtitle" = "コンパクトモードで各モニターの輝度とスリープコントロールを表示します。";
+"CompactSmartButtonsCompactTitle" = "コンパクトなスマートボタンサイズ";
+"CompactSmartButtonsCompactSubtitle" = "コンパクトモードで小さいボタンタイルを使用し、詳細モードのレイアウトに合わせます。";

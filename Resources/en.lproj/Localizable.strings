@@ -333,6 +333,10 @@
 "ColorOceanLabel" = "Ocean";
 "ColorPineLabel" = "Pine";
 "SmartButtonsOrderNote" = "Profiles stay sorted by this list order. Up to 4 smart buttons are shown per row in the menu bar.";
+"CompactShowMonitorTilesTitle" = "Show monitor tiles";
+"CompactShowMonitorTilesSubtitle" = "Display per-monitor brightness and sleep controls in compact mode.";
+"CompactSmartButtonsCompactTitle" = "Compact smart button size";
+"CompactSmartButtonsCompactSubtitle" = "Use smaller button tiles in compact mode, matching the advanced mode layout.";
 "SmartButtonsSubtitle" = "Quick profile shortcuts shown below Quick Actions.";
 "ColorRoseLabel" = "Rose";
 "ColorRubyLabel" = "Ruby";
@@ -391,4 +395,3 @@
 "ForgetMonitorAlertSubtitle" = "This clears the saved name, preferences, and brightness history for this monitor. Settings return to defaults when it reconnects.";
 "PreviouslySeenMonitorsSectionTitle" = "Previously Seen Monitors";
 "PreviouslySeenMonitorsSectionSubtitle" = "Dimly remembers monitors for 90 days. Forgetting a monitor removes its saved name and preferences.";
-"MonitorLastSeenLabel" = "Last seen";

@@ -403,3 +403,8 @@
 "PreviouslySeenMonitorsSectionTitle" = "Korábban látott monitorok";
 "PreviouslySeenMonitorsSectionSubtitle" = "A Dimly 90 napig emlékszik a monitorokra. Egy monitor elfelejtése eltávolítja a mentett nevét és beállításait.";
 "MonitorLastSeenLabel" = "Utoljára látva";
+
+"CompactShowMonitorTilesTitle" = "Monitor csempék megjelenítése";
+"CompactShowMonitorTilesSubtitle" = "Fényerő és alvás vezérlők megjelenítése monitoronként kompakt módban.";
+"CompactSmartButtonsCompactTitle" = "Kompakt gyorsgomb méret";
+"CompactSmartButtonsCompactSubtitle" = "Kisebb gombocsempék használata kompakt módban, a haladó mód elrendezéséhez igazítva.";

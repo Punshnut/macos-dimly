@@ -403,3 +403,8 @@
 "PreviouslySeenMonitorsSectionTitle" = "আগে দেখা মনিটর";
 "PreviouslySeenMonitorsSectionSubtitle" = "Dimly ৯০ দিনের জন্য মনিটর মনে রাখে। একটি মনিটর ভুলে গেলে এর সংরক্ষিত নাম এবং পছন্দ মুছে যায়।";
 "MonitorLastSeenLabel" = "সর্বশেষ দেখা";
+
+"CompactShowMonitorTilesTitle" = "মনিটর টাইল দেখান";
+"CompactShowMonitorTilesSubtitle" = "কমপ্যাক্ট মোডে প্রতি-মনিটর উজ্জ্বলতা এবং স্লিপ নিয়ন্ত্রণ প্রদর্শন করুন।";
+"CompactSmartButtonsCompactTitle" = "কমপ্যাক্ট স্মার্ট বাটন সাইজ";
+"CompactSmartButtonsCompactSubtitle" = "কমপ্যাক্ট মোডে ছোট বাটন টাইল ব্যবহার করুন, অ্যাডভান্সড মোড লেআউটের সাথে মিলিয়ে।";

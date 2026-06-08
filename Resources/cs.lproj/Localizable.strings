@@ -403,3 +403,8 @@
 "PreviouslySeenMonitorsSectionTitle" = "Dříve viděné monitory";
 "PreviouslySeenMonitorsSectionSubtitle" = "Dimly si pamatuje monitory po dobu 90 dnů. Zapomenutí monitoru odstraní jeho uložený název a předvolby.";
 "MonitorLastSeenLabel" = "Naposledy viděno";
+
+"CompactShowMonitorTilesTitle" = "Zobrazit dlaždice monitoru";
+"CompactShowMonitorTilesSubtitle" = "Zobrazit ovládací prvky jasu a spánku pro každý monitor v kompaktním režimu.";
+"CompactSmartButtonsCompactTitle" = "Kompaktní velikost rychlých tlačítek";
+"CompactSmartButtonsCompactSubtitle" = "Používat menší dlaždice tlačítek v kompaktním režimu, odpovídající rozložení pokročilého režimu.";
