@@ -73,6 +73,9 @@ struct DimlySettings: Codable, Equatable {
     var externalDisplayOrder: [String]
     var internalDisplayOrder: [String]
     var mergedDisplayOrder: [String]
+    var externalDisplayRows: [[String]]
+    var internalDisplayRows: [[String]]
+    var mergedDisplayRows: [[String]]
     var menuBarSimpleMode: Bool
     var menuBarQuickActionsMode: Bool
     var fastActionsVisibilityMode: FastActionsVisibilityMode
@@ -105,6 +108,9 @@ struct DimlySettings: Codable, Equatable {
         case externalDisplayOrder
         case internalDisplayOrder
         case mergedDisplayOrder
+        case externalDisplayRows
+        case internalDisplayRows
+        case mergedDisplayRows
         case menuBarSimpleMode
         case menuBarQuickActionsMode
         case menuBarLayoutMode
@@ -158,6 +164,9 @@ struct DimlySettings: Codable, Equatable {
         externalDisplayOrder: [],
         internalDisplayOrder: [],
         mergedDisplayOrder: [],
+        externalDisplayRows: [],
+        internalDisplayRows: [],
+        mergedDisplayRows: [],
         menuBarSimpleMode: false,
         menuBarQuickActionsMode: false,
         fastActionsVisibilityMode: .advancedOnly,
@@ -191,6 +200,9 @@ struct DimlySettings: Codable, Equatable {
         externalDisplayOrder: [String],
         internalDisplayOrder: [String],
         mergedDisplayOrder: [String],
+        externalDisplayRows: [[String]],
+        internalDisplayRows: [[String]],
+        mergedDisplayRows: [[String]],
         menuBarSimpleMode: Bool,
         menuBarQuickActionsMode: Bool,
         fastActionsVisibilityMode: FastActionsVisibilityMode,
@@ -221,6 +233,9 @@ struct DimlySettings: Codable, Equatable {
         self.externalDisplayOrder = externalDisplayOrder
         self.internalDisplayOrder = internalDisplayOrder
         self.mergedDisplayOrder = mergedDisplayOrder
+        self.externalDisplayRows = externalDisplayRows
+        self.internalDisplayRows = internalDisplayRows
+        self.mergedDisplayRows = mergedDisplayRows
         self.menuBarSimpleMode = menuBarSimpleMode
         self.menuBarQuickActionsMode = menuBarQuickActionsMode
         self.fastActionsVisibilityMode = fastActionsVisibilityMode
@@ -256,6 +271,9 @@ struct DimlySettings: Codable, Equatable {
         let externalDisplayOrder = try container.decodeIfPresent([String].self, forKey: .externalDisplayOrder) ?? DimlySettings.default.externalDisplayOrder
         let internalDisplayOrder = try container.decodeIfPresent([String].self, forKey: .internalDisplayOrder) ?? DimlySettings.default.internalDisplayOrder
         let mergedDisplayOrder = try container.decodeIfPresent([String].self, forKey: .mergedDisplayOrder) ?? DimlySettings.default.mergedDisplayOrder
+        let externalDisplayRows = try container.decodeIfPresent([[String]].self, forKey: .externalDisplayRows) ?? DimlySettings.default.externalDisplayRows
+        let internalDisplayRows = try container.decodeIfPresent([[String]].self, forKey: .internalDisplayRows) ?? DimlySettings.default.internalDisplayRows
+        let mergedDisplayRows = try container.decodeIfPresent([[String]].self, forKey: .mergedDisplayRows) ?? DimlySettings.default.mergedDisplayRows
         let decodedMenuBarLayoutMode = try container.decodeIfPresent(MenuBarLayoutMode.self, forKey: .menuBarLayoutMode)
         let legacyMenuBarSimpleMode = try container.decodeIfPresent(Bool.self, forKey: .menuBarSimpleMode) ?? DimlySettings.default.menuBarSimpleMode
         let legacyMenuBarQuickActionsMode = try container.decodeIfPresent(Bool.self, forKey: .menuBarQuickActionsMode) ?? DimlySettings.default.menuBarQuickActionsMode
@@ -312,6 +330,9 @@ struct DimlySettings: Codable, Equatable {
             externalDisplayOrder: externalDisplayOrder,
             internalDisplayOrder: internalDisplayOrder,
             mergedDisplayOrder: mergedDisplayOrder,
+            externalDisplayRows: externalDisplayRows,
+            internalDisplayRows: internalDisplayRows,
+            mergedDisplayRows: mergedDisplayRows,
             menuBarSimpleMode: menuBarSimpleMode,
             menuBarQuickActionsMode: menuBarQuickActionsMode,
             fastActionsVisibilityMode: fastActionsVisibilityMode,
@@ -347,6 +368,9 @@ struct DimlySettings: Codable, Equatable {
         try container.encode(externalDisplayOrder, forKey: .externalDisplayOrder)
         try container.encode(internalDisplayOrder, forKey: .internalDisplayOrder)
         try container.encode(mergedDisplayOrder, forKey: .mergedDisplayOrder)
+        try container.encode(externalDisplayRows, forKey: .externalDisplayRows)
+        try container.encode(internalDisplayRows, forKey: .internalDisplayRows)
+        try container.encode(mergedDisplayRows, forKey: .mergedDisplayRows)
         try container.encode(menuBarSimpleMode, forKey: .menuBarSimpleMode)
         try container.encode(menuBarQuickActionsMode, forKey: .menuBarQuickActionsMode)
         try container.encode(menuBarLayoutMode, forKey: .menuBarLayoutMode)
@@ -365,6 +389,30 @@ struct DimlySettings: Codable, Equatable {
     /// Clamps smart-button row limits to the supported range.
     private static func normalizedSmartButtonsLimit(_ value: Int) -> Int {
         max(4, min(16, value))
+    }
+
+    /// Rebuilds compact-mode row groups from a flat display order and optional existing rows.
+    /// - If `existingRows` already covers every ID in `allKnownIDs`, it is returned as-is
+    ///   (with any missing IDs appended to the last row).
+    /// - Otherwise, returns a single row containing `flat` plus any unknown IDs.
+    static func rowsFromFlatOrder(
+        _ flat: [String],
+        existingRows: [[String]],
+        allKnownIDs: [String]
+    ) -> [[String]] {
+        let existingFlat = existingRows.flatMap { $0 }
+        let missingIDs = allKnownIDs.filter { !existingFlat.contains($0) }
+        if existingRows.isEmpty || existingFlat.isEmpty {
+            var single = flat
+            for id in allKnownIDs where !flat.contains(id) { single.append(id) }
+            return single.isEmpty ? [] : [single]
+        }
+        if missingIDs.isEmpty {
+            return existingRows.filter { !$0.isEmpty }
+        }
+        var rows = existingRows
+        rows[rows.count - 1].append(contentsOf: missingIDs)
+        return rows.filter { !$0.isEmpty }
     }
 }
 

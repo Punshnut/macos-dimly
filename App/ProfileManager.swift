@@ -264,6 +264,9 @@ struct ProfileMonitorState: Codable, Equatable {
     var menuBarIncludedInternalDisplayIDs: [String]
     var externalDisplayOrder: [String]
     var internalDisplayOrder: [String]
+    var externalDisplayRows: [[String]]
+    var internalDisplayRows: [[String]]
+    var mergedDisplayRows: [[String]]
     var brightnessPanelExpandedDisplayIDs: [String]
     var monitorPowerStateByDisplayID: [String: PersistedMonitorPowerState]
     var monitorBrightnessByDisplayID: [String: Int]
@@ -273,6 +276,9 @@ struct ProfileMonitorState: Codable, Equatable {
         case menuBarIncludedInternalDisplayIDs
         case externalDisplayOrder
         case internalDisplayOrder
+        case externalDisplayRows
+        case internalDisplayRows
+        case mergedDisplayRows
         case brightnessPanelExpandedDisplayIDs
         case monitorPowerStateByDisplayID
         case monitorBrightnessByDisplayID
@@ -284,6 +290,9 @@ struct ProfileMonitorState: Codable, Equatable {
         menuBarIncludedInternalDisplayIDs: [String],
         externalDisplayOrder: [String],
         internalDisplayOrder: [String],
+        externalDisplayRows: [[String]],
+        internalDisplayRows: [[String]],
+        mergedDisplayRows: [[String]],
         brightnessPanelExpandedDisplayIDs: [String],
         monitorPowerStateByDisplayID: [String: PersistedMonitorPowerState],
         monitorBrightnessByDisplayID: [String: Int]
@@ -292,6 +301,9 @@ struct ProfileMonitorState: Codable, Equatable {
         self.menuBarIncludedInternalDisplayIDs = menuBarIncludedInternalDisplayIDs
         self.externalDisplayOrder = externalDisplayOrder
         self.internalDisplayOrder = internalDisplayOrder
+        self.externalDisplayRows = externalDisplayRows
+        self.internalDisplayRows = internalDisplayRows
+        self.mergedDisplayRows = mergedDisplayRows
         self.brightnessPanelExpandedDisplayIDs = brightnessPanelExpandedDisplayIDs
         self.monitorPowerStateByDisplayID = monitorPowerStateByDisplayID
         self.monitorBrightnessByDisplayID = monitorBrightnessByDisplayID
@@ -303,6 +315,9 @@ struct ProfileMonitorState: Codable, Equatable {
         menuBarIncludedInternalDisplayIDs = settings.menuBarIncludedInternalDisplayIDs
         externalDisplayOrder = settings.externalDisplayOrder
         internalDisplayOrder = settings.internalDisplayOrder
+        externalDisplayRows = settings.externalDisplayRows
+        internalDisplayRows = settings.internalDisplayRows
+        mergedDisplayRows = settings.mergedDisplayRows
         brightnessPanelExpandedDisplayIDs = settings.brightnessPanelExpandedDisplayIDs
         monitorPowerStateByDisplayID = settings.monitorPowerStateByDisplayID
         monitorBrightnessByDisplayID = settings.monitorBrightnessByDisplayID
@@ -315,6 +330,9 @@ struct ProfileMonitorState: Codable, Equatable {
         menuBarIncludedInternalDisplayIDs = try container.decodeIfPresent([String].self, forKey: .menuBarIncludedInternalDisplayIDs) ?? []
         externalDisplayOrder = try container.decodeIfPresent([String].self, forKey: .externalDisplayOrder) ?? []
         internalDisplayOrder = try container.decodeIfPresent([String].self, forKey: .internalDisplayOrder) ?? []
+        externalDisplayRows = try container.decodeIfPresent([[String]].self, forKey: .externalDisplayRows) ?? []
+        internalDisplayRows = try container.decodeIfPresent([[String]].self, forKey: .internalDisplayRows) ?? []
+        mergedDisplayRows = try container.decodeIfPresent([[String]].self, forKey: .mergedDisplayRows) ?? []
         brightnessPanelExpandedDisplayIDs = try container.decodeIfPresent([String].self, forKey: .brightnessPanelExpandedDisplayIDs) ?? []
         monitorPowerStateByDisplayID = try container.decodeIfPresent([String: PersistedMonitorPowerState].self, forKey: .monitorPowerStateByDisplayID) ?? [:]
         monitorBrightnessByDisplayID = try container.decodeIfPresent([String: Int].self, forKey: .monitorBrightnessByDisplayID) ?? [:]
@@ -327,6 +345,9 @@ struct ProfileMonitorState: Codable, Equatable {
         try container.encode(menuBarIncludedInternalDisplayIDs, forKey: .menuBarIncludedInternalDisplayIDs)
         try container.encode(externalDisplayOrder, forKey: .externalDisplayOrder)
         try container.encode(internalDisplayOrder, forKey: .internalDisplayOrder)
+        try container.encode(externalDisplayRows, forKey: .externalDisplayRows)
+        try container.encode(internalDisplayRows, forKey: .internalDisplayRows)
+        try container.encode(mergedDisplayRows, forKey: .mergedDisplayRows)
         try container.encode(brightnessPanelExpandedDisplayIDs, forKey: .brightnessPanelExpandedDisplayIDs)
         try container.encode(monitorPowerStateByDisplayID, forKey: .monitorPowerStateByDisplayID)
         try container.encode(monitorBrightnessByDisplayID, forKey: .monitorBrightnessByDisplayID)
@@ -339,6 +360,9 @@ struct ProfileMonitorState: Codable, Equatable {
         settings.externalDisplayOrder = externalDisplayOrder
         settings.internalDisplayOrder = internalDisplayOrder
         if settings.profileRestoresTileLayout {
+            settings.externalDisplayRows = externalDisplayRows
+            settings.internalDisplayRows = internalDisplayRows
+            settings.mergedDisplayRows = mergedDisplayRows
             settings.brightnessPanelExpandedDisplayIDs = brightnessPanelExpandedDisplayIDs
         }
         settings.monitorPowerStateByDisplayID = monitorPowerStateByDisplayID
@@ -352,6 +376,9 @@ struct ProfileMonitorState: Codable, Equatable {
             menuBarIncludedInternalDisplayIDs: remap(menuBarIncludedInternalDisplayIDs, with: idMap),
             externalDisplayOrder: remap(externalDisplayOrder, with: idMap),
             internalDisplayOrder: remap(internalDisplayOrder, with: idMap),
+            externalDisplayRows: externalDisplayRows.map { remap($0, with: idMap) },
+            internalDisplayRows: internalDisplayRows.map { remap($0, with: idMap) },
+            mergedDisplayRows: mergedDisplayRows.map { remap($0, with: idMap) },
             brightnessPanelExpandedDisplayIDs: remap(brightnessPanelExpandedDisplayIDs, with: idMap),
             monitorPowerStateByDisplayID: remap(monitorPowerStateByDisplayID, with: idMap),
             monitorBrightnessByDisplayID: remap(monitorBrightnessByDisplayID, with: idMap)

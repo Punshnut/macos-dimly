@@ -149,6 +149,9 @@ struct MonitorSettingsPayload: Codable {
     let externalDisplayOrder: [String]
     let internalDisplayOrder: [String]
     let mergedDisplayOrder: [String]
+    let externalDisplayRows: [[String]]
+    let internalDisplayRows: [[String]]
+    let mergedDisplayRows: [[String]]
     let brightnessPanelExpandedDisplayIDs: [String]
     let monitorBrightnessByDisplayID: [String: Int]
     let monitorPowerStateByDisplayID: [String: PersistedMonitorPowerState]
@@ -162,6 +165,9 @@ struct MonitorSettingsPayload: Codable {
         case externalDisplayOrder
         case internalDisplayOrder
         case mergedDisplayOrder
+        case externalDisplayRows
+        case internalDisplayRows
+        case mergedDisplayRows
         case brightnessPanelExpandedDisplayIDs
         case monitorBrightnessByDisplayID
         case monitorPowerStateByDisplayID
@@ -177,6 +183,9 @@ struct MonitorSettingsPayload: Codable {
         externalDisplayOrder = settings.externalDisplayOrder
         internalDisplayOrder = settings.internalDisplayOrder
         mergedDisplayOrder = settings.mergedDisplayOrder
+        externalDisplayRows = settings.externalDisplayRows
+        internalDisplayRows = settings.internalDisplayRows
+        mergedDisplayRows = settings.mergedDisplayRows
         brightnessPanelExpandedDisplayIDs = settings.brightnessPanelExpandedDisplayIDs
         monitorBrightnessByDisplayID = settings.monitorBrightnessByDisplayID
         monitorPowerStateByDisplayID = settings.monitorPowerStateByDisplayID
@@ -193,6 +202,9 @@ struct MonitorSettingsPayload: Codable {
         externalDisplayOrder = try container.decodeIfPresent([String].self, forKey: .externalDisplayOrder) ?? []
         internalDisplayOrder = try container.decodeIfPresent([String].self, forKey: .internalDisplayOrder) ?? []
         mergedDisplayOrder = try container.decodeIfPresent([String].self, forKey: .mergedDisplayOrder) ?? []
+        externalDisplayRows = try container.decodeIfPresent([[String]].self, forKey: .externalDisplayRows) ?? []
+        internalDisplayRows = try container.decodeIfPresent([[String]].self, forKey: .internalDisplayRows) ?? []
+        mergedDisplayRows = try container.decodeIfPresent([[String]].self, forKey: .mergedDisplayRows) ?? []
         brightnessPanelExpandedDisplayIDs = try container.decodeIfPresent([String].self, forKey: .brightnessPanelExpandedDisplayIDs) ?? []
         monitorBrightnessByDisplayID = try container.decodeIfPresent([String: Int].self, forKey: .monitorBrightnessByDisplayID) ?? [:]
         monitorPowerStateByDisplayID = try container.decodeIfPresent([String: PersistedMonitorPowerState].self, forKey: .monitorPowerStateByDisplayID) ?? [:]
@@ -209,6 +221,9 @@ struct MonitorSettingsPayload: Codable {
         try container.encode(externalDisplayOrder, forKey: .externalDisplayOrder)
         try container.encode(internalDisplayOrder, forKey: .internalDisplayOrder)
         try container.encode(mergedDisplayOrder, forKey: .mergedDisplayOrder)
+        try container.encode(externalDisplayRows, forKey: .externalDisplayRows)
+        try container.encode(internalDisplayRows, forKey: .internalDisplayRows)
+        try container.encode(mergedDisplayRows, forKey: .mergedDisplayRows)
         try container.encode(brightnessPanelExpandedDisplayIDs, forKey: .brightnessPanelExpandedDisplayIDs)
         try container.encode(monitorBrightnessByDisplayID, forKey: .monitorBrightnessByDisplayID)
         try container.encode(monitorPowerStateByDisplayID, forKey: .monitorPowerStateByDisplayID)
@@ -224,6 +239,9 @@ struct MonitorSettingsPayload: Codable {
         settings.externalDisplayOrder = externalDisplayOrder
         settings.internalDisplayOrder = internalDisplayOrder
         settings.mergedDisplayOrder = mergedDisplayOrder
+        settings.externalDisplayRows = externalDisplayRows
+        settings.internalDisplayRows = internalDisplayRows
+        settings.mergedDisplayRows = mergedDisplayRows
         settings.brightnessPanelExpandedDisplayIDs = brightnessPanelExpandedDisplayIDs
         settings.monitorBrightnessByDisplayID = monitorBrightnessByDisplayID
         settings.monitorPowerStateByDisplayID = monitorPowerStateByDisplayID

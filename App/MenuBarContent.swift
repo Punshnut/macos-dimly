@@ -11,6 +11,12 @@ struct MenuBarContentView: View {
         case window
     }
 
+    private enum MiniTileDragOutcome: Equatable {
+        case swapInRow(targetID: String)
+        case moveCrossRow(targetID: String)
+        case createNewRow
+    }
+
     private enum LayoutMode: Hashable {
         case simple
         case advanced
@@ -38,7 +44,8 @@ struct MenuBarContentView: View {
     @State private var displayMiniTileFramesByID: [String: CGRect] = [:]
     @State private var displayMiniTileDragStartFramesByID: [String: CGRect] = [:]
     @State private var displayMiniTileDragTranslation: CGSize = .zero
-    @State private var displayMiniTileSwapTargetID: String? = nil
+    @State private var displayMiniTileDragOutcome: MiniTileDragOutcome? = nil
+    @State private var displayMiniTileNewRowDropHighlighted: Bool = false
     @State private var draggedDisplayRowID: String? = nil
     @State private var displayRowFramesByID: [String: CGRect] = [:]
     @State private var displayRowDragStartFramesByID: [String: CGRect] = [:]
@@ -665,6 +672,50 @@ struct MenuBarContentView: View {
             return orderedMergedDisplays
         }
         return orderedExternalDisplays + orderedInternalDisplays
+    }
+
+    /// Displays grouped into rows for compact mode, based on persisted row layout.
+    private var menuBarDisplayRows: [[DisplayInfo]] {
+        let settings = settingsStore.settings
+        if mergeInternalAndExternalDisplays {
+            let ids = menuBarDisplays.map(\.stableIdentity)
+            let rawRows = DimlySettings.rowsFromFlatOrder(
+                settings.mergedDisplayOrder,
+                existingRows: settings.mergedDisplayRows,
+                allKnownIDs: ids
+            )
+            return resolveRows(rawRows)
+        } else {
+            let extIDs = orderedExternalDisplays.map(\.stableIdentity)
+            let intIDs = orderedInternalDisplays.map(\.stableIdentity)
+            let extRows = DimlySettings.rowsFromFlatOrder(
+                settings.externalDisplayOrder,
+                existingRows: settings.externalDisplayRows,
+                allKnownIDs: extIDs
+            )
+            let intRows = DimlySettings.rowsFromFlatOrder(
+                settings.internalDisplayOrder,
+                existingRows: settings.internalDisplayRows,
+                allKnownIDs: intIDs
+            )
+            return resolveRows(extRows) + resolveRows(intRows)
+        }
+    }
+
+    /// Resolves a 2D array of display IDs into DisplayInfo objects, dropping unknowns and empty rows.
+    private func resolveRows(_ rows: [[String]]) -> [[DisplayInfo]] {
+        let byID = Dictionary(uniqueKeysWithValues: menuBarDisplays.map { ($0.stableIdentity, $0) })
+        return rows
+            .map { row in row.compactMap { byID[$0] } }
+            .filter { !$0.isEmpty }
+    }
+
+    /// Returns (row, col) position of a display ID in a 2D rows array.
+    private func findRowPosition(of id: String, in rows: [[String]]) -> (row: Int, col: Int)? {
+        for (r, row) in rows.enumerated() {
+            if let c = row.firstIndex(of: id) { return (row: r, col: c) }
+        }
+        return nil
     }
 
     /// Map of display stable IDs to their external index number.
@@ -1379,30 +1430,46 @@ struct MenuBarContentView: View {
 
     /// Compact mini-tile grid used in short mode: one tile per display with toggle buttons.
     private var compactDisplayMiniTilesSection: some View {
-        let displays = menuBarDisplays
-        let colCount = min(max(displays.count, 1), 4)
-        let columns = Array(repeating: GridItem(.flexible(), spacing: 6), count: colCount)
+        let rows = menuBarDisplayRows
+        // Build a global index map so display numbers stay stable across rows.
+        let globalIndexByID: [String: Int] = Dictionary(
+            uniqueKeysWithValues: menuBarDisplays.enumerated().map { ($1.stableIdentity, $0) }
+        )
         return VStack(alignment: .leading, spacing: 8) {
             sectionHeader(monitorsSectionTitle)
             ZStack(alignment: .topLeading) {
-                LazyVGrid(columns: columns, alignment: .leading, spacing: 6) {
-                    ForEach(Array(displays.enumerated()), id: \.element.stableIdentity) { index, display in
-                        let isDragged = draggedDisplayMiniTileID == display.stableIdentity
-                        let isTargeted = draggedDisplayMiniTileID != nil && displayMiniTileSwapTargetID == display.stableIdentity
-                        displayMiniTile(display, index: index)
-                            .opacity(isDragged ? 0.12 : 1)
-                            .scaleEffect(isTargeted && !reduceMotion ? 1.04 : 1)
-                            .offset(y: isTargeted && !reduceMotion ? -2 : 0)
-                            .background(
-                                GeometryReader { geo in
-                                    Color.clear.preference(
-                                        key: DisplayMiniTileFramePreferenceKey.self,
-                                        value: [display.stableIdentity: geo.frame(in: .named(compactDisplayMiniTileCoordinateSpace))]
+                VStack(spacing: 6) {
+                    ForEach(Array(rows.enumerated()), id: \.offset) { rowIndex, rowDisplays in
+                        let colCount = max(rowDisplays.count, 1)
+                        let columns = Array(repeating: GridItem(.flexible(), spacing: 6), count: colCount)
+                        LazyVGrid(columns: columns, alignment: .leading, spacing: 6) {
+                            ForEach(rowDisplays, id: \.stableIdentity) { display in
+                                let isDragged = draggedDisplayMiniTileID == display.stableIdentity
+                                let isTargeted: Bool = {
+                                    guard draggedDisplayMiniTileID != nil else { return false }
+                                    switch displayMiniTileDragOutcome {
+                                    case .swapInRow(let t), .moveCrossRow(let t): return t == display.stableIdentity
+                                    default: return false
+                                    }
+                                }()
+                                let globalIndex = globalIndexByID[display.stableIdentity] ?? 0
+                                displayMiniTile(display, index: globalIndex, tilesInRow: rowDisplays.count)
+                                    .opacity(isDragged ? 0.12 : 1)
+                                    .scaleEffect(isTargeted && !reduceMotion ? 1.04 : 1)
+                                    .offset(y: isTargeted && !reduceMotion ? -2 : 0)
+                                    .background(
+                                        GeometryReader { geo in
+                                            Color.clear.preference(
+                                                key: DisplayMiniTileFramePreferenceKey.self,
+                                                value: [display.stableIdentity: geo.frame(in: .named(compactDisplayMiniTileCoordinateSpace))]
+                                            )
+                                        }
                                     )
-                                }
-                            )
-                            // drag gesture is on the name area inside the tile itself
+                            }
+                        }
                     }
+                    // Drop zone for creating a new row — only visible while dragging
+                    miniTileNewRowDropZone()
                 }
                 if let draggedID = draggedDisplayMiniTileID,
                    let display = menuBarDisplays.first(where: { $0.stableIdentity == draggedID }),
@@ -1421,15 +1488,39 @@ struct MenuBarContentView: View {
             .onPreferenceChange(DisplayMiniTileFramePreferenceKey.self) { frames in
                 displayMiniTileFramesByID = frames
             }
-            .animation(reorderAnimation, value: displayMiniTileSwapTargetID)
+            .animation(reorderAnimation, value: displayMiniTileDragOutcome)
             .animation(reorderAnimation, value: menuBarDisplays.map(\.stableIdentity))
             .animation(reorderAnimation, value: draggedDisplayMiniTileID)
         }
     }
 
+    /// Drop zone shown below all rows during a drag; lets the user create a new row.
+    /// Only takes up layout space while dragging. Detection uses tile frame bounds, not GeometryReader.
+    @ViewBuilder
+    private func miniTileNewRowDropZone() -> some View {
+        if draggedDisplayMiniTileID != nil {
+            RoundedRectangle(cornerRadius: 6, style: .continuous)
+                .fill(displayMiniTileNewRowDropHighlighted
+                    ? Color.accentColor.opacity(0.15)
+                    : Color.clear)
+                .overlay(
+                    RoundedRectangle(cornerRadius: 6, style: .continuous)
+                        .strokeBorder(
+                            style: StrokeStyle(lineWidth: 1, dash: [4, 3])
+                        )
+                        .foregroundStyle(displayMiniTileNewRowDropHighlighted
+                            ? Color.accentColor.opacity(0.7)
+                            : neutralStroke.opacity(0.45))
+                )
+                .frame(height: 26)
+                .animation(quickAnimation, value: displayMiniTileNewRowDropHighlighted)
+        }
+    }
+
     /// A single compact tile for one display in short mode.
     /// Name row is the drag handle; button row has sleep/wake + brightness ±.
-    private func displayMiniTile(_ display: DisplayInfo, index: Int) -> some View {
+    /// `tilesInRow` controls whether large (1–3 tiles) or compact (4 tiles) sizing is used.
+    private func displayMiniTile(_ display: DisplayInfo, index: Int, tilesInRow: Int) -> some View {
         let tileShape = RoundedRectangle(cornerRadius: 11, style: .continuous)
         let name = displayName(for: display)
         let isBlackoutActive = engine.isDisplayBlackoutActive(display)
@@ -1451,22 +1542,45 @@ struct MenuBarContentView: View {
         let indexLabel = display.isBuiltin ? "INT" : "\(index + 1)"
         let brightnessLabel = "\(brightnessPercent(for: display))%"
 
+        // Sizes scale up for rows with 1–3 tiles; stay compact for 4 tiles.
+        let large = tilesInRow <= 3
+        let toggleIconSize: CGFloat  = large ? 13   : 10
+        let toggleFrameSize: CGFloat = large ? 26   : 20
+        let chevronSize: CGFloat     = large ? 8    : 6.5
+        let chevronFrameW: CGFloat   = large ? 16   : 14
+        let chevronFrameH: CGFloat   = large ? 22   : 18
+        let nameFontSize: CGFloat    = large ? 9.5  : 8.5
+        let labelFontSize: CGFloat   = large ? 7.5  : 6
+
         return VStack(spacing: 0) {
             // ── Name / drag handle ──────────────────────────────
             HStack(alignment: .top, spacing: 3) {
                 Text(name)
-                    .font(.system(size: 8.5, weight: .semibold))
+                    .font(.system(size: nameFontSize, weight: .semibold))
                     .lineLimit(1)
                     .minimumScaleFactor(0.65)
                     .foregroundStyle(neutralPrimaryText)
                     .frame(maxWidth: .infinity, alignment: .leading)
-                VStack(alignment: .trailing, spacing: 0) {
-                    Text(indexLabel)
-                        .font(.system(size: 6, weight: .medium))
-                        .foregroundStyle(neutralTertiaryText)
-                    Text(brightnessLabel)
-                        .font(.system(size: 6, weight: .regular).monospacedDigit())
-                        .foregroundStyle(neutralTertiaryText)
+                if large {
+                    // Single-line ID + brightness for wider tiles
+                    HStack(spacing: 3) {
+                        Text(indexLabel)
+                            .font(.system(size: labelFontSize, weight: .medium))
+                            .foregroundStyle(neutralTertiaryText)
+                        Text(brightnessLabel)
+                            .font(.system(size: labelFontSize, weight: .regular).monospacedDigit())
+                            .foregroundStyle(neutralTertiaryText)
+                    }
+                } else {
+                    // Stacked for the tightest 4-column layout
+                    VStack(alignment: .trailing, spacing: 0) {
+                        Text(indexLabel)
+                            .font(.system(size: labelFontSize, weight: .medium))
+                            .foregroundStyle(neutralTertiaryText)
+                        Text(brightnessLabel)
+                            .font(.system(size: labelFontSize, weight: .regular).monospacedDigit())
+                            .foregroundStyle(neutralTertiaryText)
+                    }
                 }
             }
             .padding(.horizontal, 5)
@@ -1488,9 +1602,9 @@ struct MenuBarContentView: View {
                             engine.standby(display: display)
                         }
                     } label: {
-                        animatedSymbol(sleepIcon, size: 10, value: isAsleep)
+                        animatedSymbol(sleepIcon, size: toggleIconSize, value: isAsleep)
                             .foregroundStyle(sleepTint)
-                            .frame(width: 20, height: 20)
+                            .frame(width: toggleFrameSize, height: toggleFrameSize)
                             .background(Circle().fill(sleepTint.opacity(0.12)))
                     }
                     .buttonStyle(FluentPressButtonStyle(pressedScale: 0.88, pressedOpacity: 0.82))
@@ -1502,9 +1616,9 @@ struct MenuBarContentView: View {
                     HStack(spacing: 0) {
                         BrightnessHoldButton(action: { nudgeBrightness(for: display, delta: -1) }) {
                             Image(systemName: "chevron.down")
-                                .font(.system(size: 6.5, weight: .medium))
+                                .font(.system(size: chevronSize, weight: .medium))
                                 .foregroundStyle(neutralTertiaryText)
-                                .frame(width: 14, height: 18)
+                                .frame(width: chevronFrameW, height: chevronFrameH)
                         }
                         .help(String(localized: "ActionDecreaseBrightnessHint"))
                         Rectangle()
@@ -1512,9 +1626,9 @@ struct MenuBarContentView: View {
                             .frame(width: 0.5, height: 9)
                         BrightnessHoldButton(action: { nudgeBrightness(for: display, delta: 1) }) {
                             Image(systemName: "chevron.up")
-                                .font(.system(size: 6.5, weight: .medium))
+                                .font(.system(size: chevronSize, weight: .medium))
                                 .foregroundStyle(neutralTertiaryText)
-                                .frame(width: 14, height: 18)
+                                .frame(width: chevronFrameW, height: chevronFrameH)
                         }
                         .help(String(localized: "ActionIncreaseBrightnessHint"))
                     }
@@ -1563,7 +1677,7 @@ struct MenuBarContentView: View {
         return max(-4, min(4, displayMiniTileDragTranslation.width / 24))
     }
 
-    /// Drag gesture for reordering compact display mini-tiles.
+    /// Drag gesture for reordering compact display mini-tiles (row-aware).
     private func displayMiniTileReorderGesture(for id: String) -> some Gesture {
         DragGesture(minimumDistance: 3, coordinateSpace: .named(compactDisplayMiniTileCoordinateSpace))
             .onChanged { value in
@@ -1574,68 +1688,167 @@ struct MenuBarContentView: View {
                        let liveFrame = displayMiniTileFramesByID[id] {
                         displayMiniTileDragStartFramesByID[id] = liveFrame
                     }
-                    displayMiniTileSwapTargetID = nil
+                    displayMiniTileDragOutcome = nil
                 }
                 displayMiniTileDragTranslation = value.translation
-                displayMiniTileSwapTargetID = displayMiniTileSwapTarget(for: value.translation, draggedID: id)
+                let outcome = resolveMiniTileDragOutcome(translation: value.translation, draggedID: id)
+                displayMiniTileDragOutcome = outcome
+                if case .createNewRow = outcome {
+                    displayMiniTileNewRowDropHighlighted = true
+                } else {
+                    displayMiniTileNewRowDropHighlighted = false
+                }
             }
             .onEnded { _ in
-                applyDisplayMiniTileSwapIfNeeded()
+                applyDisplayMiniTileDragOutcome()
                 draggedDisplayMiniTileID = nil
                 displayMiniTileDragStartFramesByID.removeAll()
                 displayMiniTileDragTranslation = .zero
-                displayMiniTileSwapTargetID = nil
+                displayMiniTileDragOutcome = nil
+                displayMiniTileNewRowDropHighlighted = false
             }
     }
 
-    /// Commits the pending mini-tile swap to the persisted display order.
-    private func applyDisplayMiniTileSwapIfNeeded() {
+    /// Commits the pending drag outcome: swap, cross-row move, or new-row creation.
+    private func applyDisplayMiniTileDragOutcome() {
         guard let draggedID = draggedDisplayMiniTileID,
-              let targetID = displayMiniTileSwapTargetID,
-              targetID != draggedID else { return }
-        swapDisplayOrder(draggedID: draggedID, targetID: targetID)
+              let outcome = displayMiniTileDragOutcome else { return }
+        switch outcome {
+        case .swapInRow(let targetID):
+            applyRowMutation(draggedID: draggedID) { rows in
+                guard let from = findRowPosition(of: draggedID, in: rows),
+                      let to = findRowPosition(of: targetID, in: rows),
+                      from.row == to.row else { return }
+                rows[from.row].swapAt(from.col, to.col)
+            }
+        case .moveCrossRow(let targetID):
+            applyRowMutation(draggedID: draggedID) { rows in
+                guard let from = findRowPosition(of: draggedID, in: rows),
+                      let to = findRowPosition(of: targetID, in: rows),
+                      from.row != to.row else { return }
+                rows[from.row].remove(at: from.col)
+                let insertIdx = min(to.col, rows[to.row].count)
+                rows[to.row].insert(draggedID, at: insertIdx)
+                rows = rows.filter { !$0.isEmpty }
+            }
+        case .createNewRow:
+            guard menuBarDisplays.count > 1 else { return }
+            applyRowMutation(draggedID: draggedID) { rows in
+                guard let from = findRowPosition(of: draggedID, in: rows) else { return }
+                rows[from.row].remove(at: from.col)
+                rows = rows.filter { !$0.isEmpty }
+                rows.append([draggedID])
+            }
+        }
     }
 
-    /// Resolves which mini-tile should swap with the dragged one using overlap-ratio detection.
-    private func displayMiniTileSwapTarget(for translation: CGSize, draggedID: String) -> String? {
+    /// Applies a row mutation to the correct settings array based on merge mode and which display is being moved.
+    private func applyRowMutation(draggedID: String, _ mutation: (inout [[String]]) -> Void) {
+        let settings = settingsStore.settings
+        let extIDs = Set(orderedExternalDisplays.map(\.stableIdentity))
+        if mergeInternalAndExternalDisplays {
+            let ids = menuBarDisplays.map(\.stableIdentity)
+            var rows = DimlySettings.rowsFromFlatOrder(settings.mergedDisplayOrder, existingRows: settings.mergedDisplayRows, allKnownIDs: ids)
+            mutation(&rows)
+            runMotion(DimlyMotion.reorderSettleSpring) {
+                settingsStore.update { s in s.mergedDisplayRows = rows }
+            }
+        } else {
+            let extKnown = orderedExternalDisplays.map(\.stableIdentity)
+            let intKnown = orderedInternalDisplays.map(\.stableIdentity)
+            if extIDs.contains(draggedID) {
+                var rows = DimlySettings.rowsFromFlatOrder(settings.externalDisplayOrder, existingRows: settings.externalDisplayRows, allKnownIDs: extKnown)
+                mutation(&rows)
+                runMotion(DimlyMotion.reorderSettleSpring) {
+                    settingsStore.update { s in s.externalDisplayRows = rows }
+                }
+            } else {
+                var rows = DimlySettings.rowsFromFlatOrder(settings.internalDisplayOrder, existingRows: settings.internalDisplayRows, allKnownIDs: intKnown)
+                mutation(&rows)
+                runMotion(DimlyMotion.reorderSettleSpring) {
+                    settingsStore.update { s in s.internalDisplayRows = rows }
+                }
+            }
+        }
+    }
+
+    /// Resolves the drag outcome based on overlap with other tiles and the new-row drop zone.
+    private func resolveMiniTileDragOutcome(translation: CGSize, draggedID: String) -> MiniTileDragOutcome? {
         let startFrames = displayMiniTileDragStartFramesByID.isEmpty ? displayMiniTileFramesByID : displayMiniTileDragStartFramesByID
         guard let draggedFrame = startFrames[draggedID] else { return nil }
         if abs(translation.width) < 5 && abs(translation.height) < 5 { return nil }
 
         let dragRect = draggedFrame.offsetBy(dx: translation.width, dy: translation.height)
-        let cancelPadding = max(draggedFrame.width, draggedFrame.height) * 0.45
-        if draggedFrame.insetBy(dx: -cancelPadding, dy: -cancelPadding).contains(dragRect.center) {
+
+        // Compute the drop zone rect from tile frame boundaries (avoids GeometryReader timing issues).
+        // It sits just below the lowest tile in the grid.
+        let allStartFrames = startFrames.values.filter { !$0.isEmpty }
+        if let maxY = allStartFrames.map(\.maxY).max(),
+           let minX = allStartFrames.map(\.minX).min(),
+           let maxX = allStartFrames.map(\.maxX).max() {
+            let dropZoneRect = CGRect(x: minX, y: maxY + 4, width: maxX - minX, height: 32)
+            if dragRect.intersects(dropZoneRect) {
+                return .createNewRow
+            }
+        }
+
+        // Use axis-specific cancel padding so vertical drags on wide tiles aren't suppressed.
+        let cancelPaddingX = draggedFrame.width * 0.45
+        let cancelPaddingY = draggedFrame.height * 0.45
+        if draggedFrame.insetBy(dx: -cancelPaddingX, dy: -cancelPaddingY).contains(dragRect.center) {
             return nil
         }
 
-        let orderedIDs = menuBarDisplays.map(\.stableIdentity).filter { $0 != draggedID }
-        let candidates: [(id: String, frame: CGRect)] = orderedIDs.compactMap { id in
-            guard let frame = startFrames[id] ?? displayMiniTileFramesByID[id] else { return nil }
-            return (id: id, frame: frame)
+        // Build row-membership map
+        let rows = menuBarDisplayRows
+        var rowIndexByID: [String: Int] = [:]
+        for (rowIdx, row) in rows.enumerated() {
+            for display in row { rowIndexByID[display.stableIdentity] = rowIdx }
         }
+        guard let draggedRowIndex = rowIndexByID[draggedID] else { return nil }
+
+        let candidates: [(id: String, frame: CGRect, rowIdx: Int)] = menuBarDisplays
+            .filter { $0.stableIdentity != draggedID }
+            .compactMap { display in
+                let tid = display.stableIdentity
+                guard let frame = startFrames[tid] ?? displayMiniTileFramesByID[tid],
+                      let rowIdx = rowIndexByID[tid] else { return nil }
+                return (id: tid, frame: frame, rowIdx: rowIdx)
+            }
         guard !candidates.isEmpty else { return nil }
 
         let stickinessThreshold: CGFloat = 0.14
         let overlapThreshold: CGFloat = 0.22
-        let overlapScores = candidates.map { (id: $0.id, overlap: dragRect.overlapRatio(with: $0.frame)) }
+        let overlapScores = candidates.map { (id: $0.id, overlap: dragRect.overlapRatio(with: $0.frame), rowIdx: $0.rowIdx) }
 
-        if let currentTargetID = displayMiniTileSwapTargetID,
-           currentTargetID != draggedID,
-           let currentScore = overlapScores.first(where: { $0.id == currentTargetID })?.overlap,
-           currentScore >= stickinessThreshold {
-            return currentTargetID
+        // Stickiness: keep current outcome if it still passes threshold
+        if let current = displayMiniTileDragOutcome {
+            let currentID: String? = {
+                switch current {
+                case .swapInRow(let t): return t
+                case .moveCrossRow(let t): return t
+                default: return nil
+                }
+            }()
+            if let cID = currentID,
+               let score = overlapScores.first(where: { $0.id == cID })?.overlap,
+               score >= stickinessThreshold {
+                return current
+            }
         }
 
         guard let strongest = overlapScores.max(by: { lhs, rhs in
             if abs(lhs.overlap - rhs.overlap) < 0.01 {
-                guard let lhsFrame = candidates.first(where: { $0.id == lhs.id })?.frame,
-                      let rhsFrame = candidates.first(where: { $0.id == rhs.id })?.frame else { return false }
-                return dragRect.center.distanceSquared(to: lhsFrame.center) > dragRect.center.distanceSquared(to: rhsFrame.center)
+                guard let lf = candidates.first(where: { $0.id == lhs.id })?.frame,
+                      let rf = candidates.first(where: { $0.id == rhs.id })?.frame else { return false }
+                return dragRect.center.distanceSquared(to: lf.center) > dragRect.center.distanceSquared(to: rf.center)
             }
             return lhs.overlap < rhs.overlap
-        }) else { return nil }
+        }), strongest.overlap >= overlapThreshold else { return nil }
 
-        return strongest.overlap >= overlapThreshold ? strongest.id : nil
+        return strongest.rowIdx == draggedRowIndex
+            ? .swapInRow(targetID: strongest.id)
+            : .moveCrossRow(targetID: strongest.id)
     }
 
     /// Renders a single display row with actions and status.
