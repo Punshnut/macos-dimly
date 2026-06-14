@@ -117,6 +117,18 @@ struct MenuBarContentView: View {
         .onDisappear {
             panelIsPresented = false
             removeModifierClickMonitor()
+            // Cancel any in-flight mode transition so modeContentOpacity
+            // isn't left at 0 the next time the panel opens.
+            modeTransitionToken += 1
+            modeContentOpacity = 1
+            modeContentOffsetY = 0
+            isModeTransitioning = false
+            modeTransitionInvolvesCompactMode = false
+        }
+        .onKeyPress(.escape) {
+            guard presentation == .menuBar else { return .ignored }
+            closeMenuBarWindow()
+            return .handled
         }
         .preferredColorScheme(settingsStore.effectiveColorScheme)
     }
@@ -390,31 +402,24 @@ struct MenuBarContentView: View {
     /// Handles option/control modifier clicks to trigger quick actions.
     private func handleModifierClickIfNeeded() {
         guard let event = NSApp.currentEvent else { return }
-        guard event.type == .leftMouseUp || event.type == .leftMouseDown else { return }
+        guard event.type == .leftMouseDown else { return }
         let flags = event.modifierFlags
         if flags.contains(.option) {
             engine.toggleExternalBlackout()
-            if event.type == .leftMouseDown, presentation == .menuBar {
-                closeMenuBarWindow()
-            }
+            if presentation == .menuBar { closeMenuBarWindow() }
         } else if flags.contains(.control) {
             engine.toggleExternalSleepWake()
-            if event.type == .leftMouseDown, presentation == .menuBar {
-                closeMenuBarWindow()
-            }
+            if presentation == .menuBar { closeMenuBarWindow() }
         }
     }
 
     /// Installs a local monitor so modifier clicks work while the menu is open.
     private func installModifierClickMonitor() {
         guard modifierClickMonitor == nil else { return }
-        modifierClickMonitor = NSEvent.addLocalMonitorForEvents(matching: [.leftMouseDown, .leftMouseUp]) { event in
+        modifierClickMonitor = NSEvent.addLocalMonitorForEvents(matching: .leftMouseDown) { event in
             let flags = event.modifierFlags
-            if flags.contains(.option) {
-                engine.toggleExternalBlackout()
-            } else if flags.contains(.control) {
-                engine.toggleExternalSleepWake()
-            }
+            if flags.contains(.option) { engine.toggleExternalBlackout() }
+            else if flags.contains(.control) { engine.toggleExternalSleepWake() }
             return event
         }
     }

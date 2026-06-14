@@ -370,23 +370,25 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         launcherWindowController?.toggle()
     }
 
-    /// Opens/closes the MenuBarExtra window through the status item when the icon is shown.
+    /// Opens/closes the MenuBarExtra window via SwiftUI's own status item button so that
+    /// SwiftUI's internal state stays in sync (avoids ghost highlights, double-open flashes,
+    /// and missed onAppear/onDisappear lifecycle calls).
     @discardableResult
     private func toggleMenuBarWindowIfPossible() -> Bool {
         guard settingsStore?.settings.showMenuBarIcon == true else { return false }
-        if let menuWindow = dimlyMenuBarWindow(),
-           menuWindow.isVisible {
-            menuWindow.orderOut(nil)
-            return true
+        guard dimlyMenuBarWindow() != nil else { return false }
+        NSApp.activate(ignoringOtherApps: true)
+        if let button = dimlyStatusBarButton() {
+            button.performClick(nil)
+        } else {
+            // Fallback: direct AppKit toggle when the button can't be located.
+            if let w = dimlyMenuBarWindow(), w.isVisible {
+                w.orderOut(nil)
+            } else {
+                dimlyMenuBarWindow()?.makeKeyAndOrderFront(nil)
+            }
         }
-
-        if let menuWindow = dimlyMenuBarWindow() {
-            NSApp.activate(ignoringOtherApps: true)
-            menuWindow.makeKeyAndOrderFront(nil)
-            menuWindow.orderFrontRegardless()
-            return true
-        }
-        return false
+        return true
     }
 
     /// Finds Dimly's menu bar extra window without relying on private status item APIs.
@@ -398,6 +400,27 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
             }
             return window.level == .statusBar || window.level == .popUpMenu
         }
+    }
+
+    /// Locates the NSStatusBarButton owned by our MenuBarExtra so we can perform
+    /// programmatic clicks that keep SwiftUI's MenuBarExtra state in sync.
+    private func dimlyStatusBarButton() -> NSStatusBarButton? {
+        for window in NSApp.windows {
+            let cls = NSStringFromClass(type(of: window))
+            guard cls.localizedCaseInsensitiveContains("StatusBar"),
+                  !cls.localizedCaseInsensitiveContains("MenuBarExtra") else { continue }
+            if let button = firstStatusBarButton(in: window.contentView) { return button }
+        }
+        return nil
+    }
+
+    private func firstStatusBarButton(in view: NSView?) -> NSStatusBarButton? {
+        guard let view else { return nil }
+        if let b = view as? NSStatusBarButton { return b }
+        for sub in view.subviews {
+            if let b = firstStatusBarButton(in: sub) { return b }
+        }
+        return nil
     }
 
 }
