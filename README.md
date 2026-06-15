@@ -174,7 +174,7 @@ If a display stays on Overlay mode: check the cable type, enable DDC/CI in the O
 
 Requires macOS 14+. Supports Intel and Apple Silicon.
 
-> **macOS 26.4 (Tahoe) users:** update to Dimly 2026.4 before or right after upgrading - otherwise the UI may look off. Sparkle will offer it automatically, or grab it from the [releases page](https://github.com/Punshnut/macos-dimly/releases/latest).
+> **macOS 26 (Tahoe) users:** update to Dimly 2026.5.1 before or right after upgrading - otherwise the UI may look off. Sparkle will offer it automatically, or grab it from the [releases page](https://github.com/Punshnut/macos-dimly/releases/latest).
 
 ## User Guide
 
