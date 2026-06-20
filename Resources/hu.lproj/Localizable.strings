@@ -17,8 +17,10 @@
 "IntroControlDDCSubtitle" = "Közvetlen monitorvezérlés a fényerőhöz és az alvás/ébresztéshez.";
 "IntroControlOverlaySubtitle" = "Tartalék fényerő-csökkentő réteg, ha a DDC nem érhető el vagy le van tiltva.";
 "IntroControlFallbackNote" = "A Dimly először a DDC-t próbálja, majd biztonságosan átvált fedvény módra.";
-"IntroGotItButton" = "Értettem";
+"IntroGotItButton" = "Kezdés";
 "IntroMenuBarTabLabel" = "Menüsáv";
+"IntroInternalMonitorTitle" = "Beépített kijelző megjelenítése a Dimly-ben";
+"IntroInternalMonitorHint" = "A Dimly a Mac beépített kijelzőjét is vezérelheti. Ezt később a Beállítások → Kijelzők menüpontban módosíthatja.";
 
 /* Menu Bar Overview */
 "DisplayCountFormat" = "%lld kijelző csatlakoztatva";

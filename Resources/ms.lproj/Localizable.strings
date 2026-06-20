@@ -17,8 +17,10 @@
 "IntroControlDDCSubtitle" = "Kawalan monitor langsung untuk kecerahan dan tidur/bangun.";
 "IntroControlOverlaySubtitle" = "Lapisan pemalapan sandaran apabila DDC tidak tersedia atau dinyahdayakan.";
 "IntroControlFallbackNote" = "Dimly cuba DDC dahulu, kemudian beralih dengan selamat ke mod tindanan.";
-"IntroGotItButton" = "Faham";
+"IntroGotItButton" = "Mulakan";
 "IntroMenuBarTabLabel" = "Bar menu";
+"IntroInternalMonitorTitle" = "Tunjukkan paparan terbina dalam di Dimly";
+"IntroInternalMonitorHint" = "Dimly juga boleh mengawal paparan terbina dalam Mac anda. Anda boleh mengubah ini kemudian dalam Tetapan → Paparan.";
 
 /* Menu Bar Overview */
 "DisplayCountFormat" = "%lld paparan disambung";

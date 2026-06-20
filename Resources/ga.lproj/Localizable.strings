@@ -17,8 +17,10 @@
 "IntroControlDDCSubtitle" = "Rialú díreach an mhonatóra le haghaidh gile agus codlata/múscailte.";
 "IntroControlOverlaySubtitle" = "Sraith mhaolaithe chúltaca nuair nach bhfuil DDC ar fáil nó nuair atá sé díchumasaithe.";
 "IntroControlFallbackNote" = "Déanann Dimly iarracht ar DDC ar dtús, ansin filleann sé go sábháilte ar mhód forleagain.";
-"IntroGotItButton" = "Tuigthe";
+"IntroGotItButton" = "Tosaigh";
 "IntroMenuBarTabLabel" = "Barra roghchláir";
+"IntroInternalMonitorTitle" = "Taispeáin an taispeáint ionsuite in Dimly";
+"IntroInternalMonitorHint" = "Is féidir le Dimly taispeáint ionsuite do Mac a rialú freisin. Is féidir leat é seo a athrú níos déanaí i Socruithe → Taispeántaí.";
 
 /* Menu Bar Overview */
 "DisplayCountFormat" = "%lld taispeáint(í) ceangailte";

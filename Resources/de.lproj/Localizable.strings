@@ -17,8 +17,10 @@
 "IntroControlDDCSubtitle" = "Direkte Monitorsteuerung für Helligkeit und Ruhezustand/Aufwecken.";
 "IntroControlOverlaySubtitle" = "Ersatz-Dimmungsebene, wenn DDC nicht verfügbar oder deaktiviert ist.";
 "IntroControlFallbackNote" = "Dimly versucht zuerst DDC und wechselt dann sicher in den Überlagerungsmodus.";
-"IntroGotItButton" = "Verstanden";
+"IntroGotItButton" = "Loslegen";
 "IntroMenuBarTabLabel" = "Menüleiste";
+"IntroInternalMonitorTitle" = "Integrierten Bildschirm in Dimly anzeigen";
+"IntroInternalMonitorHint" = "Dimly kann auch den integrierten Bildschirm deines Macs steuern. Du kannst dies später unter Einstellungen → Bildschirme ändern.";
 
 /* Menu Bar Overview */
 "DisplayCountFormat" = "%lld Display(s) verbunden";

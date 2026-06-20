@@ -212,8 +212,12 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
                 return
             }
         }
+        guard let settingsStore, let displayManager else { return }
         UserDefaults.standard.set(true, forKey: Self.introShownKey)
-        let controller = IntroWindowController { [weak self] in
+        let controller = IntroWindowController(
+            settingsStore: settingsStore,
+            displayManager: displayManager
+        ) { [weak self] in
             self?.introWindowController = nil
         }
         introWindowController = controller

@@ -77,7 +77,10 @@ struct SettingsRootView: View {
     private func showIntroAgain() {
         UserDefaults.standard.set(false, forKey: AppDelegate.introShownKey)
         if introWindowController == nil {
-            introWindowController = IntroWindowController {
+            introWindowController = IntroWindowController(
+                settingsStore: settingsStore,
+                displayManager: displayManager
+            ) {
                 introWindowController = nil
             }
         }

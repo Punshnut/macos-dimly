@@ -17,8 +17,10 @@
 "IntroControlDDCSubtitle" = "Kontrol monitor langsung untuk kecerahan dan tidur/bangun.";
 "IntroControlOverlaySubtitle" = "Lapisan peredupan cadangan saat DDC tidak tersedia atau dinonaktifkan.";
 "IntroControlFallbackNote" = "Dimly mencoba DDC terlebih dahulu, lalu dengan aman beralih ke mode overlay.";
-"IntroGotItButton" = "Mengerti";
+"IntroGotItButton" = "Mulai";
 "IntroMenuBarTabLabel" = "Bilah menu";
+"IntroInternalMonitorTitle" = "Tampilkan layar bawaan di Dimly";
+"IntroInternalMonitorHint" = "Dimly juga dapat mengontrol layar bawaan Mac Anda. Anda dapat mengubah ini nanti di Pengaturan → Layar.";
 
 /* Menu Bar Overview */
 "DisplayCountFormat" = "%lld layar terhubung";

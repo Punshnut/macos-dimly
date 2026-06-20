@@ -17,8 +17,10 @@
 "IntroControlDDCSubtitle" = "ब्राइटनेस और स्लीप/वेक के लिए सीधे मॉनिटर नियंत्रण।";
 "IntroControlOverlaySubtitle" = "जब DDC उपलब्ध न हो या अक्षम हो, तब बैकअप डिमिंग लेयर।";
 "IntroControlFallbackNote" = "Dimly पहले DDC आज़माता है, फिर सुरक्षित रूप से ओवरले मोड पर लौटता है।";
-"IntroGotItButton" = "समझ गया";
+"IntroGotItButton" = "शुरू करें";
 "IntroMenuBarTabLabel" = "मेनू बार";
+"IntroInternalMonitorTitle" = "Dimly में बिल्ट-इन डिस्प्ले दिखाएं";
+"IntroInternalMonitorHint" = "Dimly आपके Mac के बिल्ट-इन डिस्प्ले को भी नियंत्रित कर सकता है। आप इसे बाद में सेटिंग्स → डिस्प्ले में बदल सकते हैं।";
 
 /* Menu Bar Overview */
 "DisplayCountFormat" = "%lld डिस्प्ले कनेक्टेड";

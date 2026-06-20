@@ -17,8 +17,10 @@
 "IntroControlDDCSubtitle" = "Bezpośrednie sterowanie monitorem dla jasności i usypiania/wybudzania.";
 "IntroControlOverlaySubtitle" = "Warstwa zapasowego przyciemniania, gdy DDC jest niedostępne lub wyłączone.";
 "IntroControlFallbackNote" = "Dimly najpierw próbuje DDC, a następnie bezpiecznie przechodzi do trybu nakładki.";
-"IntroGotItButton" = "Rozumiem";
+"IntroGotItButton" = "Zacznij";
 "IntroMenuBarTabLabel" = "Pasek menu";
+"IntroInternalMonitorTitle" = "Pokaż wbudowany wyświetlacz w Dimly";
+"IntroInternalMonitorHint" = "Dimly może też sterować wbudowanym wyświetlaczem Twojego Maca. Możesz to zmienić później w Ustawienia → Wyświetlacze.";
 
 /* Menu Bar Overview */
 "DisplayCountFormat" = "Podłączono %lld wyświetlacz(e)";

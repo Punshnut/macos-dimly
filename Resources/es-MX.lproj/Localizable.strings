@@ -17,8 +17,10 @@
 "IntroControlDDCSubtitle" = "Control directo del monitor para brillo y suspensión/reactivación.";
 "IntroControlOverlaySubtitle" = "Capa de atenuación de respaldo cuando DDC no está disponible o está desactivado.";
 "IntroControlFallbackNote" = "Dimly intenta primero DDC y luego cambia de forma segura al modo de superposición.";
-"IntroGotItButton" = "Listo";
+"IntroGotItButton" = "Comenzar";
 "IntroMenuBarTabLabel" = "Barra de menús";
+"IntroInternalMonitorTitle" = "Mostrar pantalla integrada en Dimly";
+"IntroInternalMonitorHint" = "Dimly también puede controlar la pantalla integrada de tu Mac. Puedes cambiar esto más tarde en Configuración → Pantallas.";
 
 /* Menu Bar Overview */
 "DisplayCountFormat" = "%lld pantalla(s) conectada(s)";

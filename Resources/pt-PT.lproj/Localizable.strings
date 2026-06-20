@@ -17,8 +17,10 @@
 "IntroControlDDCSubtitle" = "Controlo direto do monitor para brilho e suspensão/reativação.";
 "IntroControlOverlaySubtitle" = "Camada de escurecimento de recurso quando o DDC não está disponível ou está desativado.";
 "IntroControlFallbackNote" = "O Dimly tenta primeiro o DDC e depois recua em segurança para o modo de sobreposição.";
-"IntroGotItButton" = "Percebi";
+"IntroGotItButton" = "Começar";
 "IntroMenuBarTabLabel" = "Barra de menus";
+"IntroInternalMonitorTitle" = "Mostrar ecrã integrado no Dimly";
+"IntroInternalMonitorHint" = "O Dimly também pode controlar o ecrã integrado do seu Mac. Pode alterar isto mais tarde em Definições → Ecrãs.";
 
 /* Menu Bar Overview */
 "DisplayCountFormat" = "%lld ecrã(s) ligado(s)";

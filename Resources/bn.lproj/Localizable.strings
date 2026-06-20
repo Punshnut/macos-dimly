@@ -17,8 +17,10 @@
 "IntroControlDDCSubtitle" = "উজ্জ্বলতা ও স্লিপ/ওয়েকের জন্য সরাসরি মনিটর নিয়ন্ত্রণ।";
 "IntroControlOverlaySubtitle" = "DDC অনুপলব্ধ বা নিষ্ক্রিয় হলে বিকল্প ডিমিং স্তর।";
 "IntroControlFallbackNote" = "Dimly প্রথমে DDC চেষ্টা করে, তারপর নিরাপদে ওভারলে মোডে ফিরে যায়।";
-"IntroGotItButton" = "ঠিক আছে";
+"IntroGotItButton" = "শুরু করুন";
 "IntroMenuBarTabLabel" = "মেনু বার";
+"IntroInternalMonitorTitle" = "Dimly-তে বিল্ট-ইন ডিসপ্লে দেখান";
+"IntroInternalMonitorHint" = "Dimly আপনার Mac-এর বিল্ট-ইন ডিসপ্লেও নিয়ন্ত্রণ করতে পারে। আপনি এটি পরে সেটিংস → ডিসপ্লে-তে পরিবর্তন করতে পারেন।";
 
 /* Menu Bar Overview */
 "DisplayCountFormat" = "%lld ডিসপ্লে সংযুক্ত";

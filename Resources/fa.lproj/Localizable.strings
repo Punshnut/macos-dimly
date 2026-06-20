@@ -17,8 +17,10 @@
 "IntroControlDDCSubtitle" = "کنترل مستقیم مانیتور برای روشنایی و خواب/بیداری.";
 "IntroControlOverlaySubtitle" = "لایه کم‌نورکننده جایگزین زمانی که DDC در دسترس نیست یا غیرفعال است.";
 "IntroControlFallbackNote" = "Dimly ابتدا DDC را امتحان می‌کند، سپس با اطمینان به حالت هم‌پوشانی برمی‌گردد.";
-"IntroGotItButton" = "فهمیدم";
+"IntroGotItButton" = "شروع کنید";
 "IntroMenuBarTabLabel" = "نوار منو";
+"IntroInternalMonitorTitle" = "نمایش صفحه‌نمایش داخلی در Dimly";
+"IntroInternalMonitorHint" = "Dimly همچنین می‌تواند صفحه‌نمایش داخلی مک شما را کنترل کند. می‌توانید این را بعداً در تنظیمات ← صفحه‌نمایش‌ها تغییر دهید.";
 
 /* Menu Bar Overview */
 "DisplayCountFormat" = "%lld نمایشگر متصل";

@@ -19,8 +19,10 @@
 "IntroControlDDCSubtitle" = "Direct monitor control for brightness and sleep/wake.";
 "IntroControlOverlaySubtitle" = "Fallback dimming layer when DDC is unavailable or disabled.";
 "IntroControlFallbackNote" = "Dimly tries DDC first, then safely falls back to overlay mode.";
-"IntroGotItButton" = "Got it";
+"IntroGotItButton" = "Get Started";
 "IntroMenuBarTabLabel" = "Menu bar";
+"IntroInternalMonitorTitle" = "Show built-in display in Dimly";
+"IntroInternalMonitorHint" = "Dimly can also control your Mac's built-in display. You can change this later in Settings → Displays.";
 
 /* Menu Bar Overview */
 "DisplayCountFormat" = "%lld display(s) connected";

@@ -17,8 +17,10 @@
 "IntroControlDDCSubtitle" = "Sarrafa na'urar nuni kai tsaye don haske da barci/farkawa.";
 "IntroControlOverlaySubtitle" = "Matakin rage haske na madadin lokacin da DDC bai samu ba ko an kashe shi.";
 "IntroControlFallbackNote" = "Dimly yana fara gwada DDC, sannan ya koma yanayin rufi cikin aminci.";
-"IntroGotItButton" = "Na gane";
+"IntroGotItButton" = "Fara";
 "IntroMenuBarTabLabel" = "Sandar menu";
+"IntroInternalMonitorTitle" = "Nuna allo na ciki a Dimly";
+"IntroInternalMonitorHint" = "Dimly kuma zai iya sarrafa allo na ciki na Mac ɗinka. Zaka iya canza wannan daga baya a Saitunan → Allunan Nuni.";
 
 /* Menu Bar Overview */
 "DisplayCountFormat" = "%lld allo(na) an haɗa";

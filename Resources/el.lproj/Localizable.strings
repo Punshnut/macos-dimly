@@ -17,8 +17,10 @@
 "IntroControlDDCSubtitle" = "Άμεσος έλεγχος οθόνης για φωτεινότητα και ύπνο/αφύπνιση.";
 "IntroControlOverlaySubtitle" = "Εφεδρικό επίπεδο σκίασης όταν το DDC δεν είναι διαθέσιμο ή είναι απενεργοποιημένο.";
 "IntroControlFallbackNote" = "Το Dimly δοκιμάζει πρώτα το DDC και έπειτα μεταβαίνει με ασφάλεια στη λειτουργία επικάλυψης.";
-"IntroGotItButton" = "Εντάξει";
+"IntroGotItButton" = "Έναρξη";
 "IntroMenuBarTabLabel" = "Γραμμή μενού";
+"IntroInternalMonitorTitle" = "Εμφάνιση ενσωματωμένης οθόνης στο Dimly";
+"IntroInternalMonitorHint" = "Το Dimly μπορεί επίσης να ελέγξει την ενσωματωμένη οθόνη του Mac σας. Μπορείτε να το αλλάξετε αργότερα στις Ρυθμίσεις → Οθόνες.";
 
 /* Menu Bar Overview */
 "DisplayCountFormat" = "%lld οθόνη(ες) συνδεδεμένη(ες)";

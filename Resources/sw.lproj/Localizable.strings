@@ -17,8 +17,10 @@
 "IntroControlDDCSubtitle" = "Udhibiti wa moja kwa moja wa kifuatiliaji kwa mwangaza na kulala/kuamsha.";
 "IntroControlOverlaySubtitle" = "Safu ya kupunguza mwangaza ya akiba DDC isipopatikana au ikizimwa.";
 "IntroControlFallbackNote" = "Dimly hujaribu DDC kwanza, kisha hurudi kwa usalama kwenye hali ya kufunika.";
-"IntroGotItButton" = "Nimepata";
+"IntroGotItButton" = "Anza";
 "IntroMenuBarTabLabel" = "Mwambaa wa menyu";
+"IntroInternalMonitorTitle" = "Onyesha skrini ya ndani katika Dimly";
+"IntroInternalMonitorHint" = "Dimly pia inaweza kudhibiti skrini ya ndani ya Mac yako. Unaweza kubadilisha hii baadaye katika Mipangilio → Maonyesho.";
 
 /* Menu Bar Overview */
 "DisplayCountFormat" = "%lld skrini zimeunganishwa";

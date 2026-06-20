@@ -17,8 +17,10 @@
 "IntroControlDDCSubtitle" = "چمک اور سلیپ/ویک کے لیے مانیٹر کا براہِ راست کنٹرول۔";
 "IntroControlOverlaySubtitle" = "جب DDC دستیاب نہ ہو یا غیر فعال ہو تو متبادل مدھم کرنے والی پرت۔";
 "IntroControlFallbackNote" = "Dimly پہلے DDC آزماتا ہے، پھر محفوظ طریقے سے اوورلے موڈ پر واپس آ جاتا ہے۔";
-"IntroGotItButton" = "سمجھ گیا";
+"IntroGotItButton" = "شروع کریں";
 "IntroMenuBarTabLabel" = "مینو بار";
+"IntroInternalMonitorTitle" = "Dimly میں بلٹ ان ڈسپلے دکھائیں";
+"IntroInternalMonitorHint" = "Dimly آپ کے Mac کی بلٹ ان ڈسپلے کو بھی کنٹرول کر سکتا ہے۔ آپ اسے بعد میں ترتیبات ← ڈسپلے میں تبدیل کر سکتے ہیں۔";
 
 /* Menu Bar Overview */
 "DisplayCountFormat" = "%lld ڈسپلے منسلک";

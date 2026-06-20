@@ -17,8 +17,10 @@
 "IntroControlDDCSubtitle" = "Suora näytön ohjaus kirkkaudelle ja lepotila/herätys-toiminnoille.";
 "IntroControlOverlaySubtitle" = "Vara-himmennyskerros, kun DDC ei ole käytettävissä tai se on poistettu käytöstä.";
 "IntroControlFallbackNote" = "Dimly yrittää ensin DDC:tä ja siirtyy sitten turvallisesti peittotilaan.";
-"IntroGotItButton" = "Selvä";
+"IntroGotItButton" = "Aloita";
 "IntroMenuBarTabLabel" = "Valikkorivi";
+"IntroInternalMonitorTitle" = "Näytä sisäänrakennettu näyttö Dimly-sovelluksessa";
+"IntroInternalMonitorHint" = "Dimly voi myös ohjata Macin sisäänrakennettua näyttöä. Voit muuttaa tätä myöhemmin kohdassa Asetukset → Näytöt.";
 
 /* Menu Bar Overview */
 "DisplayCountFormat" = "%lld näyttö(ä) yhdistetty";

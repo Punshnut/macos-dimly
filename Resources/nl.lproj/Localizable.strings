@@ -17,8 +17,10 @@
 "IntroControlDDCSubtitle" = "Directe monitorbediening voor helderheid en slaap/wakker maken.";
 "IntroControlOverlaySubtitle" = "Reserve-dimlaag wanneer DDC niet beschikbaar of uitgeschakeld is.";
 "IntroControlFallbackNote" = "Dimly probeert eerst DDC en schakelt daarna veilig over naar de overlaymodus.";
-"IntroGotItButton" = "Begrepen";
+"IntroGotItButton" = "Aan de slag";
 "IntroMenuBarTabLabel" = "Menubalk";
+"IntroInternalMonitorTitle" = "Ingebouwd scherm tonen in Dimly";
+"IntroInternalMonitorHint" = "Dimly kan ook het ingebouwde scherm van je Mac bedienen. Je kunt dit later wijzigen via Instellingen → Schermen.";
 
 /* Menu Bar Overview */
 "DisplayCountFormat" = "%lld scherm(en) verbonden";

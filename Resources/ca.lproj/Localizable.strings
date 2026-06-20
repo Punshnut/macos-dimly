@@ -17,8 +17,10 @@
 "IntroControlDDCSubtitle" = "Control directe del monitor per a la brillantor i el repòs/reactivació.";
 "IntroControlOverlaySubtitle" = "Capa d'atenuació alternativa quan el DDC no està disponible o està desactivat.";
 "IntroControlFallbackNote" = "Dimly prova primer el DDC i, si cal, passa de manera segura al mode de superposició.";
-"IntroGotItButton" = "Entès";
+"IntroGotItButton" = "Comença";
 "IntroMenuBarTabLabel" = "Barra de menú";
+"IntroInternalMonitorTitle" = "Mostra la pantalla integrada a Dimly";
+"IntroInternalMonitorHint" = "Dimly també pot controlar la pantalla integrada del teu Mac. Pots canviar-ho més tard a Configuració → Pantalles.";
 
 /* Menu Bar Overview */
 "DisplayCountFormat" = "%lld pantalla(es) connectada(es)";

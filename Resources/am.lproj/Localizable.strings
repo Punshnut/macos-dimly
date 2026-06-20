@@ -17,8 +17,10 @@
 "IntroControlDDCSubtitle" = "ለብሩህነት እና ለእንቅልፍ/ማስነሳት ቀጥተኛ የሞኒተር መቆጣጠሪያ።";
 "IntroControlOverlaySubtitle" = "DDC ካልተገኘ ወይም ከተሰናከለ ጊዜ የተተኪ ማደብዘዣ ሽፋን።";
 "IntroControlFallbackNote" = "Dimly መጀመሪያ DDCን ይሞክራል፣ ከዚያ በደህና ወደ የኦቨርሌይ ሁኔታ ይመለሳል።";
-"IntroGotItButton" = "ተረዳሁ";
+"IntroGotItButton" = "ጀምር";
 "IntroMenuBarTabLabel" = "ሜኑ አሞሌ";
+"IntroInternalMonitorTitle" = "የ Mac ውስጣዊ ማሳያ በ Dimly ውስጥ አሳይ";
+"IntroInternalMonitorHint" = "Dimly የ Mac ውስጣዊ ማሳያን ሊቆጣጠር ይችላል። ይህን ቆይቶ በቅንጅቶች → ማሳያዎች ውስጥ መቀየር ይቻላል።";
 
 /* Menu Bar Overview */
 "DisplayCountFormat" = "%lld ማሳያ(ዎች) ተገናኝተዋል";

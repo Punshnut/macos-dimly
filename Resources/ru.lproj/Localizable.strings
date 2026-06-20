@@ -17,8 +17,10 @@
 "IntroControlDDCSubtitle" = "Прямое управление монитором для яркости и сна/пробуждения.";
 "IntroControlOverlaySubtitle" = "Резервный слой затемнения, когда DDC недоступен или отключён.";
 "IntroControlFallbackNote" = "Dimly сначала пробует DDC, а затем безопасно переключается в режим наложения.";
-"IntroGotItButton" = "Понятно";
+"IntroGotItButton" = "Начать";
 "IntroMenuBarTabLabel" = "Строка меню";
+"IntroInternalMonitorTitle" = "Показать встроенный дисплей в Dimly";
+"IntroInternalMonitorHint" = "Dimly также может управлять встроенным дисплеем вашего Mac. Вы можете изменить это позже в Настройках → Дисплеи.";
 
 /* Menu Bar Overview */
 "DisplayCountFormat" = "%lld дисплей(ев) подключено";

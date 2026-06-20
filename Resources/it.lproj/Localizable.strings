@@ -17,8 +17,10 @@
 "IntroControlDDCSubtitle" = "Controllo diretto del monitor per luminosità e sospensione/riattivazione.";
 "IntroControlOverlaySubtitle" = "Livello di attenuazione di riserva quando DDC non è disponibile o è disattivato.";
 "IntroControlFallbackNote" = "Dimly prova prima DDC, poi passa in sicurezza alla modalità overlay.";
-"IntroGotItButton" = "Ho capito";
+"IntroGotItButton" = "Inizia";
 "IntroMenuBarTabLabel" = "Barra dei menu";
+"IntroInternalMonitorTitle" = "Mostra il display integrato in Dimly";
+"IntroInternalMonitorHint" = "Dimly può anche controllare il display integrato del tuo Mac. Puoi cambiare questa impostazione in seguito in Impostazioni → Display.";
 
 /* Menu Bar Overview */
 "DisplayCountFormat" = "%lld display collegati";

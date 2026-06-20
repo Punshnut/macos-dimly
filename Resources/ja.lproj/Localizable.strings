@@ -17,8 +17,10 @@
 "IntroControlDDCSubtitle" = "明るさやスリープ/復帰のためのモニター直接制御。";
 "IntroControlOverlaySubtitle" = "DDC が利用できない、または無効な場合のフォールバック調光レイヤー。";
 "IntroControlFallbackNote" = "Dimly はまず DDC を試し、必要に応じて安全にオーバーレイモードへ切り替えます。";
-"IntroGotItButton" = "了解";
+"IntroGotItButton" = "始める";
 "IntroMenuBarTabLabel" = "メニューバー";
+"IntroInternalMonitorTitle" = "組み込みディスプレイを Dimly に表示";
+"IntroInternalMonitorHint" = "Dimly は Mac の組み込みディスプレイも制御できます。後で設定 → ディスプレイから変更できます。";
 
 /* Menu Bar Overview */
 "DisplayCountFormat" = "%lld 台のディスプレイが接続";

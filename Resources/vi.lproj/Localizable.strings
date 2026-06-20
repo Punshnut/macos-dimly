@@ -17,8 +17,10 @@
 "IntroControlDDCSubtitle" = "Điều khiển màn hình trực tiếp cho độ sáng và ngủ/thức.";
 "IntroControlOverlaySubtitle" = "Lớp làm mờ dự phòng khi DDC không khả dụng hoặc bị tắt.";
 "IntroControlFallbackNote" = "Dimly thử DDC trước, sau đó chuyển an toàn sang chế độ phủ.";
-"IntroGotItButton" = "Hiểu rồi";
+"IntroGotItButton" = "Bắt đầu";
 "IntroMenuBarTabLabel" = "Thanh menu";
+"IntroInternalMonitorTitle" = "Hiển thị màn hình tích hợp trong Dimly";
+"IntroInternalMonitorHint" = "Dimly cũng có thể điều khiển màn hình tích hợp của Mac. Bạn có thể thay đổi điều này sau trong Cài đặt → Màn hình.";
 
 /* Menu Bar Overview */
 "DisplayCountFormat" = "%lld màn hình được kết nối";

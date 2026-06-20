@@ -17,8 +17,10 @@
 "IntroControlDDCSubtitle" = "Contrôle direct du moniteur pour la luminosité et la mise en veille/réveil.";
 "IntroControlOverlaySubtitle" = "Couche de gradation de secours lorsque DDC est indisponible ou désactivé.";
 "IntroControlFallbackNote" = "Dimly essaie d'abord DDC, puis bascule en toute sécurité vers le mode superposition.";
-"IntroGotItButton" = "Compris";
+"IntroGotItButton" = "Commencer";
 "IntroMenuBarTabLabel" = "Barre de menus";
+"IntroInternalMonitorTitle" = "Afficher l'écran intégré dans Dimly";
+"IntroInternalMonitorHint" = "Dimly peut également contrôler l'écran intégré de votre Mac. Vous pouvez modifier cela plus tard dans Réglages → Écrans.";
 
 /* Menu Bar Overview */
 "DisplayCountFormat" = "%lld écran(s) connecté(s)";

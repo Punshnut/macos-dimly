@@ -17,8 +17,10 @@
 "IntroControlDDCSubtitle" = "အလင်းအားနှင့် အိပ်/နှိုး အတွက် မော်နီတာကို တိုက်ရိုက် ထိန်းချုပ်ခြင်း။";
 "IntroControlOverlaySubtitle" = "DDC မရရှိနိုင်ခြင်း သို့မဟုတ် ပိတ်ထားခြင်း ဖြစ်ပါက အစားထိုး မှိန်စေမှု အလွှာ။";
 "IntroControlFallbackNote" = "Dimly သည် ပထမဦးစွာ DDC ကို စမ်းသပ်ပြီးနောက် လုံခြုံစွာ Overlay မုဒ်သို့ ပြန်လည်ပြောင်းလဲသည်။";
-"IntroGotItButton" = "နားလည်ပါပြီ";
+"IntroGotItButton" = "စတင်ပါ";
 "IntroMenuBarTabLabel" = "မီနူးဘား";
+"IntroInternalMonitorTitle" = "Dimly တွင် ကိုယ်တိုင်ပါ မျက်နှာပြင် ပြရန်";
+"IntroInternalMonitorHint" = "Dimly သည် သင့် Mac ၏ ကိုယ်တိုင်ပါ မျက်နှာပြင်ကိုလည်း ထိန်းချုပ်နိုင်သည်။ ဆက်တင်များ → မျက်နှာပြင်များ တွင် ၎င်းကို နောက်မှ ပြောင်းနိုင်သည်။";
 
 /* Menu Bar Overview */
 "DisplayCountFormat" = "%lld ခု ပြသမှု ချိတ်ဆက်ထား";

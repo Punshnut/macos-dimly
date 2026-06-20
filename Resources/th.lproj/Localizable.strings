@@ -17,8 +17,10 @@
 "IntroControlDDCSubtitle" = "ควบคุมจอภาพโดยตรงสำหรับความสว่างและการพัก/ปลุก";
 "IntroControlOverlaySubtitle" = "ชั้นลดความสว่างสำรองเมื่อ DDC ใช้งานไม่ได้หรือถูกปิดใช้งาน";
 "IntroControlFallbackNote" = "Dimly จะลองใช้ DDC ก่อน แล้วจึงสลับกลับไปยังโหมดโอเวอร์เลย์อย่างปลอดภัย";
-"IntroGotItButton" = "รับทราบ";
+"IntroGotItButton" = "เริ่มต้น";
 "IntroMenuBarTabLabel" = "แถบเมนู";
+"IntroInternalMonitorTitle" = "แสดงจอแสดงผลในตัวใน Dimly";
+"IntroInternalMonitorHint" = "Dimly ยังสามารถควบคุมจอแสดงผลในตัวของ Mac ของคุณได้ คุณสามารถเปลี่ยนแปลงได้ในภายหลังที่ การตั้งค่า → จอแสดงผล";
 
 /* Menu Bar Overview */
 "DisplayCountFormat" = "%lld จอเชื่อมต่อ";

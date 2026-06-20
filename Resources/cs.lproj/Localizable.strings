@@ -17,8 +17,10 @@
 "IntroControlDDCSubtitle" = "Přímé ovládání monitoru pro jas a uspání/probuzení.";
 "IntroControlOverlaySubtitle" = "Záložní vrstva ztmavení, když DDC není dostupné nebo je vypnuté.";
 "IntroControlFallbackNote" = "Dimly nejprve zkusí DDC a pak bezpečně přejde do režimu překrytí.";
-"IntroGotItButton" = "Rozumím";
+"IntroGotItButton" = "Začít";
 "IntroMenuBarTabLabel" = "Lišta menu";
+"IntroInternalMonitorTitle" = "Zobrazit vestavěný displej v Dimly";
+"IntroInternalMonitorHint" = "Dimly může také ovládat vestavěný displej vašeho Macu. Toto nastavení můžete později změnit v Nastavení → Displeje.";
 
 /* Menu Bar Overview */
 "DisplayCountFormat" = "%lld displej(ů) připojeno";

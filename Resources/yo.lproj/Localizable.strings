@@ -17,8 +17,10 @@
 "IntroControlDDCSubtitle" = "Iṣakoso taara ti monitọ̀ fún ìmọ́lẹ̀ àti sun/jí.";
 "IntroControlOverlaySubtitle" = "Àlẹmọ dín ìmọ́lẹ̀ àfọwọ́yìí nígbà tí DDC kò sí tàbí tí a ti pa á.";
 "IntroControlFallbackNote" = "Dimly kọ́kọ́ gbìyànjú DDC, lẹ́yìn náà ó padà lọ sí ipo ìbojú ní ààbò.";
-"IntroGotItButton" = "Mo lóye";
+"IntroGotItButton" = "Bẹrẹ";
 "IntroMenuBarTabLabel" = "Pátákó àkójọ";
+"IntroInternalMonitorTitle" = "Ṣe afihan ifihan ti a ṣe sinu ni Dimly";
+"IntroInternalMonitorHint" = "Dimly tun le ṣakoso ifihan ti a ṣe sinu Mac rẹ. O le yi eyi pada lẹhinna ni Awọn eto → Awọn Ifihan.";
 
 /* Menu Bar Overview */
 "DisplayCountFormat" = "%lld àfihàn ti so pọ̀";

@@ -17,8 +17,10 @@
 "IntroControlDDCSubtitle" = "Direkt skärmstyrning för ljusstyrka och vila/väckning.";
 "IntroControlOverlaySubtitle" = "Reservdämpningslager när DDC inte är tillgängligt eller inaktiverat.";
 "IntroControlFallbackNote" = "Dimly provar först DDC och växlar sedan säkert till överlagringsläge.";
-"IntroGotItButton" = "Jag förstår";
+"IntroGotItButton" = "Kom igång";
 "IntroMenuBarTabLabel" = "Menyrad";
+"IntroInternalMonitorTitle" = "Visa inbyggd skärm i Dimly";
+"IntroInternalMonitorHint" = "Dimly kan också styra din Macs inbyggda skärm. Du kan ändra detta senare i Inställningar → Skärmar.";
 
 /* Menu Bar Overview */
 "DisplayCountFormat" = "%lld skärm(ar) anslutna";

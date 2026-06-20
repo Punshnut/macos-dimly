@@ -18,8 +18,10 @@
 "IntroControlDDCSubtitle" = "Direktang kontrol ng monitor para sa liwanag at sleep/wake.";
 "IntroControlOverlaySubtitle" = "Pansamantalang dimming layer kapag hindi available o naka-disable ang DDC.";
 "IntroControlFallbackNote" = "Susubukan muna ng Dimly ang DDC, pagkatapos ay ligtas na lilipat sa overlay mode.";
-"IntroGotItButton" = "Nakuha";
+"IntroGotItButton" = "Magsimula";
 "IntroMenuBarTabLabel" = "Bar ng menu";
+"IntroInternalMonitorTitle" = "Ipakita ang built-in display sa Dimly";
+"IntroInternalMonitorHint" = "Maaari ring kontrolin ng Dimly ang built-in display ng iyong Mac. Maaari mong baguhin ito sa ibang pagkakataon sa Mga Setting → Mga Display.";
 
 /* Menu Bar Overview */
 "DisplayCountFormat" = "%lld display na nakakonekta";

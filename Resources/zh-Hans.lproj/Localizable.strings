@@ -17,8 +17,10 @@
 "IntroControlDDCSubtitle" = "用于亮度和睡眠/唤醒的显示器直接控制。";
 "IntroControlOverlaySubtitle" = "当 DDC 不可用或被禁用时使用的后备调暗层。";
 "IntroControlFallbackNote" = "Dimly 会先尝试 DDC，然后安全回退到覆盖模式。";
-"IntroGotItButton" = "知道了";
+"IntroGotItButton" = "开始使用";
 "IntroMenuBarTabLabel" = "菜单栏";
+"IntroInternalMonitorTitle" = "在 Dimly 中显示内置显示屏";
+"IntroInternalMonitorHint" = "Dimly 还可以控制 Mac 的内置显示屏。您可以稍后在设置 → 显示屏中更改此项。";
 
 /* Menu Bar Overview */
 "DisplayCountFormat" = "已连接 %lld 台显示器";

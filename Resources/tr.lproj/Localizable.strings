@@ -17,8 +17,10 @@
 "IntroControlDDCSubtitle" = "Parlaklık ve uyku/uyandırma için doğrudan monitör kontrolü.";
 "IntroControlOverlaySubtitle" = "DDC kullanılamadığında veya devre dışı bırakıldığında yedek karartma katmanı.";
 "IntroControlFallbackNote" = "Dimly önce DDC'yi dener, ardından güvenle kaplama moduna geri döner.";
-"IntroGotItButton" = "Anladım";
+"IntroGotItButton" = "Başla";
 "IntroMenuBarTabLabel" = "Menü çubuğu";
+"IntroInternalMonitorTitle" = "Yerleşik ekranı Dimly'de göster";
+"IntroInternalMonitorHint" = "Dimly, Mac'inizin yerleşik ekranını da kontrol edebilir. Bunu daha sonra Ayarlar → Ekranlar bölümünden değiştirebilirsiniz.";
 
 /* Menu Bar Overview */
 "DisplayCountFormat" = "%lld ekran bağlı";

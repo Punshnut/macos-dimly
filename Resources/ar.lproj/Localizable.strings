@@ -17,8 +17,10 @@
 "IntroControlDDCSubtitle" = "تحكم مباشر في الشاشة للسطوع والسكون/الإيقاظ.";
 "IntroControlOverlaySubtitle" = "طبقة تعتيم بديلة عندما يكون DDC غير متاح أو معطلاً.";
 "IntroControlFallbackNote" = "يحاول Dimly استخدام DDC أولاً، ثم ينتقل بأمان إلى وضع التراكب.";
-"IntroGotItButton" = "تم";
+"IntroGotItButton" = "ابدأ";
 "IntroMenuBarTabLabel" = "شريط القوائم";
+"IntroInternalMonitorTitle" = "إظهار الشاشة المدمجة في Dimly";
+"IntroInternalMonitorHint" = "يمكن لـ Dimly أيضًا التحكم في الشاشة المدمجة بجهاز Mac. يمكنك تغيير ذلك لاحقًا في الإعدادات ← الشاشات.";
 
 /* Menu Bar Overview */
 "DisplayCountFormat" = "%lld شاشة متصلة";
