@@ -410,3 +410,69 @@
 "CompactShowMonitorTilesSubtitle" = "แสดงตัวควบคุมความสว่างและโหมดสลีปสำหรับแต่ละจอมอนิเตอร์ในโหมดกะทัดรัด";
 "CompactSmartButtonsCompactTitle" = "ขนาดปุ่มลัดแบบกะทัดรัด";
 "CompactSmartButtonsCompactSubtitle" = "ใช้ไทล์ปุ่มขนาดเล็กลงในโหมดกะทัดรัด ซึ่งสอดคล้องกับเลย์เอาต์โหมดขั้นสูง";
+
+/* Collapsible Section Headers */
+"SectionContrastTitle" = "ความเปรียบต่าง";
+"SectionPowerTitle" = "พลังงาน";
+"SectionImageTitle" = "ภาพ";
+"SectionResolutionTitle" = "ความละเอียด";
+"SectionInputSourceTitle" = "แหล่งสัญญาณเข้า";
+"SectionDimlyBehaviorTitle" = "พฤติกรรมของ Dimly";
+
+/* Night Shift */
+"NightShiftLabel" = "Night Shift";
+"NightShiftLessWarmLabel" = "อุ่นน้อยลง";
+"NightShiftMoreWarmLabel" = "อุ่นมากขึ้น";
+"NightShiftUnavailableNote" = "Night Shift ไม่พร้อมใช้งานบน Mac เครื่องนี้";
+
+/* True Tone */
+"TrueToneLabel" = "True Tone";
+
+/* Contrast */
+"ContrastSectionLabel" = "ความเปรียบต่าง";
+"ContrastPercentFormat" = "%lld%%";
+"ActionDecreaseContrastHint" = "ลดความเปรียบต่างลง 1%";
+"ActionIncreaseContrastHint" = "เพิ่มความเปรียบต่างขึ้น 1%";
+
+/* Resolution & Refresh Rate */
+"ResolutionPickerLabel" = "ความละเอียด";
+"RefreshRatePickerLabel" = "อัตรารีเฟรช";
+"ResolutionHiDPIBadge" = "HiDPI";
+"ResolutionNativeBadge" = "ดั้งเดิม";
+"ResolutionDefaultBadge" = "ค่าเริ่มต้น";
+
+/* Input Source */
+"InputSourceVGA1Label" = "VGA 1";
+"InputSourceVGA2Label" = "VGA 2";
+"InputSourceDVI1Label" = "DVI 1";
+"InputSourceDVI2Label" = "DVI 2";
+"InputSourceHDMI1Label" = "HDMI 1";
+"InputSourceHDMI2Label" = "HDMI 2";
+"InputSourceDisplayPort1Label" = "DisplayPort 1";
+"InputSourceDisplayPort2Label" = "DisplayPort 2";
+"InputSourceCompositeLabel" = "วิดีโอคอมโพสิต";
+"InputSourceUnknownLabel" = "แหล่งสัญญาณที่ไม่รู้จัก";
+
+/* Color Profile */
+"ColorProfileSectionLabel" = "โปรไฟล์สี";
+"ColorProfileDefaultLabel" = "ค่าเริ่มต้น";
+
+/* Display Appearance Filter */
+"DisplayFilterLabel" = "ฟิลเตอร์รูปลักษณ์";
+"DisplayFilterStandardLabel" = "มาตรฐาน";
+"DisplayFilterGrayscaleLabel" = "โทนสีเทา";
+"DisplayFilterInvertLabel" = "กลับสี";
+"DisplayFilterWarmthLabel" = "อุ่น";
+"DisplayFilterCoolLabel" = "เย็น";
+
+/* Color Profile — new */
+"ColorProfileSystemDefaultLabel" = "ค่าเริ่มต้นของระบบ";
+"ColorProfileBuiltinHintLabel" = "โปรไฟล์จอแสดงผลในตัวได้รับการจัดการโดย macOS";
+"OpenSystemSettingsButton" = "เปิดการตั้งค่าระบบ";
+
+/* Color Profile group section headers */
+"ColorProfileGroupStandardLabel" = "มาตรฐาน";
+"ColorProfileGroupModernLabel" = "สมัยใหม่";
+"ColorProfileGroupCreativeLabel" = "เอฟเฟ็กต์สร้างสรรค์";
+"ColorProfileGroupCalibrationLabel" = "การปรับเทียบจอแสดงผล";
+"ColorProfileGroupUserLabel" = "ติดตั้งโดยผู้ใช้";

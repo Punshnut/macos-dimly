@@ -410,3 +410,69 @@
 "CompactShowMonitorTilesSubtitle" = "Zobrazit ovládací prvky jasu a spánku pro každý monitor v kompaktním režimu.";
 "CompactSmartButtonsCompactTitle" = "Kompaktní velikost rychlých tlačítek";
 "CompactSmartButtonsCompactSubtitle" = "Používat menší dlaždice tlačítek v kompaktním režimu, odpovídající rozložení pokročilého režimu.";
+
+/* Collapsible Section Headers */
+"SectionContrastTitle" = "Kontrast";
+"SectionPowerTitle" = "Napájení";
+"SectionImageTitle" = "Obraz";
+"SectionResolutionTitle" = "Rozlišení";
+"SectionInputSourceTitle" = "Vstupní zdroj";
+"SectionDimlyBehaviorTitle" = "Chování Dimly";
+
+/* Night Shift */
+"NightShiftLabel" = "Night Shift";
+"NightShiftLessWarmLabel" = "Méně teplé";
+"NightShiftMoreWarmLabel" = "Více teplé";
+"NightShiftUnavailableNote" = "Night Shift není na tomto Macu k dispozici.";
+
+/* True Tone */
+"TrueToneLabel" = "True Tone";
+
+/* Contrast */
+"ContrastSectionLabel" = "Kontrast";
+"ContrastPercentFormat" = "%lld%%";
+"ActionDecreaseContrastHint" = "Snížit kontrast o 1%";
+"ActionIncreaseContrastHint" = "Zvýšit kontrast o 1%";
+
+/* Resolution & Refresh Rate */
+"ResolutionPickerLabel" = "Rozlišení";
+"RefreshRatePickerLabel" = "Obnovovací frekvence";
+"ResolutionHiDPIBadge" = "HiDPI";
+"ResolutionNativeBadge" = "Nativní";
+"ResolutionDefaultBadge" = "Výchozí";
+
+/* Input Source */
+"InputSourceVGA1Label" = "VGA 1";
+"InputSourceVGA2Label" = "VGA 2";
+"InputSourceDVI1Label" = "DVI 1";
+"InputSourceDVI2Label" = "DVI 2";
+"InputSourceHDMI1Label" = "HDMI 1";
+"InputSourceHDMI2Label" = "HDMI 2";
+"InputSourceDisplayPort1Label" = "DisplayPort 1";
+"InputSourceDisplayPort2Label" = "DisplayPort 2";
+"InputSourceCompositeLabel" = "Kompozitní video";
+"InputSourceUnknownLabel" = "Neznámý zdroj";
+
+/* Color Profile */
+"ColorProfileSectionLabel" = "Barevný profil";
+"ColorProfileDefaultLabel" = "Výchozí";
+
+/* Display Appearance Filter */
+"DisplayFilterLabel" = "Filtr vzhledu";
+"DisplayFilterStandardLabel" = "Standardní";
+"DisplayFilterGrayscaleLabel" = "Stupně šedi";
+"DisplayFilterInvertLabel" = "Invertováno";
+"DisplayFilterWarmthLabel" = "Teplý";
+"DisplayFilterCoolLabel" = "Studený";
+
+/* Color Profile — new */
+"ColorProfileSystemDefaultLabel" = "Výchozí systémový";
+"ColorProfileBuiltinHintLabel" = "Vestavěné profily displeje spravuje macOS";
+"OpenSystemSettingsButton" = "Otevřít Nastavení systému";
+
+/* Color Profile group section headers */
+"ColorProfileGroupStandardLabel" = "Standardní";
+"ColorProfileGroupModernLabel" = "Moderní";
+"ColorProfileGroupCreativeLabel" = "Kreativní efekty";
+"ColorProfileGroupCalibrationLabel" = "Kalibrace displeje";
+"ColorProfileGroupUserLabel" = "Nainstalováno uživatelem";

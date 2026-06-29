@@ -410,3 +410,69 @@
 "CompactShowMonitorTilesSubtitle" = "Helderheids- en slaapbesturingen per monitor weergeven in de compacte modus.";
 "CompactSmartButtonsCompactTitle" = "Compacte snelknopgrootte";
 "CompactSmartButtonsCompactSubtitle" = "Gebruik kleinere knoptegels in de compacte modus, overeenkomend met de lay-out van de geavanceerde modus.";
+
+/* Collapsible Section Headers */
+"SectionContrastTitle" = "Contrast";
+"SectionPowerTitle" = "Energie";
+"SectionImageTitle" = "Afbeelding";
+"SectionResolutionTitle" = "Resolutie";
+"SectionInputSourceTitle" = "Invoerbron";
+"SectionDimlyBehaviorTitle" = "Dimly-gedrag";
+
+/* Night Shift */
+"NightShiftLabel" = "Night Shift";
+"NightShiftLessWarmLabel" = "Minder warm";
+"NightShiftMoreWarmLabel" = "Warmer";
+"NightShiftUnavailableNote" = "Night Shift is niet beschikbaar op deze Mac.";
+
+/* True Tone */
+"TrueToneLabel" = "True Tone";
+
+/* Contrast */
+"ContrastSectionLabel" = "Contrast";
+"ContrastPercentFormat" = "%lld%%";
+"ActionDecreaseContrastHint" = "Contrast met 1% verlagen";
+"ActionIncreaseContrastHint" = "Contrast met 1% verhogen";
+
+/* Resolution & Refresh Rate */
+"ResolutionPickerLabel" = "Resolutie";
+"RefreshRatePickerLabel" = "Verversingsfrequentie";
+"ResolutionHiDPIBadge" = "HiDPI";
+"ResolutionNativeBadge" = "Standaard";
+"ResolutionDefaultBadge" = "Standaard";
+
+/* Input Source */
+"InputSourceVGA1Label" = "VGA 1";
+"InputSourceVGA2Label" = "VGA 2";
+"InputSourceDVI1Label" = "DVI 1";
+"InputSourceDVI2Label" = "DVI 2";
+"InputSourceHDMI1Label" = "HDMI 1";
+"InputSourceHDMI2Label" = "HDMI 2";
+"InputSourceDisplayPort1Label" = "DisplayPort 1";
+"InputSourceDisplayPort2Label" = "DisplayPort 2";
+"InputSourceCompositeLabel" = "Composietvideo";
+"InputSourceUnknownLabel" = "Onbekende bron";
+
+/* Color Profile */
+"ColorProfileSectionLabel" = "Kleurprofiel";
+"ColorProfileDefaultLabel" = "Standaard";
+
+/* Display Appearance Filter */
+"DisplayFilterLabel" = "Weergavefilter";
+"DisplayFilterStandardLabel" = "Standaard";
+"DisplayFilterGrayscaleLabel" = "Grijswaarden";
+"DisplayFilterInvertLabel" = "Geïnverteerd";
+"DisplayFilterWarmthLabel" = "Warm";
+"DisplayFilterCoolLabel" = "Koel";
+
+/* Color Profile — new */
+"ColorProfileSystemDefaultLabel" = "Systeemstandaard";
+"ColorProfileBuiltinHintLabel" = "Ingebouwde beeldschermprofielen worden beheerd door macOS";
+"OpenSystemSettingsButton" = "Systeeminstellingen openen";
+
+/* Color Profile group section headers */
+"ColorProfileGroupStandardLabel" = "Standaard";
+"ColorProfileGroupModernLabel" = "Modern";
+"ColorProfileGroupCreativeLabel" = "Creatieve effecten";
+"ColorProfileGroupCalibrationLabel" = "Beeldschermkalibratie";
+"ColorProfileGroupUserLabel" = "Door gebruiker geïnstalleerd";

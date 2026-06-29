@@ -410,3 +410,69 @@
 "CompactShowMonitorTilesSubtitle" = "نمایش کنترل‌های روشنایی و خواب برای هر مانیتور در حالت فشرده.";
 "CompactSmartButtonsCompactTitle" = "اندازه فشرده دکمه‌های هوشمند";
 "CompactSmartButtonsCompactSubtitle" = "استفاده از کاشی‌های دکمه کوچکتر در حالت فشرده، مطابق با طرح‌بندی حالت پیشرفته.";
+
+/* Collapsible Section Headers */
+"SectionContrastTitle" = "کنتراست";
+"SectionPowerTitle" = "انرژی";
+"SectionImageTitle" = "تصویر";
+"SectionResolutionTitle" = "وضوح";
+"SectionInputSourceTitle" = "منبع ورودی";
+"SectionDimlyBehaviorTitle" = "رفتار Dimly";
+
+/* Night Shift */
+"NightShiftLabel" = "Night Shift";
+"NightShiftLessWarmLabel" = "گرمای کمتر";
+"NightShiftMoreWarmLabel" = "گرمای بیشتر";
+"NightShiftUnavailableNote" = "‏Night Shift روی این Mac در دسترس نیست.";
+
+/* True Tone */
+"TrueToneLabel" = "True Tone";
+
+/* Contrast */
+"ContrastSectionLabel" = "کنتراست";
+"ContrastPercentFormat" = "%lld%%";
+"ActionDecreaseContrastHint" = "کاهش کنتراست به میزان ۱٪";
+"ActionIncreaseContrastHint" = "افزایش کنتراست به میزان ۱٪";
+
+/* Resolution & Refresh Rate */
+"ResolutionPickerLabel" = "وضوح";
+"RefreshRatePickerLabel" = "نرخ نوسازی";
+"ResolutionHiDPIBadge" = "HiDPI";
+"ResolutionNativeBadge" = "بومی";
+"ResolutionDefaultBadge" = "پیش‌فرض";
+
+/* Input Source */
+"InputSourceVGA1Label" = "VGA 1";
+"InputSourceVGA2Label" = "VGA 2";
+"InputSourceDVI1Label" = "DVI 1";
+"InputSourceDVI2Label" = "DVI 2";
+"InputSourceHDMI1Label" = "HDMI 1";
+"InputSourceHDMI2Label" = "HDMI 2";
+"InputSourceDisplayPort1Label" = "DisplayPort 1";
+"InputSourceDisplayPort2Label" = "DisplayPort 2";
+"InputSourceCompositeLabel" = "ویدیوی کامپوزیت";
+"InputSourceUnknownLabel" = "منبع ناشناخته";
+
+/* Color Profile */
+"ColorProfileSectionLabel" = "نمایه رنگ";
+"ColorProfileDefaultLabel" = "پیش‌فرض";
+
+/* Display Appearance Filter */
+"DisplayFilterLabel" = "فیلتر ظاهر";
+"DisplayFilterStandardLabel" = "استاندارد";
+"DisplayFilterGrayscaleLabel" = "مقیاس خاکستری";
+"DisplayFilterInvertLabel" = "معکوس";
+"DisplayFilterWarmthLabel" = "گرم";
+"DisplayFilterCoolLabel" = "سرد";
+
+/* Color Profile — new */
+"ColorProfileSystemDefaultLabel" = "پیش‌فرض سیستم";
+"ColorProfileBuiltinHintLabel" = "نمایه‌های نمایشگر داخلی توسط macOS مدیریت می‌شوند";
+"OpenSystemSettingsButton" = "باز کردن تنظیمات سیستم";
+
+/* Color Profile group section headers */
+"ColorProfileGroupStandardLabel" = "استاندارد";
+"ColorProfileGroupModernLabel" = "مدرن";
+"ColorProfileGroupCreativeLabel" = "جلوه‌های خلاقانه";
+"ColorProfileGroupCalibrationLabel" = "کالیبراسیون نمایشگر";
+"ColorProfileGroupUserLabel" = "نصب‌شده توسط کاربر";

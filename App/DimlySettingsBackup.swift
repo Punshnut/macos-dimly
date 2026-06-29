@@ -108,6 +108,8 @@ struct GeneralSettingsPayload: Codable {
     let menuBarSimpleMode: Bool
     let menuBarQuickActionsMode: Bool?
     let fastActionsVisibilityMode: DimlySettings.FastActionsVisibilityMode?
+    let nightShiftEnabled: Bool?
+    let nightShiftStrength: Float?
 
     /// Snapshots general app preferences without monitor-specific state.
     init(from settings: DimlySettings) {
@@ -122,6 +124,8 @@ struct GeneralSettingsPayload: Codable {
         menuBarSimpleMode = settings.menuBarSimpleMode
         menuBarQuickActionsMode = settings.menuBarQuickActionsMode
         fastActionsVisibilityMode = settings.fastActionsVisibilityMode
+        nightShiftEnabled = settings.nightShiftEnabled
+        nightShiftStrength = settings.nightShiftStrength
     }
 
     /// Writes general (non-monitor-specific) settings into the target settings object.
@@ -137,6 +141,8 @@ struct GeneralSettingsPayload: Codable {
         settings.menuBarSimpleMode = menuBarSimpleMode
         settings.menuBarQuickActionsMode = menuBarQuickActionsMode ?? false
         settings.fastActionsVisibilityMode = fastActionsVisibilityMode ?? .advancedOnly
+        settings.nightShiftEnabled = nightShiftEnabled ?? false
+        settings.nightShiftStrength = nightShiftStrength ?? 0.5
     }
 }
 
@@ -155,6 +161,12 @@ struct MonitorSettingsPayload: Codable {
     let brightnessPanelExpandedDisplayIDs: [String]
     let monitorBrightnessByDisplayID: [String: Int]
     let monitorPowerStateByDisplayID: [String: PersistedMonitorPowerState]
+    let monitorContrastByDisplayID: [String: Int]
+    let monitorInputSourceByDisplayID: [String: Int]
+    let monitorDisplayModeByDisplayID: [String: Int]
+    let monitorColorProfileByDisplayID: [String: String]
+    let displayFilterByDisplayID: [String: DisplayFilter]
+    let trueToneEnabledByDisplayID: [String: Bool]
 
     private enum CodingKeys: String, CodingKey {
         case displayAliases
@@ -171,9 +183,15 @@ struct MonitorSettingsPayload: Codable {
         case brightnessPanelExpandedDisplayIDs
         case monitorBrightnessByDisplayID
         case monitorPowerStateByDisplayID
+        case monitorContrastByDisplayID
+        case monitorInputSourceByDisplayID
+        case monitorDisplayModeByDisplayID
+        case monitorColorProfileByDisplayID
+        case displayFilterByDisplayID
+        case trueToneEnabledByDisplayID
     }
 
-    /// Snapshots per-display ordering, aliases, brightness, and power intent.
+    /// Snapshots per-display ordering, aliases, brightness, power intent, and new display controls.
     init(from settings: DimlySettings) {
         displayAliases = settings.displayAliases
         overlayOnlyDisplayIDs = settings.overlayOnlyDisplayIDs
@@ -189,6 +207,12 @@ struct MonitorSettingsPayload: Codable {
         brightnessPanelExpandedDisplayIDs = settings.brightnessPanelExpandedDisplayIDs
         monitorBrightnessByDisplayID = settings.monitorBrightnessByDisplayID
         monitorPowerStateByDisplayID = settings.monitorPowerStateByDisplayID
+        monitorContrastByDisplayID = settings.monitorContrastByDisplayID
+        monitorInputSourceByDisplayID = settings.monitorInputSourceByDisplayID
+        monitorDisplayModeByDisplayID = settings.monitorDisplayModeByDisplayID
+        monitorColorProfileByDisplayID = settings.monitorColorProfileByDisplayID
+        displayFilterByDisplayID = settings.displayFilterByDisplayID
+        trueToneEnabledByDisplayID = settings.trueToneEnabledByDisplayID
     }
 
     /// Decodes monitor payloads defensively so older backups can omit newer fields.
@@ -208,6 +232,12 @@ struct MonitorSettingsPayload: Codable {
         brightnessPanelExpandedDisplayIDs = try container.decodeIfPresent([String].self, forKey: .brightnessPanelExpandedDisplayIDs) ?? []
         monitorBrightnessByDisplayID = try container.decodeIfPresent([String: Int].self, forKey: .monitorBrightnessByDisplayID) ?? [:]
         monitorPowerStateByDisplayID = try container.decodeIfPresent([String: PersistedMonitorPowerState].self, forKey: .monitorPowerStateByDisplayID) ?? [:]
+        monitorContrastByDisplayID = try container.decodeIfPresent([String: Int].self, forKey: .monitorContrastByDisplayID) ?? [:]
+        monitorInputSourceByDisplayID = try container.decodeIfPresent([String: Int].self, forKey: .monitorInputSourceByDisplayID) ?? [:]
+        monitorDisplayModeByDisplayID = try container.decodeIfPresent([String: Int].self, forKey: .monitorDisplayModeByDisplayID) ?? [:]
+        monitorColorProfileByDisplayID = try container.decodeIfPresent([String: String].self, forKey: .monitorColorProfileByDisplayID) ?? [:]
+        displayFilterByDisplayID = try container.decodeIfPresent([String: DisplayFilter].self, forKey: .displayFilterByDisplayID) ?? [:]
+        trueToneEnabledByDisplayID = try container.decodeIfPresent([String: Bool].self, forKey: .trueToneEnabledByDisplayID) ?? [:]
     }
 
     /// Encodes monitor payload while preserving forward/backward compatibility defaults.
@@ -227,6 +257,12 @@ struct MonitorSettingsPayload: Codable {
         try container.encode(brightnessPanelExpandedDisplayIDs, forKey: .brightnessPanelExpandedDisplayIDs)
         try container.encode(monitorBrightnessByDisplayID, forKey: .monitorBrightnessByDisplayID)
         try container.encode(monitorPowerStateByDisplayID, forKey: .monitorPowerStateByDisplayID)
+        try container.encode(monitorContrastByDisplayID, forKey: .monitorContrastByDisplayID)
+        try container.encode(monitorInputSourceByDisplayID, forKey: .monitorInputSourceByDisplayID)
+        try container.encode(monitorDisplayModeByDisplayID, forKey: .monitorDisplayModeByDisplayID)
+        try container.encode(monitorColorProfileByDisplayID, forKey: .monitorColorProfileByDisplayID)
+        try container.encode(displayFilterByDisplayID, forKey: .displayFilterByDisplayID)
+        try container.encode(trueToneEnabledByDisplayID, forKey: .trueToneEnabledByDisplayID)
     }
 
     /// Writes monitor-related settings into the target settings object.
@@ -245,5 +281,11 @@ struct MonitorSettingsPayload: Codable {
         settings.brightnessPanelExpandedDisplayIDs = brightnessPanelExpandedDisplayIDs
         settings.monitorBrightnessByDisplayID = monitorBrightnessByDisplayID
         settings.monitorPowerStateByDisplayID = monitorPowerStateByDisplayID
+        settings.monitorContrastByDisplayID = monitorContrastByDisplayID
+        settings.monitorInputSourceByDisplayID = monitorInputSourceByDisplayID
+        settings.monitorDisplayModeByDisplayID = monitorDisplayModeByDisplayID
+        settings.monitorColorProfileByDisplayID = monitorColorProfileByDisplayID
+        settings.displayFilterByDisplayID = displayFilterByDisplayID
+        settings.trueToneEnabledByDisplayID = trueToneEnabledByDisplayID
     }
 }

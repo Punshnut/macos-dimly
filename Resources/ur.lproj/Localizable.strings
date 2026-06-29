@@ -410,3 +410,69 @@
 "CompactShowMonitorTilesSubtitle" = "کمپیکٹ موڈ میں ہر مانیٹر کے لیے روشنی اور نیند کے کنٹرول دکھائیں۔";
 "CompactSmartButtonsCompactTitle" = "کمپیکٹ سمارٹ بٹن سائز";
 "CompactSmartButtonsCompactSubtitle" = "کمپیکٹ موڈ میں چھوٹی بٹن ٹائلز استعمال کریں، ایڈوانسڈ موڈ لے آؤٹ سے ملاتے ہوئے۔";
+
+/* Collapsible Section Headers */
+"SectionContrastTitle" = "کنٹراسٹ";
+"SectionPowerTitle" = "پاور";
+"SectionImageTitle" = "تصویر";
+"SectionResolutionTitle" = "ریزولوشن";
+"SectionInputSourceTitle" = "ان پٹ سورس";
+"SectionDimlyBehaviorTitle" = "Dimly کا رویہ";
+
+/* Night Shift */
+"NightShiftLabel" = "Night Shift";
+"NightShiftLessWarmLabel" = "کم گرم";
+"NightShiftMoreWarmLabel" = "زیادہ گرم";
+"NightShiftUnavailableNote" = "‏Night Shift اس Mac پر دستیاب نہیں ہے۔";
+
+/* True Tone */
+"TrueToneLabel" = "True Tone";
+
+/* Contrast */
+"ContrastSectionLabel" = "کنٹراسٹ";
+"ContrastPercentFormat" = "%lld%%";
+"ActionDecreaseContrastHint" = "کنٹراسٹ 1% کم کریں";
+"ActionIncreaseContrastHint" = "کنٹراسٹ 1% بڑھائیں";
+
+/* Resolution & Refresh Rate */
+"ResolutionPickerLabel" = "ریزولوشن";
+"RefreshRatePickerLabel" = "ریفریش ریٹ";
+"ResolutionHiDPIBadge" = "HiDPI";
+"ResolutionNativeBadge" = "مقامی";
+"ResolutionDefaultBadge" = "ڈیفالٹ";
+
+/* Input Source */
+"InputSourceVGA1Label" = "VGA 1";
+"InputSourceVGA2Label" = "VGA 2";
+"InputSourceDVI1Label" = "DVI 1";
+"InputSourceDVI2Label" = "DVI 2";
+"InputSourceHDMI1Label" = "HDMI 1";
+"InputSourceHDMI2Label" = "HDMI 2";
+"InputSourceDisplayPort1Label" = "DisplayPort 1";
+"InputSourceDisplayPort2Label" = "DisplayPort 2";
+"InputSourceCompositeLabel" = "کمپوزٹ ویڈیو";
+"InputSourceUnknownLabel" = "نامعلوم سورس";
+
+/* Color Profile */
+"ColorProfileSectionLabel" = "رنگ پروفائل";
+"ColorProfileDefaultLabel" = "ڈیفالٹ";
+
+/* Display Appearance Filter */
+"DisplayFilterLabel" = "ظاہری شکل کا فلٹر";
+"DisplayFilterStandardLabel" = "معیاری";
+"DisplayFilterGrayscaleLabel" = "گرے اسکیل";
+"DisplayFilterInvertLabel" = "الٹا";
+"DisplayFilterWarmthLabel" = "گرم";
+"DisplayFilterCoolLabel" = "ٹھنڈا";
+
+/* Color Profile — new */
+"ColorProfileSystemDefaultLabel" = "سسٹم ڈیفالٹ";
+"ColorProfileBuiltinHintLabel" = "بلٹ ان ڈسپلے پروفائلز کا انتظام macOS کرتا ہے";
+"OpenSystemSettingsButton" = "سسٹم سیٹنگز کھولیں";
+
+/* Color Profile group section headers */
+"ColorProfileGroupStandardLabel" = "معیاری";
+"ColorProfileGroupModernLabel" = "جدید";
+"ColorProfileGroupCreativeLabel" = "تخلیقی اثرات";
+"ColorProfileGroupCalibrationLabel" = "ڈسپلے کیلیبریشن";
+"ColorProfileGroupUserLabel" = "صارف کی جانب سے انسٹال شدہ";

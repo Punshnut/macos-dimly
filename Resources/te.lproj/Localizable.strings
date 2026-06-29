@@ -410,3 +410,69 @@
 "CompactShowMonitorTilesSubtitle" = "కాంపాక్ట్ మోడ్‌లో ప్రతి మానిటర్‌కు బ్రైట్‌నెస్ మరియు స్లీప్ నియంత్రణలను చూపించు.";
 "CompactSmartButtonsCompactTitle" = "కాంపాక్ట్ స్మార్ట్ బటన్ పరిమాణం";
 "CompactSmartButtonsCompactSubtitle" = "కాంపాక్ట్ మోడ్‌లో చిన్న బటన్ టైల్స్ ఉపయోగించండి, అడ్వాన్స్‌డ్ మోడ్ లేఅవుట్‌కు సరిపోలేలా.";
+
+/* Collapsible Section Headers */
+"SectionContrastTitle" = "కాంట్రాస్ట్";
+"SectionPowerTitle" = "పవర్";
+"SectionImageTitle" = "చిత్రం";
+"SectionResolutionTitle" = "రిజల్యూషన్";
+"SectionInputSourceTitle" = "ఇన్‌పుట్ మూలం";
+"SectionDimlyBehaviorTitle" = "Dimly ప్రవర్తన";
+
+/* Night Shift */
+"NightShiftLabel" = "Night Shift";
+"NightShiftLessWarmLabel" = "తక్కువ వెచ్చదనం";
+"NightShiftMoreWarmLabel" = "ఎక్కువ వెచ్చదనం";
+"NightShiftUnavailableNote" = "ఈ Mac‌లో Night Shift అందుబాటులో లేదు.";
+
+/* True Tone */
+"TrueToneLabel" = "True Tone";
+
+/* Contrast */
+"ContrastSectionLabel" = "కాంట్రాస్ట్";
+"ContrastPercentFormat" = "%lld%%";
+"ActionDecreaseContrastHint" = "కాంట్రాస్ట్‌ను 1% తగ్గించండి";
+"ActionIncreaseContrastHint" = "కాంట్రాస్ట్‌ను 1% పెంచండి";
+
+/* Resolution & Refresh Rate */
+"ResolutionPickerLabel" = "రిజల్యూషన్";
+"RefreshRatePickerLabel" = "రిఫ్రెష్ రేటు";
+"ResolutionHiDPIBadge" = "HiDPI";
+"ResolutionNativeBadge" = "స్థానిక";
+"ResolutionDefaultBadge" = "డిఫాల్ట్";
+
+/* Input Source */
+"InputSourceVGA1Label" = "VGA 1";
+"InputSourceVGA2Label" = "VGA 2";
+"InputSourceDVI1Label" = "DVI 1";
+"InputSourceDVI2Label" = "DVI 2";
+"InputSourceHDMI1Label" = "HDMI 1";
+"InputSourceHDMI2Label" = "HDMI 2";
+"InputSourceDisplayPort1Label" = "DisplayPort 1";
+"InputSourceDisplayPort2Label" = "DisplayPort 2";
+"InputSourceCompositeLabel" = "కాంపోజిట్ వీడియో";
+"InputSourceUnknownLabel" = "తెలియని మూలం";
+
+/* Color Profile */
+"ColorProfileSectionLabel" = "రంగు ప్రొఫైల్";
+"ColorProfileDefaultLabel" = "డిఫాల్ట్";
+
+/* Display Appearance Filter */
+"DisplayFilterLabel" = "రూపం ఫిల్టర్";
+"DisplayFilterStandardLabel" = "ప్రామాణిక";
+"DisplayFilterGrayscaleLabel" = "గ్రేస్కేల్";
+"DisplayFilterInvertLabel" = "విలోమం";
+"DisplayFilterWarmthLabel" = "వెచ్చని";
+"DisplayFilterCoolLabel" = "చల్లని";
+
+/* Color Profile — new */
+"ColorProfileSystemDefaultLabel" = "సిస్టమ్ డిఫాల్ట్";
+"ColorProfileBuiltinHintLabel" = "అంతర్నిర్మిత డిస్‌ప్లే ప్రొఫైల్‌లను macOS నిర్వహిస్తుంది";
+"OpenSystemSettingsButton" = "సిస్టమ్ సెట్టింగ్‌లను తెరవండి";
+
+/* Color Profile group section headers */
+"ColorProfileGroupStandardLabel" = "ప్రామాణిక";
+"ColorProfileGroupModernLabel" = "ఆధునిక";
+"ColorProfileGroupCreativeLabel" = "సృజనాత్మక ప్రభావాలు";
+"ColorProfileGroupCalibrationLabel" = "డిస్‌ప్లే క్యాలిబ్రేషన్";
+"ColorProfileGroupUserLabel" = "వినియోగదారు ఇన్‌స్టాల్ చేసినది";

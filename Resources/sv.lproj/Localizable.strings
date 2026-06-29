@@ -410,3 +410,69 @@
 "CompactShowMonitorTilesSubtitle" = "Visa ljusstyrke- och vilokontroller per skärm i kompakt läge.";
 "CompactSmartButtonsCompactTitle" = "Kompakt storlek på snabbknappar";
 "CompactSmartButtonsCompactSubtitle" = "Använd mindre knappar i kompakt läge, matchande layouten i avancerat läge.";
+
+/* Collapsible Section Headers */
+"SectionContrastTitle" = "Kontrast";
+"SectionPowerTitle" = "Ström";
+"SectionImageTitle" = "Bild";
+"SectionResolutionTitle" = "Upplösning";
+"SectionInputSourceTitle" = "Insignalskälla";
+"SectionDimlyBehaviorTitle" = "Dimly-beteende";
+
+/* Night Shift */
+"NightShiftLabel" = "Night Shift";
+"NightShiftLessWarmLabel" = "Mindre varm";
+"NightShiftMoreWarmLabel" = "Varmare";
+"NightShiftUnavailableNote" = "Night Shift är inte tillgängligt på den här Macen.";
+
+/* True Tone */
+"TrueToneLabel" = "True Tone";
+
+/* Contrast */
+"ContrastSectionLabel" = "Kontrast";
+"ContrastPercentFormat" = "%lld%%";
+"ActionDecreaseContrastHint" = "Minska kontrasten med 1%";
+"ActionIncreaseContrastHint" = "Öka kontrasten med 1%";
+
+/* Resolution & Refresh Rate */
+"ResolutionPickerLabel" = "Upplösning";
+"RefreshRatePickerLabel" = "Uppdateringsfrekvens";
+"ResolutionHiDPIBadge" = "HiDPI";
+"ResolutionNativeBadge" = "Inbyggd";
+"ResolutionDefaultBadge" = "Standard";
+
+/* Input Source */
+"InputSourceVGA1Label" = "VGA 1";
+"InputSourceVGA2Label" = "VGA 2";
+"InputSourceDVI1Label" = "DVI 1";
+"InputSourceDVI2Label" = "DVI 2";
+"InputSourceHDMI1Label" = "HDMI 1";
+"InputSourceHDMI2Label" = "HDMI 2";
+"InputSourceDisplayPort1Label" = "DisplayPort 1";
+"InputSourceDisplayPort2Label" = "DisplayPort 2";
+"InputSourceCompositeLabel" = "Kompositvideo";
+"InputSourceUnknownLabel" = "Okänd källa";
+
+/* Color Profile */
+"ColorProfileSectionLabel" = "Färgprofil";
+"ColorProfileDefaultLabel" = "Standard";
+
+/* Display Appearance Filter */
+"DisplayFilterLabel" = "Utseendefilter";
+"DisplayFilterStandardLabel" = "Standard";
+"DisplayFilterGrayscaleLabel" = "Gråskala";
+"DisplayFilterInvertLabel" = "Inverterad";
+"DisplayFilterWarmthLabel" = "Varm";
+"DisplayFilterCoolLabel" = "Kall";
+
+/* Color Profile — new */
+"ColorProfileSystemDefaultLabel" = "Systemstandard";
+"ColorProfileBuiltinHintLabel" = "Inbyggda skärmprofiler hanteras av macOS";
+"OpenSystemSettingsButton" = "Öppna Systeminställningar";
+
+/* Color Profile group section headers */
+"ColorProfileGroupStandardLabel" = "Standard";
+"ColorProfileGroupModernLabel" = "Modern";
+"ColorProfileGroupCreativeLabel" = "Kreativa effekter";
+"ColorProfileGroupCalibrationLabel" = "Skärmkalibrering";
+"ColorProfileGroupUserLabel" = "Installerad av användare";

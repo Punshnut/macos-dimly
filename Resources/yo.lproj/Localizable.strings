@@ -410,3 +410,69 @@
 "CompactShowMonitorTilesSubtitle" = "Ṣafihan awọn iṣakoso imọlẹ ati oorun fun atẹ kọọkan ni ipo ti o kuru.";
 "CompactSmartButtonsCompactTitle" = "Iwọn bọtini yara kekere";
 "CompactSmartButtonsCompactSubtitle" = "Lo awọn alẹmọ bọtini kekere ni ipo ti o kuru, ni ibamu pẹlu ipilẹṣẹ ipo ilọsiwaju.";
+
+/* Collapsible Section Headers */
+"SectionContrastTitle" = "Iyatọ";
+"SectionPowerTitle" = "Agbára";
+"SectionImageTitle" = "Àwòrán";
+"SectionResolutionTitle" = "Ìpinnu";
+"SectionInputSourceTitle" = "Orísun Ìfọwọ́sí";
+"SectionDimlyBehaviorTitle" = "Ìhùwàsí Dimly";
+
+/* Night Shift */
+"NightShiftLabel" = "Night Shift";
+"NightShiftLessWarmLabel" = "Ìmọ́lẹ̀ Tútù Díẹ̀";
+"NightShiftMoreWarmLabel" = "Ìmọ́lẹ̀ Gbígbóná Síi";
+"NightShiftUnavailableNote" = "Night Shift kò sí lórí Mac yìí.";
+
+/* True Tone */
+"TrueToneLabel" = "True Tone";
+
+/* Contrast */
+"ContrastSectionLabel" = "Iyatọ";
+"ContrastPercentFormat" = "%lld%%";
+"ActionDecreaseContrastHint" = "Dín iyatọ kù pẹ̀lú 1%";
+"ActionIncreaseContrastHint" = "Mú iyatọ pọ̀ sí i pẹ̀lú 1%";
+
+/* Resolution & Refresh Rate */
+"ResolutionPickerLabel" = "Ìpinnu";
+"RefreshRatePickerLabel" = "Òṣùwọ̀n Ìmúdọ̀tun";
+"ResolutionHiDPIBadge" = "HiDPI";
+"ResolutionNativeBadge" = "Àbínibí";
+"ResolutionDefaultBadge" = "Àkọ́kọ́";
+
+/* Input Source */
+"InputSourceVGA1Label" = "VGA 1";
+"InputSourceVGA2Label" = "VGA 2";
+"InputSourceDVI1Label" = "DVI 1";
+"InputSourceDVI2Label" = "DVI 2";
+"InputSourceHDMI1Label" = "HDMI 1";
+"InputSourceHDMI2Label" = "HDMI 2";
+"InputSourceDisplayPort1Label" = "DisplayPort 1";
+"InputSourceDisplayPort2Label" = "DisplayPort 2";
+"InputSourceCompositeLabel" = "Fídíò Àkójọpọ̀";
+"InputSourceUnknownLabel" = "Orísun Àìmọ̀";
+
+/* Color Profile */
+"ColorProfileSectionLabel" = "Profáìlì Àwọ̀";
+"ColorProfileDefaultLabel" = "Àkọ́kọ́";
+
+/* Display Appearance Filter */
+"DisplayFilterLabel" = "Àyẹ̀wò Ìrísí";
+"DisplayFilterStandardLabel" = "Àpẹẹrẹ";
+"DisplayFilterGrayscaleLabel" = "Àwọ̀ Eérú";
+"DisplayFilterInvertLabel" = "Yíyípadà";
+"DisplayFilterWarmthLabel" = "Gbígbóná";
+"DisplayFilterCoolLabel" = "Tútù";
+
+/* Color Profile — new */
+"ColorProfileSystemDefaultLabel" = "Àkọ́kọ́ Ètò";
+"ColorProfileBuiltinHintLabel" = "macOS ló ń ṣàkóso àwọn profáìlì ìfihàn tí a kọ́ sínú";
+"OpenSystemSettingsButton" = "Ṣí Ètò Sístẹ́mù";
+
+/* Color Profile group section headers */
+"ColorProfileGroupStandardLabel" = "Àpẹẹrẹ";
+"ColorProfileGroupModernLabel" = "Òde-òní";
+"ColorProfileGroupCreativeLabel" = "Àwọn Ipa Ìṣẹ̀dá";
+"ColorProfileGroupCalibrationLabel" = "Ìṣàtúnṣe Ìfihàn";
+"ColorProfileGroupUserLabel" = "Olùmúlò Fi Sí";

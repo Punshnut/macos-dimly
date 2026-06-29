@@ -408,3 +408,69 @@
 "CompactShowMonitorTilesSubtitle" = "Ipakita ang mga kontrol sa liwanag at tulog bawat monitor sa compact na mode.";
 "CompactSmartButtonsCompactTitle" = "Compact na laki ng smart button";
 "CompactSmartButtonsCompactSubtitle" = "Gumamit ng mas maliliit na button tile sa compact na mode, katulad ng layout ng advanced na mode.";
+
+/* Collapsible Section Headers */
+"SectionContrastTitle" = "Contrast";
+"SectionPowerTitle" = "Power";
+"SectionImageTitle" = "Larawan";
+"SectionResolutionTitle" = "Resolution";
+"SectionInputSourceTitle" = "Pinagmulan ng Input";
+"SectionDimlyBehaviorTitle" = "Pag-uugali ng Dimly";
+
+/* Night Shift */
+"NightShiftLabel" = "Night Shift";
+"NightShiftLessWarmLabel" = "Hindi Gaanong Mainit";
+"NightShiftMoreWarmLabel" = "Mas Mainit";
+"NightShiftUnavailableNote" = "Hindi available ang Night Shift sa Mac na ito.";
+
+/* True Tone */
+"TrueToneLabel" = "True Tone";
+
+/* Contrast */
+"ContrastSectionLabel" = "Contrast";
+"ContrastPercentFormat" = "%lld%%";
+"ActionDecreaseContrastHint" = "Bawasan ang contrast ng 1%";
+"ActionIncreaseContrastHint" = "Dagdagan ang contrast ng 1%";
+
+/* Resolution & Refresh Rate */
+"ResolutionPickerLabel" = "Resolution";
+"RefreshRatePickerLabel" = "Refresh Rate";
+"ResolutionHiDPIBadge" = "HiDPI";
+"ResolutionNativeBadge" = "Native";
+"ResolutionDefaultBadge" = "Default";
+
+/* Input Source */
+"InputSourceVGA1Label" = "VGA 1";
+"InputSourceVGA2Label" = "VGA 2";
+"InputSourceDVI1Label" = "DVI 1";
+"InputSourceDVI2Label" = "DVI 2";
+"InputSourceHDMI1Label" = "HDMI 1";
+"InputSourceHDMI2Label" = "HDMI 2";
+"InputSourceDisplayPort1Label" = "DisplayPort 1";
+"InputSourceDisplayPort2Label" = "DisplayPort 2";
+"InputSourceCompositeLabel" = "Composite Video";
+"InputSourceUnknownLabel" = "Hindi Kilalang Pinagmulan";
+
+/* Color Profile */
+"ColorProfileSectionLabel" = "Color Profile";
+"ColorProfileDefaultLabel" = "Default";
+
+/* Display Appearance Filter */
+"DisplayFilterLabel" = "Filter ng Hitsura";
+"DisplayFilterStandardLabel" = "Standard";
+"DisplayFilterGrayscaleLabel" = "Grayscale";
+"DisplayFilterInvertLabel" = "Inverted";
+"DisplayFilterWarmthLabel" = "Mainit";
+"DisplayFilterCoolLabel" = "Malamig";
+
+/* Color Profile — new */
+"ColorProfileSystemDefaultLabel" = "Default ng System";
+"ColorProfileBuiltinHintLabel" = "Ang mga built-in na display profile ay pinamamahalaan ng macOS";
+"OpenSystemSettingsButton" = "Buksan ang System Settings";
+
+/* Color Profile group section headers */
+"ColorProfileGroupStandardLabel" = "Standard";
+"ColorProfileGroupModernLabel" = "Modern";
+"ColorProfileGroupCreativeLabel" = "Mga Creative Effect";
+"ColorProfileGroupCalibrationLabel" = "Display Calibration";
+"ColorProfileGroupUserLabel" = "Naka-install ng User";

@@ -90,6 +90,11 @@ final class DimlyEngine: ObservableObject {
     let ddcManager: DDCManager
     let profileManager: ProfileManager
     let scheduleManager: ScheduleManager
+    let nightShiftManager: NightShiftManager
+    let trueToneManager: TrueToneManager
+    let displayModeManager: DisplayModeManager
+    let colorProfileManager: ColorProfileManager
+    let displayAppearanceManager: DisplayAppearanceManager
     var onShowWindow: (() -> Void)?
     var onToggleWindow: (() -> Void)?
 
@@ -115,6 +120,11 @@ final class DimlyEngine: ObservableObject {
             settingsStore: settingsStore
         )
         self.scheduleManager = ScheduleManager()
+        self.nightShiftManager = NightShiftManager()
+        self.trueToneManager = TrueToneManager()
+        self.displayModeManager = DisplayModeManager()
+        self.colorProfileManager = ColorProfileManager()
+        self.displayAppearanceManager = DisplayAppearanceManager()
         DiagnosticsLogger.shared.log("Engine init: managers constructed", category: "engine")
         self.launcherHotkeyManager.onHotkeyPressed = { [weak self] in
             self?.onShowWindow?()
@@ -171,6 +181,8 @@ final class DimlyEngine: ObservableObject {
                     remainingAttempts: 5,
                     initialDelayNanoseconds: self.wakeRestoreDelayNanoseconds
                 )
+                self.displayAppearanceManager.restoreAll(for: self.displayManager.displays)
+                self.trueToneManager.refresh(for: self.displayManager.displays)
             }
         }
         workspaceSessionDidResignToken = NSWorkspace.shared.notificationCenter.addObserver(
@@ -760,6 +772,58 @@ final class DimlyEngine: ObservableObject {
         persistPowerState(.visible, for: display.stableIdentity, reason: "wakeDDC")
     }
 
+    // MARK: - Display Control Facades
+
+    /// Sets DDC contrast (0...100) and persists the value.
+    func setContrast(_ percent: Int, for display: DisplayInfo) {
+        ddcManager.setContrast(percent, for: display) { [weak self] success in
+            guard success else { return }
+            self?.settingsStore.update { settings in
+                settings.monitorContrastByDisplayID[display.stableIdentity] = percent
+            }
+        }
+    }
+
+    /// Sets DDC input source and persists the value.
+    func setInputSource(_ source: DDCInputSource, for display: DisplayInfo) {
+        ddcManager.setInputSource(source, for: display) { [weak self] success in
+            guard success else { return }
+            self?.settingsStore.update { settings in
+                settings.monitorInputSourceByDisplayID[display.stableIdentity] = source.rawValue
+            }
+        }
+    }
+
+    /// Sets display resolution/refresh rate mode and persists the mode ID.
+    func setDisplayMode(_ mode: DisplayMode, for display: DisplayInfo) {
+        let succeeded = displayModeManager.setMode(mode, for: display)
+        if succeeded {
+            settingsStore.update { settings in
+                settings.monitorDisplayModeByDisplayID[display.stableIdentity] = mode.id
+            }
+        }
+    }
+
+    /// Sets an ICC color profile and persists the profile path.
+    func setColorProfile(_ profile: ColorProfile, for display: DisplayInfo) {
+        let succeeded = colorProfileManager.setProfile(profile, for: display)
+        if succeeded {
+            settingsStore.update { settings in
+                settings.monitorColorProfileByDisplayID[display.stableIdentity] = profile.id
+            }
+            // Re-apply any active gamma LUT filter after the ICC switch.
+            displayAppearanceManager.restoreAll(for: displayManager.displays)
+        }
+    }
+
+    /// Applies a display appearance filter (gamma LUT) and persists it.
+    func setDisplayFilter(_ filter: DisplayFilter, for display: DisplayInfo) {
+        displayAppearanceManager.applyFilter(filter, to: display)
+        settingsStore.update { settings in
+            settings.displayFilterByDisplayID[display.stableIdentity] = filter
+        }
+    }
+
     /// Applies explicit user intent for a display power state and persists it as the restore source of truth.
     func applyUserPowerState(_ state: PersistedMonitorPowerState, to display: DisplayInfo) {
         let settings = settingsStore.settings
@@ -1032,6 +1096,12 @@ final class DimlyEngine: ObservableObject {
                     remainingAttempts: 5,
                     initialDelayNanoseconds: self.effectiveDisplayChangeRestoreDelayNanoseconds()
                 )
+                for display in displays {
+                    self.displayModeManager.loadModes(for: display)
+                    self.colorProfileManager.loadProfiles(for: display)
+                }
+                self.trueToneManager.refresh(for: displays)
+                self.displayAppearanceManager.restoreAll(for: displays)
             }
             .store(in: &stateCancellables)
 

@@ -410,3 +410,69 @@
 "CompactShowMonitorTilesSubtitle" = "Відображати елементи керування яскравістю та сном для кожного монітора в компактному режимі.";
 "CompactSmartButtonsCompactTitle" = "Компактний розмір кнопок швидких дій";
 "CompactSmartButtonsCompactSubtitle" = "Використовувати менші плитки кнопок у компактному режимі, відповідно до макету розширеного режиму.";
+
+/* Collapsible Section Headers */
+"SectionContrastTitle" = "Контрастність";
+"SectionPowerTitle" = "Живлення";
+"SectionImageTitle" = "Зображення";
+"SectionResolutionTitle" = "Роздільна здатність";
+"SectionInputSourceTitle" = "Джерело вхідного сигналу";
+"SectionDimlyBehaviorTitle" = "Поведінка Dimly";
+
+/* Night Shift */
+"NightShiftLabel" = "Night Shift";
+"NightShiftLessWarmLabel" = "Менш тепле";
+"NightShiftMoreWarmLabel" = "Тепліше";
+"NightShiftUnavailableNote" = "Night Shift недоступний на цьому Mac.";
+
+/* True Tone */
+"TrueToneLabel" = "True Tone";
+
+/* Contrast */
+"ContrastSectionLabel" = "Контрастність";
+"ContrastPercentFormat" = "%lld%%";
+"ActionDecreaseContrastHint" = "Зменшити контрастність на 1%";
+"ActionIncreaseContrastHint" = "Збільшити контрастність на 1%";
+
+/* Resolution & Refresh Rate */
+"ResolutionPickerLabel" = "Роздільна здатність";
+"RefreshRatePickerLabel" = "Частота оновлення";
+"ResolutionHiDPIBadge" = "HiDPI";
+"ResolutionNativeBadge" = "Рідна";
+"ResolutionDefaultBadge" = "За замовчуванням";
+
+/* Input Source */
+"InputSourceVGA1Label" = "VGA 1";
+"InputSourceVGA2Label" = "VGA 2";
+"InputSourceDVI1Label" = "DVI 1";
+"InputSourceDVI2Label" = "DVI 2";
+"InputSourceHDMI1Label" = "HDMI 1";
+"InputSourceHDMI2Label" = "HDMI 2";
+"InputSourceDisplayPort1Label" = "DisplayPort 1";
+"InputSourceDisplayPort2Label" = "DisplayPort 2";
+"InputSourceCompositeLabel" = "Композитне відео";
+"InputSourceUnknownLabel" = "Невідоме джерело";
+
+/* Color Profile */
+"ColorProfileSectionLabel" = "Профіль кольору";
+"ColorProfileDefaultLabel" = "За замовчуванням";
+
+/* Display Appearance Filter */
+"DisplayFilterLabel" = "Фільтр вигляду";
+"DisplayFilterStandardLabel" = "Стандартний";
+"DisplayFilterGrayscaleLabel" = "Відтінки сірого";
+"DisplayFilterInvertLabel" = "Інвертований";
+"DisplayFilterWarmthLabel" = "Теплий";
+"DisplayFilterCoolLabel" = "Холодний";
+
+/* Color Profile — new */
+"ColorProfileSystemDefaultLabel" = "Системний за замовчуванням";
+"ColorProfileBuiltinHintLabel" = "Вбудованими профілями дисплея керує macOS";
+"OpenSystemSettingsButton" = "Відкрити Системні параметри";
+
+/* Color Profile group section headers */
+"ColorProfileGroupStandardLabel" = "Стандартний";
+"ColorProfileGroupModernLabel" = "Сучасний";
+"ColorProfileGroupCreativeLabel" = "Творчі ефекти";
+"ColorProfileGroupCalibrationLabel" = "Калібрування дисплея";
+"ColorProfileGroupUserLabel" = "Встановлено користувачем";

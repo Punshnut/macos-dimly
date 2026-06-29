@@ -397,3 +397,69 @@
 "ForgetMonitorAlertSubtitle" = "This clears the saved name, preferences, and brightness history for this monitor. Settings return to defaults when it reconnects.";
 "PreviouslySeenMonitorsSectionTitle" = "Previously Seen Monitors";
 "PreviouslySeenMonitorsSectionSubtitle" = "Dimly remembers monitors for 90 days. Forgetting a monitor removes its saved name and preferences.";
+
+/* Collapsible Section Headers */
+"SectionContrastTitle" = "Contrast";
+"SectionPowerTitle" = "Power";
+"SectionImageTitle" = "Image";
+"SectionResolutionTitle" = "Resolution";
+"SectionInputSourceTitle" = "Input Source";
+"SectionDimlyBehaviorTitle" = "Dimly Behavior";
+
+/* Night Shift */
+"NightShiftLabel" = "Night Shift";
+"NightShiftLessWarmLabel" = "Less Warm";
+"NightShiftMoreWarmLabel" = "More Warm";
+"NightShiftUnavailableNote" = "Night Shift is not available on this Mac.";
+
+/* True Tone */
+"TrueToneLabel" = "True Tone";
+
+/* Contrast */
+"ContrastSectionLabel" = "Contrast";
+"ContrastPercentFormat" = "%lld%%";
+"ActionDecreaseContrastHint" = "Decrease contrast by 1%";
+"ActionIncreaseContrastHint" = "Increase contrast by 1%";
+
+/* Resolution & Refresh Rate */
+"ResolutionPickerLabel" = "Resolution";
+"RefreshRatePickerLabel" = "Refresh Rate";
+"ResolutionHiDPIBadge" = "HiDPI";
+"ResolutionNativeBadge" = "Native";
+"ResolutionDefaultBadge" = "Default";
+
+/* Input Source */
+"InputSourceVGA1Label" = "VGA 1";
+"InputSourceVGA2Label" = "VGA 2";
+"InputSourceDVI1Label" = "DVI 1";
+"InputSourceDVI2Label" = "DVI 2";
+"InputSourceHDMI1Label" = "HDMI 1";
+"InputSourceHDMI2Label" = "HDMI 2";
+"InputSourceDisplayPort1Label" = "DisplayPort 1";
+"InputSourceDisplayPort2Label" = "DisplayPort 2";
+"InputSourceCompositeLabel" = "Composite Video";
+"InputSourceUnknownLabel" = "Unknown Source";
+
+/* Color Profile */
+"ColorProfileSectionLabel" = "Color Profile";
+"ColorProfileDefaultLabel" = "Default";
+
+/* Display Appearance Filter */
+"DisplayFilterLabel" = "Appearance Filter";
+"DisplayFilterStandardLabel" = "Standard";
+"DisplayFilterGrayscaleLabel" = "Grayscale";
+"DisplayFilterInvertLabel" = "Inverted";
+"DisplayFilterWarmthLabel" = "Warm";
+"DisplayFilterCoolLabel" = "Cool";
+
+/* Color Profile — new */
+"ColorProfileSystemDefaultLabel" = "System Default";
+"ColorProfileBuiltinHintLabel" = "Built-in display profiles are managed by macOS";
+"OpenSystemSettingsButton" = "Open System Settings";
+
+/* Color Profile group section headers */
+"ColorProfileGroupStandardLabel" = "Standard";
+"ColorProfileGroupModernLabel" = "Modern";
+"ColorProfileGroupCreativeLabel" = "Creative Effects";
+"ColorProfileGroupCalibrationLabel" = "Display Calibration";
+"ColorProfileGroupUserLabel" = "User Installed";

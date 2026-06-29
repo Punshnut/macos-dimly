@@ -410,3 +410,69 @@
 "CompactShowMonitorTilesSubtitle" = "Fényerő és alvás vezérlők megjelenítése monitoronként kompakt módban.";
 "CompactSmartButtonsCompactTitle" = "Kompakt gyorsgomb méret";
 "CompactSmartButtonsCompactSubtitle" = "Kisebb gombocsempék használata kompakt módban, a haladó mód elrendezéséhez igazítva.";
+
+/* Collapsible Section Headers */
+"SectionContrastTitle" = "Kontraszt";
+"SectionPowerTitle" = "Energia";
+"SectionImageTitle" = "Kép";
+"SectionResolutionTitle" = "Felbontás";
+"SectionInputSourceTitle" = "Bemeneti forrás";
+"SectionDimlyBehaviorTitle" = "Dimly viselkedése";
+
+/* Night Shift */
+"NightShiftLabel" = "Night Shift";
+"NightShiftLessWarmLabel" = "Kevésbé meleg";
+"NightShiftMoreWarmLabel" = "Melegebb";
+"NightShiftUnavailableNote" = "A Night Shift nem érhető el ezen a Macen.";
+
+/* True Tone */
+"TrueToneLabel" = "True Tone";
+
+/* Contrast */
+"ContrastSectionLabel" = "Kontraszt";
+"ContrastPercentFormat" = "%lld%%";
+"ActionDecreaseContrastHint" = "Kontraszt csökkentése 1%-kal";
+"ActionIncreaseContrastHint" = "Kontraszt növelése 1%-kal";
+
+/* Resolution & Refresh Rate */
+"ResolutionPickerLabel" = "Felbontás";
+"RefreshRatePickerLabel" = "Frissítési gyakoriság";
+"ResolutionHiDPIBadge" = "HiDPI";
+"ResolutionNativeBadge" = "Natív";
+"ResolutionDefaultBadge" = "Alapértelmezett";
+
+/* Input Source */
+"InputSourceVGA1Label" = "VGA 1";
+"InputSourceVGA2Label" = "VGA 2";
+"InputSourceDVI1Label" = "DVI 1";
+"InputSourceDVI2Label" = "DVI 2";
+"InputSourceHDMI1Label" = "HDMI 1";
+"InputSourceHDMI2Label" = "HDMI 2";
+"InputSourceDisplayPort1Label" = "DisplayPort 1";
+"InputSourceDisplayPort2Label" = "DisplayPort 2";
+"InputSourceCompositeLabel" = "Kompozit videó";
+"InputSourceUnknownLabel" = "Ismeretlen forrás";
+
+/* Color Profile */
+"ColorProfileSectionLabel" = "Színprofil";
+"ColorProfileDefaultLabel" = "Alapértelmezett";
+
+/* Display Appearance Filter */
+"DisplayFilterLabel" = "Megjelenési szűrő";
+"DisplayFilterStandardLabel" = "Normál";
+"DisplayFilterGrayscaleLabel" = "Szürkeárnyalatos";
+"DisplayFilterInvertLabel" = "Invertált";
+"DisplayFilterWarmthLabel" = "Meleg";
+"DisplayFilterCoolLabel" = "Hideg";
+
+/* Color Profile — new */
+"ColorProfileSystemDefaultLabel" = "Rendszer alapértelmezett";
+"ColorProfileBuiltinHintLabel" = "A beépített kijelzőprofilokat a macOS kezeli";
+"OpenSystemSettingsButton" = "Rendszerbeállítások megnyitása";
+
+/* Color Profile group section headers */
+"ColorProfileGroupStandardLabel" = "Normál";
+"ColorProfileGroupModernLabel" = "Modern";
+"ColorProfileGroupCreativeLabel" = "Kreatív effektek";
+"ColorProfileGroupCalibrationLabel" = "Kijelző kalibrálása";
+"ColorProfileGroupUserLabel" = "Felhasználó által telepített";

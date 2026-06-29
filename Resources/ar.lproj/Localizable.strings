@@ -410,3 +410,69 @@
 "CompactShowMonitorTilesSubtitle" = "عرض عناصر التحكم في السطوع والنوم لكل شاشة في الوضع المضغوط.";
 "CompactSmartButtonsCompactTitle" = "حجم أزرار الإجراءات السريعة المضغوطة";
 "CompactSmartButtonsCompactSubtitle" = "استخدام بلاطات أزرار أصغر في الوضع المضغوط، بما يتوافق مع تخطيط الوضع المتقدم.";
+
+/* Collapsible Section Headers */
+"SectionContrastTitle" = "التباين";
+"SectionPowerTitle" = "الطاقة";
+"SectionImageTitle" = "الصورة";
+"SectionResolutionTitle" = "الدقة";
+"SectionInputSourceTitle" = "مصدر الإدخال";
+"SectionDimlyBehaviorTitle" = "سلوك Dimly";
+
+/* Night Shift */
+"NightShiftLabel" = "Night Shift";
+"NightShiftLessWarmLabel" = "أقل دفئًا";
+"NightShiftMoreWarmLabel" = "أكثر دفئًا";
+"NightShiftUnavailableNote" = "‏Night Shift غير متوفر على هذا الـ Mac.";
+
+/* True Tone */
+"TrueToneLabel" = "True Tone";
+
+/* Contrast */
+"ContrastSectionLabel" = "التباين";
+"ContrastPercentFormat" = "%lld%%";
+"ActionDecreaseContrastHint" = "خفض التباين بنسبة 1%";
+"ActionIncreaseContrastHint" = "زيادة التباين بنسبة 1%";
+
+/* Resolution & Refresh Rate */
+"ResolutionPickerLabel" = "الدقة";
+"RefreshRatePickerLabel" = "معدل التحديث";
+"ResolutionHiDPIBadge" = "HiDPI";
+"ResolutionNativeBadge" = "أصلية";
+"ResolutionDefaultBadge" = "افتراضية";
+
+/* Input Source */
+"InputSourceVGA1Label" = "VGA 1";
+"InputSourceVGA2Label" = "VGA 2";
+"InputSourceDVI1Label" = "DVI 1";
+"InputSourceDVI2Label" = "DVI 2";
+"InputSourceHDMI1Label" = "HDMI 1";
+"InputSourceHDMI2Label" = "HDMI 2";
+"InputSourceDisplayPort1Label" = "DisplayPort 1";
+"InputSourceDisplayPort2Label" = "DisplayPort 2";
+"InputSourceCompositeLabel" = "فيديو مركب";
+"InputSourceUnknownLabel" = "مصدر غير معروف";
+
+/* Color Profile */
+"ColorProfileSectionLabel" = "ملف الألوان";
+"ColorProfileDefaultLabel" = "افتراضي";
+
+/* Display Appearance Filter */
+"DisplayFilterLabel" = "مرشح المظهر";
+"DisplayFilterStandardLabel" = "قياسي";
+"DisplayFilterGrayscaleLabel" = "تدرج رمادي";
+"DisplayFilterInvertLabel" = "معكوس";
+"DisplayFilterWarmthLabel" = "دافئ";
+"DisplayFilterCoolLabel" = "بارد";
+
+/* Color Profile — new */
+"ColorProfileSystemDefaultLabel" = "افتراضي النظام";
+"ColorProfileBuiltinHintLabel" = "تتم إدارة ملفات تعريف الشاشة المدمجة بواسطة macOS";
+"OpenSystemSettingsButton" = "فتح إعدادات النظام";
+
+/* Color Profile group section headers */
+"ColorProfileGroupStandardLabel" = "قياسي";
+"ColorProfileGroupModernLabel" = "حديث";
+"ColorProfileGroupCreativeLabel" = "تأثيرات إبداعية";
+"ColorProfileGroupCalibrationLabel" = "معايرة الشاشة";
+"ColorProfileGroupUserLabel" = "مثبّت بواسطة المستخدم";

@@ -410,3 +410,69 @@
 "CompactShowMonitorTilesSubtitle" = "Onyesha vidhibiti vya mwangaza na usingizi kwa kila mfuatiliaji katika hali ya kompakti.";
 "CompactSmartButtonsCompactTitle" = "Ukubwa wa kitufe cha haraka cha kompakti";
 "CompactSmartButtonsCompactSubtitle" = "Tumia vigae vidogo vya vitufe katika hali ya kompakti, kulingana na mpangilio wa hali ya juu.";
+
+/* Collapsible Section Headers */
+"SectionContrastTitle" = "Utofauti";
+"SectionPowerTitle" = "Nishati";
+"SectionImageTitle" = "Picha";
+"SectionResolutionTitle" = "Mwonekano";
+"SectionInputSourceTitle" = "Chanzo cha Ingizo";
+"SectionDimlyBehaviorTitle" = "Tabia ya Dimly";
+
+/* Night Shift */
+"NightShiftLabel" = "Night Shift";
+"NightShiftLessWarmLabel" = "Joto Kidogo";
+"NightShiftMoreWarmLabel" = "Joto Zaidi";
+"NightShiftUnavailableNote" = "Night Shift haipatikani kwenye Mac hii.";
+
+/* True Tone */
+"TrueToneLabel" = "True Tone";
+
+/* Contrast */
+"ContrastSectionLabel" = "Utofauti";
+"ContrastPercentFormat" = "%lld%%";
+"ActionDecreaseContrastHint" = "Punguza utofauti kwa 1%";
+"ActionIncreaseContrastHint" = "Ongeza utofauti kwa 1%";
+
+/* Resolution & Refresh Rate */
+"ResolutionPickerLabel" = "Mwonekano";
+"RefreshRatePickerLabel" = "Kasi ya Kuonyesha Upya";
+"ResolutionHiDPIBadge" = "HiDPI";
+"ResolutionNativeBadge" = "Asilia";
+"ResolutionDefaultBadge" = "Chaguo-msingi";
+
+/* Input Source */
+"InputSourceVGA1Label" = "VGA 1";
+"InputSourceVGA2Label" = "VGA 2";
+"InputSourceDVI1Label" = "DVI 1";
+"InputSourceDVI2Label" = "DVI 2";
+"InputSourceHDMI1Label" = "HDMI 1";
+"InputSourceHDMI2Label" = "HDMI 2";
+"InputSourceDisplayPort1Label" = "DisplayPort 1";
+"InputSourceDisplayPort2Label" = "DisplayPort 2";
+"InputSourceCompositeLabel" = "Video ya Mchanganyiko";
+"InputSourceUnknownLabel" = "Chanzo Kisichojulikana";
+
+/* Color Profile */
+"ColorProfileSectionLabel" = "Wasifu wa Rangi";
+"ColorProfileDefaultLabel" = "Chaguo-msingi";
+
+/* Display Appearance Filter */
+"DisplayFilterLabel" = "Kichujio cha Mwonekano";
+"DisplayFilterStandardLabel" = "Kawaida";
+"DisplayFilterGrayscaleLabel" = "Kijivu";
+"DisplayFilterInvertLabel" = "Iliyogeuzwa";
+"DisplayFilterWarmthLabel" = "Joto";
+"DisplayFilterCoolLabel" = "Baridi";
+
+/* Color Profile — new */
+"ColorProfileSystemDefaultLabel" = "Chaguo-msingi la Mfumo";
+"ColorProfileBuiltinHintLabel" = "Wasifu wa onyesho uliojengwa ndani unasimamiwa na macOS";
+"OpenSystemSettingsButton" = "Fungua Mipangilio ya Mfumo";
+
+/* Color Profile group section headers */
+"ColorProfileGroupStandardLabel" = "Kawaida";
+"ColorProfileGroupModernLabel" = "Kisasa";
+"ColorProfileGroupCreativeLabel" = "Athari za Ubunifu";
+"ColorProfileGroupCalibrationLabel" = "Urekebishaji wa Onyesho";
+"ColorProfileGroupUserLabel" = "Imesakinishwa na Mtumiaji";

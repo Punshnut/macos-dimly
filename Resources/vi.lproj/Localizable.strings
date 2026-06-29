@@ -410,3 +410,69 @@
 "CompactShowMonitorTilesSubtitle" = "Hiển thị các điều khiển độ sáng và ngủ cho từng màn hình trong chế độ thu gọn.";
 "CompactSmartButtonsCompactTitle" = "Kích thước nút nhanh gọn";
 "CompactSmartButtonsCompactSubtitle" = "Sử dụng các ô nút nhỏ hơn trong chế độ thu gọn, phù hợp với bố cục chế độ nâng cao.";
+
+/* Collapsible Section Headers */
+"SectionContrastTitle" = "Độ tương phản";
+"SectionPowerTitle" = "Nguồn";
+"SectionImageTitle" = "Hình ảnh";
+"SectionResolutionTitle" = "Độ phân giải";
+"SectionInputSourceTitle" = "Nguồn đầu vào";
+"SectionDimlyBehaviorTitle" = "Hành vi Dimly";
+
+/* Night Shift */
+"NightShiftLabel" = "Night Shift";
+"NightShiftLessWarmLabel" = "Ít ấm hơn";
+"NightShiftMoreWarmLabel" = "Ấm hơn";
+"NightShiftUnavailableNote" = "Night Shift không khả dụng trên máy Mac này.";
+
+/* True Tone */
+"TrueToneLabel" = "True Tone";
+
+/* Contrast */
+"ContrastSectionLabel" = "Độ tương phản";
+"ContrastPercentFormat" = "%lld%%";
+"ActionDecreaseContrastHint" = "Giảm độ tương phản 1%";
+"ActionIncreaseContrastHint" = "Tăng độ tương phản 1%";
+
+/* Resolution & Refresh Rate */
+"ResolutionPickerLabel" = "Độ phân giải";
+"RefreshRatePickerLabel" = "Tần số làm mới";
+"ResolutionHiDPIBadge" = "HiDPI";
+"ResolutionNativeBadge" = "Gốc";
+"ResolutionDefaultBadge" = "Mặc định";
+
+/* Input Source */
+"InputSourceVGA1Label" = "VGA 1";
+"InputSourceVGA2Label" = "VGA 2";
+"InputSourceDVI1Label" = "DVI 1";
+"InputSourceDVI2Label" = "DVI 2";
+"InputSourceHDMI1Label" = "HDMI 1";
+"InputSourceHDMI2Label" = "HDMI 2";
+"InputSourceDisplayPort1Label" = "DisplayPort 1";
+"InputSourceDisplayPort2Label" = "DisplayPort 2";
+"InputSourceCompositeLabel" = "Video tổng hợp";
+"InputSourceUnknownLabel" = "Nguồn không xác định";
+
+/* Color Profile */
+"ColorProfileSectionLabel" = "Cấu hình màu";
+"ColorProfileDefaultLabel" = "Mặc định";
+
+/* Display Appearance Filter */
+"DisplayFilterLabel" = "Bộ lọc giao diện";
+"DisplayFilterStandardLabel" = "Tiêu chuẩn";
+"DisplayFilterGrayscaleLabel" = "Thang độ xám";
+"DisplayFilterInvertLabel" = "Đảo ngược";
+"DisplayFilterWarmthLabel" = "Ấm";
+"DisplayFilterCoolLabel" = "Lạnh";
+
+/* Color Profile — new */
+"ColorProfileSystemDefaultLabel" = "Mặc định hệ thống";
+"ColorProfileBuiltinHintLabel" = "Cấu hình màn hình tích hợp được quản lý bởi macOS";
+"OpenSystemSettingsButton" = "Mở Cài đặt hệ thống";
+
+/* Color Profile group section headers */
+"ColorProfileGroupStandardLabel" = "Tiêu chuẩn";
+"ColorProfileGroupModernLabel" = "Hiện đại";
+"ColorProfileGroupCreativeLabel" = "Hiệu ứng sáng tạo";
+"ColorProfileGroupCalibrationLabel" = "Hiệu chỉnh màn hình";
+"ColorProfileGroupUserLabel" = "Người dùng cài đặt";

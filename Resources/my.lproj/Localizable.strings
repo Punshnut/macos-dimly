@@ -410,3 +410,69 @@
 "CompactShowMonitorTilesSubtitle" = "ကျစ်လစ်သော မုဒ်တွင် မော်နီတာတစ်ခုချင်းစီအတွက် အလင်းရောင်နှင့် အိပ်ခြင်း ထိန်းချုပ်မှုများ ပြသပါ။";
 "CompactSmartButtonsCompactTitle" = "ကျစ်လစ်သော စမတ်ခလုတ် အရွယ်အစား";
 "CompactSmartButtonsCompactSubtitle" = "ကျစ်လစ်သော မုဒ်တွင် သေးငယ်သော ခလုတ် ကြွေးများ သုံးပါ၊ အဆင့်မြင့် မုဒ် ပုံစံနှင့် ကိုက်ညီစေရန်။";
+
+/* Collapsible Section Headers */
+"SectionContrastTitle" = "ကွဲပြားမှု";
+"SectionPowerTitle" = "ပါဝါ";
+"SectionImageTitle" = "ပုံ";
+"SectionResolutionTitle" = "ကြည်လင်ပြတ်သားမှု";
+"SectionInputSourceTitle" = "ထည့်သွင်းရင်းမြစ်";
+"SectionDimlyBehaviorTitle" = "Dimly အပြုအမူ";
+
+/* Night Shift */
+"NightShiftLabel" = "Night Shift";
+"NightShiftLessWarmLabel" = "နွေးထွေးမှု နည်းသည်";
+"NightShiftMoreWarmLabel" = "ပိုနွေးထွေးသည်";
+"NightShiftUnavailableNote" = "ဤ Mac တွင် Night Shift မရရှိနိုင်ပါ။";
+
+/* True Tone */
+"TrueToneLabel" = "True Tone";
+
+/* Contrast */
+"ContrastSectionLabel" = "ကွဲပြားမှု";
+"ContrastPercentFormat" = "%lld%%";
+"ActionDecreaseContrastHint" = "ကွဲပြားမှုကို ၁% လျှော့ပါ";
+"ActionIncreaseContrastHint" = "ကွဲပြားမှုကို ၁% တိုးပါ";
+
+/* Resolution & Refresh Rate */
+"ResolutionPickerLabel" = "ကြည်လင်ပြတ်သားမှု";
+"RefreshRatePickerLabel" = "ပြန်လည်ဆန်းသစ်နှုန်း";
+"ResolutionHiDPIBadge" = "HiDPI";
+"ResolutionNativeBadge" = "မူရင်း";
+"ResolutionDefaultBadge" = "ပုံသေ";
+
+/* Input Source */
+"InputSourceVGA1Label" = "VGA 1";
+"InputSourceVGA2Label" = "VGA 2";
+"InputSourceDVI1Label" = "DVI 1";
+"InputSourceDVI2Label" = "DVI 2";
+"InputSourceHDMI1Label" = "HDMI 1";
+"InputSourceHDMI2Label" = "HDMI 2";
+"InputSourceDisplayPort1Label" = "DisplayPort 1";
+"InputSourceDisplayPort2Label" = "DisplayPort 2";
+"InputSourceCompositeLabel" = "ကွန်ပိုစစ်ဗီဒီယို";
+"InputSourceUnknownLabel" = "မသိသောရင်းမြစ်";
+
+/* Color Profile */
+"ColorProfileSectionLabel" = "အရောင်ပရိုဖိုင်";
+"ColorProfileDefaultLabel" = "ပုံသေ";
+
+/* Display Appearance Filter */
+"DisplayFilterLabel" = "အသွင်အပြင်စစ်ထုတ်ကိရိယာ";
+"DisplayFilterStandardLabel" = "စံ";
+"DisplayFilterGrayscaleLabel" = "မီးခိုးရောင်စကေး";
+"DisplayFilterInvertLabel" = "ပြောင်းပြန်";
+"DisplayFilterWarmthLabel" = "နွေးထွေး";
+"DisplayFilterCoolLabel" = "အေးမြ";
+
+/* Color Profile — new */
+"ColorProfileSystemDefaultLabel" = "စနစ်ပုံသေ";
+"ColorProfileBuiltinHintLabel" = "တပ်ဆင်ပြီးသား ဖန်သားပြင်ပရိုဖိုင်များကို macOS မှ စီမံခန့်ခွဲသည်";
+"OpenSystemSettingsButton" = "စနစ်ဆက်တင်များ ဖွင့်ပါ";
+
+/* Color Profile group section headers */
+"ColorProfileGroupStandardLabel" = "စံ";
+"ColorProfileGroupModernLabel" = "ခေတ်မီ";
+"ColorProfileGroupCreativeLabel" = "ဖန်တီးမှုအာနိသင်များ";
+"ColorProfileGroupCalibrationLabel" = "ဖန်သားပြင်ချိန်ညှိခြင်း";
+"ColorProfileGroupUserLabel" = "အသုံးပြုသူ တပ်ဆင်ထားသည်";

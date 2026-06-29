@@ -410,3 +410,69 @@
 "CompactShowMonitorTilesSubtitle" = "Tampilkan kontrol kecerahan dan tidur per monitor dalam mode kompak.";
 "CompactSmartButtonsCompactTitle" = "Ukuran tombol cepat kompak";
 "CompactSmartButtonsCompactSubtitle" = "Gunakan ubin tombol yang lebih kecil dalam mode kompak, sesuai dengan tata letak mode lanjutan.";
+
+/* Collapsible Section Headers */
+"SectionContrastTitle" = "Kontras";
+"SectionPowerTitle" = "Daya";
+"SectionImageTitle" = "Gambar";
+"SectionResolutionTitle" = "Resolusi";
+"SectionInputSourceTitle" = "Sumber Masukan";
+"SectionDimlyBehaviorTitle" = "Perilaku Dimly";
+
+/* Night Shift */
+"NightShiftLabel" = "Night Shift";
+"NightShiftLessWarmLabel" = "Kurang Hangat";
+"NightShiftMoreWarmLabel" = "Lebih Hangat";
+"NightShiftUnavailableNote" = "Night Shift tidak tersedia di Mac ini.";
+
+/* True Tone */
+"TrueToneLabel" = "True Tone";
+
+/* Contrast */
+"ContrastSectionLabel" = "Kontras";
+"ContrastPercentFormat" = "%lld%%";
+"ActionDecreaseContrastHint" = "Kurangi kontras sebesar 1%";
+"ActionIncreaseContrastHint" = "Tambah kontras sebesar 1%";
+
+/* Resolution & Refresh Rate */
+"ResolutionPickerLabel" = "Resolusi";
+"RefreshRatePickerLabel" = "Laju Penyegaran";
+"ResolutionHiDPIBadge" = "HiDPI";
+"ResolutionNativeBadge" = "Asli";
+"ResolutionDefaultBadge" = "Bawaan";
+
+/* Input Source */
+"InputSourceVGA1Label" = "VGA 1";
+"InputSourceVGA2Label" = "VGA 2";
+"InputSourceDVI1Label" = "DVI 1";
+"InputSourceDVI2Label" = "DVI 2";
+"InputSourceHDMI1Label" = "HDMI 1";
+"InputSourceHDMI2Label" = "HDMI 2";
+"InputSourceDisplayPort1Label" = "DisplayPort 1";
+"InputSourceDisplayPort2Label" = "DisplayPort 2";
+"InputSourceCompositeLabel" = "Video Komposit";
+"InputSourceUnknownLabel" = "Sumber Tidak Diketahui";
+
+/* Color Profile */
+"ColorProfileSectionLabel" = "Profil Warna";
+"ColorProfileDefaultLabel" = "Bawaan";
+
+/* Display Appearance Filter */
+"DisplayFilterLabel" = "Filter Tampilan";
+"DisplayFilterStandardLabel" = "Standar";
+"DisplayFilterGrayscaleLabel" = "Skala Abu-abu";
+"DisplayFilterInvertLabel" = "Terbalik";
+"DisplayFilterWarmthLabel" = "Hangat";
+"DisplayFilterCoolLabel" = "Sejuk";
+
+/* Color Profile — new */
+"ColorProfileSystemDefaultLabel" = "Bawaan Sistem";
+"ColorProfileBuiltinHintLabel" = "Profil layar bawaan dikelola oleh macOS";
+"OpenSystemSettingsButton" = "Buka Pengaturan Sistem";
+
+/* Color Profile group section headers */
+"ColorProfileGroupStandardLabel" = "Standar";
+"ColorProfileGroupModernLabel" = "Modern";
+"ColorProfileGroupCreativeLabel" = "Efek Kreatif";
+"ColorProfileGroupCalibrationLabel" = "Kalibrasi Layar";
+"ColorProfileGroupUserLabel" = "Dipasang Pengguna";

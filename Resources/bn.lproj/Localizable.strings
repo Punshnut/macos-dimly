@@ -410,3 +410,69 @@
 "CompactShowMonitorTilesSubtitle" = "কমপ্যাক্ট মোডে প্রতি-মনিটর উজ্জ্বলতা এবং স্লিপ নিয়ন্ত্রণ প্রদর্শন করুন।";
 "CompactSmartButtonsCompactTitle" = "কমপ্যাক্ট স্মার্ট বাটন সাইজ";
 "CompactSmartButtonsCompactSubtitle" = "কমপ্যাক্ট মোডে ছোট বাটন টাইল ব্যবহার করুন, অ্যাডভান্সড মোড লেআউটের সাথে মিলিয়ে।";
+
+/* Collapsible Section Headers */
+"SectionContrastTitle" = "কনট্রাস্ট";
+"SectionPowerTitle" = "পাওয়ার";
+"SectionImageTitle" = "ছবি";
+"SectionResolutionTitle" = "রেজোলিউশন";
+"SectionInputSourceTitle" = "ইনপুট উৎস";
+"SectionDimlyBehaviorTitle" = "Dimly আচরণ";
+
+/* Night Shift */
+"NightShiftLabel" = "Night Shift";
+"NightShiftLessWarmLabel" = "কম উষ্ণ";
+"NightShiftMoreWarmLabel" = "বেশি উষ্ণ";
+"NightShiftUnavailableNote" = "এই Mac-এ Night Shift উপলব্ধ নয়।";
+
+/* True Tone */
+"TrueToneLabel" = "True Tone";
+
+/* Contrast */
+"ContrastSectionLabel" = "কনট্রাস্ট";
+"ContrastPercentFormat" = "%lld%%";
+"ActionDecreaseContrastHint" = "কনট্রাস্ট ১% কমান";
+"ActionIncreaseContrastHint" = "কনট্রাস্ট ১% বাড়ান";
+
+/* Resolution & Refresh Rate */
+"ResolutionPickerLabel" = "রেজোলিউশন";
+"RefreshRatePickerLabel" = "রিফ্রেশ রেট";
+"ResolutionHiDPIBadge" = "HiDPI";
+"ResolutionNativeBadge" = "নেটিভ";
+"ResolutionDefaultBadge" = "ডিফল্ট";
+
+/* Input Source */
+"InputSourceVGA1Label" = "VGA 1";
+"InputSourceVGA2Label" = "VGA 2";
+"InputSourceDVI1Label" = "DVI 1";
+"InputSourceDVI2Label" = "DVI 2";
+"InputSourceHDMI1Label" = "HDMI 1";
+"InputSourceHDMI2Label" = "HDMI 2";
+"InputSourceDisplayPort1Label" = "DisplayPort 1";
+"InputSourceDisplayPort2Label" = "DisplayPort 2";
+"InputSourceCompositeLabel" = "কম্পোজিট ভিডিও";
+"InputSourceUnknownLabel" = "অজানা উৎস";
+
+/* Color Profile */
+"ColorProfileSectionLabel" = "রঙের প্রোফাইল";
+"ColorProfileDefaultLabel" = "ডিফল্ট";
+
+/* Display Appearance Filter */
+"DisplayFilterLabel" = "চেহারা ফিল্টার";
+"DisplayFilterStandardLabel" = "স্ট্যান্ডার্ড";
+"DisplayFilterGrayscaleLabel" = "গ্রেস্কেল";
+"DisplayFilterInvertLabel" = "উল্টানো";
+"DisplayFilterWarmthLabel" = "উষ্ণ";
+"DisplayFilterCoolLabel" = "শীতল";
+
+/* Color Profile — new */
+"ColorProfileSystemDefaultLabel" = "সিস্টেম ডিফল্ট";
+"ColorProfileBuiltinHintLabel" = "বিল্ট-ইন ডিসপ্লে প্রোফাইলগুলি macOS দ্বারা পরিচালিত হয়";
+"OpenSystemSettingsButton" = "সিস্টেম সেটিংস খুলুন";
+
+/* Color Profile group section headers */
+"ColorProfileGroupStandardLabel" = "স্ট্যান্ডার্ড";
+"ColorProfileGroupModernLabel" = "আধুনিক";
+"ColorProfileGroupCreativeLabel" = "সৃজনশীল প্রভাব";
+"ColorProfileGroupCalibrationLabel" = "ডিসপ্লে ক্যালিব্রেশন";
+"ColorProfileGroupUserLabel" = "ব্যবহারকারী ইনস্টল করেছেন";

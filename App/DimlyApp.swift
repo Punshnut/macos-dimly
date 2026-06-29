@@ -79,6 +79,8 @@ struct DimlyApp: App {
                 ddcManager: engine.ddcManager,
                 profileManager: engine.profileManager,
                 engine: engine,
+                nightShiftManager: engine.nightShiftManager,
+                trueToneManager: engine.trueToneManager,
                 updaterController: appDelegate.updaterController,
                 presentation: .menuBar
             )
@@ -96,7 +98,12 @@ struct DimlyApp: App {
                 ddcManager: engine.ddcManager,
                 blackoutManager: engine.blackoutManager,
                 engine: engine,
-                scheduleManager: engine.scheduleManager
+                scheduleManager: engine.scheduleManager,
+                nightShiftManager: engine.nightShiftManager,
+                trueToneManager: engine.trueToneManager,
+                displayModeManager: engine.displayModeManager,
+                colorProfileManager: engine.colorProfileManager,
+                displayAppearanceManager: engine.displayAppearanceManager
             )
         }
     }
@@ -290,7 +297,12 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
                 ddcManager: settingsEngine.ddcManager,
                 blackoutManager: settingsEngine.blackoutManager,
                 engine: settingsEngine,
-                scheduleManager: settingsEngine.scheduleManager
+                scheduleManager: settingsEngine.scheduleManager,
+                nightShiftManager: settingsEngine.nightShiftManager,
+                trueToneManager: settingsEngine.trueToneManager,
+                displayModeManager: settingsEngine.displayModeManager,
+                colorProfileManager: settingsEngine.colorProfileManager,
+                displayAppearanceManager: settingsEngine.displayAppearanceManager
             )
             let hostingView = NSHostingView(rootView: rootView)
             let window = NSWindow(

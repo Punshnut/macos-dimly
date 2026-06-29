@@ -410,3 +410,69 @@
 "CompactShowMonitorTilesSubtitle" = "கம்பாக்ட் முறையில் ஒவ்வொரு மானிட்டருக்கும் பிரகாசம் மற்றும் தூக்க கட்டுப்பாடுகளை காட்டு.";
 "CompactSmartButtonsCompactTitle" = "கம்பாக்ட் ஸ்மார்ட் பட்டன் அளவு";
 "CompactSmartButtonsCompactSubtitle" = "கம்பாக்ட் முறையில் சிறிய பட்டன் டைல்களை பயன்படுத்தவும், மேம்பட்ட முறை தளவமைப்புடன் பொருத்தமாக.";
+
+/* Collapsible Section Headers */
+"SectionContrastTitle" = "வேறுபாடு";
+"SectionPowerTitle" = "மின்சக்தி";
+"SectionImageTitle" = "படம்";
+"SectionResolutionTitle" = "தெளிவுத்திறன்";
+"SectionInputSourceTitle" = "உள்ளீட்டு மூலம்";
+"SectionDimlyBehaviorTitle" = "Dimly நடத்தை";
+
+/* Night Shift */
+"NightShiftLabel" = "Night Shift";
+"NightShiftLessWarmLabel" = "குறைந்த வெப்பம்";
+"NightShiftMoreWarmLabel" = "அதிக வெப்பம்";
+"NightShiftUnavailableNote" = "இந்த Mac-இல் Night Shift கிடைக்கவில்லை.";
+
+/* True Tone */
+"TrueToneLabel" = "True Tone";
+
+/* Contrast */
+"ContrastSectionLabel" = "வேறுபாடு";
+"ContrastPercentFormat" = "%lld%%";
+"ActionDecreaseContrastHint" = "வேறுபாட்டை 1% குறைக்கவும்";
+"ActionIncreaseContrastHint" = "வேறுபாட்டை 1% அதிகரிக்கவும்";
+
+/* Resolution & Refresh Rate */
+"ResolutionPickerLabel" = "தெளிவுத்திறன்";
+"RefreshRatePickerLabel" = "புதுப்பிப்பு விகிதம்";
+"ResolutionHiDPIBadge" = "HiDPI";
+"ResolutionNativeBadge" = "இயல்பான";
+"ResolutionDefaultBadge" = "இயல்புநிலை";
+
+/* Input Source */
+"InputSourceVGA1Label" = "VGA 1";
+"InputSourceVGA2Label" = "VGA 2";
+"InputSourceDVI1Label" = "DVI 1";
+"InputSourceDVI2Label" = "DVI 2";
+"InputSourceHDMI1Label" = "HDMI 1";
+"InputSourceHDMI2Label" = "HDMI 2";
+"InputSourceDisplayPort1Label" = "DisplayPort 1";
+"InputSourceDisplayPort2Label" = "DisplayPort 2";
+"InputSourceCompositeLabel" = "கலப்பு வீடியோ";
+"InputSourceUnknownLabel" = "அறியப்படாத மூலம்";
+
+/* Color Profile */
+"ColorProfileSectionLabel" = "வண்ண சுயவிவரம்";
+"ColorProfileDefaultLabel" = "இயல்புநிலை";
+
+/* Display Appearance Filter */
+"DisplayFilterLabel" = "தோற்ற வடிப்பான்";
+"DisplayFilterStandardLabel" = "நிலையான";
+"DisplayFilterGrayscaleLabel" = "சாம்பல் அளவுகோல்";
+"DisplayFilterInvertLabel" = "தலைகீழ்";
+"DisplayFilterWarmthLabel" = "வெப்பமான";
+"DisplayFilterCoolLabel" = "குளிர்ந்த";
+
+/* Color Profile — new */
+"ColorProfileSystemDefaultLabel" = "கணினி இயல்புநிலை";
+"ColorProfileBuiltinHintLabel" = "உள்ளமைந்த காட்சி சுயவிவரங்கள் macOS ஆல் நிர்வகிக்கப்படுகின்றன";
+"OpenSystemSettingsButton" = "கணினி அமைப்புகளைத் திற";
+
+/* Color Profile group section headers */
+"ColorProfileGroupStandardLabel" = "நிலையான";
+"ColorProfileGroupModernLabel" = "நவீன";
+"ColorProfileGroupCreativeLabel" = "படைப்பு விளைவுகள்";
+"ColorProfileGroupCalibrationLabel" = "காட்சி அளவீடு";
+"ColorProfileGroupUserLabel" = "பயனர் நிறுவியது";

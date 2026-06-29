@@ -410,3 +410,69 @@
 "CompactShowMonitorTilesSubtitle" = "Näytä kirkkauden ja lepotilan hallintalaitteet näyttökohtaisesti kompaktissa tilassa.";
 "CompactSmartButtonsCompactTitle" = "Kompakti pikapainikkeiden koko";
 "CompactSmartButtonsCompactSubtitle" = "Käytä pienempiä painikeruutuja kompaktissa tilassa, vastaten edistyneen tilan asettelua.";
+
+/* Collapsible Section Headers */
+"SectionContrastTitle" = "Kontrasti";
+"SectionPowerTitle" = "Virta";
+"SectionImageTitle" = "Kuva";
+"SectionResolutionTitle" = "Tarkkuus";
+"SectionInputSourceTitle" = "Tulolähde";
+"SectionDimlyBehaviorTitle" = "Dimlyn toiminta";
+
+/* Night Shift */
+"NightShiftLabel" = "Night Shift";
+"NightShiftLessWarmLabel" = "Vähemmän lämmin";
+"NightShiftMoreWarmLabel" = "Lämpimämpi";
+"NightShiftUnavailableNote" = "Night Shift ei ole käytettävissä tässä Macissa.";
+
+/* True Tone */
+"TrueToneLabel" = "True Tone";
+
+/* Contrast */
+"ContrastSectionLabel" = "Kontrasti";
+"ContrastPercentFormat" = "%lld%%";
+"ActionDecreaseContrastHint" = "Vähennä kontrastia 1%";
+"ActionIncreaseContrastHint" = "Lisää kontrastia 1%";
+
+/* Resolution & Refresh Rate */
+"ResolutionPickerLabel" = "Tarkkuus";
+"RefreshRatePickerLabel" = "Virkistystaajuus";
+"ResolutionHiDPIBadge" = "HiDPI";
+"ResolutionNativeBadge" = "Natiivi";
+"ResolutionDefaultBadge" = "Oletus";
+
+/* Input Source */
+"InputSourceVGA1Label" = "VGA 1";
+"InputSourceVGA2Label" = "VGA 2";
+"InputSourceDVI1Label" = "DVI 1";
+"InputSourceDVI2Label" = "DVI 2";
+"InputSourceHDMI1Label" = "HDMI 1";
+"InputSourceHDMI2Label" = "HDMI 2";
+"InputSourceDisplayPort1Label" = "DisplayPort 1";
+"InputSourceDisplayPort2Label" = "DisplayPort 2";
+"InputSourceCompositeLabel" = "Komposiittivideo";
+"InputSourceUnknownLabel" = "Tuntematon lähde";
+
+/* Color Profile */
+"ColorProfileSectionLabel" = "Väriprofiili";
+"ColorProfileDefaultLabel" = "Oletus";
+
+/* Display Appearance Filter */
+"DisplayFilterLabel" = "Ulkoasusuodatin";
+"DisplayFilterStandardLabel" = "Vakio";
+"DisplayFilterGrayscaleLabel" = "Harmaasävy";
+"DisplayFilterInvertLabel" = "Käänteinen";
+"DisplayFilterWarmthLabel" = "Lämmin";
+"DisplayFilterCoolLabel" = "Viileä";
+
+/* Color Profile — new */
+"ColorProfileSystemDefaultLabel" = "Järjestelmän oletus";
+"ColorProfileBuiltinHintLabel" = "macOS hallinnoi sisäänrakennettuja näyttöprofiileja";
+"OpenSystemSettingsButton" = "Avaa Järjestelmäasetukset";
+
+/* Color Profile group section headers */
+"ColorProfileGroupStandardLabel" = "Vakio";
+"ColorProfileGroupModernLabel" = "Moderni";
+"ColorProfileGroupCreativeLabel" = "Luovat tehosteet";
+"ColorProfileGroupCalibrationLabel" = "Näytön kalibrointi";
+"ColorProfileGroupUserLabel" = "Käyttäjän asentama";

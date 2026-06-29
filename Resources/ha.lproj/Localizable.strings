@@ -410,3 +410,69 @@
 "CompactShowMonitorTilesSubtitle" = "Nuna sarrafa haske da barci a kowane kallo a yanayin taƙaitaccen.";
 "CompactSmartButtonsCompactTitle" = "Ƙananan girman maɓallin sauri";
 "CompactSmartButtonsCompactSubtitle" = "Yi amfani da ƙananan faifan maɓalli a yanayin taƙaitaccen, kamar tsarin yanayin ci gaba.";
+
+/* Collapsible Section Headers */
+"SectionContrastTitle" = "Bambanci";
+"SectionPowerTitle" = "Wuta";
+"SectionImageTitle" = "Hoto";
+"SectionResolutionTitle" = "Ƙuduri";
+"SectionInputSourceTitle" = "Tushen Shigarwa";
+"SectionDimlyBehaviorTitle" = "Halayyar Dimly";
+
+/* Night Shift */
+"NightShiftLabel" = "Night Shift";
+"NightShiftLessWarmLabel" = "Ƙarancin Ɗumi";
+"NightShiftMoreWarmLabel" = "Ƙarin Ɗumi";
+"NightShiftUnavailableNote" = "Night Shift ba ya samuwa a wannan Mac.";
+
+/* True Tone */
+"TrueToneLabel" = "True Tone";
+
+/* Contrast */
+"ContrastSectionLabel" = "Bambanci";
+"ContrastPercentFormat" = "%lld%%";
+"ActionDecreaseContrastHint" = "Rage bambanci da 1%";
+"ActionIncreaseContrastHint" = "Ƙara bambanci da 1%";
+
+/* Resolution & Refresh Rate */
+"ResolutionPickerLabel" = "Ƙuduri";
+"RefreshRatePickerLabel" = "Ƙimar Sabuntawa";
+"ResolutionHiDPIBadge" = "HiDPI";
+"ResolutionNativeBadge" = "Na asali";
+"ResolutionDefaultBadge" = "Tsoho";
+
+/* Input Source */
+"InputSourceVGA1Label" = "VGA 1";
+"InputSourceVGA2Label" = "VGA 2";
+"InputSourceDVI1Label" = "DVI 1";
+"InputSourceDVI2Label" = "DVI 2";
+"InputSourceHDMI1Label" = "HDMI 1";
+"InputSourceHDMI2Label" = "HDMI 2";
+"InputSourceDisplayPort1Label" = "DisplayPort 1";
+"InputSourceDisplayPort2Label" = "DisplayPort 2";
+"InputSourceCompositeLabel" = "Bidiyon Hadewa";
+"InputSourceUnknownLabel" = "Tushen da ba a sani ba";
+
+/* Color Profile */
+"ColorProfileSectionLabel" = "Bayanin Launi";
+"ColorProfileDefaultLabel" = "Tsoho";
+
+/* Display Appearance Filter */
+"DisplayFilterLabel" = "Tace Bayyani";
+"DisplayFilterStandardLabel" = "Daidaitacce";
+"DisplayFilterGrayscaleLabel" = "Ma'aunin Toka";
+"DisplayFilterInvertLabel" = "Juyawa";
+"DisplayFilterWarmthLabel" = "Ɗumi";
+"DisplayFilterCoolLabel" = "Sanyi";
+
+/* Color Profile — new */
+"ColorProfileSystemDefaultLabel" = "Tsoho na Tsarin";
+"ColorProfileBuiltinHintLabel" = "macOS na sarrafa bayanan nuni na ciki";
+"OpenSystemSettingsButton" = "Buɗe Saitunan Tsarin";
+
+/* Color Profile group section headers */
+"ColorProfileGroupStandardLabel" = "Daidaitacce";
+"ColorProfileGroupModernLabel" = "Na zamani";
+"ColorProfileGroupCreativeLabel" = "Tasirin Ƙirƙira";
+"ColorProfileGroupCalibrationLabel" = "Daidaita Nuni";
+"ColorProfileGroupUserLabel" = "Mai amfani ya girka";

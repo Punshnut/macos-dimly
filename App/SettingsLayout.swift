@@ -225,6 +225,76 @@ struct SettingsToggleRow: View {
     }
 }
 
+/// Reusable tinted slider container matching Dimly's brightness slider style.
+struct DimlySliderContainer<Content: View>: View {
+    let tint: Color
+    @ViewBuilder let content: () -> Content
+
+    var body: some View {
+        content()
+            .padding(8)
+            .background(
+                RoundedRectangle(cornerRadius: 8, style: .continuous)
+                    .fill(tint.opacity(0.09))
+            )
+            .overlay(
+                RoundedRectangle(cornerRadius: 8, style: .continuous)
+                    .stroke(tint.opacity(0.28), lineWidth: 1)
+            )
+    }
+}
+
+/// A collapsible settings section for per-display controls.
+/// Chevron rotates 90° on expand; content fades and scales in.
+struct DisplaySettingsSection<Content: View>: View {
+    let title: String
+    let systemImage: String
+    let tint: Color
+    @Binding var isExpanded: Bool
+    @ViewBuilder let content: () -> Content
+
+    @Environment(\.accessibilityReduceMotion) private var reduceMotion
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: 0) {
+            Button {
+                withAnimation(reduceMotion ? nil : DimlyMotion.standardSpring) {
+                    isExpanded.toggle()
+                }
+            } label: {
+                HStack(spacing: 8) {
+                    Image(systemName: systemImage)
+                        .font(.caption.weight(.semibold))
+                        .foregroundStyle(tint)
+                        .frame(width: 14)
+                    Text(title)
+                        .font(.caption.weight(.semibold))
+                        .foregroundStyle(tint)
+                    Spacer()
+                    Image(systemName: "chevron.right")
+                        .font(.caption2.weight(.semibold))
+                        .foregroundStyle(.secondary)
+                        .rotationEffect(.degrees(isExpanded ? 90 : 0))
+                        .animation(reduceMotion ? nil : DimlyMotion.quickSpring, value: isExpanded)
+                }
+                .padding(.vertical, 6)
+                .contentShape(Rectangle())
+            }
+            .buttonStyle(.plain)
+
+            if isExpanded {
+                content()
+                    .padding(.top, 8)
+                    .transition(
+                        reduceMotion
+                            ? .opacity
+                            : .opacity.combined(with: .scale(scale: 0.97, anchor: .top))
+                    )
+            }
+        }
+    }
+}
+
 struct SettingsWindowToolbarHider: ViewModifier {
     /// Injects a placeholder toolbar item so AppKit keeps the unified toolbar area stable.
     func body(content: Content) -> some View {

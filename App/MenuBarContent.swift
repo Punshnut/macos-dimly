@@ -29,6 +29,8 @@ struct MenuBarContentView: View {
     @ObservedObject var ddcManager: DDCManager
     @ObservedObject var profileManager: ProfileManager
     @ObservedObject var engine: DimlyEngine
+    @ObservedObject var nightShiftManager: NightShiftManager
+    @ObservedObject var trueToneManager: TrueToneManager
     let updaterController: UpdaterController
     let presentation: Presentation
     @State private var modifierClickMonitor: Any?
@@ -2068,6 +2070,53 @@ struct MenuBarContentView: View {
                         .frame(width: 18, height: 18)
                 }
                 .help(String(localized: "ActionIncreaseBrightnessHint"))
+            }
+
+            let showNightShift = nightShiftManager.isAvailable
+            let showTrueTone = trueToneManager.isTrueToneAvailable(for: display)
+            if showNightShift || showTrueTone {
+                HStack(spacing: 6) {
+                    if showNightShift {
+                        Button {
+                            nightShiftManager.setEnabled(!nightShiftManager.isEnabled)
+                        } label: {
+                            HStack(spacing: 4) {
+                                Image(systemName: "moon.stars.fill")
+                                    .font(.caption.weight(.semibold))
+                                Text(String(localized: "NightShiftLabel"))
+                                    .font(.caption2.weight(.semibold))
+                            }
+                            .padding(.horizontal, 8)
+                            .padding(.vertical, 4)
+                            .background(
+                                Capsule().fill(nightShiftManager.isEnabled ? Color.orange.opacity(0.18) : neutralChromeFill)
+                            )
+                            .foregroundStyle(nightShiftManager.isEnabled ? Color.orange : neutralSecondaryText)
+                        }
+                        .buttonStyle(FluentPressButtonStyle(pressedScale: 0.93, pressedOpacity: 0.88))
+                    }
+                    if showTrueTone {
+                        let ttEnabled = trueToneManager.isTrueToneEnabled(for: display)
+                        Button {
+                            trueToneManager.setTrueTone(!ttEnabled, for: display)
+                        } label: {
+                            HStack(spacing: 4) {
+                                Image(systemName: "circle.lefthalf.filled.righthalf.striped.horizontal")
+                                    .font(.caption.weight(.semibold))
+                                Text(String(localized: "TrueToneLabel"))
+                                    .font(.caption2.weight(.semibold))
+                            }
+                            .padding(.horizontal, 8)
+                            .padding(.vertical, 4)
+                            .background(
+                                Capsule().fill(ttEnabled ? Color.blue.opacity(0.18) : neutralChromeFill)
+                            )
+                            .foregroundStyle(ttEnabled ? Color.blue : neutralSecondaryText)
+                        }
+                        .buttonStyle(FluentPressButtonStyle(pressedScale: 0.93, pressedOpacity: 0.88))
+                    }
+                    Spacer()
+                }
             }
         }
         .padding(8)

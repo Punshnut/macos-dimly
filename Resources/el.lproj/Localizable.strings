@@ -410,3 +410,69 @@
 "CompactShowMonitorTilesSubtitle" = "Εμφάνιση στοιχείων ελέγχου φωτεινότητας και αδράνειας ανά οθόνη σε συμπαγή λειτουργία.";
 "CompactSmartButtonsCompactTitle" = "Συμπαγές μέγεθος έξυπνων κουμπιών";
 "CompactSmartButtonsCompactSubtitle" = "Χρήση μικρότερων πλακιδίων κουμπιών σε συμπαγή λειτουργία, αντίστοιχα με τη διάταξη προχωρημένης λειτουργίας.";
+
+/* Collapsible Section Headers */
+"SectionContrastTitle" = "Αντίθεση";
+"SectionPowerTitle" = "Ενέργεια";
+"SectionImageTitle" = "Εικόνα";
+"SectionResolutionTitle" = "Ανάλυση";
+"SectionInputSourceTitle" = "Πηγή εισόδου";
+"SectionDimlyBehaviorTitle" = "Συμπεριφορά Dimly";
+
+/* Night Shift */
+"NightShiftLabel" = "Night Shift";
+"NightShiftLessWarmLabel" = "Λιγότερο θερμό";
+"NightShiftMoreWarmLabel" = "Πιο θερμό";
+"NightShiftUnavailableNote" = "Το Night Shift δεν είναι διαθέσιμο σε αυτό το Mac.";
+
+/* True Tone */
+"TrueToneLabel" = "True Tone";
+
+/* Contrast */
+"ContrastSectionLabel" = "Αντίθεση";
+"ContrastPercentFormat" = "%lld%%";
+"ActionDecreaseContrastHint" = "Μείωση αντίθεσης κατά 1%";
+"ActionIncreaseContrastHint" = "Αύξηση αντίθεσης κατά 1%";
+
+/* Resolution & Refresh Rate */
+"ResolutionPickerLabel" = "Ανάλυση";
+"RefreshRatePickerLabel" = "Ρυθμός ανανέωσης";
+"ResolutionHiDPIBadge" = "HiDPI";
+"ResolutionNativeBadge" = "Εγγενής";
+"ResolutionDefaultBadge" = "Προεπιλογή";
+
+/* Input Source */
+"InputSourceVGA1Label" = "VGA 1";
+"InputSourceVGA2Label" = "VGA 2";
+"InputSourceDVI1Label" = "DVI 1";
+"InputSourceDVI2Label" = "DVI 2";
+"InputSourceHDMI1Label" = "HDMI 1";
+"InputSourceHDMI2Label" = "HDMI 2";
+"InputSourceDisplayPort1Label" = "DisplayPort 1";
+"InputSourceDisplayPort2Label" = "DisplayPort 2";
+"InputSourceCompositeLabel" = "Σύνθετο βίντεο";
+"InputSourceUnknownLabel" = "Άγνωστη πηγή";
+
+/* Color Profile */
+"ColorProfileSectionLabel" = "Προφίλ χρώματος";
+"ColorProfileDefaultLabel" = "Προεπιλογή";
+
+/* Display Appearance Filter */
+"DisplayFilterLabel" = "Φίλτρο εμφάνισης";
+"DisplayFilterStandardLabel" = "Τυπικό";
+"DisplayFilterGrayscaleLabel" = "Κλίμακα του γκρι";
+"DisplayFilterInvertLabel" = "Αντεστραμμένο";
+"DisplayFilterWarmthLabel" = "Θερμό";
+"DisplayFilterCoolLabel" = "Ψυχρό";
+
+/* Color Profile — new */
+"ColorProfileSystemDefaultLabel" = "Προεπιλογή συστήματος";
+"ColorProfileBuiltinHintLabel" = "Τα ενσωματωμένα προφίλ οθόνης διαχειρίζονται από το macOS";
+"OpenSystemSettingsButton" = "Άνοιγμα Ρυθμίσεων συστήματος";
+
+/* Color Profile group section headers */
+"ColorProfileGroupStandardLabel" = "Τυπικό";
+"ColorProfileGroupModernLabel" = "Σύγχρονο";
+"ColorProfileGroupCreativeLabel" = "Δημιουργικά εφέ";
+"ColorProfileGroupCalibrationLabel" = "Βαθμονόμηση οθόνης";
+"ColorProfileGroupUserLabel" = "Εγκατεστημένο από χρήστη";

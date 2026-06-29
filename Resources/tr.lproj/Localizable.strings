@@ -410,3 +410,69 @@
 "CompactShowMonitorTilesSubtitle" = "Kompakt modda her monitör için parlaklık ve uyku kontrollerini göster.";
 "CompactSmartButtonsCompactTitle" = "Kompakt hızlı düğme boyutu";
 "CompactSmartButtonsCompactSubtitle" = "Kompakt modda daha küçük düğme kartları kullan, gelişmiş mod düzenine uygun olarak.";
+
+/* Collapsible Section Headers */
+"SectionContrastTitle" = "Kontrast";
+"SectionPowerTitle" = "Güç";
+"SectionImageTitle" = "Görüntü";
+"SectionResolutionTitle" = "Çözünürlük";
+"SectionInputSourceTitle" = "Giriş Kaynağı";
+"SectionDimlyBehaviorTitle" = "Dimly Davranışı";
+
+/* Night Shift */
+"NightShiftLabel" = "Night Shift";
+"NightShiftLessWarmLabel" = "Daha Az Sıcak";
+"NightShiftMoreWarmLabel" = "Daha Sıcak";
+"NightShiftUnavailableNote" = "Night Shift bu Mac'te kullanılamıyor.";
+
+/* True Tone */
+"TrueToneLabel" = "True Tone";
+
+/* Contrast */
+"ContrastSectionLabel" = "Kontrast";
+"ContrastPercentFormat" = "%lld%%";
+"ActionDecreaseContrastHint" = "Kontrastı %1 azalt";
+"ActionIncreaseContrastHint" = "Kontrastı %1 artır";
+
+/* Resolution & Refresh Rate */
+"ResolutionPickerLabel" = "Çözünürlük";
+"RefreshRatePickerLabel" = "Yenileme Hızı";
+"ResolutionHiDPIBadge" = "HiDPI";
+"ResolutionNativeBadge" = "Yerel";
+"ResolutionDefaultBadge" = "Varsayılan";
+
+/* Input Source */
+"InputSourceVGA1Label" = "VGA 1";
+"InputSourceVGA2Label" = "VGA 2";
+"InputSourceDVI1Label" = "DVI 1";
+"InputSourceDVI2Label" = "DVI 2";
+"InputSourceHDMI1Label" = "HDMI 1";
+"InputSourceHDMI2Label" = "HDMI 2";
+"InputSourceDisplayPort1Label" = "DisplayPort 1";
+"InputSourceDisplayPort2Label" = "DisplayPort 2";
+"InputSourceCompositeLabel" = "Kompozit Video";
+"InputSourceUnknownLabel" = "Bilinmeyen Kaynak";
+
+/* Color Profile */
+"ColorProfileSectionLabel" = "Renk Profili";
+"ColorProfileDefaultLabel" = "Varsayılan";
+
+/* Display Appearance Filter */
+"DisplayFilterLabel" = "Görünüm Filtresi";
+"DisplayFilterStandardLabel" = "Standart";
+"DisplayFilterGrayscaleLabel" = "Gri Tonlama";
+"DisplayFilterInvertLabel" = "Ters Çevrilmiş";
+"DisplayFilterWarmthLabel" = "Sıcak";
+"DisplayFilterCoolLabel" = "Soğuk";
+
+/* Color Profile — new */
+"ColorProfileSystemDefaultLabel" = "Sistem Varsayılanı";
+"ColorProfileBuiltinHintLabel" = "Yerleşik ekran profilleri macOS tarafından yönetilir";
+"OpenSystemSettingsButton" = "Sistem Ayarları'nı Aç";
+
+/* Color Profile group section headers */
+"ColorProfileGroupStandardLabel" = "Standart";
+"ColorProfileGroupModernLabel" = "Modern";
+"ColorProfileGroupCreativeLabel" = "Yaratıcı Efektler";
+"ColorProfileGroupCalibrationLabel" = "Ekran Kalibrasyonu";
+"ColorProfileGroupUserLabel" = "Kullanıcı Tarafından Yüklendi";

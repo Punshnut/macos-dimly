@@ -410,3 +410,69 @@
 "CompactShowMonitorTilesSubtitle" = "在紧凑模式下显示每台显示器的亮度和睡眠控制。";
 "CompactSmartButtonsCompactTitle" = "紧凑型快捷按钮大小";
 "CompactSmartButtonsCompactSubtitle" = "在紧凑模式下使用更小的按钮磁贴，与高级模式布局保持一致。";
+
+/* Collapsible Section Headers */
+"SectionContrastTitle" = "对比度";
+"SectionPowerTitle" = "电源";
+"SectionImageTitle" = "图像";
+"SectionResolutionTitle" = "分辨率";
+"SectionInputSourceTitle" = "输入源";
+"SectionDimlyBehaviorTitle" = "Dimly 行为";
+
+/* Night Shift */
+"NightShiftLabel" = "Night Shift";
+"NightShiftLessWarmLabel" = "降低暖色";
+"NightShiftMoreWarmLabel" = "增加暖色";
+"NightShiftUnavailableNote" = "此 Mac 不支持 Night Shift。";
+
+/* True Tone */
+"TrueToneLabel" = "True Tone";
+
+/* Contrast */
+"ContrastSectionLabel" = "对比度";
+"ContrastPercentFormat" = "%lld%%";
+"ActionDecreaseContrastHint" = "降低对比度 1%";
+"ActionIncreaseContrastHint" = "提高对比度 1%";
+
+/* Resolution & Refresh Rate */
+"ResolutionPickerLabel" = "分辨率";
+"RefreshRatePickerLabel" = "刷新率";
+"ResolutionHiDPIBadge" = "HiDPI";
+"ResolutionNativeBadge" = "原生";
+"ResolutionDefaultBadge" = "默认";
+
+/* Input Source */
+"InputSourceVGA1Label" = "VGA 1";
+"InputSourceVGA2Label" = "VGA 2";
+"InputSourceDVI1Label" = "DVI 1";
+"InputSourceDVI2Label" = "DVI 2";
+"InputSourceHDMI1Label" = "HDMI 1";
+"InputSourceHDMI2Label" = "HDMI 2";
+"InputSourceDisplayPort1Label" = "DisplayPort 1";
+"InputSourceDisplayPort2Label" = "DisplayPort 2";
+"InputSourceCompositeLabel" = "复合视频";
+"InputSourceUnknownLabel" = "未知来源";
+
+/* Color Profile */
+"ColorProfileSectionLabel" = "颜色配置文件";
+"ColorProfileDefaultLabel" = "默认";
+
+/* Display Appearance Filter */
+"DisplayFilterLabel" = "外观滤镜";
+"DisplayFilterStandardLabel" = "标准";
+"DisplayFilterGrayscaleLabel" = "灰度";
+"DisplayFilterInvertLabel" = "反转";
+"DisplayFilterWarmthLabel" = "暖色";
+"DisplayFilterCoolLabel" = "冷色";
+
+/* Color Profile — new */
+"ColorProfileSystemDefaultLabel" = "系统默认";
+"ColorProfileBuiltinHintLabel" = "内置显示器配置文件由 macOS 管理";
+"OpenSystemSettingsButton" = "打开系统设置";
+
+/* Color Profile group section headers */
+"ColorProfileGroupStandardLabel" = "标准";
+"ColorProfileGroupModernLabel" = "现代";
+"ColorProfileGroupCreativeLabel" = "创意效果";
+"ColorProfileGroupCalibrationLabel" = "显示器校准";
+"ColorProfileGroupUserLabel" = "用户安装";

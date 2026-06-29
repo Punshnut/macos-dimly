@@ -410,3 +410,69 @@
 "CompactShowMonitorTilesSubtitle" = "Taispeáin rialuithe gile agus codlata in aghaidh gach monatóra sa mód dlúth.";
 "CompactSmartButtonsCompactTitle" = "Méid dlúth na gcnaipí tapa";
 "CompactSmartButtonsCompactSubtitle" = "Úsáid tíleanna cnaipí níos lú sa mód dlúth, ag meaitseáil leagan amach an mhóid ardleibhéil.";
+
+/* Collapsible Section Headers */
+"SectionContrastTitle" = "Codarsnacht";
+"SectionPowerTitle" = "Cumhacht";
+"SectionImageTitle" = "Íomhá";
+"SectionResolutionTitle" = "Taifeach";
+"SectionInputSourceTitle" = "Foinse ionchuir";
+"SectionDimlyBehaviorTitle" = "Iompar Dimly";
+
+/* Night Shift */
+"NightShiftLabel" = "Night Shift";
+"NightShiftLessWarmLabel" = "Níos lú teasa";
+"NightShiftMoreWarmLabel" = "Níos mó teasa";
+"NightShiftUnavailableNote" = "Níl Night Shift ar fáil ar an Mac seo.";
+
+/* True Tone */
+"TrueToneLabel" = "True Tone";
+
+/* Contrast */
+"ContrastSectionLabel" = "Codarsnacht";
+"ContrastPercentFormat" = "%lld%%";
+"ActionDecreaseContrastHint" = "Laghdaigh codarsnacht faoi 1%";
+"ActionIncreaseContrastHint" = "Méadaigh codarsnacht faoi 1%";
+
+/* Resolution & Refresh Rate */
+"ResolutionPickerLabel" = "Taifeach";
+"RefreshRatePickerLabel" = "Ráta athnuachana";
+"ResolutionHiDPIBadge" = "HiDPI";
+"ResolutionNativeBadge" = "Dúchasach";
+"ResolutionDefaultBadge" = "Réamhshocrú";
+
+/* Input Source */
+"InputSourceVGA1Label" = "VGA 1";
+"InputSourceVGA2Label" = "VGA 2";
+"InputSourceDVI1Label" = "DVI 1";
+"InputSourceDVI2Label" = "DVI 2";
+"InputSourceHDMI1Label" = "HDMI 1";
+"InputSourceHDMI2Label" = "HDMI 2";
+"InputSourceDisplayPort1Label" = "DisplayPort 1";
+"InputSourceDisplayPort2Label" = "DisplayPort 2";
+"InputSourceCompositeLabel" = "Físeán ilchodach";
+"InputSourceUnknownLabel" = "Foinse anaithnid";
+
+/* Color Profile */
+"ColorProfileSectionLabel" = "Próifíl dathanna";
+"ColorProfileDefaultLabel" = "Réamhshocrú";
+
+/* Display Appearance Filter */
+"DisplayFilterLabel" = "Scagaire cuma";
+"DisplayFilterStandardLabel" = "Caighdeánach";
+"DisplayFilterGrayscaleLabel" = "Liathscála";
+"DisplayFilterInvertLabel" = "Inbhéartaithe";
+"DisplayFilterWarmthLabel" = "Te";
+"DisplayFilterCoolLabel" = "Fionnuar";
+
+/* Color Profile — new */
+"ColorProfileSystemDefaultLabel" = "Réamhshocrú an chórais";
+"ColorProfileBuiltinHintLabel" = "Bainistíonn macOS na próifílí taispeána ionsuite";
+"OpenSystemSettingsButton" = "Oscail Socruithe an Chórais";
+
+/* Color Profile group section headers */
+"ColorProfileGroupStandardLabel" = "Caighdeánach";
+"ColorProfileGroupModernLabel" = "Nua-aimseartha";
+"ColorProfileGroupCreativeLabel" = "Maisíochtaí cruthaitheacha";
+"ColorProfileGroupCalibrationLabel" = "Calabrú taispeána";
+"ColorProfileGroupUserLabel" = "Suiteáilte ag an úsáideoir";

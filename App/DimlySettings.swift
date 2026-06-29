@@ -88,6 +88,15 @@ struct DimlySettings: Codable, Equatable {
     var monitorBrightnessByDisplayID: [String: Int]
     var monitorPowerStateByDisplayID: [String: PersistedMonitorPowerState]
     var monitorLastSeenAtByDisplayID: [String: Date]
+    var monitorContrastByDisplayID: [String: Int]
+    var monitorInputSourceByDisplayID: [String: Int]
+    var monitorDisplayModeByDisplayID: [String: Int]
+    var monitorColorProfileByDisplayID: [String: String]
+    var displayFilterByDisplayID: [String: DisplayFilter]
+    var nightShiftEnabled: Bool
+    var nightShiftStrength: Float
+    var trueToneEnabledByDisplayID: [String: Bool]
+    var displaySectionExpandedStates: [String: Bool]
 
     private enum CodingKeys: String, CodingKey {
         case launchAtLogin
@@ -124,6 +133,15 @@ struct DimlySettings: Codable, Equatable {
         case monitorBrightnessByDisplayID
         case monitorPowerStateByDisplayID
         case monitorLastSeenAtByDisplayID
+        case monitorContrastByDisplayID
+        case monitorInputSourceByDisplayID
+        case monitorDisplayModeByDisplayID
+        case monitorColorProfileByDisplayID
+        case displayFilterByDisplayID
+        case nightShiftEnabled
+        case nightShiftStrength
+        case trueToneEnabledByDisplayID
+        case displaySectionExpandedStates
     }
 
     var menuBarLayoutMode: MenuBarLayoutMode {
@@ -178,7 +196,16 @@ struct DimlySettings: Codable, Equatable {
         profileRestoresTileLayout: true,
         monitorBrightnessByDisplayID: [:],
         monitorPowerStateByDisplayID: [:],
-        monitorLastSeenAtByDisplayID: [:]
+        monitorLastSeenAtByDisplayID: [:],
+        monitorContrastByDisplayID: [:],
+        monitorInputSourceByDisplayID: [:],
+        monitorDisplayModeByDisplayID: [:],
+        monitorColorProfileByDisplayID: [:],
+        displayFilterByDisplayID: [:],
+        nightShiftEnabled: false,
+        nightShiftStrength: 0.5,
+        trueToneEnabledByDisplayID: [:],
+        displaySectionExpandedStates: [:]
     )
 
     /// Memberwise initializer used by the default factory and decoder.
@@ -214,7 +241,16 @@ struct DimlySettings: Codable, Equatable {
         profileRestoresTileLayout: Bool,
         monitorBrightnessByDisplayID: [String: Int],
         monitorPowerStateByDisplayID: [String: PersistedMonitorPowerState],
-        monitorLastSeenAtByDisplayID: [String: Date]
+        monitorLastSeenAtByDisplayID: [String: Date],
+        monitorContrastByDisplayID: [String: Int],
+        monitorInputSourceByDisplayID: [String: Int],
+        monitorDisplayModeByDisplayID: [String: Int],
+        monitorColorProfileByDisplayID: [String: String],
+        displayFilterByDisplayID: [String: DisplayFilter],
+        nightShiftEnabled: Bool,
+        nightShiftStrength: Float,
+        trueToneEnabledByDisplayID: [String: Bool],
+        displaySectionExpandedStates: [String: Bool]
     ) {
         self.launchAtLogin = launchAtLogin
         self.showMenuBarIcon = showMenuBarIcon
@@ -248,6 +284,15 @@ struct DimlySettings: Codable, Equatable {
         self.monitorBrightnessByDisplayID = monitorBrightnessByDisplayID
         self.monitorPowerStateByDisplayID = monitorPowerStateByDisplayID
         self.monitorLastSeenAtByDisplayID = monitorLastSeenAtByDisplayID
+        self.monitorContrastByDisplayID = monitorContrastByDisplayID
+        self.monitorInputSourceByDisplayID = monitorInputSourceByDisplayID
+        self.monitorDisplayModeByDisplayID = monitorDisplayModeByDisplayID
+        self.monitorColorProfileByDisplayID = monitorColorProfileByDisplayID
+        self.displayFilterByDisplayID = displayFilterByDisplayID
+        self.nightShiftEnabled = nightShiftEnabled
+        self.nightShiftStrength = nightShiftStrength
+        self.trueToneEnabledByDisplayID = trueToneEnabledByDisplayID
+        self.displaySectionExpandedStates = displaySectionExpandedStates
     }
 
     /// Custom decoder that also handles legacy single-hotkey migration.
@@ -292,6 +337,15 @@ struct DimlySettings: Codable, Equatable {
         let monitorBrightnessByDisplayID = try container.decodeIfPresent([String: Int].self, forKey: .monitorBrightnessByDisplayID) ?? DimlySettings.default.monitorBrightnessByDisplayID
         let monitorPowerStateByDisplayID = try container.decodeIfPresent([String: PersistedMonitorPowerState].self, forKey: .monitorPowerStateByDisplayID) ?? DimlySettings.default.monitorPowerStateByDisplayID
         let monitorLastSeenAtByDisplayID = try container.decodeIfPresent([String: Date].self, forKey: .monitorLastSeenAtByDisplayID) ?? DimlySettings.default.monitorLastSeenAtByDisplayID
+        let monitorContrastByDisplayID = try container.decodeIfPresent([String: Int].self, forKey: .monitorContrastByDisplayID) ?? [:]
+        let monitorInputSourceByDisplayID = try container.decodeIfPresent([String: Int].self, forKey: .monitorInputSourceByDisplayID) ?? [:]
+        let monitorDisplayModeByDisplayID = try container.decodeIfPresent([String: Int].self, forKey: .monitorDisplayModeByDisplayID) ?? [:]
+        let monitorColorProfileByDisplayID = try container.decodeIfPresent([String: String].self, forKey: .monitorColorProfileByDisplayID) ?? [:]
+        let displayFilterByDisplayID = try container.decodeIfPresent([String: DisplayFilter].self, forKey: .displayFilterByDisplayID) ?? [:]
+        let nightShiftEnabled = try container.decodeIfPresent(Bool.self, forKey: .nightShiftEnabled) ?? false
+        let nightShiftStrength = try container.decodeIfPresent(Float.self, forKey: .nightShiftStrength) ?? 0.5
+        let trueToneEnabledByDisplayID = try container.decodeIfPresent([String: Bool].self, forKey: .trueToneEnabledByDisplayID) ?? [:]
+        let displaySectionExpandedStates = try container.decodeIfPresent([String: Bool].self, forKey: .displaySectionExpandedStates) ?? [:]
         var resolvedBindings: [HotkeyBinding]
         if let hotkeyBindings, !hotkeyBindings.isEmpty {
             resolvedBindings = hotkeyBindings
@@ -344,7 +398,16 @@ struct DimlySettings: Codable, Equatable {
             profileRestoresTileLayout: profileRestoresTileLayout,
             monitorBrightnessByDisplayID: monitorBrightnessByDisplayID,
             monitorPowerStateByDisplayID: monitorPowerStateByDisplayID,
-            monitorLastSeenAtByDisplayID: monitorLastSeenAtByDisplayID
+            monitorLastSeenAtByDisplayID: monitorLastSeenAtByDisplayID,
+            monitorContrastByDisplayID: monitorContrastByDisplayID,
+            monitorInputSourceByDisplayID: monitorInputSourceByDisplayID,
+            monitorDisplayModeByDisplayID: monitorDisplayModeByDisplayID,
+            monitorColorProfileByDisplayID: monitorColorProfileByDisplayID,
+            displayFilterByDisplayID: displayFilterByDisplayID,
+            nightShiftEnabled: nightShiftEnabled,
+            nightShiftStrength: nightShiftStrength,
+            trueToneEnabledByDisplayID: trueToneEnabledByDisplayID,
+            displaySectionExpandedStates: displaySectionExpandedStates
         )
     }
 
@@ -384,6 +447,15 @@ struct DimlySettings: Codable, Equatable {
         try container.encode(monitorBrightnessByDisplayID, forKey: .monitorBrightnessByDisplayID)
         try container.encode(monitorPowerStateByDisplayID, forKey: .monitorPowerStateByDisplayID)
         try container.encode(monitorLastSeenAtByDisplayID, forKey: .monitorLastSeenAtByDisplayID)
+        try container.encode(monitorContrastByDisplayID, forKey: .monitorContrastByDisplayID)
+        try container.encode(monitorInputSourceByDisplayID, forKey: .monitorInputSourceByDisplayID)
+        try container.encode(monitorDisplayModeByDisplayID, forKey: .monitorDisplayModeByDisplayID)
+        try container.encode(monitorColorProfileByDisplayID, forKey: .monitorColorProfileByDisplayID)
+        try container.encode(displayFilterByDisplayID, forKey: .displayFilterByDisplayID)
+        try container.encode(nightShiftEnabled, forKey: .nightShiftEnabled)
+        try container.encode(nightShiftStrength, forKey: .nightShiftStrength)
+        try container.encode(trueToneEnabledByDisplayID, forKey: .trueToneEnabledByDisplayID)
+        try container.encode(displaySectionExpandedStates, forKey: .displaySectionExpandedStates)
     }
 
     /// Clamps smart-button row limits to the supported range.
@@ -437,6 +509,33 @@ extension DimlySettings.FastActionsVisibilityMode {
             return String(localized: "QuickActionsVisibilityAdvancedOnlyLabel")
         case .showEverywhere:
             return String(localized: "QuickActionsVisibilityAlwaysShowLabel")
+        }
+    }
+}
+
+/// Per-display gamma-table appearance filter.
+enum DisplayFilter: String, CaseIterable, Identifiable, Codable {
+    case standard
+    /// Legacy case — kept for Codable backward-compat with persisted settings only.
+    /// Not shown in UI; `applyFilter(.grayscale)` is treated as `.standard`.
+    /// Use Color Profile → "Black & White" for actual grayscale on external displays.
+    case grayscale
+    case invert
+    case warmth
+    case cool
+
+    var id: String { rawValue }
+
+    /// Filters shown in the UI picker — excludes the legacy grayscale case.
+    static var displayable: [DisplayFilter] { [.standard, .invert, .warmth, .cool] }
+
+    var localizedName: String {
+        switch self {
+        case .standard:  return String(localized: "DisplayFilterStandardLabel")
+        case .grayscale: return String(localized: "DisplayFilterGrayscaleLabel")
+        case .invert:    return String(localized: "DisplayFilterInvertLabel")
+        case .warmth:    return String(localized: "DisplayFilterWarmthLabel")
+        case .cool:      return String(localized: "DisplayFilterCoolLabel")
         }
     }
 }

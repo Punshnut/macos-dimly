@@ -410,3 +410,69 @@
 "CompactShowMonitorTilesSubtitle" = "コンパクトモードで各モニターの輝度とスリープコントロールを表示します。";
 "CompactSmartButtonsCompactTitle" = "コンパクトなスマートボタンサイズ";
 "CompactSmartButtonsCompactSubtitle" = "コンパクトモードで小さいボタンタイルを使用し、詳細モードのレイアウトに合わせます。";
+
+/* Collapsible Section Headers */
+"SectionContrastTitle" = "コントラスト";
+"SectionPowerTitle" = "電源";
+"SectionImageTitle" = "画像";
+"SectionResolutionTitle" = "解像度";
+"SectionInputSourceTitle" = "入力ソース";
+"SectionDimlyBehaviorTitle" = "Dimlyの動作";
+
+/* Night Shift */
+"NightShiftLabel" = "Night Shift";
+"NightShiftLessWarmLabel" = "暖かさを抑える";
+"NightShiftMoreWarmLabel" = "より暖かく";
+"NightShiftUnavailableNote" = "このMacではNight Shiftを使用できません。";
+
+/* True Tone */
+"TrueToneLabel" = "True Tone";
+
+/* Contrast */
+"ContrastSectionLabel" = "コントラスト";
+"ContrastPercentFormat" = "%lld%%";
+"ActionDecreaseContrastHint" = "コントラストを1%下げる";
+"ActionIncreaseContrastHint" = "コントラストを1%上げる";
+
+/* Resolution & Refresh Rate */
+"ResolutionPickerLabel" = "解像度";
+"RefreshRatePickerLabel" = "リフレッシュレート";
+"ResolutionHiDPIBadge" = "HiDPI";
+"ResolutionNativeBadge" = "ネイティブ";
+"ResolutionDefaultBadge" = "デフォルト";
+
+/* Input Source */
+"InputSourceVGA1Label" = "VGA 1";
+"InputSourceVGA2Label" = "VGA 2";
+"InputSourceDVI1Label" = "DVI 1";
+"InputSourceDVI2Label" = "DVI 2";
+"InputSourceHDMI1Label" = "HDMI 1";
+"InputSourceHDMI2Label" = "HDMI 2";
+"InputSourceDisplayPort1Label" = "DisplayPort 1";
+"InputSourceDisplayPort2Label" = "DisplayPort 2";
+"InputSourceCompositeLabel" = "コンポジットビデオ";
+"InputSourceUnknownLabel" = "不明なソース";
+
+/* Color Profile */
+"ColorProfileSectionLabel" = "カラープロファイル";
+"ColorProfileDefaultLabel" = "デフォルト";
+
+/* Display Appearance Filter */
+"DisplayFilterLabel" = "表示フィルタ";
+"DisplayFilterStandardLabel" = "標準";
+"DisplayFilterGrayscaleLabel" = "グレースケール";
+"DisplayFilterInvertLabel" = "反転";
+"DisplayFilterWarmthLabel" = "暖色";
+"DisplayFilterCoolLabel" = "寒色";
+
+/* Color Profile — new */
+"ColorProfileSystemDefaultLabel" = "システムデフォルト";
+"ColorProfileBuiltinHintLabel" = "内蔵ディスプレイのプロファイルはmacOSによって管理されます";
+"OpenSystemSettingsButton" = "システム設定を開く";
+
+/* Color Profile group section headers */
+"ColorProfileGroupStandardLabel" = "標準";
+"ColorProfileGroupModernLabel" = "モダン";
+"ColorProfileGroupCreativeLabel" = "クリエイティブ効果";
+"ColorProfileGroupCalibrationLabel" = "ディスプレイ調整";
+"ColorProfileGroupUserLabel" = "ユーザーインストール";

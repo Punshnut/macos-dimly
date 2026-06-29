@@ -265,6 +265,15 @@ final class DisplayHardware: DisplayHardwareProviding, @unchecked Sendable {
         return unsafeBitCast(sym, to: IOAVServiceWriteI2CFn.self)
     }()
 
+    typealias IOAVServiceReadI2CFn =
+        @convention(c) (UnsafeRawPointer, UInt32, UInt32, UnsafeMutableRawPointer, UInt32) -> IOReturn
+
+    static let ioavServiceReadI2C: IOAVServiceReadI2CFn? = {
+        guard let handle = dlopen("/System/Library/Frameworks/IOKit.framework/IOKit", RTLD_LAZY),
+              let sym = dlsym(handle, "IOAVServiceReadI2C") else { return nil }
+        return unsafeBitCast(sym, to: IOAVServiceReadI2CFn.self)
+    }()
+
     /// Returns a +1 retained IOAVService ref for the given display, or nil.
     /// Caller must CFRelease when done.
     static func ioAVServiceRef(for displayID: CGDirectDisplayID) -> UnsafeRawPointer? {
@@ -379,7 +388,7 @@ final class DisplayHardware: DisplayHardwareProviding, @unchecked Sendable {
         return fn(displayID)
     }
 
-    private static let displayServicesHandleAddress: UInt? = {
+    static let displayServicesHandleAddress: UInt? = {
         let candidates = [
             "/System/Library/PrivateFrameworks/DisplayServices.framework/DisplayServices",
             "/System/Library/PrivateFrameworks/DisplayServices.framework/Versions/A/DisplayServices"

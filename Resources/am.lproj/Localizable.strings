@@ -410,3 +410,69 @@
 "CompactShowMonitorTilesSubtitle" = "በጥቅል ሁኔታ ውስጥ ለእያንዳንዱ ሞኒተር የብሩህነት እና የእንቅልፍ መቆጣጠሪያዎችን አሳይ።";
 "CompactSmartButtonsCompactTitle" = "ጥቅል የፈጣን አዝራር መጠን";
 "CompactSmartButtonsCompactSubtitle" = "በጥቅል ሁኔታ ውስጥ አነስተኛ የአዝራር ሰሌዳዎችን ተጠቀም፣ ከላቀ ሁኔታ አቀማመጥ ጋር ተዛምዶ።";
+
+/* Collapsible Section Headers */
+"SectionContrastTitle" = "ንፅፅር";
+"SectionPowerTitle" = "ኃይል";
+"SectionImageTitle" = "ምስል";
+"SectionResolutionTitle" = "ሪዞሉሽን";
+"SectionInputSourceTitle" = "የግቤት ምንጭ";
+"SectionDimlyBehaviorTitle" = "የDimly ባህሪ";
+
+/* Night Shift */
+"NightShiftLabel" = "Night Shift";
+"NightShiftLessWarmLabel" = "ያነሰ ሙቀት";
+"NightShiftMoreWarmLabel" = "ተጨማሪ ሙቀት";
+"NightShiftUnavailableNote" = "Night Shift በዚህ Mac ላይ አይገኝም።";
+
+/* True Tone */
+"TrueToneLabel" = "True Tone";
+
+/* Contrast */
+"ContrastSectionLabel" = "ንፅፅር";
+"ContrastPercentFormat" = "%lld%%";
+"ActionDecreaseContrastHint" = "ንፅፅርን በ1% ቀንስ";
+"ActionIncreaseContrastHint" = "ንፅፅርን በ1% ጨምር";
+
+/* Resolution & Refresh Rate */
+"ResolutionPickerLabel" = "ሪዞሉሽን";
+"RefreshRatePickerLabel" = "የማደስ መጠን";
+"ResolutionHiDPIBadge" = "HiDPI";
+"ResolutionNativeBadge" = "ቤተኛ";
+"ResolutionDefaultBadge" = "ነባሪ";
+
+/* Input Source */
+"InputSourceVGA1Label" = "VGA 1";
+"InputSourceVGA2Label" = "VGA 2";
+"InputSourceDVI1Label" = "DVI 1";
+"InputSourceDVI2Label" = "DVI 2";
+"InputSourceHDMI1Label" = "HDMI 1";
+"InputSourceHDMI2Label" = "HDMI 2";
+"InputSourceDisplayPort1Label" = "DisplayPort 1";
+"InputSourceDisplayPort2Label" = "DisplayPort 2";
+"InputSourceCompositeLabel" = "የተቀናጀ ቪዲዮ";
+"InputSourceUnknownLabel" = "ያልታወቀ ምንጭ";
+
+/* Color Profile */
+"ColorProfileSectionLabel" = "የቀለም መገለጫ";
+"ColorProfileDefaultLabel" = "ነባሪ";
+
+/* Display Appearance Filter */
+"DisplayFilterLabel" = "የመልክ ማጣሪያ";
+"DisplayFilterStandardLabel" = "መደበኛ";
+"DisplayFilterGrayscaleLabel" = "ግራጫ";
+"DisplayFilterInvertLabel" = "የተገለበጠ";
+"DisplayFilterWarmthLabel" = "ሙቅ";
+"DisplayFilterCoolLabel" = "ቀዝቃዛ";
+
+/* Color Profile — new */
+"ColorProfileSystemDefaultLabel" = "የስርዓት ነባሪ";
+"ColorProfileBuiltinHintLabel" = "የውስጥ ማሳያ መገለጫዎች በmacOS ይተዳደራሉ";
+"OpenSystemSettingsButton" = "የስርዓት ቅንብሮችን ክፈት";
+
+/* Color Profile group section headers */
+"ColorProfileGroupStandardLabel" = "መደበኛ";
+"ColorProfileGroupModernLabel" = "ዘመናዊ";
+"ColorProfileGroupCreativeLabel" = "የፈጠራ ውጤቶች";
+"ColorProfileGroupCalibrationLabel" = "የማሳያ ካሊብሬሽን";
+"ColorProfileGroupUserLabel" = "በተጠቃሚ የተጫነ";

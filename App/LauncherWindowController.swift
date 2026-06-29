@@ -42,6 +42,8 @@ final class LauncherWindowController: NSWindowController, NSWindowDelegate {
             ddcManager: engine.ddcManager,
             profileManager: engine.profileManager,
             engine: engine,
+            nightShiftManager: engine.nightShiftManager,
+            trueToneManager: engine.trueToneManager,
             updaterController: updaterController,
             presentation: .window
         )

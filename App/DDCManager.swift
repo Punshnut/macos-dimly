@@ -48,11 +48,42 @@ private enum DDCConnection {
 #endif
 }
 
+/// Known DDC VCP input source values (VCP code 0x60).
+enum DDCInputSource: Int, CaseIterable, Identifiable, Codable {
+    case vga1 = 1
+    case vga2 = 2
+    case dvi1 = 3
+    case dvi2 = 4
+    case compositeVideo = 5
+    case displayPort1 = 15
+    case displayPort2 = 16
+    case hdmi1 = 17
+    case hdmi2 = 18
+
+    var id: Int { rawValue }
+
+    var localizedName: String {
+        switch self {
+        case .vga1:           return String(localized: "InputSourceVGA1Label")
+        case .vga2:           return String(localized: "InputSourceVGA2Label")
+        case .dvi1:           return String(localized: "InputSourceDVI1Label")
+        case .dvi2:           return String(localized: "InputSourceDVI2Label")
+        case .compositeVideo: return String(localized: "InputSourceCompositeLabel")
+        case .displayPort1:   return String(localized: "InputSourceDisplayPort1Label")
+        case .displayPort2:   return String(localized: "InputSourceDisplayPort2Label")
+        case .hdmi1:          return String(localized: "InputSourceHDMI1Label")
+        case .hdmi2:          return String(localized: "InputSourceHDMI2Label")
+        }
+    }
+}
+
 /// Manages DDC probing plus power/brightness commands.
 @MainActor
 final class DDCManager: ObservableObject {
     @Published private(set) var states: [String: DDCState] = [:] // stableIdentity -> state
     @Published private(set) var brightnessLevels: [String: Int] = [:] // stableIdentity -> percent
+    @Published private(set) var contrastLevels: [String: Int] = [:] // stableIdentity -> percent (VCP 0x12)
+    @Published private(set) var inputSources: [String: DDCInputSource] = [:] // stableIdentity -> source (VCP 0x60)
     @Published private(set) var cableCheckDisplayIDs: Set<String> = [] // stableIdentity set
 
     private let displayManager: DisplayManager
@@ -185,6 +216,90 @@ final class DDCManager: ObservableObject {
         }
     }
 
+    /// Sets hardware contrast over DDC/CI asynchronously (0...100).
+    func setContrast(_ percent: Int, for display: DisplayInfo, completion: @escaping (Bool) -> Void) {
+        let clamped = max(0, min(100, percent))
+        guard states[display.stableIdentity]?.status == .supported else {
+            completion(false)
+            return
+        }
+        Task { [weak self] in
+            guard let self else { return }
+            let result = await Task.detached(priority: .userInitiated) { [display, clamped] in
+                Self.sendVCPCommandSynchronously(displayID: display.displayID, code: 0x12, value: UInt16(clamped))
+            }.value
+            switch result {
+            case .success:
+                self.logger.notice("DDC contrast \(clamped, privacy: .public)% set for \(display.stableIdentity, privacy: .public)")
+                self.contrastLevels[display.stableIdentity] = clamped
+                completion(true)
+            case .failure(let error):
+                self.logger.error("DDC contrast failed for \(display.stableIdentity, privacy: .public): \(error.localizedDescription, privacy: .public)")
+                completion(false)
+            }
+        }
+    }
+
+    /// Reads current contrast from the display over DDC/CI asynchronously.
+    func readContrast(for display: DisplayInfo, completion: @escaping (Int?) -> Void) {
+        guard states[display.stableIdentity]?.status == .supported else {
+            completion(nil)
+            return
+        }
+        Task { [weak self] in
+            guard let self else { return }
+            let value = await Task.detached(priority: .utility) { [display] in
+                Self.readVCPValueSynchronously(displayID: display.displayID, code: 0x12)
+            }.value
+            if let value {
+                let percent = Int(min(value, 100))
+                self.contrastLevels[display.stableIdentity] = percent
+            }
+            completion(value.map { Int(min($0, 100)) })
+        }
+    }
+
+    /// Sets the input source via DDC VCP 0x60 asynchronously.
+    func setInputSource(_ source: DDCInputSource, for display: DisplayInfo, completion: @escaping (Bool) -> Void) {
+        guard states[display.stableIdentity]?.status == .supported else {
+            completion(false)
+            return
+        }
+        Task { [weak self] in
+            guard let self else { return }
+            let result = await Task.detached(priority: .userInitiated) { [display, source] in
+                Self.sendVCPCommandSynchronously(displayID: display.displayID, code: 0x60, value: UInt16(source.rawValue))
+            }.value
+            switch result {
+            case .success:
+                self.inputSources[display.stableIdentity] = source
+                completion(true)
+            case .failure(let error):
+                self.logger.error("DDC input source failed for \(display.stableIdentity, privacy: .public): \(error.localizedDescription, privacy: .public)")
+                completion(false)
+            }
+        }
+    }
+
+    /// Reads current input source from the display over DDC/CI asynchronously.
+    func readInputSource(for display: DisplayInfo, completion: @escaping (DDCInputSource?) -> Void) {
+        guard states[display.stableIdentity]?.status == .supported else {
+            completion(nil)
+            return
+        }
+        Task { [weak self] in
+            guard let self else { return }
+            let rawValue = await Task.detached(priority: .utility) { [display] in
+                Self.readVCPValueSynchronously(displayID: display.displayID, code: 0x60)
+            }.value
+            let source = rawValue.flatMap { DDCInputSource(rawValue: Int($0)) }
+            if let source {
+                self.inputSources[display.stableIdentity] = source
+            }
+            completion(source)
+        }
+    }
+
     // MARK: - Private
 
     private var cancellables: Set<AnyCancellable> = []
@@ -196,6 +311,8 @@ final class DDCManager: ObservableObject {
         for id in staleStateIDs {
             states.removeValue(forKey: id)
             brightnessLevels.removeValue(forKey: id)
+            contrastLevels.removeValue(forKey: id)
+            inputSources.removeValue(forKey: id)
             probeTasks[id]?.cancel()
             probeTasks.removeValue(forKey: id)
             cableCheckDisplayIDs.remove(id)
@@ -279,6 +396,8 @@ final class DDCManager: ObservableObject {
         if result.status == .supported {
             setState(result, for: display)
             probeTasks[display.stableIdentity] = nil
+            readContrast(for: display) { _ in }
+            readInputSource(for: display) { _ in }
             return
         }
 
@@ -366,6 +485,125 @@ final class DDCManager: ObservableObject {
             return Self.sendVCPCommand(connection: connection, code: 0x10, value: value)
         }
     }
+
+    /// Sends any VCP command to a display synchronously.
+    nonisolated static func sendVCPCommandSynchronously(displayID: CGDirectDisplayID, code: UInt8, value: UInt16) -> Result<Void, Error> {
+        let openResult = Self.openConnection(for: displayID)
+        switch openResult {
+        case .failure(let error):
+            return .failure(error)
+        case .success(let connection):
+            defer { Self.close(connection) }
+            return Self.sendVCPCommand(connection: connection, code: code, value: value)
+        }
+    }
+
+    /// Reads a VCP value from a display synchronously, with 3 retries and a 60ms wait.
+    /// Returns the current value, or nil if the display does not support reading.
+    nonisolated static func readVCPValueSynchronously(displayID: CGDirectDisplayID, code: UInt8) -> UInt16? {
+        for attempt in 0..<3 {
+            if attempt > 0 {
+                Thread.sleep(forTimeInterval: 0.060)
+            }
+            let openResult = Self.openConnection(for: displayID)
+            guard case .success(let connection) = openResult else { continue }
+            defer { Self.close(connection) }
+            if let value = Self.readVCPValue(connection: connection, code: code) {
+                return value
+            }
+        }
+        return nil
+    }
+
+    /// Sends a DDC Get VCP Feature request and reads the 12-byte reply.
+    /// Returns the current value field, or nil on any protocol error.
+    nonisolated private static func readVCPValue(connection: DDCConnection, code: UInt8) -> UInt16? {
+        switch connection {
+        case .i2c(let ref):
+            return readVCPValueIntel(connection: ref, code: code)
+#if arch(arm64)
+        case .avService(let ref):
+            return readVCPValueARM(avService: ref, code: code)
+#endif
+        }
+    }
+
+    /// Intel: sends a Get VCP Feature request and reads the reply over IOI2C.
+    nonisolated private static func readVCPValueIntel(connection: IOI2CConnectRef, code: UInt8) -> UInt16? {
+        // Step 1: send the Get VCP Feature request (opcode 0x01).
+        var request = IOI2CRequest()
+        request.commFlags = 0
+        request.sendAddress = 0x6E
+        request.sendTransactionType = IOOptionBits(kIOI2CSimpleTransactionType)
+        request.replyTransactionType = IOOptionBits(kIOI2CNoTransactionType)
+
+        var sendPayload: [UInt8] = [0x51, 0x82, 0x01, code, 0]
+        sendPayload[4] = Self.checksum(for: sendPayload)
+
+        let sent = sendPayload.withUnsafeBytes { buf -> IOReturn in
+            guard let base = buf.baseAddress else { return kIOReturnNoMemory }
+            request.sendBytes = UInt32(buf.count)
+            request.sendBuffer = vm_address_t(UInt(bitPattern: base))
+            return IOI2CSendRequest(connection, IOOptionBits(0), &request)
+        }
+        guard sent == kIOReturnSuccess else { return nil }
+
+        // Step 2: wait for the monitor to prepare the reply.
+        Thread.sleep(forTimeInterval: 0.050)
+
+        // Step 3: read the reply.
+        var replyRequest = IOI2CRequest()
+        replyRequest.commFlags = 0
+        replyRequest.sendAddress = 0x6E
+        replyRequest.sendTransactionType = IOOptionBits(kIOI2CNoTransactionType)
+        replyRequest.replyAddress = 0x6F
+        replyRequest.replyTransactionType = IOOptionBits(kIOI2CSimpleTransactionType)
+        replyRequest.replyBytes = 12
+
+        var replyBuffer = [UInt8](repeating: 0, count: 12)
+        let received = replyBuffer.withUnsafeMutableBytes { buf -> IOReturn in
+            guard let base = buf.baseAddress else { return kIOReturnNoMemory }
+            replyRequest.replyBuffer = vm_address_t(UInt(bitPattern: base))
+            return IOI2CSendRequest(connection, IOOptionBits(0), &replyRequest)
+        }
+        guard received == kIOReturnSuccess else { return nil }
+        // Reply layout (0-indexed): [0]=src, [1]=len|0x80, [2]=result(0=ok), [3]=opcode,
+        // [4]=type, [5]=max_hi, [6]=max_lo, [7]=cur_hi, [8]=cur_lo, [9]=checksum
+        guard replyBuffer[2] == 0, replyBuffer[3] == code else { return nil }
+        return (UInt16(replyBuffer[7]) << 8) | UInt16(replyBuffer[8])
+    }
+
+#if arch(arm64)
+    /// Apple Silicon: sends a Get VCP Feature request and reads the reply via IOAVServiceReadI2C.
+    nonisolated private static func readVCPValueARM(avService: UnsafeRawPointer, code: UInt8) -> UInt16? {
+        guard let writeFn = DisplayHardware.ioavServiceWriteI2C,
+              let readFn = DisplayHardware.ioavServiceReadI2C else { return nil }
+
+        // Send the Get VCP Feature request payload.
+        var fullPayload: [UInt8] = [0x51, 0x82, 0x01, code, 0]
+        fullPayload[4] = Self.checksum(for: fullPayload)
+        var data = Array(fullPayload.dropFirst()) // drop leading 0x51 (dataAddress)
+        let writeResult = data.withUnsafeMutableBytes { buf -> IOReturn in
+            guard let base = buf.baseAddress else { return kIOReturnNoMemory }
+            return writeFn(avService, 0x37, 0x51, UnsafeMutableRawPointer(mutating: base), UInt32(buf.count))
+        }
+        guard writeResult == kIOReturnSuccess else { return nil }
+
+        Thread.sleep(forTimeInterval: 0.050)
+
+        // Read the 11-byte reply (chipAddress=0x37, dataAddress=0x6E).
+        var replyBuffer = [UInt8](repeating: 0, count: 11)
+        let readResult = replyBuffer.withUnsafeMutableBytes { buf -> IOReturn in
+            guard let base = buf.baseAddress else { return kIOReturnNoMemory }
+            return readFn(avService, 0x37, 0x6E, base, UInt32(buf.count))
+        }
+        guard readResult == kIOReturnSuccess else { return nil }
+        // ARM reply: [0]=len|0x80, [1]=result(0=ok), [2]=opcode, [3]=type,
+        //            [4]=max_hi, [5]=max_lo, [6]=cur_hi, [7]=cur_lo, [8]=checksum
+        guard replyBuffer[1] == 0, replyBuffer[2] == code else { return nil }
+        return (UInt16(replyBuffer[6]) << 8) | UInt16(replyBuffer[7])
+    }
+#endif
 
     /// Opens a DDC transport connection for a display, routing to the correct path per architecture.
     nonisolated private static func openConnection(for displayID: CGDirectDisplayID) -> Result<DDCConnection, Error> {
