@@ -3,6 +3,29 @@ import AppKit
 
 // MARK: - Settings Layout System
 
+/// Renders a horizontal color strip showing how a LUT remaps a neutral ramp.
+struct LUTPreviewSwatch: View {
+    let r: [Float]
+    let g: [Float]
+    let b: [Float]
+
+    var body: some View {
+        Canvas { context, size in
+            let width = Int(size.width)
+            guard width > 0 else { return }
+            for x in 0..<width {
+                let idx = Int(Float(x) / Float(width - 1) * Float(r.count - 1))
+                let color = Color(red: Double(r[idx]), green: Double(g[idx]), blue: Double(b[idx]))
+                context.fill(
+                    Path(CGRect(x: x, y: 0, width: 1, height: Int(size.height))),
+                    with: .color(color)
+                )
+            }
+        }
+        .clipShape(RoundedRectangle(cornerRadius: 4, style: .continuous))
+    }
+}
+
 struct SettingsBackdrop: View {
     @Environment(\.colorScheme) private var colorScheme
 

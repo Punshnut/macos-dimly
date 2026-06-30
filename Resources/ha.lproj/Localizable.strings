@@ -476,3 +476,21 @@
 "ColorProfileGroupCreativeLabel" = "Tasirin Ƙirƙira";
 "ColorProfileGroupCalibrationLabel" = "Daidaita Nuni";
 "ColorProfileGroupUserLabel" = "Mai amfani ya girka";
+
+/* LUT Library */
+"SettingsTabLUTsLabel" = "LUTs";
+"LUTLibraryTitle" = "Laburaren LUT";
+"LUTLibrarySubtitle" = "Shigo da fayilolin LUT na .cube, .3dl, .lut, da .csv kuma ka sanya su ga kowane allon nuni.";
+"LUTImportButton" = "Shigo da LUT…";
+"LUTEmptyStateLabel" = "Ba a shigo da wani LUT tukuna.";
+"LUTPickerNoneLabel" = "Babu";
+"LUTDimension1DLabel" = "1D";
+"LUTDimension3DLabel" = "3D";
+"LUTApproximationNote" = "Ana ɗaukar samfurin LUT na 3D a kan neutral axis.";
+"LUTDeleteConfirmTitle" = "Cire \"%@\"?";
+"LUTDeleteConfirmSubtitle" = "Wannan yana cire LUT daga laburare kuma yana share shi daga duk wani allon nuni da ke amfani da shi.";
+"LUTRenameAlertTitle" = "Sauya Sunan LUT";
+"LUTRenameAlertSubtitle" = "Shigar da sabon suna ga wannan LUT.";
+"LUTImportErrorTitle" = "Ba a iya shigo da LUT ba";
+"LUTImportErrorSubtitle" = "Ba a iya karanta fayilin ko ba LUT ingantacce ba ne.";
+"LUTRowLabel" = "LUT";

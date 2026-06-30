@@ -476,3 +476,21 @@
 "ColorProfileGroupCreativeLabel" = "Maisíochtaí cruthaitheacha";
 "ColorProfileGroupCalibrationLabel" = "Calabrú taispeána";
 "ColorProfileGroupUserLabel" = "Suiteáilte ag an úsáideoir";
+
+/* LUT Library */
+"SettingsTabLUTsLabel" = "LUTs";
+"LUTLibraryTitle" = "Leabharlann LUT";
+"LUTLibrarySubtitle" = "Iompórtáil comhaid LUT .cube, .3dl, .lut, agus .csv agus sann iad in aghaidh gach taispeána.";
+"LUTImportButton" = "Iompórtáil LUT…";
+"LUTEmptyStateLabel" = "Níl aon LUT iompórtáilte fós.";
+"LUTPickerNoneLabel" = "Gan ceann";
+"LUTDimension1DLabel" = "1D";
+"LUTDimension3DLabel" = "3D";
+"LUTApproximationNote" = "Déantar sampláil ar LUTanna 3D feadh an ais neodrach.";
+"LUTDeleteConfirmTitle" = "An LUT \"%@\" a bhaint?";
+"LUTDeleteConfirmSubtitle" = "Bainfidh sé seo an LUT ón leabharlann agus glanfaidh sé é ó aon taispeána atá á úsáid.";
+"LUTRenameAlertTitle" = "Athainmnigh LUT";
+"LUTRenameAlertSubtitle" = "Cuir isteach ainm nua don LUT seo.";
+"LUTImportErrorTitle" = "Níorbh fhéidir an LUT a iompórtáil";
+"LUTImportErrorSubtitle" = "Níorbh fhéidir an comhad a léamh nó níl LUT bailí ann.";
+"LUTRowLabel" = "LUT";

@@ -476,3 +476,21 @@
 "ColorProfileGroupCreativeLabel" = "Hiệu ứng sáng tạo";
 "ColorProfileGroupCalibrationLabel" = "Hiệu chỉnh màn hình";
 "ColorProfileGroupUserLabel" = "Người dùng cài đặt";
+
+/* LUT Library */
+"SettingsTabLUTsLabel" = "LUTs";
+"LUTLibraryTitle" = "Thư viện LUT";
+"LUTLibrarySubtitle" = "Nhập các tệp LUT định dạng .cube, .3dl, .lut và .csv, rồi gán cho từng màn hình.";
+"LUTImportButton" = "Nhập LUT…";
+"LUTEmptyStateLabel" = "Chưa có LUT nào được nhập.";
+"LUTPickerNoneLabel" = "Không có";
+"LUTDimension1DLabel" = "1D";
+"LUTDimension3DLabel" = "3D";
+"LUTApproximationNote" = "LUT 3D được lấy mẫu dọc theo trục trung tính.";
+"LUTDeleteConfirmTitle" = "Xóa \"%@\"?";
+"LUTDeleteConfirmSubtitle" = "Thao tác này sẽ xóa LUT khỏi thư viện và gỡ bỏ nó khỏi tất cả các màn hình đang sử dụng.";
+"LUTRenameAlertTitle" = "Đổi tên LUT";
+"LUTRenameAlertSubtitle" = "Nhập tên mới cho LUT này.";
+"LUTImportErrorTitle" = "Không thể nhập LUT";
+"LUTImportErrorSubtitle" = "Không thể đọc tệp hoặc tệp không phải là LUT hợp lệ.";
+"LUTRowLabel" = "LUT";

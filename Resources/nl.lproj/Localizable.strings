@@ -476,3 +476,21 @@
 "ColorProfileGroupCreativeLabel" = "Creatieve effecten";
 "ColorProfileGroupCalibrationLabel" = "Beeldschermkalibratie";
 "ColorProfileGroupUserLabel" = "Door gebruiker geïnstalleerd";
+
+/* LUT Library */
+"SettingsTabLUTsLabel" = "LUTs";
+"LUTLibraryTitle" = "LUT-bibliotheek";
+"LUTLibrarySubtitle" = "Importeer .cube-, .3dl-, .lut- en .csv-LUT-bestanden en wijs ze toe per beeldscherm.";
+"LUTImportButton" = "LUT importeren…";
+"LUTEmptyStateLabel" = "Nog geen LUT's geïmporteerd.";
+"LUTPickerNoneLabel" = "Geen";
+"LUTDimension1DLabel" = "1D";
+"LUTDimension3DLabel" = "3D";
+"LUTApproximationNote" = "3D-LUT's worden bemonsterd langs de neutrale as.";
+"LUTDeleteConfirmTitle" = "\"%@\" verwijderen?";
+"LUTDeleteConfirmSubtitle" = "Hierdoor wordt de LUT uit de bibliotheek verwijderd en gewist van alle beeldschermen die deze gebruiken.";
+"LUTRenameAlertTitle" = "LUT hernoemen";
+"LUTRenameAlertSubtitle" = "Voer een nieuwe naam in voor deze LUT.";
+"LUTImportErrorTitle" = "LUT kan niet worden geïmporteerd";
+"LUTImportErrorSubtitle" = "Het bestand kan niet worden gelezen of is geen geldige LUT.";
+"LUTRowLabel" = "LUT";

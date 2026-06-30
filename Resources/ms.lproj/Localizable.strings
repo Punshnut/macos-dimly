@@ -476,3 +476,21 @@
 "ColorProfileGroupCreativeLabel" = "Kesan Kreatif";
 "ColorProfileGroupCalibrationLabel" = "Penentukuran Paparan";
 "ColorProfileGroupUserLabel" = "Dipasang Pengguna";
+
+/* LUT Library */
+"SettingsTabLUTsLabel" = "LUTs";
+"LUTLibraryTitle" = "Perpustakaan LUT";
+"LUTLibrarySubtitle" = "Import fail LUT .cube, .3dl, .lut, dan .csv serta tetapkannya bagi setiap paparan.";
+"LUTImportButton" = "Import LUT…";
+"LUTEmptyStateLabel" = "Tiada LUT diimport lagi.";
+"LUTPickerNoneLabel" = "Tiada";
+"LUTDimension1DLabel" = "1D";
+"LUTDimension3DLabel" = "3D";
+"LUTApproximationNote" = "LUT 3D disampel sepanjang paksi neutral.";
+"LUTDeleteConfirmTitle" = "Buang \"%@\"?";
+"LUTDeleteConfirmSubtitle" = "Ini akan membuang LUT daripada perpustakaan dan mengosongkannya daripada mana-mana paparan yang menggunakannya.";
+"LUTRenameAlertTitle" = "Namakan Semula LUT";
+"LUTRenameAlertSubtitle" = "Masukkan nama baharu untuk LUT ini.";
+"LUTImportErrorTitle" = "LUT tidak dapat diimport";
+"LUTImportErrorSubtitle" = "Fail tidak dapat dibaca atau bukan LUT yang sah.";
+"LUTRowLabel" = "LUT";

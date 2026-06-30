@@ -476,3 +476,21 @@
 "ColorProfileGroupCreativeLabel" = "Luovat tehosteet";
 "ColorProfileGroupCalibrationLabel" = "Näytön kalibrointi";
 "ColorProfileGroupUserLabel" = "Käyttäjän asentama";
+
+/* LUT Library */
+"SettingsTabLUTsLabel" = "LUTs";
+"LUTLibraryTitle" = "LUT-kirjasto";
+"LUTLibrarySubtitle" = "Tuo .cube-, .3dl-, .lut- ja .csv-LUT-tiedostoja ja määritä ne näyttökohtaisesti.";
+"LUTImportButton" = "Tuo LUT…";
+"LUTEmptyStateLabel" = "Ei tuotuja LUT-tiedostoja.";
+"LUTPickerNoneLabel" = "Ei mitään";
+"LUTDimension1DLabel" = "1D";
+"LUTDimension3DLabel" = "3D";
+"LUTApproximationNote" = "3D-LUT-tiedostot näytteistetään neutraaliakselin suunnassa.";
+"LUTDeleteConfirmTitle" = "Poistetaanko „%@\"?";
+"LUTDeleteConfirmSubtitle" = "Tämä poistaa LUT-tiedoston kirjastosta ja tyhjentää sen kaikilta näytöiltä, joissa sitä käytetään.";
+"LUTRenameAlertTitle" = "Nimeä LUT uudelleen";
+"LUTRenameAlertSubtitle" = "Kirjoita tälle LUT-tiedostolle uusi nimi.";
+"LUTImportErrorTitle" = "LUT-tiedoston tuonti epäonnistui";
+"LUTImportErrorSubtitle" = "Tiedostoa ei voitu lukea tai se ei ole kelvollinen LUT-tiedosto.";
+"LUTRowLabel" = "LUT";

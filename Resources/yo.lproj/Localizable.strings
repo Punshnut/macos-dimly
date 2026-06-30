@@ -476,3 +476,21 @@
 "ColorProfileGroupCreativeLabel" = "Àwọn Ipa Ìṣẹ̀dá";
 "ColorProfileGroupCalibrationLabel" = "Ìṣàtúnṣe Ìfihàn";
 "ColorProfileGroupUserLabel" = "Olùmúlò Fi Sí";
+
+/* LUT Library */
+"SettingsTabLUTsLabel" = "LUTs";
+"LUTLibraryTitle" = "Ikawe LUT";
+"LUTLibrarySubtitle" = "Gbe awọn faili LUT .cube, .3dl, .lut, ati .csv wọle ki o si fi wọn si àárọ̀ kọọkan.";
+"LUTImportButton" = "Gbe LUT Wọle…";
+"LUTEmptyStateLabel" = "Ko si LUT ti a ti gbe wọle sibẹsibẹ.";
+"LUTPickerNoneLabel" = "Ẹnikan";
+"LUTDimension1DLabel" = "1D";
+"LUTDimension3DLabel" = "3D";
+"LUTApproximationNote" = "A ń ṣàyẹ̀wò awọn LUT 3D lé lórí ọ̀nà àárín.";
+"LUTDeleteConfirmTitle" = "Yọ \"%@\" Kúrò?";
+"LUTDeleteConfirmSubtitle" = "Eyi yọ LUT kuro ninu ikawe ti o si pa a rẹ kuro ninu eyikeyi àárọ̀ ti n lo.";
+"LUTRenameAlertTitle" = "Ṣe Àtúnṣe Orúkọ LUT";
+"LUTRenameAlertSubtitle" = "Tẹ orúkọ tuntun sii fún LUT yii.";
+"LUTImportErrorTitle" = "Ko Lè Gbe LUT Wọle";
+"LUTImportErrorSubtitle" = "A kò lè ka fáìlì náà tàbí kò jẹ́ LUT tó wulo.";
+"LUTRowLabel" = "LUT";

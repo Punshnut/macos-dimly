@@ -476,3 +476,21 @@
 "ColorProfileGroupCreativeLabel" = "クリエイティブ効果";
 "ColorProfileGroupCalibrationLabel" = "ディスプレイ調整";
 "ColorProfileGroupUserLabel" = "ユーザーインストール";
+
+/* LUT Library */
+"SettingsTabLUTsLabel" = "LUTs";
+"LUTLibraryTitle" = "LUTライブラリ";
+"LUTLibrarySubtitle" = ".cube、.3dl、.lut、.csvのLUTファイルを読み込み、ディスプレイごとに割り当てます。";
+"LUTImportButton" = "LUTを読み込む…";
+"LUTEmptyStateLabel" = "LUTがまだ読み込まれていません。";
+"LUTPickerNoneLabel" = "なし";
+"LUTDimension1DLabel" = "1D";
+"LUTDimension3DLabel" = "3D";
+"LUTApproximationNote" = "3D LUTはニュートラル軸に沿ってサンプリングされます。";
+"LUTDeleteConfirmTitle" = "\"%@\"を削除しますか?";
+"LUTDeleteConfirmSubtitle" = "このLUTをライブラリから削除し、使用中のすべてのディスプレイからも削除します。";
+"LUTRenameAlertTitle" = "LUTの名前を変更";
+"LUTRenameAlertSubtitle" = "このLUTの新しい名前を入力してください。";
+"LUTImportErrorTitle" = "LUTを読み込めませんでした";
+"LUTImportErrorSubtitle" = "ファイルを読み取れないか、有効なLUTではありません。";
+"LUTRowLabel" = "LUT";

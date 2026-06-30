@@ -93,6 +93,7 @@ struct DimlySettings: Codable, Equatable {
     var monitorDisplayModeByDisplayID: [String: Int]
     var monitorColorProfileByDisplayID: [String: String]
     var displayFilterByDisplayID: [String: DisplayFilter]
+    var activeLUTByDisplayID: [String: UUID]
     var nightShiftEnabled: Bool
     var nightShiftStrength: Float
     var trueToneEnabledByDisplayID: [String: Bool]
@@ -138,6 +139,7 @@ struct DimlySettings: Codable, Equatable {
         case monitorDisplayModeByDisplayID
         case monitorColorProfileByDisplayID
         case displayFilterByDisplayID
+        case activeLUTByDisplayID
         case nightShiftEnabled
         case nightShiftStrength
         case trueToneEnabledByDisplayID
@@ -202,6 +204,7 @@ struct DimlySettings: Codable, Equatable {
         monitorDisplayModeByDisplayID: [:],
         monitorColorProfileByDisplayID: [:],
         displayFilterByDisplayID: [:],
+        activeLUTByDisplayID: [:],
         nightShiftEnabled: false,
         nightShiftStrength: 0.5,
         trueToneEnabledByDisplayID: [:],
@@ -247,6 +250,7 @@ struct DimlySettings: Codable, Equatable {
         monitorDisplayModeByDisplayID: [String: Int],
         monitorColorProfileByDisplayID: [String: String],
         displayFilterByDisplayID: [String: DisplayFilter],
+        activeLUTByDisplayID: [String: UUID],
         nightShiftEnabled: Bool,
         nightShiftStrength: Float,
         trueToneEnabledByDisplayID: [String: Bool],
@@ -289,6 +293,7 @@ struct DimlySettings: Codable, Equatable {
         self.monitorDisplayModeByDisplayID = monitorDisplayModeByDisplayID
         self.monitorColorProfileByDisplayID = monitorColorProfileByDisplayID
         self.displayFilterByDisplayID = displayFilterByDisplayID
+        self.activeLUTByDisplayID = activeLUTByDisplayID
         self.nightShiftEnabled = nightShiftEnabled
         self.nightShiftStrength = nightShiftStrength
         self.trueToneEnabledByDisplayID = trueToneEnabledByDisplayID
@@ -342,6 +347,7 @@ struct DimlySettings: Codable, Equatable {
         let monitorDisplayModeByDisplayID = try container.decodeIfPresent([String: Int].self, forKey: .monitorDisplayModeByDisplayID) ?? [:]
         let monitorColorProfileByDisplayID = try container.decodeIfPresent([String: String].self, forKey: .monitorColorProfileByDisplayID) ?? [:]
         let displayFilterByDisplayID = try container.decodeIfPresent([String: DisplayFilter].self, forKey: .displayFilterByDisplayID) ?? [:]
+        let activeLUTByDisplayID = try container.decodeIfPresent([String: UUID].self, forKey: .activeLUTByDisplayID) ?? [:]
         let nightShiftEnabled = try container.decodeIfPresent(Bool.self, forKey: .nightShiftEnabled) ?? false
         let nightShiftStrength = try container.decodeIfPresent(Float.self, forKey: .nightShiftStrength) ?? 0.5
         let trueToneEnabledByDisplayID = try container.decodeIfPresent([String: Bool].self, forKey: .trueToneEnabledByDisplayID) ?? [:]
@@ -404,6 +410,7 @@ struct DimlySettings: Codable, Equatable {
             monitorDisplayModeByDisplayID: monitorDisplayModeByDisplayID,
             monitorColorProfileByDisplayID: monitorColorProfileByDisplayID,
             displayFilterByDisplayID: displayFilterByDisplayID,
+            activeLUTByDisplayID: activeLUTByDisplayID,
             nightShiftEnabled: nightShiftEnabled,
             nightShiftStrength: nightShiftStrength,
             trueToneEnabledByDisplayID: trueToneEnabledByDisplayID,
@@ -452,6 +459,7 @@ struct DimlySettings: Codable, Equatable {
         try container.encode(monitorDisplayModeByDisplayID, forKey: .monitorDisplayModeByDisplayID)
         try container.encode(monitorColorProfileByDisplayID, forKey: .monitorColorProfileByDisplayID)
         try container.encode(displayFilterByDisplayID, forKey: .displayFilterByDisplayID)
+        try container.encode(activeLUTByDisplayID, forKey: .activeLUTByDisplayID)
         try container.encode(nightShiftEnabled, forKey: .nightShiftEnabled)
         try container.encode(nightShiftStrength, forKey: .nightShiftStrength)
         try container.encode(trueToneEnabledByDisplayID, forKey: .trueToneEnabledByDisplayID)

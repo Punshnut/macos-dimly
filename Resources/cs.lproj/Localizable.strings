@@ -476,3 +476,21 @@
 "ColorProfileGroupCreativeLabel" = "Kreativní efekty";
 "ColorProfileGroupCalibrationLabel" = "Kalibrace displeje";
 "ColorProfileGroupUserLabel" = "Nainstalováno uživatelem";
+
+/* LUT Library */
+"SettingsTabLUTsLabel" = "LUTs";
+"LUTLibraryTitle" = "Knihovna LUT";
+"LUTLibrarySubtitle" = "Importujte soubory LUT ve formátech .cube, .3dl, .lut a .csv a přiřaďte je jednotlivým displejům.";
+"LUTImportButton" = "Importovat LUT…";
+"LUTEmptyStateLabel" = "Zatím nebyly importovány žádné LUT.";
+"LUTPickerNoneLabel" = "Žádný";
+"LUTDimension1DLabel" = "1D";
+"LUTDimension3DLabel" = "3D";
+"LUTApproximationNote" = "3D LUT jsou vzorkovány podél neutrální osy.";
+"LUTDeleteConfirmTitle" = "Odebrat „%@\"?";
+"LUTDeleteConfirmSubtitle" = "Tímto odstraníte LUT z knihovny a odeberete jej ze všech displejů, které jej používají.";
+"LUTRenameAlertTitle" = "Přejmenovat LUT";
+"LUTRenameAlertSubtitle" = "Zadejte nový název pro tento LUT.";
+"LUTImportErrorTitle" = "LUT nelze importovat";
+"LUTImportErrorSubtitle" = "Soubor nelze přečíst nebo se nejedná o platný LUT.";
+"LUTRowLabel" = "LUT";

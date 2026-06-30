@@ -476,3 +476,21 @@
 "ColorProfileGroupCreativeLabel" = "படைப்பு விளைவுகள்";
 "ColorProfileGroupCalibrationLabel" = "காட்சி அளவீடு";
 "ColorProfileGroupUserLabel" = "பயனர் நிறுவியது";
+
+/* LUT Library */
+"SettingsTabLUTsLabel" = "LUTs";
+"LUTLibraryTitle" = "LUT நூலகம்";
+"LUTLibrarySubtitle" = ".cube, .3dl, .lut மற்றும் .csv LUT கோப்புகளை இறக்குமதி செய்து ஒவ்வொரு திரைக்கும் ஒதுக்கவும்.";
+"LUTImportButton" = "LUT இறக்குமதி செய்…";
+"LUTEmptyStateLabel" = "இன்னும் எந்த LUT உம் இறக்குமதி செய்யப்படவில்லை.";
+"LUTPickerNoneLabel" = "எதுவுமில்லை";
+"LUTDimension1DLabel" = "1D";
+"LUTDimension3DLabel" = "3D";
+"LUTApproximationNote" = "3D LUT கள் நடுநிலை அச்சு வழியாக மாதிரியெடுக்கப்படுகின்றன.";
+"LUTDeleteConfirmTitle" = "\"%@\" ஐ நீக்கவா?";
+"LUTDeleteConfirmSubtitle" = "இது LUT ஐ நூலகத்திலிருந்து நீக்கி, அதைப் பயன்படுத்தும் திரைகளிலிருந்தும் அழிக்கும்.";
+"LUTRenameAlertTitle" = "LUT ஐ மறுபெயரிடு";
+"LUTRenameAlertSubtitle" = "இந்த LUT க்கு புதிய பெயரை உள்ளிடவும்.";
+"LUTImportErrorTitle" = "LUT இறக்குமதி செய்ய இயலவில்லை";
+"LUTImportErrorSubtitle" = "கோப்பை படிக்க முடியவில்லை அல்லது அது சரியான LUT அல்ல.";
+"LUTRowLabel" = "LUT";

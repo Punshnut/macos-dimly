@@ -31,22 +31,23 @@ Dimly is a free, open-source macOS menu bar app for multi-monitor brightness and
 
 ## Features
 
-- **Per-display brightness** — hardware DDC control or smooth overlay fallback, per monitor
-- **Contrast** — hardware DDC contrast control for external monitors
-- **Sleep, wake, and blackout** — instant blackout overlay plus true DDC standby when supported
-- **Color profiles** — switch ICC profiles per external display: sRGB, Display P3, DCI-P3, Adobe RGB, BT.709, BT.2020, Extended P3, HDR (BT.2100 PQ/HLG), creative effects, and user-installed calibrations
-- **Appearance filters** — per-display gamma filters: Invert, Warm, Cool
-- **Night Shift** — toggle and warmth control integrated directly in the display panel
-- **True Tone** — per-display True Tone toggle for supported hardware
-- **Resolution & refresh rate** — switch display modes and Hz per external monitor
-- **Input source** — switch between HDMI, DisplayPort, DVI, and VGA inputs via DDC
-- **Profiles** — save and apply named display setups in one click; pin them as Smart Buttons in the menu bar
-- **Schedule** — auto-apply profiles at fixed times or at sunrise/sunset based on your location
-- **Global hotkeys** — assign keyboard shortcuts per display or for all externals at once
-- **Profile automation** — auto-apply a profile when a specific external display connects
-- **Stealth mode** — hide the menu bar icon and Dock entry; hotkeys keep working
-- **Backup and restore** — export and import general settings and monitor settings independently
-- **Panic hotkey** — `Ctrl` + `Option` + `Shift` + `P` always restores all displays, no matter what
+- **Per-display brightness** - hardware DDC control or smooth overlay fallback, per monitor
+- **Contrast** - hardware DDC contrast control for external monitors
+- **Sleep, wake, and blackout** - instant blackout overlay plus true DDC standby when supported
+- **Color profiles** - switch ICC profiles per external display: sRGB, Display P3, DCI-P3, Adobe RGB, BT.709, BT.2020, Extended P3, HDR (BT.2100 PQ/HLG), creative effects, and user-installed calibrations
+- **Appearance filters** - per-display gamma filters: Invert, Warm, Cool
+- **LUT support** - import .cube, .3dl, .lut, and .csv color lookup tables and assign them per display; manage the library in Settings → LUTs
+- **Night Shift** - toggle and warmth control integrated directly in the display panel
+- **True Tone** - per-display True Tone toggle for supported hardware
+- **Resolution & refresh rate** - switch display modes and Hz per external monitor
+- **Input source** - switch between HDMI, DisplayPort, DVI, and VGA inputs via DDC
+- **Profiles** - save and apply named display setups in one click; pin them as Smart Buttons in the menu bar
+- **Schedule** - auto-apply profiles at fixed times or at sunrise/sunset based on your location
+- **Global hotkeys** - assign keyboard shortcuts per display or for all externals at once
+- **Profile automation** - auto-apply a profile when a specific external display connects
+- **Stealth mode** - hide the menu bar icon and Dock entry; hotkeys keep working
+- **Backup and restore** - export and import general settings and monitor settings independently
+- **Panic hotkey** - `Ctrl` + `Option` + `Shift` + `P` always restores all displays, no matter what
 
 <p align="center">
   <a href="Media/Screenshots/Dimly_Simple_Minimized.png">

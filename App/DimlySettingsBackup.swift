@@ -44,6 +44,12 @@ enum SettingsBackupApplyError: Error {
     case missingMonitorSettings
 }
 
+/// A single LUT file embedded in a backup so it can be restored on another Mac.
+struct LUTBackupEntry: Codable {
+    let entry: LUTEntry
+    let fileData: Data
+}
+
 struct DimlySettingsBackup: Codable {
     let version: Int
     let exportedAt: Date
@@ -51,13 +57,15 @@ struct DimlySettingsBackup: Codable {
     let general: GeneralSettingsPayload?
     let monitor: MonitorSettingsPayload?
     let profileState: ProfileState?
+    let lutLibrary: [LUTBackupEntry]?
 
     /// Captures the requested settings sections into a versioned backup payload.
     init(
         settings: DimlySettings,
         type: SettingsBackupType,
         exportedAt: Date = Date(),
-        profileState: ProfileState? = nil
+        profileState: ProfileState? = nil,
+        lutLibrary: [LUTBackupEntry]? = nil
     ) {
         self.version = 2
         self.exportedAt = exportedAt
@@ -65,6 +73,7 @@ struct DimlySettingsBackup: Codable {
         self.general = type.includesGeneral ? GeneralSettingsPayload(from: settings) : nil
         self.monitor = type.includesMonitor ? MonitorSettingsPayload(from: settings) : nil
         self.profileState = type.includesMonitor ? profileState : nil
+        self.lutLibrary = type.includesMonitor ? lutLibrary : nil
     }
 
     /// Applies selected backup sections to a live settings snapshot.
@@ -166,6 +175,7 @@ struct MonitorSettingsPayload: Codable {
     let monitorDisplayModeByDisplayID: [String: Int]
     let monitorColorProfileByDisplayID: [String: String]
     let displayFilterByDisplayID: [String: DisplayFilter]
+    let activeLUTByDisplayID: [String: UUID]
     let trueToneEnabledByDisplayID: [String: Bool]
 
     private enum CodingKeys: String, CodingKey {
@@ -188,6 +198,7 @@ struct MonitorSettingsPayload: Codable {
         case monitorDisplayModeByDisplayID
         case monitorColorProfileByDisplayID
         case displayFilterByDisplayID
+        case activeLUTByDisplayID
         case trueToneEnabledByDisplayID
     }
 
@@ -212,6 +223,7 @@ struct MonitorSettingsPayload: Codable {
         monitorDisplayModeByDisplayID = settings.monitorDisplayModeByDisplayID
         monitorColorProfileByDisplayID = settings.monitorColorProfileByDisplayID
         displayFilterByDisplayID = settings.displayFilterByDisplayID
+        activeLUTByDisplayID = settings.activeLUTByDisplayID
         trueToneEnabledByDisplayID = settings.trueToneEnabledByDisplayID
     }
 
@@ -237,6 +249,7 @@ struct MonitorSettingsPayload: Codable {
         monitorDisplayModeByDisplayID = try container.decodeIfPresent([String: Int].self, forKey: .monitorDisplayModeByDisplayID) ?? [:]
         monitorColorProfileByDisplayID = try container.decodeIfPresent([String: String].self, forKey: .monitorColorProfileByDisplayID) ?? [:]
         displayFilterByDisplayID = try container.decodeIfPresent([String: DisplayFilter].self, forKey: .displayFilterByDisplayID) ?? [:]
+        activeLUTByDisplayID = try container.decodeIfPresent([String: UUID].self, forKey: .activeLUTByDisplayID) ?? [:]
         trueToneEnabledByDisplayID = try container.decodeIfPresent([String: Bool].self, forKey: .trueToneEnabledByDisplayID) ?? [:]
     }
 
@@ -262,6 +275,7 @@ struct MonitorSettingsPayload: Codable {
         try container.encode(monitorDisplayModeByDisplayID, forKey: .monitorDisplayModeByDisplayID)
         try container.encode(monitorColorProfileByDisplayID, forKey: .monitorColorProfileByDisplayID)
         try container.encode(displayFilterByDisplayID, forKey: .displayFilterByDisplayID)
+        try container.encode(activeLUTByDisplayID, forKey: .activeLUTByDisplayID)
         try container.encode(trueToneEnabledByDisplayID, forKey: .trueToneEnabledByDisplayID)
     }
 
@@ -286,6 +300,7 @@ struct MonitorSettingsPayload: Codable {
         settings.monitorDisplayModeByDisplayID = monitorDisplayModeByDisplayID
         settings.monitorColorProfileByDisplayID = monitorColorProfileByDisplayID
         settings.displayFilterByDisplayID = displayFilterByDisplayID
+        settings.activeLUTByDisplayID = activeLUTByDisplayID
         settings.trueToneEnabledByDisplayID = trueToneEnabledByDisplayID
     }
 }

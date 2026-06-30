@@ -476,3 +476,21 @@
 "ColorProfileGroupCreativeLabel" = "সৃজনশীল প্রভাব";
 "ColorProfileGroupCalibrationLabel" = "ডিসপ্লে ক্যালিব্রেশন";
 "ColorProfileGroupUserLabel" = "ব্যবহারকারী ইনস্টল করেছেন";
+
+/* LUT Library */
+"SettingsTabLUTsLabel" = "LUTs";
+"LUTLibraryTitle" = "LUT লাইব্রেরি";
+"LUTLibrarySubtitle" = ".cube, .3dl, .lut, এবং .csv LUT ফাইল আমদানি করুন এবং প্রতিটি ডিসপ্লেতে নির্ধারণ করুন।";
+"LUTImportButton" = "LUT আমদানি করুন…";
+"LUTEmptyStateLabel" = "এখনও কোনো LUT আমদানি করা হয়নি।";
+"LUTPickerNoneLabel" = "কোনোটি নয়";
+"LUTDimension1DLabel" = "1D";
+"LUTDimension3DLabel" = "3D";
+"LUTApproximationNote" = "3D LUT গুলি নিউট্রাল অ্যাক্সিস বরাবর নমুনা নেওয়া হয়।";
+"LUTDeleteConfirmTitle" = "\"%@\" সরাবেন?";
+"LUTDeleteConfirmSubtitle" = "এটি LUT টি লাইব্রেরি থেকে সরিয়ে দেবে এবং এটি ব্যবহার করছে এমন সব ডিসপ্লে থেকে মুছে দেবে।";
+"LUTRenameAlertTitle" = "LUT পুনরায় নামকরণ করুন";
+"LUTRenameAlertSubtitle" = "এই LUT-এর জন্য একটি নতুন নাম লিখুন।";
+"LUTImportErrorTitle" = "LUT আমদানি করা যায়নি";
+"LUTImportErrorSubtitle" = "ফাইলটি পড়া যায়নি অথবা এটি একটি বৈধ LUT নয়।";
+"LUTRowLabel" = "LUT";

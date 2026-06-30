@@ -476,3 +476,21 @@
 "ColorProfileGroupCreativeLabel" = "เอฟเฟ็กต์สร้างสรรค์";
 "ColorProfileGroupCalibrationLabel" = "การปรับเทียบจอแสดงผล";
 "ColorProfileGroupUserLabel" = "ติดตั้งโดยผู้ใช้";
+
+/* LUT Library */
+"SettingsTabLUTsLabel" = "LUTs";
+"LUTLibraryTitle" = "คลัง LUT";
+"LUTLibrarySubtitle" = "นำเข้าไฟล์ LUT ประเภท .cube, .3dl, .lut และ .csv แล้วกำหนดให้กับแต่ละจอแสดงผล";
+"LUTImportButton" = "นำเข้า LUT…";
+"LUTEmptyStateLabel" = "ยังไม่มี LUT ที่นำเข้า";
+"LUTPickerNoneLabel" = "ไม่มี";
+"LUTDimension1DLabel" = "1D";
+"LUTDimension3DLabel" = "3D";
+"LUTApproximationNote" = "LUT แบบ 3D จะถูกสุ่มตัวอย่างตามแกนกลางสี";
+"LUTDeleteConfirmTitle" = "ลบ \"%@\" ออกหรือไม่?";
+"LUTDeleteConfirmSubtitle" = "การดำเนินการนี้จะลบ LUT ออกจากคลัง และล้างการตั้งค่าบนจอแสดงผลที่ใช้งานอยู่ทั้งหมด";
+"LUTRenameAlertTitle" = "เปลี่ยนชื่อ LUT";
+"LUTRenameAlertSubtitle" = "ป้อนชื่อใหม่สำหรับ LUT นี้";
+"LUTImportErrorTitle" = "ไม่สามารถนำเข้า LUT ได้";
+"LUTImportErrorSubtitle" = "ไม่สามารถอ่านไฟล์ได้ หรือไฟล์ไม่ใช่ LUT ที่ถูกต้อง";
+"LUTRowLabel" = "LUT";

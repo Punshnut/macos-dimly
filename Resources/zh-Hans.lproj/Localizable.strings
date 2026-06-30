@@ -476,3 +476,21 @@
 "ColorProfileGroupCreativeLabel" = "创意效果";
 "ColorProfileGroupCalibrationLabel" = "显示器校准";
 "ColorProfileGroupUserLabel" = "用户安装";
+
+/* LUT Library */
+"SettingsTabLUTsLabel" = "LUTs";
+"LUTLibraryTitle" = "LUT 资源库";
+"LUTLibrarySubtitle" = "导入 .cube、.3dl、.lut 和 .csv LUT 文件，并为每台显示器单独指定。";
+"LUTImportButton" = "导入 LUT…";
+"LUTEmptyStateLabel" = "尚未导入任何 LUT。";
+"LUTPickerNoneLabel" = "无";
+"LUTDimension1DLabel" = "1D";
+"LUTDimension3DLabel" = "3D";
+"LUTApproximationNote" = "3D LUT 沿中性轴采样。";
+"LUTDeleteConfirmTitle" = "移除\"%@\"？";
+"LUTDeleteConfirmSubtitle" = "此操作将从资源库中移除该 LUT，并清除所有正在使用它的显示器上的设置。";
+"LUTRenameAlertTitle" = "重命名 LUT";
+"LUTRenameAlertSubtitle" = "为此 LUT 输入新名称。";
+"LUTImportErrorTitle" = "无法导入 LUT";
+"LUTImportErrorSubtitle" = "无法读取该文件，或该文件不是有效的 LUT。";
+"LUTRowLabel" = "LUT";

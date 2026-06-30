@@ -476,3 +476,21 @@
 "ColorProfileGroupCreativeLabel" = "Yaratıcı Efektler";
 "ColorProfileGroupCalibrationLabel" = "Ekran Kalibrasyonu";
 "ColorProfileGroupUserLabel" = "Kullanıcı Tarafından Yüklendi";
+
+/* LUT Library */
+"SettingsTabLUTsLabel" = "LUTs";
+"LUTLibraryTitle" = "LUT Kütüphanesi";
+"LUTLibrarySubtitle" = ".cube, .3dl, .lut ve .csv LUT dosyalarını içe aktarın ve her ekrana atayın.";
+"LUTImportButton" = "LUT İçe Aktar…";
+"LUTEmptyStateLabel" = "Henüz hiç LUT içe aktarılmadı.";
+"LUTPickerNoneLabel" = "Yok";
+"LUTDimension1DLabel" = "1D";
+"LUTDimension3DLabel" = "3D";
+"LUTApproximationNote" = "3D LUT'lar nötr eksen boyunca örneklenir.";
+"LUTDeleteConfirmTitle" = "\"%@\" kaldırılsın mı?";
+"LUTDeleteConfirmSubtitle" = "Bu işlem, LUT'u kütüphaneden kaldırır ve kullanan tüm ekranlardan temizler.";
+"LUTRenameAlertTitle" = "LUT'u Yeniden Adlandır";
+"LUTRenameAlertSubtitle" = "Bu LUT için yeni bir ad girin.";
+"LUTImportErrorTitle" = "LUT içe aktarılamadı";
+"LUTImportErrorSubtitle" = "Dosya okunamadı veya geçerli bir LUT değil.";
+"LUTRowLabel" = "LUT";

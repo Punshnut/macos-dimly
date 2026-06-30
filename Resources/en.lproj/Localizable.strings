@@ -463,3 +463,21 @@
 "ColorProfileGroupCreativeLabel" = "Creative Effects";
 "ColorProfileGroupCalibrationLabel" = "Display Calibration";
 "ColorProfileGroupUserLabel" = "User Installed";
+
+/* LUT Library */
+"SettingsTabLUTsLabel" = "LUTs";
+"LUTLibraryTitle" = "LUT Library";
+"LUTLibrarySubtitle" = "Import .cube, .3dl, .lut, and .csv LUT files and assign them per display.";
+"LUTImportButton" = "Import LUT…";
+"LUTEmptyStateLabel" = "No LUTs imported yet.";
+"LUTPickerNoneLabel" = "None";
+"LUTDimension1DLabel" = "1D";
+"LUTDimension3DLabel" = "3D";
+"LUTApproximationNote" = "3D LUTs are sampled along the neutral axis.";
+"LUTDeleteConfirmTitle" = "Remove "%@"?";
+"LUTDeleteConfirmSubtitle" = "This removes the LUT from the library and clears it from any displays using it.";
+"LUTRenameAlertTitle" = "Rename LUT";
+"LUTRenameAlertSubtitle" = "Enter a new name for this LUT.";
+"LUTImportErrorTitle" = "Could not import LUT";
+"LUTImportErrorSubtitle" = "The file could not be read or is not a valid LUT.";
+"LUTRowLabel" = "LUT";

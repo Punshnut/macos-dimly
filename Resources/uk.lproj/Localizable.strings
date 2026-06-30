@@ -476,3 +476,21 @@
 "ColorProfileGroupCreativeLabel" = "Творчі ефекти";
 "ColorProfileGroupCalibrationLabel" = "Калібрування дисплея";
 "ColorProfileGroupUserLabel" = "Встановлено користувачем";
+
+/* LUT Library */
+"SettingsTabLUTsLabel" = "LUTs";
+"LUTLibraryTitle" = "Бібліотека LUT";
+"LUTLibrarySubtitle" = "Імпортуйте файли LUT форматів .cube, .3dl, .lut і .csv та призначайте їх для кожного дисплея.";
+"LUTImportButton" = "Імпортувати LUT…";
+"LUTEmptyStateLabel" = "LUT ще не імпортовано.";
+"LUTPickerNoneLabel" = "Немає";
+"LUTDimension1DLabel" = "1D";
+"LUTDimension3DLabel" = "3D";
+"LUTApproximationNote" = "3D LUT зчитуються вздовж нейтральної осі.";
+"LUTDeleteConfirmTitle" = "Видалити «%@»?";
+"LUTDeleteConfirmSubtitle" = "Це видалить LUT із бібліотеки та прибере його з усіх дисплеїв, де він використовується.";
+"LUTRenameAlertTitle" = "Перейменувати LUT";
+"LUTRenameAlertSubtitle" = "Введіть нову назву для цього LUT.";
+"LUTImportErrorTitle" = "Не вдалося імпортувати LUT";
+"LUTImportErrorSubtitle" = "Не вдалося прочитати файл або він не є дійсним LUT.";
+"LUTRowLabel" = "LUT";

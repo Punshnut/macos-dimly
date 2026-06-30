@@ -476,3 +476,21 @@
 "ColorProfileGroupCreativeLabel" = "Efeitos criativos";
 "ColorProfileGroupCalibrationLabel" = "Calibração da tela";
 "ColorProfileGroupUserLabel" = "Instalado pelo usuário";
+
+/* LUT Library */
+"SettingsTabLUTsLabel" = "LUTs";
+"LUTLibraryTitle" = "Biblioteca de LUT";
+"LUTLibrarySubtitle" = "Importe arquivos LUT .cube, .3dl, .lut e .csv e atribua-os por monitor.";
+"LUTImportButton" = "Importar LUT…";
+"LUTEmptyStateLabel" = "Nenhum LUT importado ainda.";
+"LUTPickerNoneLabel" = "Nenhum";
+"LUTDimension1DLabel" = "1D";
+"LUTDimension3DLabel" = "3D";
+"LUTApproximationNote" = "LUTs 3D são amostrados ao longo do eixo neutro.";
+"LUTDeleteConfirmTitle" = "Remover \"%@\"?";
+"LUTDeleteConfirmSubtitle" = "Isso remove o LUT da biblioteca e o limpa de todos os monitores que o utilizam.";
+"LUTRenameAlertTitle" = "Renomear LUT";
+"LUTRenameAlertSubtitle" = "Insira um novo nome para este LUT.";
+"LUTImportErrorTitle" = "Não foi possível importar o LUT";
+"LUTImportErrorSubtitle" = "O arquivo não pôde ser lido ou não é um LUT válido.";
+"LUTRowLabel" = "LUT";

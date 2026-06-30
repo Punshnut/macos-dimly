@@ -476,3 +476,21 @@
 "ColorProfileGroupCreativeLabel" = "ဖန်တီးမှုအာနိသင်များ";
 "ColorProfileGroupCalibrationLabel" = "ဖန်သားပြင်ချိန်ညှိခြင်း";
 "ColorProfileGroupUserLabel" = "အသုံးပြုသူ တပ်ဆင်ထားသည်";
+
+/* LUT Library */
+"SettingsTabLUTsLabel" = "LUTs";
+"LUTLibraryTitle" = "LUT စာကြည့်တိုက်";
+"LUTLibrarySubtitle" = ".cube, .3dl, .lut နှင့် .csv LUT ဖိုင်များကို တင်သွင်းပြီး မျက်နှာပြင်တစ်ခုချင်းစီအတွက် သတ်မှတ်ပါ။";
+"LUTImportButton" = "LUT တင်သွင်းရန်…";
+"LUTEmptyStateLabel" = "LUT များ မရှိသေးပါ။";
+"LUTPickerNoneLabel" = "မရှိ";
+"LUTDimension1DLabel" = "1D";
+"LUTDimension3DLabel" = "3D";
+"LUTApproximationNote" = "3D LUT များကို neutral axis တလျှောက် နမူနာယူသည်။";
+"LUTDeleteConfirmTitle" = "\"%@\" ကို ဖယ်ရှားမည်လား?";
+"LUTDeleteConfirmSubtitle" = "ဤလုပ်ဆောင်ချက်သည် LUT ကို စာကြည့်တိုက်မှ ဖယ်ရှားပြီး ၎င်းကို အသုံးပြုနေသော မျက်နှာပြင်များမှ ရှင်းလင်းမည်ဖြစ်သည်။";
+"LUTRenameAlertTitle" = "LUT အမည်ပြောင်းရန်";
+"LUTRenameAlertSubtitle" = "ဤ LUT အတွက် အမည်အသစ်တစ်ခု ထည့်သွင်းပါ။";
+"LUTImportErrorTitle" = "LUT တင်သွင်း၍ မရပါ";
+"LUTImportErrorSubtitle" = "ဖိုင်ကို ဖတ်၍မရသောကြောင့် သို့မဟုတ် ၎င်းသည် မှန်ကန်သော LUT မဟုတ်သောကြောင့် ဖြစ်သည်။";
+"LUTRowLabel" = "LUT";

@@ -476,3 +476,21 @@
 "ColorProfileGroupCreativeLabel" = "크리에이티브 효과";
 "ColorProfileGroupCalibrationLabel" = "디스플레이 보정";
 "ColorProfileGroupUserLabel" = "사용자 설치";
+
+/* LUT Library */
+"SettingsTabLUTsLabel" = "LUTs";
+"LUTLibraryTitle" = "LUT 라이브러리";
+"LUTLibrarySubtitle" = ".cube, .3dl, .lut, .csv LUT 파일을 가져와 디스플레이별로 지정할 수 있습니다.";
+"LUTImportButton" = "LUT 가져오기…";
+"LUTEmptyStateLabel" = "가져온 LUT이 없습니다.";
+"LUTPickerNoneLabel" = "없음";
+"LUTDimension1DLabel" = "1D";
+"LUTDimension3DLabel" = "3D";
+"LUTApproximationNote" = "3D LUT은 중립 축을 따라 샘플링됩니다.";
+"LUTDeleteConfirmTitle" = "\"%@\"을(를) 제거하겠습니까?";
+"LUTDeleteConfirmSubtitle" = "이 LUT이 라이브러리에서 제거되고 사용 중인 모든 디스플레이에서 지워집니다.";
+"LUTRenameAlertTitle" = "LUT 이름 변경";
+"LUTRenameAlertSubtitle" = "이 LUT의 새 이름을 입력하십시오.";
+"LUTImportErrorTitle" = "LUT을 가져올 수 없음";
+"LUTImportErrorSubtitle" = "파일을 읽을 수 없거나 올바른 LUT 형식이 아닙니다.";
+"LUTRowLabel" = "LUT";

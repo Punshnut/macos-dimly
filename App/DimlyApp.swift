@@ -103,7 +103,8 @@ struct DimlyApp: App {
                 trueToneManager: engine.trueToneManager,
                 displayModeManager: engine.displayModeManager,
                 colorProfileManager: engine.colorProfileManager,
-                displayAppearanceManager: engine.displayAppearanceManager
+                displayAppearanceManager: engine.displayAppearanceManager,
+                lutManager: engine.lutManager
             )
         }
     }
@@ -302,7 +303,8 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
                 trueToneManager: settingsEngine.trueToneManager,
                 displayModeManager: settingsEngine.displayModeManager,
                 colorProfileManager: settingsEngine.colorProfileManager,
-                displayAppearanceManager: settingsEngine.displayAppearanceManager
+                displayAppearanceManager: settingsEngine.displayAppearanceManager,
+                lutManager: settingsEngine.lutManager
             )
             let hostingView = NSHostingView(rootView: rootView)
             let window = NSWindow(

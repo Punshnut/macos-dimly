@@ -476,3 +476,21 @@
 "ColorProfileGroupCreativeLabel" = "సృజనాత్మక ప్రభావాలు";
 "ColorProfileGroupCalibrationLabel" = "డిస్‌ప్లే క్యాలిబ్రేషన్";
 "ColorProfileGroupUserLabel" = "వినియోగదారు ఇన్‌స్టాల్ చేసినది";
+
+/* LUT Library */
+"SettingsTabLUTsLabel" = "LUTs";
+"LUTLibraryTitle" = "LUT లైబ్రరీ";
+"LUTLibrarySubtitle" = ".cube, .3dl, .lut, మరియు .csv LUT ఫైళ్లను దిగుమతి చేసుకుని, ప్రతి డిస్‌ప్లేకు కేటాయించండి.";
+"LUTImportButton" = "LUT దిగుమతి చేయండి…";
+"LUTEmptyStateLabel" = "ఇంకా LUTలు దిగుమతి చేయబడలేదు.";
+"LUTPickerNoneLabel" = "ఏదీ లేదు";
+"LUTDimension1DLabel" = "1D";
+"LUTDimension3DLabel" = "3D";
+"LUTApproximationNote" = "3D LUTలను న్యూట్రల్ యాక్సిస్ వెంట శాంపిల్ చేస్తారు.";
+"LUTDeleteConfirmTitle" = "\"%@\"ని తీసివేయాలా?";
+"LUTDeleteConfirmSubtitle" = "దీనివల్ల LUT లైబ్రరీ నుండి తొలగించబడుతుంది మరియు దాన్ని ఉపయోగిస్తున్న అన్ని డిస్‌ప్లేల నుండి క్లియర్ అవుతుంది.";
+"LUTRenameAlertTitle" = "LUTకి పేరు మార్చండి";
+"LUTRenameAlertSubtitle" = "ఈ LUTకి కొత్త పేరు నమోదు చేయండి.";
+"LUTImportErrorTitle" = "LUT దిగుమతి చేయడం సాధ్యపడలేదు";
+"LUTImportErrorSubtitle" = "ఫైల్ చదవడం సాధ్యపడలేదు లేదా అది చెల్లుబాటు అయ్యే LUT కాదు.";
+"LUTRowLabel" = "LUT";

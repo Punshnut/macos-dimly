@@ -476,3 +476,21 @@
 "ColorProfileGroupCreativeLabel" = "جلوه‌های خلاقانه";
 "ColorProfileGroupCalibrationLabel" = "کالیبراسیون نمایشگر";
 "ColorProfileGroupUserLabel" = "نصب‌شده توسط کاربر";
+
+/* LUT Library */
+"SettingsTabLUTsLabel" = "LUTs";
+"LUTLibraryTitle" = "کتابخانه LUT";
+"LUTLibrarySubtitle" = "فایل‌های LUT با فرمت .cube، .3dl، .lut و .csv را وارد کنید و برای هر نمایشگر تنظیم کنید.";
+"LUTImportButton" = "وارد کردن LUT…";
+"LUTEmptyStateLabel" = "هنوز هیچ LUT‌ای وارد نشده.";
+"LUTPickerNoneLabel" = "هیچ‌کدام";
+"LUTDimension1DLabel" = "1D";
+"LUTDimension3DLabel" = "3D";
+"LUTApproximationNote" = "LUT‌های سه‌بعدی (3D) در امتداد محور خنثی نمونه‌برداری می‌شوند.";
+"LUTDeleteConfirmTitle" = "حذف «%@»؟";
+"LUTDeleteConfirmSubtitle" = "این LUT از کتابخانه حذف می‌شود و از تمام نمایشگرهایی که از آن استفاده می‌کنند پاک می‌شود.";
+"LUTRenameAlertTitle" = "تغییر نام LUT";
+"LUTRenameAlertSubtitle" = "یک نام جدید برای این LUT وارد کنید.";
+"LUTImportErrorTitle" = "وارد کردن LUT ممکن نیست";
+"LUTImportErrorSubtitle" = "فایل قابل خواندن نیست یا یک LUT معتبر نمی‌باشد.";
+"LUTRowLabel" = "LUT";

@@ -476,3 +476,21 @@
 "ColorProfileGroupCreativeLabel" = "تأثيرات إبداعية";
 "ColorProfileGroupCalibrationLabel" = "معايرة الشاشة";
 "ColorProfileGroupUserLabel" = "مثبّت بواسطة المستخدم";
+
+/* LUT Library */
+"SettingsTabLUTsLabel" = "LUTs";
+"LUTLibraryTitle" = "مكتبة LUT";
+"LUTLibrarySubtitle" = "استورد ملفات LUT بصيغ ‎.cube و‎.3dl و‎.lut و‎.csv وخصّص لكل شاشة ما يناسبها.";
+"LUTImportButton" = "استيراد LUT…";
+"LUTEmptyStateLabel" = "لم يتم استيراد أي LUT بعد.";
+"LUTPickerNoneLabel" = "لا شيء";
+"LUTDimension1DLabel" = "1D";
+"LUTDimension3DLabel" = "3D";
+"LUTApproximationNote" = "يتم أخذ عينات من LUT ثلاثية الأبعاد على طول المحور المحايد.";
+"LUTDeleteConfirmTitle" = "إزالة «%@»؟";
+"LUTDeleteConfirmSubtitle" = "سيؤدي هذا إلى إزالة LUT من المكتبة ومسحه من أي شاشات تستخدمه.";
+"LUTRenameAlertTitle" = "إعادة تسمية LUT";
+"LUTRenameAlertSubtitle" = "أدخل اسمًا جديدًا لهذا LUT.";
+"LUTImportErrorTitle" = "تعذّر استيراد LUT";
+"LUTImportErrorSubtitle" = "تعذّرت قراءة الملف أو أنه ليس LUT صالحًا.";
+"LUTRowLabel" = "LUT";

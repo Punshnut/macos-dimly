@@ -95,6 +95,7 @@ final class DimlyEngine: ObservableObject {
     let displayModeManager: DisplayModeManager
     let colorProfileManager: ColorProfileManager
     let displayAppearanceManager: DisplayAppearanceManager
+    let lutManager: LUTManager
     var onShowWindow: (() -> Void)?
     var onToggleWindow: (() -> Void)?
 
@@ -125,6 +126,7 @@ final class DimlyEngine: ObservableObject {
         self.displayModeManager = DisplayModeManager()
         self.colorProfileManager = ColorProfileManager()
         self.displayAppearanceManager = DisplayAppearanceManager()
+        self.lutManager = LUTManager()
         DiagnosticsLogger.shared.log("Engine init: managers constructed", category: "engine")
         self.launcherHotkeyManager.onHotkeyPressed = { [weak self] in
             self?.onShowWindow?()
@@ -181,7 +183,7 @@ final class DimlyEngine: ObservableObject {
                     remainingAttempts: 5,
                     initialDelayNanoseconds: self.wakeRestoreDelayNanoseconds
                 )
-                self.displayAppearanceManager.restoreAll(for: self.displayManager.displays)
+                self.displayAppearanceManager.restoreAll(for: self.displayManager.displays, lutProvider: self.activeLUTTables(for:))
                 self.trueToneManager.refresh(for: self.displayManager.displays)
             }
         }
@@ -812,16 +814,37 @@ final class DimlyEngine: ObservableObject {
                 settings.monitorColorProfileByDisplayID[display.stableIdentity] = profile.id
             }
             // Re-apply any active gamma LUT filter after the ICC switch.
-            displayAppearanceManager.restoreAll(for: displayManager.displays)
+            displayAppearanceManager.restoreAll(for: displayManager.displays, lutProvider: activeLUTTables(for:))
         }
     }
 
     /// Applies a display appearance filter (gamma LUT) and persists it.
     func setDisplayFilter(_ filter: DisplayFilter, for display: DisplayInfo) {
-        displayAppearanceManager.applyFilter(filter, to: display)
+        displayAppearanceManager.applyFilter(filter, lutTables: activeLUTTables(for: display), to: display)
         settingsStore.update { settings in
             settings.displayFilterByDisplayID[display.stableIdentity] = filter
         }
+    }
+
+    /// Sets or clears the active LUT for a display and immediately composes it with the current filter.
+    func setActiveLUT(_ entry: LUTEntry?, for display: DisplayInfo) {
+        settingsStore.update { settings in
+            if let entry {
+                settings.activeLUTByDisplayID[display.stableIdentity] = entry.id
+            } else {
+                settings.activeLUTByDisplayID.removeValue(forKey: display.stableIdentity)
+            }
+        }
+        let filter = displayAppearanceManager.activeFilter[display.stableIdentity] ?? .standard
+        let lut = entry.flatMap { lutManager.gammaTables(for: $0) }
+        displayAppearanceManager.applyFilter(filter, lutTables: lut, to: display)
+    }
+
+    /// Returns the cached LUT gamma tables for the active LUT on the given display, if any.
+    func activeLUTTables(for display: DisplayInfo) -> ([Float], [Float], [Float])? {
+        guard let lutID = settingsStore.settings.activeLUTByDisplayID[display.stableIdentity],
+              let entry = lutManager.library.first(where: { $0.id == lutID }) else { return nil }
+        return lutManager.gammaTables(for: entry)
     }
 
     /// Applies explicit user intent for a display power state and persists it as the restore source of truth.
@@ -1101,7 +1124,7 @@ final class DimlyEngine: ObservableObject {
                     self.colorProfileManager.loadProfiles(for: display)
                 }
                 self.trueToneManager.refresh(for: displays)
-                self.displayAppearanceManager.restoreAll(for: displays)
+                self.displayAppearanceManager.restoreAll(for: displays, lutProvider: self.activeLUTTables(for:))
             }
             .store(in: &stateCancellables)
 

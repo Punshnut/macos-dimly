@@ -16,8 +16,10 @@ final class DisplayAppearanceManager: ObservableObject {
 
     // MARK: - Public API
 
-    /// Applies the given filter to a display via gamma LUT manipulation.
-    func applyFilter(_ filter: DisplayFilter, to display: DisplayInfo) {
+    /// Applies the given filter to a display, optionally composing with LUT tables.
+    /// When `lutTables` is provided, the filter is applied first and then mapped through the LUT
+    /// in a single `CGSetDisplayTransferByTable` call.
+    func applyFilter(_ filter: DisplayFilter, lutTables: ([Float], [Float], [Float])? = nil, to display: DisplayInfo) {
         let displayID = display.displayID
         switch filter {
 
@@ -25,47 +27,82 @@ final class DisplayAppearanceManager: ObservableObject {
             // .grayscale is kept in the enum only for legacy-settings decode compat.
             // True channel-mixing desaturation is not achievable via per-channel LUTs;
             // use Color Profile → "Black & White" for that instead.
-            CGDisplayRestoreColorSyncSettings()
-            activeFilter[display.stableIdentity] = .standard
+            if let lut = lutTables {
+                // Standard filter = identity, so just apply LUT directly.
+                applyTables(lut.0, lut.1, lut.2, to: displayID, stableID: display.stableIdentity, filter: .standard)
+            } else {
+                CGDisplayRestoreColorSyncSettings()
+                activeFilter[display.stableIdentity] = .standard
+            }
 
         case .invert, .warmth, .cool:
-            let (r, g, b) = Self.tables(for: filter)
-            let result = r.withUnsafeBufferPointer { rBuf in
-                g.withUnsafeBufferPointer { gBuf in
-                    b.withUnsafeBufferPointer { bBuf in
-                        CGSetDisplayTransferByTable(
-                            displayID,
-                            UInt32(Self.tableSize),
-                            rBuf.baseAddress,
-                            gBuf.baseAddress,
-                            bBuf.baseAddress
-                        )
-                    }
-                }
-            }
-            if result == .success {
-                activeFilter[display.stableIdentity] = filter
+            let (fr, fg, fb) = Self.tables(for: filter)
+            let (r, g, b): ([Float], [Float], [Float])
+            if let lut = lutTables {
+                r = Self.composeTables(fr, through: lut.0)
+                g = Self.composeTables(fg, through: lut.1)
+                b = Self.composeTables(fb, through: lut.2)
             } else {
-                logger.error("Gamma LUT failed for \(display.stableIdentity, privacy: .public): \(result.rawValue, privacy: .public)")
+                (r, g, b) = (fr, fg, fb)
             }
+            applyTables(r, g, b, to: displayID, stableID: display.stableIdentity, filter: filter)
         }
     }
 
     /// Re-applies all stored filters; call after sleep/wake or color profile change.
-    func restoreAll(for displays: [DisplayInfo]) {
+    /// `lutProvider` optionally supplies LUT tables per display so filter+LUT stay composed.
+    func restoreAll(for displays: [DisplayInfo], lutProvider: ((DisplayInfo) -> ([Float], [Float], [Float])?)? = nil) {
         for display in displays {
             let filter = activeFilter[display.stableIdentity] ?? .standard
-            if filter != .standard {
-                applyFilter(filter, to: display)
+            let lut = lutProvider?(display)
+            if filter != .standard || lut != nil {
+                applyFilter(filter, lutTables: lut, to: display)
             }
+        }
+    }
+
+    // MARK: - Private helpers
+
+    private func applyTables(_ r: [Float], _ g: [Float], _ b: [Float],
+                              to displayID: CGDirectDisplayID,
+                              stableID: String,
+                              filter: DisplayFilter) {
+        let result = r.withUnsafeBufferPointer { rBuf in
+            g.withUnsafeBufferPointer { gBuf in
+                b.withUnsafeBufferPointer { bBuf in
+                    CGSetDisplayTransferByTable(
+                        displayID,
+                        UInt32(Self.tableSize),
+                        rBuf.baseAddress,
+                        gBuf.baseAddress,
+                        bBuf.baseAddress
+                    )
+                }
+            }
+        }
+        if result == .success {
+            activeFilter[stableID] = filter
+        } else {
+            logger.error("Gamma LUT failed for \(stableID, privacy: .public): \(result.rawValue, privacy: .public)")
+        }
+    }
+
+    /// Threads `filterTable` through `lutTable`: each output[i] = lut(filterTable[i]).
+    private static func composeTables(_ filterTable: [Float], through lutTable: [Float]) -> [Float] {
+        let n = tableSize
+        let lutMax = Float(lutTable.count - 1)
+        return (0..<n).map { i in
+            let pos = filterTable[i] * lutMax
+            let lo = Int(pos)
+            let hi = min(lo + 1, lutTable.count - 1)
+            let frac = pos - Float(lo)
+            return lutTable[lo] * (1 - frac) + lutTable[hi] * frac
         }
     }
 
     // MARK: - Gamma table generation
 
-    private static func tables(for filter: DisplayFilter) -> ([Float], [Float], [Float]) {
-        // Entries are in the display's gamma-encoded domain (0 → 1).
-        // Per-channel LUTs can only remap — they cannot cross-mix channels.
+    static func tables(for filter: DisplayFilter) -> ([Float], [Float], [Float]) {
         let n = tableSize
         let id = (0..<n).map { Float($0) / Float(n - 1) }
 
@@ -74,18 +111,14 @@ final class DisplayAppearanceManager: ObservableObject {
             return (id, id, id)
 
         case .invert:
-            // Mirror: encoded 1.0 → 0.0 and vice versa.
             let inv = (0..<n).map { Float(n - 1 - $0) / Float(n - 1) }
             return (inv, inv, inv)
 
         case .warmth:
-            // Shift white point warmer by pulling blue down ~18%.
-            // Red/green stay at identity so no hue shift in the mid-tones.
             let cool = id.map { min(max($0 * 0.82, 0), 1) }
             return (id, id, cool)
 
         case .cool:
-            // Shift white point cooler by pulling red down ~14%.
             let warm = id.map { min(max($0 * 0.86, 0), 1) }
             return (warm, id, id)
         }

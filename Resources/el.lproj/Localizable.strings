@@ -476,3 +476,21 @@
 "ColorProfileGroupCreativeLabel" = "Δημιουργικά εφέ";
 "ColorProfileGroupCalibrationLabel" = "Βαθμονόμηση οθόνης";
 "ColorProfileGroupUserLabel" = "Εγκατεστημένο από χρήστη";
+
+/* LUT Library */
+"SettingsTabLUTsLabel" = "LUTs";
+"LUTLibraryTitle" = "Βιβλιοθήκη LUT";
+"LUTLibrarySubtitle" = "Εισαγωγή αρχείων LUT τύπου .cube, .3dl, .lut και .csv με ανάθεση ανά οθόνη.";
+"LUTImportButton" = "Εισαγωγή LUT…";
+"LUTEmptyStateLabel" = "Δεν έχουν εισαχθεί LUT ακόμα.";
+"LUTPickerNoneLabel" = "Καμία";
+"LUTDimension1DLabel" = "1D";
+"LUTDimension3DLabel" = "3D";
+"LUTApproximationNote" = "Τα 3D LUT δειγματοληπτούνται κατά μήκος του ουδέτερου άξονα.";
+"LUTDeleteConfirmTitle" = "Αφαίρεση του «%@»;";
+"LUTDeleteConfirmSubtitle" = "Αυτό αφαιρεί το LUT από τη βιβλιοθήκη και το καταργεί από τυχόν οθόνες που το χρησιμοποιούν.";
+"LUTRenameAlertTitle" = "Μετονομασία LUT";
+"LUTRenameAlertSubtitle" = "Εισαγάγετε νέο όνομα για αυτό το LUT.";
+"LUTImportErrorTitle" = "Αδύνατη η εισαγωγή LUT";
+"LUTImportErrorSubtitle" = "Δεν ήταν δυνατή η ανάγνωση του αρχείου ή δεν αποτελεί έγκυρο LUT.";
+"LUTRowLabel" = "LUT";

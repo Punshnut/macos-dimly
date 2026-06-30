@@ -476,3 +476,21 @@
 "ColorProfileGroupCreativeLabel" = "تخلیقی اثرات";
 "ColorProfileGroupCalibrationLabel" = "ڈسپلے کیلیبریشن";
 "ColorProfileGroupUserLabel" = "صارف کی جانب سے انسٹال شدہ";
+
+/* LUT Library */
+"SettingsTabLUTsLabel" = "LUTs";
+"LUTLibraryTitle" = "LUT لائبریری";
+"LUTLibrarySubtitle" = ".cube، .3dl، .lut، اور .csv LUT فائلیں درآمد کریں اور انہیں ہر ڈسپلے کے لیے مخصوص کریں۔";
+"LUTImportButton" = "LUT درآمد کریں…";
+"LUTEmptyStateLabel" = "ابھی تک کوئی LUT درآمد نہیں کی گئی۔";
+"LUTPickerNoneLabel" = "کوئی نہیں";
+"LUTDimension1DLabel" = "1D";
+"LUTDimension3DLabel" = "3D";
+"LUTApproximationNote" = "3D LUTs کو neutral axis کے ساتھ نمونہ کیا جاتا ہے۔";
+"LUTDeleteConfirmTitle" = "\"%@\" ہٹائیں؟";
+"LUTDeleteConfirmSubtitle" = "یہ LUT کو لائبریری سے ہٹا دے گا اور اسے استعمال کرنے والے تمام ڈسپلے سے صاف کر دے گا۔";
+"LUTRenameAlertTitle" = "LUT کا نام تبدیل کریں";
+"LUTRenameAlertSubtitle" = "اس LUT کے لیے نیا نام درج کریں۔";
+"LUTImportErrorTitle" = "LUT درآمد نہیں ہو سکی";
+"LUTImportErrorSubtitle" = "فائل پڑھی نہیں جا سکی یا یہ کوئی درست LUT نہیں ہے۔";
+"LUTRowLabel" = "LUT";

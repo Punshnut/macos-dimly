@@ -476,3 +476,21 @@
 "ColorProfileGroupCreativeLabel" = "የፈጠራ ውጤቶች";
 "ColorProfileGroupCalibrationLabel" = "የማሳያ ካሊብሬሽን";
 "ColorProfileGroupUserLabel" = "በተጠቃሚ የተጫነ";
+
+/* LUT Library */
+"SettingsTabLUTsLabel" = "LUTs";
+"LUTLibraryTitle" = "የ LUT ቤተ-መጻሕፍት";
+"LUTLibrarySubtitle" = ".cube፣ .3dl፣ .lut እና .csv የ LUT ፋይሎችን አስገባ እና ለእያንዳንዱ ማሳያ ሰይም።";
+"LUTImportButton" = "LUT አስገባ…";
+"LUTEmptyStateLabel" = "እስካሁን ምንም LUT አልገባም።";
+"LUTPickerNoneLabel" = "ምንም";
+"LUTDimension1DLabel" = "1D";
+"LUTDimension3DLabel" = "3D";
+"LUTApproximationNote" = "3D LUT ዎች በ neutral axis ላይ ይለካሉ።";
+"LUTDeleteConfirmTitle" = "«%@»ን ማስወገድ?";
+"LUTDeleteConfirmSubtitle" = "ይህ LUTን ከቤተ-መጻሕፍቱ ያስወግደዋል እና እየተጠቀሙበት ካሉ ማሳያዎች ሁሉ ያጸዳዋል።";
+"LUTRenameAlertTitle" = "LUT ዳግም ሰይም";
+"LUTRenameAlertSubtitle" = "ለዚህ LUT አዲስ ስም አስገባ።";
+"LUTImportErrorTitle" = "LUT ማስገባት አልተቻለም";
+"LUTImportErrorSubtitle" = "ፋይሉ ሊነበብ አልቻለም ወይም ትክክለኛ LUT አይደለም።";
+"LUTRowLabel" = "LUT";

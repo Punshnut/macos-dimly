@@ -18,6 +18,7 @@ struct SettingsRootView: View {
     @ObservedObject var displayModeManager: DisplayModeManager
     @ObservedObject var colorProfileManager: ColorProfileManager
     @ObservedObject var displayAppearanceManager: DisplayAppearanceManager
+    @ObservedObject var lutManager: LUTManager
     @State private var introWindowController: IntroWindowController?
     @State private var selection: SettingsDestination = .general
     @State private var proposedProfileName: String = ""
@@ -25,6 +26,7 @@ struct SettingsRootView: View {
     enum SettingsDestination: Hashable {
         case general
         case displays
+        case luts
         case visuals
         case shortcuts
         case profiles
@@ -41,6 +43,8 @@ struct SettingsRootView: View {
                         .tag(SettingsDestination.general)
                     Label(String(localized: "SettingsTabDisplaysLabel"), systemImage: "display")
                         .tag(SettingsDestination.displays)
+                    Label(String(localized: "SettingsTabLUTsLabel"), systemImage: "camera.filters")
+                        .tag(SettingsDestination.luts)
                     Label(String(localized: "SettingsTabVisualsLabel"), systemImage: "paintbrush")
                         .tag(SettingsDestination.visuals)
                     Label(String(localized: "SettingsTabShortcutsLabel"), systemImage: "keyboard")
@@ -64,6 +68,7 @@ struct SettingsRootView: View {
                 ddcManager: ddcManager,
                 engine: engine,
                 scheduleManager: scheduleManager,
+                lutManager: lutManager,
                 proposedProfileName: $proposedProfileName,
                 renameProfile: renameProfile,
                 showIntroAgain: showIntroAgain,
@@ -400,7 +405,37 @@ struct SettingsRootView: View {
                 .controlSize(.small)
                 .labelsHidden()
             }
+            lutPickerRow(for: display)
             colorProfileRow(for: display)
+        }
+    }
+
+    @ViewBuilder
+    private func lutPickerRow(for display: DisplayInfo) -> some View {
+        let activeLUTID = settingsStore.settings.activeLUTByDisplayID[display.stableIdentity]
+        HStack {
+            Text(String(localized: "LUTRowLabel"))
+                .font(.caption)
+                .foregroundStyle(.secondary)
+            Spacer()
+            Picker("", selection: Binding(
+                get: { activeLUTID },
+                set: { newID in
+                    let entry = newID.flatMap { id in engine.lutManager.library.first { $0.id == id } }
+                    engine.setActiveLUT(entry, for: display)
+                }
+            )) {
+                Text(String(localized: "LUTPickerNoneLabel")).tag(Optional<UUID>.none)
+                if !engine.lutManager.library.isEmpty {
+                    Divider()
+                    ForEach(engine.lutManager.library) { entry in
+                        Text(entry.name).tag(Optional(entry.id))
+                    }
+                }
+            }
+            .pickerStyle(.menu)
+            .controlSize(.small)
+            .labelsHidden()
         }
     }
 
@@ -912,6 +947,7 @@ struct SettingsRootView: View {
         @ObservedObject var ddcManager: DDCManager
         let engine: DimlyEngine
         @ObservedObject var scheduleManager: ScheduleManager
+        @ObservedObject var lutManager: LUTManager
         @Binding var proposedProfileName: String
         let renameProfile: (DisplayProfile) -> Void
         let showIntroAgain: () -> Void
@@ -949,6 +985,8 @@ struct SettingsRootView: View {
                 generalDetail
             case .displays:
                 displaysDetail
+            case .luts:
+                lutsDetail
             case .visuals:
                 visualsDetail
             case .shortcuts:
@@ -1216,6 +1254,10 @@ struct SettingsRootView: View {
             let remaining = allDisplays.filter { order.contains($0.stableIdentity) == false }
                 .sorted { $0.displayID < $1.displayID }
             return ordered + remaining
+        }
+
+        private var lutsDetail: some View {
+            _LUTsDetailView(lutManager: lutManager, engine: engine)
         }
 
         private var visualsDetail: some View {
@@ -3026,5 +3068,146 @@ private extension Array where Element == CGFloat {
             return (sorted[mid - 1] + sorted[mid]) * 0.5
         }
         return sorted[mid]
+    }
+}
+
+// MARK: - LUT Library Tab
+
+private struct _LUTsDetailView: View {
+    @ObservedObject var lutManager: LUTManager
+    let engine: DimlyEngine
+
+    @State private var showImporter = false
+    @State private var importError: String? = nil
+    @State private var showImportError = false
+
+    var body: some View {
+        SettingsScrollView(
+            title: String(localized: "LUTLibraryTitle"),
+            subtitle: String(localized: "LUTLibrarySubtitle"),
+            contentMaxWidth: 780
+        ) {
+            SettingsCard(title: String(localized: "LUTLibraryTitle"), subtitle: nil) {
+                HStack {
+                    Spacer()
+                    Button(String(localized: "LUTImportButton")) {
+                        showImporter = true
+                    }
+                    .buttonStyle(.bordered)
+                    .controlSize(.small)
+                }
+                if lutManager.library.isEmpty {
+                    Text(String(localized: "LUTEmptyStateLabel"))
+                        .font(.caption)
+                        .foregroundStyle(.secondary)
+                        .frame(maxWidth: .infinity, alignment: .center)
+                        .padding(.vertical, 12)
+                } else {
+                    SettingsDivider()
+                    ForEach(lutManager.library) { entry in
+                        HStack(spacing: 10) {
+                            if let (r, g, b) = lutManager.gammaTables(for: entry) {
+                                LUTPreviewSwatch(r: r, g: g, b: b)
+                                    .frame(width: 60, height: 18)
+                                    .overlay(RoundedRectangle(cornerRadius: 4).stroke(Color.primary.opacity(0.15), lineWidth: 0.5))
+                            } else {
+                                RoundedRectangle(cornerRadius: 4)
+                                    .fill(Color.secondary.opacity(0.2))
+                                    .frame(width: 60, height: 18)
+                            }
+                            VStack(alignment: .leading, spacing: 2) {
+                                Text(entry.name)
+                                    .font(.caption.weight(.medium))
+                                Text(entry.dimension.label)
+                                    .font(.caption2)
+                                    .foregroundStyle(.secondary)
+                            }
+                            Spacer()
+                            Button(String(localized: "ActionRenameLabel")) {
+                                showRenameAlert(for: entry)
+                            }
+                            .buttonStyle(.borderless)
+                            .controlSize(.small)
+                            .foregroundStyle(.secondary)
+                            Button(role: .destructive) {
+                                confirmDeleteLUT(entry)
+                            } label: {
+                                Image(systemName: "trash")
+                                    .font(.caption)
+                            }
+                            .buttonStyle(.borderless)
+                            .controlSize(.small)
+                            .foregroundStyle(.secondary)
+                        }
+                        .padding(.vertical, 4)
+                        if entry.id != lutManager.library.last?.id {
+                            SettingsDivider()
+                        }
+                    }
+                }
+            }
+        }
+        .fileImporter(
+            isPresented: $showImporter,
+            allowedContentTypes: [
+                UTType(filenameExtension: "cube") ?? .data,
+                UTType(filenameExtension: "3dl") ?? .data,
+                UTType(filenameExtension: "lut") ?? .data,
+                UTType(filenameExtension: "csv") ?? .commaSeparatedText,
+            ],
+            allowsMultipleSelection: false
+        ) { result in
+            switch result {
+            case .success(let urls):
+                guard let url = urls.first else { return }
+                do {
+                    _ = try lutManager.importLUT(from: url)
+                } catch {
+                    importError = error.localizedDescription
+                    showImportError = true
+                }
+            case .failure:
+                break
+            }
+        }
+        .alert(
+            String(localized: "LUTImportErrorTitle"),
+            isPresented: $showImportError,
+            presenting: importError
+        ) { _ in
+            Button("OK", role: .cancel) {}
+        } message: { msg in
+            Text(msg)
+        }
+    }
+
+    private func confirmDeleteLUT(_ entry: LUTEntry) {
+        let alert = NSAlert()
+        alert.messageText = String(format: String(localized: "LUTDeleteConfirmTitle"), entry.name)
+        alert.informativeText = String(localized: "LUTDeleteConfirmSubtitle")
+        alert.alertStyle = .warning
+        alert.addButton(withTitle: String(localized: "ActionDeleteButton"))
+        alert.addButton(withTitle: String(localized: "ActionCancelButton"))
+        if alert.runModal() == .alertFirstButtonReturn {
+            lutManager.deleteLUT(entry)
+        }
+    }
+
+    private func showRenameAlert(for entry: LUTEntry) {
+        let alert = NSAlert()
+        alert.messageText = String(localized: "LUTRenameAlertTitle")
+        alert.informativeText = String(localized: "LUTRenameAlertSubtitle")
+        alert.addButton(withTitle: String(localized: "ActionSaveButton"))
+        alert.addButton(withTitle: String(localized: "ActionCancelButton"))
+        let textField = NSTextField(string: entry.name)
+        textField.frame = NSRect(x: 0, y: 0, width: 240, height: 24)
+        alert.accessoryView = textField
+        let response = AlertPresentation.runModalOnCursorScreen(alert)
+        if response == .alertFirstButtonReturn {
+            let newName = textField.stringValue.trimmingCharacters(in: .whitespacesAndNewlines)
+            if !newName.isEmpty {
+                lutManager.renameLUT(entry, to: newName)
+            }
+        }
     }
 }

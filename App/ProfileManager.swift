@@ -270,6 +270,7 @@ struct ProfileMonitorState: Codable, Equatable {
     var brightnessPanelExpandedDisplayIDs: [String]
     var monitorPowerStateByDisplayID: [String: PersistedMonitorPowerState]
     var monitorBrightnessByDisplayID: [String: Int]
+    var activeLUTByDisplayID: [String: UUID]
 
     private enum CodingKeys: String, CodingKey {
         case menuBarExcludedDisplayIDs
@@ -282,6 +283,7 @@ struct ProfileMonitorState: Codable, Equatable {
         case brightnessPanelExpandedDisplayIDs
         case monitorPowerStateByDisplayID
         case monitorBrightnessByDisplayID
+        case activeLUTByDisplayID
     }
 
     /// Creates the monitor-specific portion of a profile snapshot.
@@ -295,7 +297,8 @@ struct ProfileMonitorState: Codable, Equatable {
         mergedDisplayRows: [[String]],
         brightnessPanelExpandedDisplayIDs: [String],
         monitorPowerStateByDisplayID: [String: PersistedMonitorPowerState],
-        monitorBrightnessByDisplayID: [String: Int]
+        monitorBrightnessByDisplayID: [String: Int],
+        activeLUTByDisplayID: [String: UUID] = [:]
     ) {
         self.menuBarExcludedDisplayIDs = menuBarExcludedDisplayIDs
         self.menuBarIncludedInternalDisplayIDs = menuBarIncludedInternalDisplayIDs
@@ -307,6 +310,7 @@ struct ProfileMonitorState: Codable, Equatable {
         self.brightnessPanelExpandedDisplayIDs = brightnessPanelExpandedDisplayIDs
         self.monitorPowerStateByDisplayID = monitorPowerStateByDisplayID
         self.monitorBrightnessByDisplayID = monitorBrightnessByDisplayID
+        self.activeLUTByDisplayID = activeLUTByDisplayID
     }
 
     /// Captures monitor ordering and per-display state from the current live settings.
@@ -321,6 +325,7 @@ struct ProfileMonitorState: Codable, Equatable {
         brightnessPanelExpandedDisplayIDs = settings.brightnessPanelExpandedDisplayIDs
         monitorPowerStateByDisplayID = settings.monitorPowerStateByDisplayID
         monitorBrightnessByDisplayID = settings.monitorBrightnessByDisplayID
+        activeLUTByDisplayID = settings.activeLUTByDisplayID
     }
 
     /// Decodes saved monitor UI state while tolerating fields that may be absent in older profiles.
@@ -336,6 +341,7 @@ struct ProfileMonitorState: Codable, Equatable {
         brightnessPanelExpandedDisplayIDs = try container.decodeIfPresent([String].self, forKey: .brightnessPanelExpandedDisplayIDs) ?? []
         monitorPowerStateByDisplayID = try container.decodeIfPresent([String: PersistedMonitorPowerState].self, forKey: .monitorPowerStateByDisplayID) ?? [:]
         monitorBrightnessByDisplayID = try container.decodeIfPresent([String: Int].self, forKey: .monitorBrightnessByDisplayID) ?? [:]
+        activeLUTByDisplayID = try container.decodeIfPresent([String: UUID].self, forKey: .activeLUTByDisplayID) ?? [:]
     }
 
     /// Encodes monitor-specific profile state for persistence and backup export.
@@ -351,6 +357,7 @@ struct ProfileMonitorState: Codable, Equatable {
         try container.encode(brightnessPanelExpandedDisplayIDs, forKey: .brightnessPanelExpandedDisplayIDs)
         try container.encode(monitorPowerStateByDisplayID, forKey: .monitorPowerStateByDisplayID)
         try container.encode(monitorBrightnessByDisplayID, forKey: .monitorBrightnessByDisplayID)
+        try container.encode(activeLUTByDisplayID, forKey: .activeLUTByDisplayID)
     }
 
     /// Applies captured monitor-related UI state back into live app settings.
@@ -367,6 +374,7 @@ struct ProfileMonitorState: Codable, Equatable {
         }
         settings.monitorPowerStateByDisplayID = monitorPowerStateByDisplayID
         settings.monitorBrightnessByDisplayID = monitorBrightnessByDisplayID
+        settings.activeLUTByDisplayID = activeLUTByDisplayID
     }
 
     /// Rewrites monitor IDs using profile snapshot -> current display mappings.
@@ -381,7 +389,8 @@ struct ProfileMonitorState: Codable, Equatable {
             mergedDisplayRows: mergedDisplayRows.map { remap($0, with: idMap) },
             brightnessPanelExpandedDisplayIDs: remap(brightnessPanelExpandedDisplayIDs, with: idMap),
             monitorPowerStateByDisplayID: remap(monitorPowerStateByDisplayID, with: idMap),
-            monitorBrightnessByDisplayID: remap(monitorBrightnessByDisplayID, with: idMap)
+            monitorBrightnessByDisplayID: remap(monitorBrightnessByDisplayID, with: idMap),
+            activeLUTByDisplayID: remap(activeLUTByDisplayID, with: idMap)
         )
     }
 
@@ -413,6 +422,15 @@ struct ProfileMonitorState: Codable, Equatable {
         with idMap: [String: String]
     ) -> [String: PersistedMonitorPowerState] {
         var remapped: [String: PersistedMonitorPowerState] = [:]
+        for (id, value) in values {
+            remapped[idMap[id] ?? id] = value
+        }
+        return remapped
+    }
+
+    /// Remaps dictionary keys from snapshot IDs to current display IDs.
+    private func remap(_ values: [String: UUID], with idMap: [String: String]) -> [String: UUID] {
+        var remapped: [String: UUID] = [:]
         for (id, value) in values {
             remapped[idMap[id] ?? id] = value
         }
@@ -743,6 +761,12 @@ final class ProfileManager: ObservableObject {
             appliedCount += 1
         }
         if let engine {
+            // Apply active LUT per display immediately.
+            for (_, display) in matched {
+                let lutID = remappedMonitorState?.activeLUTByDisplayID[display.stableIdentity]
+                let lutEntry = lutID.flatMap { id in engine.lutManager.library.first { $0.id == id } }
+                engine.setActiveLUT(lutEntry, for: display)
+            }
             let deduplicatedImmediate = deduplicatedBrightnessTargets(immediateBrightnessTargets)
             engine.setBrightnessSynchronously(deduplicatedImmediate, animated: shouldAnimateBrightness)
             if !delayedBrightnessTargets.isEmpty {

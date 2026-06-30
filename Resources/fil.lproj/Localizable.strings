@@ -474,3 +474,21 @@
 "ColorProfileGroupCreativeLabel" = "Mga Creative Effect";
 "ColorProfileGroupCalibrationLabel" = "Display Calibration";
 "ColorProfileGroupUserLabel" = "Naka-install ng User";
+
+/* LUT Library */
+"SettingsTabLUTsLabel" = "LUTs";
+"LUTLibraryTitle" = "LUT Library";
+"LUTLibrarySubtitle" = "Mag-import ng mga .cube, .3dl, .lut, at .csv na LUT file at italaga ang mga ito sa bawat display.";
+"LUTImportButton" = "Mag-import ng LUT…";
+"LUTEmptyStateLabel" = "Wala pang na-import na LUT.";
+"LUTPickerNoneLabel" = "Wala";
+"LUTDimension1DLabel" = "1D";
+"LUTDimension3DLabel" = "3D";
+"LUTApproximationNote" = "Ang mga 3D LUT ay sinesampol sa neutral axis.";
+"LUTDeleteConfirmTitle" = "Alisin ang \"%@\"?";
+"LUTDeleteConfirmSubtitle" = "Aalisin nito ang LUT mula sa library at iki-clear ito sa lahat ng display na gumagamit nito.";
+"LUTRenameAlertTitle" = "Palitan ang Pangalan ng LUT";
+"LUTRenameAlertSubtitle" = "Maglagay ng bagong pangalan para sa LUT na ito.";
+"LUTImportErrorTitle" = "Hindi ma-import ang LUT";
+"LUTImportErrorSubtitle" = "Hindi mabasa ang file o hindi ito valid na LUT.";
+"LUTRowLabel" = "LUT";

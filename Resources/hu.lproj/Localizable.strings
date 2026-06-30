@@ -476,3 +476,21 @@
 "ColorProfileGroupCreativeLabel" = "Kreatív effektek";
 "ColorProfileGroupCalibrationLabel" = "Kijelző kalibrálása";
 "ColorProfileGroupUserLabel" = "Felhasználó által telepített";
+
+/* LUT Library */
+"SettingsTabLUTsLabel" = "LUTs";
+"LUTLibraryTitle" = "LUT-könyvtár";
+"LUTLibrarySubtitle" = "Importáljon .cube, .3dl, .lut és .csv LUT fájlokat, és rendelje hozzá azokat az egyes kijelzőkhöz.";
+"LUTImportButton" = "LUT importálása…";
+"LUTEmptyStateLabel" = "Még nincs importált LUT.";
+"LUTPickerNoneLabel" = "Nincs";
+"LUTDimension1DLabel" = "1D";
+"LUTDimension3DLabel" = "3D";
+"LUTApproximationNote" = "A 3D LUT-ok mintavételezése a semleges tengely mentén történik.";
+"LUTDeleteConfirmTitle" = "Eltávolítja ezt: „%@\"?";
+"LUTDeleteConfirmSubtitle" = "Ez eltávolítja a LUT-ot a könyvtárból, és törli az összes azt használó kijelzőről.";
+"LUTRenameAlertTitle" = "LUT átnevezése";
+"LUTRenameAlertSubtitle" = "Adjon meg egy új nevet ehhez a LUT-hoz.";
+"LUTImportErrorTitle" = "A LUT importálása nem sikerült";
+"LUTImportErrorSubtitle" = "A fájl nem olvasható, vagy nem érvényes LUT.";
+"LUTRowLabel" = "LUT";

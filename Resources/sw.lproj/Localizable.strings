@@ -476,3 +476,21 @@
 "ColorProfileGroupCreativeLabel" = "Athari za Ubunifu";
 "ColorProfileGroupCalibrationLabel" = "Urekebishaji wa Onyesho";
 "ColorProfileGroupUserLabel" = "Imesakinishwa na Mtumiaji";
+
+/* LUT Library */
+"SettingsTabLUTsLabel" = "LUTs";
+"LUTLibraryTitle" = "Maktaba ya LUT";
+"LUTLibrarySubtitle" = "Ingiza faili za LUT za .cube, .3dl, .lut, na .csv na uzigawie kwa kila skrini.";
+"LUTImportButton" = "Ingiza LUT…";
+"LUTEmptyStateLabel" = "Hakuna LUT zilizoingizwa bado.";
+"LUTPickerNoneLabel" = "Hakuna";
+"LUTDimension1DLabel" = "1D";
+"LUTDimension3DLabel" = "3D";
+"LUTApproximationNote" = "LUT za 3D zinasampulwa kwenye mhimili wa neutral axis.";
+"LUTDeleteConfirmTitle" = "Ondoa \"%@\"?";
+"LUTDeleteConfirmSubtitle" = "Hii inaondoa LUT kutoka maktabani na kuifuta kutoka kwa skrini zote zinazoitumia.";
+"LUTRenameAlertTitle" = "Badilisha Jina la LUT";
+"LUTRenameAlertSubtitle" = "Weka jina jipya kwa LUT hii.";
+"LUTImportErrorTitle" = "Haikuweza kuingiza LUT";
+"LUTImportErrorSubtitle" = "Faili haikusomeka au si LUT halali.";
+"LUTRowLabel" = "LUT";
