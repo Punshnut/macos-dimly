@@ -22,6 +22,17 @@
 "IntroInternalMonitorTitle" = "نمایش صفحه‌نمایش داخلی در Dimly";
 "IntroInternalMonitorHint" = "Dimly همچنین می‌تواند صفحه‌نمایش داخلی مک شما را کنترل کند. می‌توانید این را بعداً در تنظیمات ← صفحه‌نمایش‌ها تغییر دهید.";
 
+/* What's New */
+"WhatsNewHeaderTitle" = "چه چیز تازه‌ای در Dimly است";
+"WhatsNewHeaderSubtitle" = "چند چیز که ممکن است از دست داده باشید";
+"WhatsNewLUTLibraryTitle" = "کتابخانه جداول جست‌وجوی رنگ";
+"WhatsNewLUTLibraryDescription" = "جداول جست‌وجوی رنگ با فرمت‌های .cube، .3dl، .lut و .csv را وارد و مدیریت کنید، آن‌ها را برای هر نمایشگر اختصاص دهید و در نمایه‌ها گروه‌بندی کنید. پنج پیش‌تنظیم گنجانده شده است.";
+"WhatsNewLUTLibraryLocation" = "در تنظیمات ← LUTs موجود است";
+"WhatsNewDisplaySettingsTitle" = "تنظیمات گسترده نمایشگر";
+"WhatsNewDisplaySettingsDescription" = "بخش‌های تاشوی جدید شامل تغییر نمایه رنگ ICC، فیلترهای ظاهری، کنتراست مبتنی بر DDC، انتخاب وضوح و نرخ نوسازی، تغییر منبع ورودی، و کلیدهای Night Shift / True Tone می‌شوند.";
+"WhatsNewDisplaySettingsLocation" = "در تنظیمات ← صفحه‌نمایش‌ها موجود است";
+"WhatsNewDismissButton" = "متوجه شدم";
+
 /* Menu Bar Overview */
 "DisplayCountFormat" = "%lld نمایشگر متصل";
 "ExternalCountFormat" = "%lld خارجی";
@@ -92,6 +103,7 @@
 "DisplaysShowNumbersTitle" = "نمایش شماره‌ها روی صفحه‌ها";
 "DisplaysEmptyLabel" = "هیچ نمایشگر فعالی شناسایی نشد.";
 "GeneralShowIntroButton" = "نمایش دوباره مقدمه";
+"GeneralShowWhatsNewButton" = "نمایش دوباره موارد تازه";
 
 /* Settings Displays */
 "DisplayTypeInternalLabel" = "داخلی";

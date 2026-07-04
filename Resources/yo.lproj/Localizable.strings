@@ -22,6 +22,17 @@
 "IntroInternalMonitorTitle" = "Ṣe afihan ifihan ti a ṣe sinu ni Dimly";
 "IntroInternalMonitorHint" = "Dimly tun le ṣakoso ifihan ti a ṣe sinu Mac rẹ. O le yi eyi pada lẹhinna ni Awọn eto → Awọn Ifihan.";
 
+/* What's New */
+"WhatsNewHeaderTitle" = "Ohun Tuntun ninu Dimly";
+"WhatsNewHeaderSubtitle" = "Awọn nkan diẹ tí o lè ti tí kọjá";
+"WhatsNewLUTLibraryTitle" = "Ibi ìkówèésí Tábìlì Wíwá Àwọ̀";
+"WhatsNewLUTLibraryDescription" = "Gbe wọle kí o sì ṣàkóso àwọn tábìlì wíwá àwọ̀ .cube, .3dl, .lut, àti .csv, fún wọn ní àfihàn kọ̀ọ̀kan, kí o sì kó wọn jọ sínú àwọn profaili. Àwọn ìsètò márùn-ún ti wà tẹ́lẹ̀.";
+"WhatsNewLUTLibraryLocation" = "Ó wà nínú Awọn eto → LUTs";
+"WhatsNewDisplaySettingsTitle" = "Àwọn Ètò Àfihàn Tí A Fẹ̀ Sí I";
+"WhatsNewDisplaySettingsDescription" = "Àwọn abala tuntun tí a lè kó pọ̀ ń fi kún ìyípadà profaili àwọ̀ ICC, àwọn ìtọ́sọ́nà ìrísí, ìyàtọ̀ tí ó dá lórí DDC, yíyan ìwọ̀n àti iyara ìsọdọ̀tun, ìyípadà orísun ìbáwọlé, àti àwọn àyípadà Night Shift / True Tone.";
+"WhatsNewDisplaySettingsLocation" = "Ó wà nínú Awọn eto → Awọn Ifihan";
+"WhatsNewDismissButton" = "Mo ti gbọ́";
+
 /* Menu Bar Overview */
 "DisplayCountFormat" = "%lld àfihàn ti so pọ̀";
 "ExternalCountFormat" = "%lld òde";
@@ -92,6 +103,7 @@
 "DisplaysShowNumbersTitle" = "Fi nọ́mbà àfihàn hàn lórí iboju";
 "DisplaysEmptyLabel" = "Kò rí àfihàn tó n ṣiṣẹ́.";
 "GeneralShowIntroButton" = "Fi ìtẹ̀síwájú hàn lẹ́ẹ̀kansi";
+"GeneralShowWhatsNewButton" = "Fi ohun tuntun hàn lẹ́ẹ̀kansi";
 
 /* Settings Displays */
 "DisplayTypeInternalLabel" = "Inú";

@@ -22,6 +22,17 @@
 "IntroInternalMonitorTitle" = "Afficher l'écran intégré dans Dimly";
 "IntroInternalMonitorHint" = "Dimly peut également contrôler l'écran intégré de votre Mac. Vous pouvez modifier cela plus tard dans Réglages → Écrans.";
 
+/* What's New */
+"WhatsNewHeaderTitle" = "Nouveautés de Dimly";
+"WhatsNewHeaderSubtitle" = "Quelques éléments que vous avez peut-être manqués";
+"WhatsNewLUTLibraryTitle" = "Bibliothèque de tables de correspondance des couleurs";
+"WhatsNewLUTLibraryDescription" = "Importez et gérez des tables de correspondance des couleurs .cube, .3dl, .lut et .csv, attribuez-les par écran et regroupez-les dans des profils. Cinq préréglages sont inclus.";
+"WhatsNewLUTLibraryLocation" = "Disponible dans Réglages → LUTs";
+"WhatsNewDisplaySettingsTitle" = "Réglages d'écran étendus";
+"WhatsNewDisplaySettingsDescription" = "Les nouvelles sections repliables ajoutent le changement de profil colorimétrique ICC, des filtres d'apparence, un contraste basé sur le DDC, la sélection de la résolution et de la fréquence de rafraîchissement, le changement de source d'entrée, ainsi que les commutateurs Night Shift / True Tone.";
+"WhatsNewDisplaySettingsLocation" = "Disponible dans Réglages → Écrans";
+"WhatsNewDismissButton" = "Compris";
+
 /* Menu Bar Overview */
 "DisplayCountFormat" = "%lld écran(s) connecté(s)";
 "ExternalCountFormat" = "%lld externe(s)";
@@ -92,6 +103,7 @@
 "DisplaysShowNumbersTitle" = "Afficher les numéros d'écran";
 "DisplaysEmptyLabel" = "Aucun écran actif détecté.";
 "GeneralShowIntroButton" = "Afficher l'introduction à nouveau";
+"GeneralShowWhatsNewButton" = "Afficher les nouveautés à nouveau";
 
 /* Settings Displays */
 "DisplayTypeInternalLabel" = "Interne";

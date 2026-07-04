@@ -22,6 +22,17 @@
 "IntroInternalMonitorTitle" = "Εμφάνιση ενσωματωμένης οθόνης στο Dimly";
 "IntroInternalMonitorHint" = "Το Dimly μπορεί επίσης να ελέγξει την ενσωματωμένη οθόνη του Mac σας. Μπορείτε να το αλλάξετε αργότερα στις Ρυθμίσεις → Οθόνες.";
 
+/* What's New */
+"WhatsNewHeaderTitle" = "Τι νέο υπάρχει στο Dimly";
+"WhatsNewHeaderSubtitle" = "Μερικά πράγματα που ίσως σας διέφυγαν";
+"WhatsNewLUTLibraryTitle" = "Βιβλιοθήκη πινάκων αναζήτησης χρωμάτων";
+"WhatsNewLUTLibraryDescription" = "Εισαγάγετε και διαχειριστείτε πίνακες αναζήτησης χρωμάτων .cube, .3dl, .lut και .csv, αναθέστε τους ανά οθόνη και ομαδοποιήστε τους σε προφίλ. Περιλαμβάνονται πέντε προκαθορισμένες ρυθμίσεις.";
+"WhatsNewLUTLibraryLocation" = "Διαθέσιμο στις Ρυθμίσεις → LUTs";
+"WhatsNewDisplaySettingsTitle" = "Διευρυμένες ρυθμίσεις οθόνης";
+"WhatsNewDisplaySettingsDescription" = "Οι νέες πτυσσόμενες ενότητες προσθέτουν εναλλαγή προφίλ χρώματος ICC, φίλτρα εμφάνισης, αντίθεση βάσει DDC, επιλογή ανάλυσης και ρυθμού ανανέωσης, εναλλαγή πηγής εισόδου, καθώς και διακόπτες Night Shift / True Tone.";
+"WhatsNewDisplaySettingsLocation" = "Διαθέσιμο στις Ρυθμίσεις → Οθόνες";
+"WhatsNewDismissButton" = "Κατάλαβα";
+
 /* Menu Bar Overview */
 "DisplayCountFormat" = "%lld οθόνη(ες) συνδεδεμένη(ες)";
 "ExternalCountFormat" = "%lld εξωτερική";
@@ -92,6 +103,7 @@
 "DisplaysShowNumbersTitle" = "Εμφάνιση αριθμών στις οθόνες";
 "DisplaysEmptyLabel" = "Δεν εντοπίστηκαν ενεργές οθόνες.";
 "GeneralShowIntroButton" = "Εμφάνιση εισαγωγής ξανά";
+"GeneralShowWhatsNewButton" = "Εμφάνιση νέων στοιχείων ξανά";
 
 /* Settings Displays */
 "DisplayTypeInternalLabel" = "Εσωτερική";

@@ -24,6 +24,17 @@
 "IntroInternalMonitorTitle" = "Show built-in display in Dimly";
 "IntroInternalMonitorHint" = "Dimly can also control your Mac's built-in display. You can change this later in Settings → Displays.";
 
+/* What's New */
+"WhatsNewHeaderTitle" = "What's New in Dimly";
+"WhatsNewHeaderSubtitle" = "A couple of things you might have missed";
+"WhatsNewLUTLibraryTitle" = "Color Lookup Table Library";
+"WhatsNewLUTLibraryDescription" = "Import and manage .cube, .3dl, .lut, and .csv color lookup tables, assign them per display, and bundle them into profiles. Five presets are included.";
+"WhatsNewLUTLibraryLocation" = "Available in Settings → LUTs";
+"WhatsNewDisplaySettingsTitle" = "Expanded Display Settings";
+"WhatsNewDisplaySettingsDescription" = "New collapsible sections add ICC color profile switching, appearance filters, DDC-based contrast, resolution and refresh rate selection, input source switching, and Night Shift / True Tone toggles.";
+"WhatsNewDisplaySettingsLocation" = "Available in Settings → Displays";
+"WhatsNewDismissButton" = "Got it";
+
 /* Menu Bar Overview */
 "DisplayCountFormat" = "%lld display(s) connected";
 "ExternalCountFormat" = "%lld external";
@@ -98,6 +109,7 @@
 "DisplaysMergeOrderTip" = "Tip: Turn this on to arrange visible built-in and external monitors in one shared list.";
 "DisplaysEmptyLabel" = "No active displays detected.";
 "GeneralShowIntroButton" = "Show introduction again";
+"GeneralShowWhatsNewButton" = "Show what's new again";
 "GeneralBackupTitle" = "Settings backup";
 "GeneralBackupSubtitle" = "Choose what to import or export.";
 "BackupGeneralSettingsTitle" = "General settings";

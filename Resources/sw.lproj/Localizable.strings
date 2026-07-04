@@ -22,6 +22,17 @@
 "IntroInternalMonitorTitle" = "Onyesha skrini ya ndani katika Dimly";
 "IntroInternalMonitorHint" = "Dimly pia inaweza kudhibiti skrini ya ndani ya Mac yako. Unaweza kubadilisha hii baadaye katika Mipangilio → Maonyesho.";
 
+/* What's New */
+"WhatsNewHeaderTitle" = "Mapya katika Dimly";
+"WhatsNewHeaderSubtitle" = "Mambo kadhaa unaweza kuwa umeyakosa";
+"WhatsNewLUTLibraryTitle" = "Maktaba ya Jedwali za Utafutaji wa Rangi";
+"WhatsNewLUTLibraryDescription" = "Ingiza na simamia jedwali za utafutaji wa rangi za .cube, .3dl, .lut, na .csv, ziweke kwa kila skrini, na uzikusanye katika wasifu. Mipangilio mitano ya awali imejumuishwa.";
+"WhatsNewLUTLibraryLocation" = "Inapatikana katika Mipangilio → LUTs";
+"WhatsNewDisplaySettingsTitle" = "Mipangilio Iliyopanuliwa ya Skrini";
+"WhatsNewDisplaySettingsDescription" = "Sehemu mpya zinazoweza kukunjwa zinaongeza ubadilishaji wa wasifu wa rangi wa ICC, vichujio vya muonekano, mng'aro unaotegemea DDC, uchaguzi wa ubora na kasi ya kuonyesha upya, ubadilishaji wa chanzo cha ingizo, na vidhibiti vya Night Shift / True Tone.";
+"WhatsNewDisplaySettingsLocation" = "Inapatikana katika Mipangilio → Skrini";
+"WhatsNewDismissButton" = "Nimeelewa";
+
 /* Menu Bar Overview */
 "DisplayCountFormat" = "%lld skrini zimeunganishwa";
 "ExternalCountFormat" = "%lld ya nje";
@@ -92,6 +103,7 @@
 "DisplaysShowNumbersTitle" = "Onyesha nambari za skrini";
 "DisplaysEmptyLabel" = "Hakuna skrini hai imegunduliwa.";
 "GeneralShowIntroButton" = "Onyesha utangulizi tena";
+"GeneralShowWhatsNewButton" = "Onyesha mapya tena";
 
 /* Settings Displays */
 "DisplayTypeInternalLabel" = "Ya ndani";

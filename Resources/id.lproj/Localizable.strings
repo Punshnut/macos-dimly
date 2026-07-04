@@ -22,6 +22,17 @@
 "IntroInternalMonitorTitle" = "Tampilkan layar bawaan di Dimly";
 "IntroInternalMonitorHint" = "Dimly juga dapat mengontrol layar bawaan Mac Anda. Anda dapat mengubah ini nanti di Pengaturan → Layar.";
 
+/* What's New */
+"WhatsNewHeaderTitle" = "Yang Baru di Dimly";
+"WhatsNewHeaderSubtitle" = "Beberapa hal yang mungkin terlewat";
+"WhatsNewLUTLibraryTitle" = "Pustaka Tabel Pencarian Warna";
+"WhatsNewLUTLibraryDescription" = "Impor dan kelola tabel pencarian warna .cube, .3dl, .lut, dan .csv, tetapkan per layar, dan gabungkan ke dalam profil. Lima preset disertakan.";
+"WhatsNewLUTLibraryLocation" = "Tersedia di Pengaturan → LUTs";
+"WhatsNewDisplaySettingsTitle" = "Pengaturan Layar yang Diperluas";
+"WhatsNewDisplaySettingsDescription" = "Bagian baru yang dapat diciutkan menambahkan pengalihan profil warna ICC, filter tampilan, kontras berbasis DDC, pemilihan resolusi dan refresh rate, pengalihan sumber input, serta pengalih Night Shift / True Tone.";
+"WhatsNewDisplaySettingsLocation" = "Tersedia di Pengaturan → Layar";
+"WhatsNewDismissButton" = "Mengerti";
+
 /* Menu Bar Overview */
 "DisplayCountFormat" = "%lld layar terhubung";
 "ExternalCountFormat" = "%lld eksternal";
@@ -92,6 +103,7 @@
 "DisplaysShowNumbersTitle" = "Tampilkan nomor layar di layar";
 "DisplaysEmptyLabel" = "Tidak ada layar aktif terdeteksi.";
 "GeneralShowIntroButton" = "Tampilkan pengenalan lagi";
+"GeneralShowWhatsNewButton" = "Tampilkan yang baru lagi";
 
 /* Settings Displays */
 "DisplayTypeInternalLabel" = "Internal";

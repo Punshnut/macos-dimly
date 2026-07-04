@@ -22,6 +22,17 @@
 "IntroInternalMonitorTitle" = "Integrierten Bildschirm in Dimly anzeigen";
 "IntroInternalMonitorHint" = "Dimly kann auch den integrierten Bildschirm deines Macs steuern. Du kannst dies später unter Einstellungen → Bildschirme ändern.";
 
+/* What's New */
+"WhatsNewHeaderTitle" = "Neu in Dimly";
+"WhatsNewHeaderSubtitle" = "Ein paar Dinge, die dir vielleicht entgangen sind";
+"WhatsNewLUTLibraryTitle" = "Farb-Lookup-Table-Bibliothek";
+"WhatsNewLUTLibraryDescription" = "Importiere und verwalte .cube-, .3dl-, .lut- und .csv-Farb-Lookup-Tables, weise sie einzelnen Bildschirmen zu und bündle sie in Profilen. Fünf Voreinstellungen sind enthalten.";
+"WhatsNewLUTLibraryLocation" = "Verfügbar unter Einstellungen → LUTs";
+"WhatsNewDisplaySettingsTitle" = "Erweiterte Bildschirmeinstellungen";
+"WhatsNewDisplaySettingsDescription" = "Neue einklappbare Abschnitte bringen ICC-Farbprofilwechsel, Erscheinungsbildfilter, DDC-basierten Kontrast, Auflösungs- und Bildwiederholratenauswahl, Eingangsquellenwechsel sowie Night-Shift-/True-Tone-Schalter.";
+"WhatsNewDisplaySettingsLocation" = "Verfügbar unter Einstellungen → Bildschirme";
+"WhatsNewDismissButton" = "Verstanden";
+
 /* Menu Bar Overview */
 "DisplayCountFormat" = "%lld Display(s) verbunden";
 "ExternalCountFormat" = "%lld extern";
@@ -92,6 +103,7 @@
 "DisplaysShowNumbersTitle" = "Displaynummern auf Bildschirmen anzeigen";
 "DisplaysEmptyLabel" = "Keine aktiven Displays erkannt.";
 "GeneralShowIntroButton" = "Einführung erneut anzeigen";
+"GeneralShowWhatsNewButton" = "Neuigkeiten erneut anzeigen";
 
 /* Settings Displays */
 "DisplayTypeInternalLabel" = "Intern";

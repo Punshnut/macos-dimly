@@ -22,6 +22,17 @@
 "IntroInternalMonitorTitle" = "組み込みディスプレイを Dimly に表示";
 "IntroInternalMonitorHint" = "Dimly は Mac の組み込みディスプレイも制御できます。後で設定 → ディスプレイから変更できます。";
 
+/* What's New */
+"WhatsNewHeaderTitle" = "Dimly の新機能";
+"WhatsNewHeaderSubtitle" = "見逃したかもしれないいくつかの機能";
+"WhatsNewLUTLibraryTitle" = "カラールックアップテーブルライブラリ";
+"WhatsNewLUTLibraryDescription" = ".cube、.3dl、.lut、.csv 形式のカラールックアップテーブルをインポート・管理し、ディスプレイごとに割り当てて、プロファイルにまとめることができます。5 つのプリセットが含まれています。";
+"WhatsNewLUTLibraryLocation" = "設定 → LUTs から利用できます";
+"WhatsNewDisplaySettingsTitle" = "拡張されたディスプレイ設定";
+"WhatsNewDisplaySettingsDescription" = "新しく追加された折りたたみ可能なセクションで、ICC カラープロファイルの切り替え、外観フィルター、DDC ベースのコントラスト、解像度とリフレッシュレートの選択、入力ソースの切り替え、Night Shift / True Tone の切り替えが行えます。";
+"WhatsNewDisplaySettingsLocation" = "設定 → ディスプレイ から利用できます";
+"WhatsNewDismissButton" = "了解";
+
 /* Menu Bar Overview */
 "DisplayCountFormat" = "%lld 台のディスプレイが接続";
 "ExternalCountFormat" = "%lld 台の外部";
@@ -92,6 +103,7 @@
 "DisplaysShowNumbersTitle" = "画面にディスプレイ番号を表示";
 "DisplaysEmptyLabel" = "アクティブなディスプレイが検出されませんでした。";
 "GeneralShowIntroButton" = "イントロを再表示";
+"GeneralShowWhatsNewButton" = "新機能を再表示";
 
 /* Settings Displays */
 "DisplayTypeInternalLabel" = "内蔵";

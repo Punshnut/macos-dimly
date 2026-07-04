@@ -22,6 +22,7 @@ struct SettingsRootView: View {
     @State private var introWindowController: IntroWindowController?
     @State private var selection: SettingsDestination = .general
     @State private var proposedProfileName: String = ""
+    @ObservedObject private var navigationCoordinator = SettingsNavigationCoordinator.shared
 
     enum SettingsDestination: Hashable {
         case general
@@ -72,6 +73,7 @@ struct SettingsRootView: View {
                 proposedProfileName: $proposedProfileName,
                 renameProfile: renameProfile,
                 showIntroAgain: showIntroAgain,
+                showWhatsNewAgain: showWhatsNewAgain,
                 displayRow: { display in AnyView(displayRowView(for: display)) }
             )
         }
@@ -79,17 +81,44 @@ struct SettingsRootView: View {
         .hideSettingsToolbar()
         .onAppear {
             engine.refreshBuiltinBrightnessSnapshots(reason: "settingsAppear", persistToSettings: false)
+            applyPendingSettingsNavigation()
         }
         .preferredColorScheme(settingsStore.effectiveColorScheme)
+        .onChange(of: navigationCoordinator.pendingTarget) { _, _ in
+            applyPendingSettingsNavigation()
+        }
     }
 
-    /// Forces the intro window to reappear for the current session.
+    /// Applies and clears a pending Settings-tab navigation request, if any.
+    private func applyPendingSettingsNavigation() {
+        guard let target = navigationCoordinator.pendingTarget else { return }
+        switch target {
+        case .luts: selection = .luts
+        case .displays: selection = .displays
+        }
+        navigationCoordinator.pendingTarget = nil
+    }
+
+    /// Forces the intro window to reappear, opened to the welcome tour page.
     private func showIntroAgain() {
         UserDefaults.standard.set(false, forKey: AppDelegate.introShownKey)
+        showIntroWindow(initialPage: .welcome)
+    }
+
+    /// Re-shows the intro window opened directly to the What's New page, with the full feature
+    /// list, regardless of what's already been seen automatically.
+    private func showWhatsNewAgain() {
+        showIntroWindow(initialPage: .whatsNew)
+    }
+
+    /// Opens the shared intro window (creating it if needed) to the given page.
+    private func showIntroWindow(initialPage: IntroPage) {
         if introWindowController == nil {
             introWindowController = IntroWindowController(
                 settingsStore: settingsStore,
-                displayManager: displayManager
+                displayManager: displayManager,
+                initialPage: initialPage,
+                whatsNewFeatures: WhatsNewContent.features
             ) {
                 introWindowController = nil
             }
@@ -951,6 +980,7 @@ struct SettingsRootView: View {
         @Binding var proposedProfileName: String
         let renameProfile: (DisplayProfile) -> Void
         let showIntroAgain: () -> Void
+        let showWhatsNewAgain: () -> Void
         let displayRow: (DisplayInfo) -> AnyView
         @Environment(\.accessibilityReduceMotion) private var reduceMotion
         @State private var includeGeneralSettings = true
@@ -1064,11 +1094,18 @@ struct SettingsRootView: View {
                             .foregroundStyle(.secondary)
                     }
                     SettingsDivider()
-                    Button(String(localized: "GeneralShowIntroButton")) {
-                        showIntroAgain()
+                    HStack(spacing: 8) {
+                        Button(String(localized: "GeneralShowIntroButton")) {
+                            showIntroAgain()
+                        }
+                        .buttonStyle(.bordered)
+                        .controlSize(.small)
+                        Button(String(localized: "GeneralShowWhatsNewButton")) {
+                            showWhatsNewAgain()
+                        }
+                        .buttonStyle(.bordered)
+                        .controlSize(.small)
                     }
-                    .buttonStyle(.bordered)
-                    .controlSize(.small)
                 }
 
                 SettingsCard(title: String(localized: "GeneralBackupTitle"), subtitle: String(localized: "GeneralBackupSubtitle")) {

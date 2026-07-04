@@ -22,6 +22,17 @@
 "IntroInternalMonitorTitle" = "Dimly లో అంతర్నిర్మిత డిస్‌ప్లేని చూపించు";
 "IntroInternalMonitorHint" = "Dimly మీ Mac యొక్క అంతర్నిర్మిత డిస్‌ప్లేను కూడా నియంత్రించగలదు. దీన్ని తర్వాత సెట్టింగ్‌లు → డిస్‌ప్లేలు లో మార్చవచ్చు.";
 
+/* What's New */
+"WhatsNewHeaderTitle" = "Dimlyలో కొత్తవి";
+"WhatsNewHeaderSubtitle" = "మీరు మిస్ అయి ఉండే కొన్ని విషయాలు";
+"WhatsNewLUTLibraryTitle" = "కలర్ లుకప్ టేబుల్ లైబ్రరీ";
+"WhatsNewLUTLibraryDescription" = ".cube, .3dl, .lut, మరియు .csv కలర్ లుకప్ టేబుల్‌లను దిగుమతి చేసి నిర్వహించండి, వాటిని ప్రతి డిస్‌ప్లేకు కేటాయించండి, మరియు వాటిని ప్రొఫైల్‌లుగా బండిల్ చేయండి. ఐదు ప్రీసెట్‌లు చేర్చబడ్డాయి.";
+"WhatsNewLUTLibraryLocation" = "సెట్టింగ్‌లు → LUTs లో అందుబాటులో ఉంది";
+"WhatsNewDisplaySettingsTitle" = "విస్తరించిన డిస్‌ప్లే సెట్టింగ్‌లు";
+"WhatsNewDisplaySettingsDescription" = "కొత్త కుదించదగిన విభాగాలు ICC కలర్ ప్రొఫైల్ మార్పిడి, రూపం ఫిల్టర్‌లు, DDC ఆధారిత కాంట్రాస్ట్, రిజల్యూషన్ మరియు రిఫ్రెష్ రేట్ ఎంపిక, ఇన్‌పుట్ సోర్స్ మార్పిడి, మరియు Night Shift / True Tone టోగుల్స్‌లను జోడిస్తాయి.";
+"WhatsNewDisplaySettingsLocation" = "సెట్టింగ్‌లు → డిస్ప్లేలు లో అందుబాటులో ఉంది";
+"WhatsNewDismissButton" = "అర్థమైంది";
+
 /* Menu Bar Overview */
 "DisplayCountFormat" = "%lld డిస్ప్లే(లు) కనెక్ట్ అయ్యాయి";
 "ExternalCountFormat" = "%lld బాహ్య";
@@ -92,6 +103,7 @@
 "DisplaysShowNumbersTitle" = "స్క్రీన్లపై డిస్ప్లే సంఖ్యలను చూపు";
 "DisplaysEmptyLabel" = "సక్రియమైన డిస్ప్లేలు లేవు.";
 "GeneralShowIntroButton" = "పరిచయాన్ని మళ్లీ చూపించు";
+"GeneralShowWhatsNewButton" = "కొత్తవాటిని మళ్లీ చూపించు";
 
 /* Settings Displays */
 "DisplayTypeInternalLabel" = "అంతర్గత";

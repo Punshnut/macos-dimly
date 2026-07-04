@@ -22,6 +22,17 @@
 "IntroInternalMonitorTitle" = "Tunjukkan paparan terbina dalam di Dimly";
 "IntroInternalMonitorHint" = "Dimly juga boleh mengawal paparan terbina dalam Mac anda. Anda boleh mengubah ini kemudian dalam Tetapan → Paparan.";
 
+/* What's New */
+"WhatsNewHeaderTitle" = "Apa Yang Baharu dalam Dimly";
+"WhatsNewHeaderSubtitle" = "Beberapa perkara yang mungkin anda terlepas";
+"WhatsNewLUTLibraryTitle" = "Perpustakaan Jadual Carian Warna";
+"WhatsNewLUTLibraryDescription" = "Import dan urus jadual carian warna .cube, .3dl, .lut, dan .csv, tetapkan mengikut paparan, dan gabungkan ke dalam profil. Lima praset disertakan.";
+"WhatsNewLUTLibraryLocation" = "Tersedia dalam Tetapan → LUTs";
+"WhatsNewDisplaySettingsTitle" = "Tetapan Paparan Diperluas";
+"WhatsNewDisplaySettingsDescription" = "Bahagian baharu yang boleh dikuncupkan menambah penukaran profil warna ICC, penapis rupa, kontras berasaskan DDC, pemilihan resolusi dan kadar segar semula, penukaran sumber input, serta togol Night Shift / True Tone.";
+"WhatsNewDisplaySettingsLocation" = "Tersedia dalam Tetapan → Paparan";
+"WhatsNewDismissButton" = "Faham";
+
 /* Menu Bar Overview */
 "DisplayCountFormat" = "%lld paparan disambung";
 "ExternalCountFormat" = "%lld luaran";
@@ -92,6 +103,7 @@
 "DisplaysShowNumbersTitle" = "Tunjukkan nombor paparan pada skrin";
 "DisplaysEmptyLabel" = "Tiada paparan aktif dikesan.";
 "GeneralShowIntroButton" = "Tunjukkan pengenalan lagi";
+"GeneralShowWhatsNewButton" = "Tunjukkan apa yang baharu lagi";
 
 /* Settings Displays */
 "DisplayTypeInternalLabel" = "Dalaman";

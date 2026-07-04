@@ -22,6 +22,17 @@
 "IntroInternalMonitorTitle" = "Pokaż wbudowany wyświetlacz w Dimly";
 "IntroInternalMonitorHint" = "Dimly może też sterować wbudowanym wyświetlaczem Twojego Maca. Możesz to zmienić później w Ustawienia → Wyświetlacze.";
 
+/* What's New */
+"WhatsNewHeaderTitle" = "Co nowego w Dimly";
+"WhatsNewHeaderSubtitle" = "Kilka rzeczy, które mogłeś przeoczyć";
+"WhatsNewLUTLibraryTitle" = "Biblioteka tabel LUT kolorów";
+"WhatsNewLUTLibraryDescription" = "Importuj i zarządzaj tabelami LUT kolorów .cube, .3dl, .lut i .csv, przypisuj je do poszczególnych wyświetlaczy i grupuj w profile. Dołączono pięć gotowych ustawień.";
+"WhatsNewLUTLibraryLocation" = "Dostępne w Ustawienia → LUTs";
+"WhatsNewDisplaySettingsTitle" = "Rozszerzone ustawienia wyświetlacza";
+"WhatsNewDisplaySettingsDescription" = "Nowe zwijane sekcje dodają przełączanie profili kolorów ICC, filtry wyglądu, kontrast oparty na DDC, wybór rozdzielczości i częstotliwości odświeżania, przełączanie źródła sygnału oraz przełączniki Night Shift / True Tone.";
+"WhatsNewDisplaySettingsLocation" = "Dostępne w Ustawienia → Wyświetlacze";
+"WhatsNewDismissButton" = "Rozumiem";
+
 /* Menu Bar Overview */
 "DisplayCountFormat" = "Podłączono %lld wyświetlacz(e)";
 "ExternalCountFormat" = "%lld zewnętrzny";
@@ -92,6 +103,7 @@
 "DisplaysShowNumbersTitle" = "Pokaż numery wyświetlaczy na ekranach";
 "DisplaysEmptyLabel" = "Nie wykryto aktywnych wyświetlaczy.";
 "GeneralShowIntroButton" = "Pokaż wprowadzenie ponownie";
+"GeneralShowWhatsNewButton" = "Pokaż nowości ponownie";
 
 /* Settings Displays */
 "DisplayTypeInternalLabel" = "Wewnętrzny";

@@ -22,6 +22,17 @@
 "IntroInternalMonitorTitle" = "የ Mac ውስጣዊ ማሳያ በ Dimly ውስጥ አሳይ";
 "IntroInternalMonitorHint" = "Dimly የ Mac ውስጣዊ ማሳያን ሊቆጣጠር ይችላል። ይህን ቆይቶ በቅንጅቶች → ማሳያዎች ውስጥ መቀየር ይቻላል።";
 
+/* What's New */
+"WhatsNewHeaderTitle" = "በDimly ውስጥ ምን አዲስ ነገር አለ";
+"WhatsNewHeaderSubtitle" = "ላያድርጓቸው የሚችሉ ጥቂት ነገሮች";
+"WhatsNewLUTLibraryTitle" = "የቀለም መፈለጊያ ሰንጠረዥ ቤተ-መጽሐፍት";
+"WhatsNewLUTLibraryDescription" = "የ.cube, .3dl, .lut, እና .csv የቀለም መፈለጊያ ሰንጠረዦችን አስመጣ እና አስተዳድር፣ ለእያንዳንዱ ማሳያ መድብ፣ እና ወደ መገለጫዎች ያሰባስቧቸው። አምስት ቅድመ-ዝግጅቶች ተካትተዋል።";
+"WhatsNewLUTLibraryLocation" = "በቅንጅቶች → LUTs ውስጥ ይገኛል";
+"WhatsNewDisplaySettingsTitle" = "የተስፋፉ የማሳያ ቅንጅቶች";
+"WhatsNewDisplaySettingsDescription" = "አዳዲስ ሊታጠፉ የሚችሉ ክፍሎች የICC ቀለም መገለጫ መቀየሪያ፣ የገጽታ ማጣሪያዎች፣ በDDC ላይ የተመሠረተ ንፅፅር፣ የጥራት እና የማደስ ፍጥነት ምርጫ፣ የግቤት ምንጭ መቀየሪያ፣ እና የ Night Shift / True Tone መቀያየሪያዎችን ይጨምራሉ።";
+"WhatsNewDisplaySettingsLocation" = "በቅንጅቶች → ማሳያዎች ውስጥ ይገኛል";
+"WhatsNewDismissButton" = "ገባኝ";
+
 /* Menu Bar Overview */
 "DisplayCountFormat" = "%lld ማሳያ(ዎች) ተገናኝተዋል";
 "ExternalCountFormat" = "%lld ውጫዊ";
@@ -92,6 +103,7 @@
 "DisplaysShowNumbersTitle" = "በማሳያዎች ላይ ቁጥሮችን አሳይ";
 "DisplaysEmptyLabel" = "ምንም ንቁ ማሳያ አልተገኘም።";
 "GeneralShowIntroButton" = "እድሜውን እንደገና አሳይ";
+"GeneralShowWhatsNewButton" = "አዲስ ነገር እንደገና አሳይ";
 
 /* Settings Displays */
 "DisplayTypeInternalLabel" = "ውስጣዊ";

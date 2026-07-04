@@ -22,6 +22,17 @@
 "IntroInternalMonitorTitle" = "Dimly-ல் உள்ளமைந்த திரையைக் காட்டு";
 "IntroInternalMonitorHint" = "Dimly உங்கள் Mac இன் உள்ளமைந்த திரையையும் கட்டுப்படுத்தலாம். இதை பின்னர் அமைப்புகள் → திரைகள் இல் மாற்றலாம்.";
 
+/* What's New */
+"WhatsNewHeaderTitle" = "Dimly-இல் புதியவை";
+"WhatsNewHeaderSubtitle" = "நீங்கள் தவறவிட்டிருக்கக்கூடிய சில விஷயங்கள்";
+"WhatsNewLUTLibraryTitle" = "வண்ண தேடல் அட்டவணை நூலகம்";
+"WhatsNewLUTLibraryDescription" = ".cube, .3dl, .lut, மற்றும் .csv வண்ண தேடல் அட்டவணைகளை இறக்குமதி செய்து நிர்வகிக்கவும், ஒவ்வொரு திரைக்கும் ஒதுக்கவும், மற்றும் அவற்றை சுயவிவரங்களாக தொகுக்கவும். ஐந்து முன்னமைவுகள் சேர்க்கப்பட்டுள்ளன.";
+"WhatsNewLUTLibraryLocation" = "அமைப்புகள் → LUTs இல் கிடைக்கும்";
+"WhatsNewDisplaySettingsTitle" = "விரிவாக்கப்பட்ட திரை அமைப்புகள்";
+"WhatsNewDisplaySettingsDescription" = "புதிய சுருக்கக்கூடிய பிரிவுகள் ICC வண்ண சுயவிவர மாற்றம், தோற்ற வடிப்பான்கள், DDC அடிப்படையிலான மாறுபாடு, தெளிவுத்திறன் மற்றும் புதுப்பிப்பு விகித தேர்வு, உள்ளீட்டு மூல மாற்றம், மற்றும் Night Shift / True Tone நிலைமாற்றிகளைச் சேர்க்கின்றன.";
+"WhatsNewDisplaySettingsLocation" = "அமைப்புகள் → காட்சிகள் இல் கிடைக்கும்";
+"WhatsNewDismissButton" = "சரி";
+
 /* Menu Bar Overview */
 "DisplayCountFormat" = "%lld காட்சி(கள்) இணைக்கப்பட்டுள்ளன";
 "ExternalCountFormat" = "%lld வெளிப்புறம்";
@@ -92,6 +103,7 @@
 "DisplaysShowNumbersTitle" = "திரைகளில் காட்சி எண்களை காட்டு";
 "DisplaysEmptyLabel" = "செயலில் உள்ள காட்சிகள் எதுவும் இல்லை.";
 "GeneralShowIntroButton" = "அறிமுகத்தை மீண்டும் காட்டு";
+"GeneralShowWhatsNewButton" = "புதியவற்றை மீண்டும் காட்டு";
 
 /* Settings Displays */
 "DisplayTypeInternalLabel" = "உட்புற";

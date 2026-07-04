@@ -22,6 +22,17 @@
 "IntroInternalMonitorTitle" = "إظهار الشاشة المدمجة في Dimly";
 "IntroInternalMonitorHint" = "يمكن لـ Dimly أيضًا التحكم في الشاشة المدمجة بجهاز Mac. يمكنك تغيير ذلك لاحقًا في الإعدادات ← الشاشات.";
 
+/* What's New */
+"WhatsNewHeaderTitle" = "ما الجديد في Dimly";
+"WhatsNewHeaderSubtitle" = "بعض الأشياء التي ربما فاتتك";
+"WhatsNewLUTLibraryTitle" = "مكتبة جداول البحث اللونية";
+"WhatsNewLUTLibraryDescription" = "استورد وأدر جداول البحث اللونية بصيغ .cube و .3dl و .lut و .csv، وخصصها لكل شاشة، وجمّعها في ملفات تعريف. تتضمن خمس إعدادات مسبقة.";
+"WhatsNewLUTLibraryLocation" = "متوفر في الإعدادات ← LUTs";
+"WhatsNewDisplaySettingsTitle" = "إعدادات شاشة موسّعة";
+"WhatsNewDisplaySettingsDescription" = "تضيف الأقسام القابلة للطي الجديدة تبديل ملفات تعريف الألوان ICC، ومرشحات المظهر، والتباين المعتمد على DDC، واختيار الدقة ومعدل التحديث، وتبديل مصدر الإدخال، وتبديلات Night Shift / True Tone.";
+"WhatsNewDisplaySettingsLocation" = "متوفر في الإعدادات ← الشاشات";
+"WhatsNewDismissButton" = "فهمت";
+
 /* Menu Bar Overview */
 "DisplayCountFormat" = "%lld شاشة متصلة";
 "ExternalCountFormat" = "%lld خارجية";
@@ -92,6 +103,7 @@
 "DisplaysShowNumbersTitle" = "عرض أرقام الشاشات";
 "DisplaysEmptyLabel" = "لا توجد شاشات نشطة.";
 "GeneralShowIntroButton" = "عرض المقدمة مرة أخرى";
+"GeneralShowWhatsNewButton" = "عرض الجديد مرة أخرى";
 
 /* Settings Displays */
 "DisplayTypeInternalLabel" = "داخلية";

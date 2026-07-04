@@ -115,6 +115,7 @@ struct DimlyApp: App {
 final class AppDelegate: NSObject, NSApplicationDelegate {
     let updaterController = UpdaterController()
     static let introShownKey = "DimlyHasShownIntro.v1"
+    static let whatsNewLastSeenRevisionKey = "DimlyWhatsNewLastSeenRevision.v1"
     private var introWindowController: IntroWindowController?
     private var launcherWindowController: LauncherWindowController?
     private var settingsWindowController: NSWindowController?
@@ -202,9 +203,16 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
 
 
 
-    /// Opens the intro window on first launch.
+    /// Opens the intro window on first launch, or a "What's New" recap for returning users.
     private func showIntroIfNeeded() {
-        showIntro(force: false)
+        if !UserDefaults.standard.bool(forKey: Self.introShownKey) {
+            showIntro(force: false)
+            // New users see everything as part of the welcome tour — don't also show a
+            // retroactive "what's new" popup for features that predate their first run.
+            UserDefaults.standard.set(WhatsNewContent.currentRevision, forKey: Self.whatsNewLastSeenRevisionKey)
+            return
+        }
+        showWhatsNewIfNeeded()
     }
 
     /// Resets the "shown" flag and forces the intro to appear.
@@ -224,7 +232,29 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         UserDefaults.standard.set(true, forKey: Self.introShownKey)
         let controller = IntroWindowController(
             settingsStore: settingsStore,
-            displayManager: displayManager
+            displayManager: displayManager,
+            whatsNewFeatures: WhatsNewContent.features
+        ) { [weak self] in
+            self?.introWindowController = nil
+        }
+        introWindowController = controller
+        controller.showWindow(nil)
+        NSApp.activate(ignoringOtherApps: true)
+    }
+
+    /// Presents the intro window opened directly to the What's New page, when there's anything
+    /// the user hasn't seen yet. The window still lets them switch back to the welcome tour.
+    private func showWhatsNewIfNeeded() {
+        let lastSeen = UserDefaults.standard.integer(forKey: Self.whatsNewLastSeenRevisionKey)
+        let hasUnseenFeatures = WhatsNewContent.features.contains { $0.introducedInRevision > lastSeen }
+        guard hasUnseenFeatures else { return }
+        guard let settingsStore, let displayManager else { return }
+        UserDefaults.standard.set(WhatsNewContent.currentRevision, forKey: Self.whatsNewLastSeenRevisionKey)
+        let controller = IntroWindowController(
+            settingsStore: settingsStore,
+            displayManager: displayManager,
+            initialPage: .whatsNew,
+            whatsNewFeatures: WhatsNewContent.features
         ) { [weak self] in
             self?.introWindowController = nil
         }

@@ -22,6 +22,17 @@
 "IntroInternalMonitorTitle" = "Yerleşik ekranı Dimly'de göster";
 "IntroInternalMonitorHint" = "Dimly, Mac'inizin yerleşik ekranını da kontrol edebilir. Bunu daha sonra Ayarlar → Ekranlar bölümünden değiştirebilirsiniz.";
 
+/* What's New */
+"WhatsNewHeaderTitle" = "Dimly'deki Yenilikler";
+"WhatsNewHeaderSubtitle" = "Kaçırmış olabileceğiniz birkaç şey";
+"WhatsNewLUTLibraryTitle" = "Renk Arama Tablosu Kitaplığı";
+"WhatsNewLUTLibraryDescription" = ".cube, .3dl, .lut ve .csv renk arama tablolarını içe aktarın ve yönetin, ekran başına atayın ve profillerde bir araya toplayın. Beş hazır ayar dahildir.";
+"WhatsNewLUTLibraryLocation" = "Ayarlar → LUTs bölümünde kullanılabilir";
+"WhatsNewDisplaySettingsTitle" = "Genişletilmiş Ekran Ayarları";
+"WhatsNewDisplaySettingsDescription" = "Yeni daraltılabilir bölümler; ICC renk profili değiştirme, görünüm filtreleri, DDC tabanlı kontrast, çözünürlük ve yenileme hızı seçimi, giriş kaynağı değiştirme ile Night Shift / True Tone anahtarlarını ekler.";
+"WhatsNewDisplaySettingsLocation" = "Ayarlar → Ekranlar bölümünde kullanılabilir";
+"WhatsNewDismissButton" = "Anladım";
+
 /* Menu Bar Overview */
 "DisplayCountFormat" = "%lld ekran bağlı";
 "ExternalCountFormat" = "%lld harici";
@@ -92,6 +103,7 @@
 "DisplaysShowNumbersTitle" = "Ekran numaralarını ekranda göster";
 "DisplaysEmptyLabel" = "Aktif ekran bulunamadı.";
 "GeneralShowIntroButton" = "Girişi tekrar göster";
+"GeneralShowWhatsNewButton" = "Yenilikleri tekrar göster";
 
 /* Settings Displays */
 "DisplayTypeInternalLabel" = "Dahili";

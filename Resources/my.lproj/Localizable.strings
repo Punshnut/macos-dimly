@@ -22,6 +22,17 @@
 "IntroInternalMonitorTitle" = "Dimly တွင် ကိုယ်တိုင်ပါ မျက်နှာပြင် ပြရန်";
 "IntroInternalMonitorHint" = "Dimly သည် သင့် Mac ၏ ကိုယ်တိုင်ပါ မျက်နှာပြင်ကိုလည်း ထိန်းချုပ်နိုင်သည်။ ဆက်တင်များ → မျက်နှာပြင်များ တွင် ၎င်းကို နောက်မှ ပြောင်းနိုင်သည်။";
 
+/* What's New */
+"WhatsNewHeaderTitle" = "Dimly ရှိ အသစ်များ";
+"WhatsNewHeaderSubtitle" = "သင်လွတ်သွားနိုင်သည့် အရာအချို့";
+"WhatsNewLUTLibraryTitle" = "အရောင် ရှာဖွေမှုဇယား စာကြည့်တိုက်";
+"WhatsNewLUTLibraryDescription" = ".cube, .3dl, .lut, နှင့် .csv အရောင်ရှာဖွေမှုဇယားများကို တင်သွင်းပြီး စီမံပါ၊ မျက်နှာပြင်တစ်ခုချင်းစီအတွက် သတ်မှတ်ပါ၊ ပရိုဖိုင်များထဲသို့ စုစည်းပါ။ ပုံစံငါးမျိုး ပါဝင်ပါသည်။";
+"WhatsNewLUTLibraryLocation" = "ဆက်တင်များ → LUTs တွင် ရနိုင်သည်";
+"WhatsNewDisplaySettingsTitle" = "တိုးချဲ့ထားသော မျက်နှာပြင် ဆက်တင်များ";
+"WhatsNewDisplaySettingsDescription" = "ခေါက်၍ ရသော ဆက်ရှင်အသစ်များက ICC အရောင်ပရိုဖိုင် ပြောင်းခြင်း၊ အသွင်အပြင် စစ်ထုတ်ကိရိယာများ၊ DDC အခြေပြု ကွာခြားချက်၊ ကြည်လင်ပြတ်သားမှုနှင့် ပြန်လည်သန်းစားနှုန်း ရွေးချယ်ခြင်း၊ ထည့်သွင်းမှုရင်းမြစ် ပြောင်းခြင်းနှင့် Night Shift / True Tone ခလုတ်များကို ထပ်တိုးပေးသည်။";
+"WhatsNewDisplaySettingsLocation" = "ဆက်တင်များ → မျက်နှာပြင်များ တွင် ရနိုင်သည်";
+"WhatsNewDismissButton" = "နားလည်ပြီ";
+
 /* Menu Bar Overview */
 "DisplayCountFormat" = "%lld ခု ပြသမှု ချိတ်ဆက်ထား";
 "ExternalCountFormat" = "%lld ခု ပြင်ပ";
@@ -92,6 +103,7 @@
 "DisplaysShowNumbersTitle" = "စခရင်တွင် ပြသမှုနံပါတ်များ ပြ";
 "DisplaysEmptyLabel" = "သက်ဝင်ပြသမှု မတွေ့ပါ။";
 "GeneralShowIntroButton" = "နိဒါန်း ပြန်ပြပါ";
+"GeneralShowWhatsNewButton" = "အသစ်များကို ပြန်ပြပါ";
 
 /* Settings Displays */
 "DisplayTypeInternalLabel" = "အတွင်းပိုင်း";

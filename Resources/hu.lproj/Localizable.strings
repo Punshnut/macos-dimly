@@ -22,6 +22,17 @@
 "IntroInternalMonitorTitle" = "Beépített kijelző megjelenítése a Dimly-ben";
 "IntroInternalMonitorHint" = "A Dimly a Mac beépített kijelzőjét is vezérelheti. Ezt később a Beállítások → Kijelzők menüpontban módosíthatja.";
 
+/* What's New */
+"WhatsNewHeaderTitle" = "Újdonságok a Dimlyben";
+"WhatsNewHeaderSubtitle" = "Néhány dolog, amit esetleg kihagytál";
+"WhatsNewLUTLibraryTitle" = "Színkeresőtábla-könyvtár";
+"WhatsNewLUTLibraryDescription" = "Importálhatsz és kezelhetsz .cube, .3dl, .lut és .csv színkeresőtáblákat, kijelzőnként hozzárendelheted őket, és profilokba csomagolhatod azokat. Öt előre beállított sablon található.";
+"WhatsNewLUTLibraryLocation" = "Elérhető itt: Beállítások → LUTs";
+"WhatsNewDisplaySettingsTitle" = "Kibővített kijelzőbeállítások";
+"WhatsNewDisplaySettingsDescription" = "Az új összecsukható szakaszok ICC színprofil-váltást, megjelenési szűrőket, DDC-alapú kontrasztot, felbontás- és képfrissítési sebesség-választást, bemeneti forrás váltást, valamint Night Shift / True Tone kapcsolókat adnak hozzá.";
+"WhatsNewDisplaySettingsLocation" = "Elérhető itt: Beállítások → Kijelzők";
+"WhatsNewDismissButton" = "Értem";
+
 /* Menu Bar Overview */
 "DisplayCountFormat" = "%lld kijelző csatlakoztatva";
 "ExternalCountFormat" = "%lld külső";
@@ -92,6 +103,7 @@
 "DisplaysShowNumbersTitle" = "Kijelzőszámok megjelenítése a képernyőkön";
 "DisplaysEmptyLabel" = "Nem észlelhető aktív kijelző.";
 "GeneralShowIntroButton" = "Bevezető újbóli megjelenítése";
+"GeneralShowWhatsNewButton" = "Újdonságok újbóli megjelenítése";
 
 /* Settings Displays */
 "DisplayTypeInternalLabel" = "Belső";

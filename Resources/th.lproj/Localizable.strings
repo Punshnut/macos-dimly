@@ -22,6 +22,17 @@
 "IntroInternalMonitorTitle" = "แสดงจอแสดงผลในตัวใน Dimly";
 "IntroInternalMonitorHint" = "Dimly ยังสามารถควบคุมจอแสดงผลในตัวของ Mac ของคุณได้ คุณสามารถเปลี่ยนแปลงได้ในภายหลังที่ การตั้งค่า → จอแสดงผล";
 
+/* What's New */
+"WhatsNewHeaderTitle" = "มีอะไรใหม่ใน Dimly";
+"WhatsNewHeaderSubtitle" = "สิ่งเล็กๆ น้อยๆ ที่คุณอาจพลาดไป";
+"WhatsNewLUTLibraryTitle" = "คลังตารางค้นหาสี (LUT)";
+"WhatsNewLUTLibraryDescription" = "นำเข้าและจัดการตารางค้นหาสีแบบ .cube, .3dl, .lut และ .csv กำหนดให้กับแต่ละจอแสดงผล และรวมไว้ในโปรไฟล์ มีชุดค่าที่ตั้งไว้ล่วงหน้าห้าแบบให้มาด้วย";
+"WhatsNewLUTLibraryLocation" = "ใช้งานได้ที่ การตั้งค่า → LUTs";
+"WhatsNewDisplaySettingsTitle" = "การตั้งค่าจอแสดงผลที่ขยายเพิ่ม";
+"WhatsNewDisplaySettingsDescription" = "ส่วนที่ยุบขยายได้ใหม่เพิ่มการสลับโปรไฟล์สี ICC ตัวกรองรูปลักษณ์ คอนทราสต์ที่อิงตาม DDC การเลือกความละเอียดและอัตรารีเฟรช การสลับแหล่งสัญญาณเข้า และสวิตช์ Night Shift / True Tone";
+"WhatsNewDisplaySettingsLocation" = "ใช้งานได้ที่ การตั้งค่า → จอ";
+"WhatsNewDismissButton" = "เข้าใจแล้ว";
+
 /* Menu Bar Overview */
 "DisplayCountFormat" = "%lld จอเชื่อมต่อ";
 "ExternalCountFormat" = "%lld ภายนอก";
@@ -92,6 +103,7 @@
 "DisplaysShowNumbersTitle" = "แสดงหมายเลขจอบนหน้าจอ";
 "DisplaysEmptyLabel" = "ไม่พบจอที่ใช้งาน";
 "GeneralShowIntroButton" = "แสดงบทนำอีกครั้ง";
+"GeneralShowWhatsNewButton" = "แสดงสิ่งใหม่อีกครั้ง";
 
 /* Settings Displays */
 "DisplayTypeInternalLabel" = "ภายใน";

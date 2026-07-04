@@ -23,6 +23,8 @@ final class IntroWindowController: NSWindowController, NSWindowDelegate {
     init(
         settingsStore: AppSettingsStore,
         displayManager: DisplayManager,
+        initialPage: IntroPage = .welcome,
+        whatsNewFeatures: [WhatsNewFeature] = [],
         onDismiss: @escaping () -> Void
     ) {
         self.onDismiss = onDismiss
@@ -58,7 +60,14 @@ final class IntroWindowController: NSWindowController, NSWindowDelegate {
         let rootView = IntroWindowView(
             onDismiss: { [weak window] in window?.close() },
             displayManager: displayManager,
-            includeInternalMonitor: includeBinding
+            includeInternalMonitor: includeBinding,
+            initialPage: initialPage,
+            whatsNewFeatures: whatsNewFeatures,
+            onPageChange: { [weak self] in
+                Task { @MainActor [weak self] in
+                    self?.resizeToFitContent()
+                }
+            }
         )
         .frame(width: Self.contentWidth)
 
@@ -85,22 +94,26 @@ final class IntroWindowController: NSWindowController, NSWindowDelegate {
             .receive(on: DispatchQueue.main)
             .sink { [weak self] _ in
                 Task { @MainActor [weak self] in
-                    guard let self,
-                          let win = self.window, win.isVisible,
-                          let hv = self.hostingView else { return }
-                    let newSize = hv.fittingSize
-                    guard newSize.height > 0,
-                          abs(newSize.height - (win.contentView?.bounds.height ?? 0)) > 1 else { return }
-                    NSAnimationContext.runAnimationGroup { ctx in
-                        ctx.duration = 0.25
-                        ctx.timingFunction = CAMediaTimingFunction(name: .easeInEaseOut)
-                        win.animator().setContentSize(newSize)
-                    }
+                    self?.resizeToFitContent()
                 }
             }
     }
 
     required init?(coder: NSCoder) { return nil }
+
+    /// Re-measures the SwiftUI content and smoothly resizes the window to fit — used both when
+    /// the built-in display card appears and when the user switches between intro pages.
+    private func resizeToFitContent() {
+        guard let win = window, win.isVisible, let hv = hostingView else { return }
+        let newSize = hv.fittingSize
+        guard newSize.height > 0,
+              abs(newSize.height - (win.contentView?.bounds.height ?? 0)) > 1 else { return }
+        NSAnimationContext.runAnimationGroup { ctx in
+            ctx.duration = 0.25
+            ctx.timingFunction = CAMediaTimingFunction(name: .easeInEaseOut)
+            win.animator().setContentSize(newSize)
+        }
+    }
 
     /// Writes the toggle choice to settings when the window closes (either Get Started or the X button).
     func windowWillClose(_ notification: Notification) {

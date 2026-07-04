@@ -22,6 +22,17 @@
 "IntroInternalMonitorTitle" = "Hiển thị màn hình tích hợp trong Dimly";
 "IntroInternalMonitorHint" = "Dimly cũng có thể điều khiển màn hình tích hợp của Mac. Bạn có thể thay đổi điều này sau trong Cài đặt → Màn hình.";
 
+/* What's New */
+"WhatsNewHeaderTitle" = "Có gì mới trong Dimly";
+"WhatsNewHeaderSubtitle" = "Một vài điều bạn có thể đã bỏ lỡ";
+"WhatsNewLUTLibraryTitle" = "Thư viện Bảng tra cứu màu";
+"WhatsNewLUTLibraryDescription" = "Nhập và quản lý các bảng tra cứu màu .cube, .3dl, .lut và .csv, gán chúng cho từng màn hình và đóng gói chúng thành hồ sơ. Đã bao gồm năm cấu hình dựng sẵn.";
+"WhatsNewLUTLibraryLocation" = "Có sẵn trong Cài đặt → LUTs";
+"WhatsNewDisplaySettingsTitle" = "Cài đặt Màn hình Mở rộng";
+"WhatsNewDisplaySettingsDescription" = "Các phần có thể thu gọn mới bổ sung chuyển đổi hồ sơ màu ICC, bộ lọc giao diện, độ tương phản dựa trên DDC, lựa chọn độ phân giải và tần số quét, chuyển đổi nguồn tín hiệu vào, cùng các nút chuyển Night Shift / True Tone.";
+"WhatsNewDisplaySettingsLocation" = "Có sẵn trong Cài đặt → Màn hình";
+"WhatsNewDismissButton" = "Đã hiểu";
+
 /* Menu Bar Overview */
 "DisplayCountFormat" = "%lld màn hình được kết nối";
 "ExternalCountFormat" = "%lld ngoài";
@@ -92,6 +103,7 @@
 "DisplaysShowNumbersTitle" = "Hiển thị số màn hình trên màn hình";
 "DisplaysEmptyLabel" = "Không phát hiện màn hình hoạt động.";
 "GeneralShowIntroButton" = "Hiển thị phần giới thiệu lại";
+"GeneralShowWhatsNewButton" = "Hiển thị lại phần Có gì mới";
 
 /* Settings Displays */
 "DisplayTypeInternalLabel" = "Nội bộ";

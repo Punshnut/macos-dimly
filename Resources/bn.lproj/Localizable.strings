@@ -22,6 +22,17 @@
 "IntroInternalMonitorTitle" = "Dimly-তে বিল্ট-ইন ডিসপ্লে দেখান";
 "IntroInternalMonitorHint" = "Dimly আপনার Mac-এর বিল্ট-ইন ডিসপ্লেও নিয়ন্ত্রণ করতে পারে। আপনি এটি পরে সেটিংস → ডিসপ্লে-তে পরিবর্তন করতে পারেন।";
 
+/* What's New */
+"WhatsNewHeaderTitle" = "Dimly-তে নতুন কী আছে";
+"WhatsNewHeaderSubtitle" = "কয়েকটি জিনিস যা আপনি হয়তো মিস করেছেন";
+"WhatsNewLUTLibraryTitle" = "কালার লুকআপ টেবিল লাইব্রেরি";
+"WhatsNewLUTLibraryDescription" = ".cube, .3dl, .lut, এবং .csv কালার লুকআপ টেবিল আমদানি ও পরিচালনা করুন, প্রতিটি ডিসপ্লের জন্য বরাদ্দ করুন এবং প্রোফাইলে বান্ডিল করুন। পাঁচটি প্রিসেট অন্তর্ভুক্ত আছে।";
+"WhatsNewLUTLibraryLocation" = "সেটিংস → LUTs-এ উপলব্ধ";
+"WhatsNewDisplaySettingsTitle" = "সম্প্রসারিত ডিসপ্লে সেটিংস";
+"WhatsNewDisplaySettingsDescription" = "নতুন সংকোচনযোগ্য বিভাগগুলি ICC কালার প্রোফাইল পরিবর্তন, অ্যাপিয়ারেন্স ফিল্টার, DDC-ভিত্তিক কনট্রাস্ট, রেজোলিউশন ও রিফ্রেশ রেট নির্বাচন, ইনপুট সোর্স পরিবর্তন, এবং Night Shift / True Tone টগল যোগ করে।";
+"WhatsNewDisplaySettingsLocation" = "সেটিংস → ডিসপ্লে-তে উপলব্ধ";
+"WhatsNewDismissButton" = "বুঝেছি";
+
 /* Menu Bar Overview */
 "DisplayCountFormat" = "%lld ডিসপ্লে সংযুক্ত";
 "ExternalCountFormat" = "%lld বাহ্যিক";
@@ -92,6 +103,7 @@
 "DisplaysShowNumbersTitle" = "স্ক্রিনে ডিসপ্লে নম্বর দেখান";
 "DisplaysEmptyLabel" = "কোনো সক্রিয় ডিসপ্লে শনাক্ত হয়নি।";
 "GeneralShowIntroButton" = "পরিচিতি আবার দেখান";
+"GeneralShowWhatsNewButton" = "নতুন কী আছে আবার দেখান";
 
 /* Settings Displays */
 "DisplayTypeInternalLabel" = "অভ্যন্তরীণ";

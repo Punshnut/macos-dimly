@@ -22,6 +22,17 @@
 "IntroInternalMonitorTitle" = "Dimly에 내장 디스플레이 표시";
 "IntroInternalMonitorHint" = "Dimly는 Mac의 내장 디스플레이도 제어할 수 있습니다. 나중에 설정 → 디스플레이에서 변경할 수 있습니다.";
 
+/* What's New */
+"WhatsNewHeaderTitle" = "Dimly의 새로운 기능";
+"WhatsNewHeaderSubtitle" = "놓쳤을 수도 있는 몇 가지 사항";
+"WhatsNewLUTLibraryTitle" = "컬러 룩업 테이블 라이브러리";
+"WhatsNewLUTLibraryDescription" = ".cube, .3dl, .lut, .csv 컬러 룩업 테이블을 가져오고 관리하며, 디스플레이별로 지정하고 프로필로 묶을 수 있습니다. 5개의 프리셋이 포함되어 있습니다.";
+"WhatsNewLUTLibraryLocation" = "설정 → LUTs에서 사용 가능";
+"WhatsNewDisplaySettingsTitle" = "확장된 디스플레이 설정";
+"WhatsNewDisplaySettingsDescription" = "새로운 접을 수 있는 섹션에서 ICC 색상 프로필 전환, 외관 필터, DDC 기반 명암, 해상도 및 화면 재생률 선택, 입력 소스 전환, Night Shift / True Tone 전환 기능을 제공합니다.";
+"WhatsNewDisplaySettingsLocation" = "설정 → 디스플레이에서 사용 가능";
+"WhatsNewDismissButton" = "확인";
+
 /* Menu Bar Overview */
 "DisplayCountFormat" = "%lld대 디스플레이 연결됨";
 "ExternalCountFormat" = "%lld대 외부";
@@ -92,6 +103,7 @@
 "DisplaysShowNumbersTitle" = "화면에 디스플레이 번호 표시";
 "DisplaysEmptyLabel" = "활성 디스플레이가 없습니다.";
 "GeneralShowIntroButton" = "소개 다시 보기";
+"GeneralShowWhatsNewButton" = "새로운 기능 다시 보기";
 
 /* Settings Displays */
 "DisplayTypeInternalLabel" = "내장";

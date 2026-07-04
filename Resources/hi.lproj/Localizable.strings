@@ -22,6 +22,17 @@
 "IntroInternalMonitorTitle" = "Dimly में बिल्ट-इन डिस्प्ले दिखाएं";
 "IntroInternalMonitorHint" = "Dimly आपके Mac के बिल्ट-इन डिस्प्ले को भी नियंत्रित कर सकता है। आप इसे बाद में सेटिंग्स → डिस्प्ले में बदल सकते हैं।";
 
+/* What's New */
+"WhatsNewHeaderTitle" = "Dimly में नया क्या है";
+"WhatsNewHeaderSubtitle" = "कुछ चीज़ें जो शायद आपसे छूट गई हों";
+"WhatsNewLUTLibraryTitle" = "कलर लुकअप टेबल लाइब्रेरी";
+"WhatsNewLUTLibraryDescription" = ".cube, .3dl, .lut, और .csv कलर लुकअप टेबल आयात और प्रबंधित करें, प्रत्येक डिस्प्ले के लिए असाइन करें, और उन्हें प्रोफ़ाइल में बंडल करें। पाँच प्रीसेट शामिल हैं।";
+"WhatsNewLUTLibraryLocation" = "सेटिंग्स → LUTs में उपलब्ध";
+"WhatsNewDisplaySettingsTitle" = "विस्तारित डिस्प्ले सेटिंग्स";
+"WhatsNewDisplaySettingsDescription" = "नए संक्षिप्त करने योग्य सेक्शन ICC कलर प्रोफ़ाइल स्विचिंग, अपीयरेंस फ़िल्टर, DDC-आधारित कंट्रास्ट, रिज़ॉल्यूशन और रिफ़्रेश रेट चयन, इनपुट सोर्स स्विचिंग, और Night Shift / True Tone टॉगल जोड़ते हैं।";
+"WhatsNewDisplaySettingsLocation" = "सेटिंग्स → डिस्प्ले में उपलब्ध";
+"WhatsNewDismissButton" = "समझ गया";
+
 /* Menu Bar Overview */
 "DisplayCountFormat" = "%lld डिस्प्ले कनेक्टेड";
 "ExternalCountFormat" = "%lld बाहरी";
@@ -92,6 +103,7 @@
 "DisplaysShowNumbersTitle" = "स्क्रीन पर डिस्प्ले नंबर दिखाएँ";
 "DisplaysEmptyLabel" = "कोई सक्रिय डिस्प्ले नहीं मिला।";
 "GeneralShowIntroButton" = "परिचय फिर से दिखाएँ";
+"GeneralShowWhatsNewButton" = "नया क्या है फिर से दिखाएँ";
 
 /* Settings Displays */
 "DisplayTypeInternalLabel" = "आंतरिक";

@@ -23,6 +23,17 @@
 "IntroInternalMonitorTitle" = "Ipakita ang built-in display sa Dimly";
 "IntroInternalMonitorHint" = "Maaari ring kontrolin ng Dimly ang built-in display ng iyong Mac. Maaari mong baguhin ito sa ibang pagkakataon sa Mga Setting → Mga Display.";
 
+/* What's New */
+"WhatsNewHeaderTitle" = "Ano ang Bago sa Dimly";
+"WhatsNewHeaderSubtitle" = "Ilang bagay na maaaring hindi mo napansin";
+"WhatsNewLUTLibraryTitle" = "Aklatan ng Color Lookup Table";
+"WhatsNewLUTLibraryDescription" = "Mag-import at mamahala ng .cube, .3dl, .lut, at .csv na color lookup table, itakda ang mga ito sa bawat display, at i-bundle sa mga profile. Kasama ang limang preset.";
+"WhatsNewLUTLibraryLocation" = "Available sa Mga Setting → LUTs";
+"WhatsNewDisplaySettingsTitle" = "Pinalawak na Mga Setting ng Display";
+"WhatsNewDisplaySettingsDescription" = "Ang mga bagong maaaring i-collapse na seksyon ay nagdaragdag ng pagpapalit ng ICC color profile, mga filter ng hitsura, DDC-based na contrast, pagpili ng resolution at refresh rate, pagpapalit ng input source, at mga toggle ng Night Shift / True Tone.";
+"WhatsNewDisplaySettingsLocation" = "Available sa Mga Setting → Mga Display";
+"WhatsNewDismissButton" = "Nakuha ko";
+
 /* Menu Bar Overview */
 "DisplayCountFormat" = "%lld display na nakakonekta";
 "ExternalCountFormat" = "%lld panlabas";
@@ -93,6 +104,7 @@
 "DisplaysShowNumbersTitle" = "Ipakita ang mga numero ng display sa screen";
 "DisplaysEmptyLabel" = "Walang aktibong display na natukoy.";
 "GeneralShowIntroButton" = "Ipakita muli ang pagpapakilala";
+"GeneralShowWhatsNewButton" = "Ipakita muli ang mga bago";
 "GeneralBackupTitle" = "Backup ng settings";
 "GeneralBackupSubtitle" = "Piliin kung ano ang i-import o i-export.";
 "BackupGeneralSettingsTitle" = "Pangkalahatang settings";

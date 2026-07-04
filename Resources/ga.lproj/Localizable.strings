@@ -22,6 +22,17 @@
 "IntroInternalMonitorTitle" = "Taispeáin an taispeáint ionsuite in Dimly";
 "IntroInternalMonitorHint" = "Is féidir le Dimly taispeáint ionsuite do Mac a rialú freisin. Is féidir leat é seo a athrú níos déanaí i Socruithe → Taispeántaí.";
 
+/* What's New */
+"WhatsNewHeaderTitle" = "Cad Atá Nua i Dimly";
+"WhatsNewHeaderSubtitle" = "Cúpla rud a d'fhéadfá a bheith imithe i ngan fhios ort";
+"WhatsNewLUTLibraryTitle" = "Leabharlann Táblaí Cuardaigh Datha";
+"WhatsNewLUTLibraryDescription" = "Iompórtáil agus bainistigh táblaí cuardaigh datha .cube, .3dl, .lut, agus .csv, sann iad in aghaidh gach taispeántais, agus pacáistigh iad i bpróifílí. Tá cúig réamhshocrú san áireamh.";
+"WhatsNewLUTLibraryLocation" = "Ar fáil i Socruithe → LUTs";
+"WhatsNewDisplaySettingsTitle" = "Socruithe Taispeána Leathnaithe";
+"WhatsNewDisplaySettingsDescription" = "Cuireann ranna nua inchosanta scoránú próifílí datha ICC, scagairí cuma, codarsnacht bunaithe ar DDC, roghnú taifeach agus ráta athnuachana, scoránú fhoinse ionchuir, agus scoránuithe Night Shift / True Tone leis.";
+"WhatsNewDisplaySettingsLocation" = "Ar fáil i Socruithe → Taispeántaí";
+"WhatsNewDismissButton" = "Tuigthe";
+
 /* Menu Bar Overview */
 "DisplayCountFormat" = "%lld taispeáint(í) ceangailte";
 "ExternalCountFormat" = "%lld sheachtrach";
@@ -92,6 +103,7 @@
 "DisplaysShowNumbersTitle" = "Taispeáin uimhreacha ar na scáileáin";
 "DisplaysEmptyLabel" = "Níor braitheadh taispeántais ghníomhacha.";
 "GeneralShowIntroButton" = "Taispeáin an réamhrá arís";
+"GeneralShowWhatsNewButton" = "Taispeáin an méid atá nua arís";
 
 /* Settings Displays */
 "DisplayTypeInternalLabel" = "Inmheánach";

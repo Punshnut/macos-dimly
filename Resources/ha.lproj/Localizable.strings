@@ -22,6 +22,17 @@
 "IntroInternalMonitorTitle" = "Nuna allo na ciki a Dimly";
 "IntroInternalMonitorHint" = "Dimly kuma zai iya sarrafa allo na ciki na Mac ɗinka. Zaka iya canza wannan daga baya a Saitunan → Allunan Nuni.";
 
+/* What's New */
+"WhatsNewHeaderTitle" = "Sabbin Abubuwa a Dimly";
+"WhatsNewHeaderSubtitle" = "Wasu abubuwa da wataƙila ka rasa";
+"WhatsNewLUTLibraryTitle" = "Ma'ajin Teburin Bincike na Launi";
+"WhatsNewLUTLibraryDescription" = "Shigo da kuma sarrafa teburin bincike na launi na .cube, .3dl, .lut, da .csv, ka sanya su ga kowane allo, kuma ka haɗa su cikin bayanan martaba. An haɗa da'irori guda biyar.";
+"WhatsNewLUTLibraryLocation" = "Ana samu a Saitunan → LUTs";
+"WhatsNewDisplaySettingsTitle" = "Fadada Saitunan Allo";
+"WhatsNewDisplaySettingsDescription" = "Sabbin sassan da za a iya durƙushewa suna ƙara canjin bayanan martaba na launi na ICC, matattarar kamanni, bambanci bisa DDC, zaɓin ƙuduri da ƙimar sabuntawa, sauya tushen shigarwa, da maɓallan Night Shift / True Tone.";
+"WhatsNewDisplaySettingsLocation" = "Ana samu a Saitunan → Allo";
+"WhatsNewDismissButton" = "Na gane";
+
 /* Menu Bar Overview */
 "DisplayCountFormat" = "%lld allo(na) an haɗa";
 "ExternalCountFormat" = "%lld na waje";
@@ -92,6 +103,7 @@
 "DisplaysShowNumbersTitle" = "Nuna lambobin allo a kan allo";
 "DisplaysEmptyLabel" = "Ba a gano allo mai aiki ba.";
 "GeneralShowIntroButton" = "Nuna gabatarwa sake";
+"GeneralShowWhatsNewButton" = "Nuna sabbin abubuwa sake";
 
 /* Settings Displays */
 "DisplayTypeInternalLabel" = "Na ciki";

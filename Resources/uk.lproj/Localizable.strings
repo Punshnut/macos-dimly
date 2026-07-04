@@ -22,6 +22,17 @@
 "IntroInternalMonitorTitle" = "Показати вбудований дисплей у Dimly";
 "IntroInternalMonitorHint" = "Dimly також може керувати вбудованим дисплеєм вашого Mac. Ви можете змінити це пізніше в Налаштуваннях → Дисплеї.";
 
+/* What's New */
+"WhatsNewHeaderTitle" = "Що нового в Dimly";
+"WhatsNewHeaderSubtitle" = "Декілька речей, які ви могли пропустити";
+"WhatsNewLUTLibraryTitle" = "Бібліотека таблиць кольорокорекції (LUT)";
+"WhatsNewLUTLibraryDescription" = "Імпортуйте та керуйте таблицями кольорокорекції форматів .cube, .3dl, .lut і .csv, призначайте їх для кожного дисплея та об'єднуйте в профілі. Включено п'ять готових пресетів.";
+"WhatsNewLUTLibraryLocation" = "Доступно в Налаштуваннях → LUTs";
+"WhatsNewDisplaySettingsTitle" = "Розширені налаштування дисплея";
+"WhatsNewDisplaySettingsDescription" = "Нові розділи, що згортаються, додають перемикання кольорових профілів ICC, фільтри вигляду, контраст на основі DDC, вибір роздільної здатності та частоти оновлення, перемикання джерела входу, а також перемикачі Night Shift / True Tone.";
+"WhatsNewDisplaySettingsLocation" = "Доступно в Налаштуваннях → Дисплеї";
+"WhatsNewDismissButton" = "Зрозуміло";
+
 /* Menu Bar Overview */
 "DisplayCountFormat" = "%lld дисплей(їв) підключено";
 "ExternalCountFormat" = "%lld зовнішній";
@@ -92,6 +103,7 @@
 "DisplaysShowNumbersTitle" = "Показувати номери на екранах";
 "DisplaysEmptyLabel" = "Активних дисплеїв не виявлено.";
 "GeneralShowIntroButton" = "Показати вступ знову";
+"GeneralShowWhatsNewButton" = "Показати новини знову";
 
 /* Settings Displays */
 "DisplayTypeInternalLabel" = "Внутрішній";

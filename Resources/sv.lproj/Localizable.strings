@@ -22,6 +22,17 @@
 "IntroInternalMonitorTitle" = "Visa inbyggd skärm i Dimly";
 "IntroInternalMonitorHint" = "Dimly kan också styra din Macs inbyggda skärm. Du kan ändra detta senare i Inställningar → Skärmar.";
 
+/* What's New */
+"WhatsNewHeaderTitle" = "Nytt i Dimly";
+"WhatsNewHeaderSubtitle" = "Några saker du kanske har missat";
+"WhatsNewLUTLibraryTitle" = "LUT-bibliotek (färguppslagstabeller)";
+"WhatsNewLUTLibraryDescription" = "Importera och hantera färguppslagstabeller i formaten .cube, .3dl, .lut och .csv, tilldela dem per skärm och paketera dem i profiler. Fem förinställningar ingår.";
+"WhatsNewLUTLibraryLocation" = "Finns i Inställningar → LUTs";
+"WhatsNewDisplaySettingsTitle" = "Utökade skärminställningar";
+"WhatsNewDisplaySettingsDescription" = "Nya hopfällbara avsnitt lägger till byte av ICC-färgprofil, utseendefilter, DDC-baserad kontrast, val av upplösning och uppdateringsfrekvens, byte av ingångskälla samt Night Shift- och True Tone-reglage.";
+"WhatsNewDisplaySettingsLocation" = "Finns i Inställningar → Skärmar";
+"WhatsNewDismissButton" = "Uppfattat";
+
 /* Menu Bar Overview */
 "DisplayCountFormat" = "%lld skärm(ar) anslutna";
 "ExternalCountFormat" = "%lld extern(a)";
@@ -92,6 +103,7 @@
 "DisplaysShowNumbersTitle" = "Visa skärmnummer på skärmar";
 "DisplaysEmptyLabel" = "Inga aktiva skärmar hittades.";
 "GeneralShowIntroButton" = "Visa introduktion igen";
+"GeneralShowWhatsNewButton" = "Visa nyheter igen";
 
 /* Settings Displays */
 "DisplayTypeInternalLabel" = "Intern";

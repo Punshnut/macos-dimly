@@ -22,6 +22,17 @@
 "IntroInternalMonitorTitle" = "Ingebouwd scherm tonen in Dimly";
 "IntroInternalMonitorHint" = "Dimly kan ook het ingebouwde scherm van je Mac bedienen. Je kunt dit later wijzigen via Instellingen → Schermen.";
 
+/* What's New */
+"WhatsNewHeaderTitle" = "Nieuw in Dimly";
+"WhatsNewHeaderSubtitle" = "Een paar dingen die je misschien gemist hebt";
+"WhatsNewLUTLibraryTitle" = "Kleur-lookuptabelbibliotheek";
+"WhatsNewLUTLibraryDescription" = "Importeer en beheer .cube-, .3dl-, .lut- en .csv-kleur-lookuptabellen, wijs ze per scherm toe en bundel ze in profielen. Vijf presets zijn inbegrepen.";
+"WhatsNewLUTLibraryLocation" = "Beschikbaar via Instellingen → LUTs";
+"WhatsNewDisplaySettingsTitle" = "Uitgebreide scherminstellingen";
+"WhatsNewDisplaySettingsDescription" = "Nieuwe inklapbare secties voegen ICC-kleurprofielwisseling, uiterlijkfilters, DDC-gebaseerd contrast, selectie van resolutie en vernieuwingsfrequentie, wisseling van invoerbron en Night Shift-/True Tone-schakelaars toe.";
+"WhatsNewDisplaySettingsLocation" = "Beschikbaar via Instellingen → Schermen";
+"WhatsNewDismissButton" = "Begrepen";
+
 /* Menu Bar Overview */
 "DisplayCountFormat" = "%lld scherm(en) verbonden";
 "ExternalCountFormat" = "%lld extern";
@@ -92,6 +103,7 @@
 "DisplaysShowNumbersTitle" = "Schermnummers op schermen tonen";
 "DisplaysEmptyLabel" = "Geen actieve schermen gevonden.";
 "GeneralShowIntroButton" = "Intro opnieuw tonen";
+"GeneralShowWhatsNewButton" = "Nieuwtjes opnieuw tonen";
 
 /* Settings Displays */
 "DisplayTypeInternalLabel" = "Intern";

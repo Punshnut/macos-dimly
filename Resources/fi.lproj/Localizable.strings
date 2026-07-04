@@ -22,6 +22,17 @@
 "IntroInternalMonitorTitle" = "Näytä sisäänrakennettu näyttö Dimly-sovelluksessa";
 "IntroInternalMonitorHint" = "Dimly voi myös ohjata Macin sisäänrakennettua näyttöä. Voit muuttaa tätä myöhemmin kohdassa Asetukset → Näytöt.";
 
+/* What's New */
+"WhatsNewHeaderTitle" = "Mitä uutta Dimlyssä";
+"WhatsNewHeaderSubtitle" = "Muutama asia, joka on saattanut jäädä huomaamatta";
+"WhatsNewLUTLibraryTitle" = "Värien hakutaulukirjasto";
+"WhatsNewLUTLibraryDescription" = "Tuo ja hallinnoi .cube-, .3dl-, .lut- ja .csv-värien hakutaulukoita, kohdista niitä näytöittäin ja niputa ne profiileihin. Mukana on viisi esiasetusta.";
+"WhatsNewLUTLibraryLocation" = "Saatavilla kohdassa Asetukset → LUTs";
+"WhatsNewDisplaySettingsTitle" = "Laajennetut näyttöasetukset";
+"WhatsNewDisplaySettingsDescription" = "Uudet supistettavat osiot tuovat ICC-väriprofiilin vaihdon, ulkoasusuodattimet, DDC-pohjaisen kontrastin, tarkkuuden ja virkistystaajuuden valinnan, tulolähteen vaihdon sekä Night Shift- / True Tone -kytkimet.";
+"WhatsNewDisplaySettingsLocation" = "Saatavilla kohdassa Asetukset → Näytöt";
+"WhatsNewDismissButton" = "Selvä";
+
 /* Menu Bar Overview */
 "DisplayCountFormat" = "%lld näyttö(ä) yhdistetty";
 "ExternalCountFormat" = "%lld ulkoinen";
@@ -92,6 +103,7 @@
 "DisplaysShowNumbersTitle" = "Näytä näyttönumerot";
 "DisplaysEmptyLabel" = "Aktiivisia näyttöjä ei havaittu.";
 "GeneralShowIntroButton" = "Näytä esittely uudelleen";
+"GeneralShowWhatsNewButton" = "Näytä uutuudet uudelleen";
 
 /* Settings Displays */
 "DisplayTypeInternalLabel" = "Sisäinen";

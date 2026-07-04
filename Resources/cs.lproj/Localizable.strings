@@ -22,6 +22,17 @@
 "IntroInternalMonitorTitle" = "Zobrazit vestavěný displej v Dimly";
 "IntroInternalMonitorHint" = "Dimly může také ovládat vestavěný displej vašeho Macu. Toto nastavení můžete později změnit v Nastavení → Displeje.";
 
+/* What's New */
+"WhatsNewHeaderTitle" = "Co je nového v Dimly";
+"WhatsNewHeaderSubtitle" = "Pár věcí, které vám mohly uniknout";
+"WhatsNewLUTLibraryTitle" = "Knihovna vyhledávacích tabulek barev";
+"WhatsNewLUTLibraryDescription" = "Importujte a spravujte vyhledávací tabulky barev ve formátech .cube, .3dl, .lut a .csv, přiřaďte je jednotlivým displejům a sdružte je do profilů. Součástí je pět předvoleb.";
+"WhatsNewLUTLibraryLocation" = "Dostupné v Nastavení → LUTs";
+"WhatsNewDisplaySettingsTitle" = "Rozšířené nastavení displeje";
+"WhatsNewDisplaySettingsDescription" = "Nové sbalitelné sekce přidávají přepínání barevných profilů ICC, filtry vzhledu, kontrast založený na DDC, výběr rozlišení a obnovovací frekvence, přepínání vstupního zdroje a přepínače Night Shift / True Tone.";
+"WhatsNewDisplaySettingsLocation" = "Dostupné v Nastavení → Displeje";
+"WhatsNewDismissButton" = "Rozumím";
+
 /* Menu Bar Overview */
 "DisplayCountFormat" = "%lld displej(ů) připojeno";
 "ExternalCountFormat" = "%lld externí";
@@ -92,6 +103,7 @@
 "DisplaysShowNumbersTitle" = "Zobrazit čísla displejů";
 "DisplaysEmptyLabel" = "Žádné aktivní displeje.";
 "GeneralShowIntroButton" = "Zobrazit úvod znovu";
+"GeneralShowWhatsNewButton" = "Zobrazit novinky znovu";
 
 /* Settings Displays */
 "DisplayTypeInternalLabel" = "Interní";
