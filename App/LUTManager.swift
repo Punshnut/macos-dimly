@@ -400,6 +400,7 @@ final class LUTManager: ObservableObject {
 
     init() {
         loadLibrary()
+        deduplicateBundledLUTs()
         importBundledLUTsIfNeeded()
     }
 
@@ -409,8 +410,11 @@ final class LUTManager: ObservableObject {
 
     private func importBundledLUTsIfNeeded() {
         guard !UserDefaults.standard.bool(forKey: Self.bundledLUTsImportedKey) else { return }
+        // Set the flag up front (not after the async loop finishes) so a quit/kill
+        // mid-import can't leave it false and cause the whole set to be re-imported
+        // on the next launch.
+        UserDefaults.standard.set(true, forKey: Self.bundledLUTsImportedKey)
         guard let examplesDir = Bundle.main.url(forResource: "ExampleLUTs", withExtension: nil) else {
-            UserDefaults.standard.set(true, forKey: Self.bundledLUTsImportedKey)
             return
         }
         Task.detached(priority: .background) { [weak self] in
@@ -420,13 +424,71 @@ final class LUTManager: ObservableObject {
             let supported = ["cube", "3dl", "lut", "csv"]
             for url in urls.sorted(by: { $0.lastPathComponent < $1.lastPathComponent }) {
                 guard supported.contains(url.pathExtension.lowercased()) else { continue }
-                try? await MainActor.run { [weak self] in
-                    try self?.importLUT(from: url)
+                let key = Self.bundledKey(forBaseName: url.deletingPathExtension().lastPathComponent,
+                                          ext: url.pathExtension)
+                await MainActor.run { [weak self] in
+                    guard let self,
+                          !self.library.contains(where: { Self.bundledKey(forFilename: $0.filename) == key })
+                    else { return }
+                    _ = try? self.importLUT(from: url)
                 }
             }
-            await MainActor.run {
-                UserDefaults.standard.set(true, forKey: Self.bundledLUTsImportedKey)
+        }
+    }
+
+    /// Canonical identity for a bundled preset's on-disk filename, stripping the
+    /// "_N" uniquification suffix `importLUT` adds on repeated imports (e.g.
+    /// "Cool_Breeze_2.cube" -> "Cool_Breeze.cube"). Display names can't be used for
+    /// this since a LUT's parsed TITLE (e.g. "Cool Breeze") may differ from its
+    /// bundled filename (e.g. "Cool_Breeze.cube").
+    private static nonisolated func bundledKey(forFilename filename: String) -> String {
+        let ext = (filename as NSString).pathExtension
+        let base = (filename as NSString).deletingPathExtension
+        return bundledKey(forBaseName: base, ext: ext)
+    }
+
+    private static nonisolated func bundledKey(forBaseName base: String, ext: String) -> String {
+        var trimmed = base
+        if let range = trimmed.range(of: "_[0-9]+$", options: .regularExpression) {
+            trimmed.removeSubrange(range)
+        }
+        return "\(trimmed).\(ext.lowercased())"
+    }
+
+    /// Collapses bundled-preset entries that were duplicated by a prior launch
+    /// racing the (now fixed) async seeding guard, keeping the first occurrence
+    /// of each bundled source and removing the orphaned duplicate files.
+    private func deduplicateBundledLUTs() {
+        guard let examplesDir = Bundle.main.url(forResource: "ExampleLUTs", withExtension: nil) else { return }
+        let bundledKeys = Set(
+            ((try? FileManager.default.contentsOfDirectory(at: examplesDir, includingPropertiesForKeys: nil)) ?? [])
+                .map { Self.bundledKey(forBaseName: $0.deletingPathExtension().lastPathComponent, ext: $0.pathExtension) }
+        )
+        guard !bundledKeys.isEmpty else { return }
+
+        var seenKeys = Set<String>()
+        var deduped: [LUTEntry] = []
+        var changed = false
+        for entry in library {
+            let key = Self.bundledKey(forFilename: entry.filename)
+            guard bundledKeys.contains(key) else {
+                deduped.append(entry)
+                continue
             }
+            if seenKeys.contains(key) {
+                let fileURL = Self.lutsDirectory.appendingPathComponent(entry.filename)
+                try? FileManager.default.removeItem(at: fileURL)
+                tableCache.removeValue(forKey: entry.id)
+                changed = true
+            } else {
+                seenKeys.insert(key)
+                deduped.append(entry)
+            }
+        }
+        if changed {
+            library = deduped
+            persistLibrary()
+            logger.notice("Removed duplicate bundled LUT entries")
         }
     }
 
