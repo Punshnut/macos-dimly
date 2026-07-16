@@ -733,7 +733,6 @@ struct SettingsRootView: View {
         let overlayOnly = settingsStore.settings.overlayOnlyDisplayIDs.contains(display.stableIdentity)
         let fallbackActive = (!ddcSupported || overlayOnly) && blackoutManager.activeDisplayIDs.contains(display.stableIdentity)
         let controlTint: Color = (ddcSupported && !overlayOnly) ? .green : (fallbackActive ? .blue : .secondary)
-        let canControl = display.isExternal
         let brightnessMode = display.isBuiltin ? BrightnessControlMode.ddc : engine.brightnessMode(for: display)
         let brightnessPresentation: (Color, String) = {
             switch brightnessMode {
@@ -747,12 +746,6 @@ struct SettingsRootView: View {
         }()
         let brightnessTint = brightnessPresentation.0
         let brightnessModeLabel = brightnessPresentation.1
-        let isShownInDimly: Bool = {
-            if display.isBuiltin {
-                return settingsStore.settings.menuBarIncludedInternalDisplayIDs.contains(display.stableIdentity)
-            }
-            return settingsStore.settings.menuBarExcludedDisplayIDs.contains(display.stableIdentity) == false
-        }()
         let currentBrightness = brightnessPercent(for: display)
 
         VStack(alignment: .leading, spacing: 0) {

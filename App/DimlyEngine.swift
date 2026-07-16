@@ -1435,6 +1435,7 @@ final class DimlyEngine: ObservableObject {
             if power == .blackout || power == .standby {
                 if isPrimary && settleInProgress {
                     pendingIDs.insert(id)
+                    continue
                 }
                 if runtimeBuiltinBlackoutActive {
                     // Keep the panel dark without overwriting the saved pre-blackout brightness snapshot.
