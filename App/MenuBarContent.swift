@@ -3158,6 +3158,7 @@ private struct MenuBarWindowAnchorLock: NSViewRepresentable {
         private var lockedTopY: CGFloat?
         private var lockedScreen: NSScreen?
         private var targetContentSize: CGSize = .zero
+        private var isSyncingWindowFrame = false
 
         /// Starts observing the current hosting window and captures the top edge to preserve menu bar anchoring.
         func attach(
@@ -3282,6 +3283,10 @@ private struct MenuBarWindowAnchorLock: NSViewRepresentable {
 
         /// Keeps the menu bar window frame in sync with the measured SwiftUI content size.
         private func syncWindowFrame(force: Bool = false) {
+            guard !isSyncingWindowFrame else { return }
+            isSyncingWindowFrame = true
+            defer { isSyncingWindowFrame = false }
+
             guard isEnabled, let window else { return }
             guard let targetContentSize = resolvedTargetContentSize(in: window) else { return }
 
