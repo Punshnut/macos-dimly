@@ -9,7 +9,9 @@
 	<key>CFBundleExecutable</key>
 	<string>Dimly</string>
 	<key>CFBundleIconFile</key>
-	<string>AppIcon</string>
+	<string>Dimly</string>
+	<key>CFBundleIconName</key>
+	<string>Dimly</string>
 	<key>CFBundleIdentifier</key>
 	<string>com.punshnut.dimly</string>
 	<key>CFBundleInfoDictionaryVersion</key>
