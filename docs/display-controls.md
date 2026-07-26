@@ -135,20 +135,9 @@ Filters work on all displays including built-in. They reset on sleep/wake - Diml
 
 ### LUTs
 
-A **LUT (Look-Up Table)** remaps the color output of a display using a calibration or creative curve. LUTs are applied at the gamma-table level - they affect the full display output, just like Appearance Filters.
+A **LUT (Look-Up Table)** remaps the color output of a display using a calibration or creative curve, applied right alongside Appearance Filters in the Image section. Dimly includes 5 bundled presets plus support for importing your own `.cube`, `.3dl`, `.lut`, and `.csv` files.
 
-Supported formats: `.cube` (Resolve, Premiere, Photoshop), `.3dl` (Autodesk/Flame), `.lut` (Resolve 1D exports), `.csv` (spreadsheet-style 1D tables).
-
-**To assign a LUT to a display:**
-1. Go to **Settings → LUTs** and import a LUT file.
-2. In **Settings → Displays**, expand a display's **Image** section.
-3. Choose a LUT from the **LUT** picker. Select **None** to remove it.
-
-**1D vs 3D LUTs:**
-- **1D LUTs** remap each channel independently. These map exactly to the gamma table.
-- **3D LUTs** apply full cross-channel color transforms. Dimly samples the neutral axis of 3D LUTs to derive per-channel curves - this works well for calibration LUTs but may not fully reproduce strong creative color grading effects.
-
-LUTs are reapplied automatically after sleep/wake and display reconnects. They compose with Appearance Filters - the filter is applied first, then the LUT curve.
+See the dedicated [LUT Library guide](luts.md) for supported formats, importing, assigning LUTs to displays, and backup/restore.
 
 ### Night Shift
 

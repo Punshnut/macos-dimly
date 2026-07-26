@@ -70,32 +70,7 @@ Click **Forget** to remove a monitor's saved name, preferences, and brightness h
 
 ## LUTs
 
-**Settings → LUTs** is where you manage your personal LUT library.
-
-### Importing a LUT
-
-Click **Import LUT…** and choose a file. Supported formats:
-
-| Format | Description |
-|---|---|
-| `.cube` | Industry standard - used by DaVinci Resolve, Premiere Pro, Photoshop, Final Cut Pro. Supports both 1D and 3D LUTs. |
-| `.3dl` | Autodesk / Flame format. 3D mesh LUT, 12-bit range. |
-| `.lut` | 1D LUT format used by DaVinci Resolve and broadcast tools. |
-| `.csv` | Comma- or tab-separated 1D table with R, G, B columns. |
-
-After import, the LUT appears in the library with a **color preview strip** and a badge showing its type and size (e.g. "3D · 33³" or "1D · 64").
-
-### Renaming and deleting
-
-Click **Rename** next to any LUT to give it a custom name. Click **Delete** (with confirmation) to remove a LUT from the library - any displays using it will revert to no LUT automatically.
-
-### Assigning a LUT to a display
-
-Go to **Settings → Displays**, expand a display, open the **Image** section, and choose from the **LUT** picker. Select **None** to clear it.
-
-### Backup and restore
-
-LUT assignments are included in Settings Backup (Monitor Settings). When you export a backup and the LUT library toggle is included, the actual LUT file data is embedded in the backup - so restoring the backup on another Mac also restores the LUT files.
+See the dedicated [LUT Library](luts.md) guide for importing, assigning, and backing up LUTs.
 
 ---
 

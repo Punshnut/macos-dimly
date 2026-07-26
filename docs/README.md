@@ -21,6 +21,9 @@ That's the basics. Everything below explains what else Dimly can do.
 **Control any display**
 Adjust brightness per monitor, put displays to sleep, wake them, or black them out instantly. Works on every external monitor - hardware control where possible, software overlay where not.
 
+**See what's new**
+The intro window - shown on first launch and reachable anytime from Settings → About - includes a What's New page after you update. It highlights new features with direct links into the relevant Settings tab, so you can jump straight to trying them out.
+
 **Save setups as profiles**
 Capture your current display state - brightness, power, order - as a named profile. Apply it in one click, pin it as a Smart Button in the menu bar, or have it apply automatically when a monitor connects.
 
@@ -78,6 +81,7 @@ Set up a Schedule with a sunset trigger and a profile that dims all displays to 
 | | |
 |---|---|
 | [Display Controls](display-controls.md) | Brightness, sleep, wake, blackout, DDC vs overlay, renaming |
+| [LUT Library](luts.md) | Importing LUTs, bundled presets, per-display assignment, backup/restore |
 | [Profiles & Smart Buttons](profiles.md) | Saving setups, quick-access buttons, auto-apply on connect |
 | [Scheduling](scheduling.md) | Clock and sunrise/sunset triggers, location setup |
 | [Shortcuts & Hotkeys](shortcuts.md) | Global hotkeys, panic recovery, custom bindings |
