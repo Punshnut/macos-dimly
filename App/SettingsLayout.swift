@@ -365,13 +365,20 @@ private struct SettingsToolbarCleaner: NSViewRepresentable {
         private let placeholderID = NSToolbarItem.Identifier("settings.toolbar.placeholder")
 
         /// Ensures a toolbar exists, then applies prune/placeholder rules.
+        /// Reassigning `delegate`/mutating `items` unconditionally forces AppKit to
+        /// invalidate and relayout the unified toolbar even when nothing changed, which
+        /// was cutting off the native traffic-light hover crossfade on every SwiftUI
+        /// re-render. Only touch the toolbar when something actually needs fixing.
         @MainActor func attachToolbar(to window: NSWindow?) {
             guard let window else { return }
             if window.toolbar == nil {
                 window.toolbar = NSToolbar(identifier: "SettingsToolbar")
             }
-            window.toolbar?.delegate = self
-            pruneToolbarItems(in: window.toolbar)
+            guard let toolbar = window.toolbar else { return }
+            if toolbar.delegate !== self {
+                toolbar.delegate = self
+            }
+            pruneToolbarItems(in: toolbar)
         }
 
         /// Removes unwanted sidebar/separator items and guarantees a placeholder item.

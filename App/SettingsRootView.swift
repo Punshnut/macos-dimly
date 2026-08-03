@@ -78,6 +78,7 @@ struct SettingsRootView: View {
             )
         }
         .frame(minWidth: 900, minHeight: 580)
+        .toolbar(removing: .sidebarToggle)
         .hideSettingsToolbar()
         .onAppear {
             engine.refreshBuiltinBrightnessSnapshots(reason: "settingsAppear", persistToSettings: false)

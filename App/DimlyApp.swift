@@ -344,6 +344,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
                 defer: false
             )
             window.title = String(localized: "AppSettingsTitle")
+            window.titleVisibility = .hidden
             window.titlebarAppearsTransparent = true
             window.titlebarSeparatorStyle = .none
             window.toolbarStyle = .unifiedCompact
