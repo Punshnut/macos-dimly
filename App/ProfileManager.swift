@@ -900,6 +900,27 @@ final class ProfileManager: ObservableObject {
             }
         }
 
+        // The builtin panel routinely lacks a stable CoreGraphics UUID/serial and falls back to a
+        // session-local "display-<CGDirectDisplayID>" identity, which can be reassigned by the window
+        // server between applies even though the display never disconnects. Since a Mac has at most one
+        // built-in display, pair the remaining unmatched builtin snapshot/display directly rather than
+        // relying on identity/score matching.
+        let unmatchedBuiltinSnapshots = unmatchedSnapshots.filter { $0.isBuiltin == true }
+        let unmatchedBuiltinDisplays = unmatchedDisplaysByID.values.filter(\.isBuiltin)
+        if unmatchedBuiltinSnapshots.count == 1, unmatchedBuiltinDisplays.count == 1,
+           let builtinSnapshot = unmatchedBuiltinSnapshots.first,
+           let builtinDisplay = unmatchedBuiltinDisplays.first {
+            unmatchedDisplaysByID.removeValue(forKey: builtinDisplay.stableIdentity)
+            unmatchedSnapshots.removeAll { $0.id == builtinSnapshot.id }
+            result.append((snapshot: builtinSnapshot, display: builtinDisplay))
+            if builtinSnapshot.id != builtinDisplay.stableIdentity {
+                DiagnosticsLogger.shared.log(
+                    "Forced builtin match snapshotID=\(builtinSnapshot.id) displayID=\(builtinDisplay.stableIdentity)",
+                    category: "profile"
+                )
+            }
+        }
+
         typealias Candidate = (snapshot: DisplaySnapshot, display: DisplayInfo, score: Int)
         var candidates: [Candidate] = []
         for snapshot in unmatchedSnapshots {
@@ -1138,8 +1159,16 @@ final class ProfileManager: ObservableObject {
         if ddcManager.states[id]?.lastCommand == .standby {
             return .standby
         }
-        if display.isBuiltin, let persisted = settingsStore.settings.monitorPowerStateByDisplayID[id], persisted != .visible {
-            return persisted
+        if display.isBuiltin {
+            // The builtin panel's stableIdentity can drift across display-reconfiguration events
+            // (see the snapshot-matching fix above), which would orphan a settings-dict lookup here.
+            // Read live panel brightness instead so this check survives an id change.
+            if let liveBrightness = DisplayHardware.builtinDisplayBrightnessPercent(for: display.displayID) {
+                return liveBrightness <= 0 ? .blackout : .visible
+            }
+            if let persisted = settingsStore.settings.monitorPowerStateByDisplayID[id], persisted != .visible {
+                return persisted
+            }
         }
         return .visible
     }

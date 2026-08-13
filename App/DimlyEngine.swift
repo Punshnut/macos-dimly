@@ -337,6 +337,11 @@ final class DimlyEngine: ObservableObject {
     /// Indicates whether a display is currently in blackout mode.
     func isDisplayBlackoutActive(_ display: DisplayInfo) -> Bool {
         if display.isBuiltin {
+            // The builtin panel's stableIdentity can drift across display-reconfiguration events,
+            // which would orphan a settings-dict lookup here. Read live panel brightness instead.
+            if let liveBrightness = DisplayHardware.builtinDisplayBrightnessPercent(for: display.displayID) {
+                return liveBrightness <= 0
+            }
             return settingsStore.settings.monitorPowerStateByDisplayID[display.stableIdentity] == .blackout
         }
         return blackoutManager.activeDisplayIDs.contains(display.stableIdentity)
