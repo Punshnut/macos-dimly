@@ -22,9 +22,10 @@ struct SettingsRootView: View {
     @State private var introWindowController: IntroWindowController?
     @State private var selection: SettingsDestination = .general
     @State private var proposedProfileName: String = ""
+    @State private var searchQuery: String = ""
     @ObservedObject private var navigationCoordinator = SettingsNavigationCoordinator.shared
 
-    enum SettingsDestination: Hashable {
+    enum SettingsDestination: CaseIterable, Hashable {
         case general
         case displays
         case luts
@@ -33,32 +34,228 @@ struct SettingsRootView: View {
         case profiles
         case schedule
         case about
+
+        var labelKey: String {
+            switch self {
+            case .general: "SettingsTabGeneralLabel"
+            case .displays: "SettingsTabDisplaysLabel"
+            case .luts: "SettingsTabLUTsLabel"
+            case .visuals: "SettingsTabVisualsLabel"
+            case .shortcuts: "SettingsTabShortcutsLabel"
+            case .profiles: "ProfilesSectionTitle"
+            case .schedule: "ScheduleTabLabel"
+            case .about: "SettingsTabAboutLabel"
+            }
+        }
+
+        /// Tab name in the system's current display language.
+        var localizedLabel: String { String(localized: String.LocalizationValue(labelKey)) }
+
+        /// Tab name in English — used so search always also matches the English term
+        /// regardless of the app's current display language.
+        var englishLabel: String { localized(labelKey, locale: englishLocale) }
+
+        var systemImage: String {
+            switch self {
+            case .general: "gearshape"
+            case .displays: "display"
+            case .luts: "camera.filters"
+            case .visuals: "paintbrush"
+            case .shortcuts: "keyboard"
+            case .profiles: "rectangle.3.group"
+            case .schedule: "clock"
+            case .about: "info.circle"
+            }
+        }
+    }
+
+    /// All search entries across both static tabs and per-display controls.
+    private var searchIndex: [SettingsSearchEntry] {
+        SettingsDetailView.staticSearchEntries(
+            settingsStore: settingsStore,
+            scheduleManager: scheduleManager,
+            profileManager: profileManager,
+            openTab: { destination in
+                selection = destination
+                searchQuery = ""
+            }
+        ) + displaySearchEntries()
+    }
+
+    /// Search text with leading/trailing whitespace stripped, so an accidental space
+    /// doesn't flip the detail pane into "no results" search mode.
+    private var trimmedSearchQuery: String {
+        searchQuery.trimmingCharacters(in: .whitespacesAndNewlines)
+    }
+
+    /// Tabs that have at least one match for the current search query.
+    private func matchingTabs(in index: [SettingsSearchEntry]) -> Set<SettingsDestination> {
+        Set(index.filter { settingsSearchMatches($0, query: trimmedSearchQuery) }.map(\.tab))
+    }
+
+    /// Builds one search entry per per-display control, for every connected display.
+    private func displaySearchEntries() -> [SettingsSearchEntry] {
+        displayManager.displays.flatMap { display -> [SettingsSearchEntry] in
+            let name = displayName(for: display)
+            let state = ddcManager.states[display.stableIdentity] ?? DDCState(status: .unknown, lastError: nil, lastCommand: nil, lastCommandAt: nil)
+            let ddcSupported = state.status == .supported
+            let brightnessMode = display.isBuiltin ? BrightnessControlMode.ddc : engine.brightnessMode(for: display)
+            let brightnessTint: Color = brightnessMode == .ddc ? .green : (brightnessMode == .fallback ? .blue : .orange)
+            let brightnessModeLabel = brightnessMode == .ddc ? String(localized: "DDC") : (brightnessMode == .fallback ? String(localized: "DisplayModeOverlayLabel") : String(localized: "DDCCheckingLabel"))
+            let overlayOnly = settingsStore.settings.overlayOnlyDisplayIDs.contains(display.stableIdentity)
+            let fallbackActive = (!ddcSupported || overlayOnly) && blackoutManager.activeDisplayIDs.contains(display.stableIdentity)
+            let controlTint: Color = (ddcSupported && !overlayOnly) ? .green : (fallbackActive ? .blue : .secondary)
+
+            var entries: [SettingsSearchEntry] = [
+                SettingsSearchEntry(
+                    id: "displays.\(display.stableIdentity).brightness",
+                    tab: .displays,
+                    titleKey: "BrightnessSectionLabel",
+                    subtitleLiteral: name,
+                    systemImage: "sun.max.fill",
+                    keywords: [name],
+                    content: { AnyView(DisplaySectionContent.brightness(for: display, engine: engine, brightnessTint: brightnessTint, brightnessModeLabel: brightnessModeLabel)) }
+                )
+            ]
+
+            if display.isExternal && ddcSupported {
+                entries.append(SettingsSearchEntry(
+                    id: "displays.\(display.stableIdentity).contrast",
+                    tab: .displays,
+                    titleKey: "SectionContrastTitle",
+                    subtitleLiteral: name,
+                    systemImage: "circle.lefthalf.filled",
+                    keywords: [name],
+                    content: { AnyView(DisplaySectionContent.contrast(for: display, ddcManager: ddcManager, engine: engine)) }
+                ))
+            }
+
+            if display.isExternal {
+                entries.append(SettingsSearchEntry(
+                    id: "displays.\(display.stableIdentity).power",
+                    tab: .displays,
+                    titleKey: "SectionPowerTitle",
+                    subtitleLiteral: name,
+                    systemImage: "power",
+                    keywords: [name],
+                    content: { AnyView(DisplaySectionContent.power(for: display, engine: engine, controlTint: controlTint)) }
+                ))
+            }
+
+            if nightShiftManager.isAvailable && (display.isBuiltin || displayManager.displays.filter(\.isBuiltin).isEmpty) {
+                entries.append(SettingsSearchEntry(
+                    id: "displays.\(display.stableIdentity).nightShift",
+                    tab: .displays,
+                    titleKey: "NightShiftLabel",
+                    subtitleLiteral: name,
+                    systemImage: "paintpalette",
+                    keywords: [name],
+                    content: { AnyView(DisplaySectionContent.nightShiftRow(for: display, nightShiftManager: nightShiftManager, displayManager: displayManager, showLabel: false)) }
+                ))
+            }
+
+            if trueToneManager.isTrueToneAvailable(for: display) {
+                entries.append(SettingsSearchEntry(
+                    id: "displays.\(display.stableIdentity).trueTone",
+                    tab: .displays,
+                    titleKey: "TrueToneLabel",
+                    subtitleLiteral: name,
+                    systemImage: "paintpalette",
+                    keywords: [name],
+                    content: { AnyView(DisplaySectionContent.trueToneRow(for: display, trueToneManager: trueToneManager, showLabel: false)) }
+                ))
+            }
+
+            entries.append(SettingsSearchEntry(
+                id: "displays.\(display.stableIdentity).filter",
+                tab: .displays,
+                titleKey: "DisplayFilterLabel",
+                subtitleLiteral: name,
+                systemImage: "paintpalette",
+                keywords: [name],
+                content: { AnyView(DisplaySectionContent.displayFilterRow(for: display, displayAppearanceManager: displayAppearanceManager, engine: engine, showLabel: false)) }
+            ))
+
+            entries.append(SettingsSearchEntry(
+                id: "displays.\(display.stableIdentity).lut",
+                tab: .displays,
+                titleKey: "LUTRowLabel",
+                subtitleLiteral: name,
+                systemImage: "camera.filters",
+                keywords: [name, "lut", "luts"],
+                content: { AnyView(DisplaySectionContent.lutPicker(for: display, settingsStore: settingsStore, engine: engine, showLabel: false)) }
+            ))
+
+            if !display.isBuiltin {
+                entries.append(SettingsSearchEntry(
+                    id: "displays.\(display.stableIdentity).colorProfile",
+                    tab: .displays,
+                    titleKey: "ColorProfileSectionLabel",
+                    subtitleLiteral: name,
+                    systemImage: "paintpalette",
+                    keywords: [name],
+                    content: { AnyView(DisplaySectionContent.colorProfile(for: display, colorProfileManager: colorProfileManager, engine: engine, showLabel: false)) }
+                ))
+            }
+
+            if display.isExternal {
+                entries.append(SettingsSearchEntry(
+                    id: "displays.\(display.stableIdentity).resolution",
+                    tab: .displays,
+                    titleKey: "SectionResolutionTitle",
+                    subtitleLiteral: name,
+                    systemImage: "aspectratio",
+                    keywords: [name],
+                    content: { AnyView(DisplaySectionContent.resolution(for: display, displayModeManager: displayModeManager, engine: engine, showLabel: false)) }
+                ))
+            }
+
+            if display.isExternal && ddcSupported {
+                entries.append(SettingsSearchEntry(
+                    id: "displays.\(display.stableIdentity).inputSource",
+                    tab: .displays,
+                    titleKey: "SectionInputSourceTitle",
+                    subtitleLiteral: name,
+                    systemImage: "cable.connector",
+                    keywords: [name],
+                    content: { AnyView(DisplaySectionContent.inputSource(for: display, ddcManager: ddcManager, engine: engine, showLabel: false)) }
+                ))
+            }
+
+            entries.append(SettingsSearchEntry(
+                id: "displays.\(display.stableIdentity).behavior",
+                tab: .displays,
+                titleKey: "SectionDimlyBehaviorTitle",
+                subtitleLiteral: name,
+                systemImage: "slider.horizontal.3",
+                keywords: [name],
+                content: { AnyView(DisplaySectionContent.dimlyBehavior(for: display, settingsStore: settingsStore)) }
+            ))
+
+            return entries
+        }
     }
 
     /// Settings UI with sidebar navigation.
     var body: some View {
+        let index = searchIndex
+        let visibleTabs = matchingTabs(in: index)
         NavigationSplitView(columnVisibility: .constant(.all)) {
-            List(selection: $selection) {
-                Section(String(localized: "AppName")) {
-                    Label(String(localized: "SettingsTabGeneralLabel"), systemImage: "gearshape")
-                        .tag(SettingsDestination.general)
-                    Label(String(localized: "SettingsTabDisplaysLabel"), systemImage: "display")
-                        .tag(SettingsDestination.displays)
-                    Label(String(localized: "SettingsTabLUTsLabel"), systemImage: "camera.filters")
-                        .tag(SettingsDestination.luts)
-                    Label(String(localized: "SettingsTabVisualsLabel"), systemImage: "paintbrush")
-                        .tag(SettingsDestination.visuals)
-                    Label(String(localized: "SettingsTabShortcutsLabel"), systemImage: "keyboard")
-                        .tag(SettingsDestination.shortcuts)
-                    Label(String(localized: "ProfilesSectionTitle"), systemImage: "rectangle.3.group")
-                        .tag(SettingsDestination.profiles)
-                    Label(String(localized: "ScheduleTabLabel"), systemImage: "clock")
-                        .tag(SettingsDestination.schedule)
-                    Label(String(localized: "SettingsTabAboutLabel"), systemImage: "info.circle")
-                        .tag(SettingsDestination.about)
+            VStack(spacing: 0) {
+                SettingsSearchField(text: $searchQuery)
+                    .padding(.horizontal, 10)
+                    .padding(.top, 8)
+                    .padding(.bottom, 4)
+                List(selection: $selection) {
+                    Section(String(localized: "AppName")) {
+                        ForEach(SettingsDestination.allCases.filter { trimmedSearchQuery.isEmpty || visibleTabs.contains($0) }, id: \.self) { destination in
+                            Label(destination.localizedLabel, systemImage: destination.systemImage)
+                                .tag(destination)
+                        }
+                    }
                 }
+                .listStyle(.sidebar)
             }
-            .listStyle(.sidebar)
             .frame(minWidth: 210)
         } detail: {
             SettingsDetailView(
@@ -74,8 +271,13 @@ struct SettingsRootView: View {
                 renameProfile: renameProfile,
                 showIntroAgain: showIntroAgain,
                 showWhatsNewAgain: showWhatsNewAgain,
-                displayRow: { display in AnyView(displayRowView(for: display)) }
+                displayRow: { display in AnyView(displayRowView(for: display)) },
+                searchQuery: trimmedSearchQuery,
+                searchIndex: index
             )
+        }
+        .onChange(of: selection) { _, _ in
+            if !searchQuery.isEmpty { searchQuery = "" }
         }
         .frame(minWidth: 900, minHeight: 580)
         .toolbar(removing: .sidebarToggle)
@@ -246,481 +448,6 @@ struct SettingsRootView: View {
         )
     }
 
-    // MARK: - Section Content Helpers
-
-    @ViewBuilder
-    private func brightnessSectionContent(for display: DisplayInfo, brightnessTint: Color, brightnessModeLabel: String, currentBrightness: Double) -> some View {
-        DimlySliderContainer(tint: brightnessTint) {
-            VStack(alignment: .leading, spacing: 8) {
-                HStack(spacing: 8) {
-                    Spacer()
-                    Text(
-                        String.localizedStringWithFormat(
-                            String(localized: "BrightnessPercentFormat"),
-                            Int64(currentBrightness.rounded())
-                        )
-                    )
-                    .font(.caption.monospacedDigit())
-                    .foregroundStyle(.secondary)
-                    Text(brightnessModeLabel)
-                        .font(.caption2.weight(.semibold))
-                        .padding(.horizontal, 6)
-                        .padding(.vertical, 3)
-                        .background(brightnessTint.opacity(0.18))
-                        .foregroundStyle(brightnessTint)
-                        .clipShape(Capsule())
-                }
-                HStack(spacing: 8) {
-                    Button { nudgeBrightness(for: display, delta: -1) } label: {
-                        Image(systemName: "chevron.left")
-                            .font(.system(size: 10, weight: .semibold))
-                            .frame(width: 18, height: 18)
-                    }
-                    .buttonStyle(FluentPressButtonStyle(pressedScale: 0.84, pressedOpacity: 0.82))
-                    .foregroundStyle(.secondary)
-                    .help(String(localized: "ActionDecreaseBrightnessHint"))
-                    Slider(
-                        value: Binding(
-                            get: { Double(brightnessPercent(for: display)) },
-                            set: { setBrightness(Int($0.rounded()), for: display) }
-                        ),
-                        in: 0...100
-                    )
-                    .tint(brightnessTint)
-                    Button { nudgeBrightness(for: display, delta: 1) } label: {
-                        Image(systemName: "chevron.right")
-                            .font(.system(size: 10, weight: .semibold))
-                            .frame(width: 18, height: 18)
-                    }
-                    .buttonStyle(FluentPressButtonStyle(pressedScale: 0.84, pressedOpacity: 0.82))
-                    .foregroundStyle(.secondary)
-                    .help(String(localized: "ActionIncreaseBrightnessHint"))
-                }
-            }
-        }
-    }
-
-    @ViewBuilder
-    private func contrastSectionContent(for display: DisplayInfo) -> some View {
-        let currentContrast = ddcManager.contrastLevels[display.stableIdentity] ?? 50
-        DimlySliderContainer(tint: .green) {
-            VStack(alignment: .leading, spacing: 8) {
-                HStack {
-                    Spacer()
-                    Text(String.localizedStringWithFormat(String(localized: "ContrastPercentFormat"), Int64(currentContrast)))
-                        .font(.caption.monospacedDigit())
-                        .foregroundStyle(.secondary)
-                }
-                HStack(spacing: 8) {
-                    Button {
-                        let next = max(0, currentContrast - 1)
-                        engine.setContrast(next, for: display)
-                    } label: {
-                        Image(systemName: "chevron.left")
-                            .font(.system(size: 10, weight: .semibold))
-                            .frame(width: 18, height: 18)
-                    }
-                    .buttonStyle(FluentPressButtonStyle(pressedScale: 0.84, pressedOpacity: 0.82))
-                    .foregroundStyle(.secondary)
-                    .help(String(localized: "ActionDecreaseContrastHint"))
-                    Slider(
-                        value: Binding(
-                            get: { Double(currentContrast) },
-                            set: { engine.setContrast(Int($0.rounded()), for: display) }
-                        ),
-                        in: 0...100
-                    )
-                    .tint(.green)
-                    Button {
-                        let next = min(100, currentContrast + 1)
-                        engine.setContrast(next, for: display)
-                    } label: {
-                        Image(systemName: "chevron.right")
-                            .font(.system(size: 10, weight: .semibold))
-                            .frame(width: 18, height: 18)
-                    }
-                    .buttonStyle(FluentPressButtonStyle(pressedScale: 0.84, pressedOpacity: 0.82))
-                    .foregroundStyle(.secondary)
-                    .help(String(localized: "ActionIncreaseContrastHint"))
-                }
-            }
-        }
-    }
-
-    @ViewBuilder
-    private func powerSectionContent(for display: DisplayInfo, controlTint: Color) -> some View {
-        HStack(spacing: 8) {
-            Button(String(localized: "ActionStandbyButton")) { engine.standby(display: display) }
-                .tint(controlTint)
-                .buttonStyle(.bordered)
-                .controlSize(.small)
-            Button(String(localized: "ActionWakeButton")) { engine.wake(display: display) }
-                .tint(controlTint)
-                .buttonStyle(.bordered)
-                .controlSize(.small)
-            Spacer()
-        }
-    }
-
-    @ViewBuilder
-    private func imageSectionContent(for display: DisplayInfo) -> some View {
-        VStack(alignment: .leading, spacing: 10) {
-            if nightShiftManager.isAvailable && (display.isBuiltin || displayManager.displays.filter(\.isBuiltin).isEmpty) {
-                VStack(alignment: .leading, spacing: 6) {
-                    HStack {
-                        Text(String(localized: "NightShiftLabel"))
-                            .font(.caption.weight(.semibold))
-                            .foregroundStyle(.orange)
-                        Spacer()
-                        Toggle("", isOn: Binding(
-                            get: { nightShiftManager.isEnabled },
-                            set: { nightShiftManager.setEnabled($0) }
-                        ))
-                        .labelsHidden()
-                        .toggleStyle(.switch)
-                        .controlSize(.large)
-                    }
-                    if nightShiftManager.isEnabled {
-                        DimlySliderContainer(tint: .orange) {
-                            HStack(spacing: 8) {
-                                Text(String(localized: "NightShiftLessWarmLabel"))
-                                    .font(.caption2)
-                                    .foregroundStyle(.secondary)
-                                Slider(
-                                    value: Binding(
-                                        get: { Double(nightShiftManager.strength) },
-                                        set: { nightShiftManager.setStrength(Float($0)) }
-                                    ),
-                                    in: 0...1
-                                )
-                                .tint(.orange)
-                                Text(String(localized: "NightShiftMoreWarmLabel"))
-                                    .font(.caption2)
-                                    .foregroundStyle(.secondary)
-                            }
-                        }
-                    }
-                }
-            }
-            if trueToneManager.isTrueToneAvailable(for: display) {
-                HStack {
-                    Text(String(localized: "TrueToneLabel"))
-                        .font(.caption)
-                        .foregroundStyle(.secondary)
-                    Spacer()
-                    Toggle("", isOn: Binding(
-                        get: { trueToneManager.isTrueToneEnabled(for: display) },
-                        set: { trueToneManager.setTrueTone($0, for: display) }
-                    ))
-                    .labelsHidden()
-                    .toggleStyle(.switch)
-                    .controlSize(.large)
-                }
-            }
-            let currentFilter = displayAppearanceManager.activeFilter[display.stableIdentity] ?? .standard
-            HStack {
-                Text(String(localized: "DisplayFilterLabel"))
-                    .font(.caption)
-                    .foregroundStyle(.secondary)
-                Spacer()
-                Picker("", selection: Binding(
-                    get: { currentFilter },
-                    set: { engine.setDisplayFilter($0, for: display) }
-                )) {
-                    ForEach(DisplayFilter.displayable) { filter in
-                        Text(filter.localizedName).tag(filter)
-                    }
-                }
-                .pickerStyle(.menu)
-                .controlSize(.small)
-                .labelsHidden()
-            }
-            lutPickerRow(for: display)
-            colorProfileRow(for: display)
-        }
-    }
-
-    @ViewBuilder
-    private func lutPickerRow(for display: DisplayInfo) -> some View {
-        let activeLUTID = settingsStore.settings.activeLUTByDisplayID[display.stableIdentity]
-        HStack {
-            Text(String(localized: "LUTRowLabel"))
-                .font(.caption)
-                .foregroundStyle(.secondary)
-            Spacer()
-            Picker("", selection: Binding(
-                get: { activeLUTID },
-                set: { newID in
-                    let entry = newID.flatMap { id in engine.lutManager.library.first { $0.id == id } }
-                    engine.setActiveLUT(entry, for: display)
-                }
-            )) {
-                Text(String(localized: "LUTPickerNoneLabel")).tag(Optional<UUID>.none)
-                if !engine.lutManager.library.isEmpty {
-                    Divider()
-                    ForEach(engine.lutManager.library) { entry in
-                        Text(entry.name).tag(Optional(entry.id))
-                    }
-                }
-            }
-            .pickerStyle(.menu)
-            .controlSize(.small)
-            .labelsHidden()
-        }
-    }
-
-    /// Color profile row — full picker for externals; System Settings hint for internals.
-    @ViewBuilder
-    private func colorProfileRow(for display: DisplayInfo) -> some View {
-        if display.isBuiltin {
-            VStack(alignment: .leading, spacing: 5) {
-                HStack(spacing: 6) {
-                    Image(systemName: "info.circle")
-                        .font(.caption2)
-                        .foregroundStyle(.secondary)
-                    Text(String(localized: "ColorProfileBuiltinHintLabel"))
-                        .font(.caption)
-                        .foregroundStyle(.secondary)
-                }
-                Button(String(localized: "OpenSystemSettingsButton")) {
-                    NSWorkspace.shared.open(
-                        URL(string: "x-apple.systempreferences:com.apple.displays-settings")!
-                    )
-                }
-                .buttonStyle(.bordered)
-                .controlSize(.mini)
-            }
-        } else {
-            let profiles = colorProfileManager.availableProfiles[display.stableIdentity] ?? []
-            let currentID = colorProfileManager.currentProfile[display.stableIdentity]?.id
-                ?? ColorProfile.systemDefaultID
-            if !profiles.isEmpty {
-                HStack {
-                    Text(String(localized: "ColorProfileSectionLabel"))
-                        .font(.caption)
-                        .foregroundStyle(.secondary)
-                    Spacer()
-                    Picker("", selection: Binding(
-                        get: { currentID },
-                        set: { id in
-                            if let profile = profiles.first(where: { $0.id == id }) {
-                                engine.setColorProfile(profile, for: display)
-                            }
-                        }
-                    )) {
-                        // Sections mirror the profile groups for organised presentation.
-                        let byGroup = Dictionary(grouping: profiles, by: \.group)
-                        // System Default first, always.
-                        if let defaults = byGroup[.standard]?.filter(\.isSystemDefault) {
-                            ForEach(defaults) { Text($0.name).tag($0.id) }
-                        }
-                        // Curated standard profiles.
-                        let standards = (byGroup[.standard] ?? []).filter { !$0.isSystemDefault }
-                        if !standards.isEmpty {
-                            Section(String(localized: "ColorProfileGroupStandardLabel")) {
-                                ForEach(standards) { Text($0.name).tag($0.id) }
-                            }
-                        }
-                        // Modern / extended colour spaces.
-                        let modern = byGroup[.modern] ?? []
-                        if !modern.isEmpty {
-                            Section(String(localized: "ColorProfileGroupModernLabel")) {
-                                ForEach(modern) { Text($0.name).tag($0.id) }
-                            }
-                        }
-                        // Creative effect profiles (/Library).
-                        let creative = byGroup[.creative] ?? []
-                        if !creative.isEmpty {
-                            Section(String(localized: "ColorProfileGroupCreativeLabel")) {
-                                ForEach(creative) { Text($0.name).tag($0.id) }
-                            }
-                        }
-                        // Hardware calibration profiles (/Library/Displays).
-                        let calibration = byGroup[.calibration] ?? []
-                        if !calibration.isEmpty {
-                            Section(String(localized: "ColorProfileGroupCalibrationLabel")) {
-                                ForEach(calibration) { Text($0.name).tag($0.id) }
-                            }
-                        }
-                        // User-installed profiles (~/Library).
-                        let user = byGroup[.user] ?? []
-                        if !user.isEmpty {
-                            Section(String(localized: "ColorProfileGroupUserLabel")) {
-                                ForEach(user) { Text($0.name).tag($0.id) }
-                            }
-                        }
-                    }
-                    .pickerStyle(.menu)
-                    .controlSize(.small)
-                    .labelsHidden()
-                }
-            }
-        }
-    }
-
-    @ViewBuilder
-    private func resolutionSectionContent(for display: DisplayInfo) -> some View {
-        let grouped = displayModeManager.groupedModes(for: display)
-        let currentMode = displayModeManager.currentMode[display.stableIdentity]
-        if grouped.isEmpty {
-            Text(String(localized: "DDCUnknownLabel"))
-                .font(.caption)
-                .foregroundStyle(.tertiary)
-        } else {
-            VStack(alignment: .leading, spacing: 8) {
-                let currentResLabel = currentMode.map { $0.resolutionLabel + ($0.isHiDPI ? " HiDPI" : "") } ?? ""
-                let currentResGroup = grouped.first(where: { $0.resolution == currentResLabel }) ?? grouped.first!
-                HStack {
-                    Text(String(localized: "ResolutionPickerLabel"))
-                        .font(.caption)
-                        .foregroundStyle(.secondary)
-                    Spacer()
-                    Picker("", selection: Binding(
-                        get: { currentResLabel },
-                        set: { newRes in
-                            if let group = grouped.first(where: { $0.resolution == newRes }),
-                               let preferred = group.modes.first(where: { $0.refreshRate == currentMode?.refreshRate }) ?? group.modes.first {
-                                engine.setDisplayMode(preferred, for: display)
-                            }
-                        }
-                    )) {
-                        ForEach(grouped, id: \.resolution) { group in
-                            Text(group.resolution).tag(group.resolution)
-                        }
-                    }
-                    .pickerStyle(.menu)
-                    .controlSize(.small)
-                    .labelsHidden()
-                }
-                if currentResGroup.modes.count > 1 {
-                    HStack {
-                        Text(String(localized: "RefreshRatePickerLabel"))
-                            .font(.caption)
-                            .foregroundStyle(.secondary)
-                        Spacer()
-                        Picker("", selection: Binding(
-                            get: { currentMode?.refreshRate ?? currentResGroup.modes.first?.refreshRate ?? 60 },
-                            set: { hz in
-                                if let mode = currentResGroup.modes.first(where: { $0.refreshRate == hz }) {
-                                    engine.setDisplayMode(mode, for: display)
-                                }
-                            }
-                        )) {
-                            ForEach(currentResGroup.modes, id: \.refreshRate) { mode in
-                                Text(String(format: "%.0fHz", mode.refreshRate)).tag(mode.refreshRate)
-                            }
-                        }
-                        .pickerStyle(.menu)
-                        .controlSize(.small)
-                        .labelsHidden()
-                    }
-                }
-            }
-        }
-    }
-
-    @ViewBuilder
-    private func inputSourceSectionContent(for display: DisplayInfo) -> some View {
-        let currentSource = ddcManager.inputSources[display.stableIdentity]
-        HStack {
-            Text(String(localized: "SectionInputSourceTitle"))
-                .font(.caption)
-                .foregroundStyle(.secondary)
-            Spacer()
-            Picker("", selection: Binding(
-                get: { currentSource?.rawValue ?? -1 },
-                set: { rawValue in
-                    if let source = DDCInputSource(rawValue: rawValue) {
-                        engine.setInputSource(source, for: display)
-                    }
-                }
-            )) {
-                if currentSource == nil {
-                    Text(String(localized: "InputSourceUnknownLabel")).tag(-1)
-                }
-                ForEach(DDCInputSource.allCases) { source in
-                    Text(source.localizedName).tag(source.rawValue)
-                }
-            }
-            .pickerStyle(.menu)
-            .controlSize(.small)
-            .labelsHidden()
-        }
-    }
-
-    @ViewBuilder
-    private func dimlyBehaviorSectionContent(for display: DisplayInfo) -> some View {
-        let isShownInDimly: Bool = {
-            if display.isBuiltin {
-                return settingsStore.settings.menuBarIncludedInternalDisplayIDs.contains(display.stableIdentity)
-            }
-            return settingsStore.settings.menuBarExcludedDisplayIDs.contains(display.stableIdentity) == false
-        }()
-        VStack(alignment: .leading, spacing: 10) {
-            if display.isExternal {
-                HStack(spacing: 10) {
-                    Text(String(localized: "DisplayOverlayOnlyLabel"))
-                        .font(.caption)
-                        .foregroundStyle(.secondary)
-                    Spacer()
-                    Toggle("", isOn: Binding(
-                        get: { settingsStore.settings.overlayOnlyDisplayIDs.contains(display.stableIdentity) },
-                        set: { enabled in
-                            settingsStore.update { settings in
-                                if enabled {
-                                    if !settings.overlayOnlyDisplayIDs.contains(display.stableIdentity) {
-                                        settings.overlayOnlyDisplayIDs.append(display.stableIdentity)
-                                    }
-                                } else {
-                                    settings.overlayOnlyDisplayIDs.removeAll { $0 == display.stableIdentity }
-                                }
-                            }
-                        }
-                    ))
-                    .labelsHidden()
-                    .toggleStyle(.switch)
-                    .controlSize(.large)
-                }
-            }
-            HStack(spacing: 10) {
-                VStack(alignment: .leading, spacing: 2) {
-                    Text(String(localized: "DisplayShowInDimlyTitle"))
-                        .font(.caption)
-                        .foregroundStyle(.secondary)
-                    Text(String(localized: "DisplayShowInDimlySubtitle"))
-                        .font(.caption2)
-                        .foregroundStyle(.tertiary)
-                }
-                Spacer()
-                Toggle("", isOn: Binding(
-                    get: { isShownInDimly },
-                    set: { enabled in
-                        settingsStore.update { settings in
-                            if display.isBuiltin {
-                                if enabled {
-                                    if !settings.menuBarIncludedInternalDisplayIDs.contains(display.stableIdentity) {
-                                        settings.menuBarIncludedInternalDisplayIDs.append(display.stableIdentity)
-                                    }
-                                } else {
-                                    settings.menuBarIncludedInternalDisplayIDs.removeAll { $0 == display.stableIdentity }
-                                }
-                            } else {
-                                if enabled {
-                                    settings.menuBarExcludedDisplayIDs.removeAll { $0 == display.stableIdentity }
-                                } else if !settings.menuBarExcludedDisplayIDs.contains(display.stableIdentity) {
-                                    settings.menuBarExcludedDisplayIDs.append(display.stableIdentity)
-                                }
-                            }
-                        }
-                    }
-                ))
-                .labelsHidden()
-                .toggleStyle(.switch)
-                .controlSize(.large)
-            }
-        }
-    }
-
     // MARK: - Per-Display Card
 
     /// Renders a detailed row for a single display in Settings.
@@ -747,7 +474,6 @@ struct SettingsRootView: View {
         }()
         let brightnessTint = brightnessPresentation.0
         let brightnessModeLabel = brightnessPresentation.1
-        let currentBrightness = brightnessPercent(for: display)
 
         VStack(alignment: .leading, spacing: 0) {
             // Flat card header — always visible
@@ -834,11 +560,11 @@ struct SettingsRootView: View {
                 tint: brightnessTint,
                 isExpanded: sectionExpanded(for: display, key: "brightness")
             ) {
-                brightnessSectionContent(
+                DisplaySectionContent.brightness(
                     for: display,
+                    engine: engine,
                     brightnessTint: brightnessTint,
-                    brightnessModeLabel: brightnessModeLabel,
-                    currentBrightness: Double(currentBrightness)
+                    brightnessModeLabel: brightnessModeLabel
                 )
             }
             .padding(.horizontal, 14)
@@ -853,7 +579,7 @@ struct SettingsRootView: View {
                     tint: .green,
                     isExpanded: sectionExpanded(for: display, key: "contrast")
                 ) {
-                    contrastSectionContent(for: display)
+                    DisplaySectionContent.contrast(for: display, ddcManager: ddcManager, engine: engine)
                 }
                 .padding(.horizontal, 14)
                 .padding(.bottom, 10)
@@ -868,7 +594,7 @@ struct SettingsRootView: View {
                     tint: controlTint,
                     isExpanded: sectionExpanded(for: display, key: "power")
                 ) {
-                    powerSectionContent(for: display, controlTint: controlTint)
+                    DisplaySectionContent.power(for: display, engine: engine, controlTint: controlTint)
                 }
                 .padding(.horizontal, 14)
                 .padding(.bottom, 10)
@@ -882,7 +608,16 @@ struct SettingsRootView: View {
                 tint: .purple,
                 isExpanded: sectionExpanded(for: display, key: "image")
             ) {
-                imageSectionContent(for: display)
+                DisplaySectionContent.image(
+                    for: display,
+                    nightShiftManager: nightShiftManager,
+                    displayManager: displayManager,
+                    trueToneManager: trueToneManager,
+                    displayAppearanceManager: displayAppearanceManager,
+                    engine: engine,
+                    settingsStore: settingsStore,
+                    colorProfileManager: colorProfileManager
+                )
             }
             .padding(.horizontal, 14)
             .padding(.bottom, 10)
@@ -896,7 +631,7 @@ struct SettingsRootView: View {
                     tint: .blue,
                     isExpanded: sectionExpanded(for: display, key: "resolution")
                 ) {
-                    resolutionSectionContent(for: display)
+                    DisplaySectionContent.resolution(for: display, displayModeManager: displayModeManager, engine: engine)
                 }
                 .padding(.horizontal, 14)
                 .padding(.bottom, 10)
@@ -911,7 +646,7 @@ struct SettingsRootView: View {
                     tint: .green,
                     isExpanded: sectionExpanded(for: display, key: "input")
                 ) {
-                    inputSourceSectionContent(for: display)
+                    DisplaySectionContent.inputSource(for: display, ddcManager: ddcManager, engine: engine)
                 }
                 .padding(.horizontal, 14)
                 .padding(.bottom, 10)
@@ -925,7 +660,7 @@ struct SettingsRootView: View {
                 tint: .secondary,
                 isExpanded: sectionExpanded(for: display, key: "advanced")
             ) {
-                dimlyBehaviorSectionContent(for: display)
+                DisplaySectionContent.dimlyBehavior(for: display, settingsStore: settingsStore)
             }
             .padding(.horizontal, 14)
             .padding(.bottom, 14)
@@ -939,25 +674,6 @@ struct SettingsRootView: View {
             RoundedRectangle(cornerRadius: 14, style: .continuous)
                 .stroke(Color.primary.opacity(0.13), lineWidth: 1)
         )
-    }
-
-    /// Nudges brightness by a fixed percentage amount.
-    private func nudgeBrightness(for display: DisplayInfo, delta: Int) {
-        let current = brightnessPercent(for: display)
-        let updated = min(100, max(0, current + delta))
-        guard updated != current else { return }
-        setBrightness(updated, for: display)
-    }
-
-    /// Returns display brightness from DDC/overlay for externals, macOS for internals.
-    private func brightnessPercent(for display: DisplayInfo) -> Int {
-        engine.brightnessPercent(for: display)
-    }
-
-    /// Applies display brightness to the right backend for this display type.
-    private func setBrightness(_ percent: Int, for display: DisplayInfo) {
-        let clamped = max(0, min(100, percent))
-        engine.setBrightness(clamped, for: display, source: .slider)
     }
 
     // MARK: - Detail Views
@@ -976,6 +692,8 @@ struct SettingsRootView: View {
         let showIntroAgain: () -> Void
         let showWhatsNewAgain: () -> Void
         let displayRow: (DisplayInfo) -> AnyView
+        let searchQuery: String
+        let searchIndex: [SettingsSearchEntry]
         @Environment(\.accessibilityReduceMotion) private var reduceMotion
         @State private var includeGeneralSettings = true
         @State private var includeMonitorSettings = true
@@ -1004,24 +722,272 @@ struct SettingsRootView: View {
         }
 
         var body: some View {
-            switch selection {
-            case .general:
-                generalDetail
-            case .displays:
-                displaysDetail
-            case .luts:
-                lutsDetail
-            case .visuals:
-                visualsDetail
-            case .shortcuts:
-                shortcutsDetail
-            case .profiles:
-                profilesDetail
-            case .schedule:
-                scheduleDetail
-            case .about:
-                aboutDetail
+            if searchQuery.isEmpty {
+                switch selection {
+                case .general:
+                    generalDetail
+                case .displays:
+                    displaysDetail
+                case .luts:
+                    lutsDetail
+                case .visuals:
+                    visualsDetail
+                case .shortcuts:
+                    shortcutsDetail
+                case .profiles:
+                    profilesDetail
+                case .schedule:
+                    scheduleDetail
+                case .about:
+                    aboutDetail
+                }
+            } else {
+                SettingsSearchResultsView(entries: searchIndex, query: searchQuery)
             }
+        }
+
+        /// Search entries for the static (non-per-display) tabs — General, Visuals,
+        /// Shortcuts, Profiles, Schedule, LUTs. Titles/subtitles/bindings mirror the
+        /// tiles rendered by their home tab's `body` above.
+        /// Trailing switch accessory used by search entries — the entry's icon/title/subtitle
+        /// are already drawn once by `SettingsSearchResultsView`'s generic row header, so this
+        /// intentionally omits the label `SettingsToggleRow` would otherwise duplicate.
+        private static func trailingToggle(_ isOn: Binding<Bool>) -> some View {
+            HStack {
+                Spacer()
+                Toggle("", isOn: isOn)
+                    .labelsHidden()
+                    .toggleStyle(.switch)
+                    .controlSize(.large)
+            }
+        }
+
+        static func staticSearchEntries(
+            settingsStore: AppSettingsStore,
+            scheduleManager: ScheduleManager,
+            profileManager: ProfileManager,
+            openTab: @escaping (SettingsRootView.SettingsDestination) -> Void
+        ) -> [SettingsSearchEntry] {
+            [
+                SettingsSearchEntry(
+                    id: "general.autostart",
+                    tab: .general,
+                    titleKey: "GeneralAutostartTitle",
+                    subtitleKey: "GeneralAutostartSubtitle",
+                    systemImage: "power.circle",
+                    keywords: [],
+                    content: {
+                        AnyView(trailingToggle(Binding(
+                            get: { settingsStore.settings.launchAtLogin },
+                            set: { newValue in settingsStore.update { $0.launchAtLogin = newValue } }
+                        )))
+                    }
+                ),
+                SettingsSearchEntry(
+                    id: "general.menuBarIcon",
+                    tab: .general,
+                    titleKey: "GeneralMenuBarIconTitle",
+                    systemImage: "menubar.rectangle",
+                    keywords: [],
+                    content: {
+                        AnyView(trailingToggle(Binding(
+                            get: { settingsStore.settings.showMenuBarIcon },
+                            set: { newValue in settingsStore.update { $0.showMenuBarIcon = newValue } }
+                        )))
+                    }
+                ),
+                SettingsSearchEntry(
+                    id: "general.hideDockIcon",
+                    tab: .general,
+                    titleKey: "GeneralHideDockIconTitle",
+                    systemImage: "dock.rectangle",
+                    keywords: [],
+                    content: {
+                        AnyView(trailingToggle(Binding(
+                            get: { settingsStore.settings.hideDockIcon },
+                            set: { newValue in settingsStore.update { $0.hideDockIcon = newValue } }
+                        )))
+                    }
+                ),
+                SettingsSearchEntry(
+                    id: "general.quickActionsVisibility",
+                    tab: .general,
+                    titleKey: "GeneralQuickActionsVisibilityTitle",
+                    subtitleKey: "GeneralQuickActionsVisibilitySubtitle",
+                    systemImage: "bolt.badge.clock",
+                    keywords: [],
+                    content: {
+                        AnyView(HStack {
+                            Spacer()
+                            Picker(
+                                String(localized: "GeneralQuickActionsVisibilityTitle"),
+                                selection: Binding(
+                                    get: { settingsStore.settings.fastActionsVisibilityMode },
+                                    set: { newValue in settingsStore.update { $0.fastActionsVisibilityMode = newValue } }
+                                )
+                            ) {
+                                ForEach(DimlySettings.FastActionsVisibilityMode.allCases) { mode in
+                                    Text(mode.localizedTitle).tag(mode)
+                                }
+                            }
+                            .labelsHidden()
+                            .pickerStyle(.menu)
+                            .frame(width: 150)
+                        })
+                    }
+                ),
+                SettingsSearchEntry(
+                    id: "visuals.appearance",
+                    tab: .visuals,
+                    titleKey: "VisualsAppearanceTitle",
+                    subtitleKey: "VisualsAppearanceSubtitle",
+                    systemImage: "circle.lefthalf.filled",
+                    keywords: [],
+                    content: {
+                        AnyView(HStack {
+                            Spacer()
+                            Picker(
+                                String(localized: "VisualsAppearanceTitle"),
+                                selection: Binding(
+                                    get: { settingsStore.settings.appAppearancePreference },
+                                    set: { newValue in settingsStore.update { $0.appAppearancePreference = newValue } }
+                                )
+                            ) {
+                                ForEach(AppAppearancePreference.allCases) { preference in
+                                    Text(preference.localizedTitle).tag(preference)
+                                }
+                            }
+                            .labelsHidden()
+                            .pickerStyle(.menu)
+                            .frame(width: 150)
+                        })
+                    }
+                ),
+                SettingsSearchEntry(
+                    id: "visuals.fadeOut",
+                    tab: .visuals,
+                    titleKey: "VisualsTransitionFadeOutTitle",
+                    systemImage: "moon.zzz",
+                    keywords: [],
+                    content: {
+                        AnyView(trailingToggle(Binding(
+                            get: { settingsStore.settings.fadeOutAnimationEnabled },
+                            set: { newValue in settingsStore.update { $0.fadeOutAnimationEnabled = newValue } }
+                        )))
+                    }
+                ),
+                SettingsSearchEntry(
+                    id: "visuals.fadeIn",
+                    tab: .visuals,
+                    titleKey: "VisualsTransitionFadeInTitle",
+                    systemImage: "sun.max",
+                    keywords: [],
+                    content: {
+                        AnyView(trailingToggle(Binding(
+                            get: { settingsStore.settings.fadeInAnimationEnabled },
+                            set: { newValue in settingsStore.update { $0.fadeInAnimationEnabled = newValue } }
+                        )))
+                    }
+                ),
+                SettingsSearchEntry(
+                    id: "visuals.smartButtonsLimit",
+                    tab: .visuals,
+                    titleKey: "SmartButtonsToggleTitle",
+                    subtitleKey: "SmartButtonsSubtitle",
+                    systemImage: "square.grid.2x2",
+                    keywords: [],
+                    content: {
+                        AnyView(HStack {
+                            Spacer()
+                            Picker(
+                                String(localized: "SmartButtonsToggleTitle"),
+                                selection: Binding(
+                                    get: { max(4, min(16, settingsStore.settings.menuBarSmartButtonsLimit)) },
+                                    set: { newValue in
+                                        settingsStore.update { settings in
+                                            settings.menuBarSmartButtonsLimit = max(4, min(16, newValue))
+                                        }
+                                    }
+                                )
+                            ) {
+                                Text("4").tag(4)
+                                Text("8").tag(8)
+                                Text("12").tag(12)
+                                Text("16").tag(16)
+                            }
+                            .labelsHidden()
+                            .pickerStyle(.menu)
+                            .frame(width: 88)
+                        })
+                    }
+                ),
+                SettingsSearchEntry(
+                    id: "schedule.enable",
+                    tab: .schedule,
+                    titleKey: "ScheduleEnableTitle",
+                    subtitleKey: "ScheduleEnableSubtitle",
+                    systemImage: "clock.badge.checkmark",
+                    keywords: [],
+                    content: {
+                        AnyView(trailingToggle(Binding(
+                            get: { scheduleManager.schedulingEnabled },
+                            set: { scheduleManager.schedulingEnabled = $0 }
+                        )))
+                    }
+                ),
+                SettingsSearchEntry(
+                    id: "profiles.restoreTileLayout",
+                    tab: .profiles,
+                    titleKey: "ProfileRestoreTilesTitle",
+                    subtitleKey: "ProfileRestoreTilesSubtitle",
+                    systemImage: "rectangle.expand.diagonal",
+                    keywords: [],
+                    content: {
+                        AnyView(trailingToggle(Binding(
+                            get: { settingsStore.settings.profileRestoresTileLayout },
+                            set: { newValue in settingsStore.update { $0.profileRestoresTileLayout = newValue } }
+                        )))
+                    }
+                ),
+                SettingsSearchEntry(
+                    id: "luts.library",
+                    tab: .luts,
+                    titleKey: "LUTLibraryTitle",
+                    subtitleKey: "LUTLibrarySubtitle",
+                    systemImage: "camera.filters",
+                    keywords: ["lut", "luts"],
+                    content: {
+                        AnyView(HStack {
+                            Spacer()
+                            Button(action: { openTab(.luts) }) {
+                                Label(String(localized: "SettingsTabLUTsLabel"), systemImage: "chevron.right")
+                                    .labelStyle(.titleAndIcon)
+                            }
+                            .buttonStyle(.bordered)
+                            .controlSize(.small)
+                        })
+                    }
+                ),
+                SettingsSearchEntry(
+                    id: "shortcuts.global",
+                    tab: .shortcuts,
+                    titleKey: "SettingsTabShortcutsLabel",
+                    subtitleKey: "ShortcutsGlobalTitle",
+                    systemImage: "keyboard",
+                    keywords: [],
+                    content: {
+                        AnyView(HStack {
+                            Spacer()
+                            Button(action: { openTab(.shortcuts) }) {
+                                Label(String(localized: "SettingsTabShortcutsLabel"), systemImage: "chevron.right")
+                                    .labelStyle(.titleAndIcon)
+                            }
+                            .buttonStyle(.bordered)
+                            .controlSize(.small)
+                        })
+                    }
+                )
+            ]
         }
 
         private var generalDetail: some View {

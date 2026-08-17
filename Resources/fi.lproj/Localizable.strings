@@ -506,3 +506,8 @@
 "LUTImportErrorTitle" = "LUT-tiedoston tuonti epäonnistui";
 "LUTImportErrorSubtitle" = "Tiedostoa ei voitu lukea tai se ei ole kelvollinen LUT-tiedosto.";
 "LUTRowLabel" = "LUT";
+
+/* Settings Search (untranslated placeholder) */
+"SettingsSearchPlaceholder" = "Search Settings";
+"SettingsSearchResultsTitle" = "Search Results";
+"SettingsSearchNoResultsLabel" = "No matching settings";

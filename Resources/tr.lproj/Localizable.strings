@@ -506,3 +506,8 @@
 "LUTImportErrorTitle" = "LUT içe aktarılamadı";
 "LUTImportErrorSubtitle" = "Dosya okunamadı veya geçerli bir LUT değil.";
 "LUTRowLabel" = "LUT";
+
+/* Settings Search (untranslated placeholder) */
+"SettingsSearchPlaceholder" = "Search Settings";
+"SettingsSearchResultsTitle" = "Search Results";
+"SettingsSearchNoResultsLabel" = "No matching settings";

@@ -504,3 +504,8 @@
 "LUTImportErrorTitle" = "Hindi ma-import ang LUT";
 "LUTImportErrorSubtitle" = "Hindi mabasa ang file o hindi ito valid na LUT.";
 "LUTRowLabel" = "LUT";
+
+/* Settings Search (untranslated placeholder) */
+"SettingsSearchPlaceholder" = "Search Settings";
+"SettingsSearchResultsTitle" = "Search Results";
+"SettingsSearchNoResultsLabel" = "No matching settings";

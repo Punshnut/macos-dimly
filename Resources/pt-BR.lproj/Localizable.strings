@@ -506,3 +506,8 @@
 "LUTImportErrorTitle" = "Não foi possível importar o LUT";
 "LUTImportErrorSubtitle" = "O arquivo não pôde ser lido ou não é um LUT válido.";
 "LUTRowLabel" = "LUT";
+
+/* Settings Search (untranslated placeholder) */
+"SettingsSearchPlaceholder" = "Search Settings";
+"SettingsSearchResultsTitle" = "Search Results";
+"SettingsSearchNoResultsLabel" = "No matching settings";

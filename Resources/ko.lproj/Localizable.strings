@@ -506,3 +506,8 @@
 "LUTImportErrorTitle" = "LUT을 가져올 수 없음";
 "LUTImportErrorSubtitle" = "파일을 읽을 수 없거나 올바른 LUT 형식이 아닙니다.";
 "LUTRowLabel" = "LUT";
+
+/* Settings Search (untranslated placeholder) */
+"SettingsSearchPlaceholder" = "Search Settings";
+"SettingsSearchResultsTitle" = "Search Results";
+"SettingsSearchNoResultsLabel" = "No matching settings";

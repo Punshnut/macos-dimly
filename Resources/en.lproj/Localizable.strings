@@ -88,6 +88,11 @@
 "SettingsTabShortcutsLabel" = "Shortcuts";
 "SettingsTabAboutLabel" = "About";
 
+/* Settings Search */
+"SettingsSearchPlaceholder" = "Search Settings";
+"SettingsSearchResultsTitle" = "Search Results";
+"SettingsSearchNoResultsLabel" = "No matching settings";
+
 /* Settings General */
 "GeneralAutostartTitle" = "Autostart";
 "GeneralAutostartSubtitle" = "Start Dimly automatically when you log in.";

@@ -506,3 +506,8 @@
 "LUTImportErrorTitle" = "LUT ማስገባት አልተቻለም";
 "LUTImportErrorSubtitle" = "ፋይሉ ሊነበብ አልቻለም ወይም ትክክለኛ LUT አይደለም።";
 "LUTRowLabel" = "LUT";
+
+/* Settings Search (untranslated placeholder) */
+"SettingsSearchPlaceholder" = "Search Settings";
+"SettingsSearchResultsTitle" = "Search Results";
+"SettingsSearchNoResultsLabel" = "No matching settings";

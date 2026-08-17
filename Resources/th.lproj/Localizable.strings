@@ -506,3 +506,8 @@
 "LUTImportErrorTitle" = "ไม่สามารถนำเข้า LUT ได้";
 "LUTImportErrorSubtitle" = "ไม่สามารถอ่านไฟล์ได้ หรือไฟล์ไม่ใช่ LUT ที่ถูกต้อง";
 "LUTRowLabel" = "LUT";
+
+/* Settings Search (untranslated placeholder) */
+"SettingsSearchPlaceholder" = "Search Settings";
+"SettingsSearchResultsTitle" = "Search Results";
+"SettingsSearchNoResultsLabel" = "No matching settings";

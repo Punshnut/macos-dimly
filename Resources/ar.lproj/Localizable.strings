@@ -506,3 +506,8 @@
 "LUTImportErrorTitle" = "تعذّر استيراد LUT";
 "LUTImportErrorSubtitle" = "تعذّرت قراءة الملف أو أنه ليس LUT صالحًا.";
 "LUTRowLabel" = "LUT";
+
+/* Settings Search (untranslated placeholder) */
+"SettingsSearchPlaceholder" = "Search Settings";
+"SettingsSearchResultsTitle" = "Search Results";
+"SettingsSearchNoResultsLabel" = "No matching settings";

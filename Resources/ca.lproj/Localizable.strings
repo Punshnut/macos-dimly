@@ -506,3 +506,8 @@
 "LUTImportErrorTitle" = "No s'ha pogut importar el LUT";
 "LUTImportErrorSubtitle" = "No s'ha pogut llegir el fitxer o no és un LUT vàlid.";
 "LUTRowLabel" = "LUT";
+
+/* Settings Search (untranslated placeholder) */
+"SettingsSearchPlaceholder" = "Search Settings";
+"SettingsSearchResultsTitle" = "Search Results";
+"SettingsSearchNoResultsLabel" = "No matching settings";

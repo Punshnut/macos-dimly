@@ -506,3 +506,8 @@
 "LUTImportErrorTitle" = "LUTを読み込めませんでした";
 "LUTImportErrorSubtitle" = "ファイルを読み取れないか、有効なLUTではありません。";
 "LUTRowLabel" = "LUT";
+
+/* Settings Search (untranslated placeholder) */
+"SettingsSearchPlaceholder" = "Search Settings";
+"SettingsSearchResultsTitle" = "Search Results";
+"SettingsSearchNoResultsLabel" = "No matching settings";

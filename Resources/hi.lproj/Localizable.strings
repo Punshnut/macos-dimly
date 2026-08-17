@@ -506,3 +506,8 @@
 "LUTImportErrorTitle" = "LUT इम्पोर्ट नहीं हो सका";
 "LUTImportErrorSubtitle" = "फ़ाइल पढ़ी नहीं जा सकी या यह एक मान्य LUT नहीं है।";
 "LUTRowLabel" = "LUT";
+
+/* Settings Search (untranslated placeholder) */
+"SettingsSearchPlaceholder" = "Search Settings";
+"SettingsSearchResultsTitle" = "Search Results";
+"SettingsSearchNoResultsLabel" = "No matching settings";

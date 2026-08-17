@@ -506,3 +506,8 @@
 "LUTImportErrorTitle" = "LUT আমদানি করা যায়নি";
 "LUTImportErrorSubtitle" = "ফাইলটি পড়া যায়নি অথবা এটি একটি বৈধ LUT নয়।";
 "LUTRowLabel" = "LUT";
+
+/* Settings Search (untranslated placeholder) */
+"SettingsSearchPlaceholder" = "Search Settings";
+"SettingsSearchResultsTitle" = "Search Results";
+"SettingsSearchNoResultsLabel" = "No matching settings";

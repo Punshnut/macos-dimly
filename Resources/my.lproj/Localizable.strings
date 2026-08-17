@@ -506,3 +506,8 @@
 "LUTImportErrorTitle" = "LUT တင်သွင်း၍ မရပါ";
 "LUTImportErrorSubtitle" = "ဖိုင်ကို ဖတ်၍မရသောကြောင့် သို့မဟုတ် ၎င်းသည် မှန်ကန်သော LUT မဟုတ်သောကြောင့် ဖြစ်သည်။";
 "LUTRowLabel" = "LUT";
+
+/* Settings Search (untranslated placeholder) */
+"SettingsSearchPlaceholder" = "Search Settings";
+"SettingsSearchResultsTitle" = "Search Results";
+"SettingsSearchNoResultsLabel" = "No matching settings";

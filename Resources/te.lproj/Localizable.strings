@@ -506,3 +506,8 @@
 "LUTImportErrorTitle" = "LUT దిగుమతి చేయడం సాధ్యపడలేదు";
 "LUTImportErrorSubtitle" = "ఫైల్ చదవడం సాధ్యపడలేదు లేదా అది చెల్లుబాటు అయ్యే LUT కాదు.";
 "LUTRowLabel" = "LUT";
+
+/* Settings Search (untranslated placeholder) */
+"SettingsSearchPlaceholder" = "Search Settings";
+"SettingsSearchResultsTitle" = "Search Results";
+"SettingsSearchNoResultsLabel" = "No matching settings";

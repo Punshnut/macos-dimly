@@ -506,3 +506,8 @@
 "LUTImportErrorTitle" = "LUT இறக்குமதி செய்ய இயலவில்லை";
 "LUTImportErrorSubtitle" = "கோப்பை படிக்க முடியவில்லை அல்லது அது சரியான LUT அல்ல.";
 "LUTRowLabel" = "LUT";
+
+/* Settings Search (untranslated placeholder) */
+"SettingsSearchPlaceholder" = "Search Settings";
+"SettingsSearchResultsTitle" = "Search Results";
+"SettingsSearchNoResultsLabel" = "No matching settings";

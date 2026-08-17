@@ -506,3 +506,8 @@
 "LUTImportErrorTitle" = "Níorbh fhéidir an LUT a iompórtáil";
 "LUTImportErrorSubtitle" = "Níorbh fhéidir an comhad a léamh nó níl LUT bailí ann.";
 "LUTRowLabel" = "LUT";
+
+/* Settings Search (untranslated placeholder) */
+"SettingsSearchPlaceholder" = "Search Settings";
+"SettingsSearchResultsTitle" = "Search Results";
+"SettingsSearchNoResultsLabel" = "No matching settings";

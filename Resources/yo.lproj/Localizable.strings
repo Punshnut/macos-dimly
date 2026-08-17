@@ -506,3 +506,8 @@
 "LUTImportErrorTitle" = "Ko Lè Gbe LUT Wọle";
 "LUTImportErrorSubtitle" = "A kò lè ka fáìlì náà tàbí kò jẹ́ LUT tó wulo.";
 "LUTRowLabel" = "LUT";
+
+/* Settings Search (untranslated placeholder) */
+"SettingsSearchPlaceholder" = "Search Settings";
+"SettingsSearchResultsTitle" = "Search Results";
+"SettingsSearchNoResultsLabel" = "No matching settings";
