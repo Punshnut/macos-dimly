@@ -1176,6 +1176,15 @@ final class ProfileManager: ObservableObject {
     /// Returns the desired persisted power state used when saving/restoring profiles.
     private func currentDesiredPowerState(for display: DisplayInfo) -> PersistedMonitorPowerState {
         let id = display.stableIdentity
+        if display.isBuiltin {
+            // The builtin panel's stableIdentity can drift across display-reconfiguration events
+            // (see currentRuntimePowerState/isDisplayBlackoutActive), which would orphan a
+            // settings-dict lookup here. Read live panel brightness instead so profile save
+            // captures the correct toggle state even after an id change.
+            if let liveBrightness = DisplayHardware.builtinDisplayBrightnessPercent(for: display.displayID) {
+                return liveBrightness <= 0 ? .blackout : .visible
+            }
+        }
         if let persisted = settingsStore.settings.monitorPowerStateByDisplayID[id] {
             return persisted
         }
