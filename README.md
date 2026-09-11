@@ -4,7 +4,7 @@ Dimly is a free, open-source macOS menu bar app for multi-monitor brightness and
 
 <p align="center">
   <img src="https://img.shields.io/badge/macOS-native-000000?style=flat&logo=apple" alt="macOS native">
-  <img src="https://img.shields.io/badge/License-MIT-green.svg" alt="License: MIT">
+  <img src="https://img.shields.io/badge/License-AGPL--3.0-green.svg" alt="License: AGPL-3.0">
 </p>
 
 <p align="center">
@@ -197,6 +197,12 @@ Full documentation is in the [`docs/`](docs/README.md) folder: display controls,
 [Donate (Ko-Fi)](https://ko-fi.com/janfeuerbacher)
 
 Made with ❤️
+
+## License
+
+Dimly is licensed under the [GNU Affero General Public License v3.0](LICENSE) (AGPL-3.0), effective 2026-09-11.
+
+Versions released prior to this date remain available under their original MIT license, which cannot be retroactively revoked.
 
 ## Star History
 

@@ -11,7 +11,7 @@ Dimly is the lightweight macOS menu bar control center for people with real moni
 **Primary CTA:** Download Dimly  
 **Secondary CTA:** View on GitHub
 
-**Support line:** macOS 14+ · Apple Silicon + Intel · MIT Licensed
+**Support line:** macOS 14+ · Apple Silicon + Intel · AGPL-3.0 Licensed
 
 ---
 
