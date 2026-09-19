@@ -477,7 +477,7 @@
 "DisplayFilterWarmthLabel" = "နွေးထွေး";
 "DisplayFilterCoolLabel" = "အေးမြ";
 
-/* Color Profile — new */
+/* Color Profile - new */
 "ColorProfileSystemDefaultLabel" = "စနစ်ပုံသေ";
 "ColorProfileBuiltinHintLabel" = "တပ်ဆင်ပြီးသား ဖန်သားပြင်ပရိုဖိုင်များကို macOS မှ စီမံခန့်ခွဲသည်";
 "OpenSystemSettingsButton" = "စနစ်ဆက်တင်များ ဖွင့်ပါ";

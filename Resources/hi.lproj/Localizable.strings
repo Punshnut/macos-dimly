@@ -477,7 +477,7 @@
 "DisplayFilterWarmthLabel" = "गर्म";
 "DisplayFilterCoolLabel" = "ठंडा";
 
-/* Color Profile — new */
+/* Color Profile - new */
 "ColorProfileSystemDefaultLabel" = "सिस्टम डिफ़ॉल्ट";
 "ColorProfileBuiltinHintLabel" = "अंतर्निहित डिस्प्ले प्रोफ़ाइल macOS द्वारा प्रबंधित की जाती हैं";
 "OpenSystemSettingsButton" = "सिस्टम सेटिंग्स खोलें";

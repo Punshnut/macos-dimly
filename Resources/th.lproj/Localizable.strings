@@ -477,7 +477,7 @@
 "DisplayFilterWarmthLabel" = "อุ่น";
 "DisplayFilterCoolLabel" = "เย็น";
 
-/* Color Profile — new */
+/* Color Profile - new */
 "ColorProfileSystemDefaultLabel" = "ค่าเริ่มต้นของระบบ";
 "ColorProfileBuiltinHintLabel" = "โปรไฟล์จอแสดงผลในตัวได้รับการจัดการโดย macOS";
 "OpenSystemSettingsButton" = "เปิดการตั้งค่าระบบ";

@@ -6,7 +6,7 @@ import Combine
 import OSLog
 
 /// Applies per-display appearance filters using CoreGraphics gamma tables.
-/// Filters are not persistent across sleep/wake — call restoreAll() on wake.
+/// Filters are not persistent across sleep/wake - call restoreAll() on wake.
 @MainActor
 final class DisplayAppearanceManager: ObservableObject {
     @Published private(set) var activeFilter: [String: DisplayFilter] = [:]

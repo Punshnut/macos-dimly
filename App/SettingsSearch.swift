@@ -7,7 +7,7 @@ import SwiftUI
 // search that always considers both the system language and English.
 
 /// Looks up a `Localizable.strings` key in a fixed locale, regardless of the app's current
-/// language — used so search always also matches the English term for a setting even when
+/// language - used so search always also matches the English term for a setting even when
 /// the UI is displayed in another language.
 func localized(_ key: String, locale: Locale) -> String {
     String(localized: String.LocalizationValue(key), locale: locale)
@@ -18,17 +18,17 @@ let englishLocale = Locale(identifier: "en")
 struct SettingsSearchEntry: Identifiable {
     let id: String
     let tab: SettingsRootView.SettingsDestination
-    /// Localizable.strings key for the title — resolved in the system language for display,
+    /// Localizable.strings key for the title - resolved in the system language for display,
     /// and separately in English so search always works in both.
     let titleKey: String
     /// Localizable.strings key for the subtitle, when the subtitle is itself localized text
     /// (e.g. a setting's description). Mutually exclusive with `subtitleLiteral`.
     let subtitleKey: String?
-    /// A subtitle that isn't localized text — e.g. a display's name. Shown as-is and matched
+    /// A subtitle that isn't localized text - e.g. a display's name. Shown as-is and matched
     /// as-is (no English variant needed).
     let subtitleLiteral: String?
     let systemImage: String
-    /// Extra literal match terms beyond title/subtitle/tab name — e.g. a display's name, or
+    /// Extra literal match terms beyond title/subtitle/tab name - e.g. a display's name, or
     /// English synonyms for a setting that isn't literally named that in the UI.
     let keywords: [String]
     let content: () -> AnyView
@@ -120,7 +120,7 @@ private func tokenScore(_ token: String, in field: String) -> Int? {
 
 /// Relevance score for an entry against a query, or nil if the query doesn't match at all.
 /// Every whitespace-separated token must match some field (AND across tokens, OR across
-/// fields) — this lets compound queries like "display1 brightness" scope down to a single
+/// fields) - this lets compound queries like "display1 brightness" scope down to a single
 /// display's brightness tile, while still tolerating a typo in either half.
 func settingsSearchScore(_ entry: SettingsSearchEntry, query: String) -> Int? {
     let tokens = query.lowercased().split(separator: " ").map(String.init)
@@ -175,7 +175,7 @@ struct SettingsSearchField: View {
 }
 
 /// Renders matching search entries, grouped by their home tab, in the same tile chrome
-/// used by that tab's normal content — each tile is the real, live control. Both entries
+/// used by that tab's normal content - each tile is the real, live control. Both entries
 /// within a group and the groups themselves are ordered by relevance, so the best match is
 /// always first.
 struct SettingsSearchResultsView: View {

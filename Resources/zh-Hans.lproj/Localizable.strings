@@ -196,7 +196,7 @@
 "AboutCopyrightLabel" = "© 2026 Jan Feuerbacher";
 "AboutDescriptionText" = "Dimly 是一款原生 Swift macOS 工具，可快速让外接显示器黑屏并管理睡眠/唤醒。";
 "AboutLegacyDescriptionText" = "Dimly 是原生 Swift macOS 工具。本版本包含带菜单栏支持、登录项切换和可配置热键的简单框架。";
-"AboutMadeByText" = "业余时间制作——感谢支持。";
+"AboutMadeByText" = "业余时间制作--感谢支持。";
 "AboutGitHubRepoTitle" = "GitHub 仓库";
 "AboutReportIssueTitle" = "报告问题";
 "AboutDonateTitle" = "捐助";
@@ -477,7 +477,7 @@
 "DisplayFilterWarmthLabel" = "暖色";
 "DisplayFilterCoolLabel" = "冷色";
 
-/* Color Profile — new */
+/* Color Profile - new */
 "ColorProfileSystemDefaultLabel" = "系统默认";
 "ColorProfileBuiltinHintLabel" = "内置显示器配置文件由 macOS 管理";
 "OpenSystemSettingsButton" = "打开系统设置";

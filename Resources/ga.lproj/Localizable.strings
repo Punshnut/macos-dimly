@@ -477,7 +477,7 @@
 "DisplayFilterWarmthLabel" = "Te";
 "DisplayFilterCoolLabel" = "Fionnuar";
 
-/* Color Profile — new */
+/* Color Profile - new */
 "ColorProfileSystemDefaultLabel" = "Réamhshocrú an chórais";
 "ColorProfileBuiltinHintLabel" = "Bainistíonn macOS na próifílí taispeána ionsuite";
 "OpenSystemSettingsButton" = "Oscail Socruithe an Chórais";

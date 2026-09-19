@@ -207,7 +207,7 @@ final class ScheduleManager: NSObject, ObservableObject, CLLocationManagerDelega
         guard schedulingEnabled else { return }
         let now = Date()
 
-        // Cancel all pending timers — they may have stale fire dates from before sleep.
+        // Cancel all pending timers - they may have stale fire dates from before sleep.
         for timer in timers.values { timer.invalidate() }
         timers.removeAll()
 
@@ -348,7 +348,7 @@ final class ScheduleManager: NSObject, ObservableObject, CLLocationManagerDelega
         } else if status == .authorizedAlways || status == .authorized {
             manager.requestLocation()
         } else {
-            // Permission denied — signal UI
+            // Permission denied - signal UI
             isRequestingLocation = false
             locationManager = nil
         }

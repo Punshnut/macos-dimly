@@ -11,7 +11,7 @@ enum SettingsNavigationTarget: String {
 /// Carries a pending Settings-tab navigation request from the What's New card to the Settings
 /// window. A plain notification would race the Settings window's own creation on a cold start
 /// (the window isn't created, and its view isn't yet subscribed, until the notification that
-/// opens it is handled) — this survives until whichever `SettingsRootView` instance appears
+/// opens it is handled) - this survives until whichever `SettingsRootView` instance appears
 /// (new or already-open) is ready to consume it.
 @MainActor
 final class SettingsNavigationCoordinator: ObservableObject {

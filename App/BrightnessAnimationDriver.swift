@@ -20,7 +20,7 @@ final class BrightnessAnimationDriver {
 
     private var animations: [String: Animation] = [:]
     private var displayLinks: [ObjectIdentifier: CADisplayLink] = [:]
-    // Keep bridges alive — CADisplayLink holds a weak reference to its target.
+    // Keep bridges alive - CADisplayLink holds a weak reference to its target.
     private var bridges: [ObjectIdentifier: DisplayLinkBridge] = [:]
 
     // MARK: - Public API
@@ -51,7 +51,7 @@ final class BrightnessAnimationDriver {
                 displayLinks[screenKey] = link
                 bridges[screenKey] = bridge
             } else {
-                // No screen — flush immediately.
+                // No screen - flush immediately.
                 flushAnimations(for: screenKey)
             }
         }
@@ -102,7 +102,7 @@ final class BrightnessAnimationDriver {
         bridges.removeValue(forKey: key)
     }
 
-    /// Cubic easeInOut — smooth acceleration and deceleration.
+    /// Cubic easeInOut - smooth acceleration and deceleration.
     private func easeInOut(_ t: Double) -> Double {
         t < 0.5 ? 4 * t * t * t : 1 - pow(-2 * t + 2, 3) / 2
     }
@@ -111,7 +111,7 @@ final class BrightnessAnimationDriver {
 // MARK: - DisplayLinkBridge
 
 // NSScreen.displayLink(target:selector:) requires an NSObject target.
-// Uses MainActor.assumeIsolated — the link fires on RunLoop.main so we are
+// Uses MainActor.assumeIsolated - the link fires on RunLoop.main so we are
 // already on the main thread; no Task queuing burst is introduced.
 private final class DisplayLinkBridge: NSObject, @unchecked Sendable {
     private weak var driver: BrightnessAnimationDriver?

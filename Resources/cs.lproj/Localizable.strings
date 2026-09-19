@@ -196,7 +196,7 @@
 "AboutCopyrightLabel" = "© 2026 Jan Feuerbacher";
 "AboutDescriptionText" = "Dimly je native Swift utilita pro macOS k rychlému zatemnění externích displejů a správě spánku/probuzení.";
 "AboutLegacyDescriptionText" = "Dimly je nativní Swift utilita pro macOS. Toto sestavení obsahuje jednoduchý skelet s podporou lišty menu, přepínačem položky přihlášení a konfigurovatelnou klávesovou zkratkou.";
-"AboutMadeByText" = "Vytvořeno ve volném čase – díky za podporu.";
+"AboutMadeByText" = "Vytvořeno ve volném čase - díky za podporu.";
 "AboutGitHubRepoTitle" = "Repozitář na GitHubu";
 "AboutReportIssueTitle" = "Nahlásit problém";
 "AboutDonateTitle" = "Přispět";
@@ -477,7 +477,7 @@
 "DisplayFilterWarmthLabel" = "Teplý";
 "DisplayFilterCoolLabel" = "Studený";
 
-/* Color Profile — new */
+/* Color Profile - new */
 "ColorProfileSystemDefaultLabel" = "Výchozí systémový";
 "ColorProfileBuiltinHintLabel" = "Vestavěné profily displeje spravuje macOS";
 "OpenSystemSettingsButton" = "Otevřít Nastavení systému";

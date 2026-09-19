@@ -477,7 +477,7 @@
 "DisplayFilterWarmthLabel" = "Hangat";
 "DisplayFilterCoolLabel" = "Sejuk";
 
-/* Color Profile — new */
+/* Color Profile - new */
 "ColorProfileSystemDefaultLabel" = "Lalai Sistem";
 "ColorProfileBuiltinHintLabel" = "Profil paparan terbina dalam diuruskan oleh macOS";
 "OpenSystemSettingsButton" = "Buka Tetapan Sistem";

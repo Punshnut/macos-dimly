@@ -1475,7 +1475,7 @@ struct MenuBarContentView: View {
                             }
                         }
                     }
-                    // Drop zone for creating a new row — only visible while dragging
+                    // Drop zone for creating a new row - only visible while dragging
                     miniTileNewRowDropZone()
                 }
                 if let draggedID = draggedDisplayMiniTileID,
@@ -1526,7 +1526,7 @@ struct MenuBarContentView: View {
 
     /// A single compact tile for one display in short mode.
     /// Name row is the drag handle; button row has sleep/wake + brightness ±.
-    /// `tilesInRow` controls whether large (1–3 tiles) or compact (4 tiles) sizing is used.
+    /// `tilesInRow` controls whether large (1-3 tiles) or compact (4 tiles) sizing is used.
     private func displayMiniTile(_ display: DisplayInfo, index: Int, tilesInRow: Int) -> some View {
         let tileShape = RoundedRectangle(cornerRadius: 11, style: .continuous)
         let name = displayName(for: display)
@@ -1549,7 +1549,7 @@ struct MenuBarContentView: View {
         let indexLabel = display.isBuiltin ? "INT" : "\(index + 1)"
         let brightnessLabel = "\(brightnessPercent(for: display))%"
 
-        // Sizes scale up for rows with 1–3 tiles; stay compact for 4 tiles.
+        // Sizes scale up for rows with 1-3 tiles; stay compact for 4 tiles.
         let large = tilesInRow <= 3
         let toggleIconSize: CGFloat  = large ? 13   : 10
         let toggleFrameSize: CGFloat = large ? 26   : 20
@@ -1947,7 +1947,7 @@ struct MenuBarContentView: View {
             .onTapGesture {
                 toggleBrightnessPanel(for: display)
             }
-            // Drag-to-reorder lives only on the name strip — keeps brightness buttons fully interactive.
+            // Drag-to-reorder lives only on the name strip - keeps brightness buttons fully interactive.
             .highPriorityGesture(displayRowReorderGesture(for: display.stableIdentity))
             HStack(spacing: 6) {
                 displayOrderButtons(for: display)
@@ -2844,7 +2844,7 @@ struct MenuBarContentView: View {
 
     /// Resolves which display row should swap with the dragged one.
     /// Uses vertical midpoint proximity: swap fires as soon as the dragged card's
-    /// center crosses the midpoint of an adjacent row — no overshoot required.
+    /// center crosses the midpoint of an adjacent row - no overshoot required.
     private func displayRowSwapTarget(for translation: CGSize, draggedID: String) -> String? {
         let startFrames = displayRowDragStartFramesByID.isEmpty ? displayRowFramesByID : displayRowDragStartFramesByID
         guard let draggedFrame = startFrames[draggedID] else { return nil }
@@ -2862,7 +2862,7 @@ struct MenuBarContentView: View {
         guard let closest = candidates.min(by: { abs($0.midY - dragMidY) < abs($1.midY - dragMidY) }) else {
             return nil
         }
-        // Only commit when within one row-height of the target mid — prevents
+        // Only commit when within one row-height of the target mid - prevents
         // accidental swaps when dragging past the last or first row.
         guard abs(closest.midY - dragMidY) < draggedFrame.height else { return nil }
         return closest.id
@@ -3199,7 +3199,7 @@ private struct MenuBarWindowAnchorLock: NSViewRepresentable {
             if isEnabled {
                 // Re-capture when first enabled, after a reset, or when the panel has moved to a
                 // different screen (e.g. opened on a fullscreen monitor after being on another screen).
-                // Never re-capture on repeat calls for the same screen — later SwiftUI animation
+                // Never re-capture on repeat calls for the same screen - later SwiftUI animation
                 // frames may fire updateNSView after macOS has already drifted the window upward.
                 if !wasEnabled || lockedTopY == nil || window.screen !== lockedScreen {
                     lockedTopY = window.frame.maxY

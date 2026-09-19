@@ -477,7 +477,7 @@
 "DisplayFilterWarmthLabel" = "Joto";
 "DisplayFilterCoolLabel" = "Baridi";
 
-/* Color Profile — new */
+/* Color Profile - new */
 "ColorProfileSystemDefaultLabel" = "Chaguo-msingi la Mfumo";
 "ColorProfileBuiltinHintLabel" = "Wasifu wa onyesho uliojengwa ndani unasimamiwa na macOS";
 "OpenSystemSettingsButton" = "Fungua Mipangilio ya Mfumo";

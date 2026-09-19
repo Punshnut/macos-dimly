@@ -477,7 +477,7 @@
 "DisplayFilterWarmthLabel" = "دافئ";
 "DisplayFilterCoolLabel" = "بارد";
 
-/* Color Profile — new */
+/* Color Profile - new */
 "ColorProfileSystemDefaultLabel" = "افتراضي النظام";
 "ColorProfileBuiltinHintLabel" = "تتم إدارة ملفات تعريف الشاشة المدمجة بواسطة macOS";
 "OpenSystemSettingsButton" = "فتح إعدادات النظام";

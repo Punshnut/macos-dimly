@@ -477,7 +477,7 @@
 "DisplayFilterWarmthLabel" = "Meleg";
 "DisplayFilterCoolLabel" = "Hideg";
 
-/* Color Profile — new */
+/* Color Profile - new */
 "ColorProfileSystemDefaultLabel" = "Rendszer alapértelmezett";
 "ColorProfileBuiltinHintLabel" = "A beépített kijelzőprofilokat a macOS kezeli";
 "OpenSystemSettingsButton" = "Rendszerbeállítások megnyitása";

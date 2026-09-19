@@ -477,7 +477,7 @@
 "DisplayFilterWarmthLabel" = "వెచ్చని";
 "DisplayFilterCoolLabel" = "చల్లని";
 
-/* Color Profile — new */
+/* Color Profile - new */
 "ColorProfileSystemDefaultLabel" = "సిస్టమ్ డిఫాల్ట్";
 "ColorProfileBuiltinHintLabel" = "అంతర్నిర్మిత డిస్‌ప్లే ప్రొఫైల్‌లను macOS నిర్వహిస్తుంది";
 "OpenSystemSettingsButton" = "సిస్టమ్ సెట్టింగ్‌లను తెరవండి";

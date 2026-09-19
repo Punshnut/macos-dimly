@@ -477,7 +477,7 @@
 "DisplayFilterWarmthLabel" = "Quente";
 "DisplayFilterCoolLabel" = "Frio";
 
-/* Color Profile — new */
+/* Color Profile - new */
 "ColorProfileSystemDefaultLabel" = "Predefinição do sistema";
 "ColorProfileBuiltinHintLabel" = "Os perfis de ecrã integrados são geridos pelo macOS";
 "OpenSystemSettingsButton" = "Abrir Definições do Sistema";

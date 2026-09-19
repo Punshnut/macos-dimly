@@ -602,7 +602,7 @@ final class DimOverlayWindow: NSWindow {
     private final class DimOverlayView: NSView {
         override var wantsUpdateLayer: Bool { true }
 
-        /// Solid black layer — opacity is animated on the view, not the window.
+        /// Solid black layer - opacity is animated on the view, not the window.
         override func updateLayer() {
             layer?.backgroundColor = NSColor.black.cgColor
         }

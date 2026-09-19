@@ -477,7 +477,7 @@
 "DisplayFilterWarmthLabel" = "வெப்பமான";
 "DisplayFilterCoolLabel" = "குளிர்ந்த";
 
-/* Color Profile — new */
+/* Color Profile - new */
 "ColorProfileSystemDefaultLabel" = "கணினி இயல்புநிலை";
 "ColorProfileBuiltinHintLabel" = "உள்ளமைந்த காட்சி சுயவிவரங்கள் macOS ஆல் நிர்வகிக்கப்படுகின்றன";
 "OpenSystemSettingsButton" = "கணினி அமைப்புகளைத் திற";

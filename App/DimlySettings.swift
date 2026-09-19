@@ -524,7 +524,7 @@ extension DimlySettings.FastActionsVisibilityMode {
 /// Per-display gamma-table appearance filter.
 enum DisplayFilter: String, CaseIterable, Identifiable, Codable {
     case standard
-    /// Legacy case — kept for Codable backward-compat with persisted settings only.
+    /// Legacy case - kept for Codable backward-compat with persisted settings only.
     /// Not shown in UI; `applyFilter(.grayscale)` is treated as `.standard`.
     /// Use Color Profile → "Black & White" for actual grayscale on external displays.
     case grayscale
@@ -534,7 +534,7 @@ enum DisplayFilter: String, CaseIterable, Identifiable, Codable {
 
     var id: String { rawValue }
 
-    /// Filters shown in the UI picker — excludes the legacy grayscale case.
+    /// Filters shown in the UI picker - excludes the legacy grayscale case.
     static var displayable: [DisplayFilter] { [.standard, .invert, .warmth, .cool] }
 
     var localizedName: String {

@@ -79,9 +79,9 @@ Open a display tile in the menu bar panel or in Settings → Displays to see all
 
 ## Contrast (DDC only)
 
-The **Contrast** section appears for external displays with DDC support. Drag the slider or use the arrow buttons to adjust the monitor's hardware contrast level (0–100). This sends a DDC VCP command directly to the display - equivalent to using the monitor's physical on-screen menu.
+The **Contrast** section appears for external displays with DDC support. Drag the slider or use the arrow buttons to adjust the monitor's hardware contrast level (0-100). This sends a DDC VCP command directly to the display - equivalent to using the monitor's physical on-screen menu.
 
-Contrast and brightness interact differently on each monitor. Most monitors look best somewhere between 70–80% contrast. Adjust brightness first; only change contrast if you need deeper blacks or brighter whites.
+Contrast and brightness interact differently on each monitor. Most monitors look best somewhere between 70-80% contrast. Adjust brightness first; only change contrast if you need deeper blacks or brighter whites.
 
 ---
 

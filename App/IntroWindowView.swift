@@ -17,7 +17,7 @@ enum IntroPage {
 struct IntroWindowView: View {
     /// Called when the user dismisses the intro window.
     let onDismiss: () -> Void
-    /// Live display inventory — observed so the built-in card appears as soon as displays load.
+    /// Live display inventory - observed so the built-in card appears as soon as displays load.
     @ObservedObject var displayManager: DisplayManager
     /// Whether to include the built-in display in Dimly. Bound to controller state.
     @Binding var includeInternalMonitor: Bool
@@ -64,11 +64,11 @@ struct IntroWindowView: View {
 
     // MARK: - Page Tab Strip
 
-    /// A small, minimal pill slider — no icons or text, just a floating thumb. A single real
+    /// A small, minimal pill slider - no icons or text, just a floating thumb. A single real
     /// `Button` toggling between the two pages, in the style of macOS's Liquid Glass switches.
     /// Placed inline in the header (not at the very top of the window) since bare SwiftUI
     /// gestures/buttons sitting in a titled window's top drag strip can lose clicks to the
-    /// window's own move-by-background handling — only genuine `NSControl`-backed views like
+    /// window's own move-by-background handling - only genuine `NSControl`-backed views like
     /// this `Button` reliably claim them there.
     private var pageTabStrip: some View {
         let totalWidth: CGFloat = 44

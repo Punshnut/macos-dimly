@@ -1,5 +1,5 @@
 TITLE Film Curve
-# Mild S-curve contrast — lifts shadows, compresses highlights for a cinematic feel.
+# Mild S-curve contrast - lifts shadows, compresses highlights for a cinematic feel.
 LUT_1D_SIZE 33
 
 0.000000 0.000000 0.000000

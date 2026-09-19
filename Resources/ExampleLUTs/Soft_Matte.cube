@@ -1,5 +1,5 @@
 TITLE Soft Matte
-# Easy-on-eyes matte — lifts black point and clips white to reduce visual fatigue.
+# Easy-on-eyes matte - lifts black point and clips white to reduce visual fatigue.
 LUT_1D_SIZE 33
 
 0.050000 0.050000 0.050000

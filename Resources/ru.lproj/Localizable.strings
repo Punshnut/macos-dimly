@@ -10,7 +10,7 @@
 
 /* Intro Window */
 "IntroWelcomeTitle" = "Добро пожаловать в Dimly";
-"IntroWelcomeSubtitle" = "Ваши дисплеи — в одном клике.";
+"IntroWelcomeSubtitle" = "Ваши дисплеи - в одном клике.";
 "IntroMenuBarTitle" = "Dimly находится в строке меню.";
 "IntroMenuBarHint" = "Ищите значок дисплея в правом верхнем углу экрана.";
 "IntroControlModeTitle" = "Как работает режим управления";
@@ -194,9 +194,9 @@
 /* About */
 "VersionFormat" = "Версия %@ (%@)";
 "AboutCopyrightLabel" = "© 2026 Jan Feuerbacher";
-"AboutDescriptionText" = "Dimly — нативная утилита Swift для macOS, быстро затемняющая внешние дисплеи и управляющая сном/пробуждением.";
-"AboutLegacyDescriptionText" = "Dimly — нативная утилита Swift для macOS. Эта сборка содержит простой каркас с поддержкой строки меню, переключателем элемента входа и настраиваемой горячей клавишей.";
-"AboutMadeByText" = "Сделано в свободное время — спасибо за поддержку.";
+"AboutDescriptionText" = "Dimly - нативная утилита Swift для macOS, быстро затемняющая внешние дисплеи и управляющая сном/пробуждением.";
+"AboutLegacyDescriptionText" = "Dimly - нативная утилита Swift для macOS. Эта сборка содержит простой каркас с поддержкой строки меню, переключателем элемента входа и настраиваемой горячей клавишей.";
+"AboutMadeByText" = "Сделано в свободное время - спасибо за поддержку.";
 "AboutGitHubRepoTitle" = "Репозиторий GitHub";
 "AboutReportIssueTitle" = "Сообщить о проблеме";
 "AboutDonateTitle" = "Пожертвовать";
@@ -477,7 +477,7 @@
 "DisplayFilterWarmthLabel" = "Тёплый";
 "DisplayFilterCoolLabel" = "Холодный";
 
-/* Color Profile — new */
+/* Color Profile - new */
 "ColorProfileSystemDefaultLabel" = "Системный по умолчанию";
 "ColorProfileBuiltinHintLabel" = "Встроенные профили дисплея управляются macOS";
 "OpenSystemSettingsButton" = "Открыть Системные настройки";

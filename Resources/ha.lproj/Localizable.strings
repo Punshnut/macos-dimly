@@ -477,7 +477,7 @@
 "DisplayFilterWarmthLabel" = "Ɗumi";
 "DisplayFilterCoolLabel" = "Sanyi";
 
-/* Color Profile — new */
+/* Color Profile - new */
 "ColorProfileSystemDefaultLabel" = "Tsoho na Tsarin";
 "ColorProfileBuiltinHintLabel" = "macOS na sarrafa bayanan nuni na ciki";
 "OpenSystemSettingsButton" = "Buɗe Saitunan Tsarin";

@@ -477,7 +477,7 @@
 "DisplayFilterWarmthLabel" = "Sıcak";
 "DisplayFilterCoolLabel" = "Soğuk";
 
-/* Color Profile — new */
+/* Color Profile - new */
 "ColorProfileSystemDefaultLabel" = "Sistem Varsayılanı";
 "ColorProfileBuiltinHintLabel" = "Yerleşik ekran profilleri macOS tarafından yönetilir";
 "OpenSystemSettingsButton" = "Sistem Ayarları'nı Aç";

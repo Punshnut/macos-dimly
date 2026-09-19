@@ -15,7 +15,7 @@ final class AppSettingsStore: ObservableObject {
         }
     }
 
-    /// The concrete color scheme currently in effect. Always a definite value — never nil —
+    /// The concrete color scheme currently in effect. Always a definite value - never nil -
     /// so SwiftUI views can bind directly and receive instant updates via @Published.
     @Published private(set) var effectiveColorScheme: ColorScheme = .light
 

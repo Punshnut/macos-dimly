@@ -477,7 +477,7 @@
 "DisplayFilterWarmthLabel" = "Ciepły";
 "DisplayFilterCoolLabel" = "Chłodny";
 
-/* Color Profile — new */
+/* Color Profile - new */
 "ColorProfileSystemDefaultLabel" = "Domyślny systemowy";
 "ColorProfileBuiltinHintLabel" = "Wbudowane profile wyświetlacza są zarządzane przez macOS";
 "OpenSystemSettingsButton" = "Otwórz Ustawienia systemowe";

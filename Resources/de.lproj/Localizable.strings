@@ -196,7 +196,7 @@
 "AboutCopyrightLabel" = "© 2026 Jan Feuerbacher";
 "AboutDescriptionText" = "Dimly ist ein natives Swift macOS-Tool, um externe Displays schnell abzudunkeln und Schlaf/Aufwachen zu steuern.";
 "AboutLegacyDescriptionText" = "Dimly ist ein natives Swift macOS-Tool. Dieser Build enthält ein einfaches Gerüst mit Menüleisten-Unterstützung, Login-Item-Umschalter und konfigurierbarem Hotkey.";
-"AboutMadeByText" = "In meiner Freizeit gebaut – danke für die Unterstützung.";
+"AboutMadeByText" = "In meiner Freizeit gebaut - danke für die Unterstützung.";
 "AboutGitHubRepoTitle" = "GitHub-Repo";
 "AboutReportIssueTitle" = "Problem melden";
 "AboutDonateTitle" = "Spenden";
@@ -477,7 +477,7 @@
 "DisplayFilterWarmthLabel" = "Warm";
 "DisplayFilterCoolLabel" = "Kühl";
 
-/* Color Profile — new */
+/* Color Profile - new */
 "ColorProfileSystemDefaultLabel" = "Systemstandard";
 "ColorProfileBuiltinHintLabel" = "Integrierte Displayprofile werden von macOS verwaltet";
 "OpenSystemSettingsButton" = "Systemeinstellungen öffnen";

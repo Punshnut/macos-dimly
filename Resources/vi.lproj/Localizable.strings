@@ -477,7 +477,7 @@
 "DisplayFilterWarmthLabel" = "Ấm";
 "DisplayFilterCoolLabel" = "Lạnh";
 
-/* Color Profile — new */
+/* Color Profile - new */
 "ColorProfileSystemDefaultLabel" = "Mặc định hệ thống";
 "ColorProfileBuiltinHintLabel" = "Cấu hình màn hình tích hợp được quản lý bởi macOS";
 "OpenSystemSettingsButton" = "Mở Cài đặt hệ thống";

@@ -477,7 +477,7 @@
 "DisplayFilterWarmthLabel" = "Θερμό";
 "DisplayFilterCoolLabel" = "Ψυχρό";
 
-/* Color Profile — new */
+/* Color Profile - new */
 "ColorProfileSystemDefaultLabel" = "Προεπιλογή συστήματος";
 "ColorProfileBuiltinHintLabel" = "Τα ενσωματωμένα προφίλ οθόνης διαχειρίζονται από το macOS";
 "OpenSystemSettingsButton" = "Άνοιγμα Ρυθμίσεων συστήματος";

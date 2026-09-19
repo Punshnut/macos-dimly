@@ -188,11 +188,19 @@ Requires macOS 14+. Supports Intel and Apple Silicon.
 
 Full documentation is in the [`docs/`](docs/README.md) folder: display controls, profiles, scheduling, shortcuts, settings, and troubleshooting.
 
+## Build it yourself
+
+Prefer to compile Dimly from source instead of downloading a release? See [docs/building.md](docs/building.md) for a no-experience-needed walkthrough, or [CONTRIBUTING.md](CONTRIBUTING.md) if you're planning to change code and send a PR. The public build scripts live in [`scripts/`](scripts/README.md) - official releases are still built and signed separately by the maintainer, so self-built copies are clearly marked as unofficial "Community Build"s in the app and don't auto-update.
+
 ## Roadmap
 
 - **Adaptive dimming** - remember per-location or time-of-day preferences
 - **Per-app triggers** - auto-dim when select apps enter full screen
 - **Script hooks** - call custom scripts before/after blackout
+
+## Contributing
+
+Bug reports, feature ideas, and pull requests are welcome - see [CONTRIBUTING.md](CONTRIBUTING.md) for how the codebase is laid out and how to get a dev build running.
 
 [Donate (Ko-Fi)](https://ko-fi.com/janfeuerbacher)
 

@@ -1,5 +1,5 @@
 TITLE Warm Amber
-# Gentle evening warmth — shifts white point amber by reducing blue.
+# Gentle evening warmth - shifts white point amber by reducing blue.
 LUT_1D_SIZE 33
 
 0.000000 0.000000 0.000000

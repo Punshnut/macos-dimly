@@ -47,14 +47,14 @@ enum LUTParseError: LocalizedError {
     var errorDescription: String? {
         switch self {
         case .unsupportedFormat:   return "Unrecognized LUT format."
-        case .invalidSize:         return "LUT size is out of the supported range (2–65536)."
+        case .invalidSize:         return "LUT size is out of the supported range (2-65536)."
         case .noData:              return "No color data found in the file."
         case .ioError(let msg):    return msg
         }
     }
 }
 
-/// Normalized parse output — always 256-entry R/G/B arrays ready for CGSetDisplayTransferByTable.
+/// Normalized parse output - always 256-entry R/G/B arrays ready for CGSetDisplayTransferByTable.
 struct LUTParseResult {
     let title: String?
     let dimension: LUTDimension

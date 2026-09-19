@@ -207,7 +207,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
     private func showIntroIfNeeded() {
         if !UserDefaults.standard.bool(forKey: Self.introShownKey) {
             showIntro(force: false)
-            // New users see everything as part of the welcome tour — don't also show a
+            // New users see everything as part of the welcome tour - don't also show a
             // retroactive "what's new" popup for features that predate their first run.
             UserDefaults.standard.set(WhatsNewContent.currentRevision, forKey: Self.whatsNewLastSeenRevisionKey)
             return

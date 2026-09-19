@@ -61,9 +61,9 @@ You can add as many hotkeys as you need. Hotkeys are registered globally - they 
 
 Hotkeys support:
 
-- Letter keys (A–Z)
-- Number keys (0–9)
-- Function keys (F1–F19)
+- Letter keys (A-Z)
+- Number keys (0-9)
+- Function keys (F1-F19)
 - Arrow keys, Page Up/Down, Home, End
 - Keypad keys
 - Media keys: Volume Up/Down, Mute, Brightness Up/Down, Play/Pause, Next/Previous Track, Rewind, Fast Forward

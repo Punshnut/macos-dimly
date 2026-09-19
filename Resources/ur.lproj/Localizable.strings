@@ -477,7 +477,7 @@
 "DisplayFilterWarmthLabel" = "گرم";
 "DisplayFilterCoolLabel" = "ٹھنڈا";
 
-/* Color Profile — new */
+/* Color Profile - new */
 "ColorProfileSystemDefaultLabel" = "سسٹم ڈیفالٹ";
 "ColorProfileBuiltinHintLabel" = "بلٹ ان ڈسپلے پروفائلز کا انتظام macOS کرتا ہے";
 "OpenSystemSettingsButton" = "سسٹم سیٹنگز کھولیں";

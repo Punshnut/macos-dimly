@@ -255,7 +255,7 @@ enum DisplaySectionContent {
         }
     }
 
-    /// Color profile row — full picker for externals; System Settings hint for internals.
+    /// Color profile row - full picker for externals; System Settings hint for internals.
     @ViewBuilder
     static func colorProfile(for display: DisplayInfo, colorProfileManager: ColorProfileManager, engine: DimlyEngine, showLabel: Bool = true) -> some View {
         if display.isBuiltin {

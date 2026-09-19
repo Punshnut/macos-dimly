@@ -477,7 +477,7 @@
 "DisplayFilterWarmthLabel" = "ሙቅ";
 "DisplayFilterCoolLabel" = "ቀዝቃዛ";
 
-/* Color Profile — new */
+/* Color Profile - new */
 "ColorProfileSystemDefaultLabel" = "የስርዓት ነባሪ";
 "ColorProfileBuiltinHintLabel" = "የውስጥ ማሳያ መገለጫዎች በmacOS ይተዳደራሉ";
 "OpenSystemSettingsButton" = "የስርዓት ቅንብሮችን ክፈት";

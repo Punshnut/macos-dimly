@@ -477,7 +477,7 @@
 "DisplayFilterWarmthLabel" = "Càlid";
 "DisplayFilterCoolLabel" = "Fred";
 
-/* Color Profile — new */
+/* Color Profile - new */
 "ColorProfileSystemDefaultLabel" = "Per defecte del sistema";
 "ColorProfileBuiltinHintLabel" = "Els perfils de pantalla integrats els gestiona macOS";
 "OpenSystemSettingsButton" = "Obrir Configuració del Sistema";

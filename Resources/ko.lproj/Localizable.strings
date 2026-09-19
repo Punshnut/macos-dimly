@@ -477,7 +477,7 @@
 "DisplayFilterWarmthLabel" = "따뜻함";
 "DisplayFilterCoolLabel" = "차가움";
 
-/* Color Profile — new */
+/* Color Profile - new */
 "ColorProfileSystemDefaultLabel" = "시스템 기본값";
 "ColorProfileBuiltinHintLabel" = "내장 디스플레이 프로파일은 macOS가 관리합니다";
 "OpenSystemSettingsButton" = "시스템 설정 열기";

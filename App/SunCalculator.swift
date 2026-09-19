@@ -1,6 +1,6 @@
 // MARK: - Solar Calculator
 // Pure-Swift NOAA simplified solar algorithm for sunrise/sunset computation.
-// No external dependencies — uses only Foundation.
+// No external dependencies - uses only Foundation.
 import Foundation
 
 /// Computes local sunrise and sunset times using the NOAA simplified solar algorithm.
@@ -86,7 +86,7 @@ enum SunCalculator {
         let latRad = latitude * .pi / 180.0
         let cosHA = cos(90.833 * .pi / 180.0) / (cos(latRad) * cos(decRad)) - tan(latRad) * tan(decRad)
 
-        // Polar day or polar night — no sunrise or sunset
+        // Polar day or polar night - no sunrise or sunset
         guard cosHA >= -1.0 && cosHA <= 1.0 else { return nil }
 
         let haDeg = acos(cosHA) * 180.0 / .pi

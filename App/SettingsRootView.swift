@@ -51,7 +51,7 @@ struct SettingsRootView: View {
         /// Tab name in the system's current display language.
         var localizedLabel: String { String(localized: String.LocalizationValue(labelKey)) }
 
-        /// Tab name in English — used so search always also matches the English term
+        /// Tab name in English - used so search always also matches the English term
         /// regardless of the app's current display language.
         var englishLabel: String { localized(labelKey, locale: englishLocale) }
 
@@ -476,7 +476,7 @@ struct SettingsRootView: View {
         let brightnessModeLabel = brightnessPresentation.1
 
         VStack(alignment: .leading, spacing: 0) {
-            // Flat card header — always visible
+            // Flat card header - always visible
             VStack(alignment: .leading, spacing: 8) {
                 HStack(alignment: .top, spacing: 10) {
                     SettingsIcon(systemName: display.isBuiltin ? "laptopcomputer" : "display")
@@ -570,7 +570,7 @@ struct SettingsRootView: View {
             .padding(.horizontal, 14)
             .padding(.bottom, 10)
 
-            // Contrast section — DDC external displays only
+            // Contrast section - DDC external displays only
             if display.isExternal && ddcSupported {
                 SettingsDivider()
                 DisplaySettingsSection(
@@ -585,7 +585,7 @@ struct SettingsRootView: View {
                 .padding(.bottom, 10)
             }
 
-            // Power section — external displays only
+            // Power section - external displays only
             if display.isExternal {
                 SettingsDivider()
                 DisplaySettingsSection(
@@ -600,7 +600,7 @@ struct SettingsRootView: View {
                 .padding(.bottom, 10)
             }
 
-            // Image section — Night Shift, True Tone, filter, color profile
+            // Image section - Night Shift, True Tone, filter, color profile
             SettingsDivider()
             DisplaySettingsSection(
                 title: String(localized: "SectionImageTitle"),
@@ -622,7 +622,7 @@ struct SettingsRootView: View {
             .padding(.horizontal, 14)
             .padding(.bottom, 10)
 
-            // Resolution section — external displays only
+            // Resolution section - external displays only
             if display.isExternal {
                 SettingsDivider()
                 DisplaySettingsSection(
@@ -637,7 +637,7 @@ struct SettingsRootView: View {
                 .padding(.bottom, 10)
             }
 
-            // Input Source section — DDC external displays only
+            // Input Source section - DDC external displays only
             if display.isExternal && ddcSupported {
                 SettingsDivider()
                 DisplaySettingsSection(
@@ -746,10 +746,10 @@ struct SettingsRootView: View {
             }
         }
 
-        /// Search entries for the static (non-per-display) tabs — General, Visuals,
+        /// Search entries for the static (non-per-display) tabs - General, Visuals,
         /// Shortcuts, Profiles, Schedule, LUTs. Titles/subtitles/bindings mirror the
         /// tiles rendered by their home tab's `body` above.
-        /// Trailing switch accessory used by search entries — the entry's icon/title/subtitle
+        /// Trailing switch accessory used by search entries - the entry's icon/title/subtitle
         /// are already drawn once by `SettingsSearchResultsView`'s generic row header, so this
         /// intentionally omits the label `SettingsToggleRow` would otherwise duplicate.
         private static func trailingToggle(_ isOn: Binding<Bool>) -> some View {
@@ -1931,7 +1931,7 @@ struct SettingsRootView: View {
             ]
             var seen = Set<String>()
 
-            // Live displays: alias → hardware name → "External N" — no bullet marker needed in a picker.
+            // Live displays: alias → hardware name → "External N" - no bullet marker needed in a picker.
             let sortedExternals = displayManager.displays.filter { $0.isExternal }.sorted { $0.displayID < $1.displayID }
             for (index, display) in sortedExternals.enumerated() {
                 let id = display.stableIdentity
@@ -2026,7 +2026,7 @@ struct SettingsRootView: View {
                     }
                 }
 
-                // Location card — only when at least one entry uses a solar trigger
+                // Location card - only when at least one entry uses a solar trigger
                 let hasSolarEntry = scheduleManager.entries.contains {
                     if case .sunrise = $0.trigger { return true }
                     if case .sunset = $0.trigger { return true }
@@ -2392,7 +2392,8 @@ struct SettingsRootView: View {
         }
 
         private var aboutDetail: some View {
-            SettingsScrollView(title: String(localized: "SettingsTabAboutLabel"), subtitle: nil, contentMaxWidth: 980) {
+            let buildKind = Bundle.main.object(forInfoDictionaryKey: "DimlyBuildKind") as? String ?? "official"
+            return SettingsScrollView(title: String(localized: "SettingsTabAboutLabel"), subtitle: nil, contentMaxWidth: 980) {
                 SettingsCard(title: String(localized: "AppName"), subtitle: nil) {
                     let version = Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String ?? ""
                     let build = Bundle.main.object(forInfoDictionaryKey: "CFBundleVersion") as? String ?? ""
@@ -2434,6 +2435,36 @@ struct SettingsRootView: View {
                         Text(String(localized: "AboutMadeByText"))
                             .font(.caption)
                             .foregroundStyle(.secondary)
+                    }
+                }
+
+                if buildKind != "official" {
+                    SettingsCard(
+                        title: "Community Build",
+                        subtitle: "Not built or signed by Jan Feuerbacher"
+                    ) {
+                        VStack(alignment: .leading, spacing: 10) {
+                            HStack(spacing: 8) {
+                                Image(systemName: "hammer.fill")
+                                    .font(.callout.weight(.semibold))
+                                    .foregroundStyle(.orange)
+                                Text("This copy was compiled locally from source - it isn't an official release.")
+                                    .font(.callout.weight(.medium))
+                            }
+                            Text("It won't check for or install updates automatically. For official signed releases, the latest source, or to report a problem, visit the GitHub project.")
+                                .font(.caption)
+                                .foregroundStyle(.secondary)
+                            Link(destination: URL(string: "https://github.com/Punshnut/macos-dimly")!) {
+                                aboutActionTile(
+                                    title: "Official GitHub Project",
+                                    subtitle: "github.com/Punshnut/macos-dimly",
+                                    systemImage: "chevron.left.forwardslash.chevron.right",
+                                    tint: Color(red: 0.93, green: 0.52, blue: 0.19)
+                                )
+                            }
+                            .buttonStyle(FluentPressButtonStyle(pressedScale: 0.985, pressedOpacity: 0.94))
+                            .dimlyHoverLift(hoverScale: 1.01, shadowOpacity: 0.08)
+                        }
                     }
                 }
 

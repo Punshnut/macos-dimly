@@ -477,7 +477,7 @@
 "DisplayFilterWarmthLabel" = "گرم";
 "DisplayFilterCoolLabel" = "سرد";
 
-/* Color Profile — new */
+/* Color Profile - new */
 "ColorProfileSystemDefaultLabel" = "پیش‌فرض سیستم";
 "ColorProfileBuiltinHintLabel" = "نمایه‌های نمایشگر داخلی توسط macOS مدیریت می‌شوند";
 "OpenSystemSettingsButton" = "باز کردن تنظیمات سیستم";

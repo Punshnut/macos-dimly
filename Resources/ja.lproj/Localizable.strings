@@ -477,7 +477,7 @@
 "DisplayFilterWarmthLabel" = "暖色";
 "DisplayFilterCoolLabel" = "寒色";
 
-/* Color Profile — new */
+/* Color Profile - new */
 "ColorProfileSystemDefaultLabel" = "システムデフォルト";
 "ColorProfileBuiltinHintLabel" = "内蔵ディスプレイのプロファイルはmacOSによって管理されます";
 "OpenSystemSettingsButton" = "システム設定を開く";

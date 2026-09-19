@@ -10,7 +10,7 @@ final class IntroWindowController: NSWindowController, NSWindowDelegate {
     private let onDismiss: () -> Void
     private weak var settingsStore: AppSettingsStore?
     private weak var displayManager: DisplayManager?
-    /// Mirror of the SwiftUI toggle — updated via Binding before windowWillClose fires.
+    /// Mirror of the SwiftUI toggle - updated via Binding before windowWillClose fires.
     private var pendingIncludeInternal: Bool = true
     /// Weak ref to the hosting view so we can query fittingSize after displays load.
     private weak var hostingView: NSView?
@@ -71,7 +71,7 @@ final class IntroWindowController: NSWindowController, NSWindowDelegate {
         )
         .frame(width: Self.contentWidth)
 
-        // Plain NSHostingView — no sizingOptions. Combining sizingOptions = .preferredContentSize
+        // Plain NSHostingView - no sizingOptions. Combining sizingOptions = .preferredContentSize
         // with autoresizingMask = [.width, .height] creates a constraint loop that crashes.
         let hv = NSHostingView(rootView: rootView)
         self.hostingView = hv
@@ -101,7 +101,7 @@ final class IntroWindowController: NSWindowController, NSWindowDelegate {
 
     required init?(coder: NSCoder) { return nil }
 
-    /// Re-measures the SwiftUI content and smoothly resizes the window to fit — used both when
+    /// Re-measures the SwiftUI content and smoothly resizes the window to fit - used both when
     /// the built-in display card appears and when the user switches between intro pages.
     private func resizeToFitContent() {
         guard let win = window, win.isVisible, let hv = hostingView else { return }

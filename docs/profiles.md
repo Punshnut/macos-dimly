@@ -106,7 +106,7 @@ Dimly applies the selected profile a moment after the trigger display connects.
 
 ## Tips
 
-- Save a "Night" profile with all brightness levels at 20–30% and apply it in one tap before winding down.
+- Save a "Night" profile with all brightness levels at 20-30% and apply it in one tap before winding down.
 - Save a "Presentation" profile with your external monitor at 100% and internal at whatever you prefer.
 - Save a "Focus" profile with side monitors blacked out and your main monitor at your working brightness.
 - Use different Smart Button colors to tell profiles apart at a glance.

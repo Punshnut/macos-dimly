@@ -196,7 +196,7 @@
 "AboutCopyrightLabel" = "© 2026 Jan Feuerbacher";
 "AboutDescriptionText" = "Dimly är ett inbyggt Swift-verktyg för macOS för att snabbt mörklägga externa skärmar och hantera vila/väckning.";
 "AboutLegacyDescriptionText" = "Dimly är ett inbyggt Swift-verktyg för macOS. Denna build innehåller ett enkelt skelett med stöd för menyrad, växling av inloggningspost och anpassningsbar snabbkommando.";
-"AboutMadeByText" = "Gjort på min fritid – tack för stödet.";
+"AboutMadeByText" = "Gjort på min fritid - tack för stödet.";
 "AboutGitHubRepoTitle" = "GitHub-repo";
 "AboutReportIssueTitle" = "Rapportera ett problem";
 "AboutDonateTitle" = "Donera";
@@ -477,7 +477,7 @@
 "DisplayFilterWarmthLabel" = "Varm";
 "DisplayFilterCoolLabel" = "Kall";
 
-/* Color Profile — new */
+/* Color Profile - new */
 "ColorProfileSystemDefaultLabel" = "Systemstandard";
 "ColorProfileBuiltinHintLabel" = "Inbyggda skärmprofiler hanteras av macOS";
 "OpenSystemSettingsButton" = "Öppna Systeminställningar";

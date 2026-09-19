@@ -63,6 +63,8 @@
 	<string>Dimly</string>
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
+	<key>DimlyBuildKind</key>
+	<string>official</string>
 	<key>CFBundleShortVersionString</key>
 	<string>2026.6.0</string>
 	<key>CFBundleVersion</key>

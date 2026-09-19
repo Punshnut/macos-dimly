@@ -5,7 +5,7 @@ import CoreGraphics
 import Darwin
 import OSLog
 
-/// Logical grouping of a color profile — used to render sections in the picker.
+/// Logical grouping of a color profile - used to render sections in the picker.
 enum ColorProfileGroup: String {
     case standard       // curated macOS system profiles (sRGB, P3, Adobe RGB…)
     case modern         // named CGColorSpace profiles (Extended P3, HDR…)
@@ -16,7 +16,7 @@ enum ColorProfileGroup: String {
 
 /// An installed ICC color profile available for a display.
 struct ColorProfile: Identifiable, Equatable {
-    /// Sentinel ID for the "System Default" entry — passes nil to CGDisplaySetColorProfile.
+    /// Sentinel ID for the "System Default" entry - passes nil to CGDisplaySetColorProfile.
     static let systemDefaultID = "__dimly_system_default__"
 
     let id: String              // file path for file-backed profiles; unique id for virtual ones
@@ -156,7 +156,7 @@ final class ColorProfileManager: ObservableObject {
         ("Generic RGB Profile.icc",    "Generic RGB"),
     ]
 
-    // Modern named color spaces — backed by CGColorSpace constants, no standalone ICC file.
+    // Modern named color spaces - backed by CGColorSpace constants, no standalone ICC file.
     // The `cgName` strings match the CGColorSpace constant values (e.g. "kCGColorSpaceExtendedDisplayP3").
     private nonisolated static let modernNamedSpaces: [(id: String, name: String, cgName: String)] = [
         ("__extendedDisplayP3__",  "Extended Display P3",    "kCGColorSpaceExtendedDisplayP3"),
@@ -167,7 +167,7 @@ final class ColorProfileManager: ObservableObject {
     ]
 
     // Creative effect profiles installed by macOS in /Library (present on every Mac).
-    // WebSafeColors is excluded — not appropriate for modern display control.
+    // WebSafeColors is excluded - not appropriate for modern display control.
     private nonisolated static let libraryProfileFilenames: Set<String> = [
         "Black & White.icc",
         "Blue Tone.icc",
@@ -177,7 +177,7 @@ final class ColorProfileManager: ObservableObject {
         "Sepia Tone.icc",
     ]
 
-    // Path constants — nonisolated so background tasks can reference them.
+    // Path constants - nonisolated so background tasks can reference them.
     private nonisolated static let systemProfilesDir =
         URL(fileURLWithPath: "/System/Library/ColorSync/Profiles")
     private nonisolated static let libraryProfilesDir =
@@ -188,7 +188,7 @@ final class ColorProfileManager: ObservableObject {
         FileManager.default.homeDirectoryForCurrentUser
             .appendingPathComponent("Library/ColorSync/Profiles")
 
-    // MARK: - Enumeration (nonisolated — called from Task.detached)
+    // MARK: - Enumeration (nonisolated - called from Task.detached)
 
     private nonisolated static func enumerateSystemProfiles() -> [ColorProfile] {
         curatedSystemProfiles.compactMap { entry in
@@ -198,7 +198,7 @@ final class ColorProfileManager: ObservableObject {
         }
     }
 
-    /// Named CGColorSpace profiles — get ICC data from the live color space object.
+    /// Named CGColorSpace profiles - get ICC data from the live color space object.
     private nonisolated static func enumerateModernNamedProfiles() -> [ColorProfile] {
         modernNamedSpaces.compactMap { entry in
             guard let cs = CGColorSpace(name: entry.cgName as CFString),

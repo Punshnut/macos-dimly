@@ -72,7 +72,7 @@ Use brightness control for the external display. Enable **Launch at Login** and 
 Save a "Presentation" profile with your external monitor at 100% and any unused monitors blacked out. Apply it before you start. Use the panic hotkey if anything goes wrong mid-presentation.
 
 **Evening wind-down**
-Set up a Schedule with a sunset trigger and a profile that dims all displays to 20–30%. Dimly applies it automatically - no action needed.
+Set up a Schedule with a sunset trigger and a profile that dims all displays to 20-30%. Dimly applies it automatically - no action needed.
 
 ---
 
@@ -87,6 +87,7 @@ Set up a Schedule with a sunset trigger and a profile that dims all displays to 
 | [Shortcuts & Hotkeys](shortcuts.md) | Global hotkeys, panic recovery, custom bindings |
 | [Settings & Customization](settings.md) | Appearance, transitions, display visibility, backup/restore |
 | [Troubleshooting](troubleshooting.md) | DDC not working, monitor compatibility, diagnostics |
+| [Build it yourself](building.md) | Compiling Dimly from source, no development experience needed |
 
 ---
 

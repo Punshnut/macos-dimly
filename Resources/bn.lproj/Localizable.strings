@@ -477,7 +477,7 @@
 "DisplayFilterWarmthLabel" = "উষ্ণ";
 "DisplayFilterCoolLabel" = "শীতল";
 
-/* Color Profile — new */
+/* Color Profile - new */
 "ColorProfileSystemDefaultLabel" = "সিস্টেম ডিফল্ট";
 "ColorProfileBuiltinHintLabel" = "বিল্ট-ইন ডিসপ্লে প্রোফাইলগুলি macOS দ্বারা পরিচালিত হয়";
 "OpenSystemSettingsButton" = "সিস্টেম সেটিংস খুলুন";
