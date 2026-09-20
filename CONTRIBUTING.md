@@ -20,7 +20,7 @@ Requirements: **macOS 14+**, **Xcode** with the Swift 6.2 toolchain (the version
 ## Project layout
 
 - `App/` - all Swift source. SwiftUI for the UI, AppKit where SwiftUI doesn't reach (menu bar item, display/window management), plus the DDC/CI and CoreDisplay integration.
-- `Resources/` - `Info.plist`, the app icon (`Dimly.icon`, an Icon Composer bundle), bundled example LUTs, and one `.lproj` folder per supported localization.
+- `Resources/` - `Info.plist`, the app icon (`Dimly.icon`, an Icon Composer bundle), bundled example LUTs and textures, and one `.lproj` folder per supported localization.
 - `docs/` - the user guide (linked from the README).
 - `scripts/` - the public build scripts covered above.
 - `Media/` - screenshots and the logo used in the README.
@@ -35,6 +35,15 @@ Code signing, notarization, and Sparkle's update-signing key are deliberately ke
 - Don't add a new dependency without opening an issue first to discuss it; Sparkle is currently the only external package for a reason.
 - If you're changing anything DDC-related, please test against real hardware if you can, and mention what you tested with (Mac architecture, cable type, monitor make/model) in your PR description - DDC behavior varies a lot between setups, and the [DDC/CI compatibility notes](README.md#ddcci-and-external-monitors) and [Troubleshooting guide](docs/troubleshooting.md) exist because of exactly that variance.
 - Adding a new user-facing string? It should go through the localization system like the rest of the UI (`String(localized:)` plus an entry in `Resources/en.lproj/Localizable.strings`) rather than a hardcoded literal, so translators can pick it up - translations into other languages aren't required from you, just the English source string.
+
+## Contributing a texture
+
+Bundled example textures (Settings → Textures) work the same way as bundled LUT presets: drop files into `Resources/ExampleTextures/` and Dimly seeds them into new users' libraries on first launch.
+
+- A regular image texture: add the diffuse image (`.png`/`.jpg`/`.jpeg`/`.heic`/`.tiff`), plus an optional normal/height map named `<same base name>_normal.<ext>` if you have one - Dimly pairs them automatically.
+- A procedural texture written in the [Texture Playground](docs/textures.md#the-texture-playground): export it from the Playground (**Export…**) and drop the resulting `.metal` file into `Resources/ExampleTextures/Procedural/`.
+
+Either way, keep it tileable/seamless - that's the whole point of an overlay texture - and open a PR the same way as any other change.
 
 ## Submitting a pull request
 

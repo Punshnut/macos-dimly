@@ -19,6 +19,7 @@ struct SettingsRootView: View {
     @ObservedObject var colorProfileManager: ColorProfileManager
     @ObservedObject var displayAppearanceManager: DisplayAppearanceManager
     @ObservedObject var lutManager: LUTManager
+    @ObservedObject var textureManager: TextureManager
     @State private var introWindowController: IntroWindowController?
     @State private var selection: SettingsDestination = .general
     @State private var proposedProfileName: String = ""
@@ -29,6 +30,7 @@ struct SettingsRootView: View {
         case general
         case displays
         case luts
+        case textures
         case visuals
         case shortcuts
         case profiles
@@ -40,6 +42,7 @@ struct SettingsRootView: View {
             case .general: "SettingsTabGeneralLabel"
             case .displays: "SettingsTabDisplaysLabel"
             case .luts: "SettingsTabLUTsLabel"
+            case .textures: "SettingsTabTexturesLabel"
             case .visuals: "SettingsTabVisualsLabel"
             case .shortcuts: "SettingsTabShortcutsLabel"
             case .profiles: "ProfilesSectionTitle"
@@ -60,6 +63,7 @@ struct SettingsRootView: View {
             case .general: "gearshape"
             case .displays: "display"
             case .luts: "camera.filters"
+            case .textures: "square.on.square.dashed"
             case .visuals: "paintbrush"
             case .shortcuts: "keyboard"
             case .profiles: "rectangle.3.group"
@@ -75,6 +79,7 @@ struct SettingsRootView: View {
             settingsStore: settingsStore,
             scheduleManager: scheduleManager,
             profileManager: profileManager,
+            textureManager: textureManager,
             openTab: { destination in
                 selection = destination
                 searchQuery = ""
@@ -186,6 +191,16 @@ struct SettingsRootView: View {
                 content: { AnyView(DisplaySectionContent.lutPicker(for: display, settingsStore: settingsStore, engine: engine, showLabel: false)) }
             ))
 
+            entries.append(SettingsSearchEntry(
+                id: "displays.\(display.stableIdentity).texture",
+                tab: .displays,
+                titleKey: "TextureRowLabel",
+                subtitleLiteral: name,
+                systemImage: "square.on.square.dashed",
+                keywords: [name, "texture", "textures", "paper", "grain"],
+                content: { AnyView(DisplaySectionContent.texturePicker(for: display, settingsStore: settingsStore, engine: engine, textureManager: textureManager, showLabel: false)) }
+            ))
+
             if !display.isBuiltin {
                 entries.append(SettingsSearchEntry(
                     id: "displays.\(display.stableIdentity).colorProfile",
@@ -267,6 +282,7 @@ struct SettingsRootView: View {
                 engine: engine,
                 scheduleManager: scheduleManager,
                 lutManager: lutManager,
+                textureManager: textureManager,
                 proposedProfileName: $proposedProfileName,
                 renameProfile: renameProfile,
                 showIntroAgain: showIntroAgain,
@@ -297,6 +313,7 @@ struct SettingsRootView: View {
         guard let target = navigationCoordinator.pendingTarget else { return }
         switch target {
         case .luts: selection = .luts
+        case .textures: selection = .textures
         case .displays: selection = .displays
         }
         navigationCoordinator.pendingTarget = nil
@@ -616,7 +633,8 @@ struct SettingsRootView: View {
                     displayAppearanceManager: displayAppearanceManager,
                     engine: engine,
                     settingsStore: settingsStore,
-                    colorProfileManager: colorProfileManager
+                    colorProfileManager: colorProfileManager,
+                    textureManager: textureManager
                 )
             }
             .padding(.horizontal, 14)
@@ -687,6 +705,7 @@ struct SettingsRootView: View {
         let engine: DimlyEngine
         @ObservedObject var scheduleManager: ScheduleManager
         @ObservedObject var lutManager: LUTManager
+        @ObservedObject var textureManager: TextureManager
         @Binding var proposedProfileName: String
         let renameProfile: (DisplayProfile) -> Void
         let showIntroAgain: () -> Void
@@ -730,6 +749,8 @@ struct SettingsRootView: View {
                     displaysDetail
                 case .luts:
                     lutsDetail
+                case .textures:
+                    texturesDetail
                 case .visuals:
                     visualsDetail
                 case .shortcuts:
@@ -766,6 +787,7 @@ struct SettingsRootView: View {
             settingsStore: AppSettingsStore,
             scheduleManager: ScheduleManager,
             profileManager: ProfileManager,
+            textureManager: TextureManager,
             openTab: @escaping (SettingsRootView.SettingsDestination) -> Void
         ) -> [SettingsSearchEntry] {
             [
@@ -966,6 +988,65 @@ struct SettingsRootView: View {
                             .buttonStyle(.bordered)
                             .controlSize(.small)
                         })
+                    }
+                ),
+                SettingsSearchEntry(
+                    id: "textures.library",
+                    tab: .textures,
+                    titleKey: "TextureLibraryTitle",
+                    subtitleKey: "TextureLibrarySubtitle",
+                    systemImage: "square.on.square.dashed",
+                    keywords: ["texture", "textures", "paper", "grain", "material", "overlay"],
+                    content: {
+                        AnyView(HStack {
+                            Spacer()
+                            Button(action: { openTab(.textures) }) {
+                                Label(String(localized: "SettingsTabTexturesLabel"), systemImage: "chevron.right")
+                                    .labelStyle(.titleAndIcon)
+                            }
+                            .buttonStyle(.bordered)
+                            .controlSize(.small)
+                        })
+                    }
+                ),
+                SettingsSearchEntry(
+                    id: "textures.playground",
+                    tab: .textures,
+                    titleKey: "TexturePlaygroundTitle",
+                    subtitleKey: "TexturePlaygroundSearchSubtitle",
+                    systemImage: "chevron.left.forwardslash.chevron.right",
+                    keywords: ["shader", "metal", "playground", "procedural", "code"],
+                    content: {
+                        AnyView(HStack {
+                            Spacer()
+                            Button(action: { openTab(.textures) }) {
+                                Label(String(localized: "TexturePlaygroundOpenButton"), systemImage: "chevron.right")
+                                    .labelStyle(.titleAndIcon)
+                            }
+                            .buttonStyle(.bordered)
+                            .controlSize(.small)
+                        })
+                    }
+                ),
+                SettingsSearchEntry(
+                    id: "textures.menuBarMode",
+                    tab: .textures,
+                    titleKey: "TextureMenuBarModeTitle",
+                    subtitleKey: "TextureMenuBarModeSubtitle",
+                    systemImage: "menubar.rectangle",
+                    keywords: ["cycle", "grid", "blend mode"],
+                    content: {
+                        AnyView(Picker("", selection: Binding(
+                            get: { settingsStore.settings.textureMenuBarMode },
+                            set: { newValue in settingsStore.update { $0.textureMenuBarMode = newValue } }
+                        )) {
+                            ForEach(TextureMenuBarMode.allCases) { mode in
+                                Text(mode.localizedName).tag(mode)
+                            }
+                        }
+                        .pickerStyle(.segmented)
+                        .labelsHidden()
+                        .frame(width: 160))
                     }
                 ),
                 SettingsSearchEntry(
@@ -1255,6 +1336,10 @@ struct SettingsRootView: View {
 
         private var lutsDetail: some View {
             _LUTsDetailView(lutManager: lutManager, engine: engine)
+        }
+
+        private var texturesDetail: some View {
+            _TexturesDetailView(textureManager: textureManager, settingsStore: settingsStore, engine: engine)
         }
 
         private var visualsDetail: some View {

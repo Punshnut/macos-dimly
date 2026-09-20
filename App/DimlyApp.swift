@@ -104,7 +104,8 @@ struct DimlyApp: App {
                 displayModeManager: engine.displayModeManager,
                 colorProfileManager: engine.colorProfileManager,
                 displayAppearanceManager: engine.displayAppearanceManager,
-                lutManager: engine.lutManager
+                lutManager: engine.lutManager,
+                textureManager: engine.textureManager
             )
         }
     }
@@ -334,7 +335,8 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
                 displayModeManager: settingsEngine.displayModeManager,
                 colorProfileManager: settingsEngine.colorProfileManager,
                 displayAppearanceManager: settingsEngine.displayAppearanceManager,
-                lutManager: settingsEngine.lutManager
+                lutManager: settingsEngine.lutManager,
+                textureManager: settingsEngine.textureManager
             )
             let hostingView = NSHostingView(rootView: rootView)
             let window = NSWindow(

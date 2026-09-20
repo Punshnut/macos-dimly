@@ -96,6 +96,8 @@ final class DimlyEngine: ObservableObject {
     let colorProfileManager: ColorProfileManager
     let displayAppearanceManager: DisplayAppearanceManager
     let lutManager: LUTManager
+    let textureManager: TextureManager
+    let textureOverlayManager: TextureOverlayManager
     var onShowWindow: (() -> Void)?
     var onToggleWindow: (() -> Void)?
 
@@ -127,6 +129,8 @@ final class DimlyEngine: ObservableObject {
         self.colorProfileManager = ColorProfileManager()
         self.displayAppearanceManager = DisplayAppearanceManager()
         self.lutManager = LUTManager()
+        self.textureManager = TextureManager()
+        self.textureOverlayManager = TextureOverlayManager(displayManager: displayManager, textureManager: textureManager)
         DiagnosticsLogger.shared.log("Engine init: managers constructed", category: "engine")
         self.launcherHotkeyManager.onHotkeyPressed = { [weak self] in
             self?.onShowWindow?()
@@ -331,6 +335,9 @@ final class DimlyEngine: ObservableObject {
             for id in displayIDs where settings.monitorPowerStateByDisplayID[id] == .blackout {
                 settings.monitorPowerStateByDisplayID[id] = .visible
             }
+        }
+        for display in displayManager.displays {
+            setActiveTexture(nil, for: display)
         }
     }
 
@@ -845,6 +852,141 @@ final class DimlyEngine: ObservableObject {
         displayAppearanceManager.applyFilter(filter, lutTables: lut, to: display)
     }
 
+    // MARK: - Texture overlays
+
+    /// Sets or clears the active texture overlay for a display, applying it with the
+    /// display's current opacity/blend-mode/tile-scale (or the defaults, on first assignment).
+    func setActiveTexture(_ entry: TextureEntry?, for display: DisplayInfo) {
+        settingsStore.update { settings in
+            if let entry {
+                settings.activeTextureByDisplayID[display.stableIdentity] = entry.id
+                if settings.textureOpacityByDisplayID[display.stableIdentity] == nil {
+                    settings.textureOpacityByDisplayID[display.stableIdentity] = DimlySettings.defaultTextureOpacity
+                }
+                if settings.textureBlendModeByDisplayID[display.stableIdentity] == nil {
+                    settings.textureBlendModeByDisplayID[display.stableIdentity] = DimlySettings.defaultTextureBlendMode
+                }
+                if settings.textureTileScaleByDisplayID[display.stableIdentity] == nil {
+                    settings.textureTileScaleByDisplayID[display.stableIdentity] = DimlySettings.defaultTextureTileScale
+                }
+            } else {
+                settings.activeTextureByDisplayID.removeValue(forKey: display.stableIdentity)
+            }
+        }
+        applyTextureState(for: display)
+    }
+
+    /// Live visual-only opacity preview during a slider drag - no settingsStore write, no
+    /// persistence, just the cheap window-layer opacity update. Call `setTextureOpacity(_:for:)`
+    /// once the gesture ends to commit the value.
+    func previewTextureOpacity(_ opacity: Double, for display: DisplayInfo) {
+        textureOverlayManager.setOpacity(opacity, for: display)
+    }
+
+    /// Sets a display's texture overlay opacity (0-1) and persists it. Cheap - doesn't
+    /// re-render the tile. Intended to be called once per gesture (e.g. on slider release);
+    /// use `previewTextureOpacity(_:for:)` for continuous live feedback during a drag.
+    func setTextureOpacity(_ opacity: Double, for display: DisplayInfo) {
+        settingsStore.update { settings in
+            settings.textureOpacityByDisplayID[display.stableIdentity] = opacity
+        }
+        textureOverlayManager.setOpacity(opacity, for: display)
+    }
+
+    /// Sets a display's texture overlay blend mode.
+    func setTextureBlendMode(_ mode: TextureBlendMode, for display: DisplayInfo) {
+        settingsStore.update { settings in
+            settings.textureBlendModeByDisplayID[display.stableIdentity] = mode
+        }
+        textureOverlayManager.setBlendMode(mode, for: display)
+    }
+
+    /// Live visual-only tile-scale preview during a slider drag - no settingsStore write, no
+    /// persistence. Cheap: `TextureRenderer` caches the expensive relief-shading pass by
+    /// texture ID alone, so a tile-scale change only re-wraps an already-shaded bitmap at a
+    /// new size, never re-shades. Call `setTextureTileScale(_:for:)` on gesture end to commit.
+    func previewTextureTileScale(_ scale: Double, for display: DisplayInfo) {
+        guard let textureID = settingsStore.settings.activeTextureByDisplayID[display.stableIdentity],
+              let entry = textureManager.library.first(where: { $0.id == textureID }) else { return }
+        let opacity = settingsStore.settings.textureOpacityByDisplayID[display.stableIdentity] ?? DimlySettings.defaultTextureOpacity
+        let blendMode = settingsStore.settings.textureBlendModeByDisplayID[display.stableIdentity] ?? DimlySettings.defaultTextureBlendMode
+        textureOverlayManager.previewTileScale(scale, entry: entry, opacity: opacity, blendMode: blendMode, for: display)
+    }
+
+    /// Sets a display's texture tile scale, persists it, and re-renders the tile at the new
+    /// scale. Intended to be called once per gesture; use `previewTextureTileScale(_:for:)`
+    /// for continuous live feedback during a drag.
+    func setTextureTileScale(_ scale: Double, for display: DisplayInfo) {
+        settingsStore.update { settings in
+            settings.textureTileScaleByDisplayID[display.stableIdentity] = scale
+        }
+        applyTextureState(for: display)
+    }
+
+    /// Resolves the next texture ID in `order` after `currentID` (nil = "off"), including an
+    /// explicit "off" step as the N+1 position in the rotation. `currentID == nil` is treated
+    /// as sitting at the "off" position, so cycling wraps: favorites... -> off -> favorites...
+    private func nextTextureCycleID(after currentID: UUID?, direction: Int, order: [UUID]) -> UUID? {
+        guard !order.isEmpty else { return nil }
+        let currentIndex = currentID.flatMap { order.firstIndex(of: $0) } ?? order.count
+        let totalSteps = order.count + 1
+        let nextIndex = ((currentIndex + direction) % totalSteps + totalSteps) % totalSteps
+        return nextIndex == order.count ? nil : order[nextIndex]
+    }
+
+    /// Advances the menu bar's texture "favorites" cycle by one step (or back, with a
+    /// negative direction) - including an "off" step - and applies the result to every
+    /// display in lockstep. This is the default, compact menu bar Cycle quick action.
+    func cycleTexture(direction: Int) {
+        let order = settingsStore.settings.textureCycleOrder
+        let currentID = displayManager.displays.first.flatMap { settingsStore.settings.activeTextureByDisplayID[$0.stableIdentity] }
+        let nextID = nextTextureCycleID(after: currentID, direction: direction, order: order)
+        let entry = nextID.flatMap { id in textureManager.library.first { $0.id == id } }
+        for display in displayManager.displays {
+            setActiveTexture(entry, for: display)
+        }
+    }
+
+    /// Advances a single display's texture cycle (favorites + "off"), independent of every
+    /// other display - used by the menu bar panel's per-display mini toggle.
+    func cycleTexture(direction: Int, for display: DisplayInfo) {
+        let order = settingsStore.settings.textureCycleOrder
+        let currentID = settingsStore.settings.activeTextureByDisplayID[display.stableIdentity]
+        let nextID = nextTextureCycleID(after: currentID, direction: direction, order: order)
+        let entry = nextID.flatMap { id in textureManager.library.first { $0.id == id } }
+        setActiveTexture(entry, for: display)
+    }
+
+    /// Re-applies every display's persisted texture state - used to hand displays back to
+    /// their real settings after a Texture Playground preview ends.
+    func restoreAllTextureOverlays() {
+        for display in displayManager.displays {
+            applyTextureState(for: display)
+        }
+    }
+
+    /// Shows a raw, not-yet-saved image (e.g. a Texture Playground compile result) on every
+    /// connected display without touching persisted settings. Pass `image: nil` to stop
+    /// previewing (though `restoreAllTextureOverlays()` is the normal way back to real state).
+    func previewTexture(image: CGImage?, opacity: Double, blendMode: TextureBlendMode, tileScale: Double) {
+        textureOverlayManager.previewImage(image, opacity: opacity, blendMode: blendMode, tileScale: tileScale, on: displayManager.displays)
+    }
+
+    /// Re-applies a display's currently persisted texture state to the overlay manager -
+    /// used after any change that requires a re-render (texture, tile scale).
+    func applyTextureState(for display: DisplayInfo) {
+        let settings = settingsStore.settings
+        guard let textureID = settings.activeTextureByDisplayID[display.stableIdentity],
+              let entry = textureManager.library.first(where: { $0.id == textureID }) else {
+            textureOverlayManager.applyTexture(nil, opacity: 0, blendMode: .normal, tileScale: 1, to: display)
+            return
+        }
+        let opacity = settings.textureOpacityByDisplayID[display.stableIdentity] ?? DimlySettings.defaultTextureOpacity
+        let blendMode = settings.textureBlendModeByDisplayID[display.stableIdentity] ?? DimlySettings.defaultTextureBlendMode
+        let tileScale = settings.textureTileScaleByDisplayID[display.stableIdentity] ?? DimlySettings.defaultTextureTileScale
+        textureOverlayManager.applyTexture(entry, opacity: opacity, blendMode: blendMode, tileScale: tileScale, to: display)
+    }
+
     /// Returns the cached LUT gamma tables for the active LUT on the given display, if any.
     func activeLUTTables(for display: DisplayInfo) -> ([Float], [Float], [Float])? {
         guard let lutID = settingsStore.settings.activeLUTByDisplayID[display.stableIdentity],
@@ -912,6 +1054,7 @@ final class DimlyEngine: ObservableObject {
         updateHotkeys(settings.hotkeyBindings)
         panicHotkeyManager.activate()
         blackoutManager.transitionSpeedMultiplier = settings.transitionSpeed.multiplier
+        textureOverlayManager.transitionSpeedMultiplier = settings.transitionSpeed.multiplier
     }
 
     /// Registers all configured hotkeys and de-duplicates by descriptor.
@@ -1130,6 +1273,9 @@ final class DimlyEngine: ObservableObject {
                 }
                 self.trueToneManager.refresh(for: displays)
                 self.displayAppearanceManager.restoreAll(for: displays, lutProvider: self.activeLUTTables(for:))
+                for display in displays {
+                    self.applyTextureState(for: display)
+                }
             }
             .store(in: &stateCancellables)
 

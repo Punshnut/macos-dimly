@@ -54,6 +54,10 @@ Save monitor states, reorder profiles, surface smart buttons in Quick Actions, a
 
 Use global shortcuts for all externals or target specific displays. Includes a fixed panic shortcut to restore everything instantly.
 
+### Textures that don't strain your eyes
+
+Paper, canvas, and material overlays with real depth from normal-map shading, switchable per display from the menu bar. Write your own in the built-in Texture Playground.
+
 ### Built for daily use
 
 Show display numbers, hide selected displays from the menu list, merge ordering, and run in stealth mode with Dock/menu icon hidden.

@@ -1,5 +1,7 @@
 # LUT Library
 
+*Available since Dimly 2026.6.*
+
 A **LUT (Look-Up Table)** remaps the color output of a display using a calibration or creative curve. LUTs are applied at the gamma-table level - they affect the full display output, just like Appearance Filters. Manage your LUT library from **Settings → LUTs**, then assign LUTs to individual displays from **Settings → Displays → Image**.
 
 ---

@@ -24,6 +24,9 @@ Adjust brightness per monitor, put displays to sleep, wake them, or black them o
 **See what's new**
 The intro window - shown on first launch and reachable anytime from Settings → About - includes a What's New page after you update. It highlights new features with direct links into the relevant Settings tab, so you can jump straight to trying them out.
 
+**Ease eye strain with texture overlays**
+Lay a subtle paper, canvas, or material texture - with real 3D relief shading - over any display. Switch textures per display from Settings, or with a quick menu bar button. *Available since 2026.7.*
+
 **Save setups as profiles**
 Capture your current display state - brightness, power, order - as a named profile. Apply it in one click, pin it as a Smart Button in the menu bar, or have it apply automatically when a monitor connects.
 
@@ -82,6 +85,8 @@ Set up a Schedule with a sunset trigger and a profile that dims all displays to 
 |---|---|
 | [Display Controls](display-controls.md) | Brightness, sleep, wake, blackout, DDC vs overlay, renaming |
 | [LUT Library](luts.md) | Importing LUTs, bundled presets, per-display assignment, backup/restore |
+| [Texture Overlays](textures.md) | Importing textures, 3D relief shading, the Texture Playground, menu bar switching |
+| [The Texture Playground, step by step](texture-playground.md) | A friendly, no-experience-needed walkthrough for writing your own texture and sharing it |
 | [Profiles & Smart Buttons](profiles.md) | Saving setups, quick-access buttons, auto-apply on connect |
 | [Scheduling](scheduling.md) | Clock and sunrise/sunset triggers, location setup |
 | [Shortcuts & Hotkeys](shortcuts.md) | Global hotkeys, panic recovery, custom bindings |

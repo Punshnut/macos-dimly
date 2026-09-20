@@ -6,6 +6,7 @@ import SwiftUI
 enum SettingsNavigationTarget: String {
     case luts
     case displays
+    case textures
 }
 
 /// Carries a pending Settings-tab navigation request from the What's New card to the Settings
@@ -33,9 +34,19 @@ struct WhatsNewFeature: Identifiable {
 
 /// Bump `currentRevision` whenever a new entry is added so returning users see only the delta.
 enum WhatsNewContent {
-    static let currentRevision = 1
+    static let currentRevision = 2
 
     static let features: [WhatsNewFeature] = [
+        WhatsNewFeature(
+            id: "textureOverlays",
+            symbol: "square.on.square.dashed",
+            color: .brown,
+            titleKey: "WhatsNewTextureOverlaysTitle",
+            descriptionKey: "WhatsNewTextureOverlaysDescription",
+            locationKey: "WhatsNewTextureOverlaysLocation",
+            settingsTarget: .textures,
+            introducedInRevision: 2
+        ),
         WhatsNewFeature(
             id: "lutLibrary",
             symbol: "cube.transparent",

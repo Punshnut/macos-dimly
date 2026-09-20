@@ -271,6 +271,10 @@ struct ProfileMonitorState: Codable, Equatable {
     var monitorPowerStateByDisplayID: [String: PersistedMonitorPowerState]
     var monitorBrightnessByDisplayID: [String: Int]
     var activeLUTByDisplayID: [String: UUID]
+    var activeTextureByDisplayID: [String: UUID]
+    var textureOpacityByDisplayID: [String: Double]
+    var textureBlendModeByDisplayID: [String: TextureBlendMode]
+    var textureTileScaleByDisplayID: [String: Double]
 
     private enum CodingKeys: String, CodingKey {
         case menuBarExcludedDisplayIDs
@@ -284,6 +288,10 @@ struct ProfileMonitorState: Codable, Equatable {
         case monitorPowerStateByDisplayID
         case monitorBrightnessByDisplayID
         case activeLUTByDisplayID
+        case activeTextureByDisplayID
+        case textureOpacityByDisplayID
+        case textureBlendModeByDisplayID
+        case textureTileScaleByDisplayID
     }
 
     /// Creates the monitor-specific portion of a profile snapshot.
@@ -298,7 +306,11 @@ struct ProfileMonitorState: Codable, Equatable {
         brightnessPanelExpandedDisplayIDs: [String],
         monitorPowerStateByDisplayID: [String: PersistedMonitorPowerState],
         monitorBrightnessByDisplayID: [String: Int],
-        activeLUTByDisplayID: [String: UUID] = [:]
+        activeLUTByDisplayID: [String: UUID] = [:],
+        activeTextureByDisplayID: [String: UUID] = [:],
+        textureOpacityByDisplayID: [String: Double] = [:],
+        textureBlendModeByDisplayID: [String: TextureBlendMode] = [:],
+        textureTileScaleByDisplayID: [String: Double] = [:]
     ) {
         self.menuBarExcludedDisplayIDs = menuBarExcludedDisplayIDs
         self.menuBarIncludedInternalDisplayIDs = menuBarIncludedInternalDisplayIDs
@@ -311,6 +323,10 @@ struct ProfileMonitorState: Codable, Equatable {
         self.monitorPowerStateByDisplayID = monitorPowerStateByDisplayID
         self.monitorBrightnessByDisplayID = monitorBrightnessByDisplayID
         self.activeLUTByDisplayID = activeLUTByDisplayID
+        self.activeTextureByDisplayID = activeTextureByDisplayID
+        self.textureOpacityByDisplayID = textureOpacityByDisplayID
+        self.textureBlendModeByDisplayID = textureBlendModeByDisplayID
+        self.textureTileScaleByDisplayID = textureTileScaleByDisplayID
     }
 
     /// Captures monitor ordering and per-display state from the current live settings.
@@ -326,6 +342,10 @@ struct ProfileMonitorState: Codable, Equatable {
         monitorPowerStateByDisplayID = settings.monitorPowerStateByDisplayID
         monitorBrightnessByDisplayID = settings.monitorBrightnessByDisplayID
         activeLUTByDisplayID = settings.activeLUTByDisplayID
+        activeTextureByDisplayID = settings.activeTextureByDisplayID
+        textureOpacityByDisplayID = settings.textureOpacityByDisplayID
+        textureBlendModeByDisplayID = settings.textureBlendModeByDisplayID
+        textureTileScaleByDisplayID = settings.textureTileScaleByDisplayID
     }
 
     /// Decodes saved monitor UI state while tolerating fields that may be absent in older profiles.
@@ -342,6 +362,10 @@ struct ProfileMonitorState: Codable, Equatable {
         monitorPowerStateByDisplayID = try container.decodeIfPresent([String: PersistedMonitorPowerState].self, forKey: .monitorPowerStateByDisplayID) ?? [:]
         monitorBrightnessByDisplayID = try container.decodeIfPresent([String: Int].self, forKey: .monitorBrightnessByDisplayID) ?? [:]
         activeLUTByDisplayID = try container.decodeIfPresent([String: UUID].self, forKey: .activeLUTByDisplayID) ?? [:]
+        activeTextureByDisplayID = try container.decodeIfPresent([String: UUID].self, forKey: .activeTextureByDisplayID) ?? [:]
+        textureOpacityByDisplayID = try container.decodeIfPresent([String: Double].self, forKey: .textureOpacityByDisplayID) ?? [:]
+        textureBlendModeByDisplayID = try container.decodeIfPresent([String: TextureBlendMode].self, forKey: .textureBlendModeByDisplayID) ?? [:]
+        textureTileScaleByDisplayID = try container.decodeIfPresent([String: Double].self, forKey: .textureTileScaleByDisplayID) ?? [:]
     }
 
     /// Encodes monitor-specific profile state for persistence and backup export.
@@ -358,6 +382,10 @@ struct ProfileMonitorState: Codable, Equatable {
         try container.encode(monitorPowerStateByDisplayID, forKey: .monitorPowerStateByDisplayID)
         try container.encode(monitorBrightnessByDisplayID, forKey: .monitorBrightnessByDisplayID)
         try container.encode(activeLUTByDisplayID, forKey: .activeLUTByDisplayID)
+        try container.encode(activeTextureByDisplayID, forKey: .activeTextureByDisplayID)
+        try container.encode(textureOpacityByDisplayID, forKey: .textureOpacityByDisplayID)
+        try container.encode(textureBlendModeByDisplayID, forKey: .textureBlendModeByDisplayID)
+        try container.encode(textureTileScaleByDisplayID, forKey: .textureTileScaleByDisplayID)
     }
 
     /// Applies captured monitor-related UI state back into live app settings.
@@ -375,6 +403,10 @@ struct ProfileMonitorState: Codable, Equatable {
         settings.monitorPowerStateByDisplayID = monitorPowerStateByDisplayID
         settings.monitorBrightnessByDisplayID = monitorBrightnessByDisplayID
         settings.activeLUTByDisplayID = activeLUTByDisplayID
+        settings.activeTextureByDisplayID = activeTextureByDisplayID
+        settings.textureOpacityByDisplayID = textureOpacityByDisplayID
+        settings.textureBlendModeByDisplayID = textureBlendModeByDisplayID
+        settings.textureTileScaleByDisplayID = textureTileScaleByDisplayID
     }
 
     /// Rewrites monitor IDs using profile snapshot -> current display mappings.
@@ -390,7 +422,11 @@ struct ProfileMonitorState: Codable, Equatable {
             brightnessPanelExpandedDisplayIDs: remap(brightnessPanelExpandedDisplayIDs, with: idMap),
             monitorPowerStateByDisplayID: remap(monitorPowerStateByDisplayID, with: idMap),
             monitorBrightnessByDisplayID: remap(monitorBrightnessByDisplayID, with: idMap),
-            activeLUTByDisplayID: remap(activeLUTByDisplayID, with: idMap)
+            activeLUTByDisplayID: remap(activeLUTByDisplayID, with: idMap),
+            activeTextureByDisplayID: remap(activeTextureByDisplayID, with: idMap),
+            textureOpacityByDisplayID: remap(textureOpacityByDisplayID, with: idMap),
+            textureBlendModeByDisplayID: remap(textureBlendModeByDisplayID, with: idMap),
+            textureTileScaleByDisplayID: remap(textureTileScaleByDisplayID, with: idMap)
         )
     }
 
@@ -431,6 +467,24 @@ struct ProfileMonitorState: Codable, Equatable {
     /// Remaps dictionary keys from snapshot IDs to current display IDs.
     private func remap(_ values: [String: UUID], with idMap: [String: String]) -> [String: UUID] {
         var remapped: [String: UUID] = [:]
+        for (id, value) in values {
+            remapped[idMap[id] ?? id] = value
+        }
+        return remapped
+    }
+
+    /// Remaps dictionary keys from snapshot IDs to current display IDs.
+    private func remap(_ values: [String: Double], with idMap: [String: String]) -> [String: Double] {
+        var remapped: [String: Double] = [:]
+        for (id, value) in values {
+            remapped[idMap[id] ?? id] = value
+        }
+        return remapped
+    }
+
+    /// Remaps dictionary keys from snapshot IDs to current display IDs.
+    private func remap(_ values: [String: TextureBlendMode], with idMap: [String: String]) -> [String: TextureBlendMode] {
+        var remapped: [String: TextureBlendMode] = [:]
         for (id, value) in values {
             remapped[idMap[id] ?? id] = value
         }
@@ -761,11 +815,26 @@ final class ProfileManager: ObservableObject {
             appliedCount += 1
         }
         if let engine {
-            // Apply active LUT per display immediately.
+            // Apply active LUT and texture overlay per display immediately.
             for (_, display) in matched {
                 let lutID = remappedMonitorState?.activeLUTByDisplayID[display.stableIdentity]
                 let lutEntry = lutID.flatMap { id in engine.lutManager.library.first { $0.id == id } }
                 engine.setActiveLUT(lutEntry, for: display)
+
+                let textureID = remappedMonitorState?.activeTextureByDisplayID[display.stableIdentity]
+                let textureEntry = textureID.flatMap { id in engine.textureManager.library.first { $0.id == id } }
+                engine.setActiveTexture(textureEntry, for: display)
+                if textureEntry != nil {
+                    if let opacity = remappedMonitorState?.textureOpacityByDisplayID[display.stableIdentity] {
+                        engine.setTextureOpacity(opacity, for: display)
+                    }
+                    if let blendMode = remappedMonitorState?.textureBlendModeByDisplayID[display.stableIdentity] {
+                        engine.setTextureBlendMode(blendMode, for: display)
+                    }
+                    if let tileScale = remappedMonitorState?.textureTileScaleByDisplayID[display.stableIdentity] {
+                        engine.setTextureTileScale(tileScale, for: display)
+                    }
+                }
             }
             let deduplicatedImmediate = deduplicatedBrightnessTargets(immediateBrightnessTargets)
             engine.setBrightnessSynchronously(deduplicatedImmediate, animated: shouldAnimateBrightness)

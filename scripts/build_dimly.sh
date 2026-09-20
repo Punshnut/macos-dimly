@@ -197,6 +197,11 @@ if [[ -d "$PROJECT_ROOT/Resources/ExampleLUTs" ]]; then
   cp -R "$PROJECT_ROOT/Resources/ExampleLUTs" "$APP_BUNDLE/Contents/Resources/"
 fi
 
+if [[ -d "$PROJECT_ROOT/Resources/ExampleTextures" ]]; then
+  log_step "Copying bundled example textures"
+  cp -R "$PROJECT_ROOT/Resources/ExampleTextures" "$APP_BUNDLE/Contents/Resources/"
+fi
+
 resource_bundle_count=0
 bundle_search_dirs=()
 if [[ -d "$BUILD_DIR" ]]; then

@@ -255,6 +255,49 @@ enum DisplaySectionContent {
         }
     }
 
+    @ViewBuilder
+    static func texturePicker(for display: DisplayInfo, settingsStore: AppSettingsStore, engine: DimlyEngine, textureManager: TextureManager, showLabel: Bool = true) -> some View {
+        let activeTextureID = settingsStore.settings.activeTextureByDisplayID[display.stableIdentity]
+        let activeEntry = activeTextureID.flatMap { id in textureManager.library.first { $0.id == id } }
+        VStack(alignment: .leading, spacing: 8) {
+            HStack {
+                if showLabel {
+                    Text(String(localized: "TextureRowLabel"))
+                        .font(.caption)
+                        .foregroundStyle(.secondary)
+                }
+                Spacer()
+                Picker("", selection: Binding(
+                    get: { activeTextureID },
+                    set: { newID in
+                        let entry = newID.flatMap { id in textureManager.library.first { $0.id == id } }
+                        engine.setActiveTexture(entry, for: display)
+                    }
+                )) {
+                    Text(String(localized: "TexturePickerNoneLabel")).tag(Optional<UUID>.none)
+                    if !textureManager.library.isEmpty {
+                        Divider()
+                        ForEach(textureManager.library) { entry in
+                            Text(entry.name).tag(Optional(entry.id))
+                        }
+                    }
+                }
+                .pickerStyle(.menu)
+                .controlSize(.small)
+                .labelsHidden()
+            }
+            if activeEntry != nil {
+                let opacity = settingsStore.settings.textureOpacityByDisplayID[display.stableIdentity] ?? DimlySettings.defaultTextureOpacity
+                let blendMode = settingsStore.settings.textureBlendModeByDisplayID[display.stableIdentity] ?? DimlySettings.defaultTextureBlendMode
+                let tileScale = settingsStore.settings.textureTileScaleByDisplayID[display.stableIdentity] ?? DimlySettings.defaultTextureTileScale
+                TextureAdjustmentControls(
+                    display: display, engine: engine,
+                    persistedOpacity: opacity, persistedBlendMode: blendMode, persistedTileScale: tileScale
+                )
+            }
+        }
+    }
+
     /// Color profile row - full picker for externals; System Settings hint for internals.
     @ViewBuilder
     static func colorProfile(for display: DisplayInfo, colorProfileManager: ColorProfileManager, engine: DimlyEngine, showLabel: Bool = true) -> some View {
@@ -532,14 +575,95 @@ enum DisplaySectionContent {
         displayAppearanceManager: DisplayAppearanceManager,
         engine: DimlyEngine,
         settingsStore: AppSettingsStore,
-        colorProfileManager: ColorProfileManager
+        colorProfileManager: ColorProfileManager,
+        textureManager: TextureManager
     ) -> some View {
         VStack(alignment: .leading, spacing: 10) {
             nightShiftRow(for: display, nightShiftManager: nightShiftManager, displayManager: displayManager)
             trueToneRow(for: display, trueToneManager: trueToneManager)
             displayFilterRow(for: display, displayAppearanceManager: displayAppearanceManager, engine: engine)
             lutPicker(for: display, settingsStore: settingsStore, engine: engine)
+            texturePicker(for: display, settingsStore: settingsStore, engine: engine, textureManager: textureManager)
             colorProfile(for: display, colorProfileManager: colorProfileManager, engine: engine)
+        }
+    }
+}
+
+/// Opacity/blend-mode/tile-scale controls for a display's active texture. Opacity and tile
+/// scale use a "live preview during drag, commit once on release" pattern (mirroring the
+/// Texture Playground's preview slider): every tick calls a cheap, settings-free preview
+/// method so dragging stays smooth, and the persisted value is written only once, when the
+/// user lets go - `onEditingChanged` needs local state to remember the in-flight drag value,
+/// which is why this lives in its own small View rather than a stateless static builder.
+private struct TextureAdjustmentControls: View {
+    let display: DisplayInfo
+    let engine: DimlyEngine
+    let persistedOpacity: Double
+    let persistedBlendMode: TextureBlendMode
+    let persistedTileScale: Double
+
+    @State private var draggingOpacity: Double?
+    @State private var draggingTileScale: Double?
+
+    var body: some View {
+        HStack(spacing: 8) {
+            Text(String(localized: "TextureOpacityLabel"))
+                .font(.caption2)
+                .foregroundStyle(.secondary)
+            Slider(
+                value: Binding(
+                    get: { draggingOpacity ?? persistedOpacity },
+                    set: { newValue in
+                        draggingOpacity = newValue
+                        engine.previewTextureOpacity(newValue, for: display)
+                    }
+                ),
+                in: 0...1,
+                onEditingChanged: { editing in
+                    guard !editing, let value = draggingOpacity else { return }
+                    engine.setTextureOpacity(value, for: display)
+                    draggingOpacity = nil
+                }
+            )
+            .controlSize(.small)
+        }
+        HStack {
+            Text(String(localized: "TextureBlendModeLabel"))
+                .font(.caption2)
+                .foregroundStyle(.secondary)
+            Spacer()
+            Picker("", selection: Binding(
+                get: { persistedBlendMode },
+                set: { engine.setTextureBlendMode($0, for: display) }
+            )) {
+                ForEach(TextureBlendMode.allCases) { mode in
+                    Text(mode.localizedName).tag(mode)
+                }
+            }
+            .pickerStyle(.menu)
+            .controlSize(.small)
+            .labelsHidden()
+        }
+        HStack(spacing: 8) {
+            Text(String(localized: "TextureTileScaleLabel"))
+                .font(.caption2)
+                .foregroundStyle(.secondary)
+            Slider(
+                value: Binding(
+                    get: { draggingTileScale ?? persistedTileScale },
+                    set: { newValue in
+                        draggingTileScale = newValue
+                        engine.previewTextureTileScale(newValue, for: display)
+                    }
+                ),
+                in: 0.25...4,
+                onEditingChanged: { editing in
+                    guard !editing, let value = draggingTileScale else { return }
+                    engine.setTextureTileScale(value, for: display)
+                    draggingTileScale = nil
+                }
+            )
+            .controlSize(.small)
         }
     }
 }

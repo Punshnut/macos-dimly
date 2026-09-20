@@ -36,7 +36,8 @@ Dimly is a free, open-source macOS menu bar app for multi-monitor brightness and
 - **Sleep, wake, and blackout** - instant blackout overlay plus true DDC standby when supported
 - **Color profiles** - switch ICC profiles per external display: sRGB, Display P3, DCI-P3, Adobe RGB, BT.709, BT.2020, Extended P3, HDR (BT.2100 PQ/HLG), creative effects, and user-installed calibrations
 - **Appearance filters** - per-display gamma filters: Invert, Warm, Cool
-- **LUT library** - import .cube, .3dl, .lut, and .csv color lookup tables, assign them per display, choose from 5 bundled presets, and back up/restore your library; manage it in Settings → LUTs (see [LUT guide](docs/luts.md))
+- **LUT library** (2026.6+) - import .cube, .3dl, .lut, and .csv color lookup tables, assign them per display, choose from 5 bundled presets, and back up/restore your library; manage it in Settings → LUTs (see [LUT guide](docs/luts.md))
+- **Texture overlays** (2026.7+) - lay a paper, canvas, or material texture with real 3D relief shading over any display to ease eye strain; import images/SVGs, write your own in the Texture Playground (Metal Shading Language), and switch per display or from a menu bar quick action; manage it in Settings → Textures (see [Texture guide](docs/textures.md))
 - **Night Shift** - toggle and warmth control integrated directly in the display panel
 - **True Tone** - per-display True Tone toggle for supported hardware
 - **Resolution & refresh rate** - switch display modes and Hz per external monitor

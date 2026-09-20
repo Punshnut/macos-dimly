@@ -98,6 +98,19 @@ struct DimlySettings: Codable, Equatable {
     var nightShiftStrength: Float
     var trueToneEnabledByDisplayID: [String: Bool]
     var displaySectionExpandedStates: [String: Bool]
+    var activeTextureByDisplayID: [String: UUID]
+    var textureOpacityByDisplayID: [String: Double]
+    var textureBlendModeByDisplayID: [String: TextureBlendMode]
+    var textureTileScaleByDisplayID: [String: Double]
+    var textureCycleOrder: [UUID]
+    var textureMenuBarMode: TextureMenuBarMode
+
+    /// Default opacity applied to a display's texture overlay the first time one is assigned.
+    static let defaultTextureOpacity: Double = 0.14
+    /// Default blend mode applied to a display's texture overlay the first time one is assigned.
+    static let defaultTextureBlendMode: TextureBlendMode = .softLight
+    /// Default tile scale (1.0 = the texture's native pixel size at the display's backing scale).
+    static let defaultTextureTileScale: Double = 1.0
 
     private enum CodingKeys: String, CodingKey {
         case launchAtLogin
@@ -144,6 +157,12 @@ struct DimlySettings: Codable, Equatable {
         case nightShiftStrength
         case trueToneEnabledByDisplayID
         case displaySectionExpandedStates
+        case activeTextureByDisplayID
+        case textureOpacityByDisplayID
+        case textureBlendModeByDisplayID
+        case textureTileScaleByDisplayID
+        case textureCycleOrder
+        case textureMenuBarMode
     }
 
     var menuBarLayoutMode: MenuBarLayoutMode {
@@ -208,7 +227,13 @@ struct DimlySettings: Codable, Equatable {
         nightShiftEnabled: false,
         nightShiftStrength: 0.5,
         trueToneEnabledByDisplayID: [:],
-        displaySectionExpandedStates: [:]
+        displaySectionExpandedStates: [:],
+        activeTextureByDisplayID: [:],
+        textureOpacityByDisplayID: [:],
+        textureBlendModeByDisplayID: [:],
+        textureTileScaleByDisplayID: [:],
+        textureCycleOrder: [],
+        textureMenuBarMode: .cycle
     )
 
     /// Memberwise initializer used by the default factory and decoder.
@@ -254,7 +279,13 @@ struct DimlySettings: Codable, Equatable {
         nightShiftEnabled: Bool,
         nightShiftStrength: Float,
         trueToneEnabledByDisplayID: [String: Bool],
-        displaySectionExpandedStates: [String: Bool]
+        displaySectionExpandedStates: [String: Bool],
+        activeTextureByDisplayID: [String: UUID],
+        textureOpacityByDisplayID: [String: Double],
+        textureBlendModeByDisplayID: [String: TextureBlendMode],
+        textureTileScaleByDisplayID: [String: Double],
+        textureCycleOrder: [UUID],
+        textureMenuBarMode: TextureMenuBarMode
     ) {
         self.launchAtLogin = launchAtLogin
         self.showMenuBarIcon = showMenuBarIcon
@@ -298,6 +329,12 @@ struct DimlySettings: Codable, Equatable {
         self.nightShiftStrength = nightShiftStrength
         self.trueToneEnabledByDisplayID = trueToneEnabledByDisplayID
         self.displaySectionExpandedStates = displaySectionExpandedStates
+        self.activeTextureByDisplayID = activeTextureByDisplayID
+        self.textureOpacityByDisplayID = textureOpacityByDisplayID
+        self.textureBlendModeByDisplayID = textureBlendModeByDisplayID
+        self.textureTileScaleByDisplayID = textureTileScaleByDisplayID
+        self.textureCycleOrder = textureCycleOrder
+        self.textureMenuBarMode = textureMenuBarMode
     }
 
     /// Custom decoder that also handles legacy single-hotkey migration.
@@ -352,6 +389,12 @@ struct DimlySettings: Codable, Equatable {
         let nightShiftStrength = try container.decodeIfPresent(Float.self, forKey: .nightShiftStrength) ?? 0.5
         let trueToneEnabledByDisplayID = try container.decodeIfPresent([String: Bool].self, forKey: .trueToneEnabledByDisplayID) ?? [:]
         let displaySectionExpandedStates = try container.decodeIfPresent([String: Bool].self, forKey: .displaySectionExpandedStates) ?? [:]
+        let activeTextureByDisplayID = try container.decodeIfPresent([String: UUID].self, forKey: .activeTextureByDisplayID) ?? [:]
+        let textureOpacityByDisplayID = try container.decodeIfPresent([String: Double].self, forKey: .textureOpacityByDisplayID) ?? [:]
+        let textureBlendModeByDisplayID = try container.decodeIfPresent([String: TextureBlendMode].self, forKey: .textureBlendModeByDisplayID) ?? [:]
+        let textureTileScaleByDisplayID = try container.decodeIfPresent([String: Double].self, forKey: .textureTileScaleByDisplayID) ?? [:]
+        let textureCycleOrder = try container.decodeIfPresent([UUID].self, forKey: .textureCycleOrder) ?? []
+        let textureMenuBarMode = try container.decodeIfPresent(TextureMenuBarMode.self, forKey: .textureMenuBarMode) ?? .cycle
         var resolvedBindings: [HotkeyBinding]
         if let hotkeyBindings, !hotkeyBindings.isEmpty {
             resolvedBindings = hotkeyBindings
@@ -414,7 +457,13 @@ struct DimlySettings: Codable, Equatable {
             nightShiftEnabled: nightShiftEnabled,
             nightShiftStrength: nightShiftStrength,
             trueToneEnabledByDisplayID: trueToneEnabledByDisplayID,
-            displaySectionExpandedStates: displaySectionExpandedStates
+            displaySectionExpandedStates: displaySectionExpandedStates,
+            activeTextureByDisplayID: activeTextureByDisplayID,
+            textureOpacityByDisplayID: textureOpacityByDisplayID,
+            textureBlendModeByDisplayID: textureBlendModeByDisplayID,
+            textureTileScaleByDisplayID: textureTileScaleByDisplayID,
+            textureCycleOrder: textureCycleOrder,
+            textureMenuBarMode: textureMenuBarMode
         )
     }
 
@@ -464,6 +513,12 @@ struct DimlySettings: Codable, Equatable {
         try container.encode(nightShiftStrength, forKey: .nightShiftStrength)
         try container.encode(trueToneEnabledByDisplayID, forKey: .trueToneEnabledByDisplayID)
         try container.encode(displaySectionExpandedStates, forKey: .displaySectionExpandedStates)
+        try container.encode(activeTextureByDisplayID, forKey: .activeTextureByDisplayID)
+        try container.encode(textureOpacityByDisplayID, forKey: .textureOpacityByDisplayID)
+        try container.encode(textureBlendModeByDisplayID, forKey: .textureBlendModeByDisplayID)
+        try container.encode(textureTileScaleByDisplayID, forKey: .textureTileScaleByDisplayID)
+        try container.encode(textureCycleOrder, forKey: .textureCycleOrder)
+        try container.encode(textureMenuBarMode, forKey: .textureMenuBarMode)
     }
 
     /// Clamps smart-button row limits to the supported range.
@@ -517,6 +572,53 @@ extension DimlySettings.FastActionsVisibilityMode {
             return String(localized: "QuickActionsVisibilityAdvancedOnlyLabel")
         case .showEverywhere:
             return String(localized: "QuickActionsVisibilityAlwaysShowLabel")
+        }
+    }
+}
+
+/// Blend mode used when compositing a texture overlay onto a display.
+enum TextureBlendMode: String, Codable, Equatable, CaseIterable, Identifiable {
+    case normal
+    case multiply
+    case overlay
+    case softLight
+    case screen
+
+    var id: String { rawValue }
+
+    /// `CALayer.compositingFilter` name for this blend mode, or `nil` for normal (no filter).
+    var ciCompositingFilterName: String? {
+        switch self {
+        case .normal:    return nil
+        case .multiply:  return "multiplyBlendMode"
+        case .overlay:   return "overlayBlendMode"
+        case .softLight: return "softLightBlendMode"
+        case .screen:    return "screenBlendMode"
+        }
+    }
+
+    var localizedName: String {
+        switch self {
+        case .normal:    return String(localized: "TextureBlendModeNormalLabel")
+        case .multiply:  return String(localized: "TextureBlendModeMultiplyLabel")
+        case .overlay:   return String(localized: "TextureBlendModeOverlayLabel")
+        case .softLight: return String(localized: "TextureBlendModeSoftLightLabel")
+        case .screen:    return String(localized: "TextureBlendModeScreenLabel")
+        }
+    }
+}
+
+/// How the menu bar's texture quick action behaves.
+enum TextureMenuBarMode: String, Codable, Equatable, CaseIterable, Identifiable {
+    case cycle
+    case grid
+
+    var id: String { rawValue }
+
+    var localizedName: String {
+        switch self {
+        case .cycle: return String(localized: "TextureMenuBarModeCycleLabel")
+        case .grid:  return String(localized: "TextureMenuBarModeGridLabel")
         }
     }
 }

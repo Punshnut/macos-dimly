@@ -34,6 +34,7 @@ struct MenuBarContentView: View {
     let updaterController: UpdaterController
     let presentation: Presentation
     @State private var modifierClickMonitor: Any?
+    @State private var showTextureGridPopover: Bool = false
     @State private var draggedSmartButtonProfileID: UUID?
     @State private var smartButtonFramesByProfileID: [UUID: CGRect] = [:]
     @State private var smartButtonDragStartFramesByProfileID: [UUID: CGRect] = [:]
@@ -849,6 +850,10 @@ struct MenuBarContentView: View {
 
             suspendAllButtons
 
+            if !engine.textureManager.library.isEmpty {
+                textureQuickAction
+            }
+
             Button {
                 engine.panicBlackout(animated: settingsStore.settings.fadeInAnimationEnabled)
             } label: {
@@ -910,6 +915,42 @@ struct MenuBarContentView: View {
             return AnyView(button.buttonStyle(BorderedProminentButtonStyle()))
         }
         return AnyView(button.buttonStyle(BorderedButtonStyle()))
+    }
+
+    /// Quick action for switching the active texture overlay - a single-tap cycle button by
+    /// default, or a thumbnail grid popover in Grid mode (Settings → Textures), which suits
+    /// setups with more than one display since it can target each independently.
+    private var textureQuickAction: some View {
+        Group {
+            switch settingsStore.settings.textureMenuBarMode {
+            case .cycle:
+                Button {
+                    engine.cycleTexture(direction: 1)
+                } label: {
+                    Label(String(localized: "TextureMenuBarQuickActionLabel"), systemImage: "square.on.square.dashed")
+                        .frame(maxWidth: .infinity)
+                }
+                .buttonStyle(.bordered)
+                .controlSize(.regular)
+                .help(String(localized: "TextureMenuBarCycleHint"))
+            case .grid:
+                Button {
+                    showTextureGridPopover = true
+                } label: {
+                    Label(String(localized: "TextureMenuBarQuickActionLabel"), systemImage: "square.on.square.dashed")
+                        .frame(maxWidth: .infinity)
+                }
+                .buttonStyle(.bordered)
+                .controlSize(.regular)
+                .popover(isPresented: $showTextureGridPopover, arrowEdge: .trailing) {
+                    TextureGridPopoverView(
+                        displays: displayManager.displays,
+                        engine: engine,
+                        settingsStore: settingsStore
+                    )
+                }
+            }
+        }
     }
 
     /// Profiles pinned for quick one-click apply actions under Quick Actions.
@@ -1648,6 +1689,10 @@ struct MenuBarContentView: View {
                             .stroke(neutralStroke.opacity(0.35), lineWidth: 0.5)
                     )
                     .clipShape(RoundedRectangle(cornerRadius: 7, style: .continuous))
+
+                    if !engine.textureManager.library.isEmpty {
+                        textureToggleButton(for: display, frameSize: toggleFrameSize)
+                    }
                 }
                 Spacer(minLength: 0)
             }
@@ -1952,6 +1997,9 @@ struct MenuBarContentView: View {
             HStack(spacing: 6) {
                 displayOrderButtons(for: display)
                 sleepWakeButton(for: display)
+                if !engine.textureManager.library.isEmpty {
+                    textureToggleButton(for: display, frameSize: 26)
+                }
                 if includeMenu {
                     Menu {
                         Button(isBlackoutActive ? String(localized: "ActionRestoreDisplayLabel") : String(localized: "ActionBlackoutDisplayLabel")) {
@@ -2191,6 +2239,70 @@ struct MenuBarContentView: View {
             .disabled(!canControl)
             .help(label)
         )
+    }
+
+    /// Per-display texture control: left-click cycles favorites + off; right-click opens an
+    /// accessible list (thumbnail + name per row, checkmark on the active one). The button's
+    /// own circular background shows the active texture as a live thumbnail, so its state is
+    /// visible without opening anything - matching the sleep/wake button's visual language.
+    private func textureToggleButton(for display: DisplayInfo, frameSize: CGFloat) -> some View {
+        let activeID = settingsStore.settings.activeTextureByDisplayID[display.stableIdentity]
+        let activeEntry = activeID.flatMap { id in engine.textureManager.library.first { $0.id == id } }
+        let favorites = settingsStore.settings.textureCycleOrder.compactMap { id in
+            engine.textureManager.library.first { $0.id == id }
+        }
+        let noneLabel = String(localized: "TexturePickerNoneLabel")
+        return Button {
+            engine.cycleTexture(direction: 1, for: display)
+        } label: {
+            ZStack {
+                Circle().fill(Color.secondary.opacity(0.12))
+                if let thumb = activeEntry.flatMap({ engine.textureManager.thumbnailImage(for: $0) }) {
+                    Image(nsImage: thumb)
+                        .resizable()
+                        .aspectRatio(contentMode: .fill)
+                        .frame(width: frameSize, height: frameSize)
+                        .opacity(1.0)
+                        .clipShape(Circle())
+                } else {
+                    Image(systemName: "square.on.square.dashed")
+                        .font(.system(size: frameSize * 0.5))
+                        .foregroundStyle(.secondary)
+                }
+            }
+            .frame(width: frameSize, height: frameSize)
+            .overlay(Circle().stroke(Color.primary.opacity(activeEntry != nil ? 0.35 : 0.1), lineWidth: 1))
+        }
+        .buttonStyle(FluentPressButtonStyle(pressedScale: 0.88, pressedOpacity: 0.82))
+        .help(activeEntry?.name ?? noneLabel)
+        .accessibilityLabel(String(localized: "TextureToggleHint"))
+        .accessibilityValue(activeEntry?.name ?? noneLabel)
+        .contextMenu {
+            Button {
+                engine.setActiveTexture(nil, for: display)
+            } label: {
+                Label(noneLabel + (activeID == nil ? "  \u{2713}" : ""), systemImage: "slash.circle")
+            }
+            ForEach(favorites) { entry in
+                Button {
+                    engine.setActiveTexture(entry, for: display)
+                } label: {
+                    Label {
+                        Text(entry.name + (entry.id == activeID ? "  \u{2713}" : ""))
+                    } icon: {
+                        if let thumb = engine.textureManager.thumbnailImage(for: entry) {
+                            Image(nsImage: thumb)
+                                .resizable()
+                                .interpolation(.high)
+                                .frame(width: 18, height: 18)
+                                .clipShape(RoundedRectangle(cornerRadius: 3, style: .continuous))
+                        } else {
+                            Image(systemName: "photo")
+                        }
+                    }
+                }
+            }
+        }
     }
 
     /// Up/down buttons used to reorder displays in their section.
