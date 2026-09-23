@@ -1,5 +1,3 @@
-# Troubleshooting
-
 ---
 
 ## DDC not working - display stays in Overlay mode

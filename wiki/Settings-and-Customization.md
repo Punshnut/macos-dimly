@@ -1,5 +1,3 @@
-# Settings & Customization
-
 This guide covers all the options available in Dimly's Settings window (Settings → open from the panel or press `Cmd` + `,`).
 
 ---

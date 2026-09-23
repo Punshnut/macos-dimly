@@ -1,5 +1,3 @@
-# Shortcuts & Hotkeys
-
 Dimly supports global keyboard shortcuts so you can control your displays without opening the panel.
 
 ---

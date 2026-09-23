@@ -1,5 +1,3 @@
-# Dimly - User Guide
-
 Dimly is a free macOS menu bar app for controlling brightness, sleep, and wake across all your external monitors. It uses hardware DDC control when your monitor supports it, and automatically falls back to a software overlay when it doesn't - so every display works, regardless of what cable you're using or how old the monitor is.
 
 ---

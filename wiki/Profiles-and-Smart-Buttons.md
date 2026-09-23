@@ -1,5 +1,3 @@
-# Profiles & Smart Buttons
-
 Profiles let you save your current display setup and reapply it in one click. Smart Buttons pin your most-used profiles directly into the Quick Actions section of the panel.
 
 ---

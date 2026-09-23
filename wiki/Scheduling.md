@@ -1,5 +1,3 @@
-# Scheduling
-
 Dimly can apply profiles automatically at set times - either at a fixed clock time or at sunrise/sunset based on your location.
 
 ---

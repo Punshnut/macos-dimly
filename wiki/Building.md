@@ -1,5 +1,3 @@
-# Building Dimly yourself
-
 Dimly is open source, and you don't have to wait for a release or trust a download to use it - you can compile it straight from the source in this repository. This page walks through that, no development experience required.
 
 A couple of things to know up front:

@@ -1,5 +1,3 @@
-# The Texture Playground, step by step
-
 The Texture Playground is a tiny corner of Dimly where you can write your own screen texture out of pure math - no photo, no scan, just numbers turning into a pattern you can actually use. You don't need to know anything about graphics programming to get something fun on screen in about a minute. Start from the template that's already there, change a number, watch it change live on your real monitor, and go from there.
 
 This page is the friendly, no-experience-needed walkthrough. If you just want the quick facts, see the [Texture Playground section](Texture-Overlays#the-texture-playground) in the main Texture Overlays guide instead.

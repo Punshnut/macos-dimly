@@ -1,5 +1,3 @@
-# Display Controls
-
 This guide covers everything you can do with individual displays in Dimly: brightness, sleep, wake, and blackout.
 
 ---

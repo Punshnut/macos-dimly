@@ -1,5 +1,3 @@
-# Texture Overlays
-
 *Available since Dimly 2026.7.*
 
 A **texture overlay** lays a subtle material - paper, canvas, linen, or anything you import or write yourself - over a display, with real 3D relief shading from a normal/height map. It's meant to make long reading or writing sessions easier on the eyes than a flat, glowing panel. Manage your texture library from **Settings → Textures**, then assign textures to individual displays from **Settings → Displays → Image**.
