@@ -1,6 +1,6 @@
 # Contributing to Dimly
 
-Thanks for wanting to dig into Dimly. This page covers building it for development, the shape of the codebase, and how to send a pull request. If you just want to run a compiled copy without touching code, see [docs/building.md](docs/building.md) instead - it's the friendlier, no-experience-needed version of the same build.
+Thanks for wanting to dig into Dimly. This page covers building it for development, the shape of the codebase, and how to send a pull request. If you just want to run a compiled copy without touching code, see the [Building wiki page](https://github.com/Punshnut/macos-dimly/wiki/Building) instead - it's the friendlier, no-experience-needed version of the same build.
 
 ## Quick start
 
@@ -21,7 +21,7 @@ Requirements: **macOS 14+**, **Xcode** with the Swift 6.2 toolchain (the version
 
 - `App/` - all Swift source. SwiftUI for the UI, AppKit where SwiftUI doesn't reach (menu bar item, display/window management), plus the DDC/CI and CoreDisplay integration.
 - `Resources/` - `Info.plist`, the app icon (`Dimly.icon`, an Icon Composer bundle), bundled example LUTs and textures, and one `.lproj` folder per supported localization.
-- `docs/` - the user guide (linked from the README).
+- `wiki/` - source for the [project wiki](https://github.com/Punshnut/macos-dimly/wiki) (user guide). See "Updating the Wiki" below for how to publish changes.
 - `scripts/` - the public build scripts covered above.
 - `Media/` - screenshots and the logo used in the README.
 
@@ -33,7 +33,7 @@ Code signing, notarization, and Sparkle's update-signing key are deliberately ke
 
 - Match the existing style in the file you're editing rather than introducing a new pattern - this codebase leans on SwiftUI views composed from small helpers (see `SettingsRootView.swift` for the general shape of a settings page).
 - Don't add a new dependency without opening an issue first to discuss it; Sparkle is currently the only external package for a reason.
-- If you're changing anything DDC-related, please test against real hardware if you can, and mention what you tested with (Mac architecture, cable type, monitor make/model) in your PR description - DDC behavior varies a lot between setups, and the [DDC/CI compatibility notes](README.md#ddcci-and-external-monitors) and [Troubleshooting guide](docs/troubleshooting.md) exist because of exactly that variance.
+- If you're changing anything DDC-related, please test against real hardware if you can, and mention what you tested with (Mac architecture, cable type, monitor make/model) in your PR description - DDC behavior varies a lot between setups, and the [DDC/CI compatibility notes](README.md#ddcci-and-external-monitors) and [Troubleshooting guide](https://github.com/Punshnut/macos-dimly/wiki/Troubleshooting) exist because of exactly that variance.
 - Adding a new user-facing string? It should go through the localization system like the rest of the UI (`String(localized:)` plus an entry in `Resources/en.lproj/Localizable.strings`) rather than a hardcoded literal, so translators can pick it up - translations into other languages aren't required from you, just the English source string.
 
 ## Contributing a texture
@@ -41,9 +41,20 @@ Code signing, notarization, and Sparkle's update-signing key are deliberately ke
 Bundled example textures (Settings → Textures) work the same way as bundled LUT presets: drop files into `Resources/ExampleTextures/` and Dimly seeds them into new users' libraries on first launch.
 
 - A regular image texture: add the diffuse image (`.png`/`.jpg`/`.jpeg`/`.heic`/`.tiff`), plus an optional normal/height map named `<same base name>_normal.<ext>` if you have one - Dimly pairs them automatically.
-- A procedural texture written in the [Texture Playground](docs/textures.md#the-texture-playground): export it from the Playground (**Export…**) and drop the resulting `.metal` file into `Resources/ExampleTextures/Procedural/`.
+- A procedural texture written in the [Texture Playground](https://github.com/Punshnut/macos-dimly/wiki/Texture-Overlays#the-texture-playground): export it from the Playground (**Export…**) and drop the resulting `.metal` file into `Resources/ExampleTextures/Procedural/`.
 
 Either way, keep it tileable/seamless - that's the whole point of an overlay texture - and open a PR the same way as any other change.
+
+## Updating the Wiki
+
+The [project wiki](https://github.com/Punshnut/macos-dimly/wiki) is published from the `wiki/` folder in this repo, so doc changes go through a normal PR like any other change:
+
+1. Edit the relevant `wiki/*.md` file(s) and open a PR against `dev` as usual.
+2. Once merged, publish it to the live wiki:
+   ```bash
+   git remote add wiki git@github.com:Punshnut/macos-dimly.wiki.git   # one-time
+   git subtree push --prefix=wiki wiki master
+   ```
 
 ## Submitting a pull request
 

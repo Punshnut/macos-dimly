@@ -60,7 +60,7 @@ If you downloaded a ZIP from GitHub rather than using git, macOS may be a little
 ## Something not working?
 
 - Build errors are almost always a missing or outdated Xcode - make sure it's fully installed and opened at least once.
-- For anything about the app itself once it's running - DDC not detecting a monitor, display issues, and so on - see [Troubleshooting](troubleshooting.md), which is unrelated to how the app was built.
-- Found an actual bug in the build script? [Open an issue](https://github.com/Punshnut/macos-dimly/issues/new) or, even better, see [CONTRIBUTING.md](../CONTRIBUTING.md) and send a PR.
+- For anything about the app itself once it's running - DDC not detecting a monitor, display issues, and so on - see [Troubleshooting](Troubleshooting), which is unrelated to how the app was built.
+- Found an actual bug in the build script? [Open an issue](https://github.com/Punshnut/macos-dimly/issues/new) or, even better, see [CONTRIBUTING.md](https://github.com/Punshnut/macos-dimly/blob/dev/CONTRIBUTING.md) and send a PR.
 
 That's it - happy building.

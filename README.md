@@ -36,8 +36,8 @@ Dimly is a free, open-source macOS menu bar app for multi-monitor brightness and
 - **Sleep, wake, and blackout** - instant blackout overlay plus true DDC standby when supported
 - **Color profiles** - switch ICC profiles per external display: sRGB, Display P3, DCI-P3, Adobe RGB, BT.709, BT.2020, Extended P3, HDR (BT.2100 PQ/HLG), creative effects, and user-installed calibrations
 - **Appearance filters** - per-display gamma filters: Invert, Warm, Cool
-- **LUT library** (2026.6+) - import .cube, .3dl, .lut, and .csv color lookup tables, assign them per display, choose from 5 bundled presets, and back up/restore your library; manage it in Settings → LUTs (see [LUT guide](docs/luts.md))
-- **Texture overlays** (2026.7+) - lay a paper, canvas, or material texture with real 3D relief shading over any display to ease eye strain; import images/SVGs, write your own in the Texture Playground (Metal Shading Language), and switch per display or from a menu bar quick action; manage it in Settings → Textures (see [Texture guide](docs/textures.md))
+- **LUT library** (2026.6+) - import .cube, .3dl, .lut, and .csv color lookup tables, assign them per display, choose from 5 bundled presets, and back up/restore your library; manage it in Settings → LUTs (see [LUT guide](https://github.com/Punshnut/macos-dimly/wiki/LUT-Library))
+- **Texture overlays** (2026.7+) - lay a paper, canvas, or material texture with real 3D relief shading over any display to ease eye strain; import images/SVGs, write your own in the Texture Playground (Metal Shading Language), and switch per display or from a menu bar quick action; manage it in Settings → Textures (see [Texture guide](https://github.com/Punshnut/macos-dimly/wiki/Texture-Overlays))
 - **Night Shift** - toggle and warmth control integrated directly in the display panel
 - **True Tone** - per-display True Tone toggle for supported hardware
 - **Resolution & refresh rate** - switch display modes and Hz per external monitor
@@ -171,7 +171,7 @@ If your monitor isn't listed: enable DDC/CI in the OSD first, then try a direct 
 | **Checking DDC** | Probing in progress - normal for a few seconds after connect or wake |
 | **Overlay mode** | DDC unavailable; software control in use |
 
-If a display stays on Overlay mode: check the cable type, enable DDC/CI in the OSD, test without a dock, then reconnect. See [Troubleshooting](docs/troubleshooting.md) for a full diagnosis guide.
+If a display stays on Overlay mode: check the cable type, enable DDC/CI in the OSD, test without a dock, then reconnect. See [Troubleshooting](https://github.com/Punshnut/macos-dimly/wiki/Troubleshooting) for a full diagnosis guide.
 
 </details>
 
@@ -187,11 +187,11 @@ Requires macOS 14+. Supports Intel and Apple Silicon.
 
 ## User Guide
 
-Full documentation is in the [`docs/`](docs/README.md) folder: display controls, profiles, scheduling, shortcuts, settings, and troubleshooting.
+Full documentation is on the [project wiki](https://github.com/Punshnut/macos-dimly/wiki): display controls, profiles, scheduling, shortcuts, settings, and troubleshooting.
 
 ## Build it yourself
 
-Prefer to compile Dimly from source instead of downloading a release? See [docs/building.md](docs/building.md) for a no-experience-needed walkthrough, or [CONTRIBUTING.md](CONTRIBUTING.md) if you're planning to change code and send a PR. The public build scripts live in [`scripts/`](scripts/README.md) - official releases are still built and signed separately by the maintainer, so self-built copies are clearly marked as unofficial "Community Build"s in the app and don't auto-update.
+Prefer to compile Dimly from source instead of downloading a release? See the [Building wiki page](https://github.com/Punshnut/macos-dimly/wiki/Building) for a no-experience-needed walkthrough, or [CONTRIBUTING.md](CONTRIBUTING.md) if you're planning to change code and send a PR. The public build scripts live in [`scripts/`](scripts/README.md) - official releases are still built and signed separately by the maintainer, so self-built copies are clearly marked as unofficial "Community Build"s in the app and don't auto-update.
 
 ## Roadmap
 

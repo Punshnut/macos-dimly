@@ -137,7 +137,7 @@ Filters work on all displays including built-in. They reset on sleep/wake - Diml
 
 A **LUT (Look-Up Table)** remaps the color output of a display using a calibration or creative curve, applied right alongside Appearance Filters in the Image section. Dimly includes 5 bundled presets plus support for importing your own `.cube`, `.3dl`, `.lut`, and `.csv` files.
 
-See the dedicated [LUT Library guide](luts.md) for supported formats, importing, assigning LUTs to displays, and backup/restore.
+See the dedicated [LUT Library guide](LUT-Library) for supported formats, importing, assigning LUTs to displays, and backup/restore.
 
 ### Night Shift
 
@@ -211,7 +211,7 @@ Each display tile shows its current control mode:
 | **Checking DDC** (orange) | Dimly is probing - normal for a few seconds after connecting or waking |
 | **Overlay mode** (blue) | DDC unavailable; software control is in use |
 
-If a display stays on Overlay mode and you expected DDC, see the [Troubleshooting](troubleshooting.md) guide.
+If a display stays on Overlay mode and you expected DDC, see the [Troubleshooting](Troubleshooting) guide.
 
 ---
 

@@ -1,6 +1,6 @@
 # Build scripts
 
-These are the public, signing-free scripts for compiling Dimly yourself. If you're looking for the full walkthrough (installing Xcode, running these, dealing with Gatekeeper), see [docs/building.md](../docs/building.md) instead - this page is just a quick index.
+These are the public, signing-free scripts for compiling Dimly yourself. If you're looking for the full walkthrough (installing Xcode, running these, dealing with Gatekeeper), see the [Building wiki page](https://github.com/Punshnut/macos-dimly/wiki/Building) instead - this page is just a quick index.
 
 | Script | What it does |
 |---|---|

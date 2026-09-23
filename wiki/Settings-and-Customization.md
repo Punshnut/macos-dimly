@@ -70,7 +70,7 @@ Click **Forget** to remove a monitor's saved name, preferences, and brightness h
 
 ## LUTs
 
-See the dedicated [LUT Library](luts.md) guide for importing, assigning, and backing up LUTs.
+See the dedicated [LUT Library](LUT-Library) guide for importing, assigning, and backing up LUTs.
 
 ---
 
@@ -116,19 +116,19 @@ To set colors for individual buttons, go to Settings → Profiles and click the 
 
 ## Shortcuts
 
-See the dedicated [Shortcuts & Hotkeys](shortcuts.md) guide for full details.
+See the dedicated [Shortcuts & Hotkeys](Shortcuts-and-Hotkeys) guide for full details.
 
 ---
 
 ## Profiles
 
-See the dedicated [Profiles & Smart Buttons](profiles.md) guide for full details.
+See the dedicated [Profiles & Smart Buttons](Profiles-and-Smart-Buttons) guide for full details.
 
 ---
 
 ## Schedule
 
-See the dedicated [Scheduling](scheduling.md) guide for full details.
+See the dedicated [Scheduling](Scheduling) guide for full details.
 
 ---
 

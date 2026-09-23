@@ -2,7 +2,7 @@
 
 The Texture Playground is a tiny corner of Dimly where you can write your own screen texture out of pure math - no photo, no scan, just numbers turning into a pattern you can actually use. You don't need to know anything about graphics programming to get something fun on screen in about a minute. Start from the template that's already there, change a number, watch it change live on your real monitor, and go from there.
 
-This page is the friendly, no-experience-needed walkthrough. If you just want the quick facts, see the [Texture Playground section](textures.md#the-texture-playground) in the main Texture Overlays guide instead.
+This page is the friendly, no-experience-needed walkthrough. If you just want the quick facts, see the [Texture Playground section](Texture-Overlays#the-texture-playground) in the main Texture Overlays guide instead.
 
 ---
 
@@ -60,6 +60,6 @@ Real paper and canvas aren't flat - light catches the grain and casts tiny shado
 If you end up with a texture you like, share it - that's genuinely the fun part. Grab the code with **Copy Code** or **Export…** and:
 
 - Paste it into a GitHub issue or a gist so others can try it.
-- Open a pull request to get it considered as a **bundled default** everyone gets on first launch - drop the exported `.metal` file into `Resources/ExampleTextures/Procedural/` in a fork of the repo and send the PR. See [Contributing a texture](../CONTRIBUTING.md#contributing-a-texture) in `CONTRIBUTING.md` for the exact steps - it's a short one.
+- Open a pull request to get it considered as a **bundled default** everyone gets on first launch - drop the exported `.metal` file into `Resources/ExampleTextures/Procedural/` in a fork of the repo and send the PR. See [Contributing a texture](https://github.com/Punshnut/macos-dimly/blob/dev/CONTRIBUTING.md#contributing-a-texture) in `CONTRIBUTING.md` for the exact steps - it's a short one.
 
 You don't need to be an expert to contribute something worth sharing. A few tweaked numbers on the template already counts.

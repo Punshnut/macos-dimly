@@ -55,7 +55,7 @@ The Panic hotkey/button (`Ctrl` + `Option` + `Shift` + `P`, or the Quick Actions
 
 ## The Texture Playground
 
-Want a texture that's pure math instead of a photo? Click **New Texture Playground…** in Settings → Textures. It's a small, plain-text code box - no project files, no autocomplete - where you write a texture as a [Metal Shading Language](https://developer.apple.com/metal/Metal-Shading-Language-Specification.pdf) fragment function, with a live preview on your actual screens and an intensity slider so you can judge it at real-world strength. **Never written a shader before? Start with the full walkthrough: [The Texture Playground, step by step](texture-playground.md).**
+Want a texture that's pure math instead of a photo? Click **New Texture Playground…** in Settings → Textures. It's a small, plain-text code box - no project files, no autocomplete - where you write a texture as a [Metal Shading Language](https://developer.apple.com/metal/Metal-Shading-Language-Specification.pdf) fragment function, with a live preview on your actual screens and an intensity slider so you can judge it at real-world strength. **Never written a shader before? Start with the full walkthrough: [The Texture Playground, step by step](Texture-Playground).**
 
 The short version:
 - **Live preview, everywhere** - your code recompiles about 400ms after you stop typing, and the result shows immediately on every connected display (not just the small in-sheet swatch), at whatever intensity the **Preview Intensity** slider is set to (50% by default). A failing compile keeps showing your last good result and prints the compiler's error below the editor, so nothing ever goes blank mid-edit. Every display reverts to its own real texture/opacity/settings the moment you close the Playground.
@@ -63,7 +63,7 @@ The short version:
 - **Copy Code** / **Export…** - grab the raw `.metal` source to paste into an issue, a gist, a PR, wherever - or save it as a plain file. Nothing proprietary; it's just text.
 - **Save** compiles once, renders a 512×512 tileable bitmap, and adds it to your library like any imported texture - no separate "procedural" section to think about afterward.
 
-Made something good? The full guide ends with how to [share it](texture-playground.md#share-what-you-made) - including how to get it considered as a bundled default for every Dimly user.
+Made something good? The full guide ends with how to [share it](Texture-Playground#share-what-you-made) - including how to get it considered as a bundled default for every Dimly user.
 
 ---
 
