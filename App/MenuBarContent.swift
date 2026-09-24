@@ -61,6 +61,11 @@ struct MenuBarContentView: View {
     @State private var modeContainerHeight: CGFloat?
     @State private var panelContentSize: CGSize = .zero
     @State private var panelIsPresented = false
+    /// Bounded poll while the panel is visible, so brightness changes made via hardware keys
+    /// or Control Center (which the app doesn't always get an event for) still reach the
+    /// slider promptly. Only runs while the popover is on-screen, so it doesn't cost energy
+    /// in the background.
+    @State private var builtinBrightnessPollTimer: Timer?
     @State private var modeContentOpacity: Double = 1
     @State private var modeContentOffsetY: CGFloat = 0
     @State private var modeTransitionInvolvesCompactMode = false
@@ -107,6 +112,13 @@ struct MenuBarContentView: View {
             }
             activateWindowIfNeeded()
             engine.refreshBuiltinBrightnessSnapshots(reason: "menuBarAppear", persistToSettings: false)
+            builtinBrightnessPollTimer?.invalidate()
+            let pollEngine = engine
+            builtinBrightnessPollTimer = Timer.scheduledTimer(withTimeInterval: 0.75, repeats: true) { [weak pollEngine] _ in
+                Task { @MainActor in
+                    pollEngine?.refreshBuiltinBrightnessSnapshots(reason: "menuBarPoll", persistToSettings: false)
+                }
+            }
             if presentation == .menuBar {
                 handleModifierClickIfNeeded()
                 installModifierClickMonitor()
@@ -119,6 +131,8 @@ struct MenuBarContentView: View {
         }
         .onDisappear {
             panelIsPresented = false
+            builtinBrightnessPollTimer?.invalidate()
+            builtinBrightnessPollTimer = nil
             removeModifierClickMonitor()
             // Cancel any in-flight mode transition so modeContentOpacity
             // isn't left at 0 the next time the panel opens.
@@ -1594,8 +1608,14 @@ struct MenuBarContentView: View {
         let large = tilesInRow <= 3
         let toggleIconSize: CGFloat  = large ? 13   : 10
         let toggleFrameSize: CGFloat = large ? 26   : 20
+        // Texture toggle shares the row with the sleep icon + brightness pill, so in the
+        // tightest 4-per-row layout it needs to be smaller than the other controls to avoid
+        // overflowing the tile's hit-testing area (which broke taps on neighboring tiles).
+        let hasTextures = !engine.textureManager.library.isEmpty
+        let textureFrameSize: CGFloat = large ? 26 : (hasTextures ? 16 : 20)
+        let actionRowSpacing: CGFloat = large ? 5 : (hasTextures ? 3 : 5)
         let chevronSize: CGFloat     = large ? 8    : 6.5
-        let chevronFrameW: CGFloat   = large ? 16   : 14
+        let chevronFrameW: CGFloat   = large ? 16   : (hasTextures ? 12 : 14)
         let chevronFrameH: CGFloat   = large ? 22   : 18
         let nameFontSize: CGFloat    = large ? 9.5  : 8.5
         let labelFontSize: CGFloat   = large ? 7.5  : 6
@@ -1640,7 +1660,7 @@ struct MenuBarContentView: View {
             // ── Action buttons: sleep/wake + brightness pill, grouped and centred ──
             HStack(spacing: 0) {
                 Spacer(minLength: 0)
-                HStack(spacing: 5) {
+                HStack(spacing: actionRowSpacing) {
                     Button {
                         if display.isBuiltin {
                             engine.toggleDisplayBlackout(display: display)
@@ -1668,6 +1688,7 @@ struct MenuBarContentView: View {
                                 .foregroundStyle(neutralTertiaryText)
                                 .frame(width: chevronFrameW, height: chevronFrameH)
                         }
+                        .id("\(display.stableIdentity)-brightnessDown")
                         .help(String(localized: "ActionDecreaseBrightnessHint"))
                         Rectangle()
                             .fill(neutralStroke.opacity(0.35))
@@ -1678,6 +1699,7 @@ struct MenuBarContentView: View {
                                 .foregroundStyle(neutralTertiaryText)
                                 .frame(width: chevronFrameW, height: chevronFrameH)
                         }
+                        .id("\(display.stableIdentity)-brightnessUp")
                         .help(String(localized: "ActionIncreaseBrightnessHint"))
                     }
                     .background(
@@ -1690,10 +1712,11 @@ struct MenuBarContentView: View {
                     )
                     .clipShape(RoundedRectangle(cornerRadius: 7, style: .continuous))
 
-                    if !engine.textureManager.library.isEmpty {
-                        textureToggleButton(for: display, frameSize: toggleFrameSize)
+                    if hasTextures {
+                        textureToggleButton(for: display, frameSize: textureFrameSize)
                     }
                 }
+                .fixedSize()
                 Spacer(minLength: 0)
             }
             .padding(.bottom, 6)
@@ -2394,6 +2417,8 @@ struct MenuBarContentView: View {
         } label: {
             Label(String(localized: "ActionApplyProfileMenuLabel"), systemImage: "rectangle.3.group")
                 .frame(maxWidth: maxWidth)
+                .padding(.vertical, 2)
+                .dimlyGlassSurface(cornerRadius: 7, tint: .primary, fillOpacity: 0.1, strokeOpacity: 0.32)
         }
     }
 
@@ -2413,6 +2438,8 @@ struct MenuBarContentView: View {
         } label: {
             Label(String(localized: "ActionOverwriteProfileMenuLabel"), systemImage: "arrow.triangle.2.circlepath")
                 .frame(maxWidth: maxWidth)
+                .padding(.vertical, 2)
+                .dimlyGlassSurface(cornerRadius: 7, tint: .primary, fillOpacity: 0.1, strokeOpacity: 0.32)
         }
     }
 
@@ -2554,15 +2581,8 @@ struct MenuBarContentView: View {
             Image(systemName: "gearshape.fill")
                 .font(.system(size: 9, weight: .semibold))
                 .foregroundStyle(neutralSecondaryText)
-                .frame(width: 16, height: 16)
-                .background(
-                    Circle()
-                        .fill(neutralChromeFill.opacity(0.94))
-                )
-                .overlay(
-                    Circle()
-                        .stroke(neutralStroke.opacity(0.9), lineWidth: 0.8)
-                )
+                .frame(width: 18, height: 18)
+                .dimlyGlassCircle(tint: .primary, fillOpacity: 0.16, strokeOpacity: 0.4)
         }
         .buttonStyle(FluentPressButtonStyle(pressedScale: 0.9, pressedOpacity: 0.84))
         .dimlyHoverLift(hoverScale: 1.04, shadowOpacity: 0.08)
@@ -2577,15 +2597,8 @@ struct MenuBarContentView: View {
             Image(systemName: "arrow.triangle.2.circlepath")
                 .font(.system(size: 9, weight: .semibold))
                 .foregroundStyle(neutralSecondaryText)
-                .frame(width: 16, height: 16)
-                .background(
-                    Circle()
-                        .fill(neutralChromeFill.opacity(0.94))
-                )
-                .overlay(
-                    Circle()
-                        .stroke(neutralStroke.opacity(0.9), lineWidth: 0.8)
-                )
+                .frame(width: 18, height: 18)
+                .dimlyGlassCircle(tint: .primary, fillOpacity: 0.16, strokeOpacity: 0.4)
         }
         .buttonStyle(FluentPressButtonStyle(pressedScale: 0.9, pressedOpacity: 0.84))
         .dimlyHoverLift(hoverScale: 1.04, shadowOpacity: 0.08)
@@ -3473,8 +3486,9 @@ private struct MenuBarWindowAnchorLock: NSViewRepresentable {
     }
 }
 
-/// Tap fires once on press-down; hold repeats after 1 s at 0.12 s intervals.
-/// Uses onLongPressGesture so it works even when a DragGesture lives on an ancestor view.
+/// Tap fires once via a real `Button` (so it's always hit-tested reliably, even inside the
+/// menu bar's `NSPopover`); holding repeats after 1 s at 0.12 s intervals, driven by a
+/// `simultaneousGesture` so it never gates or delays the primary tap.
 private struct BrightnessHoldButton<Label: View>: View {
     let action: () -> Void
     let label: () -> Label
@@ -3488,29 +3502,39 @@ private struct BrightnessHoldButton<Label: View>: View {
         self.label = label
     }
 
-    var body: some View {
-        label()
-            .scaleEffect(isHeld && !reduceMotion ? 0.84 : 1)
-            .opacity(isHeld ? 0.78 : 1)
-            .animation(reduceMotion ? nil : DimlyMotion.quickSpring, value: isHeld)
-            .onLongPressGesture(minimumDuration: 0, pressing: { pressing in
-                isHeld = pressing
-                if pressing {
+    private func beginHold() {
+        guard repeatTask == nil else { return }
+        isHeld = true
+        repeatTask = Task {
+            do {
+                try await Task.sleep(nanoseconds: 1_000_000_000) // 1 s before repeat
+                while !Task.isCancelled {
                     action()
-                    repeatTask = Task {
-                        do {
-                            try await Task.sleep(nanoseconds: 1_000_000_000) // 1 s before repeat
-                            while !Task.isCancelled {
-                                action()
-                                try await Task.sleep(nanoseconds: 120_000_000) // ~8 steps/s
-                            }
-                        } catch {}
-                    }
-                } else {
-                    repeatTask?.cancel()
-                    repeatTask = nil
+                    try await Task.sleep(nanoseconds: 120_000_000) // ~8 steps/s
                 }
-            }, perform: {})
+            } catch {}
+        }
+    }
+
+    private func endHold() {
+        isHeld = false
+        repeatTask?.cancel()
+        repeatTask = nil
+    }
+
+    var body: some View {
+        Button(action: action) {
+            label()
+        }
+        .buttonStyle(.plain)
+        .scaleEffect(isHeld && !reduceMotion ? 0.8 : 1)
+        .opacity(isHeld ? 0.78 : 1)
+        .animation(reduceMotion ? nil : DimlyMotion.poppySpring, value: isHeld)
+        .simultaneousGesture(
+            DragGesture(minimumDistance: 0)
+                .onChanged { _ in beginHold() }
+                .onEnded { _ in endHold() }
+        )
     }
 }
 

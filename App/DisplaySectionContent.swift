@@ -46,7 +46,8 @@ enum DisplaySectionContent {
                             .font(.system(size: 10, weight: .semibold))
                             .frame(width: 18, height: 18)
                     }
-                    .buttonStyle(FluentPressButtonStyle(pressedScale: 0.84, pressedOpacity: 0.82))
+                    .buttonStyle(FluentPressButtonStyle(pressedScale: 0.8, pressedOpacity: 0.8, animation: DimlyMotion.poppySpring))
+                    .id("\(display.stableIdentity)-brightnessLeft")
                     .foregroundStyle(.secondary)
                     .help(String(localized: "ActionDecreaseBrightnessHint"))
                     Slider(
@@ -66,7 +67,8 @@ enum DisplaySectionContent {
                             .font(.system(size: 10, weight: .semibold))
                             .frame(width: 18, height: 18)
                     }
-                    .buttonStyle(FluentPressButtonStyle(pressedScale: 0.84, pressedOpacity: 0.82))
+                    .buttonStyle(FluentPressButtonStyle(pressedScale: 0.8, pressedOpacity: 0.8, animation: DimlyMotion.poppySpring))
+                    .id("\(display.stableIdentity)-brightnessRight")
                     .foregroundStyle(.secondary)
                     .help(String(localized: "ActionIncreaseBrightnessHint"))
                 }
