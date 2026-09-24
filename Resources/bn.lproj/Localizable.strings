@@ -74,6 +74,7 @@
 /* Settings Tabs */
 "SettingsTabGeneralLabel" = "সাধারণ";
 "SettingsTabDisplaysLabel" = "ডিসপ্লে";
+"SettingsTabTexturesLabel" = "টেক্সচার";
 "SettingsTabVisualsLabel" = "ভিজ্যুয়ালস";
 "SettingsTabShortcutsLabel" = "শর্টকাট";
 "SettingsTabAboutLabel" = "সম্পর্কে";
@@ -506,6 +507,50 @@
 "LUTImportErrorTitle" = "LUT আমদানি করা যায়নি";
 "LUTImportErrorSubtitle" = "ফাইলটি পড়া যায়নি অথবা এটি একটি বৈধ LUT নয়।";
 "LUTRowLabel" = "LUT";
+
+/* Texture Library */
+"TextureLibraryTitle" = "টেক্সচার লাইব্রেরি";
+"TextureLibrarySubtitle" = "কাগজ, ক্যানভাস, এবং অন্যান্য উপাদানের টেক্সচার আমদানি করুন - অথবা টেক্সচার Playground-এ নিজের টেক্সচার লিখুন - এবং সেগুলি প্রতিটি ডিসপ্লেতে নির্ধারণ করুন।";
+"TextureImportButton" = "টেক্সচার আমদানি করুন…";
+"TextureEmptyStateLabel" = "এখনও কোনো টেক্সচার আমদানি করা হয়নি।";
+"TexturePickerNoneLabel" = "কোনোটি নয়";
+"TextureRowLabel" = "টেক্সচার";
+"TextureOpacityLabel" = "অস্বচ্ছতা";
+"TextureBlendModeLabel" = "ব্লেন্ড মোড";
+"TextureTileScaleLabel" = "টাইল স্কেল";
+"TextureBlendModeNormalLabel" = "নরমাল";
+"TextureBlendModeMultiplyLabel" = "মাল্টিপ্লাই";
+"TextureBlendModeOverlayLabel" = "ওভারলে";
+"TextureBlendModeSoftLightLabel" = "সফট লাইট";
+"TextureBlendModeScreenLabel" = "স্ক্রিন";
+"TextureMenuBarModeCycleLabel" = "সাইকেল";
+"TextureMenuBarModeGridLabel" = "গ্রিড";
+"TextureMenuBarModeTitle" = "মেনু বার টেক্সচার সুইচার";
+"TextureMenuBarModeSubtitle" = "সাইকেল হলো একটি একক দ্রুত-কর্ম বোতাম যা আপনার প্রিয়গুলির মধ্য দিয়ে যায়। গ্রিড একটি থাম্বনেইল পিকার খোলে - একাধিক ডিসপ্লে থাকলে সুবিধাজনক।";
+"TextureCycleFavoritesLabel" = "সাইকেলের প্রিয়";
+"TextureCycleFavoritesEmptyLabel" = "মেনু বার সাইকেল ক্রম তৈরি করতে নিচে টেক্সচার যোগ করুন।";
+"TextureCycleFavoritesAddButton" = "প্রিয়তে যোগ করুন…";
+"TextureDeleteConfirmTitle" = "\"%@\" সরাবেন?";
+"TextureDeleteConfirmSubtitle" = "এটি টেক্সচারটি লাইব্রেরি থেকে সরিয়ে দেবে এবং এটি ব্যবহার করছে এমন সব ডিসপ্লে থেকে মুছে দেবে।";
+"TextureRenameAlertTitle" = "টেক্সচারের নাম পরিবর্তন করুন";
+"TextureRenameAlertSubtitle" = "এই টেক্সচারের জন্য একটি নতুন নাম লিখুন।";
+"TextureImportErrorTitle" = "টেক্সচার আমদানি করা যায়নি";
+"TexturePlaygroundOpenButton" = "নতুন টেক্সচার Playground…";
+"TexturePlaygroundTitle" = "টেক্সচার Playground";
+"TexturePlaygroundSearchSubtitle" = "Metal Shading Language-এ একটি টাইলযোগ্য টেক্সচার লিখুন, লাইভ প্রিভিউ সহ।";
+"TexturePlaygroundDefaultName" = "শিরোনামহীন টেক্সচার";
+"TexturePlaygroundNameFieldLabel" = "নাম";
+"TexturePlaygroundPreviewLabel" = "প্রিভিউ (2×2 টাইল)";
+"TexturePlaygroundReliefToggleLabel" = "উজ্জ্বলতা থেকে স্বয়ংক্রিয়ভাবে 3D রিলিফ তৈরি করুন";
+"TexturePlaygroundCopyCodeButton" = "কোড কপি করুন";
+"TexturePlaygroundExportButton" = "এক্সপোর্ট করুন…";
+"WhatsNewTextureOverlaysTitle" = "টেক্সচার ওভারলে";
+"WhatsNewTextureOverlaysDescription" = "যেকোনো ডিসপ্লের উপর কাগজ, ক্যানভাস, বা অন্যান্য উপাদানের একটি সূক্ষ্ম টেক্সচার যোগ করুন - প্রকৃত 3D রিলিফ শেডিং সহ - যাতে দীর্ঘ পড়ার সময় চোখের জন্য আরামদায়ক হয়। প্রতি ডিসপ্লেতে, অথবা একটি দ্রুত মেনু বার বোতাম থেকে টেক্সচার পরিবর্তন করুন।";
+"WhatsNewTextureOverlaysLocation" = "সেটিংস ← টেক্সচার";
+"TextureMenuBarQuickActionLabel" = "টেক্সচার";
+"TextureMenuBarCycleHint" = "প্রতিটি ডিসপ্লেতে পরবর্তী প্রিয় টেক্সচারে (অথবা অফ) সাইকেল করুন।";
+"TextureToggleHint" = "এই ডিসপ্লের টেক্সচার সাইকেল করুন (অথবা অফ)। সরাসরি বাছাই করতে রাইট-ক্লিক করুন।";
+"TexturePlaygroundPreviewIntensityLabel" = "প্রিভিউ তীব্রতা";
 
 /* Settings Search (untranslated placeholder) */
 "SettingsSearchPlaceholder" = "Search Settings";

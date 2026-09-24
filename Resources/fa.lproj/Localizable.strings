@@ -74,6 +74,7 @@
 /* Settings Tabs */
 "SettingsTabGeneralLabel" = "عمومی";
 "SettingsTabDisplaysLabel" = "نمایشگرها";
+"SettingsTabTexturesLabel" = "بافت‌ها";
 "SettingsTabVisualsLabel" = "تصویری";
 "SettingsTabShortcutsLabel" = "میانبرها";
 "SettingsTabAboutLabel" = "درباره";
@@ -506,6 +507,50 @@
 "LUTImportErrorTitle" = "وارد کردن LUT ممکن نیست";
 "LUTImportErrorSubtitle" = "فایل قابل خواندن نیست یا یک LUT معتبر نمی‌باشد.";
 "LUTRowLabel" = "LUT";
+
+/* Texture Library */
+"TextureLibraryTitle" = "کتابخانه بافت";
+"TextureLibrarySubtitle" = "بافت‌های کاغذ، بوم و سایر مواد را وارد کنید - یا بافت خود را در Playground بافت بنویسید - و برای هر نمایشگر تنظیم کنید.";
+"TextureImportButton" = "وارد کردن بافت…";
+"TextureEmptyStateLabel" = "هنوز هیچ بافتی وارد نشده.";
+"TexturePickerNoneLabel" = "هیچ‌کدام";
+"TextureRowLabel" = "بافت";
+"TextureOpacityLabel" = "کدورت";
+"TextureBlendModeLabel" = "حالت ترکیب";
+"TextureTileScaleLabel" = "مقیاس کاشی";
+"TextureBlendModeNormalLabel" = "معمولی";
+"TextureBlendModeMultiplyLabel" = "ضرب";
+"TextureBlendModeOverlayLabel" = "روی‌هم‌گذاری";
+"TextureBlendModeSoftLightLabel" = "نور ملایم";
+"TextureBlendModeScreenLabel" = "صفحه";
+"TextureMenuBarModeCycleLabel" = "چرخشی";
+"TextureMenuBarModeGridLabel" = "شبکه";
+"TextureMenuBarModeTitle" = "تعویض‌کننده بافت نوار منو";
+"TextureMenuBarModeSubtitle" = "چرخشی یک دکمه اقدام سریع است که بین موارد مورد علاقه شما جابه‌جا می‌شود. شبکه یک انتخابگر تصویر کوچک باز می‌کند - برای بیش از یک نمایشگر مفید است.";
+"TextureCycleFavoritesLabel" = "موارد مورد علاقه چرخشی";
+"TextureCycleFavoritesEmptyLabel" = "برای ساخت ترتیب چرخشی نوار منو، بافت‌ها را در زیر اضافه کنید.";
+"TextureCycleFavoritesAddButton" = "افزودن به موارد مورد علاقه…";
+"TextureDeleteConfirmTitle" = "حذف «%@»؟";
+"TextureDeleteConfirmSubtitle" = "این بافت را از کتابخانه حذف می‌کند و از تمام نمایشگرهایی که از آن استفاده می‌کنند پاک می‌شود.";
+"TextureRenameAlertTitle" = "تغییر نام بافت";
+"TextureRenameAlertSubtitle" = "یک نام جدید برای این بافت وارد کنید.";
+"TextureImportErrorTitle" = "وارد کردن بافت ممکن نیست";
+"TexturePlaygroundOpenButton" = "Playground بافت جدید…";
+"TexturePlaygroundTitle" = "Playground بافت";
+"TexturePlaygroundSearchSubtitle" = "یک بافت کاشی‌پذیر با Metal Shading Language بنویسید، با پیش‌نمایش زنده.";
+"TexturePlaygroundDefaultName" = "بافت بدون عنوان";
+"TexturePlaygroundNameFieldLabel" = "نام";
+"TexturePlaygroundPreviewLabel" = "پیش‌نمایش (کاشی ۲×۲)";
+"TexturePlaygroundReliefToggleLabel" = "ایجاد خودکار برجستگی سه‌بعدی از روشنایی";
+"TexturePlaygroundCopyCodeButton" = "کپی کد";
+"TexturePlaygroundExportButton" = "خروجی گرفتن…";
+"WhatsNewTextureOverlaysTitle" = "لایه‌های بافت";
+"WhatsNewTextureOverlaysDescription" = "یک بافت ظریف از کاغذ، بوم یا سایر مواد را روی هر نمایشگر - با برجستگی سه‌بعدی واقعی - اضافه کنید تا جلسات مطالعه طولانی برای چشم راحت‌تر شود. بافت‌ها را برای هر نمایشگر، یا از یک دکمه سریع در نوار منو تغییر دهید.";
+"WhatsNewTextureOverlaysLocation" = "تنظیمات ← بافت‌ها";
+"TextureMenuBarQuickActionLabel" = "بافت";
+"TextureMenuBarCycleHint" = "روی هر نمایشگر به بافت مورد علاقه بعدی (یا خاموش) بروید.";
+"TextureToggleHint" = "بافت این نمایشگر را عوض کنید (یا خاموش). برای انتخاب مستقیم کلیک راست کنید.";
+"TexturePlaygroundPreviewIntensityLabel" = "شدت پیش‌نمایش";
 
 /* Settings Search (untranslated placeholder) */
 "SettingsSearchPlaceholder" = "Search Settings";

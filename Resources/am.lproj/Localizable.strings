@@ -74,6 +74,7 @@
 /* Settings Tabs */
 "SettingsTabGeneralLabel" = "አጠቃላይ";
 "SettingsTabDisplaysLabel" = "ማሳያዎች";
+"SettingsTabTexturesLabel" = "ሸካራነቶች";
 "SettingsTabVisualsLabel" = "ምስሎች";
 "SettingsTabShortcutsLabel" = "አቋራጮች";
 "SettingsTabAboutLabel" = "ስለ";
@@ -506,6 +507,50 @@
 "LUTImportErrorTitle" = "LUT ማስገባት አልተቻለም";
 "LUTImportErrorSubtitle" = "ፋይሉ ሊነበብ አልቻለም ወይም ትክክለኛ LUT አይደለም።";
 "LUTRowLabel" = "LUT";
+
+/* Texture Library */
+"TextureLibraryTitle" = "የሸካራነት ቤተ-መጻሕፍት";
+"TextureLibrarySubtitle" = "የወረቀት፣ የሸራ እና ሌሎች የቁሳቁስ ሸካራነቶችን አስገባ - ወይም የራስህን በ Texture Playground ውስጥ ጻፍ - እና ለእያንዳንዱ ማሳያ ሰይም።";
+"TextureImportButton" = "ሸካራነት አስገባ…";
+"TextureEmptyStateLabel" = "እስካሁን ምንም ሸካራነት አልገባም።";
+"TexturePickerNoneLabel" = "ምንም";
+"TextureRowLabel" = "ሸካራነት";
+"TextureOpacityLabel" = "ግልጽነት";
+"TextureBlendModeLabel" = "የቅልቅል ሁነታ";
+"TextureTileScaleLabel" = "የሰድር መጠን";
+"TextureBlendModeNormalLabel" = "መደበኛ";
+"TextureBlendModeMultiplyLabel" = "ማባዛት";
+"TextureBlendModeOverlayLabel" = "ንብርብር";
+"TextureBlendModeSoftLightLabel" = "ለስላሳ ብርሃን";
+"TextureBlendModeScreenLabel" = "ስክሪን";
+"TextureMenuBarModeCycleLabel" = "ዑደት";
+"TextureMenuBarModeGridLabel" = "ፍርግርግ";
+"TextureMenuBarModeTitle" = "የምናሌ አሞሌ ሸካራነት መቀያየሪያ";
+"TextureMenuBarModeSubtitle" = "ዑደት የምትወዷቸውን ደጋግሞ የሚያሳይ አንድ ፈጣን-ተግባር ቁልፍ ነው። ፍርግርግ አነስተኛ ምስል መራጭ ይከፍታል - ከአንድ በላይ ማሳያ ካለ ጠቃሚ ነው።";
+"TextureCycleFavoritesLabel" = "የዑደት ተወዳጆች";
+"TextureCycleFavoritesEmptyLabel" = "የምናሌ አሞሌ ዑደት ቅደም ተከተል ለመገንባት ከታች ሸካራነቶችን ጨምር።";
+"TextureCycleFavoritesAddButton" = "ወደ ተወዳጆች ጨምር…";
+"TextureDeleteConfirmTitle" = "«%@»ን ማስወገድ?";
+"TextureDeleteConfirmSubtitle" = "ይህ ሸካራነቱን ከቤተ-መጻሕፍቱ ያስወግደዋል እና እየተጠቀሙበት ካሉ ማሳያዎች ሁሉ ያጸዳዋል።";
+"TextureRenameAlertTitle" = "ሸካራነት ዳግም ሰይም";
+"TextureRenameAlertSubtitle" = "ለዚህ ሸካራነት አዲስ ስም አስገባ።";
+"TextureImportErrorTitle" = "ሸካራነት ማስገባት አልተቻለም";
+"TexturePlaygroundOpenButton" = "አዲስ Texture Playground…";
+"TexturePlaygroundTitle" = "Texture Playground";
+"TexturePlaygroundSearchSubtitle" = "በ Metal Shading Language ሊደረደር የሚችል ሸካራነት ጻፍ፣ በቀጥታ ቅድመ-እይታ።";
+"TexturePlaygroundDefaultName" = "ርዕስ-አልባ ሸካራነት";
+"TexturePlaygroundNameFieldLabel" = "ስም";
+"TexturePlaygroundPreviewLabel" = "ቅድመ-እይታ (2×2 ደርድር)";
+"TexturePlaygroundReliefToggleLabel" = "ከብርሃናማነት 3D እፎይታን በራስ-ሰር ፍጠር";
+"TexturePlaygroundCopyCodeButton" = "ኮድ ቅዳ";
+"TexturePlaygroundExportButton" = "ላክ…";
+"WhatsNewTextureOverlaysTitle" = "የሸካራነት ንብርብሮች";
+"WhatsNewTextureOverlaysDescription" = "በማንኛውም ማሳያ ላይ ስውር የወረቀት፣ የሸራ ወይም ሌላ ቁሳቁስ ሸካራነት ጨምር - በእውነተኛ 3D እፎይታ ጥላ - ረጅም የንባብ ጊዜያትን ለዓይን የበለጠ ምቹ ለማድረግ። ሸካራነቶችን በማሳያ ወይም ከፈጣን የምናሌ አሞሌ ቁልፍ ቀይር።";
+"WhatsNewTextureOverlaysLocation" = "ቅንብሮች ← ሸካራነቶች";
+"TextureMenuBarQuickActionLabel" = "ሸካራነት";
+"TextureMenuBarCycleHint" = "በእያንዳንዱ ማሳያ ላይ ወደ ቀጣዩ ተወዳጅ ሸካራነት (ወይም ጠፍቷል) ቀይር።";
+"TextureToggleHint" = "የዚህን ማሳያ ሸካራነት አዙር (ወይም ጠፍቷል)። በቀጥታ ለመምረጥ በቀኝ-ጠቅ አድርግ።";
+"TexturePlaygroundPreviewIntensityLabel" = "የቅድመ-እይታ ጥንካሬ";
 
 /* Settings Search (untranslated placeholder) */
 "SettingsSearchPlaceholder" = "Search Settings";

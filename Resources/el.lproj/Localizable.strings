@@ -74,6 +74,7 @@
 /* Settings Tabs */
 "SettingsTabGeneralLabel" = "Γενικά";
 "SettingsTabDisplaysLabel" = "Οθόνες";
+"SettingsTabTexturesLabel" = "Υφές";
 "SettingsTabVisualsLabel" = "Οπτικά";
 "SettingsTabShortcutsLabel" = "Συντομεύσεις";
 "SettingsTabAboutLabel" = "Πληροφορίες";
@@ -506,6 +507,50 @@
 "LUTImportErrorTitle" = "Αδύνατη η εισαγωγή LUT";
 "LUTImportErrorSubtitle" = "Δεν ήταν δυνατή η ανάγνωση του αρχείου ή δεν αποτελεί έγκυρο LUT.";
 "LUTRowLabel" = "LUT";
+
+/* Texture Library */
+"TextureLibraryTitle" = "Βιβλιοθήκη Υφών";
+"TextureLibrarySubtitle" = "Εισαγάγετε υφές χαρτιού, καμβά και άλλων υλικών - ή γράψτε τη δική σας στο Playground Υφών - και αναθέστε τις ανά οθόνη.";
+"TextureImportButton" = "Εισαγωγή Υφής…";
+"TextureEmptyStateLabel" = "Δεν έχουν εισαχθεί υφές ακόμα.";
+"TexturePickerNoneLabel" = "Καμία";
+"TextureRowLabel" = "Υφή";
+"TextureOpacityLabel" = "Αδιαφάνεια";
+"TextureBlendModeLabel" = "Λειτουργία ανάμειξης";
+"TextureTileScaleLabel" = "Κλίμακα πλακιδίου";
+"TextureBlendModeNormalLabel" = "Κανονική";
+"TextureBlendModeMultiplyLabel" = "Πολλαπλασιασμός";
+"TextureBlendModeOverlayLabel" = "Επικάλυψη";
+"TextureBlendModeSoftLightLabel" = "Απαλό φως";
+"TextureBlendModeScreenLabel" = "Οθόνη";
+"TextureMenuBarModeCycleLabel" = "Κύκλος";
+"TextureMenuBarModeGridLabel" = "Πλέγμα";
+"TextureMenuBarModeTitle" = "Εναλλάκτης Υφών στη Γραμμή Μενού";
+"TextureMenuBarModeSubtitle" = "Ο Κύκλος είναι ένα μοναδικό κουμπί γρήγορης ενέργειας που διατρέχει τα αγαπημένα σας. Το Πλέγμα ανοίγει έναν επιλογέα μικρογραφιών - χρήσιμο με περισσότερες από μία οθόνες.";
+"TextureCycleFavoritesLabel" = "Αγαπημένα Κύκλου";
+"TextureCycleFavoritesEmptyLabel" = "Προσθέστε υφές παρακάτω για να δημιουργήσετε τη σειρά κύκλου της γραμμής μενού.";
+"TextureCycleFavoritesAddButton" = "Προσθήκη στα Αγαπημένα…";
+"TextureDeleteConfirmTitle" = "Αφαίρεση του «%@»;";
+"TextureDeleteConfirmSubtitle" = "Αυτό αφαιρεί την υφή από τη βιβλιοθήκη και την καταργεί από τυχόν οθόνες που τη χρησιμοποιούν.";
+"TextureRenameAlertTitle" = "Μετονομασία Υφής";
+"TextureRenameAlertSubtitle" = "Εισαγάγετε νέο όνομα για αυτήν την υφή.";
+"TextureImportErrorTitle" = "Αδύνατη η εισαγωγή υφής";
+"TexturePlaygroundOpenButton" = "Νέο Playground Υφής…";
+"TexturePlaygroundTitle" = "Playground Υφής";
+"TexturePlaygroundSearchSubtitle" = "Γράψτε μια επαναλαμβανόμενη υφή σε Metal Shading Language, με ζωντανή προεπισκόπηση.";
+"TexturePlaygroundDefaultName" = "Ανώνυμη υφή";
+"TexturePlaygroundNameFieldLabel" = "Όνομα";
+"TexturePlaygroundPreviewLabel" = "Προεπισκόπηση (πλακίδιο 2×2)";
+"TexturePlaygroundReliefToggleLabel" = "Αυτόματη δημιουργία 3D ανάγλυφου από τη φωτεινότητα";
+"TexturePlaygroundCopyCodeButton" = "Αντιγραφή Κώδικα";
+"TexturePlaygroundExportButton" = "Εξαγωγή…";
+"WhatsNewTextureOverlaysTitle" = "Επικαλύψεις Υφής";
+"WhatsNewTextureOverlaysDescription" = "Προσθέστε μια διακριτική υφή χαρτιού, καμβά ή άλλου υλικού πάνω από οποιαδήποτε οθόνη - με πραγματικό 3D ανάγλυφο - για πιο ξεκούραστες μεγάλες συνεδρίες ανάγνωσης. Εναλλάξτε υφές ανά οθόνη, ή από ένα γρήγορο κουμπί στη γραμμή μενού.";
+"WhatsNewTextureOverlaysLocation" = "Ρυθμίσεις → Υφές";
+"TextureMenuBarQuickActionLabel" = "Υφή";
+"TextureMenuBarCycleHint" = "Εναλλαγή στην επόμενη αγαπημένη υφή (ή απενεργοποίηση) σε κάθε οθόνη.";
+"TextureToggleHint" = "Εναλλαγή της υφής αυτής της οθόνης (ή απενεργοποίηση). Δεξί κλικ για απευθείας επιλογή.";
+"TexturePlaygroundPreviewIntensityLabel" = "Ένταση προεπισκόπησης";
 
 /* Settings Search (untranslated placeholder) */
 "SettingsSearchPlaceholder" = "Search Settings";

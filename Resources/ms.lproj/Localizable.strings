@@ -74,6 +74,7 @@
 /* Settings Tabs */
 "SettingsTabGeneralLabel" = "Am";
 "SettingsTabDisplaysLabel" = "Paparan";
+"SettingsTabTexturesLabel" = "Tekstur";
 "SettingsTabVisualsLabel" = "Visual";
 "SettingsTabShortcutsLabel" = "Pintasan";
 "SettingsTabAboutLabel" = "Perihal";
@@ -506,6 +507,50 @@
 "LUTImportErrorTitle" = "LUT tidak dapat diimport";
 "LUTImportErrorSubtitle" = "Fail tidak dapat dibaca atau bukan LUT yang sah.";
 "LUTRowLabel" = "LUT";
+
+/* Texture Library */
+"TextureLibraryTitle" = "Perpustakaan Tekstur";
+"TextureLibrarySubtitle" = "Import tekstur kertas, kanvas dan bahan lain - atau tulis tekstur anda sendiri dalam Playground Tekstur - dan tetapkannya bagi setiap paparan.";
+"TextureImportButton" = "Import Tekstur…";
+"TextureEmptyStateLabel" = "Tiada tekstur diimport lagi.";
+"TexturePickerNoneLabel" = "Tiada";
+"TextureRowLabel" = "Tekstur";
+"TextureOpacityLabel" = "Kelegapan";
+"TextureBlendModeLabel" = "Mod Campuran";
+"TextureTileScaleLabel" = "Skala Jubin";
+"TextureBlendModeNormalLabel" = "Biasa";
+"TextureBlendModeMultiplyLabel" = "Darab";
+"TextureBlendModeOverlayLabel" = "Overlay";
+"TextureBlendModeSoftLightLabel" = "Cahaya Lembut";
+"TextureBlendModeScreenLabel" = "Skrin";
+"TextureMenuBarModeCycleLabel" = "Kitaran";
+"TextureMenuBarModeGridLabel" = "Grid";
+"TextureMenuBarModeTitle" = "Penukar Tekstur Bar Menu";
+"TextureMenuBarModeSubtitle" = "Kitaran ialah satu butang tindakan pantas yang melalui kegemaran anda. Grid membuka pemilih lakaran kecil - berguna dengan lebih daripada satu paparan.";
+"TextureCycleFavoritesLabel" = "Kegemaran Kitaran";
+"TextureCycleFavoritesEmptyLabel" = "Tambah tekstur di bawah untuk membina susunan kitaran bar menu.";
+"TextureCycleFavoritesAddButton" = "Tambah ke Kegemaran…";
+"TextureDeleteConfirmTitle" = "Buang \"%@\"?";
+"TextureDeleteConfirmSubtitle" = "Ini akan membuang tekstur daripada perpustakaan dan mengosongkannya daripada mana-mana paparan yang menggunakannya.";
+"TextureRenameAlertTitle" = "Namakan Semula Tekstur";
+"TextureRenameAlertSubtitle" = "Masukkan nama baharu untuk tekstur ini.";
+"TextureImportErrorTitle" = "Tekstur tidak dapat diimport";
+"TexturePlaygroundOpenButton" = "Playground Tekstur Baharu…";
+"TexturePlaygroundTitle" = "Playground Tekstur";
+"TexturePlaygroundSearchSubtitle" = "Tulis tekstur yang boleh diubin dalam Metal Shading Language, dengan pratonton langsung.";
+"TexturePlaygroundDefaultName" = "Tekstur Tanpa Tajuk";
+"TexturePlaygroundNameFieldLabel" = "Nama";
+"TexturePlaygroundPreviewLabel" = "Pratonton (jubin 2×2)";
+"TexturePlaygroundReliefToggleLabel" = "Jana relief 3D secara automatik daripada luminans";
+"TexturePlaygroundCopyCodeButton" = "Salin Kod";
+"TexturePlaygroundExportButton" = "Eksport…";
+"WhatsNewTextureOverlaysTitle" = "Overlay Tekstur";
+"WhatsNewTextureOverlaysDescription" = "Tambah tekstur kertas, kanvas atau bahan lain yang halus pada mana-mana paparan - dengan relief 3D sebenar - untuk menjadikan sesi bacaan panjang lebih selesa untuk mata. Tukar tekstur bagi setiap paparan, atau daripada butang pantas bar menu.";
+"WhatsNewTextureOverlaysLocation" = "Tetapan → Tekstur";
+"TextureMenuBarQuickActionLabel" = "Tekstur";
+"TextureMenuBarCycleHint" = "Beralih ke tekstur kegemaran seterusnya (atau mati) pada setiap paparan.";
+"TextureToggleHint" = "Kitarkan tekstur paparan ini (atau mati). Klik kanan untuk memilih terus.";
+"TexturePlaygroundPreviewIntensityLabel" = "Keamatan Pratonton";
 
 /* Settings Search (untranslated placeholder) */
 "SettingsSearchPlaceholder" = "Search Settings";

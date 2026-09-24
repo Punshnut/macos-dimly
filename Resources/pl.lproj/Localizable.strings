@@ -74,6 +74,7 @@
 /* Settings Tabs */
 "SettingsTabGeneralLabel" = "Ogólne";
 "SettingsTabDisplaysLabel" = "Wyświetlacze";
+"SettingsTabTexturesLabel" = "Tekstury";
 "SettingsTabVisualsLabel" = "Wizuały";
 "SettingsTabShortcutsLabel" = "Skróty";
 "SettingsTabAboutLabel" = "Informacje";
@@ -506,6 +507,50 @@
 "LUTImportErrorTitle" = "Nie można zaimportować LUT";
 "LUTImportErrorSubtitle" = "Nie można odczytać pliku lub nie jest to prawidłowy LUT.";
 "LUTRowLabel" = "LUT";
+
+/* Texture Library */
+"TextureLibraryTitle" = "Biblioteka Tekstur";
+"TextureLibrarySubtitle" = "Importuj tekstury papieru, płótna i innych materiałów - lub napisz własną w Playgroundzie Tekstur - i przypisuj je do poszczególnych monitorów.";
+"TextureImportButton" = "Importuj Teksturę…";
+"TextureEmptyStateLabel" = "Nie zaimportowano jeszcze żadnych tekstur.";
+"TexturePickerNoneLabel" = "Brak";
+"TextureRowLabel" = "Tekstura";
+"TextureOpacityLabel" = "Krycie";
+"TextureBlendModeLabel" = "Tryb mieszania";
+"TextureTileScaleLabel" = "Skala kafelków";
+"TextureBlendModeNormalLabel" = "Normalny";
+"TextureBlendModeMultiplyLabel" = "Mnożenie";
+"TextureBlendModeOverlayLabel" = "Nakładka";
+"TextureBlendModeSoftLightLabel" = "Łagodne światło";
+"TextureBlendModeScreenLabel" = "Ekran";
+"TextureMenuBarModeCycleLabel" = "Cykl";
+"TextureMenuBarModeGridLabel" = "Siatka";
+"TextureMenuBarModeTitle" = "Przełącznik Tekstur na Pasku Menu";
+"TextureMenuBarModeSubtitle" = "Cykl to pojedynczy przycisk szybkiej akcji, który przełącza kolejne ulubione. Siatka otwiera selektor miniatur - przydatny przy więcej niż jednym monitorze.";
+"TextureCycleFavoritesLabel" = "Ulubione Cyklu";
+"TextureCycleFavoritesEmptyLabel" = "Dodaj tekstury poniżej, aby zbudować kolejność cyklu na pasku menu.";
+"TextureCycleFavoritesAddButton" = "Dodaj do Ulubionych…";
+"TextureDeleteConfirmTitle" = "Usunąć „%@\"?";
+"TextureDeleteConfirmSubtitle" = "Spowoduje to usunięcie tekstury z biblioteki i wyczyszczenie jej ze wszystkich monitorów, które jej używają.";
+"TextureRenameAlertTitle" = "Zmień nazwę Tekstury";
+"TextureRenameAlertSubtitle" = "Podaj nową nazwę dla tej tekstury.";
+"TextureImportErrorTitle" = "Nie można zaimportować tekstury";
+"TexturePlaygroundOpenButton" = "Nowy Playground Tekstur…";
+"TexturePlaygroundTitle" = "Playground Tekstur";
+"TexturePlaygroundSearchSubtitle" = "Napisz kafelkowalną teksturę w Metal Shading Language, z podglądem na żywo.";
+"TexturePlaygroundDefaultName" = "Tekstura bez nazwy";
+"TexturePlaygroundNameFieldLabel" = "Nazwa";
+"TexturePlaygroundPreviewLabel" = "Podgląd (kafelki 2×2)";
+"TexturePlaygroundReliefToggleLabel" = "Automatycznie generuj relief 3D na podstawie luminancji";
+"TexturePlaygroundCopyCodeButton" = "Kopiuj Kod";
+"TexturePlaygroundExportButton" = "Eksportuj…";
+"WhatsNewTextureOverlaysTitle" = "Nakładki Tekstur";
+"WhatsNewTextureOverlaysDescription" = "Dodaj subtelną teksturę papieru, płótna lub innego materiału na dowolny monitor - z prawdziwym reliefem 3D - aby długie sesje czytania były wygodniejsze dla oczu. Zmieniaj tekstury dla poszczególnych monitorów lub za pomocą szybkiego przycisku na pasku menu.";
+"WhatsNewTextureOverlaysLocation" = "Ustawienia → Tekstury";
+"TextureMenuBarQuickActionLabel" = "Tekstura";
+"TextureMenuBarCycleHint" = "Przełącz na następną ulubioną teksturę (lub wyłączoną) na każdym monitorze.";
+"TextureToggleHint" = "Przełącz teksturę tego monitora (lub wyłączoną). Kliknij prawym przyciskiem, aby wybrać bezpośrednio.";
+"TexturePlaygroundPreviewIntensityLabel" = "Intensywność podglądu";
 
 /* Settings Search (untranslated placeholder) */
 "SettingsSearchPlaceholder" = "Search Settings";

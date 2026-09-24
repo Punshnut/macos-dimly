@@ -74,6 +74,7 @@
 /* Settings Tabs */
 "SettingsTabGeneralLabel" = "సాధారణ";
 "SettingsTabDisplaysLabel" = "డిస్ప్లేలు";
+"SettingsTabTexturesLabel" = "టెక్స్చర్‌లు";
 "SettingsTabVisualsLabel" = "దృశ్యాలు";
 "SettingsTabShortcutsLabel" = "షార్ట్‌కట్లు";
 "SettingsTabAboutLabel" = "గురించి";
@@ -506,6 +507,50 @@
 "LUTImportErrorTitle" = "LUT దిగుమతి చేయడం సాధ్యపడలేదు";
 "LUTImportErrorSubtitle" = "ఫైల్ చదవడం సాధ్యపడలేదు లేదా అది చెల్లుబాటు అయ్యే LUT కాదు.";
 "LUTRowLabel" = "LUT";
+
+/* Texture Library */
+"TextureLibraryTitle" = "టెక్స్చర్ లైబ్రరీ";
+"TextureLibrarySubtitle" = "పేపర్, కాన్వాస్ మరియు ఇతర మెటీరియల్ టెక్స్చర్‌లను దిగుమతి చేసుకోండి - లేదా టెక్స్చర్ Playground లో మీ సొంతది రాయండి - మరియు వాటిని ప్రతి డిస్‌ప్లేకు కేటాయించండి.";
+"TextureImportButton" = "టెక్స్చర్ దిగుమతి చేయండి…";
+"TextureEmptyStateLabel" = "ఇంకా టెక్స్చర్‌లు దిగుమతి చేయబడలేదు.";
+"TexturePickerNoneLabel" = "ఏదీ లేదు";
+"TextureRowLabel" = "టెక్స్చర్";
+"TextureOpacityLabel" = "అపారదర్శకత";
+"TextureBlendModeLabel" = "బ్లెండ్ మోడ్";
+"TextureTileScaleLabel" = "టైల్ స్కేల్";
+"TextureBlendModeNormalLabel" = "సాధారణ";
+"TextureBlendModeMultiplyLabel" = "మల్టిప్లై";
+"TextureBlendModeOverlayLabel" = "ఓవర్‌లే";
+"TextureBlendModeSoftLightLabel" = "సాఫ్ట్ లైట్";
+"TextureBlendModeScreenLabel" = "స్క్రీన్";
+"TextureMenuBarModeCycleLabel" = "సైకిల్";
+"TextureMenuBarModeGridLabel" = "గ్రిడ్";
+"TextureMenuBarModeTitle" = "మెనూ బార్ టెక్స్చర్ స్విచర్";
+"TextureMenuBarModeSubtitle" = "సైకిల్ అనేది మీ ఇష్టమైనవాటిని వరుసగా మార్చే ఒకే క్విక్-యాక్షన్ బటన్. గ్రిడ్ థంబ్‌నెయిల్ పికర్‌ను తెరుస్తుంది - ఒకటి కంటే ఎక్కువ డిస్‌ప్లేలు ఉంటే ఉపయోగకరం.";
+"TextureCycleFavoritesLabel" = "సైకిల్ ఇష్టాంశాలు";
+"TextureCycleFavoritesEmptyLabel" = "మెనూ బార్ సైకిల్ క్రమాన్ని రూపొందించడానికి కింద టెక్స్చర్‌లను జోడించండి.";
+"TextureCycleFavoritesAddButton" = "ఇష్టాంశాలకు జోడించు…";
+"TextureDeleteConfirmTitle" = "\"%@\"ని తీసివేయాలా?";
+"TextureDeleteConfirmSubtitle" = "దీనివల్ల టెక్స్చర్ లైబ్రరీ నుండి తొలగించబడుతుంది మరియు దాన్ని ఉపయోగిస్తున్న అన్ని డిస్‌ప్లేల నుండి క్లియర్ అవుతుంది.";
+"TextureRenameAlertTitle" = "టెక్స్చర్‌కి పేరు మార్చండి";
+"TextureRenameAlertSubtitle" = "ఈ టెక్స్చర్‌కి కొత్త పేరు నమోదు చేయండి.";
+"TextureImportErrorTitle" = "టెక్స్చర్ దిగుమతి చేయడం సాధ్యపడలేదు";
+"TexturePlaygroundOpenButton" = "కొత్త టెక్స్చర్ Playground…";
+"TexturePlaygroundTitle" = "టెక్స్చర్ Playground";
+"TexturePlaygroundSearchSubtitle" = "Metal Shading Language లో టైల్ చేయదగిన టెక్స్చర్‌ను రాయండి, లైవ్ ప్రివ్యూతో.";
+"TexturePlaygroundDefaultName" = "శీర్షిక లేని టెక్స్చర్";
+"TexturePlaygroundNameFieldLabel" = "పేరు";
+"TexturePlaygroundPreviewLabel" = "ప్రివ్యూ (2×2 టైల్)";
+"TexturePlaygroundReliefToggleLabel" = "ప్రకాశం నుండి స్వయంచాలకంగా 3D రిలీఫ్‌ను రూపొందించండి";
+"TexturePlaygroundCopyCodeButton" = "కోడ్‌ను కాపీ చేయండి";
+"TexturePlaygroundExportButton" = "ఎగుమతి…";
+"WhatsNewTextureOverlaysTitle" = "టెక్స్చర్ ఓవర్‌లేలు";
+"WhatsNewTextureOverlaysDescription" = "ఏ డిస్‌ప్లే మీదైనా పేపర్, కాన్వాస్ లేదా ఇతర మెటీరియల్ యొక్క సున్నితమైన టెక్స్చర్‌ను జోడించండి - నిజమైన 3D రిలీఫ్ షేడింగ్‌తో - దీర్ఘ పఠన సెషన్‌లను కళ్ళకు మరింత సౌకర్యవంతంగా చేయడానికి. ప్రతి డిస్‌ప్లేకు, లేదా త్వరిత మెనూ బార్ బటన్ నుండి టెక్స్చర్‌లను మార్చండి.";
+"WhatsNewTextureOverlaysLocation" = "సెట్టింగ్‌లు ← టెక్స్చర్‌లు";
+"TextureMenuBarQuickActionLabel" = "టెక్స్చర్";
+"TextureMenuBarCycleHint" = "ప్రతి డిస్‌ప్లేలో తదుపరి ఇష్టమైన టెక్స్చర్‌కి (లేదా ఆఫ్) మారండి.";
+"TextureToggleHint" = "ఈ డిస్‌ప్లే యొక్క టెక్స్చర్‌ను సైకిల్ చేయండి (లేదా ఆఫ్). నేరుగా ఎంచుకోవడానికి రైట్-క్లిక్ చేయండి.";
+"TexturePlaygroundPreviewIntensityLabel" = "ప్రివ్యూ తీవ్రత";
 
 /* Settings Search (untranslated placeholder) */
 "SettingsSearchPlaceholder" = "Search Settings";

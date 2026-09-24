@@ -74,6 +74,7 @@
 /* Settings Tabs */
 "SettingsTabGeneralLabel" = "பொது";
 "SettingsTabDisplaysLabel" = "காட்சிகள்";
+"SettingsTabTexturesLabel" = "அமைப்புகள்";
 "SettingsTabVisualsLabel" = "காட்சிகள்";
 "SettingsTabShortcutsLabel" = "குறுக்குவழிகள்";
 "SettingsTabAboutLabel" = "பற்றி";
@@ -506,6 +507,50 @@
 "LUTImportErrorTitle" = "LUT இறக்குமதி செய்ய இயலவில்லை";
 "LUTImportErrorSubtitle" = "கோப்பை படிக்க முடியவில்லை அல்லது அது சரியான LUT அல்ல.";
 "LUTRowLabel" = "LUT";
+
+/* Texture Library */
+"TextureLibraryTitle" = "அமைப்பு நூலகம்";
+"TextureLibrarySubtitle" = "காகிதம், கான்வாஸ் மற்றும் பிற பொருள் அமைப்புகளை இறக்குமதி செய்யவும் - அல்லது Texture Playground இல் உங்கள் சொந்த அமைப்பை எழுதவும் - மற்றும் ஒவ்வொரு திரைக்கும் ஒதுக்கவும்.";
+"TextureImportButton" = "அமைப்பை இறக்குமதி செய்…";
+"TextureEmptyStateLabel" = "இன்னும் எந்த அமைப்பும் இறக்குமதி செய்யப்படவில்லை.";
+"TexturePickerNoneLabel" = "எதுவுமில்லை";
+"TextureRowLabel" = "அமைப்பு";
+"TextureOpacityLabel" = "ஒளிபுகாநிலை";
+"TextureBlendModeLabel" = "கலப்பு பயன்முறை";
+"TextureTileScaleLabel" = "டைல் அளவு";
+"TextureBlendModeNormalLabel" = "சாதாரண";
+"TextureBlendModeMultiplyLabel" = "பெருக்கல்";
+"TextureBlendModeOverlayLabel" = "மேலடுக்கு";
+"TextureBlendModeSoftLightLabel" = "மென்மையான ஒளி";
+"TextureBlendModeScreenLabel" = "திரை";
+"TextureMenuBarModeCycleLabel" = "சுழற்சி";
+"TextureMenuBarModeGridLabel" = "கட்டம்";
+"TextureMenuBarModeTitle" = "மெனு பட்டி அமைப்பு மாற்றி";
+"TextureMenuBarModeSubtitle" = "சுழற்சி என்பது உங்கள் பிடித்தவற்றின் வழியாகச் செல்லும் ஒரு விரைவு-செயல் பொத்தான். கட்டம் ஒரு சிறு உருவப் தேர்வியைத் திறக்கும் - ஒன்றுக்கும் மேற்பட்ட திரைகளுக்கு பயனுள்ளது.";
+"TextureCycleFavoritesLabel" = "சுழற்சியின் பிடித்தவை";
+"TextureCycleFavoritesEmptyLabel" = "மெனு பட்டி சுழற்சி வரிசையை உருவாக்க கீழே அமைப்புகளைச் சேர்க்கவும்.";
+"TextureCycleFavoritesAddButton" = "பிடித்தவற்றில் சேர்…";
+"TextureDeleteConfirmTitle" = "\"%@\" ஐ நீக்கவா?";
+"TextureDeleteConfirmSubtitle" = "இது அமைப்பை நூலகத்திலிருந்து நீக்கி, அதைப் பயன்படுத்தும் திரைகளிலிருந்தும் அழிக்கும்.";
+"TextureRenameAlertTitle" = "அமைப்பை மறுபெயரிடு";
+"TextureRenameAlertSubtitle" = "இந்த அமைப்புக்கு புதிய பெயரை உள்ளிடவும்.";
+"TextureImportErrorTitle" = "அமைப்பை இறக்குமதி செய்ய இயலவில்லை";
+"TexturePlaygroundOpenButton" = "புதிய Texture Playground…";
+"TexturePlaygroundTitle" = "Texture Playground";
+"TexturePlaygroundSearchSubtitle" = "Metal Shading Language இல் ஒரு டைல் செய்யக்கூடிய அமைப்பை எழுதவும், நேரடி முன்னோட்டத்துடன்.";
+"TexturePlaygroundDefaultName" = "தலைப்பிடப்படாத அமைப்பு";
+"TexturePlaygroundNameFieldLabel" = "பெயர்";
+"TexturePlaygroundPreviewLabel" = "முன்னோட்டம் (2×2 டைல்)";
+"TexturePlaygroundReliefToggleLabel" = "பிரகாசத்திலிருந்து 3D நிவாரணத்தை தானாக உருவாக்கவும்";
+"TexturePlaygroundCopyCodeButton" = "குறியீட்டை நகலெடு";
+"TexturePlaygroundExportButton" = "ஏற்றுமதி…";
+"WhatsNewTextureOverlaysTitle" = "அமைப்பு மேலடுக்குகள்";
+"WhatsNewTextureOverlaysDescription" = "எந்த திரையிலும் காகிதம், கான்வாஸ் அல்லது பிற பொருளின் நுட்பமான அமைப்பைச் சேர்க்கவும் - உண்மையான 3D நிவாரண நிழலிடலுடன் - நீண்ட நேர வாசிப்பு அமர்வுகளை கண்களுக்கு வசதியாக்க. ஒவ்வொரு திரைக்கும், அல்லது ஒரு விரைவு மெனு பட்டி பொத்தானிலிருந்து அமைப்புகளை மாற்றவும்.";
+"WhatsNewTextureOverlaysLocation" = "அமைப்புகள் ← அமைப்புகள்";
+"TextureMenuBarQuickActionLabel" = "அமைப்பு";
+"TextureMenuBarCycleHint" = "ஒவ்வொரு திரையிலும் அடுத்த பிடித்த அமைப்புக்கு (அல்லது ஆஃப்) சுழற்று.";
+"TextureToggleHint" = "இந்த திரையின் அமைப்பை சுழற்று (அல்லது ஆஃப்). நேரடியாக தேர்வு செய்ய வலது கிளிக் செய்யவும்.";
+"TexturePlaygroundPreviewIntensityLabel" = "முன்னோட்ட தீவிரம்";
 
 /* Settings Search (untranslated placeholder) */
 "SettingsSearchPlaceholder" = "Search Settings";

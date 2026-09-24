@@ -74,6 +74,7 @@
 /* Settings Tabs */
 "SettingsTabGeneralLabel" = "Gbogbogbo";
 "SettingsTabDisplaysLabel" = "Àfihàn";
+"SettingsTabTexturesLabel" = "Àwòrán Ìṣàn";
 "SettingsTabVisualsLabel" = "Àwòrán";
 "SettingsTabShortcutsLabel" = "Ọ̀nà abuja";
 "SettingsTabAboutLabel" = "Nípa";
@@ -506,6 +507,50 @@
 "LUTImportErrorTitle" = "Ko Lè Gbe LUT Wọle";
 "LUTImportErrorSubtitle" = "A kò lè ka fáìlì náà tàbí kò jẹ́ LUT tó wulo.";
 "LUTRowLabel" = "LUT";
+
+/* Texture Library */
+"TextureLibraryTitle" = "Ilé-ìkówèésí Àwòrán Ìṣàn";
+"TextureLibrarySubtitle" = "Gbe àwòrán ìṣàn iwe, kánfasì, àti àwọn ohun èlò míràn wọle - tàbí kọ tirẹ nínú Texture Playground - kí o sì fi wọ́n sí àárọ̀ kọọkan.";
+"TextureImportButton" = "Gbe Àwòrán Ìṣàn Wọle…";
+"TextureEmptyStateLabel" = "Ko si àwòrán ìṣàn ti a ti gbe wọle sibẹsibẹ.";
+"TexturePickerNoneLabel" = "Ẹnikan";
+"TextureRowLabel" = "Àwòrán Ìṣàn";
+"TextureOpacityLabel" = "Ìdábòbò";
+"TextureBlendModeLabel" = "Ipò Àdàpọ̀";
+"TextureTileScaleLabel" = "Ìwọ̀n Àlà";
+"TextureBlendModeNormalLabel" = "Déédéé";
+"TextureBlendModeMultiplyLabel" = "Ìlọ́po";
+"TextureBlendModeOverlayLabel" = "Ìlélé";
+"TextureBlendModeSoftLightLabel" = "Ìmọ́lẹ̀ Rírọ̀";
+"TextureBlendModeScreenLabel" = "Ìboju";
+"TextureMenuBarModeCycleLabel" = "Àyíká";
+"TextureMenuBarModeGridLabel" = "Àkàwé";
+"TextureMenuBarModeTitle" = "Aṣàyípadà Àwòrán Ìṣàn Menu Bar";
+"TextureMenuBarModeSubtitle" = "Àyíká jẹ́ bọtìnì iṣẹ́-kánkán kan tí ó ń gba nípasẹ̀ àwọn ohun tí o fẹ́ràn jùlọ. Àkàwé ń ṣí aṣàyàn àwòrán kékeré - ó wúlò tí a bá ní àárọ̀ ju ọ̀kan lọ.";
+"TextureCycleFavoritesLabel" = "Àwọn Ohun Tí O Fẹ́ràn Nínú Àyíká";
+"TextureCycleFavoritesEmptyLabel" = "Fi àwọn àwòrán ìṣàn kún ní ìsàlẹ̀ láti kọ́ ìlànà àyíká menu bar.";
+"TextureCycleFavoritesAddButton" = "Fi kún Àwọn Tí O Fẹ́ràn…";
+"TextureDeleteConfirmTitle" = "Yọ \"%@\" Kúrò?";
+"TextureDeleteConfirmSubtitle" = "Eyi yọ àwòrán ìṣàn kuro ninu ile-ìkówèésí ti o si pa a rẹ kuro ninu eyikeyi àárọ̀ ti n lo.";
+"TextureRenameAlertTitle" = "Ṣe Àtúnṣe Orúkọ Àwòrán Ìṣàn";
+"TextureRenameAlertSubtitle" = "Tẹ orúkọ tuntun sii fún àwòrán ìṣàn yii.";
+"TextureImportErrorTitle" = "Ko Lè Gbe Àwòrán Ìṣàn Wọle";
+"TexturePlaygroundOpenButton" = "Texture Playground Tuntun…";
+"TexturePlaygroundTitle" = "Texture Playground";
+"TexturePlaygroundSearchSubtitle" = "Kọ àwòrán ìṣàn tí a lè ṣe àlà pẹ̀lú Metal Shading Language, pẹ̀lú àwòrán ìṣíwájú láàyè.";
+"TexturePlaygroundDefaultName" = "Àwòrán Ìṣàn Láìní Orúkọ";
+"TexturePlaygroundNameFieldLabel" = "Orúkọ";
+"TexturePlaygroundPreviewLabel" = "Àwòrán Ìṣíwájú (àlà 2×2)";
+"TexturePlaygroundReliefToggleLabel" = "Ṣe àgbékalẹ̀ 3D láìfọwọ́kàn láti inú ìmọ́lẹ̀";
+"TexturePlaygroundCopyCodeButton" = "Dà Kóòdù Kọ";
+"TexturePlaygroundExportButton" = "Fi Jáde…";
+"WhatsNewTextureOverlaysTitle" = "Àwọn Ìlélé Àwòrán Ìṣàn";
+"WhatsNewTextureOverlaysDescription" = "Fi àwòrán ìṣàn iwe, kánfasì, tàbí ohun èlò míràn tí ó rẹwà kún orí àárọ̀ èyíkéyìí - pẹ̀lú ìrísí 3D tòótọ́ - láti mú kí àwọn àkókò kíkà tí ó gùn rọrùn fún ojú. Yí àwọn àwòrán ìṣàn padà fún àárọ̀ kọ̀ọ̀kan, tàbí láti orí bọtìnì menu bar kánkán.";
+"WhatsNewTextureOverlaysLocation" = "Ètò ← Àwòrán Ìṣàn";
+"TextureMenuBarQuickActionLabel" = "Àwòrán Ìṣàn";
+"TextureMenuBarCycleHint" = "Yí padà sí àwòrán ìṣàn tí ó tẹ̀lé tí a fẹ́ràn (tàbí pípa) lórí àárọ̀ kọ̀ọ̀kan.";
+"TextureToggleHint" = "Yí àwòrán ìṣàn àárọ̀ yìí padà (tàbí pípa). Tẹ ọwọ́ ọ̀tún láti yan ọ̀kan tààrà.";
+"TexturePlaygroundPreviewIntensityLabel" = "Okun Àwòrán Ìṣíwájú";
 
 /* Settings Search (untranslated placeholder) */
 "SettingsSearchPlaceholder" = "Search Settings";

@@ -74,6 +74,7 @@
 /* Settings Tabs */
 "SettingsTabGeneralLabel" = "Allmänt";
 "SettingsTabDisplaysLabel" = "Skärmar";
+"SettingsTabTexturesLabel" = "Texturer";
 "SettingsTabVisualsLabel" = "Visuellt";
 "SettingsTabShortcutsLabel" = "Genvägar";
 "SettingsTabAboutLabel" = "Om";
@@ -506,6 +507,50 @@
 "LUTImportErrorTitle" = "Det gick inte att importera LUT";
 "LUTImportErrorSubtitle" = "Filen kunde inte läsas eller är inte en giltig LUT.";
 "LUTRowLabel" = "LUT";
+
+/* Texture Library */
+"TextureLibraryTitle" = "Texturbibliotek";
+"TextureLibrarySubtitle" = "Importera pappers-, dukmålnings- och andra materialtexturer - eller skriv din egen i Textur-Playground - och tilldela dem per skärm.";
+"TextureImportButton" = "Importera Textur…";
+"TextureEmptyStateLabel" = "Inga texturer har importerats ännu.";
+"TexturePickerNoneLabel" = "Ingen";
+"TextureRowLabel" = "Textur";
+"TextureOpacityLabel" = "Opacitet";
+"TextureBlendModeLabel" = "Blandningsläge";
+"TextureTileScaleLabel" = "Rutskala";
+"TextureBlendModeNormalLabel" = "Normal";
+"TextureBlendModeMultiplyLabel" = "Multiplicera";
+"TextureBlendModeOverlayLabel" = "Overlay";
+"TextureBlendModeSoftLightLabel" = "Mjukt ljus";
+"TextureBlendModeScreenLabel" = "Skärm";
+"TextureMenuBarModeCycleLabel" = "Cykel";
+"TextureMenuBarModeGridLabel" = "Rutnät";
+"TextureMenuBarModeTitle" = "Texturväljare i Menyraden";
+"TextureMenuBarModeSubtitle" = "Cykel är en enkel snabbknapp som stegar igenom dina favoriter. Rutnät öppnar en miniatyrväljare - praktiskt med fler än en skärm.";
+"TextureCycleFavoritesLabel" = "Cykelfavoriter";
+"TextureCycleFavoritesEmptyLabel" = "Lägg till texturer nedan för att skapa cykelordningen i menyraden.";
+"TextureCycleFavoritesAddButton" = "Lägg till i Favoriter…";
+"TextureDeleteConfirmTitle" = "Ta bort \"%@\"?";
+"TextureDeleteConfirmSubtitle" = "Detta tar bort texturen från biblioteket och rensar den från alla skärmar som använder den.";
+"TextureRenameAlertTitle" = "Byt namn på Textur";
+"TextureRenameAlertSubtitle" = "Ange ett nytt namn för denna textur.";
+"TextureImportErrorTitle" = "Det gick inte att importera texturen";
+"TexturePlaygroundOpenButton" = "Ny Textur-Playground…";
+"TexturePlaygroundTitle" = "Textur-Playground";
+"TexturePlaygroundSearchSubtitle" = "Skriv en kaklingsbar textur i Metal Shading Language, med en direktuppdaterad förhandsvisning.";
+"TexturePlaygroundDefaultName" = "Namnlös textur";
+"TexturePlaygroundNameFieldLabel" = "Namn";
+"TexturePlaygroundPreviewLabel" = "Förhandsvisning (2×2 kaklad)";
+"TexturePlaygroundReliefToggleLabel" = "Generera automatiskt 3D-relief från luminans";
+"TexturePlaygroundCopyCodeButton" = "Kopiera Kod";
+"TexturePlaygroundExportButton" = "Exportera…";
+"WhatsNewTextureOverlaysTitle" = "Texturöverlägg";
+"WhatsNewTextureOverlaysDescription" = "Lägg till en subtil pappers-, duk- eller materialtextur över valfri skärm - med äkta 3D-relief - för att göra långa läsningar skonsammare för ögonen. Växla texturer per skärm, eller från en snabbknapp i menyraden.";
+"WhatsNewTextureOverlaysLocation" = "Inställningar → Texturer";
+"TextureMenuBarQuickActionLabel" = "Textur";
+"TextureMenuBarCycleHint" = "Växla till nästa favorittextur (eller av) på varje skärm.";
+"TextureToggleHint" = "Växla den här skärmens textur (eller av). Högerklicka för att välja en direkt.";
+"TexturePlaygroundPreviewIntensityLabel" = "Förhandsvisningsintensitet";
 
 /* Settings Search (untranslated placeholder) */
 "SettingsSearchPlaceholder" = "Search Settings";

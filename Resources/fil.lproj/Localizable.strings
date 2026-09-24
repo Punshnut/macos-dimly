@@ -75,6 +75,7 @@
 /* Settings Tabs */
 "SettingsTabGeneralLabel" = "Pangkalahatan";
 "SettingsTabDisplaysLabel" = "Mga display";
+"SettingsTabTexturesLabel" = "Mga Texture";
 "SettingsTabVisualsLabel" = "Mga Visual";
 "SettingsTabShortcutsLabel" = "Mga shortcut";
 "SettingsTabAboutLabel" = "Tungkol";
@@ -504,6 +505,49 @@
 "LUTImportErrorTitle" = "Hindi ma-import ang LUT";
 "LUTImportErrorSubtitle" = "Hindi mabasa ang file o hindi ito valid na LUT.";
 "LUTRowLabel" = "LUT";
+
+"TextureLibraryTitle" = "Texture Library";
+"TextureLibrarySubtitle" = "Mag-import ng papel, canvas, at iba pang material na texture - o sumulat ng sarili mo sa Texture Playground - at italaga ang mga ito sa bawat display.";
+"TextureImportButton" = "Mag-import ng Texture…";
+"TextureEmptyStateLabel" = "Wala pang na-import na texture.";
+"TexturePickerNoneLabel" = "Wala";
+"TextureRowLabel" = "Texture";
+"TextureOpacityLabel" = "Opacity";
+"TextureBlendModeLabel" = "Blend Mode";
+"TextureTileScaleLabel" = "Tile Scale";
+"TextureBlendModeNormalLabel" = "Normal";
+"TextureBlendModeMultiplyLabel" = "Multiply";
+"TextureBlendModeOverlayLabel" = "Overlay";
+"TextureBlendModeSoftLightLabel" = "Soft Light";
+"TextureBlendModeScreenLabel" = "Screen";
+"TextureMenuBarModeCycleLabel" = "Cycle";
+"TextureMenuBarModeGridLabel" = "Grid";
+"TextureMenuBarModeTitle" = "Texture Switcher sa Menu Bar";
+"TextureMenuBarModeSubtitle" = "Ang Cycle ay isang quick-action button na dumadaan sa mga paborito mo. Ang Grid ay nagbubukas ng thumbnail picker - kapaki-pakinabang kapag may higit sa isang display.";
+"TextureCycleFavoritesLabel" = "Mga Paborito sa Cycle";
+"TextureCycleFavoritesEmptyLabel" = "Magdagdag ng texture sa ibaba upang bumuo ng cycle order ng menu bar.";
+"TextureCycleFavoritesAddButton" = "Idagdag sa Paborito…";
+"TextureDeleteConfirmTitle" = "Alisin ang \"%@\"?";
+"TextureDeleteConfirmSubtitle" = "Aalisin nito ang texture mula sa library at iki-clear ito sa lahat ng display na gumagamit nito.";
+"TextureRenameAlertTitle" = "Palitan ang Pangalan ng Texture";
+"TextureRenameAlertSubtitle" = "Maglagay ng bagong pangalan para sa texture na ito.";
+"TextureImportErrorTitle" = "Hindi ma-import ang texture";
+"TexturePlaygroundOpenButton" = "Bagong Texture Playground…";
+"TexturePlaygroundTitle" = "Texture Playground";
+"TexturePlaygroundSearchSubtitle" = "Sumulat ng tileable texture sa Metal Shading Language, na may live preview.";
+"TexturePlaygroundDefaultName" = "Texture na Walang Pamagat";
+"TexturePlaygroundNameFieldLabel" = "Pangalan";
+"TexturePlaygroundPreviewLabel" = "Preview (2×2 na naka-tile)";
+"TexturePlaygroundReliefToggleLabel" = "Awtomatikong bumuo ng 3D relief mula sa luminance";
+"TexturePlaygroundCopyCodeButton" = "Kopyahin ang Code";
+"TexturePlaygroundExportButton" = "I-export…";
+"WhatsNewTextureOverlaysTitle" = "Mga Texture Overlay";
+"WhatsNewTextureOverlaysDescription" = "Magdagdag ng banayad na texture ng papel, canvas, o iba pang material sa anumang display - na may tunay na 3D relief shading - para gawing mas komportable sa mata ang mahahabang pagbabasa. Palitan ang texture kada display, o mula sa mabilis na menu bar button.";
+"WhatsNewTextureOverlaysLocation" = "Settings → Mga Texture";
+"TextureMenuBarQuickActionLabel" = "Texture";
+"TextureMenuBarCycleHint" = "Mag-cycle sa susunod na paboritong texture (o naka-off) sa bawat display.";
+"TextureToggleHint" = "I-cycle ang texture ng display na ito (o naka-off). Right-click upang direktang pumili.";
+"TexturePlaygroundPreviewIntensityLabel" = "Intensity ng Preview";
 
 /* Settings Search (untranslated placeholder) */
 "SettingsSearchPlaceholder" = "Search Settings";

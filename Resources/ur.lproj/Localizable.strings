@@ -74,6 +74,7 @@
 /* Settings Tabs */
 "SettingsTabGeneralLabel" = "عمومی";
 "SettingsTabDisplaysLabel" = "ڈسپلے";
+"SettingsTabTexturesLabel" = "بناوٹیں";
 "SettingsTabVisualsLabel" = "بصریات";
 "SettingsTabShortcutsLabel" = "شارٹ کٹس";
 "SettingsTabAboutLabel" = "متعلق";
@@ -506,6 +507,50 @@
 "LUTImportErrorTitle" = "LUT درآمد نہیں ہو سکی";
 "LUTImportErrorSubtitle" = "فائل پڑھی نہیں جا سکی یا یہ کوئی درست LUT نہیں ہے۔";
 "LUTRowLabel" = "LUT";
+
+/* Texture Library */
+"TextureLibraryTitle" = "بناوٹ لائبریری";
+"TextureLibrarySubtitle" = "کاغذ، کینوس، اور دیگر مواد کی بناوٹیں درآمد کریں - یا بناوٹ Playground میں اپنی بناوٹ لکھیں - اور انہیں ہر ڈسپلے کے لیے مخصوص کریں۔";
+"TextureImportButton" = "بناوٹ درآمد کریں…";
+"TextureEmptyStateLabel" = "ابھی تک کوئی بناوٹ درآمد نہیں کی گئی۔";
+"TexturePickerNoneLabel" = "کوئی نہیں";
+"TextureRowLabel" = "بناوٹ";
+"TextureOpacityLabel" = "دھندلاپن";
+"TextureBlendModeLabel" = "بلینڈ موڈ";
+"TextureTileScaleLabel" = "ٹائل اسکیل";
+"TextureBlendModeNormalLabel" = "عام";
+"TextureBlendModeMultiplyLabel" = "ضرب";
+"TextureBlendModeOverlayLabel" = "اوورلے";
+"TextureBlendModeSoftLightLabel" = "نرم روشنی";
+"TextureBlendModeScreenLabel" = "اسکرین";
+"TextureMenuBarModeCycleLabel" = "دورانیہ";
+"TextureMenuBarModeGridLabel" = "گرڈ";
+"TextureMenuBarModeTitle" = "مینو بار بناوٹ سوئچر";
+"TextureMenuBarModeSubtitle" = "دورانیہ ایک ہی فوری عمل بٹن ہے جو آپ کی پسندیدہ بناوٹوں کے درمیان منتقل ہوتا ہے۔ گرڈ ایک تھمب نیل منتخب کنندہ کھولتا ہے - ایک سے زیادہ ڈسپلے کے ساتھ مفید ہے۔";
+"TextureCycleFavoritesLabel" = "دورانیے کی پسندیدہ";
+"TextureCycleFavoritesEmptyLabel" = "مینو بار کی دورانیہ ترتیب بنانے کے لیے نیچے بناوٹیں شامل کریں۔";
+"TextureCycleFavoritesAddButton" = "پسندیدہ میں شامل کریں…";
+"TextureDeleteConfirmTitle" = "\"%@\" ہٹائیں؟";
+"TextureDeleteConfirmSubtitle" = "یہ بناوٹ کو لائبریری سے ہٹا دے گا اور اسے استعمال کرنے والے تمام ڈسپلے سے صاف کر دے گا۔";
+"TextureRenameAlertTitle" = "بناوٹ کا نام تبدیل کریں";
+"TextureRenameAlertSubtitle" = "اس بناوٹ کے لیے نیا نام درج کریں۔";
+"TextureImportErrorTitle" = "بناوٹ درآمد نہیں ہو سکی";
+"TexturePlaygroundOpenButton" = "نئی بناوٹ Playground…";
+"TexturePlaygroundTitle" = "بناوٹ Playground";
+"TexturePlaygroundSearchSubtitle" = "Metal Shading Language میں ٹائل ایبل بناوٹ لکھیں، لائیو پیش منظر کے ساتھ۔";
+"TexturePlaygroundDefaultName" = "بلا عنوان بناوٹ";
+"TexturePlaygroundNameFieldLabel" = "نام";
+"TexturePlaygroundPreviewLabel" = "پیش منظر (2×2 ٹائل)";
+"TexturePlaygroundReliefToggleLabel" = "چمک سے خودکار 3D ابھار تیار کریں";
+"TexturePlaygroundCopyCodeButton" = "کوڈ کاپی کریں";
+"TexturePlaygroundExportButton" = "برآمد کریں…";
+"WhatsNewTextureOverlaysTitle" = "بناوٹ اوورلے";
+"WhatsNewTextureOverlaysDescription" = "کسی بھی ڈسپلے پر کاغذ، کینوس، یا دیگر مواد کی ہلکی بناوٹ شامل کریں - حقیقی 3D ابھار کے ساتھ - تاکہ طویل مطالعہ آنکھوں کے لیے زیادہ آرام دہ ہو۔ ہر ڈسپلے کے لیے، یا مینو بار کے فوری بٹن سے بناوٹیں تبدیل کریں۔";
+"WhatsNewTextureOverlaysLocation" = "ترتیبات ← بناوٹیں";
+"TextureMenuBarQuickActionLabel" = "بناوٹ";
+"TextureMenuBarCycleHint" = "ہر ڈسپلے پر اگلی پسندیدہ بناوٹ (یا آف) پر منتقل ہوں۔";
+"TextureToggleHint" = "اس ڈسپلے کی بناوٹ کو دورانیہ دیں (یا آف)۔ براہ راست منتخب کرنے کے لیے دائیں کلک کریں۔";
+"TexturePlaygroundPreviewIntensityLabel" = "پیش منظر کی شدت";
 
 /* Settings Search (untranslated placeholder) */
 "SettingsSearchPlaceholder" = "Search Settings";

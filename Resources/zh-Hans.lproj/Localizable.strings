@@ -74,6 +74,7 @@
 /* Settings Tabs */
 "SettingsTabGeneralLabel" = "通用";
 "SettingsTabDisplaysLabel" = "显示器";
+"SettingsTabTexturesLabel" = "纹理";
 "SettingsTabVisualsLabel" = "视觉效果";
 "SettingsTabShortcutsLabel" = "快捷键";
 "SettingsTabAboutLabel" = "关于";
@@ -506,6 +507,50 @@
 "LUTImportErrorTitle" = "无法导入 LUT";
 "LUTImportErrorSubtitle" = "无法读取该文件，或该文件不是有效的 LUT。";
 "LUTRowLabel" = "LUT";
+
+/* Texture Library */
+"TextureLibraryTitle" = "纹理资源库";
+"TextureLibrarySubtitle" = "导入纸张、画布和其他材质纹理 - 或在纹理 Playground 中自行编写 - 并为每台显示器单独指定。";
+"TextureImportButton" = "导入纹理…";
+"TextureEmptyStateLabel" = "尚未导入任何纹理。";
+"TexturePickerNoneLabel" = "无";
+"TextureRowLabel" = "纹理";
+"TextureOpacityLabel" = "不透明度";
+"TextureBlendModeLabel" = "混合模式";
+"TextureTileScaleLabel" = "平铺比例";
+"TextureBlendModeNormalLabel" = "正常";
+"TextureBlendModeMultiplyLabel" = "正片叠底";
+"TextureBlendModeOverlayLabel" = "叠加";
+"TextureBlendModeSoftLightLabel" = "柔光";
+"TextureBlendModeScreenLabel" = "滤色";
+"TextureMenuBarModeCycleLabel" = "循环";
+"TextureMenuBarModeGridLabel" = "网格";
+"TextureMenuBarModeTitle" = "菜单栏纹理切换器";
+"TextureMenuBarModeSubtitle" = "循环是一个单一的快速操作按钮，可依次切换你的收藏。网格会打开缩略图选择器 - 在使用多台显示器时很方便。";
+"TextureCycleFavoritesLabel" = "循环收藏";
+"TextureCycleFavoritesEmptyLabel" = "在下方添加纹理，以构建菜单栏的循环顺序。";
+"TextureCycleFavoritesAddButton" = "添加到收藏…";
+"TextureDeleteConfirmTitle" = "移除\"%@\"？";
+"TextureDeleteConfirmSubtitle" = "此操作将从资源库中移除该纹理，并清除所有正在使用它的显示器上的设置。";
+"TextureRenameAlertTitle" = "重命名纹理";
+"TextureRenameAlertSubtitle" = "为此纹理输入新名称。";
+"TextureImportErrorTitle" = "无法导入纹理";
+"TexturePlaygroundOpenButton" = "新建纹理 Playground…";
+"TexturePlaygroundTitle" = "纹理 Playground";
+"TexturePlaygroundSearchSubtitle" = "使用 Metal Shading Language 编写可平铺的纹理，并进行实时预览。";
+"TexturePlaygroundDefaultName" = "未命名纹理";
+"TexturePlaygroundNameFieldLabel" = "名称";
+"TexturePlaygroundPreviewLabel" = "预览（2×2 平铺）";
+"TexturePlaygroundReliefToggleLabel" = "根据亮度自动生成 3D 浮雕";
+"TexturePlaygroundCopyCodeButton" = "复制代码";
+"TexturePlaygroundExportButton" = "导出…";
+"WhatsNewTextureOverlaysTitle" = "纹理叠加";
+"WhatsNewTextureOverlaysDescription" = "在任意显示器上叠加一层细腻的纸张、画布或其他材质纹理 - 具有真实的 3D 浮雕阴影效果 - 让长时间阅读更护眼。可按显示器切换纹理，也可通过菜单栏快捷按钮切换。";
+"WhatsNewTextureOverlaysLocation" = "设置 → 纹理";
+"TextureMenuBarQuickActionLabel" = "纹理";
+"TextureMenuBarCycleHint" = "在每台显示器上循环切换到下一个收藏的纹理（或关闭）。";
+"TextureToggleHint" = "循环切换此显示器的纹理（或关闭）。右键点击可直接选择。";
+"TexturePlaygroundPreviewIntensityLabel" = "预览强度";
 
 /* Settings Search (untranslated placeholder) */
 "SettingsSearchPlaceholder" = "Search Settings";

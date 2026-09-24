@@ -74,6 +74,7 @@
 /* Settings Tabs */
 "SettingsTabGeneralLabel" = "Chung";
 "SettingsTabDisplaysLabel" = "Màn hình";
+"SettingsTabTexturesLabel" = "Kết cấu";
 "SettingsTabVisualsLabel" = "Hình ảnh";
 "SettingsTabShortcutsLabel" = "Phím tắt";
 "SettingsTabAboutLabel" = "Giới thiệu";
@@ -506,6 +507,50 @@
 "LUTImportErrorTitle" = "Không thể nhập LUT";
 "LUTImportErrorSubtitle" = "Không thể đọc tệp hoặc tệp không phải là LUT hợp lệ.";
 "LUTRowLabel" = "LUT";
+
+/* Texture Library */
+"TextureLibraryTitle" = "Thư viện Kết cấu";
+"TextureLibrarySubtitle" = "Nhập kết cấu giấy, vải canvas và các chất liệu khác - hoặc tự viết trong Playground Kết cấu - rồi gán cho từng màn hình.";
+"TextureImportButton" = "Nhập Kết cấu…";
+"TextureEmptyStateLabel" = "Chưa có kết cấu nào được nhập.";
+"TexturePickerNoneLabel" = "Không có";
+"TextureRowLabel" = "Kết cấu";
+"TextureOpacityLabel" = "Độ mờ đục";
+"TextureBlendModeLabel" = "Chế độ Hòa trộn";
+"TextureTileScaleLabel" = "Tỷ lệ Lát";
+"TextureBlendModeNormalLabel" = "Bình thường";
+"TextureBlendModeMultiplyLabel" = "Nhân";
+"TextureBlendModeOverlayLabel" = "Chồng lớp";
+"TextureBlendModeSoftLightLabel" = "Ánh sáng mềm";
+"TextureBlendModeScreenLabel" = "Màn hình";
+"TextureMenuBarModeCycleLabel" = "Chu kỳ";
+"TextureMenuBarModeGridLabel" = "Lưới";
+"TextureMenuBarModeTitle" = "Bộ chuyển Kết cấu trên Thanh Menu";
+"TextureMenuBarModeSubtitle" = "Chu kỳ là một nút thao tác nhanh duy nhất, lần lượt chuyển qua các mục yêu thích của bạn. Lưới mở bộ chọn hình thu nhỏ - hữu ích khi có nhiều hơn một màn hình.";
+"TextureCycleFavoritesLabel" = "Yêu thích của Chu kỳ";
+"TextureCycleFavoritesEmptyLabel" = "Thêm kết cấu bên dưới để tạo thứ tự chu kỳ trên thanh menu.";
+"TextureCycleFavoritesAddButton" = "Thêm vào Yêu thích…";
+"TextureDeleteConfirmTitle" = "Xóa \"%@\"?";
+"TextureDeleteConfirmSubtitle" = "Thao tác này sẽ xóa kết cấu khỏi thư viện và gỡ bỏ nó khỏi tất cả các màn hình đang sử dụng.";
+"TextureRenameAlertTitle" = "Đổi tên Kết cấu";
+"TextureRenameAlertSubtitle" = "Nhập tên mới cho kết cấu này.";
+"TextureImportErrorTitle" = "Không thể nhập kết cấu";
+"TexturePlaygroundOpenButton" = "Playground Kết cấu Mới…";
+"TexturePlaygroundTitle" = "Playground Kết cấu";
+"TexturePlaygroundSearchSubtitle" = "Viết một kết cấu có thể lát bằng Metal Shading Language, với bản xem trước trực tiếp.";
+"TexturePlaygroundDefaultName" = "Kết cấu chưa đặt tên";
+"TexturePlaygroundNameFieldLabel" = "Tên";
+"TexturePlaygroundPreviewLabel" = "Xem trước (lát 2×2)";
+"TexturePlaygroundReliefToggleLabel" = "Tự động tạo hiệu ứng nổi 3D từ độ sáng";
+"TexturePlaygroundCopyCodeButton" = "Sao chép Mã";
+"TexturePlaygroundExportButton" = "Xuất…";
+"WhatsNewTextureOverlaysTitle" = "Lớp phủ Kết cấu";
+"WhatsNewTextureOverlaysDescription" = "Thêm một lớp kết cấu giấy, vải canvas hoặc chất liệu khác tinh tế lên bất kỳ màn hình nào - với hiệu ứng nổi 3D thực sự - giúp các phiên đọc dài đỡ mỏi mắt hơn. Chuyển đổi kết cấu theo từng màn hình, hoặc từ nút thao tác nhanh trên thanh menu.";
+"WhatsNewTextureOverlaysLocation" = "Cài đặt → Kết cấu";
+"TextureMenuBarQuickActionLabel" = "Kết cấu";
+"TextureMenuBarCycleHint" = "Chuyển sang kết cấu yêu thích tiếp theo (hoặc tắt) trên mọi màn hình.";
+"TextureToggleHint" = "Chuyển đổi kết cấu của màn hình này (hoặc tắt). Nhấp chuột phải để chọn trực tiếp.";
+"TexturePlaygroundPreviewIntensityLabel" = "Cường độ Xem trước";
 
 /* Settings Search (untranslated placeholder) */
 "SettingsSearchPlaceholder" = "Search Settings";

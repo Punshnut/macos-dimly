@@ -74,6 +74,7 @@
 /* Settings Tabs */
 "SettingsTabGeneralLabel" = "General";
 "SettingsTabDisplaysLabel" = "Pantalles";
+"SettingsTabTexturesLabel" = "Textures";
 "SettingsTabVisualsLabel" = "Visuals";
 "SettingsTabShortcutsLabel" = "Dreceres";
 "SettingsTabAboutLabel" = "Quant a";
@@ -506,6 +507,50 @@
 "LUTImportErrorTitle" = "No s'ha pogut importar el LUT";
 "LUTImportErrorSubtitle" = "No s'ha pogut llegir el fitxer o no és un LUT vàlid.";
 "LUTRowLabel" = "LUT";
+
+/* Texture Library */
+"TextureLibraryTitle" = "Biblioteca de Textures";
+"TextureLibrarySubtitle" = "Importa textures de paper, tela i altres materials - o escriu la teva pròpia al Texture Playground - i assigna-les per pantalla.";
+"TextureImportButton" = "Importa una Textura…";
+"TextureEmptyStateLabel" = "Encara no s'ha importat cap textura.";
+"TexturePickerNoneLabel" = "Cap";
+"TextureRowLabel" = "Textura";
+"TextureOpacityLabel" = "Opacitat";
+"TextureBlendModeLabel" = "Mode de fusió";
+"TextureTileScaleLabel" = "Escala del mosaic";
+"TextureBlendModeNormalLabel" = "Normal";
+"TextureBlendModeMultiplyLabel" = "Multiplica";
+"TextureBlendModeOverlayLabel" = "Superposa";
+"TextureBlendModeSoftLightLabel" = "Llum suau";
+"TextureBlendModeScreenLabel" = "Pantalla";
+"TextureMenuBarModeCycleLabel" = "Cicle";
+"TextureMenuBarModeGridLabel" = "Graella";
+"TextureMenuBarModeTitle" = "Selector de Textures a la Barra de Menú";
+"TextureMenuBarModeSubtitle" = "Cicle és un únic botó d'acció ràpida que recorre les teves preferides. Graella obre un selector de miniatures - útil amb més d'una pantalla.";
+"TextureCycleFavoritesLabel" = "Preferides del Cicle";
+"TextureCycleFavoritesEmptyLabel" = "Afegeix textures a sota per crear l'ordre de cicle de la barra de menú.";
+"TextureCycleFavoritesAddButton" = "Afegeix a Preferides…";
+"TextureDeleteConfirmTitle" = "Vols eliminar «%@»?";
+"TextureDeleteConfirmSubtitle" = "Això elimina la textura de la biblioteca i l'esborra de qualsevol pantalla que l'estigui utilitzant.";
+"TextureRenameAlertTitle" = "Canvia el nom de la Textura";
+"TextureRenameAlertSubtitle" = "Introdueix un nom nou per a aquesta textura.";
+"TextureImportErrorTitle" = "No s'ha pogut importar la textura";
+"TexturePlaygroundOpenButton" = "Nou Texture Playground…";
+"TexturePlaygroundTitle" = "Texture Playground";
+"TexturePlaygroundSearchSubtitle" = "Escriu una textura mosaicable en Metal Shading Language, amb previsualització en directe.";
+"TexturePlaygroundDefaultName" = "Textura sense títol";
+"TexturePlaygroundNameFieldLabel" = "Nom";
+"TexturePlaygroundPreviewLabel" = "Previsualització (mosaic 2×2)";
+"TexturePlaygroundReliefToggleLabel" = "Genera automàticament relleu 3D a partir de la lluminositat";
+"TexturePlaygroundCopyCodeButton" = "Copia el Codi";
+"TexturePlaygroundExportButton" = "Exporta…";
+"WhatsNewTextureOverlaysTitle" = "Superposicions de Textura";
+"WhatsNewTextureOverlaysDescription" = "Afegeix una textura subtil de paper, tela o un altre material sobre qualsevol pantalla - amb relleu 3D real - per fer que les sessions de lectura llargues siguin més còmodes per als ulls. Canvia de textura per pantalla, o des d'un botó ràpid a la barra de menú.";
+"WhatsNewTextureOverlaysLocation" = "Configuració → Textures";
+"TextureMenuBarQuickActionLabel" = "Textura";
+"TextureMenuBarCycleHint" = "Canvia a la següent textura preferida (o desactivada) a cada pantalla.";
+"TextureToggleHint" = "Canvia la textura d'aquesta pantalla (o desactivada). Fes clic amb el botó dret per triar-ne una directament.";
+"TexturePlaygroundPreviewIntensityLabel" = "Intensitat de la previsualització";
 
 /* Settings Search (untranslated placeholder) */
 "SettingsSearchPlaceholder" = "Search Settings";

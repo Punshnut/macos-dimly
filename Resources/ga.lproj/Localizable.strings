@@ -74,6 +74,7 @@
 /* Settings Tabs */
 "SettingsTabGeneralLabel" = "Ginearálta";
 "SettingsTabDisplaysLabel" = "Taispeántais";
+"SettingsTabTexturesLabel" = "Uigeachtaí";
 "SettingsTabVisualsLabel" = "Amhairc";
 "SettingsTabShortcutsLabel" = "Aicearraí";
 "SettingsTabAboutLabel" = "Maidir";
@@ -506,6 +507,50 @@
 "LUTImportErrorTitle" = "Níorbh fhéidir an LUT a iompórtáil";
 "LUTImportErrorSubtitle" = "Níorbh fhéidir an comhad a léamh nó níl LUT bailí ann.";
 "LUTRowLabel" = "LUT";
+
+/* Texture Library */
+"TextureLibraryTitle" = "Leabharlann Uigeachtaí";
+"TextureLibrarySubtitle" = "Iompórtáil uigeachtaí páipéir, canbháis, agus ábhar eile - nó scríobh do cheann féin sa Texture Playground - agus sann iad in aghaidh gach taispeána.";
+"TextureImportButton" = "Iompórtáil Uigeacht…";
+"TextureEmptyStateLabel" = "Níl aon uigeacht iompórtáilte fós.";
+"TexturePickerNoneLabel" = "Gan ceann";
+"TextureRowLabel" = "Uigeacht";
+"TextureOpacityLabel" = "Teimhneacht";
+"TextureBlendModeLabel" = "Modh Cumaisc";
+"TextureTileScaleLabel" = "Scála Tíleála";
+"TextureBlendModeNormalLabel" = "Gnáth";
+"TextureBlendModeMultiplyLabel" = "Iolraigh";
+"TextureBlendModeOverlayLabel" = "Forleagan";
+"TextureBlendModeSoftLightLabel" = "Solas Bog";
+"TextureBlendModeScreenLabel" = "Scáileán";
+"TextureMenuBarModeCycleLabel" = "Timthriall";
+"TextureMenuBarModeGridLabel" = "Greille";
+"TextureMenuBarModeTitle" = "Malartóir Uigeachta an Bharra Roghchláir";
+"TextureMenuBarModeSubtitle" = "Is cnaipe gníomh-thapa amháin é an Timthriall a théann trí do rogha cinn. Osclaíonn Greille roghnóir mionsamhla - áisiúil le níos mó ná taispeáint amháin.";
+"TextureCycleFavoritesLabel" = "Ceanáin an Timthriall";
+"TextureCycleFavoritesEmptyLabel" = "Cuir uigeachtaí leis thíos chun ord timthrialla an bharra roghchláir a thógáil.";
+"TextureCycleFavoritesAddButton" = "Cuir le Ceanáin…";
+"TextureDeleteConfirmTitle" = "An uigeacht \"%@\" a bhaint?";
+"TextureDeleteConfirmSubtitle" = "Bainfidh sé seo an uigeacht ón leabharlann agus glanfaidh sé í ó aon taispeána atá á húsáid.";
+"TextureRenameAlertTitle" = "Athainmnigh Uigeacht";
+"TextureRenameAlertSubtitle" = "Cuir isteach ainm nua don uigeacht seo.";
+"TextureImportErrorTitle" = "Níorbh fhéidir an uigeacht a iompórtáil";
+"TexturePlaygroundOpenButton" = "Texture Playground Nua…";
+"TexturePlaygroundTitle" = "Texture Playground";
+"TexturePlaygroundSearchSubtitle" = "Scríobh uigeacht in-tíleála i Metal Shading Language, le réamhamharc beo.";
+"TexturePlaygroundDefaultName" = "Uigeacht Gan Teideal";
+"TexturePlaygroundNameFieldLabel" = "Ainm";
+"TexturePlaygroundPreviewLabel" = "Réamhamharc (tíleáilte 2×2)";
+"TexturePlaygroundReliefToggleLabel" = "Gin faoiseamh 3D go huathoibríoch ón lonracht";
+"TexturePlaygroundCopyCodeButton" = "Cóipeáil Cód";
+"TexturePlaygroundExportButton" = "Easpórtáil…";
+"WhatsNewTextureOverlaysTitle" = "Forleagain Uigeachta";
+"WhatsNewTextureOverlaysDescription" = "Cuir uigeacht shubtaileach páipéir, canbháis, nó ábhair eile os cionn taispeána ar bith - le fíor-fhaoiseamh 3D - chun seisiúin léitheoireachta fada a dhéanamh níos compordaí do na súile. Athraigh uigeachtaí in aghaidh taispeána, nó ó chnaipe tapa an bharra roghchláir.";
+"WhatsNewTextureOverlaysLocation" = "Socruithe ← Uigeachtaí";
+"TextureMenuBarQuickActionLabel" = "Uigeacht";
+"TextureMenuBarCycleHint" = "Timthrialladh go dtí an chéad uigeacht ceanúil eile (nó as) ar gach taispeáint.";
+"TextureToggleHint" = "Timthrialladh uigeacht na taispeána seo (nó as). Deaschliceáil chun ceann a roghnú go díreach.";
+"TexturePlaygroundPreviewIntensityLabel" = "Déine an Réamhamhairc";
 
 /* Settings Search (untranslated placeholder) */
 "SettingsSearchPlaceholder" = "Search Settings";

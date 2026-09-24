@@ -74,6 +74,7 @@
 /* Settings Tabs */
 "SettingsTabGeneralLabel" = "Obecné";
 "SettingsTabDisplaysLabel" = "Displeje";
+"SettingsTabTexturesLabel" = "Textury";
 "SettingsTabVisualsLabel" = "Vizuály";
 "SettingsTabShortcutsLabel" = "Zkratky";
 "SettingsTabAboutLabel" = "O aplikaci";
@@ -506,6 +507,50 @@
 "LUTImportErrorTitle" = "LUT nelze importovat";
 "LUTImportErrorSubtitle" = "Soubor nelze přečíst nebo se nejedná o platný LUT.";
 "LUTRowLabel" = "LUT";
+
+/* Texture Library */
+"TextureLibraryTitle" = "Knihovna Textur";
+"TextureLibrarySubtitle" = "Importujte textury papíru, plátna a dalších materiálů - nebo si napište vlastní v Playgroundu Textur - a přiřaďte je jednotlivým displejům.";
+"TextureImportButton" = "Importovat Texturu…";
+"TextureEmptyStateLabel" = "Zatím nebyly importovány žádné textury.";
+"TexturePickerNoneLabel" = "Žádný";
+"TextureRowLabel" = "Textura";
+"TextureOpacityLabel" = "Krytí";
+"TextureBlendModeLabel" = "Režim prolnutí";
+"TextureTileScaleLabel" = "Měřítko dlaždic";
+"TextureBlendModeNormalLabel" = "Normální";
+"TextureBlendModeMultiplyLabel" = "Násobení";
+"TextureBlendModeOverlayLabel" = "Překrytí";
+"TextureBlendModeSoftLightLabel" = "Měkké světlo";
+"TextureBlendModeScreenLabel" = "Clona";
+"TextureMenuBarModeCycleLabel" = "Cyklus";
+"TextureMenuBarModeGridLabel" = "Mřížka";
+"TextureMenuBarModeTitle" = "Přepínač Textur v Řádku Nabídek";
+"TextureMenuBarModeSubtitle" = "Cyklus je jedno tlačítko rychlé akce, které prochází vašimi oblíbenými. Mřížka otevře výběr miniatur - užitečné při více displejích.";
+"TextureCycleFavoritesLabel" = "Oblíbené Cyklu";
+"TextureCycleFavoritesEmptyLabel" = "Přidejte textury níže a sestavte pořadí cyklu v řádku nabídek.";
+"TextureCycleFavoritesAddButton" = "Přidat do Oblíbených…";
+"TextureDeleteConfirmTitle" = "Odebrat „%@\"?";
+"TextureDeleteConfirmSubtitle" = "Tímto odstraníte texturu z knihovny a odeberete ji ze všech displejů, které ji používají.";
+"TextureRenameAlertTitle" = "Přejmenovat Texturu";
+"TextureRenameAlertSubtitle" = "Zadejte nový název pro tuto texturu.";
+"TextureImportErrorTitle" = "Texturu nelze importovat";
+"TexturePlaygroundOpenButton" = "Nový Playground Textur…";
+"TexturePlaygroundTitle" = "Playground Textur";
+"TexturePlaygroundSearchSubtitle" = "Napište dlaždicovatelnou texturu v Metal Shading Language s živým náhledem.";
+"TexturePlaygroundDefaultName" = "Nepojmenovaná textura";
+"TexturePlaygroundNameFieldLabel" = "Název";
+"TexturePlaygroundPreviewLabel" = "Náhled (2×2 dlaždice)";
+"TexturePlaygroundReliefToggleLabel" = "Automaticky generovat 3D reliéf z jasu";
+"TexturePlaygroundCopyCodeButton" = "Kopírovat Kód";
+"TexturePlaygroundExportButton" = "Exportovat…";
+"WhatsNewTextureOverlaysTitle" = "Překryvné Textury";
+"WhatsNewTextureOverlaysDescription" = "Přidejte jemnou texturu papíru, plátna nebo jiného materiálu přes libovolný displej - se skutečným 3D reliéfem - aby delší čtení bylo šetrnější k očím. Přepínejte textury podle displeje nebo pomocí rychlého tlačítka v řádku nabídek.";
+"WhatsNewTextureOverlaysLocation" = "Nastavení → Textury";
+"TextureMenuBarQuickActionLabel" = "Textura";
+"TextureMenuBarCycleHint" = "Přepnout na další oblíbenou texturu (nebo vypnuto) na každém displeji.";
+"TextureToggleHint" = "Přepínat texturu tohoto displeje (nebo vypnuto). Pravým tlačítkem vyberte přímo.";
+"TexturePlaygroundPreviewIntensityLabel" = "Intenzita náhledu";
 
 /* Settings Search (untranslated placeholder) */
 "SettingsSearchPlaceholder" = "Search Settings";

@@ -74,6 +74,7 @@
 /* Settings Tabs */
 "SettingsTabGeneralLabel" = "सामान्य";
 "SettingsTabDisplaysLabel" = "डिस्प्ले";
+"SettingsTabTexturesLabel" = "टेक्सचर";
 "SettingsTabVisualsLabel" = "दृश्य";
 "SettingsTabShortcutsLabel" = "शॉर्टकट";
 "SettingsTabAboutLabel" = "परिचय";
@@ -506,6 +507,50 @@
 "LUTImportErrorTitle" = "LUT इम्पोर्ट नहीं हो सका";
 "LUTImportErrorSubtitle" = "फ़ाइल पढ़ी नहीं जा सकी या यह एक मान्य LUT नहीं है।";
 "LUTRowLabel" = "LUT";
+
+/* Texture Library */
+"TextureLibraryTitle" = "टेक्सचर लाइब्रेरी";
+"TextureLibrarySubtitle" = "पेपर, कैनवास और अन्य मटीरियल टेक्सचर इम्पोर्ट करें - या टेक्सचर Playground में अपना खुद का लिखें - और उन्हें प्रति डिस्प्ले असाइन करें।";
+"TextureImportButton" = "टेक्सचर इम्पोर्ट करें…";
+"TextureEmptyStateLabel" = "अभी तक कोई टेक्सचर इम्पोर्ट नहीं किया गया।";
+"TexturePickerNoneLabel" = "कोई नहीं";
+"TextureRowLabel" = "टेक्सचर";
+"TextureOpacityLabel" = "अपारदर्शिता";
+"TextureBlendModeLabel" = "ब्लेंड मोड";
+"TextureTileScaleLabel" = "टाइल स्केल";
+"TextureBlendModeNormalLabel" = "सामान्य";
+"TextureBlendModeMultiplyLabel" = "मल्टीप्लाई";
+"TextureBlendModeOverlayLabel" = "ओवरले";
+"TextureBlendModeSoftLightLabel" = "सॉफ्ट लाइट";
+"TextureBlendModeScreenLabel" = "स्क्रीन";
+"TextureMenuBarModeCycleLabel" = "साइकिल";
+"TextureMenuBarModeGridLabel" = "ग्रिड";
+"TextureMenuBarModeTitle" = "मेन्यू बार टेक्सचर स्विचर";
+"TextureMenuBarModeSubtitle" = "साइकिल एक अकेला क्विक-एक्शन बटन है जो आपके पसंदीदा में से गुज़रता है। ग्रिड एक थंबनेल पिकर खोलता है - एक से अधिक डिस्प्ले होने पर उपयोगी।";
+"TextureCycleFavoritesLabel" = "साइकिल के पसंदीदा";
+"TextureCycleFavoritesEmptyLabel" = "मेन्यू बार की साइकिल क्रम बनाने के लिए नीचे टेक्सचर जोड़ें।";
+"TextureCycleFavoritesAddButton" = "पसंदीदा में जोड़ें…";
+"TextureDeleteConfirmTitle" = "\"%@\" हटाएँ?";
+"TextureDeleteConfirmSubtitle" = "यह टेक्सचर को लाइब्रेरी से हटा देता है और इसे उपयोग करने वाले किसी भी डिस्प्ले से साफ़ कर देता है।";
+"TextureRenameAlertTitle" = "टेक्सचर का नाम बदलें";
+"TextureRenameAlertSubtitle" = "इस टेक्सचर के लिए नया नाम दर्ज करें।";
+"TextureImportErrorTitle" = "टेक्सचर इम्पोर्ट नहीं हो सका";
+"TexturePlaygroundOpenButton" = "नया टेक्सचर Playground…";
+"TexturePlaygroundTitle" = "टेक्सचर Playground";
+"TexturePlaygroundSearchSubtitle" = "Metal Shading Language में एक टाइल करने योग्य टेक्सचर लिखें, लाइव पूर्वावलोकन के साथ।";
+"TexturePlaygroundDefaultName" = "बिना शीर्षक वाला टेक्सचर";
+"TexturePlaygroundNameFieldLabel" = "नाम";
+"TexturePlaygroundPreviewLabel" = "पूर्वावलोकन (2×2 टाइल)";
+"TexturePlaygroundReliefToggleLabel" = "ल्यूमिनेंस से स्वचालित रूप से 3D रिलीफ जनरेट करें";
+"TexturePlaygroundCopyCodeButton" = "कोड कॉपी करें";
+"TexturePlaygroundExportButton" = "एक्सपोर्ट करें…";
+"WhatsNewTextureOverlaysTitle" = "टेक्सचर ओवरले";
+"WhatsNewTextureOverlaysDescription" = "किसी भी डिस्प्ले पर पेपर, कैनवास या अन्य मटीरियल का हल्का टेक्सचर जोड़ें - वास्तविक 3D रिलीफ शेडिंग के साथ - जिससे लंबे रीडिंग सेशन आँखों के लिए अधिक आरामदायक हों। प्रति डिस्प्ले, या मेन्यू बार के क्विक बटन से टेक्सचर बदलें।";
+"WhatsNewTextureOverlaysLocation" = "सेटिंग्स ← टेक्सचर";
+"TextureMenuBarQuickActionLabel" = "टेक्सचर";
+"TextureMenuBarCycleHint" = "हर डिस्प्ले पर अगले पसंदीदा टेक्सचर (या ऑफ) पर साइकिल करें।";
+"TextureToggleHint" = "इस डिस्प्ले के टेक्सचर को साइकिल करें (या ऑफ)। सीधे चुनने के लिए राइट-क्लिक करें।";
+"TexturePlaygroundPreviewIntensityLabel" = "पूर्वावलोकन तीव्रता";
 
 /* Settings Search (untranslated placeholder) */
 "SettingsSearchPlaceholder" = "Search Settings";

@@ -74,6 +74,7 @@
 /* Settings Tabs */
 "SettingsTabGeneralLabel" = "ทั่วไป";
 "SettingsTabDisplaysLabel" = "จอ";
+"SettingsTabTexturesLabel" = "พื้นผิว";
 "SettingsTabVisualsLabel" = "ภาพ";
 "SettingsTabShortcutsLabel" = "ทางลัด";
 "SettingsTabAboutLabel" = "เกี่ยวกับ";
@@ -506,6 +507,50 @@
 "LUTImportErrorTitle" = "ไม่สามารถนำเข้า LUT ได้";
 "LUTImportErrorSubtitle" = "ไม่สามารถอ่านไฟล์ได้ หรือไฟล์ไม่ใช่ LUT ที่ถูกต้อง";
 "LUTRowLabel" = "LUT";
+
+/* Texture Library */
+"TextureLibraryTitle" = "คลังพื้นผิว";
+"TextureLibrarySubtitle" = "นำเข้าพื้นผิวกระดาษ ผ้าใบ และวัสดุอื่น ๆ หรือเขียนพื้นผิวของคุณเองใน Playground พื้นผิว แล้วกำหนดให้กับแต่ละจอแสดงผล";
+"TextureImportButton" = "นำเข้าพื้นผิว…";
+"TextureEmptyStateLabel" = "ยังไม่มีพื้นผิวที่นำเข้า";
+"TexturePickerNoneLabel" = "ไม่มี";
+"TextureRowLabel" = "พื้นผิว";
+"TextureOpacityLabel" = "ความทึบ";
+"TextureBlendModeLabel" = "โหมดผสาน";
+"TextureTileScaleLabel" = "อัตราส่วนลายไทล์";
+"TextureBlendModeNormalLabel" = "ปกติ";
+"TextureBlendModeMultiplyLabel" = "คูณ";
+"TextureBlendModeOverlayLabel" = "โอเวอร์เลย์";
+"TextureBlendModeSoftLightLabel" = "แสงนุ่มนวล";
+"TextureBlendModeScreenLabel" = "สกรีน";
+"TextureMenuBarModeCycleLabel" = "หมุนเวียน";
+"TextureMenuBarModeGridLabel" = "กริด";
+"TextureMenuBarModeTitle" = "ตัวสลับพื้นผิวบนแถบเมนู";
+"TextureMenuBarModeSubtitle" = "หมุนเวียนคือปุ่มดำเนินการด่วนปุ่มเดียวที่ไล่ผ่านรายการโปรดของคุณ กริดเปิดตัวเลือกภาพขนาดย่อ - มีประโยชน์เมื่อมีจอแสดงผลมากกว่าหนึ่งจอ";
+"TextureCycleFavoritesLabel" = "รายการโปรดสำหรับหมุนเวียน";
+"TextureCycleFavoritesEmptyLabel" = "เพิ่มพื้นผิวด้านล่างเพื่อสร้างลำดับการหมุนเวียนบนแถบเมนู";
+"TextureCycleFavoritesAddButton" = "เพิ่มลงในรายการโปรด…";
+"TextureDeleteConfirmTitle" = "ลบ \"%@\" ออกหรือไม่?";
+"TextureDeleteConfirmSubtitle" = "การดำเนินการนี้จะลบพื้นผิวออกจากคลัง และล้างการตั้งค่าบนจอแสดงผลที่ใช้งานอยู่ทั้งหมด";
+"TextureRenameAlertTitle" = "เปลี่ยนชื่อพื้นผิว";
+"TextureRenameAlertSubtitle" = "ป้อนชื่อใหม่สำหรับพื้นผิวนี้";
+"TextureImportErrorTitle" = "ไม่สามารถนำเข้าพื้นผิวได้";
+"TexturePlaygroundOpenButton" = "Playground พื้นผิวใหม่…";
+"TexturePlaygroundTitle" = "Playground พื้นผิว";
+"TexturePlaygroundSearchSubtitle" = "เขียนพื้นผิวที่ปูกระเบื้องได้ด้วย Metal Shading Language พร้อมตัวอย่างสด";
+"TexturePlaygroundDefaultName" = "พื้นผิวไม่มีชื่อ";
+"TexturePlaygroundNameFieldLabel" = "ชื่อ";
+"TexturePlaygroundPreviewLabel" = "ตัวอย่าง (ปูกระเบื้อง 2×2)";
+"TexturePlaygroundReliefToggleLabel" = "สร้างลวดลายนูน 3 มิติอัตโนมัติจากความสว่าง";
+"TexturePlaygroundCopyCodeButton" = "คัดลอกโค้ด";
+"TexturePlaygroundExportButton" = "ส่งออก…";
+"WhatsNewTextureOverlaysTitle" = "พื้นผิวซ้อนทับ";
+"WhatsNewTextureOverlaysDescription" = "เพิ่มพื้นผิวกระดาษ ผ้าใบ หรือวัสดุอื่น ๆ ที่ไม่เด่นชัดทับบนจอแสดงผลใด ๆ พร้อมเงานูน 3 มิติจริง เพื่อให้การอ่านนาน ๆ สบายตาขึ้น สลับพื้นผิวตามแต่ละจอแสดงผล หรือจากปุ่มด่วนบนแถบเมนู";
+"WhatsNewTextureOverlaysLocation" = "การตั้งค่า → พื้นผิว";
+"TextureMenuBarQuickActionLabel" = "พื้นผิว";
+"TextureMenuBarCycleHint" = "สลับไปยังพื้นผิวโปรดถัดไป (หรือปิด) บนทุกจอแสดงผล";
+"TextureToggleHint" = "หมุนเวียนพื้นผิวของจอแสดงผลนี้ (หรือปิด) คลิกขวาเพื่อเลือกโดยตรง";
+"TexturePlaygroundPreviewIntensityLabel" = "ความเข้มของตัวอย่าง";
 
 /* Settings Search (untranslated placeholder) */
 "SettingsSearchPlaceholder" = "Search Settings";

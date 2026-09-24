@@ -74,6 +74,7 @@
 /* Settings Tabs */
 "SettingsTabGeneralLabel" = "Általános";
 "SettingsTabDisplaysLabel" = "Kijelzők";
+"SettingsTabTexturesLabel" = "Textúrák";
 "SettingsTabVisualsLabel" = "Vizuális";
 "SettingsTabShortcutsLabel" = "Gyorsbillentyűk";
 "SettingsTabAboutLabel" = "Névjegy";
@@ -506,6 +507,50 @@
 "LUTImportErrorTitle" = "A LUT importálása nem sikerült";
 "LUTImportErrorSubtitle" = "A fájl nem olvasható, vagy nem érvényes LUT.";
 "LUTRowLabel" = "LUT";
+
+/* Texture Library */
+"TextureLibraryTitle" = "Textúrakönyvtár";
+"TextureLibrarySubtitle" = "Importáljon papír-, vászon- és egyéb anyagtextúrákat - vagy írjon sajátot a Textúra Playgroundban -, és rendelje hozzá azokat az egyes kijelzőkhöz.";
+"TextureImportButton" = "Textúra importálása…";
+"TextureEmptyStateLabel" = "Még nincs importált textúra.";
+"TexturePickerNoneLabel" = "Nincs";
+"TextureRowLabel" = "Textúra";
+"TextureOpacityLabel" = "Átlátszatlanság";
+"TextureBlendModeLabel" = "Keverési mód";
+"TextureTileScaleLabel" = "Csempeméret";
+"TextureBlendModeNormalLabel" = "Normál";
+"TextureBlendModeMultiplyLabel" = "Szorzás";
+"TextureBlendModeOverlayLabel" = "Fedés";
+"TextureBlendModeSoftLightLabel" = "Lágy fény";
+"TextureBlendModeScreenLabel" = "Halványítás";
+"TextureMenuBarModeCycleLabel" = "Ciklus";
+"TextureMenuBarModeGridLabel" = "Rács";
+"TextureMenuBarModeTitle" = "Menüsor Textúraváltó";
+"TextureMenuBarModeSubtitle" = "A Ciklus egyetlen gyorsgomb, amely végigmegy a kedvenceken. A Rács egy bélyegkép-választót nyit - hasznos több kijelző esetén.";
+"TextureCycleFavoritesLabel" = "Ciklus Kedvencei";
+"TextureCycleFavoritesEmptyLabel" = "Adjon hozzá textúrákat alább a menüsor ciklus sorrendjének összeállításához.";
+"TextureCycleFavoritesAddButton" = "Hozzáadás a Kedvencekhez…";
+"TextureDeleteConfirmTitle" = "Eltávolítja ezt: „%@\"?";
+"TextureDeleteConfirmSubtitle" = "Ez eltávolítja a textúrát a könyvtárból, és törli az összes azt használó kijelzőről.";
+"TextureRenameAlertTitle" = "Textúra átnevezése";
+"TextureRenameAlertSubtitle" = "Adjon meg egy új nevet ehhez a textúrához.";
+"TextureImportErrorTitle" = "A textúra importálása nem sikerült";
+"TexturePlaygroundOpenButton" = "Új Textúra Playground…";
+"TexturePlaygroundTitle" = "Textúra Playground";
+"TexturePlaygroundSearchSubtitle" = "Írjon csempézhető textúrát Metal Shading Language nyelven, élő előnézettel.";
+"TexturePlaygroundDefaultName" = "Névtelen textúra";
+"TexturePlaygroundNameFieldLabel" = "Név";
+"TexturePlaygroundPreviewLabel" = "Előnézet (2×2 csempézve)";
+"TexturePlaygroundReliefToggleLabel" = "3D dombormű automatikus generálása a fényerő alapján";
+"TexturePlaygroundCopyCodeButton" = "Kód Másolása";
+"TexturePlaygroundExportButton" = "Exportálás…";
+"WhatsNewTextureOverlaysTitle" = "Textúra Overlayek";
+"WhatsNewTextureOverlaysDescription" = "Adjon finom papír-, vászon- vagy más anyagtextúrát bármely kijelzőre - valódi 3D domborművel -, hogy a hosszú olvasási munkamenetek kíméletesebbek legyenek a szemnek. Váltson textúrát kijelzőnként, vagy egy gyors menüsor gombbal.";
+"WhatsNewTextureOverlaysLocation" = "Beállítások → Textúrák";
+"TextureMenuBarQuickActionLabel" = "Textúra";
+"TextureMenuBarCycleHint" = "Váltás a következő kedvenc textúrára (vagy kikapcsolva) minden kijelzőn.";
+"TextureToggleHint" = "Váltogatás ezen a kijelzőn (vagy kikapcsolva). Jobb kattintással közvetlenül választhat.";
+"TexturePlaygroundPreviewIntensityLabel" = "Előnézet intenzitása";
 
 /* Settings Search (untranslated placeholder) */
 "SettingsSearchPlaceholder" = "Search Settings";

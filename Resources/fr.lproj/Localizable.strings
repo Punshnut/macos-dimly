@@ -74,6 +74,7 @@
 /* Settings Tabs */
 "SettingsTabGeneralLabel" = "Général";
 "SettingsTabDisplaysLabel" = "Écrans";
+"SettingsTabTexturesLabel" = "Textures";
 "SettingsTabVisualsLabel" = "Visuels";
 "SettingsTabShortcutsLabel" = "Raccourcis";
 "SettingsTabAboutLabel" = "À propos";
@@ -506,6 +507,50 @@
 "LUTImportErrorTitle" = "Impossible d'importer le LUT";
 "LUTImportErrorSubtitle" = "Le fichier n'a pas pu être lu ou n'est pas un LUT valide.";
 "LUTRowLabel" = "LUT";
+
+/* Texture Library */
+"TextureLibraryTitle" = "Bibliothèque de Textures";
+"TextureLibrarySubtitle" = "Importez des textures de papier, toile et autres matériaux - ou créez les vôtres dans le Playground de Textures - et assignez-les par écran.";
+"TextureImportButton" = "Importer une Texture…";
+"TextureEmptyStateLabel" = "Aucune texture importée.";
+"TexturePickerNoneLabel" = "Aucun";
+"TextureRowLabel" = "Texture";
+"TextureOpacityLabel" = "Opacité";
+"TextureBlendModeLabel" = "Mode de fusion";
+"TextureTileScaleLabel" = "Échelle du motif";
+"TextureBlendModeNormalLabel" = "Normal";
+"TextureBlendModeMultiplyLabel" = "Multiplier";
+"TextureBlendModeOverlayLabel" = "Superposition";
+"TextureBlendModeSoftLightLabel" = "Lumière douce";
+"TextureBlendModeScreenLabel" = "Écran";
+"TextureMenuBarModeCycleLabel" = "Cycle";
+"TextureMenuBarModeGridLabel" = "Grille";
+"TextureMenuBarModeTitle" = "Sélecteur de Texture dans la Barre de Menu";
+"TextureMenuBarModeSubtitle" = "Cycle est un bouton d'action rapide qui parcourt vos favorites. Grille ouvre un sélecteur de vignettes - pratique avec plusieurs écrans.";
+"TextureCycleFavoritesLabel" = "Favorites du Cycle";
+"TextureCycleFavoritesEmptyLabel" = "Ajoutez des textures ci-dessous pour créer l'ordre du cycle dans la barre de menu.";
+"TextureCycleFavoritesAddButton" = "Ajouter aux Favorites…";
+"TextureDeleteConfirmTitle" = "Supprimer « %@ » ?";
+"TextureDeleteConfirmSubtitle" = "Ceci supprime la texture de la bibliothèque et la retire de tous les écrans qui l'utilisent.";
+"TextureRenameAlertTitle" = "Renommer la Texture";
+"TextureRenameAlertSubtitle" = "Saisissez un nouveau nom pour cette texture.";
+"TextureImportErrorTitle" = "Impossible d'importer la texture";
+"TexturePlaygroundOpenButton" = "Nouveau Playground de Texture…";
+"TexturePlaygroundTitle" = "Playground de Texture";
+"TexturePlaygroundSearchSubtitle" = "Écrivez une texture rapiéçable en Metal Shading Language, avec un aperçu en direct.";
+"TexturePlaygroundDefaultName" = "Texture sans titre";
+"TexturePlaygroundNameFieldLabel" = "Nom";
+"TexturePlaygroundPreviewLabel" = "Aperçu (mosaïque 2×2)";
+"TexturePlaygroundReliefToggleLabel" = "Générer automatiquement un relief 3D à partir de la luminance";
+"TexturePlaygroundCopyCodeButton" = "Copier le Code";
+"TexturePlaygroundExportButton" = "Exporter…";
+"WhatsNewTextureOverlaysTitle" = "Superpositions de Texture";
+"WhatsNewTextureOverlaysDescription" = "Ajoutez une subtile texture de papier, toile ou autre matériau sur n'importe quel écran - avec un vrai relief 3D - pour rendre les longues sessions de lecture plus reposantes pour les yeux. Changez de texture par écran, ou depuis un bouton rapide dans la barre de menu.";
+"WhatsNewTextureOverlaysLocation" = "Réglages → Textures";
+"TextureMenuBarQuickActionLabel" = "Texture";
+"TextureMenuBarCycleHint" = "Passer à la texture favorite suivante (ou désactivée) sur tous les écrans.";
+"TextureToggleHint" = "Changer la texture de cet écran (ou désactivée). Clic droit pour en choisir une directement.";
+"TexturePlaygroundPreviewIntensityLabel" = "Intensité de l'aperçu";
 
 /* Settings Search (untranslated placeholder) */
 "SettingsSearchPlaceholder" = "Search Settings";

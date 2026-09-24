@@ -74,6 +74,7 @@
 /* Settings Tabs */
 "SettingsTabGeneralLabel" = "一般";
 "SettingsTabDisplaysLabel" = "ディスプレイ";
+"SettingsTabTexturesLabel" = "テクスチャ";
 "SettingsTabVisualsLabel" = "ビジュアル";
 "SettingsTabShortcutsLabel" = "ショートカット";
 "SettingsTabAboutLabel" = "情報";
@@ -506,6 +507,50 @@
 "LUTImportErrorTitle" = "LUTを読み込めませんでした";
 "LUTImportErrorSubtitle" = "ファイルを読み取れないか、有効なLUTではありません。";
 "LUTRowLabel" = "LUT";
+
+/* Texture Library */
+"TextureLibraryTitle" = "テクスチャライブラリ";
+"TextureLibrarySubtitle" = "紙、キャンバス、その他の素材テクスチャを読み込むか、テクスチャPlaygroundで自作し、ディスプレイごとに割り当てます。";
+"TextureImportButton" = "テクスチャを読み込む…";
+"TextureEmptyStateLabel" = "テクスチャがまだ読み込まれていません。";
+"TexturePickerNoneLabel" = "なし";
+"TextureRowLabel" = "テクスチャ";
+"TextureOpacityLabel" = "不透明度";
+"TextureBlendModeLabel" = "ブレンドモード";
+"TextureTileScaleLabel" = "タイルスケール";
+"TextureBlendModeNormalLabel" = "通常";
+"TextureBlendModeMultiplyLabel" = "乗算";
+"TextureBlendModeOverlayLabel" = "オーバーレイ";
+"TextureBlendModeSoftLightLabel" = "ソフトライト";
+"TextureBlendModeScreenLabel" = "スクリーン";
+"TextureMenuBarModeCycleLabel" = "サイクル";
+"TextureMenuBarModeGridLabel" = "グリッド";
+"TextureMenuBarModeTitle" = "メニューバーテクスチャ切り替え";
+"TextureMenuBarModeSubtitle" = "サイクルはお気に入りを順番に切り替える単一のクイックアクションボタンです。グリッドはサムネイル選択を開きます - 複数ディスプレイに便利です。";
+"TextureCycleFavoritesLabel" = "サイクルのお気に入り";
+"TextureCycleFavoritesEmptyLabel" = "メニューバーのサイクル順を作成するには、以下にテクスチャを追加してください。";
+"TextureCycleFavoritesAddButton" = "お気に入りに追加…";
+"TextureDeleteConfirmTitle" = "\"%@\"を削除しますか?";
+"TextureDeleteConfirmSubtitle" = "このテクスチャをライブラリから削除し、使用中のすべてのディスプレイからも削除します。";
+"TextureRenameAlertTitle" = "テクスチャの名前を変更";
+"TextureRenameAlertSubtitle" = "このテクスチャの新しい名前を入力してください。";
+"TextureImportErrorTitle" = "テクスチャを読み込めませんでした";
+"TexturePlaygroundOpenButton" = "新規テクスチャPlayground…";
+"TexturePlaygroundTitle" = "テクスチャPlayground";
+"TexturePlaygroundSearchSubtitle" = "Metal Shading Languageでタイル可能なテクスチャを記述し、ライブプレビューで確認できます。";
+"TexturePlaygroundDefaultName" = "無題のテクスチャ";
+"TexturePlaygroundNameFieldLabel" = "名前";
+"TexturePlaygroundPreviewLabel" = "プレビュー（2×2タイル）";
+"TexturePlaygroundReliefToggleLabel" = "輝度から3Dレリーフを自動生成";
+"TexturePlaygroundCopyCodeButton" = "コードをコピー";
+"TexturePlaygroundExportButton" = "書き出す…";
+"WhatsNewTextureOverlaysTitle" = "テクスチャオーバーレイ";
+"WhatsNewTextureOverlaysDescription" = "紙、キャンバス、その他の素材のさりげないテクスチャを、本物の3Dレリーフシェーディング付きでどのディスプレイにも重ねて、長時間の読書を目に優しくします。ディスプレイごとに、またはメニューバーのクイックボタンからテクスチャを切り替えられます。";
+"WhatsNewTextureOverlaysLocation" = "設定 → テクスチャ";
+"TextureMenuBarQuickActionLabel" = "テクスチャ";
+"TextureMenuBarCycleHint" = "各ディスプレイで次のお気に入りテクスチャ（またはオフ）に切り替えます。";
+"TextureToggleHint" = "このディスプレイのテクスチャを切り替えます（またはオフ）。右クリックで直接選択できます。";
+"TexturePlaygroundPreviewIntensityLabel" = "プレビューの強度";
 
 /* Settings Search (untranslated placeholder) */
 "SettingsSearchPlaceholder" = "Search Settings";

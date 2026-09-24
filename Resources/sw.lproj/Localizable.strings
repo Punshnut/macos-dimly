@@ -74,6 +74,7 @@
 /* Settings Tabs */
 "SettingsTabGeneralLabel" = "Jumla";
 "SettingsTabDisplaysLabel" = "Skrini";
+"SettingsTabTexturesLabel" = "Miundo";
 "SettingsTabVisualsLabel" = "Picha";
 "SettingsTabShortcutsLabel" = "Vifupisho";
 "SettingsTabAboutLabel" = "Kuhusu";
@@ -506,6 +507,50 @@
 "LUTImportErrorTitle" = "Haikuweza kuingiza LUT";
 "LUTImportErrorSubtitle" = "Faili haikusomeka au si LUT halali.";
 "LUTRowLabel" = "LUT";
+
+/* Texture Library */
+"TextureLibraryTitle" = "Maktaba ya Miundo";
+"TextureLibrarySubtitle" = "Ingiza miundo ya karatasi, turubai, na vifaa vingine - au andika yako mwenyewe katika Texture Playground - na uigawie kwa kila skrini.";
+"TextureImportButton" = "Ingiza Muundo…";
+"TextureEmptyStateLabel" = "Hakuna miundo iliyoingizwa bado.";
+"TexturePickerNoneLabel" = "Hakuna";
+"TextureRowLabel" = "Muundo";
+"TextureOpacityLabel" = "Uwazi";
+"TextureBlendModeLabel" = "Hali ya Muunganiko";
+"TextureTileScaleLabel" = "Kipimo cha Kigae";
+"TextureBlendModeNormalLabel" = "Kawaida";
+"TextureBlendModeMultiplyLabel" = "Zidisha";
+"TextureBlendModeOverlayLabel" = "Weka Juu";
+"TextureBlendModeSoftLightLabel" = "Mwanga Laini";
+"TextureBlendModeScreenLabel" = "Skrini";
+"TextureMenuBarModeCycleLabel" = "Mzunguko";
+"TextureMenuBarModeGridLabel" = "Gridi";
+"TextureMenuBarModeTitle" = "Kibadilishaji Muundo cha Menu Bar";
+"TextureMenuBarModeSubtitle" = "Mzunguko ni kitufe kimoja cha hatua ya haraka kinachopitia vipendwa vyako. Gridi hufungua kichaguzi cha vijipicha - muhimu ukiwa na skrini zaidi ya moja.";
+"TextureCycleFavoritesLabel" = "Vipendwa vya Mzunguko";
+"TextureCycleFavoritesEmptyLabel" = "Ongeza miundo hapa chini kuunda mpangilio wa mzunguko wa menu bar.";
+"TextureCycleFavoritesAddButton" = "Ongeza kwa Vipendwa…";
+"TextureDeleteConfirmTitle" = "Ondoa \"%@\"?";
+"TextureDeleteConfirmSubtitle" = "Hii inaondoa muundo kutoka maktabani na kuufuta kutoka kwa skrini zote zinazoutumia.";
+"TextureRenameAlertTitle" = "Badilisha Jina la Muundo";
+"TextureRenameAlertSubtitle" = "Weka jina jipya kwa muundo huu.";
+"TextureImportErrorTitle" = "Haikuweza kuingiza muundo";
+"TexturePlaygroundOpenButton" = "Texture Playground Mpya…";
+"TexturePlaygroundTitle" = "Texture Playground";
+"TexturePlaygroundSearchSubtitle" = "Andika muundo unaoweza kuungwa katika Metal Shading Language, ukiwa na onyesho la moja kwa moja.";
+"TexturePlaygroundDefaultName" = "Muundo Usio na Jina";
+"TexturePlaygroundNameFieldLabel" = "Jina";
+"TexturePlaygroundPreviewLabel" = "Onyesho la Awali (kigae 2×2)";
+"TexturePlaygroundReliefToggleLabel" = "Zalisha unafuu wa 3D moja kwa moja kutoka kwa mwangaza";
+"TexturePlaygroundCopyCodeButton" = "Nakili Msimbo";
+"TexturePlaygroundExportButton" = "Hamisha…";
+"WhatsNewTextureOverlaysTitle" = "Miundo ya Kuweka Juu";
+"WhatsNewTextureOverlaysDescription" = "Ongeza muundo mwororo wa karatasi, turubai, au kifaa kingine juu ya skrini yoyote - ukiwa na unafuu wa kweli wa 3D - kufanya vipindi virefu vya kusoma kuwa vizuri zaidi kwa macho. Badilisha miundo kwa kila skrini, au kutoka kitufe cha haraka cha menu bar.";
+"WhatsNewTextureOverlaysLocation" = "Mipangilio ← Miundo";
+"TextureMenuBarQuickActionLabel" = "Muundo";
+"TextureMenuBarCycleHint" = "Zunguka hadi muundo unaofuata unaopendwa (au zimwa) kwenye kila skrini.";
+"TextureToggleHint" = "Zungusha muundo wa skrini hii (au zimwa). Bofya-kulia kuchagua moja kwa moja.";
+"TexturePlaygroundPreviewIntensityLabel" = "Ukali wa Onyesho la Awali";
 
 /* Settings Search (untranslated placeholder) */
 "SettingsSearchPlaceholder" = "Search Settings";

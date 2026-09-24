@@ -74,6 +74,7 @@
 /* Settings Tabs */
 "SettingsTabGeneralLabel" = "Genel";
 "SettingsTabDisplaysLabel" = "Ekranlar";
+"SettingsTabTexturesLabel" = "Dokular";
 "SettingsTabVisualsLabel" = "Görseller";
 "SettingsTabShortcutsLabel" = "Kısayollar";
 "SettingsTabAboutLabel" = "Hakkında";
@@ -506,6 +507,50 @@
 "LUTImportErrorTitle" = "LUT içe aktarılamadı";
 "LUTImportErrorSubtitle" = "Dosya okunamadı veya geçerli bir LUT değil.";
 "LUTRowLabel" = "LUT";
+
+/* Texture Library */
+"TextureLibraryTitle" = "Doku Kitaplığı";
+"TextureLibrarySubtitle" = "Kağıt, tuval ve diğer malzeme dokularını içe aktarın - veya Doku Playground'unda kendi dokunuzu yazın - ve her ekrana atayın.";
+"TextureImportButton" = "Doku İçe Aktar…";
+"TextureEmptyStateLabel" = "Henüz doku içe aktarılmadı.";
+"TexturePickerNoneLabel" = "Yok";
+"TextureRowLabel" = "Doku";
+"TextureOpacityLabel" = "Opaklık";
+"TextureBlendModeLabel" = "Karışım Modu";
+"TextureTileScaleLabel" = "Karo Ölçeği";
+"TextureBlendModeNormalLabel" = "Normal";
+"TextureBlendModeMultiplyLabel" = "Çarpma";
+"TextureBlendModeOverlayLabel" = "Kaplama";
+"TextureBlendModeSoftLightLabel" = "Yumuşak Işık";
+"TextureBlendModeScreenLabel" = "Ekran";
+"TextureMenuBarModeCycleLabel" = "Döngü";
+"TextureMenuBarModeGridLabel" = "Izgara";
+"TextureMenuBarModeTitle" = "Menü Çubuğu Doku Değiştirici";
+"TextureMenuBarModeSubtitle" = "Döngü, favorilerinizi sırayla gösteren tek bir hızlı işlem düğmesidir. Izgara, küçük resim seçici açar - birden fazla ekranda kullanışlıdır.";
+"TextureCycleFavoritesLabel" = "Döngü Favorileri";
+"TextureCycleFavoritesEmptyLabel" = "Menü çubuğu döngü sırasını oluşturmak için aşağıya doku ekleyin.";
+"TextureCycleFavoritesAddButton" = "Favorilere Ekle…";
+"TextureDeleteConfirmTitle" = "\"%@\" kaldırılsın mı?";
+"TextureDeleteConfirmSubtitle" = "Bu işlem, dokuyu kitaplıktan kaldırır ve onu kullanan tüm ekranlardan temizler.";
+"TextureRenameAlertTitle" = "Dokuyu Yeniden Adlandır";
+"TextureRenameAlertSubtitle" = "Bu doku için yeni bir ad girin.";
+"TextureImportErrorTitle" = "Doku içe aktarılamadı";
+"TexturePlaygroundOpenButton" = "Yeni Doku Playground'u…";
+"TexturePlaygroundTitle" = "Doku Playground'u";
+"TexturePlaygroundSearchSubtitle" = "Metal Shading Language ile döşenebilir bir doku yazın, canlı önizlemeyle.";
+"TexturePlaygroundDefaultName" = "Adsız doku";
+"TexturePlaygroundNameFieldLabel" = "Ad";
+"TexturePlaygroundPreviewLabel" = "Önizleme (2×2 döşenmiş)";
+"TexturePlaygroundReliefToggleLabel" = "Parlaklıktan otomatik 3D kabartma oluştur";
+"TexturePlaygroundCopyCodeButton" = "Kodu Kopyala";
+"TexturePlaygroundExportButton" = "Dışa Aktar…";
+"WhatsNewTextureOverlaysTitle" = "Doku Kaplamaları";
+"WhatsNewTextureOverlaysDescription" = "Herhangi bir ekranın üzerine ince bir kağıt, tuval veya malzeme dokusu ekleyin - gerçek 3D kabartmayla - uzun okuma seanslarını gözler için daha rahat hale getirin. Dokuları ekran başına veya hızlı bir menü çubuğu düğmesinden değiştirin.";
+"WhatsNewTextureOverlaysLocation" = "Ayarlar → Dokular";
+"TextureMenuBarQuickActionLabel" = "Doku";
+"TextureMenuBarCycleHint" = "Her ekranda bir sonraki favori dokuya (veya kapalıya) geçin.";
+"TextureToggleHint" = "Bu ekranın dokusunu değiştirin (veya kapalı). Doğrudan seçmek için sağ tıklayın.";
+"TexturePlaygroundPreviewIntensityLabel" = "Önizleme Yoğunluğu";
 
 /* Settings Search (untranslated placeholder) */
 "SettingsSearchPlaceholder" = "Search Settings";

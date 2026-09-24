@@ -74,6 +74,7 @@
 /* Settings Tabs */
 "SettingsTabGeneralLabel" = "ယေဘုယျ";
 "SettingsTabDisplaysLabel" = "ပြသမှုများ";
+"SettingsTabTexturesLabel" = "ဖတ်ချက်များ";
 "SettingsTabVisualsLabel" = "မြင်ကွင်းများ";
 "SettingsTabShortcutsLabel" = "ဖတ်ရှည်များ";
 "SettingsTabAboutLabel" = "အကြောင်း";
@@ -506,6 +507,50 @@
 "LUTImportErrorTitle" = "LUT တင်သွင်း၍ မရပါ";
 "LUTImportErrorSubtitle" = "ဖိုင်ကို ဖတ်၍မရသောကြောင့် သို့မဟုတ် ၎င်းသည် မှန်ကန်သော LUT မဟုတ်သောကြောင့် ဖြစ်သည်။";
 "LUTRowLabel" = "LUT";
+
+/* Texture Library */
+"TextureLibraryTitle" = "ဖတ်ချက် စာကြည့်တိုက်";
+"TextureLibrarySubtitle" = "စက္ကူ၊ ကားနဗတ်နှင့် အခြားပစ္စည်းဖတ်ချက်များကို တင်သွင်းပါ - သို့မဟုတ် Texture Playground တွင် သင့်ကိုယ်ပိုင်ဖတ်ချက်ကို ရေးပါ - ပြီး မျက်နှာပြင်တစ်ခုချင်းစီအတွက် သတ်မှတ်ပါ။";
+"TextureImportButton" = "ဖတ်ချက် တင်သွင်းရန်…";
+"TextureEmptyStateLabel" = "ဖတ်ချက်များ မရှိသေးပါ။";
+"TexturePickerNoneLabel" = "မရှိ";
+"TextureRowLabel" = "ဖတ်ချက်";
+"TextureOpacityLabel" = "အလင်းပိတ်မှု";
+"TextureBlendModeLabel" = "ရောစပ်မုဒ်";
+"TextureTileScaleLabel" = "ကွက်အရွယ်အစား";
+"TextureBlendModeNormalLabel" = "ပုံမှန်";
+"TextureBlendModeMultiplyLabel" = "မြှောက်ခြင်း";
+"TextureBlendModeOverlayLabel" = "ထပ်ပိုးခြင်း";
+"TextureBlendModeSoftLightLabel" = "ပျော့ပျောင်းသောအလင်း";
+"TextureBlendModeScreenLabel" = "မျက်နှာပြင်";
+"TextureMenuBarModeCycleLabel" = "လှည့်ပတ်";
+"TextureMenuBarModeGridLabel" = "ဂရစ်";
+"TextureMenuBarModeTitle" = "မီနူးဘား ဖတ်ချက်ပြောင်းစနစ်";
+"TextureMenuBarModeSubtitle" = "လှည့်ပတ်သည် သင်နှစ်သက်ရာများကို အဆင့်ဆင့်ပြောင်းပေးသည့် အမြန်လုပ်ဆောင်ချက်ခလုတ်တစ်ခုဖြစ်သည်။ ဂရစ်သည် ပုံသေးရွေးချယ်ကိရိယာကို ဖွင့်ပေးသည် - မျက်နှာပြင်တစ်ခုထက်ပို၍ရှိလျှင် အသုံးဝင်သည်။";
+"TextureCycleFavoritesLabel" = "လှည့်ပတ်စနစ် နှစ်သက်ရာများ";
+"TextureCycleFavoritesEmptyLabel" = "မီနူးဘား လှည့်ပတ်စနစ်အစီအစဉ်ကို တည်ဆောက်ရန် အောက်တွင် ဖတ်ချက်များထည့်ပါ။";
+"TextureCycleFavoritesAddButton" = "နှစ်သက်ရာများထဲသို့ ထည့်ရန်…";
+"TextureDeleteConfirmTitle" = "\"%@\" ကို ဖယ်ရှားမည်လား?";
+"TextureDeleteConfirmSubtitle" = "ဤလုပ်ဆောင်ချက်သည် ဖတ်ချက်ကို စာကြည့်တိုက်မှ ဖယ်ရှားပြီး ၎င်းကို အသုံးပြုနေသော မျက်နှာပြင်များမှ ရှင်းလင်းမည်ဖြစ်သည်။";
+"TextureRenameAlertTitle" = "ဖတ်ချက် အမည်ပြောင်းရန်";
+"TextureRenameAlertSubtitle" = "ဤဖတ်ချက်အတွက် အမည်အသစ်တစ်ခု ထည့်သွင်းပါ။";
+"TextureImportErrorTitle" = "ဖတ်ချက် တင်သွင်း၍ မရပါ";
+"TexturePlaygroundOpenButton" = "Texture Playground အသစ်…";
+"TexturePlaygroundTitle" = "Texture Playground";
+"TexturePlaygroundSearchSubtitle" = "Metal Shading Language ဖြင့် ကွက်တင်နိုင်သော ဖတ်ချက်ကို ရေးပါ၊ တိုက်ရိုက်အစမ်းကြည့်ခြင်းနှင့်အတူ။";
+"TexturePlaygroundDefaultName" = "ခေါင်းစဉ်မဲ့ ဖတ်ချက်";
+"TexturePlaygroundNameFieldLabel" = "အမည်";
+"TexturePlaygroundPreviewLabel" = "အစမ်းကြည့်ခြင်း (2×2 ကွက်)";
+"TexturePlaygroundReliefToggleLabel" = "အလင်းအားမှ 3D အထစ်ကို အလိုအလျောက် ထုတ်လုပ်ပါ";
+"TexturePlaygroundCopyCodeButton" = "ကုဒ် ကူးယူရန်";
+"TexturePlaygroundExportButton" = "တင်ပို့ရန်…";
+"WhatsNewTextureOverlaysTitle" = "ဖတ်ချက် ထပ်ပိုးမှုများ";
+"WhatsNewTextureOverlaysDescription" = "မည်သည့်မျက်နှာပြင်ပေါ်တွင်မဆို စက္ကူ၊ ကားနဗတ် သို့မဟုတ် အခြားပစ္စည်း၏ သိမ်မွေ့သောဖတ်ချက်ကို ထည့်ပါ - စစ်မှန်သော 3D အထစ်အရိပ်ဖြင့် - ကြာရှည်စာဖတ်ချိန်များကို မျက်စိအတွက် ပို၍ သက်တောင့်သက်သာဖြစ်စေရန်။ မျက်နှာပြင်တစ်ခုချင်းစီအတွက်၊ သို့မဟုတ် မီနူးဘား အမြန်ခလုတ်မှ ဖတ်ချက်များကို ပြောင်းပါ။";
+"WhatsNewTextureOverlaysLocation" = "ဆက်တင်များ ← ဖတ်ချက်များ";
+"TextureMenuBarQuickActionLabel" = "ဖတ်ချက်";
+"TextureMenuBarCycleHint" = "မျက်နှာပြင်တစ်ခုစီတွင် နောက်နှစ်သက်ရာဖတ်ချက် (သို့မဟုတ် ပိတ်) သို့ ပြောင်းပါ။";
+"TextureToggleHint" = "ဤမျက်နှာပြင်၏ ဖတ်ချက်ကို လှည့်ပါ (သို့မဟုတ် ပိတ်)။ တိုက်ရိုက်ရွေးချယ်ရန် ညာဖက်ကလစ်နှိပ်ပါ။";
+"TexturePlaygroundPreviewIntensityLabel" = "အစမ်းကြည့် အားအင်";
 
 /* Settings Search (untranslated placeholder) */
 "SettingsSearchPlaceholder" = "Search Settings";

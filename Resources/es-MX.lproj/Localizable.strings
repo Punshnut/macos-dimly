@@ -74,6 +74,7 @@
 /* Settings Tabs */
 "SettingsTabGeneralLabel" = "General";
 "SettingsTabDisplaysLabel" = "Pantallas";
+"SettingsTabTexturesLabel" = "Texturas";
 "SettingsTabVisualsLabel" = "Visuales";
 "SettingsTabShortcutsLabel" = "Atajos";
 "SettingsTabAboutLabel" = "Acerca de";
@@ -506,6 +507,50 @@
 "LUTImportErrorTitle" = "No se pudo importar el LUT";
 "LUTImportErrorSubtitle" = "No se pudo leer el archivo o no es un LUT válido.";
 "LUTRowLabel" = "LUT";
+
+/* Texture Library */
+"TextureLibraryTitle" = "Biblioteca de Texturas";
+"TextureLibrarySubtitle" = "Importa texturas de papel, lienzo y otros materiales, o crea las tuyas en el Playground de Texturas, y asígnalas por pantalla.";
+"TextureImportButton" = "Importar Textura…";
+"TextureEmptyStateLabel" = "Aún no se han importado texturas.";
+"TexturePickerNoneLabel" = "Ninguno";
+"TextureRowLabel" = "Textura";
+"TextureOpacityLabel" = "Opacidad";
+"TextureBlendModeLabel" = "Modo de fusión";
+"TextureTileScaleLabel" = "Escala del patrón";
+"TextureBlendModeNormalLabel" = "Normal";
+"TextureBlendModeMultiplyLabel" = "Multiplicar";
+"TextureBlendModeOverlayLabel" = "Superponer";
+"TextureBlendModeSoftLightLabel" = "Luz suave";
+"TextureBlendModeScreenLabel" = "Pantalla";
+"TextureMenuBarModeCycleLabel" = "Ciclo";
+"TextureMenuBarModeGridLabel" = "Cuadrícula";
+"TextureMenuBarModeTitle" = "Selector de Textura en la Barra de Menú";
+"TextureMenuBarModeSubtitle" = "Ciclo es un botón de acción rápida que recorre tus favoritas. Cuadrícula abre un selector de miniaturas, útil con más de una pantalla.";
+"TextureCycleFavoritesLabel" = "Favoritas del Ciclo";
+"TextureCycleFavoritesEmptyLabel" = "Agrega texturas abajo para armar el orden del ciclo en la barra de menú.";
+"TextureCycleFavoritesAddButton" = "Agregar a Favoritas…";
+"TextureDeleteConfirmTitle" = "¿Eliminar \"%@\"?";
+"TextureDeleteConfirmSubtitle" = "Esto elimina la textura de la biblioteca y la borra de todas las pantallas que la usen.";
+"TextureRenameAlertTitle" = "Renombrar Textura";
+"TextureRenameAlertSubtitle" = "Escribe un nuevo nombre para esta textura.";
+"TextureImportErrorTitle" = "No se pudo importar la textura";
+"TexturePlaygroundOpenButton" = "Nuevo Playground de Textura…";
+"TexturePlaygroundTitle" = "Playground de Texturas";
+"TexturePlaygroundSearchSubtitle" = "Escribe una textura repetible en Metal Shading Language, con vista previa en vivo.";
+"TexturePlaygroundDefaultName" = "Textura sin título";
+"TexturePlaygroundNameFieldLabel" = "Nombre";
+"TexturePlaygroundPreviewLabel" = "Vista previa (patrón 2×2)";
+"TexturePlaygroundReliefToggleLabel" = "Generar relieve 3D automáticamente a partir de la luminancia";
+"TexturePlaygroundCopyCodeButton" = "Copiar Código";
+"TexturePlaygroundExportButton" = "Exportar…";
+"WhatsNewTextureOverlaysTitle" = "Superposiciones de Textura";
+"WhatsNewTextureOverlaysDescription" = "Agrega una sutil textura de papel, lienzo u otro material sobre cualquier pantalla, con relieve 3D real, para que las sesiones largas de lectura sean más cómodas para la vista. Cambia de textura por pantalla, o desde un botón rápido en la barra de menú.";
+"WhatsNewTextureOverlaysLocation" = "Configuración → Texturas";
+"TextureMenuBarQuickActionLabel" = "Textura";
+"TextureMenuBarCycleHint" = "Cambia a la siguiente textura favorita (o apagado) en todas las pantallas.";
+"TextureToggleHint" = "Cambia la textura de esta pantalla (o apagado). Clic derecho para elegir una directamente.";
+"TexturePlaygroundPreviewIntensityLabel" = "Intensidad de la vista previa";
 
 /* Settings Search (untranslated placeholder) */
 "SettingsSearchPlaceholder" = "Search Settings";

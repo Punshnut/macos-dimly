@@ -74,6 +74,7 @@
 /* Settings Tabs */
 "SettingsTabGeneralLabel" = "Umum";
 "SettingsTabDisplaysLabel" = "Layar";
+"SettingsTabTexturesLabel" = "Tekstur";
 "SettingsTabVisualsLabel" = "Visual";
 "SettingsTabShortcutsLabel" = "Pintasan";
 "SettingsTabAboutLabel" = "Tentang";
@@ -506,6 +507,50 @@
 "LUTImportErrorTitle" = "LUT tidak dapat diimpor";
 "LUTImportErrorSubtitle" = "File tidak dapat dibaca atau bukan LUT yang valid.";
 "LUTRowLabel" = "LUT";
+
+/* Texture Library */
+"TextureLibraryTitle" = "Pustaka Tekstur";
+"TextureLibrarySubtitle" = "Impor tekstur kertas, kanvas, dan material lainnya - atau buat sendiri di Playground Tekstur - lalu tetapkan per tampilan.";
+"TextureImportButton" = "Impor Tekstur…";
+"TextureEmptyStateLabel" = "Belum ada tekstur yang diimpor.";
+"TexturePickerNoneLabel" = "Tidak Ada";
+"TextureRowLabel" = "Tekstur";
+"TextureOpacityLabel" = "Opasitas";
+"TextureBlendModeLabel" = "Mode Blend";
+"TextureTileScaleLabel" = "Skala Ubin";
+"TextureBlendModeNormalLabel" = "Normal";
+"TextureBlendModeMultiplyLabel" = "Kalikan";
+"TextureBlendModeOverlayLabel" = "Overlay";
+"TextureBlendModeSoftLightLabel" = "Cahaya Lembut";
+"TextureBlendModeScreenLabel" = "Layar";
+"TextureMenuBarModeCycleLabel" = "Siklus";
+"TextureMenuBarModeGridLabel" = "Kisi";
+"TextureMenuBarModeTitle" = "Pengalih Tekstur Bilah Menu";
+"TextureMenuBarModeSubtitle" = "Siklus adalah satu tombol aksi cepat yang berpindah di antara favorit Anda. Kisi membuka pemilih thumbnail - berguna jika memiliki lebih dari satu tampilan.";
+"TextureCycleFavoritesLabel" = "Favorit Siklus";
+"TextureCycleFavoritesEmptyLabel" = "Tambahkan tekstur di bawah untuk menyusun urutan siklus bilah menu.";
+"TextureCycleFavoritesAddButton" = "Tambahkan ke Favorit…";
+"TextureDeleteConfirmTitle" = "Hapus \"%@\"?";
+"TextureDeleteConfirmSubtitle" = "Tindakan ini menghapus tekstur dari pustaka dan menghilangkannya dari semua tampilan yang menggunakannya.";
+"TextureRenameAlertTitle" = "Ganti Nama Tekstur";
+"TextureRenameAlertSubtitle" = "Masukkan nama baru untuk tekstur ini.";
+"TextureImportErrorTitle" = "Tekstur tidak dapat diimpor";
+"TexturePlaygroundOpenButton" = "Playground Tekstur Baru…";
+"TexturePlaygroundTitle" = "Playground Tekstur";
+"TexturePlaygroundSearchSubtitle" = "Tulis tekstur yang dapat di-tile dalam Metal Shading Language, dengan pratinjau langsung.";
+"TexturePlaygroundDefaultName" = "Tekstur Tanpa Judul";
+"TexturePlaygroundNameFieldLabel" = "Nama";
+"TexturePlaygroundPreviewLabel" = "Pratinjau (2×2 ubin)";
+"TexturePlaygroundReliefToggleLabel" = "Hasilkan relief 3D otomatis dari luminansi";
+"TexturePlaygroundCopyCodeButton" = "Salin Kode";
+"TexturePlaygroundExportButton" = "Ekspor…";
+"WhatsNewTextureOverlaysTitle" = "Overlay Tekstur";
+"WhatsNewTextureOverlaysDescription" = "Tambahkan tekstur kertas, kanvas, atau material lain yang halus di atas tampilan mana pun - dengan relief 3D asli - agar sesi membaca lama lebih nyaman di mata. Ganti tekstur per tampilan, atau dari tombol cepat bilah menu.";
+"WhatsNewTextureOverlaysLocation" = "Pengaturan → Tekstur";
+"TextureMenuBarQuickActionLabel" = "Tekstur";
+"TextureMenuBarCycleHint" = "Beralih ke tekstur favorit berikutnya (atau nonaktif) pada setiap tampilan.";
+"TextureToggleHint" = "Ganti tekstur tampilan ini (atau nonaktif). Klik kanan untuk memilih langsung.";
+"TexturePlaygroundPreviewIntensityLabel" = "Intensitas Pratinjau";
 
 /* Settings Search (untranslated placeholder) */
 "SettingsSearchPlaceholder" = "Search Settings";

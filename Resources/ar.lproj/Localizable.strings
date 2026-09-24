@@ -74,6 +74,7 @@
 /* Settings Tabs */
 "SettingsTabGeneralLabel" = "عام";
 "SettingsTabDisplaysLabel" = "الشاشات";
+"SettingsTabTexturesLabel" = "الأنسجة";
 "SettingsTabVisualsLabel" = "مرئيات";
 "SettingsTabShortcutsLabel" = "اختصارات";
 "SettingsTabAboutLabel" = "حول";
@@ -506,6 +507,50 @@
 "LUTImportErrorTitle" = "تعذّر استيراد LUT";
 "LUTImportErrorSubtitle" = "تعذّرت قراءة الملف أو أنه ليس LUT صالحًا.";
 "LUTRowLabel" = "LUT";
+
+/* Texture Library */
+"TextureLibraryTitle" = "مكتبة الأنسجة";
+"TextureLibrarySubtitle" = "استورد أنسجة الورق والقماش وغيرها من المواد - أو اكتب نسيجك الخاص في Playground الأنسجة - وخصّص لكل شاشة ما يناسبها.";
+"TextureImportButton" = "استيراد نسيج…";
+"TextureEmptyStateLabel" = "لم يتم استيراد أي نسيج بعد.";
+"TexturePickerNoneLabel" = "لا شيء";
+"TextureRowLabel" = "نسيج";
+"TextureOpacityLabel" = "العتامة";
+"TextureBlendModeLabel" = "وضع المزج";
+"TextureTileScaleLabel" = "مقياس التبليط";
+"TextureBlendModeNormalLabel" = "عادي";
+"TextureBlendModeMultiplyLabel" = "ضرب";
+"TextureBlendModeOverlayLabel" = "تراكب";
+"TextureBlendModeSoftLightLabel" = "إضاءة ناعمة";
+"TextureBlendModeScreenLabel" = "شاشة";
+"TextureMenuBarModeCycleLabel" = "دوري";
+"TextureMenuBarModeGridLabel" = "شبكة";
+"TextureMenuBarModeTitle" = "مبدّل الأنسجة في شريط القوائم";
+"TextureMenuBarModeSubtitle" = "الوضع الدوري هو زر إجراء سريع واحد يتنقل بين المفضلة لديك. تفتح الشبكة أداة اختيار مصغرات - مفيدة عند وجود أكثر من شاشة.";
+"TextureCycleFavoritesLabel" = "مفضلات الوضع الدوري";
+"TextureCycleFavoritesEmptyLabel" = "أضف أنسجة أدناه لبناء ترتيب الدوران في شريط القوائم.";
+"TextureCycleFavoritesAddButton" = "إضافة إلى المفضلة…";
+"TextureDeleteConfirmTitle" = "إزالة «%@»؟";
+"TextureDeleteConfirmSubtitle" = "سيؤدي هذا إلى إزالة النسيج من المكتبة ومسحه من أي شاشات تستخدمه.";
+"TextureRenameAlertTitle" = "إعادة تسمية النسيج";
+"TextureRenameAlertSubtitle" = "أدخل اسمًا جديدًا لهذا النسيج.";
+"TextureImportErrorTitle" = "تعذّر استيراد النسيج";
+"TexturePlaygroundOpenButton" = "Playground نسيج جديد…";
+"TexturePlaygroundTitle" = "Playground النسيج";
+"TexturePlaygroundSearchSubtitle" = "اكتب نسيجًا قابلًا للتبليط بلغة Metal Shading Language، مع معاينة حية.";
+"TexturePlaygroundDefaultName" = "نسيج بلا عنوان";
+"TexturePlaygroundNameFieldLabel" = "الاسم";
+"TexturePlaygroundPreviewLabel" = "معاينة (تبليط 2×2)";
+"TexturePlaygroundReliefToggleLabel" = "توليد تضاريس ثلاثية الأبعاد تلقائيًا من السطوع";
+"TexturePlaygroundCopyCodeButton" = "نسخ الكود";
+"TexturePlaygroundExportButton" = "تصدير…";
+"WhatsNewTextureOverlaysTitle" = "طبقات النسيج";
+"WhatsNewTextureOverlaysDescription" = "أضف نسيج ورق أو قماش أو مادة أخرى خفيفًا فوق أي شاشة - بتضاريس ثلاثية الأبعاد حقيقية - لجعل جلسات القراءة الطويلة أكثر راحة للعين. بدّل الأنسجة لكل شاشة، أو من زر سريع في شريط القوائم.";
+"WhatsNewTextureOverlaysLocation" = "الإعدادات ← الأنسجة";
+"TextureMenuBarQuickActionLabel" = "نسيج";
+"TextureMenuBarCycleHint" = "التنقل إلى النسيج المفضل التالي (أو إيقاف) على كل شاشة.";
+"TextureToggleHint" = "تدوير نسيج هذه الشاشة (أو إيقاف). انقر بالزر الأيمن لاختيار واحد مباشرة.";
+"TexturePlaygroundPreviewIntensityLabel" = "شدة المعاينة";
 
 /* Settings Search (untranslated placeholder) */
 "SettingsSearchPlaceholder" = "Search Settings";

@@ -74,6 +74,7 @@
 /* Settings Tabs */
 "SettingsTabGeneralLabel" = "Общие";
 "SettingsTabDisplaysLabel" = "Дисплеи";
+"SettingsTabTexturesLabel" = "Текстуры";
 "SettingsTabVisualsLabel" = "Визуальные";
 "SettingsTabShortcutsLabel" = "Ярлыки";
 "SettingsTabAboutLabel" = "О программе";
@@ -506,6 +507,50 @@
 "LUTImportErrorTitle" = "Не удалось импортировать LUT";
 "LUTImportErrorSubtitle" = "Не удалось прочитать файл или он не является допустимым LUT.";
 "LUTRowLabel" = "LUT";
+
+/* Texture Library */
+"TextureLibraryTitle" = "Библиотека Текстур";
+"TextureLibrarySubtitle" = "Импортируйте текстуры бумаги, холста и других материалов - или создайте свою в Playground Текстур - и назначайте их для каждого дисплея.";
+"TextureImportButton" = "Импортировать Текстуру…";
+"TextureEmptyStateLabel" = "Текстуры ещё не импортированы.";
+"TexturePickerNoneLabel" = "Нет";
+"TextureRowLabel" = "Текстура";
+"TextureOpacityLabel" = "Непрозрачность";
+"TextureBlendModeLabel" = "Режим наложения";
+"TextureTileScaleLabel" = "Масштаб плитки";
+"TextureBlendModeNormalLabel" = "Обычный";
+"TextureBlendModeMultiplyLabel" = "Умножение";
+"TextureBlendModeOverlayLabel" = "Наложение";
+"TextureBlendModeSoftLightLabel" = "Мягкий свет";
+"TextureBlendModeScreenLabel" = "Экран";
+"TextureMenuBarModeCycleLabel" = "Цикл";
+"TextureMenuBarModeGridLabel" = "Сетка";
+"TextureMenuBarModeTitle" = "Переключатель Текстур в Строке Меню";
+"TextureMenuBarModeSubtitle" = "Цикл - это единственная кнопка быстрого действия, перебирающая избранные. Сетка открывает выбор миниатюр - удобно при нескольких дисплеях.";
+"TextureCycleFavoritesLabel" = "Избранное для Цикла";
+"TextureCycleFavoritesEmptyLabel" = "Добавьте текстуры ниже, чтобы задать порядок цикла в строке меню.";
+"TextureCycleFavoritesAddButton" = "Добавить в Избранное…";
+"TextureDeleteConfirmTitle" = "Удалить «%@»?";
+"TextureDeleteConfirmSubtitle" = "Текстура будет удалена из библиотеки и отключена от всех дисплеев, которые её используют.";
+"TextureRenameAlertTitle" = "Переименовать Текстуру";
+"TextureRenameAlertSubtitle" = "Введите новое имя для этой текстуры.";
+"TextureImportErrorTitle" = "Не удалось импортировать текстуру";
+"TexturePlaygroundOpenButton" = "Новый Playground Текстуры…";
+"TexturePlaygroundTitle" = "Playground Текстуры";
+"TexturePlaygroundSearchSubtitle" = "Напишите повторяющуюся текстуру на Metal Shading Language с live-предпросмотром.";
+"TexturePlaygroundDefaultName" = "Текстура без названия";
+"TexturePlaygroundNameFieldLabel" = "Имя";
+"TexturePlaygroundPreviewLabel" = "Предпросмотр (плитка 2×2)";
+"TexturePlaygroundReliefToggleLabel" = "Автоматически создавать 3D-рельеф на основе яркости";
+"TexturePlaygroundCopyCodeButton" = "Копировать Код";
+"TexturePlaygroundExportButton" = "Экспорт…";
+"WhatsNewTextureOverlaysTitle" = "Наложения Текстур";
+"WhatsNewTextureOverlaysDescription" = "Добавьте едва заметную текстуру бумаги, холста или другого материала поверх любого дисплея - с настоящим 3D-рельефом, - чтобы долгое чтение было комфортнее для глаз. Переключайте текстуры для каждого дисплея или с помощью быстрой кнопки в строке меню.";
+"WhatsNewTextureOverlaysLocation" = "Настройки → Текстуры";
+"TextureMenuBarQuickActionLabel" = "Текстура";
+"TextureMenuBarCycleHint" = "Переключить на следующую избранную текстуру (или выкл.) на каждом дисплее.";
+"TextureToggleHint" = "Переключить текстуру этого дисплея (или выкл.). Щёлкните правой кнопкой, чтобы выбрать напрямую.";
+"TexturePlaygroundPreviewIntensityLabel" = "Интенсивность предпросмотра";
 
 /* Settings Search (untranslated placeholder) */
 "SettingsSearchPlaceholder" = "Search Settings";

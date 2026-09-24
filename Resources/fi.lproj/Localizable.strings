@@ -74,6 +74,7 @@
 /* Settings Tabs */
 "SettingsTabGeneralLabel" = "Yleiset";
 "SettingsTabDisplaysLabel" = "Näytöt";
+"SettingsTabTexturesLabel" = "Tekstuurit";
 "SettingsTabVisualsLabel" = "Visuaalit";
 "SettingsTabShortcutsLabel" = "Pikanäppäimet";
 "SettingsTabAboutLabel" = "Tietoja";
@@ -506,6 +507,50 @@
 "LUTImportErrorTitle" = "LUT-tiedoston tuonti epäonnistui";
 "LUTImportErrorSubtitle" = "Tiedostoa ei voitu lukea tai se ei ole kelvollinen LUT-tiedosto.";
 "LUTRowLabel" = "LUT";
+
+/* Texture Library */
+"TextureLibraryTitle" = "Tekstuurikirjasto";
+"TextureLibrarySubtitle" = "Tuo paperi-, kangas- ja muita materiaalitekstuureja - tai kirjoita omasi Tekstuuri-Playgroundissa - ja määritä ne näyttökohtaisesti.";
+"TextureImportButton" = "Tuo Tekstuuri…";
+"TextureEmptyStateLabel" = "Ei tuotuja tekstuureja.";
+"TexturePickerNoneLabel" = "Ei mitään";
+"TextureRowLabel" = "Tekstuuri";
+"TextureOpacityLabel" = "Peittävyys";
+"TextureBlendModeLabel" = "Sekoitustila";
+"TextureTileScaleLabel" = "Ruudukon mittakaava";
+"TextureBlendModeNormalLabel" = "Normaali";
+"TextureBlendModeMultiplyLabel" = "Kerrotaan";
+"TextureBlendModeOverlayLabel" = "Peittokuva";
+"TextureBlendModeSoftLightLabel" = "Pehmeä valo";
+"TextureBlendModeScreenLabel" = "Näyttö";
+"TextureMenuBarModeCycleLabel" = "Kierrätä";
+"TextureMenuBarModeGridLabel" = "Ruudukko";
+"TextureMenuBarModeTitle" = "Valikkopalkin Tekstuurinvaihdin";
+"TextureMenuBarModeSubtitle" = "Kierrätä on yksi pikapainike, joka käy läpi suosikkisi. Ruudukko avaa pikkukuvavalitsimen - kätevä useamman näytön kanssa.";
+"TextureCycleFavoritesLabel" = "Kierrätyksen Suosikit";
+"TextureCycleFavoritesEmptyLabel" = "Lisää tekstuureja alle luodaksesi valikkopalkin kierrätysjärjestyksen.";
+"TextureCycleFavoritesAddButton" = "Lisää Suosikkeihin…";
+"TextureDeleteConfirmTitle" = "Poistetaanko \"%@\"?";
+"TextureDeleteConfirmSubtitle" = "Tämä poistaa tekstuurin kirjastosta ja tyhjentää sen kaikilta näytöiltä, joissa sitä käytetään.";
+"TextureRenameAlertTitle" = "Nimeä Tekstuuri Uudelleen";
+"TextureRenameAlertSubtitle" = "Kirjoita tälle tekstuurille uusi nimi.";
+"TextureImportErrorTitle" = "Tekstuurin tuonti epäonnistui";
+"TexturePlaygroundOpenButton" = "Uusi Tekstuuri-Playground…";
+"TexturePlaygroundTitle" = "Tekstuuri-Playground";
+"TexturePlaygroundSearchSubtitle" = "Kirjoita laatoitettava tekstuuri Metal Shading Language -kielellä, live-esikatselulla.";
+"TexturePlaygroundDefaultName" = "Nimetön tekstuuri";
+"TexturePlaygroundNameFieldLabel" = "Nimi";
+"TexturePlaygroundPreviewLabel" = "Esikatselu (2×2 laatoitettu)";
+"TexturePlaygroundReliefToggleLabel" = "Luo automaattisesti 3D-kohokuvio luminanssista";
+"TexturePlaygroundCopyCodeButton" = "Kopioi Koodi";
+"TexturePlaygroundExportButton" = "Vie…";
+"WhatsNewTextureOverlaysTitle" = "Tekstuuripeitteet";
+"WhatsNewTextureOverlaysDescription" = "Lisää hienovarainen paperi-, kangas- tai materiaalitekstuuri minkä tahansa näytön päälle - aidolla 3D-kohokuviolla - jotta pitkät lukusessiot rasittavat silmiä vähemmän. Vaihda tekstuureja näyttökohtaisesti tai valikkopalkin pikapainikkeesta.";
+"WhatsNewTextureOverlaysLocation" = "Asetukset → Tekstuurit";
+"TextureMenuBarQuickActionLabel" = "Tekstuuri";
+"TextureMenuBarCycleHint" = "Vaihda seuraavaan suosikkitekstuuriin (tai pois) jokaisella näytöllä.";
+"TextureToggleHint" = "Kierrätä tämän näytön tekstuuria (tai pois). Napsauta hiiren kakkospainikkeella valitaksesi suoraan.";
+"TexturePlaygroundPreviewIntensityLabel" = "Esikatselun voimakkuus";
 
 /* Settings Search (untranslated placeholder) */
 "SettingsSearchPlaceholder" = "Search Settings";

@@ -74,6 +74,7 @@
 /* Settings Tabs */
 "SettingsTabGeneralLabel" = "일반";
 "SettingsTabDisplaysLabel" = "디스플레이";
+"SettingsTabTexturesLabel" = "텍스처";
 "SettingsTabVisualsLabel" = "비주얼";
 "SettingsTabShortcutsLabel" = "단축키";
 "SettingsTabAboutLabel" = "정보";
@@ -506,6 +507,50 @@
 "LUTImportErrorTitle" = "LUT을 가져올 수 없음";
 "LUTImportErrorSubtitle" = "파일을 읽을 수 없거나 올바른 LUT 형식이 아닙니다.";
 "LUTRowLabel" = "LUT";
+
+/* Texture Library */
+"TextureLibraryTitle" = "텍스처 라이브러리";
+"TextureLibrarySubtitle" = "종이, 캔버스 및 기타 재질 텍스처를 가져오거나 텍스처 Playground에서 직접 작성하여 디스플레이별로 지정할 수 있습니다.";
+"TextureImportButton" = "텍스처 가져오기…";
+"TextureEmptyStateLabel" = "가져온 텍스처가 없습니다.";
+"TexturePickerNoneLabel" = "없음";
+"TextureRowLabel" = "텍스처";
+"TextureOpacityLabel" = "불투명도";
+"TextureBlendModeLabel" = "블렌드 모드";
+"TextureTileScaleLabel" = "타일 배율";
+"TextureBlendModeNormalLabel" = "표준";
+"TextureBlendModeMultiplyLabel" = "곱하기";
+"TextureBlendModeOverlayLabel" = "오버레이";
+"TextureBlendModeSoftLightLabel" = "소프트 라이트";
+"TextureBlendModeScreenLabel" = "스크린";
+"TextureMenuBarModeCycleLabel" = "순환";
+"TextureMenuBarModeGridLabel" = "격자";
+"TextureMenuBarModeTitle" = "메뉴 막대 텍스처 전환기";
+"TextureMenuBarModeSubtitle" = "순환은 즐겨찾기를 차례로 전환하는 단일 빠른 작업 버튼입니다. 격자는 축소판 선택기를 엽니다 - 디스플레이가 두 개 이상일 때 유용합니다.";
+"TextureCycleFavoritesLabel" = "순환 즐겨찾기";
+"TextureCycleFavoritesEmptyLabel" = "메뉴 막대 순환 순서를 구성하려면 아래에 텍스처를 추가하세요.";
+"TextureCycleFavoritesAddButton" = "즐겨찾기에 추가…";
+"TextureDeleteConfirmTitle" = "\"%@\"을(를) 제거하겠습니까?";
+"TextureDeleteConfirmSubtitle" = "이 텍스처가 라이브러리에서 제거되고 사용 중인 모든 디스플레이에서 지워집니다.";
+"TextureRenameAlertTitle" = "텍스처 이름 변경";
+"TextureRenameAlertSubtitle" = "이 텍스처의 새 이름을 입력하십시오.";
+"TextureImportErrorTitle" = "텍스처를 가져올 수 없음";
+"TexturePlaygroundOpenButton" = "새 텍스처 Playground…";
+"TexturePlaygroundTitle" = "텍스처 Playground";
+"TexturePlaygroundSearchSubtitle" = "Metal Shading Language로 타일링 가능한 텍스처를 작성하고 실시간 미리보기로 확인하세요.";
+"TexturePlaygroundDefaultName" = "제목 없는 텍스처";
+"TexturePlaygroundNameFieldLabel" = "이름";
+"TexturePlaygroundPreviewLabel" = "미리보기 (2×2 타일)";
+"TexturePlaygroundReliefToggleLabel" = "휘도에서 3D 릴리프를 자동 생성";
+"TexturePlaygroundCopyCodeButton" = "코드 복사";
+"TexturePlaygroundExportButton" = "내보내기…";
+"WhatsNewTextureOverlaysTitle" = "텍스처 오버레이";
+"WhatsNewTextureOverlaysDescription" = "실제 3D 릴리프 음영이 적용된 은은한 종이, 캔버스 또는 재질 텍스처를 디스플레이에 씌워 긴 독서 시간을 눈에 더 편하게 만드세요. 디스플레이별로 또는 빠른 메뉴 막대 버튼으로 텍스처를 전환할 수 있습니다.";
+"WhatsNewTextureOverlaysLocation" = "설정 → 텍스처";
+"TextureMenuBarQuickActionLabel" = "텍스처";
+"TextureMenuBarCycleHint" = "모든 디스플레이에서 다음 즐겨찾는 텍스처(또는 끄기)로 순환합니다.";
+"TextureToggleHint" = "이 디스플레이의 텍스처를 순환합니다(또는 끄기). 마우스 오른쪽 버튼으로 직접 선택하세요.";
+"TexturePlaygroundPreviewIntensityLabel" = "미리보기 강도";
 
 /* Settings Search (untranslated placeholder) */
 "SettingsSearchPlaceholder" = "Search Settings";

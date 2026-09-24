@@ -74,6 +74,7 @@
 /* Settings Tabs */
 "SettingsTabGeneralLabel" = "Allgemein";
 "SettingsTabDisplaysLabel" = "Displays";
+"SettingsTabTexturesLabel" = "Texturen";
 "SettingsTabVisualsLabel" = "Visualisierung";
 "SettingsTabShortcutsLabel" = "Kurzbefehle";
 "SettingsTabAboutLabel" = "Info";
@@ -506,6 +507,50 @@
 "LUTImportErrorTitle" = "LUT konnte nicht importiert werden";
 "LUTImportErrorSubtitle" = "Die Datei konnte nicht gelesen werden oder ist keine gültige LUT.";
 "LUTRowLabel" = "LUT";
+
+/* Texture Library */
+"TextureLibraryTitle" = "Texturbibliothek";
+"TextureLibrarySubtitle" = "Importiere Papier-, Leinwand- und andere Materialtexturen - oder schreibe deine eigene im Textur-Playground - und weise sie pro Display zu.";
+"TextureImportButton" = "Textur importieren…";
+"TextureEmptyStateLabel" = "Noch keine Texturen importiert.";
+"TexturePickerNoneLabel" = "Ohne";
+"TextureRowLabel" = "Textur";
+"TextureOpacityLabel" = "Deckkraft";
+"TextureBlendModeLabel" = "Mischmodus";
+"TextureTileScaleLabel" = "Kachelskalierung";
+"TextureBlendModeNormalLabel" = "Normal";
+"TextureBlendModeMultiplyLabel" = "Multiplizieren";
+"TextureBlendModeOverlayLabel" = "Überlagern";
+"TextureBlendModeSoftLightLabel" = "Weiches Licht";
+"TextureBlendModeScreenLabel" = "Negativ multiplizieren";
+"TextureMenuBarModeCycleLabel" = "Zyklus";
+"TextureMenuBarModeGridLabel" = "Raster";
+"TextureMenuBarModeTitle" = "Menüleisten-Texturwechsler";
+"TextureMenuBarModeSubtitle" = "Zyklus ist eine einzelne Schnellaktions-Schaltfläche, die durch deine Favoriten schaltet. Raster öffnet eine Miniaturansicht - praktisch bei mehr als einem Display.";
+"TextureCycleFavoritesLabel" = "Zyklus-Favoriten";
+"TextureCycleFavoritesEmptyLabel" = "Füge unten Texturen hinzu, um die Zyklusreihenfolge der Menüleiste festzulegen.";
+"TextureCycleFavoritesAddButton" = "Zu Favoriten hinzufügen…";
+"TextureDeleteConfirmTitle" = "„%@\" entfernen?";
+"TextureDeleteConfirmSubtitle" = "Dadurch wird die Textur aus der Bibliothek entfernt und von allen Displays gelöscht, die sie verwenden.";
+"TextureRenameAlertTitle" = "Textur umbenennen";
+"TextureRenameAlertSubtitle" = "Gib einen neuen Namen für diese Textur ein.";
+"TextureImportErrorTitle" = "Textur konnte nicht importiert werden";
+"TexturePlaygroundOpenButton" = "Neuer Textur-Playground…";
+"TexturePlaygroundTitle" = "Textur-Playground";
+"TexturePlaygroundSearchSubtitle" = "Schreibe eine kachelbare Textur in Metal Shading Language mit Live-Vorschau.";
+"TexturePlaygroundDefaultName" = "Unbenannte Textur";
+"TexturePlaygroundNameFieldLabel" = "Name";
+"TexturePlaygroundPreviewLabel" = "Vorschau (2×2 gekachelt)";
+"TexturePlaygroundReliefToggleLabel" = "3D-Relief automatisch aus der Leuchtdichte erzeugen";
+"TexturePlaygroundCopyCodeButton" = "Code kopieren";
+"TexturePlaygroundExportButton" = "Exportieren…";
+"WhatsNewTextureOverlaysTitle" = "Textur-Overlays";
+"WhatsNewTextureOverlaysDescription" = "Lege eine dezente Papier-, Leinwand- oder Materialtextur über ein beliebiges Display - mit echtem 3D-Relief-Schattenwurf -, um lange Lesesitzungen augenschonender zu machen. Wechsle Texturen pro Display oder über eine schnelle Schaltfläche in der Menüleiste.";
+"WhatsNewTextureOverlaysLocation" = "Einstellungen → Texturen";
+"TextureMenuBarQuickActionLabel" = "Textur";
+"TextureMenuBarCycleHint" = "Zur nächsten Favoriten-Textur (oder aus) auf jedem Display wechseln.";
+"TextureToggleHint" = "Textur dieses Displays durchschalten (oder aus). Rechtsklick zur direkten Auswahl.";
+"TexturePlaygroundPreviewIntensityLabel" = "Vorschauintensität";
 
 /* Settings Search (untranslated placeholder) */
 "SettingsSearchPlaceholder" = "Search Settings";

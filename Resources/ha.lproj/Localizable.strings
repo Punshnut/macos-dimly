@@ -74,6 +74,7 @@
 /* Settings Tabs */
 "SettingsTabGeneralLabel" = "Janar";
 "SettingsTabDisplaysLabel" = "Allo";
+"SettingsTabTexturesLabel" = "Yanayin Fuska";
 "SettingsTabVisualsLabel" = "Hoto";
 "SettingsTabShortcutsLabel" = "Gajerun hanyoyi";
 "SettingsTabAboutLabel" = "Game da";
@@ -506,6 +507,50 @@
 "LUTImportErrorTitle" = "Ba a iya shigo da LUT ba";
 "LUTImportErrorSubtitle" = "Ba a iya karanta fayilin ko ba LUT ingantacce ba ne.";
 "LUTRowLabel" = "LUT";
+
+/* Texture Library */
+"TextureLibraryTitle" = "Laburaren Yanayin Fuska";
+"TextureLibrarySubtitle" = "Shigo da yanayin fuska na takarda, zane-zane, da sauran kayan aiki - ko rubuta naka a cikin Texture Playground - kuma ka sanya su ga kowane allon nuni.";
+"TextureImportButton" = "Shigo da Yanayin Fuska…";
+"TextureEmptyStateLabel" = "Ba a shigo da wani yanayin fuska tukuna.";
+"TexturePickerNoneLabel" = "Babu";
+"TextureRowLabel" = "Yanayin Fuska";
+"TextureOpacityLabel" = "Bayyanawa";
+"TextureBlendModeLabel" = "Yanayin Cakuda";
+"TextureTileScaleLabel" = "Girman Tayal";
+"TextureBlendModeNormalLabel" = "Al'ada";
+"TextureBlendModeMultiplyLabel" = "Ninka";
+"TextureBlendModeOverlayLabel" = "Rufi";
+"TextureBlendModeSoftLightLabel" = "Haske Mai Laushi";
+"TextureBlendModeScreenLabel" = "Allo";
+"TextureMenuBarModeCycleLabel" = "Zagaye";
+"TextureMenuBarModeGridLabel" = "Grid";
+"TextureMenuBarModeTitle" = "Mai Sauya Yanayin Fuska na Menu Bar";
+"TextureMenuBarModeSubtitle" = "Zagaye maɓalli ne mai sauri wanda ke bi ta cikin abubuwan da kake so. Grid yana buɗe zaɓin ƙaramar hoto - yana da amfani idan ana da alluna sama da ɗaya.";
+"TextureCycleFavoritesLabel" = "Zaɓaɓɓu na Zagaye";
+"TextureCycleFavoritesEmptyLabel" = "Ƙara yanayin fuska a ƙasa don gina tsarin zagaye na menu bar.";
+"TextureCycleFavoritesAddButton" = "Ƙara zuwa Zaɓaɓɓu…";
+"TextureDeleteConfirmTitle" = "Cire \"%@\"?";
+"TextureDeleteConfirmSubtitle" = "Wannan yana cire yanayin fuska daga laburare kuma yana share shi daga duk wani allon nuni da ke amfani da shi.";
+"TextureRenameAlertTitle" = "Sauya Sunan Yanayin Fuska";
+"TextureRenameAlertSubtitle" = "Shigar da sabon suna ga wannan yanayin fuska.";
+"TextureImportErrorTitle" = "Ba a iya shigo da yanayin fuska ba";
+"TexturePlaygroundOpenButton" = "Sabon Texture Playground…";
+"TexturePlaygroundTitle" = "Texture Playground";
+"TexturePlaygroundSearchSubtitle" = "Rubuta yanayin fuska mai yiwuwa tayal a cikin Metal Shading Language, tare da duban kai tsaye.";
+"TexturePlaygroundDefaultName" = "Yanayin Fuska Ba Tare Da Take Ba";
+"TexturePlaygroundNameFieldLabel" = "Suna";
+"TexturePlaygroundPreviewLabel" = "Dubawa (tayal 2×2)";
+"TexturePlaygroundReliefToggleLabel" = "Ƙirƙiri sassauƙan 3D ta atomatik daga haske";
+"TexturePlaygroundCopyCodeButton" = "Kwafi Lambar";
+"TexturePlaygroundExportButton" = "Fitarwa…";
+"WhatsNewTextureOverlaysTitle" = "Rufin Yanayin Fuska";
+"WhatsNewTextureOverlaysDescription" = "Ƙara yanayin fuska mai laushi na takarda, zane-zane, ko wani kaya a kan kowane allon nuni - tare da ainihin sassauƙan 3D - don sauƙaƙe zaman karatu masu tsawo ga idanu. Sauya yanayin fuska ga kowane allo, ko daga maɓallin menu bar mai sauri.";
+"WhatsNewTextureOverlaysLocation" = "Saituna ← Yanayin Fuska";
+"TextureMenuBarQuickActionLabel" = "Yanayin Fuska";
+"TextureMenuBarCycleHint" = "Zagaya zuwa yanayin fuska na gaba da aka fi so (ko kashe) a kowane allo.";
+"TextureToggleHint" = "Zagaya yanayin fuskar wannan allo (ko kashe). Danna-dama don zaɓa kai tsaye.";
+"TexturePlaygroundPreviewIntensityLabel" = "Ƙarfin Dubawa";
 
 /* Settings Search (untranslated placeholder) */
 "SettingsSearchPlaceholder" = "Search Settings";

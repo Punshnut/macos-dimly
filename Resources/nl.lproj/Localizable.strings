@@ -74,6 +74,7 @@
 /* Settings Tabs */
 "SettingsTabGeneralLabel" = "Algemeen";
 "SettingsTabDisplaysLabel" = "Schermen";
+"SettingsTabTexturesLabel" = "Texturen";
 "SettingsTabVisualsLabel" = "Visuals";
 "SettingsTabShortcutsLabel" = "Sneltoetsen";
 "SettingsTabAboutLabel" = "Over";
@@ -506,6 +507,50 @@
 "LUTImportErrorTitle" = "LUT kan niet worden geïmporteerd";
 "LUTImportErrorSubtitle" = "Het bestand kan niet worden gelezen of is geen geldige LUT.";
 "LUTRowLabel" = "LUT";
+
+/* Texture Library */
+"TextureLibraryTitle" = "Texturenbibliotheek";
+"TextureLibrarySubtitle" = "Importeer papier-, canvas- en andere materiaaltexturen - of schrijf je eigen in de Texture Playground - en wijs ze toe per beeldscherm.";
+"TextureImportButton" = "Textuur importeren…";
+"TextureEmptyStateLabel" = "Nog geen texturen geïmporteerd.";
+"TexturePickerNoneLabel" = "Geen";
+"TextureRowLabel" = "Textuur";
+"TextureOpacityLabel" = "Dekking";
+"TextureBlendModeLabel" = "Mengmodus";
+"TextureTileScaleLabel" = "Tegelschaal";
+"TextureBlendModeNormalLabel" = "Normaal";
+"TextureBlendModeMultiplyLabel" = "Vermenigvuldigen";
+"TextureBlendModeOverlayLabel" = "Overlay";
+"TextureBlendModeSoftLightLabel" = "Zacht licht";
+"TextureBlendModeScreenLabel" = "Scherm";
+"TextureMenuBarModeCycleLabel" = "Doorlopen";
+"TextureMenuBarModeGridLabel" = "Raster";
+"TextureMenuBarModeTitle" = "Textuurwisselaar in Menubalk";
+"TextureMenuBarModeSubtitle" = "Doorlopen is een enkele snelle-actieknop die door je favorieten stapt. Raster opent een miniatuurkiezer - handig bij meer dan één beeldscherm.";
+"TextureCycleFavoritesLabel" = "Favorieten Doorlopen";
+"TextureCycleFavoritesEmptyLabel" = "Voeg hieronder texturen toe om de doorloopvolgorde van de menubalk samen te stellen.";
+"TextureCycleFavoritesAddButton" = "Toevoegen aan Favorieten…";
+"TextureDeleteConfirmTitle" = "\"%@\" verwijderen?";
+"TextureDeleteConfirmSubtitle" = "Hierdoor wordt de textuur uit de bibliotheek verwijderd en gewist van alle beeldschermen die deze gebruiken.";
+"TextureRenameAlertTitle" = "Textuur hernoemen";
+"TextureRenameAlertSubtitle" = "Voer een nieuwe naam in voor deze textuur.";
+"TextureImportErrorTitle" = "Textuur kan niet worden geïmporteerd";
+"TexturePlaygroundOpenButton" = "Nieuwe Texture Playground…";
+"TexturePlaygroundTitle" = "Texture Playground";
+"TexturePlaygroundSearchSubtitle" = "Schrijf een tegelbare textuur in Metal Shading Language, met een live voorbeeld.";
+"TexturePlaygroundDefaultName" = "Naamloze textuur";
+"TexturePlaygroundNameFieldLabel" = "Naam";
+"TexturePlaygroundPreviewLabel" = "Voorbeeld (2×2 tegels)";
+"TexturePlaygroundReliefToggleLabel" = "Genereer automatisch 3D-reliëf op basis van helderheid";
+"TexturePlaygroundCopyCodeButton" = "Code kopiëren";
+"TexturePlaygroundExportButton" = "Exporteren…";
+"WhatsNewTextureOverlaysTitle" = "Textuuroverlays";
+"WhatsNewTextureOverlaysDescription" = "Voeg een subtiele papier-, canvas- of materiaaltextuur toe over elk beeldscherm - met echt 3D-reliëf - om lange leessessies rustgevender voor de ogen te maken. Wissel texturen per beeldscherm, of via een snelle knop in de menubalk.";
+"WhatsNewTextureOverlaysLocation" = "Instellingen → Texturen";
+"TextureMenuBarQuickActionLabel" = "Textuur";
+"TextureMenuBarCycleHint" = "Schakel naar de volgende favoriete textuur (of uit) op elk beeldscherm.";
+"TextureToggleHint" = "Doorloop de textuur van dit beeldscherm (of uit). Klik met de rechtermuisknop om er direct een te kiezen.";
+"TexturePlaygroundPreviewIntensityLabel" = "Voorbeeldintensiteit";
 
 /* Settings Search (untranslated placeholder) */
 "SettingsSearchPlaceholder" = "Search Settings";
