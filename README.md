@@ -203,6 +203,10 @@ Prefer to compile Dimly from source instead of downloading a release? See the [B
 
 Bug reports, feature ideas, and pull requests are welcome - see [CONTRIBUTING.md](CONTRIBUTING.md) for how the codebase is laid out and how to get a dev build running.
 
+## AI Policy
+
+Using AI tools to help with a contribution is fine, but a human needs to be in the loop and able to stand behind the result. See [AI_POLICY.md](AI_POLICY.md) before opening an issue or PR.
+
 [Donate (Ko-Fi)](https://ko-fi.com/janfeuerbacher)
 
 Made with ❤️

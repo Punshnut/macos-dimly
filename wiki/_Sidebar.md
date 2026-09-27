@@ -15,3 +15,4 @@
 **Repo**
 - [README](https://github.com/Punshnut/macos-dimly#readme)
 - [Contributing](https://github.com/Punshnut/macos-dimly/blob/dev/CONTRIBUTING.md)
+- [AI Policy](https://github.com/Punshnut/macos-dimly/blob/dev/AI_POLICY.md)

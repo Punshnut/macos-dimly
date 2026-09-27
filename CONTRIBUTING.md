@@ -65,4 +65,6 @@ The [project wiki](https://github.com/Punshnut/macos-dimly/wiki) is published fr
 
 If you're fixing something small (typo, obvious bug) feel free to just send the PR. For anything larger - a new feature, a behavior change - opening an issue first to talk it through saves everyone time.
 
+Using AI tools to help write your contribution? Read [AI_POLICY.md](AI_POLICY.md) first.
+
 Thanks again for contributing.
