@@ -119,31 +119,8 @@ struct SettingsCard<Content: View>: View {
             content()
         }
         .padding(14)
-        .background(cardBackground)
-        .overlay(cardBorder)
-        .clipShape(RoundedRectangle(cornerRadius: 14, style: .continuous))
+        .dimlyCard(cornerRadius: DimlyRadius.tile)
         .shadow(color: cardShadow.color, radius: cardShadow.radius, x: 0, y: cardShadow.y)
-    }
-
-    private var cardBackground: some View {
-        Group {
-            if colorScheme == .dark {
-                Rectangle().fill(.ultraThinMaterial)
-            } else {
-                Rectangle().fill(Color.white.opacity(0.78))
-            }
-        }
-    }
-
-    private var cardBorder: some View {
-        RoundedRectangle(cornerRadius: 14, style: .continuous)
-            .stroke(cardBorderColor, lineWidth: 1)
-    }
-
-    private var cardBorderColor: Color {
-        colorScheme == .dark
-            ? Color.white.opacity(0.08)
-            : Color.white.opacity(0.5)
     }
 
     private var cardShadow: (color: Color, radius: CGFloat, y: CGFloat) {

@@ -18,7 +18,6 @@
 "IntroControlOverlaySubtitle" = "طبقة تعتيم بديلة عندما يكون DDC غير متاح أو معطلاً.";
 "IntroControlFallbackNote" = "يحاول Dimly استخدام DDC أولاً، ثم ينتقل بأمان إلى وضع التراكب.";
 "IntroGotItButton" = "ابدأ";
-"IntroMenuBarTabLabel" = "شريط القوائم";
 "IntroInternalMonitorTitle" = "إظهار الشاشة المدمجة في Dimly";
 "IntroInternalMonitorHint" = "يمكن لـ Dimly أيضًا التحكم في الشاشة المدمجة بجهاز Mac. يمكنك تغيير ذلك لاحقًا في الإعدادات ← الشاشات.";
 
@@ -79,7 +78,6 @@
 "SettingsTabShortcutsLabel" = "اختصارات";
 "SettingsTabAboutLabel" = "حول";
 
-
 /* Settings Visuals */
 "VisualsTransitionsTitle" = "انتقالات";
 "VisualsTransitionSpeedTitle" = "سرعة الانتقال";
@@ -93,9 +91,7 @@
 /* Settings General */
 "GeneralAutostartTitle" = "التشغيل التلقائي";
 "GeneralAutostartSubtitle" = "ابدأ Dimly تلقائيًا عند تسجيل الدخول.";
-"GeneralLaunchAtLoginLabel" = "التشغيل عند تسجيل الدخول";
 "GeneralMenuBarIconTitle" = "إظهار أيقونة شريط القوائم";
-"GeneralMenuBarIconAltTitle" = "إظهار أيقونة شريط القوائم";
 "GeneralHideDockIconTitle" = "إخفاء أيقونة Dock";
 "GeneralHideDockIconNote" = "إخفاء أيقونة Dock ومدخل مبدّل التطبيقات.";
 "GeneralMenuBarIconHiddenNote" = "يبقى Dimly قيد التشغيل للاختصارات حتى عند إخفاء الأيقونة.";
@@ -177,7 +173,6 @@
 "DDCServiceUnavailableLabel" = "خدمة الشاشة غير متاحة";
 "DDCOpenFailedFormat" = "فشل فتح DDC (0x%@)";
 "DDCRequestFailedFormat" = "فشل طلب DDC (0x%@)";
-"DDCConnectionTypeUnsupported" = "نوع الاتصال قد لا يدعم DDC (جرّب DisplayPort)";
 "DDCInternalPanelLabel" = "لوحة داخلية";
 
 /* Display Report */
@@ -196,17 +191,10 @@
 "VersionFormat" = "الإصدار %@ (%@)";
 "AboutCopyrightLabel" = "© 2026 Jan Feuerbacher";
 "AboutDescriptionText" = "Dimly أداة Swift أصلية لنظام macOS لتعتيم الشاشات الخارجية بسرعة وإدارة السكون/الإيقاظ.";
-"AboutLegacyDescriptionText" = "Dimly أداة Swift أصلية لنظام macOS. يتضمن هذا الإصدار هيكلًا بسيطًا بدعم شريط القوائم، تبديل عنصر تسجيل الدخول، ومفتاح اختصار قابل للتهيئة.";
 "AboutMadeByText" = "صنع في وقت فراغي - شكرًا على الدعم.";
 "AboutGitHubRepoTitle" = "مستودع GitHub";
 "AboutReportIssueTitle" = "الإبلاغ عن مشكلة";
 "AboutDonateTitle" = "تبرع";
-
-/* Preview/Template */
-"PreviewScaffoldLabel" = "هذا الهيكل في SwiftUI جاهز لأفكارك.";
-"PreviewIncrementButton" = "زيادة العداد";
-"PreviewCounterFormat" = "العداد: %lld";
-"PreviewPlaceholderButton" = "تشغيل إجراء تجريبي";
 
 /* Hotkey Labels */
 "HotkeyModCmdLabel" = "Cmd";
@@ -262,7 +250,6 @@
 "HotkeyKeyKbdBrightnessToggleLabel" = "Keyboard Brightness Toggle";
 
 "BrightnessSectionLabel" = "السطوع";
-"DisplayModeFallbackLabel" = "بديل";
 "DDC" = "DDC";
 "DisplayModeOverlayLabel" = "وضع التراكب";
 "BrightnessPercentFormat" = "%lld%%";
@@ -279,11 +266,9 @@
 "BackupExportSaveError" = "تعذّر حفظ ملف النسخة الاحتياطية.";
 "ActionExportButton" = "تصدير";
 "BackupExportActionTitle" = "تصدير الإعدادات المحددة";
-"ExportSelectedSettingsDetails" = "احفظ الفئات المحددة في ملف نسخ احتياطي.";
 "BackupGeneralSettingsTitle" = "الإعدادات العامة";
 "ActionImportButton" = "استيراد";
 "BackupImportActionTitle" = "استيراد الإعدادات المحددة";
-"ImportSelectedSettingsDetails" = "حمّل الفئات المحددة من ملف نسخ احتياطي.";
 "BackupMonitorSettingsTitle" = "إعدادات الشاشة";
 "BackupSelectCategoryError" = "حدّد فئة إعدادات واحدة على الأقل.";
 "GeneralBackupTitle" = "نسخة احتياطية للإعدادات";
@@ -310,10 +295,6 @@
 
 "ActionDecreaseBrightnessHint" = "خفض السطوع";
 "ActionIncreaseBrightnessHint" = "زيادة السطوع";
-"DisplayExcludeFromMenuTitle" = "استبعاد من نافذة شريط القوائم";
-"DisplayExcludeFromMenuSubtitle" = "إخفاء هذا الشاشة من قائمة الشاشات في شريط القوائم.";
-"StatusOnLabel" = "تشغيل";
-"StatusOffLabel" = "إيقاف";
 
 /* Dimly Display Visibility */
 "MenuMonitorsHeader" = "الشاشات";
@@ -362,7 +343,6 @@
 "ProfileReorderTip" = "نصيحة: اسحب بطاقات الملفات الشخصية لإعادة ترتيبها.";
 "ColorVioletLabel" = "بنفسجي";
 
-"ProfileAutoApplyTriggerLabel" = "تشغيل عند اتصال شاشة";
 "ProfileAutoApplyAnyMonitorLabel" = "أي شاشة خارجية";
 
 "GeneralQuickActionsVisibilityTitle" = "ظهور الإجراءات السريعة";
@@ -436,13 +416,11 @@
 "NightShiftLabel" = "Night Shift";
 "NightShiftLessWarmLabel" = "أقل دفئًا";
 "NightShiftMoreWarmLabel" = "أكثر دفئًا";
-"NightShiftUnavailableNote" = "‏Night Shift غير متوفر على هذا الـ Mac.";
 
 /* True Tone */
 "TrueToneLabel" = "True Tone";
 
 /* Contrast */
-"ContrastSectionLabel" = "التباين";
 "ContrastPercentFormat" = "%lld%%";
 "ActionDecreaseContrastHint" = "خفض التباين بنسبة 1%";
 "ActionIncreaseContrastHint" = "زيادة التباين بنسبة 1%";
@@ -451,8 +429,6 @@
 "ResolutionPickerLabel" = "الدقة";
 "RefreshRatePickerLabel" = "معدل التحديث";
 "ResolutionHiDPIBadge" = "HiDPI";
-"ResolutionNativeBadge" = "أصلية";
-"ResolutionDefaultBadge" = "افتراضية";
 
 /* Input Source */
 "InputSourceVGA1Label" = "VGA 1";
@@ -468,7 +444,6 @@
 
 /* Color Profile */
 "ColorProfileSectionLabel" = "ملف الألوان";
-"ColorProfileDefaultLabel" = "افتراضي";
 
 /* Display Appearance Filter */
 "DisplayFilterLabel" = "مرشح المظهر";
@@ -497,15 +472,11 @@
 "LUTImportButton" = "استيراد LUT…";
 "LUTEmptyStateLabel" = "لم يتم استيراد أي LUT بعد.";
 "LUTPickerNoneLabel" = "لا شيء";
-"LUTDimension1DLabel" = "1D";
-"LUTDimension3DLabel" = "3D";
-"LUTApproximationNote" = "يتم أخذ عينات من LUT ثلاثية الأبعاد على طول المحور المحايد.";
 "LUTDeleteConfirmTitle" = "إزالة «%@»؟";
 "LUTDeleteConfirmSubtitle" = "سيؤدي هذا إلى إزالة LUT من المكتبة ومسحه من أي شاشات تستخدمه.";
 "LUTRenameAlertTitle" = "إعادة تسمية LUT";
 "LUTRenameAlertSubtitle" = "أدخل اسمًا جديدًا لهذا LUT.";
 "LUTImportErrorTitle" = "تعذّر استيراد LUT";
-"LUTImportErrorSubtitle" = "تعذّرت قراءة الملف أو أنه ليس LUT صالحًا.";
 "LUTRowLabel" = "LUT";
 
 /* Texture Library */

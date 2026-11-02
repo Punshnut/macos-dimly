@@ -18,7 +18,6 @@
 "IntroControlOverlaySubtitle" = "Camada de escurecimento de recurso quando o DDC não está disponível ou está desativado.";
 "IntroControlFallbackNote" = "O Dimly tenta primeiro o DDC e depois recua em segurança para o modo de sobreposição.";
 "IntroGotItButton" = "Começar";
-"IntroMenuBarTabLabel" = "Barra de menus";
 "IntroInternalMonitorTitle" = "Mostrar ecrã integrado no Dimly";
 "IntroInternalMonitorHint" = "O Dimly também pode controlar o ecrã integrado do seu Mac. Pode alterar isto mais tarde em Definições → Ecrãs.";
 
@@ -79,7 +78,6 @@
 "SettingsTabShortcutsLabel" = "Atalhos";
 "SettingsTabAboutLabel" = "Sobre";
 
-
 /* Settings Visuals */
 "VisualsTransitionsTitle" = "Transições";
 "VisualsTransitionSpeedTitle" = "Velocidade de transição";
@@ -93,9 +91,7 @@
 /* Settings General */
 "GeneralAutostartTitle" = "Início automático";
 "GeneralAutostartSubtitle" = "Iniciar o Dimly automaticamente ao iniciar sessão.";
-"GeneralLaunchAtLoginLabel" = "Iniciar no início de sessão";
 "GeneralMenuBarIconTitle" = "Mostrar ícone na barra";
-"GeneralMenuBarIconAltTitle" = "Mostrar ícone na barra";
 "GeneralHideDockIconTitle" = "Ocultar ícone do Dock";
 "GeneralHideDockIconNote" = "Oculta o ícone do Dock e a entrada no alternador de apps.";
 "GeneralMenuBarIconHiddenNote" = "O Dimly mantém-se a correr para atalhos mesmo com o ícone oculto.";
@@ -177,7 +173,6 @@
 "DDCServiceUnavailableLabel" = "Serviço de ecrã indisponível";
 "DDCOpenFailedFormat" = "Falha ao abrir DDC (0x%@)";
 "DDCRequestFailedFormat" = "Falha no pedido DDC (0x%@)";
-"DDCConnectionTypeUnsupported" = "Este tipo de ligação pode não suportar DDC (experimente DisplayPort)";
 "DDCInternalPanelLabel" = "Painel interno";
 
 /* Display Report */
@@ -196,17 +191,10 @@
 "VersionFormat" = "Versão %@ (%@)";
 "AboutCopyrightLabel" = "© 2026 Jan Feuerbacher";
 "AboutDescriptionText" = "O Dimly é um utilitário Swift nativo para macOS para escurecer rapidamente ecrãs externos e gerir suspensão/ativação.";
-"AboutLegacyDescriptionText" = "O Dimly é um utilitário Swift nativo para macOS. Esta versão inclui um esqueleto simples com suporte de barra de menus, alternância de item de início de sessão e tecla de atalho configurável.";
 "AboutMadeByText" = "Feito no meu tempo livre - obrigado pelo apoio.";
 "AboutGitHubRepoTitle" = "Repositório GitHub";
 "AboutReportIssueTitle" = "Reportar um problema";
 "AboutDonateTitle" = "Doar";
-
-/* Preview/Template */
-"PreviewScaffoldLabel" = "Este esqueleto SwiftUI está pronto para as suas ideias.";
-"PreviewIncrementButton" = "Aumentar contador";
-"PreviewCounterFormat" = "Contador: %lld";
-"PreviewPlaceholderButton" = "Executar ação placeholder";
 
 /* Hotkey Labels */
 "HotkeyModCmdLabel" = "Cmd";
@@ -262,7 +250,6 @@
 "HotkeyKeyKbdBrightnessToggleLabel" = "Keyboard Brightness Toggle";
 
 "BrightnessSectionLabel" = "Brilho";
-"DisplayModeFallbackLabel" = "Modo alternativo";
 "DDC" = "DDC";
 "DisplayModeOverlayLabel" = "Modo de sobreposição";
 "BrightnessPercentFormat" = "%lld%%";
@@ -279,11 +266,9 @@
 "BackupExportSaveError" = "Não foi possível guardar o ficheiro de cópia de segurança.";
 "ActionExportButton" = "Exportar";
 "BackupExportActionTitle" = "Exportar definições selecionadas";
-"ExportSelectedSettingsDetails" = "Guarde as categorias selecionadas num ficheiro de cópia de segurança.";
 "BackupGeneralSettingsTitle" = "Definições gerais";
 "ActionImportButton" = "Importar";
 "BackupImportActionTitle" = "Importar definições selecionadas";
-"ImportSelectedSettingsDetails" = "Carregue as categorias selecionadas de um ficheiro de cópia de segurança.";
 "BackupMonitorSettingsTitle" = "Definições do monitor";
 "BackupSelectCategoryError" = "Selecione pelo menos uma categoria de definições.";
 "GeneralBackupTitle" = "Cópia de segurança das definições";
@@ -310,10 +295,6 @@
 
 "ActionDecreaseBrightnessHint" = "Diminuir brilho";
 "ActionIncreaseBrightnessHint" = "Aumentar brilho";
-"DisplayExcludeFromMenuTitle" = "Excluir da janela da barra de menus";
-"DisplayExcludeFromMenuSubtitle" = "Ocultar este monitor da lista de ecrãs na barra de menus.";
-"StatusOnLabel" = "Ligado";
-"StatusOffLabel" = "Desligado";
 
 /* Dimly Display Visibility */
 "MenuMonitorsHeader" = "Ecrãs";
@@ -362,7 +343,6 @@
 "ProfileReorderTip" = "Dica: arraste os cartões de perfil para os reordenar.";
 "ColorVioletLabel" = "Violeta";
 
-"ProfileAutoApplyTriggerLabel" = "Acionar na ligação do monitor";
 "ProfileAutoApplyAnyMonitorLabel" = "Qualquer monitor externo";
 
 "GeneralQuickActionsVisibilityTitle" = "Visibilidade de Ações Rápidas";
@@ -436,13 +416,11 @@
 "NightShiftLabel" = "Night Shift";
 "NightShiftLessWarmLabel" = "Menos quente";
 "NightShiftMoreWarmLabel" = "Mais quente";
-"NightShiftUnavailableNote" = "O Night Shift não está disponível neste Mac.";
 
 /* True Tone */
 "TrueToneLabel" = "True Tone";
 
 /* Contrast */
-"ContrastSectionLabel" = "Contraste";
 "ContrastPercentFormat" = "%lld%%";
 "ActionDecreaseContrastHint" = "Diminuir o contraste em 1%";
 "ActionIncreaseContrastHint" = "Aumentar o contraste em 1%";
@@ -451,8 +429,6 @@
 "ResolutionPickerLabel" = "Resolução";
 "RefreshRatePickerLabel" = "Taxa de atualização";
 "ResolutionHiDPIBadge" = "HiDPI";
-"ResolutionNativeBadge" = "Nativa";
-"ResolutionDefaultBadge" = "Predefinição";
 
 /* Input Source */
 "InputSourceVGA1Label" = "VGA 1";
@@ -468,7 +444,6 @@
 
 /* Color Profile */
 "ColorProfileSectionLabel" = "Perfil de cor";
-"ColorProfileDefaultLabel" = "Predefinição";
 
 /* Display Appearance Filter */
 "DisplayFilterLabel" = "Filtro de aparência";
@@ -497,15 +472,11 @@
 "LUTImportButton" = "Importar LUT…";
 "LUTEmptyStateLabel" = "Nenhum LUT importado ainda.";
 "LUTPickerNoneLabel" = "Nenhum";
-"LUTDimension1DLabel" = "1D";
-"LUTDimension3DLabel" = "3D";
-"LUTApproximationNote" = "Os LUTs 3D são amostrados ao longo do eixo neutro.";
 "LUTDeleteConfirmTitle" = "Remover \"%@\"?";
 "LUTDeleteConfirmSubtitle" = "Esta ação remove o LUT da biblioteca e limpa-o de todos os monitores que o utilizam.";
 "LUTRenameAlertTitle" = "Renomear LUT";
 "LUTRenameAlertSubtitle" = "Introduza um novo nome para este LUT.";
 "LUTImportErrorTitle" = "Não foi possível importar o LUT";
-"LUTImportErrorSubtitle" = "O ficheiro não pôde ser lido ou não é um LUT válido.";
 "LUTRowLabel" = "LUT";
 
 /* Texture Library */

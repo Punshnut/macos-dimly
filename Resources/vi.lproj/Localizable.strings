@@ -18,7 +18,6 @@
 "IntroControlOverlaySubtitle" = "Lớp làm mờ dự phòng khi DDC không khả dụng hoặc bị tắt.";
 "IntroControlFallbackNote" = "Dimly thử DDC trước, sau đó chuyển an toàn sang chế độ phủ.";
 "IntroGotItButton" = "Bắt đầu";
-"IntroMenuBarTabLabel" = "Thanh menu";
 "IntroInternalMonitorTitle" = "Hiển thị màn hình tích hợp trong Dimly";
 "IntroInternalMonitorHint" = "Dimly cũng có thể điều khiển màn hình tích hợp của Mac. Bạn có thể thay đổi điều này sau trong Cài đặt → Màn hình.";
 
@@ -79,7 +78,6 @@
 "SettingsTabShortcutsLabel" = "Phím tắt";
 "SettingsTabAboutLabel" = "Giới thiệu";
 
-
 /* Settings Visuals */
 "VisualsTransitionsTitle" = "Chuyển đổi";
 "VisualsTransitionSpeedTitle" = "Tốc độ chuyển đổi";
@@ -93,9 +91,7 @@
 /* Settings General */
 "GeneralAutostartTitle" = "Khởi động tự động";
 "GeneralAutostartSubtitle" = "Tự động khởi động Dimly khi đăng nhập.";
-"GeneralLaunchAtLoginLabel" = "Khởi động khi đăng nhập";
 "GeneralMenuBarIconTitle" = "Hiện biểu tượng trên thanh menu";
-"GeneralMenuBarIconAltTitle" = "Hiện biểu tượng trên thanh menu";
 "GeneralHideDockIconTitle" = "Ẩn biểu tượng Dock";
 "GeneralHideDockIconNote" = "Ẩn biểu tượng Dock và mục chuyển đổi ứng dụng.";
 "GeneralMenuBarIconHiddenNote" = "Dimly vẫn chạy cho phím tắt ngay cả khi biểu tượng thanh menu bị ẩn.";
@@ -177,7 +173,6 @@
 "DDCServiceUnavailableLabel" = "Dịch vụ màn hình không khả dụng";
 "DDCOpenFailedFormat" = "Mở DDC thất bại (0x%@)";
 "DDCRequestFailedFormat" = "Yêu cầu DDC thất bại (0x%@)";
-"DDCConnectionTypeUnsupported" = "Loại kết nối này có thể không hỗ trợ DDC (thử DisplayPort)";
 "DDCInternalPanelLabel" = "Tấm trong";
 
 /* Display Report */
@@ -196,17 +191,10 @@
 "VersionFormat" = "Phiên bản %@ (%@)";
 "AboutCopyrightLabel" = "© 2026 Jan Feuerbacher";
 "AboutDescriptionText" = "Dimly là tiện ích Swift gốc trên macOS để làm đen nhanh màn hình ngoài và quản lý ngủ/thức.";
-"AboutLegacyDescriptionText" = "Dimly là tiện ích Swift gốc macOS. Bản dựng này có khung đơn giản với hỗ trợ thanh menu, bật/tắt mục đăng nhập và phím nóng cấu hình được.";
 "AboutMadeByText" = "Làm trong thời gian rảnh - cảm ơn đã ủng hộ.";
 "AboutGitHubRepoTitle" = "Kho GitHub";
 "AboutReportIssueTitle" = "Báo lỗi";
 "AboutDonateTitle" = "Ủng hộ";
-
-/* Preview/Template */
-"PreviewScaffoldLabel" = "Bộ khung SwiftUI này sẵn sàng cho ý tưởng của bạn.";
-"PreviewIncrementButton" = "Tăng bộ đếm";
-"PreviewCounterFormat" = "Bộ đếm: %lld";
-"PreviewPlaceholderButton" = "Chạy hành động tạm";
 
 /* Hotkey Labels */
 "HotkeyModCmdLabel" = "Cmd";
@@ -262,7 +250,6 @@
 "HotkeyKeyKbdBrightnessToggleLabel" = "Keyboard Brightness Toggle";
 
 "BrightnessSectionLabel" = "Độ sáng";
-"DisplayModeFallbackLabel" = "Chế độ dự phòng";
 "DDC" = "DDC";
 "DisplayModeOverlayLabel" = "Chế độ phủ";
 "BrightnessPercentFormat" = "%lld%%";
@@ -279,11 +266,9 @@
 "BackupExportSaveError" = "Không thể lưu tệp sao lưu.";
 "ActionExportButton" = "Xuất";
 "BackupExportActionTitle" = "Xuất cài đặt đã chọn";
-"ExportSelectedSettingsDetails" = "Lưu các danh mục đã chọn vào tệp sao lưu.";
 "BackupGeneralSettingsTitle" = "Cài đặt chung";
 "ActionImportButton" = "Nhập";
 "BackupImportActionTitle" = "Nhập cài đặt đã chọn";
-"ImportSelectedSettingsDetails" = "Tải các danh mục đã chọn từ tệp sao lưu.";
 "BackupMonitorSettingsTitle" = "Cài đặt màn hình";
 "BackupSelectCategoryError" = "Chọn ít nhất một danh mục cài đặt.";
 "GeneralBackupTitle" = "Sao lưu cài đặt";
@@ -310,10 +295,6 @@
 
 "ActionDecreaseBrightnessHint" = "Giảm độ sáng";
 "ActionIncreaseBrightnessHint" = "Tăng độ sáng";
-"DisplayExcludeFromMenuTitle" = "Loại trừ khỏi cửa sổ thanh menu";
-"DisplayExcludeFromMenuSubtitle" = "Ẩn màn hình này khỏi danh sách màn hình trên thanh menu.";
-"StatusOnLabel" = "Bật";
-"StatusOffLabel" = "Tắt";
 
 /* Dimly Display Visibility */
 "MenuMonitorsHeader" = "Màn hình";
@@ -362,7 +343,6 @@
 "ProfileReorderTip" = "Mẹo: Kéo thẻ hồ sơ để sắp xếp lại.";
 "ColorVioletLabel" = "Tím";
 
-"ProfileAutoApplyTriggerLabel" = "Kích hoạt khi kết nối màn hình";
 "ProfileAutoApplyAnyMonitorLabel" = "Bất kỳ màn hình ngoài nào";
 
 "GeneralQuickActionsVisibilityTitle" = "Hiển thị thao tác nhanh";
@@ -436,13 +416,11 @@
 "NightShiftLabel" = "Night Shift";
 "NightShiftLessWarmLabel" = "Ít ấm hơn";
 "NightShiftMoreWarmLabel" = "Ấm hơn";
-"NightShiftUnavailableNote" = "Night Shift không khả dụng trên máy Mac này.";
 
 /* True Tone */
 "TrueToneLabel" = "True Tone";
 
 /* Contrast */
-"ContrastSectionLabel" = "Độ tương phản";
 "ContrastPercentFormat" = "%lld%%";
 "ActionDecreaseContrastHint" = "Giảm độ tương phản 1%";
 "ActionIncreaseContrastHint" = "Tăng độ tương phản 1%";
@@ -451,8 +429,6 @@
 "ResolutionPickerLabel" = "Độ phân giải";
 "RefreshRatePickerLabel" = "Tần số làm mới";
 "ResolutionHiDPIBadge" = "HiDPI";
-"ResolutionNativeBadge" = "Gốc";
-"ResolutionDefaultBadge" = "Mặc định";
 
 /* Input Source */
 "InputSourceVGA1Label" = "VGA 1";
@@ -468,7 +444,6 @@
 
 /* Color Profile */
 "ColorProfileSectionLabel" = "Cấu hình màu";
-"ColorProfileDefaultLabel" = "Mặc định";
 
 /* Display Appearance Filter */
 "DisplayFilterLabel" = "Bộ lọc giao diện";
@@ -497,15 +472,11 @@
 "LUTImportButton" = "Nhập LUT…";
 "LUTEmptyStateLabel" = "Chưa có LUT nào được nhập.";
 "LUTPickerNoneLabel" = "Không có";
-"LUTDimension1DLabel" = "1D";
-"LUTDimension3DLabel" = "3D";
-"LUTApproximationNote" = "LUT 3D được lấy mẫu dọc theo trục trung tính.";
 "LUTDeleteConfirmTitle" = "Xóa \"%@\"?";
 "LUTDeleteConfirmSubtitle" = "Thao tác này sẽ xóa LUT khỏi thư viện và gỡ bỏ nó khỏi tất cả các màn hình đang sử dụng.";
 "LUTRenameAlertTitle" = "Đổi tên LUT";
 "LUTRenameAlertSubtitle" = "Nhập tên mới cho LUT này.";
 "LUTImportErrorTitle" = "Không thể nhập LUT";
-"LUTImportErrorSubtitle" = "Không thể đọc tệp hoặc tệp không phải là LUT hợp lệ.";
 "LUTRowLabel" = "LUT";
 
 /* Texture Library */

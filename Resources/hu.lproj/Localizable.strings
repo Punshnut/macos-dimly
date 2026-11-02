@@ -18,7 +18,6 @@
 "IntroControlOverlaySubtitle" = "Tartalék fényerő-csökkentő réteg, ha a DDC nem érhető el vagy le van tiltva.";
 "IntroControlFallbackNote" = "A Dimly először a DDC-t próbálja, majd biztonságosan átvált fedvény módra.";
 "IntroGotItButton" = "Kezdés";
-"IntroMenuBarTabLabel" = "Menüsáv";
 "IntroInternalMonitorTitle" = "Beépített kijelző megjelenítése a Dimly-ben";
 "IntroInternalMonitorHint" = "A Dimly a Mac beépített kijelzőjét is vezérelheti. Ezt később a Beállítások → Kijelzők menüpontban módosíthatja.";
 
@@ -79,7 +78,6 @@
 "SettingsTabShortcutsLabel" = "Gyorsbillentyűk";
 "SettingsTabAboutLabel" = "Névjegy";
 
-
 /* Settings Visuals */
 "VisualsTransitionsTitle" = "Átmenetek";
 "VisualsTransitionSpeedTitle" = "Átmenet sebessége";
@@ -93,9 +91,7 @@
 /* Settings General */
 "GeneralAutostartTitle" = "Automatikus indítás";
 "GeneralAutostartSubtitle" = "Indítsa el a Dimlyt automatikusan bejelentkezéskor.";
-"GeneralLaunchAtLoginLabel" = "Indítás bejelentkezéskor";
 "GeneralMenuBarIconTitle" = "Menüsáv ikon megjelenítése";
-"GeneralMenuBarIconAltTitle" = "Menüsáv ikon megjelenítése";
 "GeneralHideDockIconTitle" = "Dock ikon elrejtése";
 "GeneralHideDockIconNote" = "Elrejti a Dock ikont és az appváltó bejegyzést.";
 "GeneralMenuBarIconHiddenNote" = "A Dimly fut a gyorsbillentyűkért, még ha az ikon el van rejtve is.";
@@ -177,7 +173,6 @@
 "DDCServiceUnavailableLabel" = "Kijelzőszolgáltatás nem elérhető";
 "DDCOpenFailedFormat" = "DDC megnyitása sikertelen (0x%@)";
 "DDCRequestFailedFormat" = "DDC kérés sikertelen (0x%@)";
-"DDCConnectionTypeUnsupported" = "Ez a kapcsolattípus esetleg nem támogatja a DDC-t (próbálja a DisplayPortot)";
 "DDCInternalPanelLabel" = "Belső panel";
 
 /* Display Report */
@@ -196,17 +191,10 @@
 "VersionFormat" = "Verzió %@ (%@)";
 "AboutCopyrightLabel" = "© 2026 Jan Feuerbacher";
 "AboutDescriptionText" = "A Dimly natív Swift macOS segédprogram a külső kijelzők gyors elsötétítésére és az alvás/ébredés kezelésére.";
-"AboutLegacyDescriptionText" = "A Dimly natív Swift macOS segédprogram. Ez a build egy egyszerű keretet tartalmaz menüsáv-támogatással, bejelentkezési elem kapcsolóval és állítható gyorsbillentyűvel.";
 "AboutMadeByText" = "Szabadidőmben készült - köszönöm a támogatást.";
 "AboutGitHubRepoTitle" = "GitHub-repo";
 "AboutReportIssueTitle" = "Hiba jelentése";
 "AboutDonateTitle" = "Adományozz";
-
-/* Preview/Template */
-"PreviewScaffoldLabel" = "Ez a SwiftUI váz készen áll az ötleteidre.";
-"PreviewIncrementButton" = "Számláló növelése";
-"PreviewCounterFormat" = "Számláló: %lld";
-"PreviewPlaceholderButton" = "Helykitöltő művelet futtatása";
 
 /* Hotkey Labels */
 "HotkeyModCmdLabel" = "Cmd";
@@ -262,7 +250,6 @@
 "HotkeyKeyKbdBrightnessToggleLabel" = "Keyboard Brightness Toggle";
 
 "BrightnessSectionLabel" = "Fenyerő";
-"DisplayModeFallbackLabel" = "Tartalek mod";
 "DDC" = "DDC";
 "DisplayModeOverlayLabel" = "Fedveny mod";
 "BrightnessPercentFormat" = "%lld%%";
@@ -279,11 +266,9 @@
 "BackupExportSaveError" = "A mentesfajlt nem sikerult elmenteni.";
 "ActionExportButton" = "Exportalas";
 "BackupExportActionTitle" = "Kivalasztott beallitasok exportalasa";
-"ExportSelectedSettingsDetails" = "A kivalasztott kategoriak mentese biztonsagi mentesfajlba.";
 "BackupGeneralSettingsTitle" = "Altalanos beallitasok";
 "ActionImportButton" = "Importalas";
 "BackupImportActionTitle" = "Kivalasztott beallitasok importalasa";
-"ImportSelectedSettingsDetails" = "A kivalasztott kategoriak betoltese mentesfajlbol.";
 "BackupMonitorSettingsTitle" = "Monitor beallitasok";
 "BackupSelectCategoryError" = "Valassz legalabb egy beallitasi kategoriat.";
 "GeneralBackupTitle" = "Beallitasmentes";
@@ -310,10 +295,6 @@
 
 "ActionDecreaseBrightnessHint" = "Fényerő csökkentése";
 "ActionIncreaseBrightnessHint" = "Fényerő növelése";
-"DisplayExcludeFromMenuTitle" = "Kizárás a menüsáv ablakból";
-"DisplayExcludeFromMenuSubtitle" = "A monitor elrejtése a menüsáv kijelzőlistájából.";
-"StatusOnLabel" = "Be";
-"StatusOffLabel" = "Ki";
 
 /* Dimly Display Visibility */
 "MenuMonitorsHeader" = "Kijelzők";
@@ -362,7 +343,6 @@
 "ProfileReorderTip" = "Tipp: Húzd a profilkártyákat az átrendezéshez.";
 "ColorVioletLabel" = "Ibolya";
 
-"ProfileAutoApplyTriggerLabel" = "Indítás monitor csatlakozásakor";
 "ProfileAutoApplyAnyMonitorLabel" = "Bármely külső monitor";
 
 "GeneralQuickActionsVisibilityTitle" = "Gyors muveletek lathatosaga";
@@ -436,13 +416,11 @@
 "NightShiftLabel" = "Night Shift";
 "NightShiftLessWarmLabel" = "Kevésbé meleg";
 "NightShiftMoreWarmLabel" = "Melegebb";
-"NightShiftUnavailableNote" = "A Night Shift nem érhető el ezen a Macen.";
 
 /* True Tone */
 "TrueToneLabel" = "True Tone";
 
 /* Contrast */
-"ContrastSectionLabel" = "Kontraszt";
 "ContrastPercentFormat" = "%lld%%";
 "ActionDecreaseContrastHint" = "Kontraszt csökkentése 1%-kal";
 "ActionIncreaseContrastHint" = "Kontraszt növelése 1%-kal";
@@ -451,8 +429,6 @@
 "ResolutionPickerLabel" = "Felbontás";
 "RefreshRatePickerLabel" = "Frissítési gyakoriság";
 "ResolutionHiDPIBadge" = "HiDPI";
-"ResolutionNativeBadge" = "Natív";
-"ResolutionDefaultBadge" = "Alapértelmezett";
 
 /* Input Source */
 "InputSourceVGA1Label" = "VGA 1";
@@ -468,7 +444,6 @@
 
 /* Color Profile */
 "ColorProfileSectionLabel" = "Színprofil";
-"ColorProfileDefaultLabel" = "Alapértelmezett";
 
 /* Display Appearance Filter */
 "DisplayFilterLabel" = "Megjelenési szűrő";
@@ -497,15 +472,11 @@
 "LUTImportButton" = "LUT importálása…";
 "LUTEmptyStateLabel" = "Még nincs importált LUT.";
 "LUTPickerNoneLabel" = "Nincs";
-"LUTDimension1DLabel" = "1D";
-"LUTDimension3DLabel" = "3D";
-"LUTApproximationNote" = "A 3D LUT-ok mintavételezése a semleges tengely mentén történik.";
 "LUTDeleteConfirmTitle" = "Eltávolítja ezt: „%@\"?";
 "LUTDeleteConfirmSubtitle" = "Ez eltávolítja a LUT-ot a könyvtárból, és törli az összes azt használó kijelzőről.";
 "LUTRenameAlertTitle" = "LUT átnevezése";
 "LUTRenameAlertSubtitle" = "Adjon meg egy új nevet ehhez a LUT-hoz.";
 "LUTImportErrorTitle" = "A LUT importálása nem sikerült";
-"LUTImportErrorSubtitle" = "A fájl nem olvasható, vagy nem érvényes LUT.";
 "LUTRowLabel" = "LUT";
 
 /* Texture Library */

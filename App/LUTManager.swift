@@ -576,28 +576,6 @@ final class LUTManager: ObservableObject {
 
     // MARK: - Backup Support
 
-    /// Returns the raw file bytes for a LUT entry (used when embedding in a settings backup).
-    func exportEntryData(_ entry: LUTEntry) -> Data? {
-        let fileURL = Self.lutsDirectory.appendingPathComponent(entry.filename)
-        return try? Data(contentsOf: fileURL)
-    }
-
-    /// Restores a LUT from embedded backup data, skipping if the same UUID already exists.
-    @discardableResult
-    func importEntryFromData(_ data: Data, entry: LUTEntry) throws -> LUTEntry {
-        if library.contains(where: { $0.id == entry.id }) { return entry }
-
-        try FileManager.default.createDirectory(at: Self.lutsDirectory,
-                                                withIntermediateDirectories: true)
-        let destURL = Self.lutsDirectory.appendingPathComponent(entry.filename)
-        if !FileManager.default.fileExists(atPath: destURL.path) {
-            try data.write(to: destURL)
-        }
-        library.append(entry)
-        persistLibrary()
-        return entry
-    }
-
     // MARK: - Persistence
 
     private func loadLibrary() {

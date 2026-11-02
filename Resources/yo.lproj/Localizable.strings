@@ -18,7 +18,6 @@
 "IntroControlOverlaySubtitle" = "Àlẹmọ dín ìmọ́lẹ̀ àfọwọ́yìí nígbà tí DDC kò sí tàbí tí a ti pa á.";
 "IntroControlFallbackNote" = "Dimly kọ́kọ́ gbìyànjú DDC, lẹ́yìn náà ó padà lọ sí ipo ìbojú ní ààbò.";
 "IntroGotItButton" = "Bẹrẹ";
-"IntroMenuBarTabLabel" = "Pátákó àkójọ";
 "IntroInternalMonitorTitle" = "Ṣe afihan ifihan ti a ṣe sinu ni Dimly";
 "IntroInternalMonitorHint" = "Dimly tun le ṣakoso ifihan ti a ṣe sinu Mac rẹ. O le yi eyi pada lẹhinna ni Awọn eto → Awọn Ifihan.";
 
@@ -79,7 +78,6 @@
 "SettingsTabShortcutsLabel" = "Ọ̀nà abuja";
 "SettingsTabAboutLabel" = "Nípa";
 
-
 /* Settings Visuals */
 "VisualsTransitionsTitle" = "Àyípadà";
 "VisualsTransitionSpeedTitle" = "Ìyára àyípadà";
@@ -93,9 +91,7 @@
 /* Settings General */
 "GeneralAutostartTitle" = "Ibẹrẹ laifọwọyi";
 "GeneralAutostartSubtitle" = "Bẹrẹ Dimly laifọwọyi nigbati o ba wọle.";
-"GeneralLaunchAtLoginLabel" = "Bẹrẹ ní ìbáwọlé";
 "GeneralMenuBarIconTitle" = "Fi àmì pátákó àkójọ hàn";
-"GeneralMenuBarIconAltTitle" = "Fi àmì pátákó àkójọ hàn";
 "GeneralHideDockIconTitle" = "Fi àmì Dock pamọ́";
 "GeneralHideDockIconNote" = "Fi àmì Dock àti ohun ìyípadà app pamọ́.";
 "GeneralMenuBarIconHiddenNote" = "Dimly máa ń ṣiṣẹ́ fún bọtìnì abuja bó tilẹ̀ jẹ́ pé àmì pátákó àkójọ ti farapamọ́.";
@@ -177,7 +173,6 @@
 "DDCServiceUnavailableLabel" = "Ìṣẹ́ ìfihàn kò sí";
 "DDCOpenFailedFormat" = "Àṣiṣe ṣiṣí DDC (0x%@)";
 "DDCRequestFailedFormat" = "Àṣìṣe ìbéèrè DDC (0x%@)";
-"DDCConnectionTypeUnsupported" = "Irú ìsopọ̀ yìí lè má ṣàtìlẹ́yìn DDC (gbìyànjú DisplayPort)";
 "DDCInternalPanelLabel" = "Pánẹ́lù inú";
 
 /* Display Report */
@@ -196,17 +191,10 @@
 "VersionFormat" = "Ẹ̀dà %@ (%@)";
 "AboutCopyrightLabel" = "© 2026 Jan Feuerbacher";
 "AboutDescriptionText" = "Dimly jẹ́ irinṣẹ́ Swift abinibi lórí macOS fún kíákíá dídàmú dudu àwọn àfihàn òde àti ìṣàkóso sùn/jí.";
-"AboutLegacyDescriptionText" = "Dimly jẹ́ irinṣẹ́ Swift abinibi lórí macOS. Ìkọ́lé yìí ní egungun ìlúpọ̀ pẹ̀lú àtìlẹ́yìn pátákó àkójọ, yíyí ohun ìwọlé padà, àti bọtìnì abuja tó lè ṣe àtúnṣe.";
 "AboutMadeByText" = "Ṣe ní àkókò àyè mi - ọpẹ́ fún àtìlẹ́yìn.";
 "AboutGitHubRepoTitle" = "Repo GitHub";
 "AboutReportIssueTitle" = "Jabọ ìṣòro";
 "AboutDonateTitle" = "Fúnni";
-
-/* Preview/Template */
-"PreviewScaffoldLabel" = "Àpẹẹrẹ SwiftUI yìí ti ṣetán fún àwọn èrò rẹ.";
-"PreviewIncrementButton" = "Mú àkójọ pọ̀ si";
-"PreviewCounterFormat" = "Àkójọ: %lld";
-"PreviewPlaceholderButton" = "Ṣiṣẹ̀ ìṣe àfọ́rùkọ";
 
 /* Hotkey Labels */
 "HotkeyModCmdLabel" = "Cmd";
@@ -262,7 +250,6 @@
 "HotkeyKeyKbdBrightnessToggleLabel" = "Keyboard Brightness Toggle";
 
 "BrightnessSectionLabel" = "Ìmọ́lẹ̀";
-"DisplayModeFallbackLabel" = "Ipo àtúnṣe";
 "DDC" = "DDC";
 "DisplayModeOverlayLabel" = "Ipo ìbojú";
 "BrightnessPercentFormat" = "%lld%%";
@@ -279,11 +266,9 @@
 "BackupExportSaveError" = "A kò lè fi fáìlì àfọwọ́kọ pamọ́.";
 "ActionExportButton" = "Jádè síta";
 "BackupExportActionTitle" = "Jádè síta àwọn ìṣètò tí o yàn";
-"ExportSelectedSettingsDetails" = "Fipamọ́ àwọn ẹ̀ka tí o yàn sínú fáìlì àfọwọ́kọ.";
 "BackupGeneralSettingsTitle" = "Àwọn ìṣètò gbogbogbò";
 "ActionImportButton" = "Wọlé sí";
 "BackupImportActionTitle" = "Wọlé sí àwọn ìṣètò tí o yàn";
-"ImportSelectedSettingsDetails" = "Gbé àwọn ẹ̀ka tí o yàn wọlé láti inú fáìlì àfọwọ́kọ.";
 "BackupMonitorSettingsTitle" = "Ìṣètò mó́nítọ̀";
 "BackupSelectCategoryError" = "Yan ó kéré tán ẹ̀ka ìṣètò kan.";
 "GeneralBackupTitle" = "Àfọwọ́kọ ìṣètò";
@@ -310,10 +295,6 @@
 
 "ActionDecreaseBrightnessHint" = "Dinku ìmọ́lẹ̀";
 "ActionIncreaseBrightnessHint" = "Ṣe ìmọ́lẹ̀ pọ̀ si";
-"DisplayExcludeFromMenuTitle" = "Yọ kuro nínú ferese pátákó àkójọ";
-"DisplayExcludeFromMenuSubtitle" = "Fi monitọ̀ yìí pamọ́ kúrò nínú àkójọ àfihàn pátákó àkójọ.";
-"StatusOnLabel" = "Tan";
-"StatusOffLabel" = "Pa";
 
 /* Dimly Display Visibility */
 "MenuMonitorsHeader" = "Àfihàn";
@@ -362,7 +343,6 @@
 "ProfileReorderTip" = "Imọ̀ràn: Fa àwọn kaadi profaili láti tún wọn ṣe ní títò.";
 "ColorVioletLabel" = "Awọ violet";
 
-"ProfileAutoApplyTriggerLabel" = "Ìtaniji ìsopọ̀ mọ́nítọ̀";
 "ProfileAutoApplyAnyMonitorLabel" = "Eyikeyi mọ́nítọ̀ ita";
 
 "GeneralQuickActionsVisibilityTitle" = "Hihan Ise Yara";
@@ -436,13 +416,11 @@
 "NightShiftLabel" = "Night Shift";
 "NightShiftLessWarmLabel" = "Ìmọ́lẹ̀ Tútù Díẹ̀";
 "NightShiftMoreWarmLabel" = "Ìmọ́lẹ̀ Gbígbóná Síi";
-"NightShiftUnavailableNote" = "Night Shift kò sí lórí Mac yìí.";
 
 /* True Tone */
 "TrueToneLabel" = "True Tone";
 
 /* Contrast */
-"ContrastSectionLabel" = "Iyatọ";
 "ContrastPercentFormat" = "%lld%%";
 "ActionDecreaseContrastHint" = "Dín iyatọ kù pẹ̀lú 1%";
 "ActionIncreaseContrastHint" = "Mú iyatọ pọ̀ sí i pẹ̀lú 1%";
@@ -451,8 +429,6 @@
 "ResolutionPickerLabel" = "Ìpinnu";
 "RefreshRatePickerLabel" = "Òṣùwọ̀n Ìmúdọ̀tun";
 "ResolutionHiDPIBadge" = "HiDPI";
-"ResolutionNativeBadge" = "Àbínibí";
-"ResolutionDefaultBadge" = "Àkọ́kọ́";
 
 /* Input Source */
 "InputSourceVGA1Label" = "VGA 1";
@@ -468,7 +444,6 @@
 
 /* Color Profile */
 "ColorProfileSectionLabel" = "Profáìlì Àwọ̀";
-"ColorProfileDefaultLabel" = "Àkọ́kọ́";
 
 /* Display Appearance Filter */
 "DisplayFilterLabel" = "Àyẹ̀wò Ìrísí";
@@ -497,15 +472,11 @@
 "LUTImportButton" = "Gbe LUT Wọle…";
 "LUTEmptyStateLabel" = "Ko si LUT ti a ti gbe wọle sibẹsibẹ.";
 "LUTPickerNoneLabel" = "Ẹnikan";
-"LUTDimension1DLabel" = "1D";
-"LUTDimension3DLabel" = "3D";
-"LUTApproximationNote" = "A ń ṣàyẹ̀wò awọn LUT 3D lé lórí ọ̀nà àárín.";
 "LUTDeleteConfirmTitle" = "Yọ \"%@\" Kúrò?";
 "LUTDeleteConfirmSubtitle" = "Eyi yọ LUT kuro ninu ikawe ti o si pa a rẹ kuro ninu eyikeyi àárọ̀ ti n lo.";
 "LUTRenameAlertTitle" = "Ṣe Àtúnṣe Orúkọ LUT";
 "LUTRenameAlertSubtitle" = "Tẹ orúkọ tuntun sii fún LUT yii.";
 "LUTImportErrorTitle" = "Ko Lè Gbe LUT Wọle";
-"LUTImportErrorSubtitle" = "A kò lè ka fáìlì náà tàbí kò jẹ́ LUT tó wulo.";
 "LUTRowLabel" = "LUT";
 
 /* Texture Library */

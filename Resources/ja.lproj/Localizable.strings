@@ -18,7 +18,6 @@
 "IntroControlOverlaySubtitle" = "DDC が利用できない、または無効な場合のフォールバック調光レイヤー。";
 "IntroControlFallbackNote" = "Dimly はまず DDC を試し、必要に応じて安全にオーバーレイモードへ切り替えます。";
 "IntroGotItButton" = "始める";
-"IntroMenuBarTabLabel" = "メニューバー";
 "IntroInternalMonitorTitle" = "組み込みディスプレイを Dimly に表示";
 "IntroInternalMonitorHint" = "Dimly は Mac の組み込みディスプレイも制御できます。後で設定 → ディスプレイから変更できます。";
 
@@ -79,7 +78,6 @@
 "SettingsTabShortcutsLabel" = "ショートカット";
 "SettingsTabAboutLabel" = "情報";
 
-
 /* Settings Visuals */
 "VisualsTransitionsTitle" = "トランジション";
 "VisualsTransitionSpeedTitle" = "トランジション速度";
@@ -93,9 +91,7 @@
 /* Settings General */
 "GeneralAutostartTitle" = "自動起動";
 "GeneralAutostartSubtitle" = "ログイン時にDimlyを自動的に起動します。";
-"GeneralLaunchAtLoginLabel" = "ログイン時に起動";
 "GeneralMenuBarIconTitle" = "メニューバーアイコンを表示";
-"GeneralMenuBarIconAltTitle" = "メニューバーアイコンを表示";
 "GeneralHideDockIconTitle" = "Dock アイコンを隠す";
 "GeneralHideDockIconNote" = "Dock アイコンとアプリスイッチャーの項目を隠します。";
 "GeneralMenuBarIconHiddenNote" = "メニューバーアイコンが隠れていても、Dimly はホットキーのために動作し続けます。";
@@ -177,7 +173,6 @@
 "DDCServiceUnavailableLabel" = "ディスプレイサービス利用不可";
 "DDCOpenFailedFormat" = "DDC のオープンに失敗しました (0x%@)";
 "DDCRequestFailedFormat" = "DDC リクエストに失敗しました (0x%@)";
-"DDCConnectionTypeUnsupported" = "この接続タイプはDDCに対応していない可能性があります（DisplayPortをお試しください）";
 "DDCInternalPanelLabel" = "内蔵パネル";
 
 /* Display Report */
@@ -196,17 +191,10 @@
 "VersionFormat" = "バージョン %@ (%@)";
 "AboutCopyrightLabel" = "© 2026 Jan Feuerbacher";
 "AboutDescriptionText" = "Dimly は外部ディスプレイを素早く暗転し、スリープ/復帰を管理する macOS 向けネイティブ Swift ユーティリティです。";
-"AboutLegacyDescriptionText" = "Dimly は macOS 向けのネイティブ Swift ユーティリティです。このビルドにはメニューバー対応、ログイン項目の切替、設定可能なホットキーを備えたシンプルな骨組みが含まれています。";
 "AboutMadeByText" = "空き時間に作りました ― サポートに感謝します。";
 "AboutGitHubRepoTitle" = "GitHub リポジトリ";
 "AboutReportIssueTitle" = "問題を報告";
 "AboutDonateTitle" = "寄付";
-
-/* Preview/Template */
-"PreviewScaffoldLabel" = "この SwiftUI スキャフォールドはあなたのアイデアを待っています。";
-"PreviewIncrementButton" = "カウンターを増やす";
-"PreviewCounterFormat" = "カウンター: %lld";
-"PreviewPlaceholderButton" = "プレースホルダー動作を実行";
 
 /* Hotkey Labels */
 "HotkeyModCmdLabel" = "Cmd";
@@ -262,7 +250,6 @@
 "HotkeyKeyKbdBrightnessToggleLabel" = "Keyboard Brightness Toggle";
 
 "BrightnessSectionLabel" = "明るさ";
-"DisplayModeFallbackLabel" = "代替モード";
 "DDC" = "DDC";
 "DisplayModeOverlayLabel" = "オーバーレイモード";
 "BrightnessPercentFormat" = "%lld%%";
@@ -279,11 +266,9 @@
 "BackupExportSaveError" = "バックアップファイルを保存できませんでした。";
 "ActionExportButton" = "エクスポート";
 "BackupExportActionTitle" = "選択した設定をエクスポート";
-"ExportSelectedSettingsDetails" = "選択したカテゴリをバックアップファイルに保存します。";
 "BackupGeneralSettingsTitle" = "一般設定";
 "ActionImportButton" = "インポート";
 "BackupImportActionTitle" = "選択した設定をインポート";
-"ImportSelectedSettingsDetails" = "バックアップファイルから選択したカテゴリを読み込みます。";
 "BackupMonitorSettingsTitle" = "モニター設定";
 "BackupSelectCategoryError" = "少なくとも1つの設定カテゴリを選択してください。";
 "GeneralBackupTitle" = "設定バックアップ";
@@ -310,10 +295,6 @@
 
 "ActionDecreaseBrightnessHint" = "明るさを下げる";
 "ActionIncreaseBrightnessHint" = "明るさを上げる";
-"DisplayExcludeFromMenuTitle" = "メニューバーウィンドウから除外";
-"DisplayExcludeFromMenuSubtitle" = "このモニターをメニューバーのディスプレイ一覧から非表示にします。";
-"StatusOnLabel" = "オン";
-"StatusOffLabel" = "オフ";
 
 /* Dimly Display Visibility */
 "MenuMonitorsHeader" = "ディスプレイ";
@@ -362,7 +343,6 @@
 "ProfileReorderTip" = "ヒント: プロファイルカードをドラッグして並べ替えます。";
 "ColorVioletLabel" = "バイオレット";
 
-"ProfileAutoApplyTriggerLabel" = "モニター接続時のトリガー";
 "ProfileAutoApplyAnyMonitorLabel" = "任意の外部モニター";
 
 "GeneralQuickActionsVisibilityTitle" = "高速アクションの表示";
@@ -436,13 +416,11 @@
 "NightShiftLabel" = "Night Shift";
 "NightShiftLessWarmLabel" = "暖かさを抑える";
 "NightShiftMoreWarmLabel" = "より暖かく";
-"NightShiftUnavailableNote" = "このMacではNight Shiftを使用できません。";
 
 /* True Tone */
 "TrueToneLabel" = "True Tone";
 
 /* Contrast */
-"ContrastSectionLabel" = "コントラスト";
 "ContrastPercentFormat" = "%lld%%";
 "ActionDecreaseContrastHint" = "コントラストを1%下げる";
 "ActionIncreaseContrastHint" = "コントラストを1%上げる";
@@ -451,8 +429,6 @@
 "ResolutionPickerLabel" = "解像度";
 "RefreshRatePickerLabel" = "リフレッシュレート";
 "ResolutionHiDPIBadge" = "HiDPI";
-"ResolutionNativeBadge" = "ネイティブ";
-"ResolutionDefaultBadge" = "デフォルト";
 
 /* Input Source */
 "InputSourceVGA1Label" = "VGA 1";
@@ -468,7 +444,6 @@
 
 /* Color Profile */
 "ColorProfileSectionLabel" = "カラープロファイル";
-"ColorProfileDefaultLabel" = "デフォルト";
 
 /* Display Appearance Filter */
 "DisplayFilterLabel" = "表示フィルタ";
@@ -497,15 +472,11 @@
 "LUTImportButton" = "LUTを読み込む…";
 "LUTEmptyStateLabel" = "LUTがまだ読み込まれていません。";
 "LUTPickerNoneLabel" = "なし";
-"LUTDimension1DLabel" = "1D";
-"LUTDimension3DLabel" = "3D";
-"LUTApproximationNote" = "3D LUTはニュートラル軸に沿ってサンプリングされます。";
 "LUTDeleteConfirmTitle" = "\"%@\"を削除しますか?";
 "LUTDeleteConfirmSubtitle" = "このLUTをライブラリから削除し、使用中のすべてのディスプレイからも削除します。";
 "LUTRenameAlertTitle" = "LUTの名前を変更";
 "LUTRenameAlertSubtitle" = "このLUTの新しい名前を入力してください。";
 "LUTImportErrorTitle" = "LUTを読み込めませんでした";
-"LUTImportErrorSubtitle" = "ファイルを読み取れないか、有効なLUTではありません。";
 "LUTRowLabel" = "LUT";
 
 /* Texture Library */

@@ -7,15 +7,11 @@ final class DiagnosticsLogger: @unchecked Sendable {
     static let shared = DiagnosticsLogger()
 
     private let queue = DispatchQueue(label: "com.punshnut.dimly.diaglog")
-    private let heartbeatQueue = DispatchQueue(label: "com.punshnut.dimly.diaglog.heartbeat")
     private var handle: FileHandle?
     private let logURL: URL
     private let logsDir: URL
-    private var uiHeartbeat: DispatchSourceTimer?
-    private var bgHeartbeat: DispatchSourceTimer?
     private let formatter = ISO8601DateFormatter()
     private let isEnabled: Bool
-    private let heartbeatEnabled: Bool
     private let maxFileSizeBytes: UInt64 = 2 * 1024 * 1024
     private let maxRotatedFiles = 3
     private var currentFileSizeBytes: UInt64 = 0
@@ -37,7 +33,6 @@ final class DiagnosticsLogger: @unchecked Sendable {
         let debugEnabled = false
 #endif
         isEnabled = debugEnabled || envEnabled || defaultsEnabled
-        heartbeatEnabled = env["DIMLY_DIAGNOSTICS_HEARTBEAT"] == "1"
 
         try? FileManager.default.createDirectory(at: resolvedLogsDir, withIntermediateDirectories: true)
         FileManager.default.createFile(atPath: logURL.path, contents: nil)
@@ -54,30 +49,6 @@ final class DiagnosticsLogger: @unchecked Sendable {
         currentFileSizeBytes = handle?.offsetInFile ?? 0
         rotateIfNeeded(forAppending: 0)
         writeHeader()
-    }
-
-    /// Starts periodic heartbeat log entries on main and background queues.
-    func startHeartbeat(interval: TimeInterval = 5) {
-        guard isEnabled, heartbeatEnabled else { return }
-        if uiHeartbeat == nil {
-            let timer = DispatchSource.makeTimerSource(queue: .main)
-            timer.schedule(deadline: .now() + interval, repeating: interval)
-            timer.setEventHandler { [weak self] in
-                self?.log("heartbeat-main", category: "heartbeat")
-            }
-            timer.resume()
-            uiHeartbeat = timer
-        }
-
-        if bgHeartbeat == nil {
-            let timer = DispatchSource.makeTimerSource(queue: heartbeatQueue)
-            timer.schedule(deadline: .now() + interval, repeating: interval)
-            timer.setEventHandler { [weak self] in
-                self?.log("heartbeat-bg", category: "heartbeat")
-            }
-            timer.resume()
-            bgHeartbeat = timer
-        }
     }
 
     /// Writes a timestamped line to the log file.

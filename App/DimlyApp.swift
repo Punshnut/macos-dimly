@@ -216,12 +216,6 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         showWhatsNewIfNeeded()
     }
 
-    /// Resets the "shown" flag and forces the intro to appear.
-    func resetAndShowIntro() {
-        UserDefaults.standard.set(false, forKey: Self.introShownKey)
-        showIntro(force: true)
-    }
-
     /// Presents the intro window when forced or not yet shown.
     private func showIntro(force: Bool) {
         if UserDefaults.standard.bool(forKey: Self.introShownKey) {

@@ -18,7 +18,6 @@
 "IntroControlOverlaySubtitle" = "Sraith mhaolaithe chúltaca nuair nach bhfuil DDC ar fáil nó nuair atá sé díchumasaithe.";
 "IntroControlFallbackNote" = "Déanann Dimly iarracht ar DDC ar dtús, ansin filleann sé go sábháilte ar mhód forleagain.";
 "IntroGotItButton" = "Tosaigh";
-"IntroMenuBarTabLabel" = "Barra roghchláir";
 "IntroInternalMonitorTitle" = "Taispeáin an taispeáint ionsuite in Dimly";
 "IntroInternalMonitorHint" = "Is féidir le Dimly taispeáint ionsuite do Mac a rialú freisin. Is féidir leat é seo a athrú níos déanaí i Socruithe → Taispeántaí.";
 
@@ -79,7 +78,6 @@
 "SettingsTabShortcutsLabel" = "Aicearraí";
 "SettingsTabAboutLabel" = "Maidir";
 
-
 /* Settings Visuals */
 "VisualsTransitionsTitle" = "Aistrithe";
 "VisualsTransitionSpeedTitle" = "Luas aistrithe";
@@ -93,9 +91,7 @@
 /* Settings General */
 "GeneralAutostartTitle" = "Uath-thosú";
 "GeneralAutostartSubtitle" = "Tosaigh Dimly go huathoibríoch nuair a logálann tú isteach.";
-"GeneralLaunchAtLoginLabel" = "Tosaigh ag logáil isteach";
 "GeneralMenuBarIconTitle" = "Taispeáin deilbhín sa bharra";
-"GeneralMenuBarIconAltTitle" = "Taispeáin deilbhín sa bharra";
 "GeneralHideDockIconTitle" = "Folaigh deilbhín an Duga";
 "GeneralHideDockIconNote" = "Folaíonn sé deilbhín an Duga agus iontráil an mhalartóra aipe.";
 "GeneralMenuBarIconHiddenNote" = "Fanann Dimly ag rith do aicearraí fiú má tá an deilbhín folaithe.";
@@ -177,7 +173,6 @@
 "DDCServiceUnavailableLabel" = "Seirbhís taispeántais ar fáil";
 "DDCOpenFailedFormat" = "Theip ar oscailt DDC (0x%@)";
 "DDCRequestFailedFormat" = "Theip ar iarratas DDC (0x%@)";
-"DDCConnectionTypeUnsupported" = "Seans nach dtacaíonn an cineál ceangail seo DDC (bain triail as DisplayPort)";
 "DDCInternalPanelLabel" = "Painéal inmheánach";
 
 /* Display Report */
@@ -196,17 +191,10 @@
 "VersionFormat" = "Leagan %@ (%@)";
 "AboutCopyrightLabel" = "© 2026 Jan Feuerbacher";
 "AboutDescriptionText" = "Is uirlis dúchais Swift í Dimly le haghaidh macOS chun taispeántais sheachtracha a dhorchadú go tapa agus codladh/múscailt a bhainistiú.";
-"AboutLegacyDescriptionText" = "Is uirlis dúchais Swift í Dimly do macOS. Cuimsíonn an tógáil seo cnámharlach simplí le tacaíocht barra roghchláir, scoránaigh earra logála isteach, agus aicearra inchoigeartaithe.";
 "AboutMadeByText" = "Rinneadh i mo chuid ama saor - go raibh maith agat as an tacaíocht.";
 "AboutGitHubRepoTitle" = "Repo GitHub";
 "AboutReportIssueTitle" = "Tuairiscigh fadhb";
 "AboutDonateTitle" = "Bronn";
-
-/* Preview/Template */
-"PreviewScaffoldLabel" = "Tá an scafall SwiftUI seo réidh do do chuid smaointe.";
-"PreviewIncrementButton" = "Méadaigh an cuntar";
-"PreviewCounterFormat" = "Cuntar: %lld";
-"PreviewPlaceholderButton" = "Rith gníomh ionadóra";
 
 /* Hotkey Labels */
 "HotkeyModCmdLabel" = "Cmd";
@@ -262,7 +250,6 @@
 "HotkeyKeyKbdBrightnessToggleLabel" = "Keyboard Brightness Toggle";
 
 "BrightnessSectionLabel" = "Gile";
-"DisplayModeFallbackLabel" = "Cúltaca";
 "DDC" = "DDC";
 "DisplayModeOverlayLabel" = "Modh forleagain";
 "BrightnessPercentFormat" = "%lld%%";
@@ -279,11 +266,9 @@
 "BackupExportSaveError" = "Níorbh fhéidir an comhad cúltaca a shábháil.";
 "ActionExportButton" = "Easpórtáil";
 "BackupExportActionTitle" = "Easpórtáil socruithe roghnaithe";
-"ExportSelectedSettingsDetails" = "Sábháil catagóirí roghnaithe i gcomhad cúltaca.";
 "BackupGeneralSettingsTitle" = "Socruithe ginearalta";
 "ActionImportButton" = "Iompórtáil";
 "BackupImportActionTitle" = "Iompórtáil socruithe roghnaithe";
-"ImportSelectedSettingsDetails" = "Lódáil catagóirí roghnaithe ó chomhad cúltaca.";
 "BackupMonitorSettingsTitle" = "Socruithe monatóra";
 "BackupSelectCategoryError" = "Roghnaigh catagóir socruithe amháin ar a laghad.";
 "GeneralBackupTitle" = "Cúltaca socruithe";
@@ -310,10 +295,6 @@
 
 "ActionDecreaseBrightnessHint" = "Laghdaigh gile";
 "ActionIncreaseBrightnessHint" = "Méadaigh gile";
-"DisplayExcludeFromMenuTitle" = "Eisiamh ón bhfuinneog barra roghchláir";
-"DisplayExcludeFromMenuSubtitle" = "Folaigh an monatóir seo ó liosta taispeántais an bharra roghchláir.";
-"StatusOnLabel" = "Ar siúl";
-"StatusOffLabel" = "Múchta";
 
 /* Dimly Display Visibility */
 "MenuMonitorsHeader" = "Taispeántais";
@@ -362,7 +343,6 @@
 "ProfileReorderTip" = "Leid: Tarraing cártaí próifíle chun iad a athordú.";
 "ColorVioletLabel" = "Corcra";
 
-"ProfileAutoApplyTriggerLabel" = "Spreag ar nascadh monatóra";
 "ProfileAutoApplyAnyMonitorLabel" = "Aon mhonatóir seachtrach";
 
 "GeneralQuickActionsVisibilityTitle" = "Infheictheacht gniomhartha tapa";
@@ -436,13 +416,11 @@
 "NightShiftLabel" = "Night Shift";
 "NightShiftLessWarmLabel" = "Níos lú teasa";
 "NightShiftMoreWarmLabel" = "Níos mó teasa";
-"NightShiftUnavailableNote" = "Níl Night Shift ar fáil ar an Mac seo.";
 
 /* True Tone */
 "TrueToneLabel" = "True Tone";
 
 /* Contrast */
-"ContrastSectionLabel" = "Codarsnacht";
 "ContrastPercentFormat" = "%lld%%";
 "ActionDecreaseContrastHint" = "Laghdaigh codarsnacht faoi 1%";
 "ActionIncreaseContrastHint" = "Méadaigh codarsnacht faoi 1%";
@@ -451,8 +429,6 @@
 "ResolutionPickerLabel" = "Taifeach";
 "RefreshRatePickerLabel" = "Ráta athnuachana";
 "ResolutionHiDPIBadge" = "HiDPI";
-"ResolutionNativeBadge" = "Dúchasach";
-"ResolutionDefaultBadge" = "Réamhshocrú";
 
 /* Input Source */
 "InputSourceVGA1Label" = "VGA 1";
@@ -468,7 +444,6 @@
 
 /* Color Profile */
 "ColorProfileSectionLabel" = "Próifíl dathanna";
-"ColorProfileDefaultLabel" = "Réamhshocrú";
 
 /* Display Appearance Filter */
 "DisplayFilterLabel" = "Scagaire cuma";
@@ -497,15 +472,11 @@
 "LUTImportButton" = "Iompórtáil LUT…";
 "LUTEmptyStateLabel" = "Níl aon LUT iompórtáilte fós.";
 "LUTPickerNoneLabel" = "Gan ceann";
-"LUTDimension1DLabel" = "1D";
-"LUTDimension3DLabel" = "3D";
-"LUTApproximationNote" = "Déantar sampláil ar LUTanna 3D feadh an ais neodrach.";
 "LUTDeleteConfirmTitle" = "An LUT \"%@\" a bhaint?";
 "LUTDeleteConfirmSubtitle" = "Bainfidh sé seo an LUT ón leabharlann agus glanfaidh sé é ó aon taispeána atá á úsáid.";
 "LUTRenameAlertTitle" = "Athainmnigh LUT";
 "LUTRenameAlertSubtitle" = "Cuir isteach ainm nua don LUT seo.";
 "LUTImportErrorTitle" = "Níorbh fhéidir an LUT a iompórtáil";
-"LUTImportErrorSubtitle" = "Níorbh fhéidir an comhad a léamh nó níl LUT bailí ann.";
 "LUTRowLabel" = "LUT";
 
 /* Texture Library */

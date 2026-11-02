@@ -18,7 +18,6 @@
 "IntroControlOverlaySubtitle" = "DDC ካልተገኘ ወይም ከተሰናከለ ጊዜ የተተኪ ማደብዘዣ ሽፋን።";
 "IntroControlFallbackNote" = "Dimly መጀመሪያ DDCን ይሞክራል፣ ከዚያ በደህና ወደ የኦቨርሌይ ሁኔታ ይመለሳል።";
 "IntroGotItButton" = "ጀምር";
-"IntroMenuBarTabLabel" = "ሜኑ አሞሌ";
 "IntroInternalMonitorTitle" = "የ Mac ውስጣዊ ማሳያ በ Dimly ውስጥ አሳይ";
 "IntroInternalMonitorHint" = "Dimly የ Mac ውስጣዊ ማሳያን ሊቆጣጠር ይችላል። ይህን ቆይቶ በቅንጅቶች → ማሳያዎች ውስጥ መቀየር ይቻላል።";
 
@@ -79,7 +78,6 @@
 "SettingsTabShortcutsLabel" = "አቋራጮች";
 "SettingsTabAboutLabel" = "ስለ";
 
-
 /* Settings Visuals */
 "VisualsTransitionsTitle" = "ሽግግሮች";
 "VisualsTransitionSpeedTitle" = "የሽግግር ፍጥነት";
@@ -93,9 +91,7 @@
 /* Settings General */
 "GeneralAutostartTitle" = "ራስ-ጀምር";
 "GeneralAutostartSubtitle" = "ወደ ስርዓት ሲገቡ Dimly በራስ-ሰር ይጀምር.";
-"GeneralLaunchAtLoginLabel" = "በመግቢያ ላይ አስጀምር";
 "GeneralMenuBarIconTitle" = "የሜኑ አዶን አሳይ";
-"GeneralMenuBarIconAltTitle" = "የሜኑ አዶን አሳይ";
 "GeneralHideDockIconTitle" = "የDock አዶን ደብቅ";
 "GeneralHideDockIconNote" = "የDock አዶንን እና የመቀየሪያ መግቢያን ደብቅ።";
 "GeneralMenuBarIconHiddenNote" = "የሜኑ አዶ ተደብቆም Dimly ለሙሉ ቁልፎች ይሰራል።";
@@ -177,7 +173,6 @@
 "DDCServiceUnavailableLabel" = "የማሳያ አገልግሎት አልተገኘም";
 "DDCOpenFailedFormat" = "DDC መክፈት አልተሳካም (0x%@)";
 "DDCRequestFailedFormat" = "የDDC ጥያቄ አልተሳካም (0x%@)";
-"DDCConnectionTypeUnsupported" = "የግንኙነት አይነቱ DDC ሊደግፍ አይችልም (DisplayPort ይሞክሩ)";
 "DDCInternalPanelLabel" = "ውስጣዊ ፓነል";
 
 /* Display Report */
@@ -196,17 +191,10 @@
 "VersionFormat" = "ስሪት %@ (%@)";
 "AboutCopyrightLabel" = "© 2026 Jan Feuerbacher";
 "AboutDescriptionText" = "Dimly ውጫዊ ማሳያዎችን በፍጥነት ለመጥቀስ እና እንቅልፍ/ንቃትን ለማስተዳደር የተሰራ የmacOS የSwift መሣሪያ ነው።";
-"AboutLegacyDescriptionText" = "Dimly የተፈጠረ የSwift macOS መሣሪያ ነው። ይህ ግንባታ የሜኑ አሞሌ ድጋፍ፣ የመግቢያ ንጥል መቀያየሪያ፣ እና የሚማርከው አንድ ቁልፍ ያለው ቀላል አካል ይዘዋል።";
 "AboutMadeByText" = "በነፃ ጊዜዬ ተሰርቷል - ስለ ድጋፉ እናመሰግናለሁ።";
 "AboutGitHubRepoTitle" = "GitHub ማጣቀሻ";
 "AboutReportIssueTitle" = "ችግኝ ጥቆማ አድርግ";
 "AboutDonateTitle" = "ያቅርቡ";
-
-/* Preview/Template */
-"PreviewScaffoldLabel" = "ይህ የSwiftUI አወዳድር ለሃሳቦችዎ ዝግጁ ነው።";
-"PreviewIncrementButton" = "ቆጣሪውን ጨምር";
-"PreviewCounterFormat" = "ቆጣሪ: %lld";
-"PreviewPlaceholderButton" = "ቦታይ እርምጃ አስኪድ";
 
 /* Hotkey Labels */
 "HotkeyModCmdLabel" = "Cmd";
@@ -262,7 +250,6 @@
 "HotkeyKeyKbdBrightnessToggleLabel" = "Keyboard Brightness Toggle";
 
 "BrightnessSectionLabel" = "ብሩህነት";
-"DisplayModeFallbackLabel" = "ተተኪ";
 "DDC" = "DDC";
 "DisplayModeOverlayLabel" = "የኦቨርሌይ ሁኔታ";
 "BrightnessPercentFormat" = "%lld%%";
@@ -279,11 +266,9 @@
 "BackupExportSaveError" = "መጠባበቂያ ፋይሉን ማስቀመጥ አልተቻለም።";
 "ActionExportButton" = "ላክ";
 "BackupExportActionTitle" = "የተመረጡ ቅንብሮችን ላክ";
-"ExportSelectedSettingsDetails" = "የተመረጡ ምድቦችን ወደ መጠባበቂያ ፋይል አስቀምጥ።";
 "BackupGeneralSettingsTitle" = "አጠቃላይ ቅንብሮች";
 "ActionImportButton" = "አስመጣ";
 "BackupImportActionTitle" = "የተመረጡ ቅንብሮችን አስመጣ";
-"ImportSelectedSettingsDetails" = "የተመረጡ ምድቦችን ከመጠባበቂያ ፋይል ጫን።";
 "BackupMonitorSettingsTitle" = "የማሳያ ቅንብሮች";
 "BackupSelectCategoryError" = "ቢያንስ አንድ የቅንብር ምድብ ይምረጡ።";
 "GeneralBackupTitle" = "የቅንብር መጠባበቂያ";
@@ -310,10 +295,6 @@
 
 "ActionDecreaseBrightnessHint" = "ብሩህነትን አሳንስ";
 "ActionIncreaseBrightnessHint" = "ብሩህነትን አሳድግ";
-"DisplayExcludeFromMenuTitle" = "ከሜኑ ባር መስኮት አስወግድ";
-"DisplayExcludeFromMenuSubtitle" = "ይህን ማሳያ ከሜኑ ባር ማሳያ ዝርዝር ውስጥ ደብቅ።";
-"StatusOnLabel" = "አብራ";
-"StatusOffLabel" = "ጥፋ";
 
 /* Dimly Display Visibility */
 "MenuMonitorsHeader" = "ማሳያዎች";
@@ -362,7 +343,6 @@
 "ProfileReorderTip" = "ጠቃሚ ምክር: የፕሮፋይል ካርዶችን በመጎተት እንደገና ያደራጁ።";
 "ColorVioletLabel" = "ቫዮሌት";
 
-"ProfileAutoApplyTriggerLabel" = "የማሳያ ግንኙነት ማነሳሻ";
 "ProfileAutoApplyAnyMonitorLabel" = "ማንኛውም ውጫዊ ማሳያ";
 
 "GeneralQuickActionsVisibilityTitle" = "የፈጣን እርምጃዎች ታይነት";
@@ -436,13 +416,11 @@
 "NightShiftLabel" = "Night Shift";
 "NightShiftLessWarmLabel" = "ያነሰ ሙቀት";
 "NightShiftMoreWarmLabel" = "ተጨማሪ ሙቀት";
-"NightShiftUnavailableNote" = "Night Shift በዚህ Mac ላይ አይገኝም።";
 
 /* True Tone */
 "TrueToneLabel" = "True Tone";
 
 /* Contrast */
-"ContrastSectionLabel" = "ንፅፅር";
 "ContrastPercentFormat" = "%lld%%";
 "ActionDecreaseContrastHint" = "ንፅፅርን በ1% ቀንስ";
 "ActionIncreaseContrastHint" = "ንፅፅርን በ1% ጨምር";
@@ -451,8 +429,6 @@
 "ResolutionPickerLabel" = "ሪዞሉሽን";
 "RefreshRatePickerLabel" = "የማደስ መጠን";
 "ResolutionHiDPIBadge" = "HiDPI";
-"ResolutionNativeBadge" = "ቤተኛ";
-"ResolutionDefaultBadge" = "ነባሪ";
 
 /* Input Source */
 "InputSourceVGA1Label" = "VGA 1";
@@ -468,7 +444,6 @@
 
 /* Color Profile */
 "ColorProfileSectionLabel" = "የቀለም መገለጫ";
-"ColorProfileDefaultLabel" = "ነባሪ";
 
 /* Display Appearance Filter */
 "DisplayFilterLabel" = "የመልክ ማጣሪያ";
@@ -497,15 +472,11 @@
 "LUTImportButton" = "LUT አስገባ…";
 "LUTEmptyStateLabel" = "እስካሁን ምንም LUT አልገባም።";
 "LUTPickerNoneLabel" = "ምንም";
-"LUTDimension1DLabel" = "1D";
-"LUTDimension3DLabel" = "3D";
-"LUTApproximationNote" = "3D LUT ዎች በ neutral axis ላይ ይለካሉ።";
 "LUTDeleteConfirmTitle" = "«%@»ን ማስወገድ?";
 "LUTDeleteConfirmSubtitle" = "ይህ LUTን ከቤተ-መጻሕፍቱ ያስወግደዋል እና እየተጠቀሙበት ካሉ ማሳያዎች ሁሉ ያጸዳዋል።";
 "LUTRenameAlertTitle" = "LUT ዳግም ሰይም";
 "LUTRenameAlertSubtitle" = "ለዚህ LUT አዲስ ስም አስገባ።";
 "LUTImportErrorTitle" = "LUT ማስገባት አልተቻለም";
-"LUTImportErrorSubtitle" = "ፋይሉ ሊነበብ አልቻለም ወይም ትክክለኛ LUT አይደለም።";
 "LUTRowLabel" = "LUT";
 
 /* Texture Library */

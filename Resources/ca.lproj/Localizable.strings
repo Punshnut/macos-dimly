@@ -18,7 +18,6 @@
 "IntroControlOverlaySubtitle" = "Capa d'atenuació alternativa quan el DDC no està disponible o està desactivat.";
 "IntroControlFallbackNote" = "Dimly prova primer el DDC i, si cal, passa de manera segura al mode de superposició.";
 "IntroGotItButton" = "Comença";
-"IntroMenuBarTabLabel" = "Barra de menú";
 "IntroInternalMonitorTitle" = "Mostra la pantalla integrada a Dimly";
 "IntroInternalMonitorHint" = "Dimly també pot controlar la pantalla integrada del teu Mac. Pots canviar-ho més tard a Configuració → Pantalles.";
 
@@ -79,7 +78,6 @@
 "SettingsTabShortcutsLabel" = "Dreceres";
 "SettingsTabAboutLabel" = "Quant a";
 
-
 /* Settings Visuals */
 "VisualsTransitionsTitle" = "Transicions";
 "VisualsTransitionSpeedTitle" = "Velocitat de transició";
@@ -93,9 +91,7 @@
 /* Settings General */
 "GeneralAutostartTitle" = "Inici automàtic";
 "GeneralAutostartSubtitle" = "Inicia Dimly automàticament quan iniciïs sessió.";
-"GeneralLaunchAtLoginLabel" = "Inicia en iniciar sessió";
 "GeneralMenuBarIconTitle" = "Mostra la icona a la barra";
-"GeneralMenuBarIconAltTitle" = "Mostra la icona a la barra";
 "GeneralHideDockIconTitle" = "Amaga la icona del Dock";
 "GeneralHideDockIconNote" = "Amaga la icona del Dock i l'entrada del commutador d'apps.";
 "GeneralMenuBarIconHiddenNote" = "Dimly segueix funcionant per a dreceres encara que la icona estigui oculta.";
@@ -177,7 +173,6 @@
 "DDCServiceUnavailableLabel" = "Servei de pantalla no disponible";
 "DDCOpenFailedFormat" = "Error en obrir DDC (0x%@)";
 "DDCRequestFailedFormat" = "Error en la sol·licitud DDC (0x%@)";
-"DDCConnectionTypeUnsupported" = "El tipus de connexió pot no admetre DDC (prova amb DisplayPort)";
 "DDCInternalPanelLabel" = "Panell intern";
 
 /* Display Report */
@@ -196,17 +191,10 @@
 "VersionFormat" = "Versió %@ (%@)";
 "AboutCopyrightLabel" = "© 2026 Jan Feuerbacher";
 "AboutDescriptionText" = "Dimly és una utilitat nativa de Swift per a macOS per enfosquir ràpidament pantalles externes i gestionar repòs/despertar.";
-"AboutLegacyDescriptionText" = "Dimly és una utilitat nativa de Swift per a macOS. Aquesta versió inclou un esquelet senzill amb suport de barra de menú, element d'inici de sessió i tecla ràpida configurable.";
 "AboutMadeByText" = "Fet en el meu temps lliure - gràcies pel suport.";
 "AboutGitHubRepoTitle" = "Repo a GitHub";
 "AboutReportIssueTitle" = "Informa d'un problema";
 "AboutDonateTitle" = "Dona";
-
-/* Preview/Template */
-"PreviewScaffoldLabel" = "Aquest esquelet SwiftUI està llest per a les teves idees.";
-"PreviewIncrementButton" = "Augmenta el comptador";
-"PreviewCounterFormat" = "Comptador: %lld";
-"PreviewPlaceholderButton" = "Executa acció de mostra";
 
 /* Hotkey Labels */
 "HotkeyModCmdLabel" = "Cmd";
@@ -262,7 +250,6 @@
 "HotkeyKeyKbdBrightnessToggleLabel" = "Keyboard Brightness Toggle";
 
 "BrightnessSectionLabel" = "Brillantor";
-"DisplayModeFallbackLabel" = "Alternativa";
 "DDC" = "DDC";
 "DisplayModeOverlayLabel" = "Mode de superposició";
 "BrightnessPercentFormat" = "%lld%%";
@@ -279,11 +266,9 @@
 "BackupExportSaveError" = "No s'ha pogut desar el fitxer de còpia de seguretat.";
 "ActionExportButton" = "Exporta";
 "BackupExportActionTitle" = "Exporta la configuració seleccionada";
-"ExportSelectedSettingsDetails" = "Desa les categories seleccionades en un fitxer de còpia de seguretat.";
 "BackupGeneralSettingsTitle" = "Configuració general";
 "ActionImportButton" = "Importa";
 "BackupImportActionTitle" = "Importa la configuració seleccionada";
-"ImportSelectedSettingsDetails" = "Carrega les categories seleccionades des d'un fitxer de còpia de seguretat.";
 "BackupMonitorSettingsTitle" = "Configuració del monitor";
 "BackupSelectCategoryError" = "Selecciona com a mínim una categoria de configuració.";
 "GeneralBackupTitle" = "Còpia de seguretat de la configuració";
@@ -310,10 +295,6 @@
 
 "ActionDecreaseBrightnessHint" = "Redueix la brillantor";
 "ActionIncreaseBrightnessHint" = "Augmenta la brillantor";
-"DisplayExcludeFromMenuTitle" = "Exclou de la finestra de la barra de menú";
-"DisplayExcludeFromMenuSubtitle" = "Amaga aquest monitor de la llista de pantalles de la barra de menú.";
-"StatusOnLabel" = "Activat";
-"StatusOffLabel" = "Desactivat";
 
 /* Dimly Display Visibility */
 "MenuMonitorsHeader" = "Pantalles";
@@ -362,7 +343,6 @@
 "ProfileReorderTip" = "Consell: arrossega les targetes de perfil per reordenar-les.";
 "ColorVioletLabel" = "Violeta";
 
-"ProfileAutoApplyTriggerLabel" = "Activador de connexió del monitor";
 "ProfileAutoApplyAnyMonitorLabel" = "Qualsevol monitor extern";
 
 "GeneralQuickActionsVisibilityTitle" = "Visibilitat d'accions ràpides";
@@ -436,13 +416,11 @@
 "NightShiftLabel" = "Night Shift";
 "NightShiftLessWarmLabel" = "Menys càlid";
 "NightShiftMoreWarmLabel" = "Més càlid";
-"NightShiftUnavailableNote" = "Night Shift no està disponible en aquest Mac.";
 
 /* True Tone */
 "TrueToneLabel" = "True Tone";
 
 /* Contrast */
-"ContrastSectionLabel" = "Contrast";
 "ContrastPercentFormat" = "%lld%%";
 "ActionDecreaseContrastHint" = "Reduir el contrast un 1%";
 "ActionIncreaseContrastHint" = "Augmentar el contrast un 1%";
@@ -451,8 +429,6 @@
 "ResolutionPickerLabel" = "Resolució";
 "RefreshRatePickerLabel" = "Freqüència d'actualització";
 "ResolutionHiDPIBadge" = "HiDPI";
-"ResolutionNativeBadge" = "Nativa";
-"ResolutionDefaultBadge" = "Per defecte";
 
 /* Input Source */
 "InputSourceVGA1Label" = "VGA 1";
@@ -468,7 +444,6 @@
 
 /* Color Profile */
 "ColorProfileSectionLabel" = "Perfil de color";
-"ColorProfileDefaultLabel" = "Per defecte";
 
 /* Display Appearance Filter */
 "DisplayFilterLabel" = "Filtre d'aparença";
@@ -497,15 +472,11 @@
 "LUTImportButton" = "Importa un LUT…";
 "LUTEmptyStateLabel" = "Encara no s'ha importat cap LUT.";
 "LUTPickerNoneLabel" = "Cap";
-"LUTDimension1DLabel" = "1D";
-"LUTDimension3DLabel" = "3D";
-"LUTApproximationNote" = "Els LUT 3D es mostren mostrejats al llarg de l'eix neutre.";
 "LUTDeleteConfirmTitle" = "Vols eliminar «%@»?";
 "LUTDeleteConfirmSubtitle" = "Això elimina el LUT de la biblioteca i l'esborra de qualsevol pantalla que l'estigui utilitzant.";
 "LUTRenameAlertTitle" = "Canvia el nom del LUT";
 "LUTRenameAlertSubtitle" = "Introdueix un nom nou per a aquest LUT.";
 "LUTImportErrorTitle" = "No s'ha pogut importar el LUT";
-"LUTImportErrorSubtitle" = "No s'ha pogut llegir el fitxer o no és un LUT vàlid.";
 "LUTRowLabel" = "LUT";
 
 /* Texture Library */

@@ -18,7 +18,6 @@
 "IntroControlOverlaySubtitle" = "DDC မရရှိနိုင်ခြင်း သို့မဟုတ် ပိတ်ထားခြင်း ဖြစ်ပါက အစားထိုး မှိန်စေမှု အလွှာ။";
 "IntroControlFallbackNote" = "Dimly သည် ပထမဦးစွာ DDC ကို စမ်းသပ်ပြီးနောက် လုံခြုံစွာ Overlay မုဒ်သို့ ပြန်လည်ပြောင်းလဲသည်။";
 "IntroGotItButton" = "စတင်ပါ";
-"IntroMenuBarTabLabel" = "မီနူးဘား";
 "IntroInternalMonitorTitle" = "Dimly တွင် ကိုယ်တိုင်ပါ မျက်နှာပြင် ပြရန်";
 "IntroInternalMonitorHint" = "Dimly သည် သင့် Mac ၏ ကိုယ်တိုင်ပါ မျက်နှာပြင်ကိုလည်း ထိန်းချုပ်နိုင်သည်။ ဆက်တင်များ → မျက်နှာပြင်များ တွင် ၎င်းကို နောက်မှ ပြောင်းနိုင်သည်။";
 
@@ -79,7 +78,6 @@
 "SettingsTabShortcutsLabel" = "ဖတ်ရှည်များ";
 "SettingsTabAboutLabel" = "အကြောင်း";
 
-
 /* Settings Visuals */
 "VisualsTransitionsTitle" = "အကူးအပြောင်းများ";
 "VisualsTransitionSpeedTitle" = "အကူးအပြောင်း အမြန်နှုန်း";
@@ -93,9 +91,7 @@
 /* Settings General */
 "GeneralAutostartTitle" = "အလိုအလျောက် စတင်";
 "GeneralAutostartSubtitle" = "သင်ဝင်ရောက်သည့်အခါ Dimly ကို အလိုအလျောက် စတင်ပါ။";
-"GeneralLaunchAtLoginLabel" = "ဝင်ရောက်ချိန် ဖွင့်";
 "GeneralMenuBarIconTitle" = "မီနူးဘား အိုင်ကွန် ပြ";
-"GeneralMenuBarIconAltTitle" = "မီနူးဘား အိုင်ကွန် ပြ";
 "GeneralHideDockIconTitle" = "Dock အိုင်ကွန် ဝှက်";
 "GeneralHideDockIconNote" = "Dock အိုင်ကွန်နှင့် အပ္ပ်ပြောင်း မှတ်တမ်းကို ဝှက်ထားသည်။";
 "GeneralMenuBarIconHiddenNote" = "မီနူးဘားအိုင်ကွန် ဝှက်ထားသောအခါတွင်တောင် Dimly သည် ဟော့ကီးများအတွက် ဆက်လက် လည်ပတ်သည်။";
@@ -177,7 +173,6 @@
 "DDCServiceUnavailableLabel" = "ပြသမှု ဝန်ဆောင်မှု မရနိုင်";
 "DDCOpenFailedFormat" = "DDC ဖွင့်ခြင်း မအောင်မြင် (0x%@)";
 "DDCRequestFailedFormat" = "DDC တောင်းဆိုမှု မအောင်မြင် (0x%@)";
-"DDCConnectionTypeUnsupported" = "ဤချိတ်ဆက်မှု အမျိုးအစားသည် DDC ကို ပံ့ပိုးမပေးနိုင်ပါ (DisplayPort သုံးကြည့်ပါ)";
 "DDCInternalPanelLabel" = "အတွင်းပိုင်း ဘုတ်";
 
 /* Display Report */
@@ -196,17 +191,10 @@
 "VersionFormat" = "ဗားရှင်း %@ (%@)";
 "AboutCopyrightLabel" = "© 2026 Jan Feuerbacher";
 "AboutDescriptionText" = "Dimly သည် ပြင်ပပြသမှုများကို မြန်မြန် အမည်းဖုံးလျက် အိပ်ရာ/နိုးထခြင်းကို စီမံရန် macOS အတွက် native Swift သုံးရည်ရွယ်ချက် ဖြစ်သည်။";
-"AboutLegacyDescriptionText" = "Dimly သည် native Swift macOS ရည်ရွယ်ချက် ဖြစ်ပြီး ဤ build တွင် မီနူးဘားပံ့ပိုးမှု၊ ဝင်ရောက်အချက်အလက် toggle၊ ပြင်ဆင်နိုင်သော ဟော့ကီး ပါဝင်သည်။";
 "AboutMadeByText" = "ငါ့အားလပ်ချိန်တွင် ပြုလုပ်သည် - ပံ့ပိုးမှုအတွက် ကျေးဇူးတင်ပါသည်။";
 "AboutGitHubRepoTitle" = "GitHub Repo";
 "AboutReportIssueTitle" = "ပြဿနာ အစီရင်ခံ";
 "AboutDonateTitle" = "လှူဒါန်း";
-
-/* Preview/Template */
-"PreviewScaffoldLabel" = "ဤ SwiftUI scaffold သည် သင့်အကြံဥာဏ်များအတွက် ဆင်ဆင်ပြင်ထားပါသည်။";
-"PreviewIncrementButton" = "Counter တိုး";
-"PreviewCounterFormat" = "Counter: %lld";
-"PreviewPlaceholderButton" = "အစားထိုးလုပ်ဆောင်မှု လုပ်";
 
 /* Hotkey Labels */
 "HotkeyModCmdLabel" = "Cmd";
@@ -262,7 +250,6 @@
 "HotkeyKeyKbdBrightnessToggleLabel" = "Keyboard Brightness Toggle";
 
 "BrightnessSectionLabel" = "တောက်ပမှု";
-"DisplayModeFallbackLabel" = "အစားထိုး မုဒ်";
 "DDC" = "DDC";
 "DisplayModeOverlayLabel" = "အိုဗာလေး မုဒ်";
 "BrightnessPercentFormat" = "%lld%%";
@@ -279,11 +266,9 @@
 "BackupExportSaveError" = "အရန်ဖိုင်ကို သိမ်းမရပါ။";
 "ActionExportButton" = "ထုတ်ရန်";
 "BackupExportActionTitle" = "ရွေးထားသော ဆက်တင်များကို ထုတ်ရန်";
-"ExportSelectedSettingsDetails" = "ရွေးထားသော အမျိုးအစားများကို အရန်ဖိုင်သို့ သိမ်းပါ။";
 "BackupGeneralSettingsTitle" = "အထွေထွေ ဆက်တင်များ";
 "ActionImportButton" = "တင်သွင်းရန်";
 "BackupImportActionTitle" = "ရွေးထားသော ဆက်တင်များကို တင်သွင်းရန်";
-"ImportSelectedSettingsDetails" = "အရန်ဖိုင်မှ ရွေးထားသော အမျိုးအစားများကို တင်ပါ။";
 "BackupMonitorSettingsTitle" = "မော်နီတာ ဆက်တင်များ";
 "BackupSelectCategoryError" = "အနည်းဆုံး ဆက်တင် အမျိုးအစား တစ်ခုကို ရွေးပါ။";
 "GeneralBackupTitle" = "ဆက်တင် အရန်";
@@ -310,10 +295,6 @@
 
 "ActionDecreaseBrightnessHint" = "အလင်းအား လျှော့ရန်";
 "ActionIncreaseBrightnessHint" = "အလင်းအား မြှင့်ရန်";
-"DisplayExcludeFromMenuTitle" = "မီနူးဘား ဝင်းဒိုးမှ ဖယ်ထုတ်ရန်";
-"DisplayExcludeFromMenuSubtitle" = "ဤမော်နီတာကို မီနူးဘား ပြသမှုစာရင်းမှ ဖျောက်ပါ။";
-"StatusOnLabel" = "ဖွင့်";
-"StatusOffLabel" = "ပိတ်";
 
 /* Dimly Display Visibility */
 "MenuMonitorsHeader" = "ပြသမှုများ";
@@ -362,7 +343,6 @@
 "ProfileReorderTip" = "အကြံပြုချက် - Profile ကတ်များကို ဆွဲ၍ အစဉ်ပြန်စီပါ။";
 "ColorVioletLabel" = "ခရမ်းရောင်";
 
-"ProfileAutoApplyTriggerLabel" = "မော်နီတာ ချိတ်ဆက်မှု အလုပ်လုပ်စေခြင်း";
 "ProfileAutoApplyAnyMonitorLabel" = "မည်သည့် ပြင်ပ မော်နီတာမဆို";
 
 "GeneralQuickActionsVisibilityTitle" = "အမြန်လုပ်ဆောင်ချက်များ မြင်နိုင်မှု";
@@ -436,13 +416,11 @@
 "NightShiftLabel" = "Night Shift";
 "NightShiftLessWarmLabel" = "နွေးထွေးမှု နည်းသည်";
 "NightShiftMoreWarmLabel" = "ပိုနွေးထွေးသည်";
-"NightShiftUnavailableNote" = "ဤ Mac တွင် Night Shift မရရှိနိုင်ပါ။";
 
 /* True Tone */
 "TrueToneLabel" = "True Tone";
 
 /* Contrast */
-"ContrastSectionLabel" = "ကွဲပြားမှု";
 "ContrastPercentFormat" = "%lld%%";
 "ActionDecreaseContrastHint" = "ကွဲပြားမှုကို ၁% လျှော့ပါ";
 "ActionIncreaseContrastHint" = "ကွဲပြားမှုကို ၁% တိုးပါ";
@@ -451,8 +429,6 @@
 "ResolutionPickerLabel" = "ကြည်လင်ပြတ်သားမှု";
 "RefreshRatePickerLabel" = "ပြန်လည်ဆန်းသစ်နှုန်း";
 "ResolutionHiDPIBadge" = "HiDPI";
-"ResolutionNativeBadge" = "မူရင်း";
-"ResolutionDefaultBadge" = "ပုံသေ";
 
 /* Input Source */
 "InputSourceVGA1Label" = "VGA 1";
@@ -468,7 +444,6 @@
 
 /* Color Profile */
 "ColorProfileSectionLabel" = "အရောင်ပရိုဖိုင်";
-"ColorProfileDefaultLabel" = "ပုံသေ";
 
 /* Display Appearance Filter */
 "DisplayFilterLabel" = "အသွင်အပြင်စစ်ထုတ်ကိရိယာ";
@@ -497,15 +472,11 @@
 "LUTImportButton" = "LUT တင်သွင်းရန်…";
 "LUTEmptyStateLabel" = "LUT များ မရှိသေးပါ။";
 "LUTPickerNoneLabel" = "မရှိ";
-"LUTDimension1DLabel" = "1D";
-"LUTDimension3DLabel" = "3D";
-"LUTApproximationNote" = "3D LUT များကို neutral axis တလျှောက် နမူနာယူသည်။";
 "LUTDeleteConfirmTitle" = "\"%@\" ကို ဖယ်ရှားမည်လား?";
 "LUTDeleteConfirmSubtitle" = "ဤလုပ်ဆောင်ချက်သည် LUT ကို စာကြည့်တိုက်မှ ဖယ်ရှားပြီး ၎င်းကို အသုံးပြုနေသော မျက်နှာပြင်များမှ ရှင်းလင်းမည်ဖြစ်သည်။";
 "LUTRenameAlertTitle" = "LUT အမည်ပြောင်းရန်";
 "LUTRenameAlertSubtitle" = "ဤ LUT အတွက် အမည်အသစ်တစ်ခု ထည့်သွင်းပါ။";
 "LUTImportErrorTitle" = "LUT တင်သွင်း၍ မရပါ";
-"LUTImportErrorSubtitle" = "ဖိုင်ကို ဖတ်၍မရသောကြောင့် သို့မဟုတ် ၎င်းသည် မှန်ကန်သော LUT မဟုတ်သောကြောင့် ဖြစ်သည်။";
 "LUTRowLabel" = "LUT";
 
 /* Texture Library */

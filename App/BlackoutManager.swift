@@ -15,7 +15,6 @@ final class BlackoutManager: ObservableObject {
     private var brightnessFallbackOverlays: [String: DimOverlayWindow] = [:]
     @Published private(set) var activeDisplayIDs: Set<String> = []
     @Published private(set) var fallbackBrightnessLevels: [String: Int] = [:] // stableIdentity -> percent (0...99)
-    private var persistenceToken: AnyCancellable?
     private var displayChangeToken: AnyCancellable?
     private let persistenceKey = "Blackout.activeDisplayIDs"
     private let startupRestoreAnimated: Bool
@@ -106,18 +105,6 @@ final class BlackoutManager: ObservableObject {
         persistState()
         logger.notice("Blackout OFF for \(display.stableIdentity, privacy: .public)")
         DiagnosticsLogger.shared.log("Blackout OFF for \(display.stableIdentity)", category: "blackout")
-    }
-
-    /// Toggles blackout across all external displays.
-    func toggleAllExternal(displays: [DisplayInfo], fadeOut: Bool, fadeIn: Bool) {
-        let externals = displays.filter { $0.isExternal }
-        let anyActive = externals.contains { activeDisplayIDs.contains($0.stableIdentity) }
-        if anyActive {
-            externals.forEach { unblackout($0, animated: fadeIn) }
-        } else {
-            externals.forEach { blackout($0, animated: fadeOut) }
-        }
-        DiagnosticsLogger.shared.log("Toggle all external blackout active=\(anyActive)", category: "blackout")
     }
 
     /// Clears all blackout and transition overlays immediately.
@@ -438,7 +425,7 @@ final class BlackoutManager: ObservableObject {
     func hideTransitionOverlay(for display: DisplayInfo, animated: Bool, delay: TimeInterval = 0) {
         guard let window = transitionOverlays[display.stableIdentity] else { return }
         if delay > 0 {
-            Task { @MainActor in
+            Task { @MainActor [weak self] in
                 try? await Task.sleep(nanoseconds: UInt64(delay * 1_000_000_000))
                 window.hide(animated: animated) { [weak self] in
                     window.close()

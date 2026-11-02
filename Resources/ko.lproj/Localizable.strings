@@ -18,7 +18,6 @@
 "IntroControlOverlaySubtitle" = "DDC를 사용할 수 없거나 비활성화된 경우의 대체 디밍 레이어.";
 "IntroControlFallbackNote" = "Dimly는 먼저 DDC를 시도한 뒤, 안전하게 오버레이 모드로 전환합니다.";
 "IntroGotItButton" = "시작하기";
-"IntroMenuBarTabLabel" = "메뉴 막대";
 "IntroInternalMonitorTitle" = "Dimly에 내장 디스플레이 표시";
 "IntroInternalMonitorHint" = "Dimly는 Mac의 내장 디스플레이도 제어할 수 있습니다. 나중에 설정 → 디스플레이에서 변경할 수 있습니다.";
 
@@ -79,7 +78,6 @@
 "SettingsTabShortcutsLabel" = "단축키";
 "SettingsTabAboutLabel" = "정보";
 
-
 /* Settings Visuals */
 "VisualsTransitionsTitle" = "전환";
 "VisualsTransitionSpeedTitle" = "전환 속도";
@@ -93,9 +91,7 @@
 /* Settings General */
 "GeneralAutostartTitle" = "자동 시작";
 "GeneralAutostartSubtitle" = "로그인하면 Dimly를 자동으로 실행합니다.";
-"GeneralLaunchAtLoginLabel" = "로그인 시 실행";
 "GeneralMenuBarIconTitle" = "메뉴 막대 아이콘 표시";
-"GeneralMenuBarIconAltTitle" = "메뉴 막대 아이콘 표시";
 "GeneralHideDockIconTitle" = "Dock 아이콘 숨기기";
 "GeneralHideDockIconNote" = "Dock 아이콘과 앱 전환 항목을 숨깁니다.";
 "GeneralMenuBarIconHiddenNote" = "메뉴 아이콘이 숨겨져 있어도 Dimly는 단축키를 위해 실행됩니다.";
@@ -177,7 +173,6 @@
 "DDCServiceUnavailableLabel" = "디스플레이 서비스 사용 불가";
 "DDCOpenFailedFormat" = "DDC 열기 실패 (0x%@)";
 "DDCRequestFailedFormat" = "DDC 요청 실패 (0x%@)";
-"DDCConnectionTypeUnsupported" = "이 연결 유형은 DDC를 지원하지 않을 수 있습니다 (DisplayPort를 사용해 보세요)";
 "DDCInternalPanelLabel" = "내장 패널";
 
 /* Display Report */
@@ -196,17 +191,10 @@
 "VersionFormat" = "버전 %@ (%@)";
 "AboutCopyrightLabel" = "© 2026 Jan Feuerbacher";
 "AboutDescriptionText" = "Dimly는 외부 디스플레이를 빠르게 블랙아웃하고 절전/깨우기를 관리하는 macOS용 네이티브 Swift 유틸리티입니다.";
-"AboutLegacyDescriptionText" = "Dimly는 macOS용 네이티브 Swift 유틸리티입니다. 이 빌드는 메뉴 막대 지원, 로그인 항목 토글, 구성 가능한 핫키가 포함된 간단한 스켈레톤을 제공합니다.";
 "AboutMadeByText" = "여가 시간에 만들었습니다 - 응원에 감사드립니다.";
 "AboutGitHubRepoTitle" = "GitHub 저장소";
 "AboutReportIssueTitle" = "문제 보고";
 "AboutDonateTitle" = "후원";
-
-/* Preview/Template */
-"PreviewScaffoldLabel" = "이 SwiftUI 스캐폴드는 당신의 아이디어를 기다리고 있습니다.";
-"PreviewIncrementButton" = "카운터 증가";
-"PreviewCounterFormat" = "카운터: %lld";
-"PreviewPlaceholderButton" = "플레이스홀더 동작 실행";
 
 /* Hotkey Labels */
 "HotkeyModCmdLabel" = "Cmd";
@@ -262,7 +250,6 @@
 "HotkeyKeyKbdBrightnessToggleLabel" = "Keyboard Brightness Toggle";
 
 "BrightnessSectionLabel" = "밝기";
-"DisplayModeFallbackLabel" = "대체 모드";
 "DDC" = "DDC";
 "DisplayModeOverlayLabel" = "오버레이 모드";
 "BrightnessPercentFormat" = "%lld%%";
@@ -279,11 +266,9 @@
 "BackupExportSaveError" = "백업 파일을 저장할 수 없습니다.";
 "ActionExportButton" = "내보내기";
 "BackupExportActionTitle" = "선택한 설정 내보내기";
-"ExportSelectedSettingsDetails" = "선택한 카테고리를 백업 파일로 저장합니다.";
 "BackupGeneralSettingsTitle" = "일반 설정";
 "ActionImportButton" = "가져오기";
 "BackupImportActionTitle" = "선택한 설정 가져오기";
-"ImportSelectedSettingsDetails" = "백업 파일에서 선택한 카테고리를 불러옵니다.";
 "BackupMonitorSettingsTitle" = "모니터 설정";
 "BackupSelectCategoryError" = "최소 하나의 설정 카테고리를 선택하세요.";
 "GeneralBackupTitle" = "설정 백업";
@@ -310,10 +295,6 @@
 
 "ActionDecreaseBrightnessHint" = "밝기 낮추기";
 "ActionIncreaseBrightnessHint" = "밝기 높이기";
-"DisplayExcludeFromMenuTitle" = "메뉴 막대 창에서 제외";
-"DisplayExcludeFromMenuSubtitle" = "이 모니터를 메뉴 막대 디스플레이 목록에서 숨깁니다.";
-"StatusOnLabel" = "켜짐";
-"StatusOffLabel" = "꺼짐";
 
 /* Dimly Display Visibility */
 "MenuMonitorsHeader" = "디스플레이";
@@ -362,7 +343,6 @@
 "ProfileReorderTip" = "팁: 프로필 카드를 드래그하여 순서를 바꾸세요.";
 "ColorVioletLabel" = "바이올렛";
 
-"ProfileAutoApplyTriggerLabel" = "모니터 연결 트리거";
 "ProfileAutoApplyAnyMonitorLabel" = "모든 외부 모니터";
 
 "GeneralQuickActionsVisibilityTitle" = "빠른 작업 표시";
@@ -436,13 +416,11 @@
 "NightShiftLabel" = "Night Shift";
 "NightShiftLessWarmLabel" = "덜 따뜻하게";
 "NightShiftMoreWarmLabel" = "더 따뜻하게";
-"NightShiftUnavailableNote" = "이 Mac에서는 Night Shift를 사용할 수 없습니다.";
 
 /* True Tone */
 "TrueToneLabel" = "True Tone";
 
 /* Contrast */
-"ContrastSectionLabel" = "대비";
 "ContrastPercentFormat" = "%lld%%";
 "ActionDecreaseContrastHint" = "대비 1% 낮추기";
 "ActionIncreaseContrastHint" = "대비 1% 높이기";
@@ -451,8 +429,6 @@
 "ResolutionPickerLabel" = "해상도";
 "RefreshRatePickerLabel" = "재생 빈도";
 "ResolutionHiDPIBadge" = "HiDPI";
-"ResolutionNativeBadge" = "기본";
-"ResolutionDefaultBadge" = "기본값";
 
 /* Input Source */
 "InputSourceVGA1Label" = "VGA 1";
@@ -468,7 +444,6 @@
 
 /* Color Profile */
 "ColorProfileSectionLabel" = "색상 프로파일";
-"ColorProfileDefaultLabel" = "기본값";
 
 /* Display Appearance Filter */
 "DisplayFilterLabel" = "외형 필터";
@@ -497,15 +472,11 @@
 "LUTImportButton" = "LUT 가져오기…";
 "LUTEmptyStateLabel" = "가져온 LUT이 없습니다.";
 "LUTPickerNoneLabel" = "없음";
-"LUTDimension1DLabel" = "1D";
-"LUTDimension3DLabel" = "3D";
-"LUTApproximationNote" = "3D LUT은 중립 축을 따라 샘플링됩니다.";
 "LUTDeleteConfirmTitle" = "\"%@\"을(를) 제거하겠습니까?";
 "LUTDeleteConfirmSubtitle" = "이 LUT이 라이브러리에서 제거되고 사용 중인 모든 디스플레이에서 지워집니다.";
 "LUTRenameAlertTitle" = "LUT 이름 변경";
 "LUTRenameAlertSubtitle" = "이 LUT의 새 이름을 입력하십시오.";
 "LUTImportErrorTitle" = "LUT을 가져올 수 없음";
-"LUTImportErrorSubtitle" = "파일을 읽을 수 없거나 올바른 LUT 형식이 아닙니다.";
 "LUTRowLabel" = "LUT";
 
 /* Texture Library */

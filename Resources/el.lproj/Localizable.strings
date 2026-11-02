@@ -18,7 +18,6 @@
 "IntroControlOverlaySubtitle" = "Εφεδρικό επίπεδο σκίασης όταν το DDC δεν είναι διαθέσιμο ή είναι απενεργοποιημένο.";
 "IntroControlFallbackNote" = "Το Dimly δοκιμάζει πρώτα το DDC και έπειτα μεταβαίνει με ασφάλεια στη λειτουργία επικάλυψης.";
 "IntroGotItButton" = "Έναρξη";
-"IntroMenuBarTabLabel" = "Γραμμή μενού";
 "IntroInternalMonitorTitle" = "Εμφάνιση ενσωματωμένης οθόνης στο Dimly";
 "IntroInternalMonitorHint" = "Το Dimly μπορεί επίσης να ελέγξει την ενσωματωμένη οθόνη του Mac σας. Μπορείτε να το αλλάξετε αργότερα στις Ρυθμίσεις → Οθόνες.";
 
@@ -79,7 +78,6 @@
 "SettingsTabShortcutsLabel" = "Συντομεύσεις";
 "SettingsTabAboutLabel" = "Πληροφορίες";
 
-
 /* Settings Visuals */
 "VisualsTransitionsTitle" = "Μεταβάσεις";
 "VisualsTransitionSpeedTitle" = "Ταχύτητα μετάβασης";
@@ -93,9 +91,7 @@
 /* Settings General */
 "GeneralAutostartTitle" = "Αυτόματη εκκίνηση";
 "GeneralAutostartSubtitle" = "Εκκίνηση του Dimly αυτόματα κατά τη σύνδεση.";
-"GeneralLaunchAtLoginLabel" = "Έναρξη με τη σύνδεση";
 "GeneralMenuBarIconTitle" = "Εμφάνιση εικονιδίου στη γραμμή";
-"GeneralMenuBarIconAltTitle" = "Εμφάνιση εικονιδίου στη γραμμή";
 "GeneralHideDockIconTitle" = "Απόκρυψη εικονιδίου Dock";
 "GeneralHideDockIconNote" = "Απόκρυψη εικονιδίου Dock και της καταχώρησης εναλλαγής εφαρμογών.";
 "GeneralMenuBarIconHiddenNote" = "Το Dimly μένει ενεργό για συντομεύσεις ακόμη κι αν το εικονίδιο είναι κρυφό.";
@@ -177,7 +173,6 @@
 "DDCServiceUnavailableLabel" = "Η υπηρεσία οθόνης δεν είναι διαθέσιμη";
 "DDCOpenFailedFormat" = "Αποτυχία ανοίγματος DDC (0x%@)";
 "DDCRequestFailedFormat" = "Αποτυχία αιτήματος DDC (0x%@)";
-"DDCConnectionTypeUnsupported" = "Ο τύπος σύνδεσης ενδέχεται να μην υποστηρίζει DDC (δοκιμάστε DisplayPort)";
 "DDCInternalPanelLabel" = "Εσωτερικό πάνελ";
 
 /* Display Report */
@@ -196,17 +191,10 @@
 "VersionFormat" = "Έκδοση %@ (%@)";
 "AboutCopyrightLabel" = "© 2026 Jan Feuerbacher";
 "AboutDescriptionText" = "Το Dimly είναι ένα εγγενές εργαλείο Swift για macOS που σκοτεινιάζει γρήγορα εξωτερικές οθόνες και διαχειρίζεται ύπνο/αφύπνιση.";
-"AboutLegacyDescriptionText" = "Το Dimly είναι εγγενές εργαλείο Swift για macOS. Αυτή η έκδοση περιλαμβάνει ένα απλό περίγραμμα με υποστήριξη γραμμής μενού, εναλλαγή στοιχείου σύνδεσης και ρυθμιζόμενο πλήκτρο.";
 "AboutMadeByText" = "Φτιαγμένο στον ελεύθερο χρόνο μου - ευχαριστώ για τη στήριξη.";
 "AboutGitHubRepoTitle" = "Αποθετήριο GitHub";
 "AboutReportIssueTitle" = "Αναφορά προβλήματος";
 "AboutDonateTitle" = "Δωρεά";
-
-/* Preview/Template */
-"PreviewScaffoldLabel" = "Αυτός ο σκελετός SwiftUI είναι έτοιμος για τις ιδέες σου.";
-"PreviewIncrementButton" = "Αύξηση μετρητή";
-"PreviewCounterFormat" = "Μετρητής: %lld";
-"PreviewPlaceholderButton" = "Εκτέλεση δοκιμαστικής ενέργειας";
 
 /* Hotkey Labels */
 "HotkeyModCmdLabel" = "Cmd";
@@ -262,7 +250,6 @@
 "HotkeyKeyKbdBrightnessToggleLabel" = "Keyboard Brightness Toggle";
 
 "BrightnessSectionLabel" = "Φωτεινότητα";
-"DisplayModeFallbackLabel" = "Εφεδρική λειτουργία";
 "DDC" = "DDC";
 "DisplayModeOverlayLabel" = "Λειτουργία επικάλυψης";
 "BrightnessPercentFormat" = "%lld%%";
@@ -279,11 +266,9 @@
 "BackupExportSaveError" = "Δεν ήταν δυνατή η αποθήκευση του αρχείου αντιγράφου ασφαλείας.";
 "ActionExportButton" = "Εξαγωγή";
 "BackupExportActionTitle" = "Εξαγωγή επιλεγμένων ρυθμίσεων";
-"ExportSelectedSettingsDetails" = "Αποθήκευσε τις επιλεγμένες κατηγορίες σε αρχείο αντιγράφου ασφαλείας.";
 "BackupGeneralSettingsTitle" = "Γενικές ρυθμίσεις";
 "ActionImportButton" = "Εισαγωγή";
 "BackupImportActionTitle" = "Εισαγωγή επιλεγμένων ρυθμίσεων";
-"ImportSelectedSettingsDetails" = "Φόρτωσε τις επιλεγμένες κατηγορίες από αρχείο αντιγράφου ασφαλείας.";
 "BackupMonitorSettingsTitle" = "Ρυθμίσεις οθόνης";
 "BackupSelectCategoryError" = "Επίλεξε τουλάχιστον μία κατηγορία ρυθμίσεων.";
 "GeneralBackupTitle" = "Αντίγραφο ασφαλείας ρυθμίσεων";
@@ -310,10 +295,6 @@
 
 "ActionDecreaseBrightnessHint" = "Μείωση φωτεινότητας";
 "ActionIncreaseBrightnessHint" = "Αύξηση φωτεινότητας";
-"DisplayExcludeFromMenuTitle" = "Εξαίρεση από το παράθυρο της γραμμής μενού";
-"DisplayExcludeFromMenuSubtitle" = "Απόκρυψη αυτής της οθόνης από τη λίστα οθονών της γραμμής μενού.";
-"StatusOnLabel" = "Ενεργό";
-"StatusOffLabel" = "Ανενεργό";
 
 /* Dimly Display Visibility */
 "MenuMonitorsHeader" = "Οθόνες";
@@ -362,7 +343,6 @@
 "ProfileReorderTip" = "Συμβουλή: Σύρετε τις κάρτες προφίλ για να αλλάξετε σειρά.";
 "ColorVioletLabel" = "Βιολετί";
 
-"ProfileAutoApplyTriggerLabel" = "Ενεργοποίηση στη σύνδεση οθόνης";
 "ProfileAutoApplyAnyMonitorLabel" = "Οποιαδήποτε εξωτερική οθόνη";
 
 "GeneralQuickActionsVisibilityTitle" = "Ορατότητα γρήγορων ενεργειών";
@@ -436,13 +416,11 @@
 "NightShiftLabel" = "Night Shift";
 "NightShiftLessWarmLabel" = "Λιγότερο θερμό";
 "NightShiftMoreWarmLabel" = "Πιο θερμό";
-"NightShiftUnavailableNote" = "Το Night Shift δεν είναι διαθέσιμο σε αυτό το Mac.";
 
 /* True Tone */
 "TrueToneLabel" = "True Tone";
 
 /* Contrast */
-"ContrastSectionLabel" = "Αντίθεση";
 "ContrastPercentFormat" = "%lld%%";
 "ActionDecreaseContrastHint" = "Μείωση αντίθεσης κατά 1%";
 "ActionIncreaseContrastHint" = "Αύξηση αντίθεσης κατά 1%";
@@ -451,8 +429,6 @@
 "ResolutionPickerLabel" = "Ανάλυση";
 "RefreshRatePickerLabel" = "Ρυθμός ανανέωσης";
 "ResolutionHiDPIBadge" = "HiDPI";
-"ResolutionNativeBadge" = "Εγγενής";
-"ResolutionDefaultBadge" = "Προεπιλογή";
 
 /* Input Source */
 "InputSourceVGA1Label" = "VGA 1";
@@ -468,7 +444,6 @@
 
 /* Color Profile */
 "ColorProfileSectionLabel" = "Προφίλ χρώματος";
-"ColorProfileDefaultLabel" = "Προεπιλογή";
 
 /* Display Appearance Filter */
 "DisplayFilterLabel" = "Φίλτρο εμφάνισης";
@@ -497,15 +472,11 @@
 "LUTImportButton" = "Εισαγωγή LUT…";
 "LUTEmptyStateLabel" = "Δεν έχουν εισαχθεί LUT ακόμα.";
 "LUTPickerNoneLabel" = "Καμία";
-"LUTDimension1DLabel" = "1D";
-"LUTDimension3DLabel" = "3D";
-"LUTApproximationNote" = "Τα 3D LUT δειγματοληπτούνται κατά μήκος του ουδέτερου άξονα.";
 "LUTDeleteConfirmTitle" = "Αφαίρεση του «%@»;";
 "LUTDeleteConfirmSubtitle" = "Αυτό αφαιρεί το LUT από τη βιβλιοθήκη και το καταργεί από τυχόν οθόνες που το χρησιμοποιούν.";
 "LUTRenameAlertTitle" = "Μετονομασία LUT";
 "LUTRenameAlertSubtitle" = "Εισαγάγετε νέο όνομα για αυτό το LUT.";
 "LUTImportErrorTitle" = "Αδύνατη η εισαγωγή LUT";
-"LUTImportErrorSubtitle" = "Δεν ήταν δυνατή η ανάγνωση του αρχείου ή δεν αποτελεί έγκυρο LUT.";
 "LUTRowLabel" = "LUT";
 
 /* Texture Library */

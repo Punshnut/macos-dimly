@@ -18,7 +18,6 @@
 "IntroControlOverlaySubtitle" = "ชั้นลดความสว่างสำรองเมื่อ DDC ใช้งานไม่ได้หรือถูกปิดใช้งาน";
 "IntroControlFallbackNote" = "Dimly จะลองใช้ DDC ก่อน แล้วจึงสลับกลับไปยังโหมดโอเวอร์เลย์อย่างปลอดภัย";
 "IntroGotItButton" = "เริ่มต้น";
-"IntroMenuBarTabLabel" = "แถบเมนู";
 "IntroInternalMonitorTitle" = "แสดงจอแสดงผลในตัวใน Dimly";
 "IntroInternalMonitorHint" = "Dimly ยังสามารถควบคุมจอแสดงผลในตัวของ Mac ของคุณได้ คุณสามารถเปลี่ยนแปลงได้ในภายหลังที่ การตั้งค่า → จอแสดงผล";
 
@@ -79,7 +78,6 @@
 "SettingsTabShortcutsLabel" = "ทางลัด";
 "SettingsTabAboutLabel" = "เกี่ยวกับ";
 
-
 /* Settings Visuals */
 "VisualsTransitionsTitle" = "การเปลี่ยนผ่าน";
 "VisualsTransitionSpeedTitle" = "ความเร็วการเปลี่ยนผ่าน";
@@ -93,9 +91,7 @@
 /* Settings General */
 "GeneralAutostartTitle" = "เริ่มอัตโนมัติ";
 "GeneralAutostartSubtitle" = "เปิด Dimly อัตโนมัติเมื่อเข้าสู่ระบบ";
-"GeneralLaunchAtLoginLabel" = "เปิดเมื่อเข้าสู่ระบบ";
 "GeneralMenuBarIconTitle" = "แสดงไอคอนบนแถบเมนู";
-"GeneralMenuBarIconAltTitle" = "แสดงไอคอนบนแถบเมนู";
 "GeneralHideDockIconTitle" = "ซ่อนไอคอน Dock";
 "GeneralHideDockIconNote" = "ซ่อนไอคอน Dock และรายการตัวสลับแอป";
 "GeneralMenuBarIconHiddenNote" = "Dimly ยังทำงานสำหรับฮอตคีย์แม้ไอคอนจะถูกซ่อนไว้";
@@ -177,7 +173,6 @@
 "DDCServiceUnavailableLabel" = "บริการจอไม่พร้อมใช้งาน";
 "DDCOpenFailedFormat" = "เปิด DDC ล้มเหลว (0x%@)";
 "DDCRequestFailedFormat" = "คำขอ DDC ล้มเหลว (0x%@)";
-"DDCConnectionTypeUnsupported" = "ประเภทการเชื่อมต่อนี้อาจไม่รองรับ DDC (ลอง DisplayPort)";
 "DDCInternalPanelLabel" = "พาเนลภายใน";
 
 /* Display Report */
@@ -196,17 +191,10 @@
 "VersionFormat" = "เวอร์ชัน %@ (%@)";
 "AboutCopyrightLabel" = "© 2026 Jan Feuerbacher";
 "AboutDescriptionText" = "Dimly เป็นยูทิลิตี Swift บน macOS เพื่อทำจอภายนอกให้มืดอย่างรวดเร็วและจัดการโหมดสลีป/ปลุก";
-"AboutLegacyDescriptionText" = "Dimly เป็นยูทิลิตี Swift บน macOS รุ่นนี้มีโครงง่ายๆ พร้อมรองรับแถบเมนู สวิตช์ไอเท็มล็อกอิน และฮอตคีย์ที่ตั้งค่าได้.";
 "AboutMadeByText" = "ทำในเวลาว่างของฉัน - ขอบคุณสำหรับการสนับสนุน.";
 "AboutGitHubRepoTitle" = "ที่เก็บ GitHub";
 "AboutReportIssueTitle" = "รายงานปัญหา";
 "AboutDonateTitle" = "บริจาค";
-
-/* Preview/Template */
-"PreviewScaffoldLabel" = "โครง SwiftUI นี้พร้อมสำหรับไอเดียของคุณ.";
-"PreviewIncrementButton" = "เพิ่มตัวนับ";
-"PreviewCounterFormat" = "ตัวนับ: %lld";
-"PreviewPlaceholderButton" = "เรียกใช้การทำงานชั่วคราว";
 
 /* Hotkey Labels */
 "HotkeyModCmdLabel" = "Cmd";
@@ -262,7 +250,6 @@
 "HotkeyKeyKbdBrightnessToggleLabel" = "Keyboard Brightness Toggle";
 
 "BrightnessSectionLabel" = "ความสว่าง";
-"DisplayModeFallbackLabel" = "โหมดสำรอง";
 "DDC" = "DDC";
 "DisplayModeOverlayLabel" = "โหมดโอเวอร์เลย์";
 "BrightnessPercentFormat" = "%lld%%";
@@ -279,11 +266,9 @@
 "BackupExportSaveError" = "ไม่สามารถบันทึกไฟล์สำรองข้อมูลได้";
 "ActionExportButton" = "ส่งออก";
 "BackupExportActionTitle" = "ส่งออกการตั้งค่าที่เลือก";
-"ExportSelectedSettingsDetails" = "บันทึกหมวดหมู่ที่เลือกลงในไฟล์สำรองข้อมูล";
 "BackupGeneralSettingsTitle" = "การตั้งค่าทั่วไป";
 "ActionImportButton" = "นำเข้า";
 "BackupImportActionTitle" = "นำเข้าการตั้งค่าที่เลือก";
-"ImportSelectedSettingsDetails" = "โหลดหมวดหมู่ที่เลือกจากไฟล์สำรองข้อมูล";
 "BackupMonitorSettingsTitle" = "การตั้งค่าจอภาพ";
 "BackupSelectCategoryError" = "เลือกอย่างน้อยหนึ่งหมวดหมู่การตั้งค่า";
 "GeneralBackupTitle" = "ข้อมูลสำรองการตั้งค่า";
@@ -310,10 +295,6 @@
 
 "ActionDecreaseBrightnessHint" = "ลดความสว่าง";
 "ActionIncreaseBrightnessHint" = "เพิ่มความสว่าง";
-"DisplayExcludeFromMenuTitle" = "ยกเว้นจากหน้าต่างแถบเมนู";
-"DisplayExcludeFromMenuSubtitle" = "ซ่อนจอนี้จากรายการจอภาพในแถบเมนู";
-"StatusOnLabel" = "เปิด";
-"StatusOffLabel" = "ปิด";
 
 /* Dimly Display Visibility */
 "MenuMonitorsHeader" = "จอภาพ";
@@ -362,7 +343,6 @@
 "ProfileReorderTip" = "เคล็ดลับ: ลากการ์ดโปรไฟล์เพื่อจัดลำดับใหม่";
 "ColorVioletLabel" = "สีม่วง";
 
-"ProfileAutoApplyTriggerLabel" = "ทริกเกอร์เมื่อเชื่อมต่อจอภาพ";
 "ProfileAutoApplyAnyMonitorLabel" = "จอภาพภายนอกใดก็ได้";
 
 "GeneralQuickActionsVisibilityTitle" = "การแสดงผลการทำงานด่วน";
@@ -436,13 +416,11 @@
 "NightShiftLabel" = "Night Shift";
 "NightShiftLessWarmLabel" = "อุ่นน้อยลง";
 "NightShiftMoreWarmLabel" = "อุ่นมากขึ้น";
-"NightShiftUnavailableNote" = "Night Shift ไม่พร้อมใช้งานบน Mac เครื่องนี้";
 
 /* True Tone */
 "TrueToneLabel" = "True Tone";
 
 /* Contrast */
-"ContrastSectionLabel" = "ความเปรียบต่าง";
 "ContrastPercentFormat" = "%lld%%";
 "ActionDecreaseContrastHint" = "ลดความเปรียบต่างลง 1%";
 "ActionIncreaseContrastHint" = "เพิ่มความเปรียบต่างขึ้น 1%";
@@ -451,8 +429,6 @@
 "ResolutionPickerLabel" = "ความละเอียด";
 "RefreshRatePickerLabel" = "อัตรารีเฟรช";
 "ResolutionHiDPIBadge" = "HiDPI";
-"ResolutionNativeBadge" = "ดั้งเดิม";
-"ResolutionDefaultBadge" = "ค่าเริ่มต้น";
 
 /* Input Source */
 "InputSourceVGA1Label" = "VGA 1";
@@ -468,7 +444,6 @@
 
 /* Color Profile */
 "ColorProfileSectionLabel" = "โปรไฟล์สี";
-"ColorProfileDefaultLabel" = "ค่าเริ่มต้น";
 
 /* Display Appearance Filter */
 "DisplayFilterLabel" = "ฟิลเตอร์รูปลักษณ์";
@@ -497,15 +472,11 @@
 "LUTImportButton" = "นำเข้า LUT…";
 "LUTEmptyStateLabel" = "ยังไม่มี LUT ที่นำเข้า";
 "LUTPickerNoneLabel" = "ไม่มี";
-"LUTDimension1DLabel" = "1D";
-"LUTDimension3DLabel" = "3D";
-"LUTApproximationNote" = "LUT แบบ 3D จะถูกสุ่มตัวอย่างตามแกนกลางสี";
 "LUTDeleteConfirmTitle" = "ลบ \"%@\" ออกหรือไม่?";
 "LUTDeleteConfirmSubtitle" = "การดำเนินการนี้จะลบ LUT ออกจากคลัง และล้างการตั้งค่าบนจอแสดงผลที่ใช้งานอยู่ทั้งหมด";
 "LUTRenameAlertTitle" = "เปลี่ยนชื่อ LUT";
 "LUTRenameAlertSubtitle" = "ป้อนชื่อใหม่สำหรับ LUT นี้";
 "LUTImportErrorTitle" = "ไม่สามารถนำเข้า LUT ได้";
-"LUTImportErrorSubtitle" = "ไม่สามารถอ่านไฟล์ได้ หรือไฟล์ไม่ใช่ LUT ที่ถูกต้อง";
 "LUTRowLabel" = "LUT";
 
 /* Texture Library */

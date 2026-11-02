@@ -135,12 +135,6 @@ final class ColorProfileManager: ObservableObject {
         return false
     }
 
-    /// Resets a display to its system-assigned color profile.
-    @discardableResult
-    func resetToSystemDefault(for display: DisplayInfo) -> Bool {
-        setProfile(.systemDefault, for: display)
-    }
-
     // MARK: - Curated System Profiles
     // Ordered by prevalence: everyday use → professional/video → scientific.
 

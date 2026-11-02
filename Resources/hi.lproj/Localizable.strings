@@ -18,7 +18,6 @@
 "IntroControlOverlaySubtitle" = "जब DDC उपलब्ध न हो या अक्षम हो, तब बैकअप डिमिंग लेयर।";
 "IntroControlFallbackNote" = "Dimly पहले DDC आज़माता है, फिर सुरक्षित रूप से ओवरले मोड पर लौटता है।";
 "IntroGotItButton" = "शुरू करें";
-"IntroMenuBarTabLabel" = "मेनू बार";
 "IntroInternalMonitorTitle" = "Dimly में बिल्ट-इन डिस्प्ले दिखाएं";
 "IntroInternalMonitorHint" = "Dimly आपके Mac के बिल्ट-इन डिस्प्ले को भी नियंत्रित कर सकता है। आप इसे बाद में सेटिंग्स → डिस्प्ले में बदल सकते हैं।";
 
@@ -79,7 +78,6 @@
 "SettingsTabShortcutsLabel" = "शॉर्टकट";
 "SettingsTabAboutLabel" = "परिचय";
 
-
 /* Settings Visuals */
 "VisualsTransitionsTitle" = "ट्रांज़िशन";
 "VisualsTransitionSpeedTitle" = "ट्रांज़िशन गति";
@@ -93,9 +91,7 @@
 /* Settings General */
 "GeneralAutostartTitle" = "स्वतः शुरू";
 "GeneralAutostartSubtitle" = "लॉग इन करने पर Dimly अपने-आप शुरू करें।";
-"GeneralLaunchAtLoginLabel" = "लॉगिन पर लॉन्च करें";
 "GeneralMenuBarIconTitle" = "मेनू बार आइकन दिखाएँ";
-"GeneralMenuBarIconAltTitle" = "मेनू बार आइकन दिखाएँ";
 "GeneralHideDockIconTitle" = "Dock आइकन छिपाएँ";
 "GeneralHideDockIconNote" = "Dock आइकन और ऐप स्विचर प्रविष्टि छिपाता है।";
 "GeneralMenuBarIconHiddenNote" = "मेनू बार आइकन छिपा होने पर भी Dimly हॉटकी के लिए चालू रहता है।";
@@ -177,7 +173,6 @@
 "DDCServiceUnavailableLabel" = "डिस्प्ले सेवा उपलब्ध नहीं";
 "DDCOpenFailedFormat" = "DDC खोलने में विफल (0x%@)";
 "DDCRequestFailedFormat" = "DDC अनुरोध विफल (0x%@)";
-"DDCConnectionTypeUnsupported" = "कनेक्शन का यह प्रकार DDC का समर्थन नहीं कर सकता (DisplayPort आज़माएँ)";
 "DDCInternalPanelLabel" = "आंतरिक पैनल";
 
 /* Display Report */
@@ -196,17 +191,10 @@
 "VersionFormat" = "संस्करण %@ (%@)";
 "AboutCopyrightLabel" = "© 2026 Jan Feuerbacher";
 "AboutDescriptionText" = "Dimly एक मूल Swift macOS उपयोगिता है जो बाहरी डिस्प्ले को जल्दी से ब्लैकआउट करती है और स्लीप/वेक को प्रबंधित करती है।";
-"AboutLegacyDescriptionText" = "Dimly एक मूल Swift macOS उपयोगिता है। इस बिल्ड में मेनू बार सपोर्ट, लॉगिन आइटम टॉगल और कॉन्फ़िगरेबल हॉटकी वाला सरल ढाँचा शामिल है।";
 "AboutMadeByText" = "खाली समय में बनाया - समर्थन के लिए धन्यवाद।";
 "AboutGitHubRepoTitle" = "GitHub रेपो";
 "AboutReportIssueTitle" = "समस्या रिपोर्ट करें";
 "AboutDonateTitle" = "दान करें";
-
-/* Preview/Template */
-"PreviewScaffoldLabel" = "यह SwiftUI ढाँचा आपके विचारों के लिए तैयार है।";
-"PreviewIncrementButton" = "काउंटर बढ़ाएँ";
-"PreviewCounterFormat" = "काउंटर: %lld";
-"PreviewPlaceholderButton" = "प्लेसहोल्डर क्रिया चलाएँ";
 
 /* Hotkey Labels */
 "HotkeyModCmdLabel" = "Cmd";
@@ -262,7 +250,6 @@
 "HotkeyKeyKbdBrightnessToggleLabel" = "Keyboard Brightness Toggle";
 
 "BrightnessSectionLabel" = "चमक";
-"DisplayModeFallbackLabel" = "वैकल्पिक";
 "DDC" = "DDC";
 "DisplayModeOverlayLabel" = "ओवरले मोड";
 "BrightnessPercentFormat" = "%lld%%";
@@ -279,11 +266,9 @@
 "BackupExportSaveError" = "बैकअप फ़ाइल सहेजी नहीं जा सकी।";
 "ActionExportButton" = "निर्यात";
 "BackupExportActionTitle" = "चयनित सेटिंग्स निर्यात करें";
-"ExportSelectedSettingsDetails" = "चयनित श्रेणियाँ बैकअप फ़ाइल में सहेजें।";
 "BackupGeneralSettingsTitle" = "सामान्य सेटिंग्स";
 "ActionImportButton" = "आयात";
 "BackupImportActionTitle" = "चयनित सेटिंग्स आयात करें";
-"ImportSelectedSettingsDetails" = "बैकअप फ़ाइल से चयनित श्रेणियाँ लोड करें।";
 "BackupMonitorSettingsTitle" = "मॉनिटर सेटिंग्स";
 "BackupSelectCategoryError" = "कम से कम एक सेटिंग श्रेणी चुनें।";
 "GeneralBackupTitle" = "सेटिंग्स बैकअप";
@@ -310,10 +295,6 @@
 
 "ActionDecreaseBrightnessHint" = "ब्राइटनेस कम करें";
 "ActionIncreaseBrightnessHint" = "ब्राइटनेस बढ़ाएँ";
-"DisplayExcludeFromMenuTitle" = "मेनू बार विंडो से बाहर रखें";
-"DisplayExcludeFromMenuSubtitle" = "इस मॉनिटर को मेनू बार डिस्प्ले सूची से छिपाएँ।";
-"StatusOnLabel" = "चालू";
-"StatusOffLabel" = "बंद";
 
 /* Dimly Display Visibility */
 "MenuMonitorsHeader" = "डिस्प्ले";
@@ -362,7 +343,6 @@
 "ProfileReorderTip" = "टिप: क्रम बदलने के लिए प्रोफ़ाइल कार्ड खींचें।";
 "ColorVioletLabel" = "बैंगनी";
 
-"ProfileAutoApplyTriggerLabel" = "मॉनिटर कनेक्शन ट्रिगर";
 "ProfileAutoApplyAnyMonitorLabel" = "कोई भी बाहरी मॉनिटर";
 
 "GeneralQuickActionsVisibilityTitle" = "तेज एक्शन्स की दृश्यता";
@@ -436,13 +416,11 @@
 "NightShiftLabel" = "Night Shift";
 "NightShiftLessWarmLabel" = "कम गर्म";
 "NightShiftMoreWarmLabel" = "अधिक गर्म";
-"NightShiftUnavailableNote" = "इस Mac पर Night Shift उपलब्ध नहीं है।";
 
 /* True Tone */
 "TrueToneLabel" = "True Tone";
 
 /* Contrast */
-"ContrastSectionLabel" = "कंट्रास्ट";
 "ContrastPercentFormat" = "%lld%%";
 "ActionDecreaseContrastHint" = "कंट्रास्ट 1% कम करें";
 "ActionIncreaseContrastHint" = "कंट्रास्ट 1% बढ़ाएं";
@@ -451,8 +429,6 @@
 "ResolutionPickerLabel" = "रिज़ॉल्यूशन";
 "RefreshRatePickerLabel" = "रिफ्रेश दर";
 "ResolutionHiDPIBadge" = "HiDPI";
-"ResolutionNativeBadge" = "नेटिव";
-"ResolutionDefaultBadge" = "डिफ़ॉल्ट";
 
 /* Input Source */
 "InputSourceVGA1Label" = "VGA 1";
@@ -468,7 +444,6 @@
 
 /* Color Profile */
 "ColorProfileSectionLabel" = "रंग प्रोफ़ाइल";
-"ColorProfileDefaultLabel" = "डिफ़ॉल्ट";
 
 /* Display Appearance Filter */
 "DisplayFilterLabel" = "रूप फ़िल्टर";
@@ -497,15 +472,11 @@
 "LUTImportButton" = "LUT इम्पोर्ट करें…";
 "LUTEmptyStateLabel" = "अभी तक कोई LUT इम्पोर्ट नहीं किया गया।";
 "LUTPickerNoneLabel" = "कोई नहीं";
-"LUTDimension1DLabel" = "1D";
-"LUTDimension3DLabel" = "3D";
-"LUTApproximationNote" = "3D LUT को neutral axis के साथ सैम्पल किया जाता है।";
 "LUTDeleteConfirmTitle" = "\"%@\" हटाएँ?";
 "LUTDeleteConfirmSubtitle" = "यह LUT को लाइब्रेरी से हटा देता है और इसे उपयोग करने वाले किसी भी डिस्प्ले से साफ़ कर देता है।";
 "LUTRenameAlertTitle" = "LUT का नाम बदलें";
 "LUTRenameAlertSubtitle" = "इस LUT के लिए नया नाम दर्ज करें।";
 "LUTImportErrorTitle" = "LUT इम्पोर्ट नहीं हो सका";
-"LUTImportErrorSubtitle" = "फ़ाइल पढ़ी नहीं जा सकी या यह एक मान्य LUT नहीं है।";
 "LUTRowLabel" = "LUT";
 
 /* Texture Library */

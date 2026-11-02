@@ -18,7 +18,6 @@
 "IntroControlOverlaySubtitle" = "لایه کم‌نورکننده جایگزین زمانی که DDC در دسترس نیست یا غیرفعال است.";
 "IntroControlFallbackNote" = "Dimly ابتدا DDC را امتحان می‌کند، سپس با اطمینان به حالت هم‌پوشانی برمی‌گردد.";
 "IntroGotItButton" = "شروع کنید";
-"IntroMenuBarTabLabel" = "نوار منو";
 "IntroInternalMonitorTitle" = "نمایش صفحه‌نمایش داخلی در Dimly";
 "IntroInternalMonitorHint" = "Dimly همچنین می‌تواند صفحه‌نمایش داخلی مک شما را کنترل کند. می‌توانید این را بعداً در تنظیمات ← صفحه‌نمایش‌ها تغییر دهید.";
 
@@ -79,7 +78,6 @@
 "SettingsTabShortcutsLabel" = "میانبرها";
 "SettingsTabAboutLabel" = "درباره";
 
-
 /* Settings Visuals */
 "VisualsTransitionsTitle" = "انتقال‌ها";
 "VisualsTransitionSpeedTitle" = "سرعت انتقال";
@@ -93,9 +91,7 @@
 /* Settings General */
 "GeneralAutostartTitle" = "شروع خودکار";
 "GeneralAutostartSubtitle" = "هنگام ورود، Dimly را به‌طور خودکار اجرا کن.";
-"GeneralLaunchAtLoginLabel" = "اجرا هنگام ورود";
 "GeneralMenuBarIconTitle" = "نمایش آیکون در نوار منو";
-"GeneralMenuBarIconAltTitle" = "نمایش آیکون نوار منو";
 "GeneralHideDockIconTitle" = "مخفی کردن آیکون داک";
 "GeneralHideDockIconNote" = "آیکون داک و ورودی تعویض برنامه را مخفی می‌کند.";
 "GeneralMenuBarIconHiddenNote" = "Dimly حتی با مخفی بودن آیکون نوار منو برای میانبرها فعال می‌ماند.";
@@ -177,7 +173,6 @@
 "DDCServiceUnavailableLabel" = "سرویس نمایشگر در دسترس نیست";
 "DDCOpenFailedFormat" = "باز کردن DDC ناموفق بود (0x%@)";
 "DDCRequestFailedFormat" = "درخواست DDC ناموفق بود (0x%@)";
-"DDCConnectionTypeUnsupported" = "این نوع اتصال ممکن است از DDC پشتیبانی نکند (DisplayPort را امتحان کنید)";
 "DDCInternalPanelLabel" = "پنل داخلی";
 
 /* Display Report */
@@ -196,17 +191,10 @@
 "VersionFormat" = "نسخه %@ (%@)";
 "AboutCopyrightLabel" = "© 2026 Jan Feuerbacher";
 "AboutDescriptionText" = "Dimly یک ابزار بومی Swift برای macOS است که نمایشگرهای خارجی را سریع تاریک می‌کند و خواب/بیداری را مدیریت می‌کند.";
-"AboutLegacyDescriptionText" = "Dimly یک ابزار بومی Swift برای macOS است. این بیلد شامل اسکلت ساده با پشتیبانی نوار منو، سوییچ آیتم ورود، و کلید میانبر قابل تنظیم است.";
 "AboutMadeByText" = "در وقت آزاد ساخته شده - از حمایت شما سپاسگزارم.";
 "AboutGitHubRepoTitle" = "مخزن GitHub";
 "AboutReportIssueTitle" = "گزارش مشکل";
 "AboutDonateTitle" = "حمایت مالی";
-
-/* Preview/Template */
-"PreviewScaffoldLabel" = "این داربست SwiftUI برای ایده‌های شما آماده است.";
-"PreviewIncrementButton" = "افزایش شمارنده";
-"PreviewCounterFormat" = "شمارنده: %lld";
-"PreviewPlaceholderButton" = "اجرای عمل نمونه";
 
 /* Hotkey Labels */
 "HotkeyModCmdLabel" = "Cmd";
@@ -262,7 +250,6 @@
 "HotkeyKeyKbdBrightnessToggleLabel" = "Keyboard Brightness Toggle";
 
 "BrightnessSectionLabel" = "روشنایی";
-"DisplayModeFallbackLabel" = "جایگزین";
 "DDC" = "DDC";
 "DisplayModeOverlayLabel" = "حالت هم‌پوشانی";
 "BrightnessPercentFormat" = "%lld%%";
@@ -279,11 +266,9 @@
 "BackupExportSaveError" = "ذخیره فایل پشتیبان ممکن نشد.";
 "ActionExportButton" = "صادر کردن";
 "BackupExportActionTitle" = "صدور تنظیمات انتخاب‌شده";
-"ExportSelectedSettingsDetails" = "دسته‌های انتخاب‌شده را در فایل پشتیبان ذخیره کنید.";
 "BackupGeneralSettingsTitle" = "تنظیمات عمومی";
 "ActionImportButton" = "وارد کردن";
 "BackupImportActionTitle" = "وارد کردن تنظیمات انتخاب‌شده";
-"ImportSelectedSettingsDetails" = "دسته‌های انتخاب‌شده را از فایل پشتیبان بارگذاری کنید.";
 "BackupMonitorSettingsTitle" = "تنظیمات مانیتور";
 "BackupSelectCategoryError" = "حداقل یک دسته تنظیمات را انتخاب کنید.";
 "GeneralBackupTitle" = "پشتیبان تنظیمات";
@@ -310,10 +295,6 @@
 
 "ActionDecreaseBrightnessHint" = "کاهش روشنایی";
 "ActionIncreaseBrightnessHint" = "افزایش روشنایی";
-"DisplayExcludeFromMenuTitle" = "حذف از پنجره نوار منو";
-"DisplayExcludeFromMenuSubtitle" = "این نمایشگر را از فهرست نمایشگرهای نوار منو پنهان کن.";
-"StatusOnLabel" = "روشن";
-"StatusOffLabel" = "خاموش";
 
 /* Dimly Display Visibility */
 "MenuMonitorsHeader" = "نمایشگرها";
@@ -362,7 +343,6 @@
 "ProfileReorderTip" = "نکته: برای تغییر ترتیب، کارت‌های پروفایل را بکشید.";
 "ColorVioletLabel" = "بنفش";
 
-"ProfileAutoApplyTriggerLabel" = "فعال‌سازی با اتصال مانیتور";
 "ProfileAutoApplyAnyMonitorLabel" = "هر مانیتور خارجی";
 
 "GeneralQuickActionsVisibilityTitle" = "نمايش اقدامات سريع";
@@ -436,13 +416,11 @@
 "NightShiftLabel" = "Night Shift";
 "NightShiftLessWarmLabel" = "گرمای کمتر";
 "NightShiftMoreWarmLabel" = "گرمای بیشتر";
-"NightShiftUnavailableNote" = "‏Night Shift روی این Mac در دسترس نیست.";
 
 /* True Tone */
 "TrueToneLabel" = "True Tone";
 
 /* Contrast */
-"ContrastSectionLabel" = "کنتراست";
 "ContrastPercentFormat" = "%lld%%";
 "ActionDecreaseContrastHint" = "کاهش کنتراست به میزان ۱٪";
 "ActionIncreaseContrastHint" = "افزایش کنتراست به میزان ۱٪";
@@ -451,8 +429,6 @@
 "ResolutionPickerLabel" = "وضوح";
 "RefreshRatePickerLabel" = "نرخ نوسازی";
 "ResolutionHiDPIBadge" = "HiDPI";
-"ResolutionNativeBadge" = "بومی";
-"ResolutionDefaultBadge" = "پیش‌فرض";
 
 /* Input Source */
 "InputSourceVGA1Label" = "VGA 1";
@@ -468,7 +444,6 @@
 
 /* Color Profile */
 "ColorProfileSectionLabel" = "نمایه رنگ";
-"ColorProfileDefaultLabel" = "پیش‌فرض";
 
 /* Display Appearance Filter */
 "DisplayFilterLabel" = "فیلتر ظاهر";
@@ -497,15 +472,11 @@
 "LUTImportButton" = "وارد کردن LUT…";
 "LUTEmptyStateLabel" = "هنوز هیچ LUT‌ای وارد نشده.";
 "LUTPickerNoneLabel" = "هیچ‌کدام";
-"LUTDimension1DLabel" = "1D";
-"LUTDimension3DLabel" = "3D";
-"LUTApproximationNote" = "LUT‌های سه‌بعدی (3D) در امتداد محور خنثی نمونه‌برداری می‌شوند.";
 "LUTDeleteConfirmTitle" = "حذف «%@»؟";
 "LUTDeleteConfirmSubtitle" = "این LUT از کتابخانه حذف می‌شود و از تمام نمایشگرهایی که از آن استفاده می‌کنند پاک می‌شود.";
 "LUTRenameAlertTitle" = "تغییر نام LUT";
 "LUTRenameAlertSubtitle" = "یک نام جدید برای این LUT وارد کنید.";
 "LUTImportErrorTitle" = "وارد کردن LUT ممکن نیست";
-"LUTImportErrorSubtitle" = "فایل قابل خواندن نیست یا یک LUT معتبر نمی‌باشد.";
 "LUTRowLabel" = "LUT";
 
 /* Texture Library */

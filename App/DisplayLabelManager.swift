@@ -173,12 +173,7 @@ private struct DisplayLabelOverlayView: View {
             }
             .padding(.horizontal, 24)
             .padding(.vertical, 18)
-            .background(.ultraThinMaterial)
-            .clipShape(RoundedRectangle(cornerRadius: 18, style: .continuous))
-            .overlay(
-                RoundedRectangle(cornerRadius: 18, style: .continuous)
-                    .stroke(Color.white.opacity(0.25), lineWidth: 1)
-            )
+            .dimlyCard(cornerRadius: DimlyRadius.card)
             .shadow(color: .black.opacity(0.25), radius: 12, x: 0, y: 6)
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)

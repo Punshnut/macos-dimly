@@ -272,7 +272,7 @@ private struct TextureThumbnailTile: View {
                             Image(systemName: "chevron.left.forwardslash.chevron.right")
                                 .font(.caption2)
                                 .padding(4)
-                                .background(.ultraThinMaterial, in: Circle())
+                                .dimlyGlassCircle(interactive: false)
                         }
                         Spacer()
                     }

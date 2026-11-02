@@ -18,7 +18,6 @@
 "IntroControlOverlaySubtitle" = "Reservdämpningslager när DDC inte är tillgängligt eller inaktiverat.";
 "IntroControlFallbackNote" = "Dimly provar först DDC och växlar sedan säkert till överlagringsläge.";
 "IntroGotItButton" = "Kom igång";
-"IntroMenuBarTabLabel" = "Menyrad";
 "IntroInternalMonitorTitle" = "Visa inbyggd skärm i Dimly";
 "IntroInternalMonitorHint" = "Dimly kan också styra din Macs inbyggda skärm. Du kan ändra detta senare i Inställningar → Skärmar.";
 
@@ -79,7 +78,6 @@
 "SettingsTabShortcutsLabel" = "Genvägar";
 "SettingsTabAboutLabel" = "Om";
 
-
 /* Settings Visuals */
 "VisualsTransitionsTitle" = "Övergångar";
 "VisualsTransitionSpeedTitle" = "Övergångshastighet";
@@ -93,9 +91,7 @@
 /* Settings General */
 "GeneralAutostartTitle" = "Autostart";
 "GeneralAutostartSubtitle" = "Starta Dimly automatiskt när du loggar in.";
-"GeneralLaunchAtLoginLabel" = "Starta vid inloggning";
 "GeneralMenuBarIconTitle" = "Visa ikon i menyraden";
-"GeneralMenuBarIconAltTitle" = "Visa ikon i menyraden";
 "GeneralHideDockIconTitle" = "Dölj Dock-ikon";
 "GeneralHideDockIconNote" = "Döljer Dock-ikonen och posten i appväxlaren.";
 "GeneralMenuBarIconHiddenNote" = "Dimly fortsätter köras för snabbkommandon även när ikonen är dold.";
@@ -177,7 +173,6 @@
 "DDCServiceUnavailableLabel" = "Skärmtjänst ej tillgänglig";
 "DDCOpenFailedFormat" = "Kunde inte öppna DDC (0x%@)";
 "DDCRequestFailedFormat" = "DDC-begäran misslyckades (0x%@)";
-"DDCConnectionTypeUnsupported" = "Den här anslutningstypen kanske inte stöder DDC (prova DisplayPort)";
 "DDCInternalPanelLabel" = "Intern panel";
 
 /* Display Report */
@@ -196,17 +191,10 @@
 "VersionFormat" = "Version %@ (%@)";
 "AboutCopyrightLabel" = "© 2026 Jan Feuerbacher";
 "AboutDescriptionText" = "Dimly är ett inbyggt Swift-verktyg för macOS för att snabbt mörklägga externa skärmar och hantera vila/väckning.";
-"AboutLegacyDescriptionText" = "Dimly är ett inbyggt Swift-verktyg för macOS. Denna build innehåller ett enkelt skelett med stöd för menyrad, växling av inloggningspost och anpassningsbar snabbkommando.";
 "AboutMadeByText" = "Gjort på min fritid - tack för stödet.";
 "AboutGitHubRepoTitle" = "GitHub-repo";
 "AboutReportIssueTitle" = "Rapportera ett problem";
 "AboutDonateTitle" = "Donera";
-
-/* Preview/Template */
-"PreviewScaffoldLabel" = "Denna SwiftUI-ställning är redo för dina idéer.";
-"PreviewIncrementButton" = "Öka räknaren";
-"PreviewCounterFormat" = "Räknare: %lld";
-"PreviewPlaceholderButton" = "Kör platshållaråtgärd";
 
 /* Hotkey Labels */
 "HotkeyModCmdLabel" = "Cmd";
@@ -262,7 +250,6 @@
 "HotkeyKeyKbdBrightnessToggleLabel" = "Keyboard Brightness Toggle";
 
 "BrightnessSectionLabel" = "Ljusstyrka";
-"DisplayModeFallbackLabel" = "Reservläge";
 "DDC" = "DDC";
 "DisplayModeOverlayLabel" = "Överlagringsläge";
 "BrightnessPercentFormat" = "%lld%%";
@@ -279,11 +266,9 @@
 "BackupExportSaveError" = "Kunde inte spara säkerhetskopian.";
 "ActionExportButton" = "Exportera";
 "BackupExportActionTitle" = "Exportera valda inställningar";
-"ExportSelectedSettingsDetails" = "Spara valda kategorier i en säkerhetskopiefil.";
 "BackupGeneralSettingsTitle" = "Allmänna inställningar";
 "ActionImportButton" = "Importera";
 "BackupImportActionTitle" = "Importera valda inställningar";
-"ImportSelectedSettingsDetails" = "Läs in valda kategorier från en säkerhetskopiefil.";
 "BackupMonitorSettingsTitle" = "Skärminställningar";
 "BackupSelectCategoryError" = "Välj minst en inställningskategori.";
 "GeneralBackupTitle" = "Säkerhetskopia av inställningar";
@@ -310,10 +295,6 @@
 
 "ActionDecreaseBrightnessHint" = "Minska ljusstyrkan";
 "ActionIncreaseBrightnessHint" = "Öka ljusstyrkan";
-"DisplayExcludeFromMenuTitle" = "Uteslut från menyradsfönstret";
-"DisplayExcludeFromMenuSubtitle" = "Dölj den här skärmen från displaylistan i menyraden.";
-"StatusOnLabel" = "På";
-"StatusOffLabel" = "Av";
 
 /* Dimly Display Visibility */
 "MenuMonitorsHeader" = "Skärmar";
@@ -362,7 +343,6 @@
 "ProfileReorderTip" = "Tips: Dra profilkort för att ändra ordningen.";
 "ColorVioletLabel" = "Violett";
 
-"ProfileAutoApplyTriggerLabel" = "Utlös vid skärmanslutning";
 "ProfileAutoApplyAnyMonitorLabel" = "Valfri extern skärm";
 
 "GeneralQuickActionsVisibilityTitle" = "Synlighet för snabba åtgärder";
@@ -436,13 +416,11 @@
 "NightShiftLabel" = "Night Shift";
 "NightShiftLessWarmLabel" = "Mindre varm";
 "NightShiftMoreWarmLabel" = "Varmare";
-"NightShiftUnavailableNote" = "Night Shift är inte tillgängligt på den här Macen.";
 
 /* True Tone */
 "TrueToneLabel" = "True Tone";
 
 /* Contrast */
-"ContrastSectionLabel" = "Kontrast";
 "ContrastPercentFormat" = "%lld%%";
 "ActionDecreaseContrastHint" = "Minska kontrasten med 1%";
 "ActionIncreaseContrastHint" = "Öka kontrasten med 1%";
@@ -451,8 +429,6 @@
 "ResolutionPickerLabel" = "Upplösning";
 "RefreshRatePickerLabel" = "Uppdateringsfrekvens";
 "ResolutionHiDPIBadge" = "HiDPI";
-"ResolutionNativeBadge" = "Inbyggd";
-"ResolutionDefaultBadge" = "Standard";
 
 /* Input Source */
 "InputSourceVGA1Label" = "VGA 1";
@@ -468,7 +444,6 @@
 
 /* Color Profile */
 "ColorProfileSectionLabel" = "Färgprofil";
-"ColorProfileDefaultLabel" = "Standard";
 
 /* Display Appearance Filter */
 "DisplayFilterLabel" = "Utseendefilter";
@@ -497,15 +472,11 @@
 "LUTImportButton" = "Importera LUT…";
 "LUTEmptyStateLabel" = "Inga LUT:er har importerats ännu.";
 "LUTPickerNoneLabel" = "Ingen";
-"LUTDimension1DLabel" = "1D";
-"LUTDimension3DLabel" = "3D";
-"LUTApproximationNote" = "3D LUT:er samplas längs den neutrala axeln.";
 "LUTDeleteConfirmTitle" = "Ta bort \"%@\"?";
 "LUTDeleteConfirmSubtitle" = "Detta tar bort LUT:en från biblioteket och rensar den från alla skärmar som använder den.";
 "LUTRenameAlertTitle" = "Byt namn på LUT";
 "LUTRenameAlertSubtitle" = "Ange ett nytt namn för denna LUT.";
 "LUTImportErrorTitle" = "Det gick inte att importera LUT";
-"LUTImportErrorSubtitle" = "Filen kunde inte läsas eller är inte en giltig LUT.";
 "LUTRowLabel" = "LUT";
 
 /* Texture Library */

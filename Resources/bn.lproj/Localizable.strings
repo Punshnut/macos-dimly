@@ -18,7 +18,6 @@
 "IntroControlOverlaySubtitle" = "DDC অনুপলব্ধ বা নিষ্ক্রিয় হলে বিকল্প ডিমিং স্তর।";
 "IntroControlFallbackNote" = "Dimly প্রথমে DDC চেষ্টা করে, তারপর নিরাপদে ওভারলে মোডে ফিরে যায়।";
 "IntroGotItButton" = "শুরু করুন";
-"IntroMenuBarTabLabel" = "মেনু বার";
 "IntroInternalMonitorTitle" = "Dimly-তে বিল্ট-ইন ডিসপ্লে দেখান";
 "IntroInternalMonitorHint" = "Dimly আপনার Mac-এর বিল্ট-ইন ডিসপ্লেও নিয়ন্ত্রণ করতে পারে। আপনি এটি পরে সেটিংস → ডিসপ্লে-তে পরিবর্তন করতে পারেন।";
 
@@ -79,7 +78,6 @@
 "SettingsTabShortcutsLabel" = "শর্টকাট";
 "SettingsTabAboutLabel" = "সম্পর্কে";
 
-
 /* Settings Visuals */
 "VisualsTransitionsTitle" = "ট্রানজিশন";
 "VisualsTransitionSpeedTitle" = "ট্রানজিশন গতি";
@@ -93,9 +91,7 @@
 /* Settings General */
 "GeneralAutostartTitle" = "স্বয়ংক্রিয় চালু";
 "GeneralAutostartSubtitle" = "লগ ইন করলে Dimly স্বয়ংক্রিয়ভাবে চালু করুন।";
-"GeneralLaunchAtLoginLabel" = "লগইনে চালু করুন";
 "GeneralMenuBarIconTitle" = "মেনু বারের আইকন দেখান";
-"GeneralMenuBarIconAltTitle" = "মেনু বারের আইকন দেখান";
 "GeneralHideDockIconTitle" = "ডক আইকন লুকান";
 "GeneralHideDockIconNote" = "ডক আইকন ও অ্যাপ সুইচার এন্ট্রি লুকিয়ে রাখুন।";
 "GeneralMenuBarIconHiddenNote" = "মেনু বারের আইকন লুকানো থাকলেও হটকি জন্য Dimly চলমান থাকে।";
@@ -177,7 +173,6 @@
 "DDCServiceUnavailableLabel" = "ডিসপ্লে পরিষেবা অনুপলব্ধ";
 "DDCOpenFailedFormat" = "DDC খোলা ব্যর্থ (0x%@)";
 "DDCRequestFailedFormat" = "DDC অনুরোধ ব্যর্থ (0x%@)";
-"DDCConnectionTypeUnsupported" = "সংযোগের ধরন DDC সমর্থন না-ও করতে পারে (DisplayPort ব্যবহার করে দেখুন)";
 "DDCInternalPanelLabel" = "অভ্যন্তরীণ প্যানেল";
 
 /* Display Report */
@@ -196,17 +191,10 @@
 "VersionFormat" = "ভার্সন %@ (%@)";
 "AboutCopyrightLabel" = "© ২০২৬ Jan Feuerbacher";
 "AboutDescriptionText" = "Dimly একটি নেটিভ Swift macOS ইউটিলিটি যা দ্রুত বাহ্যিক ডিসপ্লে অন্ধকার করে এবং স্লিপ/ওয়েক নিয়ন্ত্রণ করে।";
-"AboutLegacyDescriptionText" = "Dimly একটি নেটিভ Swift macOS ইউটিলিটি। এই বিল্ডে মেনু বার সাপোর্ট, লগইন আইটেম টগল এবং কনফিগারযোগ্য হটকি সহ সহজ একটি কাঠামো রয়েছে।";
 "AboutMadeByText" = "আমার ফাঁকা সময়ে তৈরি - সমর্থনের জন্য ধন্যবাদ।";
 "AboutGitHubRepoTitle" = "GitHub রিপো";
 "AboutReportIssueTitle" = "সমস্যা জানান";
 "AboutDonateTitle" = "দান করুন";
-
-/* Preview/Template */
-"PreviewScaffoldLabel" = "এই SwiftUI কাঠামো আপনার আইডিয়ার জন্য প্রস্তুত।";
-"PreviewIncrementButton" = "কাউন্টার বৃদ্ধি করুন";
-"PreviewCounterFormat" = "কাউন্টার: %lld";
-"PreviewPlaceholderButton" = "প্লেসহোল্ডার অ্যাকশন চালান";
 
 /* Hotkey Labels */
 "HotkeyModCmdLabel" = "Cmd";
@@ -262,7 +250,6 @@
 "HotkeyKeyKbdBrightnessToggleLabel" = "Keyboard Brightness Toggle";
 
 "BrightnessSectionLabel" = "উজ্জ্বলতা";
-"DisplayModeFallbackLabel" = "বিকল্প";
 "DDC" = "DDC";
 "DisplayModeOverlayLabel" = "ওভারলে মোড";
 "BrightnessPercentFormat" = "%lld%%";
@@ -279,11 +266,9 @@
 "BackupExportSaveError" = "ব্যাকআপ ফাইল সংরক্ষণ করা যায়নি।";
 "ActionExportButton" = "রপ্তানি";
 "BackupExportActionTitle" = "নির্বাচিত সেটিংস রপ্তানি করুন";
-"ExportSelectedSettingsDetails" = "নির্বাচিত বিভাগগুলো ব্যাকআপ ফাইলে সংরক্ষণ করুন।";
 "BackupGeneralSettingsTitle" = "সাধারণ সেটিংস";
 "ActionImportButton" = "আমদানি";
 "BackupImportActionTitle" = "নির্বাচিত সেটিংস আমদানি করুন";
-"ImportSelectedSettingsDetails" = "ব্যাকআপ ফাইল থেকে নির্বাচিত বিভাগগুলো লোড করুন।";
 "BackupMonitorSettingsTitle" = "মনিটর সেটিংস";
 "BackupSelectCategoryError" = "অন্তত একটি সেটিংস বিভাগ নির্বাচন করুন।";
 "GeneralBackupTitle" = "সেটিংস ব্যাকআপ";
@@ -310,10 +295,6 @@
 
 "ActionDecreaseBrightnessHint" = "উজ্জ্বলতা কমান";
 "ActionIncreaseBrightnessHint" = "উজ্জ্বলতা বাড়ান";
-"DisplayExcludeFromMenuTitle" = "মেনু বার উইন্ডো থেকে বাদ দিন";
-"DisplayExcludeFromMenuSubtitle" = "মেনু বার ডিসপ্লে তালিকা থেকে এই মনিটরটি লুকান।";
-"StatusOnLabel" = "চালু";
-"StatusOffLabel" = "বন্ধ";
 
 /* Dimly Display Visibility */
 "MenuMonitorsHeader" = "ডিসপ্লে";
@@ -362,7 +343,6 @@
 "ProfileReorderTip" = "টিপ: প্রোফাইল কার্ড টেনে পুনরায় সাজান।";
 "ColorVioletLabel" = "বেগুনি";
 
-"ProfileAutoApplyTriggerLabel" = "মনিটর সংযোগ ট্রিগার";
 "ProfileAutoApplyAnyMonitorLabel" = "যেকোনো বাহ্যিক মনিটর";
 
 "GeneralQuickActionsVisibilityTitle" = "ফাস্ট অ্যাকশনসের দৃশ্যমানতা";
@@ -436,13 +416,11 @@
 "NightShiftLabel" = "Night Shift";
 "NightShiftLessWarmLabel" = "কম উষ্ণ";
 "NightShiftMoreWarmLabel" = "বেশি উষ্ণ";
-"NightShiftUnavailableNote" = "এই Mac-এ Night Shift উপলব্ধ নয়।";
 
 /* True Tone */
 "TrueToneLabel" = "True Tone";
 
 /* Contrast */
-"ContrastSectionLabel" = "কনট্রাস্ট";
 "ContrastPercentFormat" = "%lld%%";
 "ActionDecreaseContrastHint" = "কনট্রাস্ট ১% কমান";
 "ActionIncreaseContrastHint" = "কনট্রাস্ট ১% বাড়ান";
@@ -451,8 +429,6 @@
 "ResolutionPickerLabel" = "রেজোলিউশন";
 "RefreshRatePickerLabel" = "রিফ্রেশ রেট";
 "ResolutionHiDPIBadge" = "HiDPI";
-"ResolutionNativeBadge" = "নেটিভ";
-"ResolutionDefaultBadge" = "ডিফল্ট";
 
 /* Input Source */
 "InputSourceVGA1Label" = "VGA 1";
@@ -468,7 +444,6 @@
 
 /* Color Profile */
 "ColorProfileSectionLabel" = "রঙের প্রোফাইল";
-"ColorProfileDefaultLabel" = "ডিফল্ট";
 
 /* Display Appearance Filter */
 "DisplayFilterLabel" = "চেহারা ফিল্টার";
@@ -497,15 +472,11 @@
 "LUTImportButton" = "LUT আমদানি করুন…";
 "LUTEmptyStateLabel" = "এখনও কোনো LUT আমদানি করা হয়নি।";
 "LUTPickerNoneLabel" = "কোনোটি নয়";
-"LUTDimension1DLabel" = "1D";
-"LUTDimension3DLabel" = "3D";
-"LUTApproximationNote" = "3D LUT গুলি নিউট্রাল অ্যাক্সিস বরাবর নমুনা নেওয়া হয়।";
 "LUTDeleteConfirmTitle" = "\"%@\" সরাবেন?";
 "LUTDeleteConfirmSubtitle" = "এটি LUT টি লাইব্রেরি থেকে সরিয়ে দেবে এবং এটি ব্যবহার করছে এমন সব ডিসপ্লে থেকে মুছে দেবে।";
 "LUTRenameAlertTitle" = "LUT পুনরায় নামকরণ করুন";
 "LUTRenameAlertSubtitle" = "এই LUT-এর জন্য একটি নতুন নাম লিখুন।";
 "LUTImportErrorTitle" = "LUT আমদানি করা যায়নি";
-"LUTImportErrorSubtitle" = "ফাইলটি পড়া যায়নি অথবা এটি একটি বৈধ LUT নয়।";
 "LUTRowLabel" = "LUT";
 
 /* Texture Library */

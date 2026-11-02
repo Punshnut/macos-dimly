@@ -18,7 +18,6 @@
 "IntroControlOverlaySubtitle" = "Reserve-dimlaag wanneer DDC niet beschikbaar of uitgeschakeld is.";
 "IntroControlFallbackNote" = "Dimly probeert eerst DDC en schakelt daarna veilig over naar de overlaymodus.";
 "IntroGotItButton" = "Aan de slag";
-"IntroMenuBarTabLabel" = "Menubalk";
 "IntroInternalMonitorTitle" = "Ingebouwd scherm tonen in Dimly";
 "IntroInternalMonitorHint" = "Dimly kan ook het ingebouwde scherm van je Mac bedienen. Je kunt dit later wijzigen via Instellingen → Schermen.";
 
@@ -79,7 +78,6 @@
 "SettingsTabShortcutsLabel" = "Sneltoetsen";
 "SettingsTabAboutLabel" = "Over";
 
-
 /* Settings Visuals */
 "VisualsTransitionsTitle" = "Overgangen";
 "VisualsTransitionSpeedTitle" = "Overgangssnelheid";
@@ -93,9 +91,7 @@
 /* Settings General */
 "GeneralAutostartTitle" = "Automatisch starten";
 "GeneralAutostartSubtitle" = "Start Dimly automatisch wanneer je inlogt.";
-"GeneralLaunchAtLoginLabel" = "Starten bij inloggen";
 "GeneralMenuBarIconTitle" = "Menubalkpictogram tonen";
-"GeneralMenuBarIconAltTitle" = "Menubalkpictogram tonen";
 "GeneralHideDockIconTitle" = "Dockpictogram verbergen";
 "GeneralHideDockIconNote" = "Verbergt het Dockpictogram en item in de app-switcher.";
 "GeneralMenuBarIconHiddenNote" = "Dimly blijft voor sneltoetsen draaien, ook als het menupictogram verborgen is.";
@@ -177,7 +173,6 @@
 "DDCServiceUnavailableLabel" = "Displayservice niet beschikbaar";
 "DDCOpenFailedFormat" = "DDC openen mislukt (0x%@)";
 "DDCRequestFailedFormat" = "DDC-verzoek mislukt (0x%@)";
-"DDCConnectionTypeUnsupported" = "Dit verbindingstype ondersteunt DDC mogelijk niet (probeer DisplayPort)";
 "DDCInternalPanelLabel" = "Intern paneel";
 
 /* Display Report */
@@ -196,17 +191,10 @@
 "VersionFormat" = "Versie %@ (%@)";
 "AboutCopyrightLabel" = "© 2026 Jan Feuerbacher";
 "AboutDescriptionText" = "Dimly is een native Swift-hulpprogramma voor macOS om externe schermen snel te verduisteren en slaap/wekken te beheren.";
-"AboutLegacyDescriptionText" = "Dimly is een native Swift-macOS-hulpprogramma. Deze build bevat een eenvoudig skelet met menubalkondersteuning, login-item schakelaar en aanpasbare hotkey.";
 "AboutMadeByText" = "Gemaakt in mijn vrije tijd - bedankt voor de steun.";
 "AboutGitHubRepoTitle" = "GitHub-repo";
 "AboutReportIssueTitle" = "Probleem melden";
 "AboutDonateTitle" = "Doneren";
-
-/* Preview/Template */
-"PreviewScaffoldLabel" = "Deze SwiftUI-steiger staat klaar voor je ideeën.";
-"PreviewIncrementButton" = "Teller verhogen";
-"PreviewCounterFormat" = "Teller: %lld";
-"PreviewPlaceholderButton" = "Placeholder-actie uitvoeren";
 
 /* Hotkey Labels */
 "HotkeyModCmdLabel" = "Cmd";
@@ -262,7 +250,6 @@
 "HotkeyKeyKbdBrightnessToggleLabel" = "Keyboard Brightness Toggle";
 
 "BrightnessSectionLabel" = "Helderheid";
-"DisplayModeFallbackLabel" = "Alternatieve modus";
 "DDC" = "DDC";
 "DisplayModeOverlayLabel" = "Overlaymodus";
 "BrightnessPercentFormat" = "%lld%%";
@@ -279,11 +266,9 @@
 "BackupExportSaveError" = "Kon het back-upbestand niet opslaan.";
 "ActionExportButton" = "Exporteren";
 "BackupExportActionTitle" = "Geselecteerde instellingen exporteren";
-"ExportSelectedSettingsDetails" = "Sla geselecteerde categorieën op in een back-upbestand.";
 "BackupGeneralSettingsTitle" = "Algemene instellingen";
 "ActionImportButton" = "Importeren";
 "BackupImportActionTitle" = "Geselecteerde instellingen importeren";
-"ImportSelectedSettingsDetails" = "Laad geselecteerde categorieën uit een back-upbestand.";
 "BackupMonitorSettingsTitle" = "Monitorinstellingen";
 "BackupSelectCategoryError" = "Selecteer minstens één instellingscategorie.";
 "GeneralBackupTitle" = "Back-up van instellingen";
@@ -310,10 +295,6 @@
 
 "ActionDecreaseBrightnessHint" = "Helderheid verlagen";
 "ActionIncreaseBrightnessHint" = "Helderheid verhogen";
-"DisplayExcludeFromMenuTitle" = "Uitsluiten van menubalkvenster";
-"DisplayExcludeFromMenuSubtitle" = "Verberg deze monitor in de schermlijst van de menubalk.";
-"StatusOnLabel" = "Aan";
-"StatusOffLabel" = "Uit";
 
 /* Dimly Display Visibility */
 "MenuMonitorsHeader" = "Schermen";
@@ -362,7 +343,6 @@
 "ProfileReorderTip" = "Tip: sleep profielkaarten om ze opnieuw te ordenen.";
 "ColorVioletLabel" = "Violetkleur";
 
-"ProfileAutoApplyTriggerLabel" = "Trigger bij monitorverbinding";
 "ProfileAutoApplyAnyMonitorLabel" = "Elke externe monitor";
 
 "GeneralQuickActionsVisibilityTitle" = "Zichtbaarheid van snelle acties";
@@ -436,13 +416,11 @@
 "NightShiftLabel" = "Night Shift";
 "NightShiftLessWarmLabel" = "Minder warm";
 "NightShiftMoreWarmLabel" = "Warmer";
-"NightShiftUnavailableNote" = "Night Shift is niet beschikbaar op deze Mac.";
 
 /* True Tone */
 "TrueToneLabel" = "True Tone";
 
 /* Contrast */
-"ContrastSectionLabel" = "Contrast";
 "ContrastPercentFormat" = "%lld%%";
 "ActionDecreaseContrastHint" = "Contrast met 1% verlagen";
 "ActionIncreaseContrastHint" = "Contrast met 1% verhogen";
@@ -451,8 +429,6 @@
 "ResolutionPickerLabel" = "Resolutie";
 "RefreshRatePickerLabel" = "Verversingsfrequentie";
 "ResolutionHiDPIBadge" = "HiDPI";
-"ResolutionNativeBadge" = "Standaard";
-"ResolutionDefaultBadge" = "Standaard";
 
 /* Input Source */
 "InputSourceVGA1Label" = "VGA 1";
@@ -468,7 +444,6 @@
 
 /* Color Profile */
 "ColorProfileSectionLabel" = "Kleurprofiel";
-"ColorProfileDefaultLabel" = "Standaard";
 
 /* Display Appearance Filter */
 "DisplayFilterLabel" = "Weergavefilter";
@@ -497,15 +472,11 @@
 "LUTImportButton" = "LUT importeren…";
 "LUTEmptyStateLabel" = "Nog geen LUT's geïmporteerd.";
 "LUTPickerNoneLabel" = "Geen";
-"LUTDimension1DLabel" = "1D";
-"LUTDimension3DLabel" = "3D";
-"LUTApproximationNote" = "3D-LUT's worden bemonsterd langs de neutrale as.";
 "LUTDeleteConfirmTitle" = "\"%@\" verwijderen?";
 "LUTDeleteConfirmSubtitle" = "Hierdoor wordt de LUT uit de bibliotheek verwijderd en gewist van alle beeldschermen die deze gebruiken.";
 "LUTRenameAlertTitle" = "LUT hernoemen";
 "LUTRenameAlertSubtitle" = "Voer een nieuwe naam in voor deze LUT.";
 "LUTImportErrorTitle" = "LUT kan niet worden geïmporteerd";
-"LUTImportErrorSubtitle" = "Het bestand kan niet worden gelezen of is geen geldige LUT.";
 "LUTRowLabel" = "LUT";
 
 /* Texture Library */

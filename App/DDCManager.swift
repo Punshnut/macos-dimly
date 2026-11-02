@@ -158,11 +158,6 @@ final class DDCManager: ObservableObject {
         }
     }
 
-    /// Re-probes one display, typically after a failed command while unresolved.
-    func refreshProbe(for display: DisplayInfo) {
-        scheduleProbe(display, retriesRemaining: probeRetryCount, markAsCableCheck: false)
-    }
-
     /// Sends a DDC standby command. Returns `true` on success.
     func standby(_ display: DisplayInfo) -> Bool {
         let result = sendPowerCommand(display, value: 0x04) // VCP 0xD6 power off

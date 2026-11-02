@@ -18,7 +18,6 @@
 "IntroControlOverlaySubtitle" = "Matakin rage haske na madadin lokacin da DDC bai samu ba ko an kashe shi.";
 "IntroControlFallbackNote" = "Dimly yana fara gwada DDC, sannan ya koma yanayin rufi cikin aminci.";
 "IntroGotItButton" = "Fara";
-"IntroMenuBarTabLabel" = "Sandar menu";
 "IntroInternalMonitorTitle" = "Nuna allo na ciki a Dimly";
 "IntroInternalMonitorHint" = "Dimly kuma zai iya sarrafa allo na ciki na Mac ɗinka. Zaka iya canza wannan daga baya a Saitunan → Allunan Nuni.";
 
@@ -79,7 +78,6 @@
 "SettingsTabShortcutsLabel" = "Gajerun hanyoyi";
 "SettingsTabAboutLabel" = "Game da";
 
-
 /* Settings Visuals */
 "VisualsTransitionsTitle" = "Canjin yanayi";
 "VisualsTransitionSpeedTitle" = "Gudun canjin yanayi";
@@ -93,9 +91,7 @@
 /* Settings General */
 "GeneralAutostartTitle" = "Farawa ta atomatik";
 "GeneralAutostartSubtitle" = "Fara Dimly ta atomatik idan ka shiga.";
-"GeneralLaunchAtLoginLabel" = "Kaddamar lokacin shiga";
 "GeneralMenuBarIconTitle" = "Nuna gunkin sandar menu";
-"GeneralMenuBarIconAltTitle" = "Nuna gunkin sandar menu";
 "GeneralHideDockIconTitle" = "Boye gunkin Dock";
 "GeneralHideDockIconNote" = "Ya ɓoye gunkin Dock da shigar mai musanya apps.";
 "GeneralMenuBarIconHiddenNote" = "Dimly na ci gaba da gudana don gajerun hanyoyi ko da gunkin menu ya ɓoye.";
@@ -177,7 +173,6 @@
 "DDCServiceUnavailableLabel" = "Bai samu sabis na allo ba";
 "DDCOpenFailedFormat" = "Buɗe DDC ya kasa (0x%@)";
 "DDCRequestFailedFormat" = "Neman DDC ya kasa (0x%@)";
-"DDCConnectionTypeUnsupported" = "Nau'in haɗin na iya rashin goyan bayan DDC (gwada DisplayPort)";
 "DDCInternalPanelLabel" = "Allon ciki";
 
 /* Display Report */
@@ -196,17 +191,10 @@
 "VersionFormat" = "Siga %@ (%@)";
 "AboutCopyrightLabel" = "© 2026 Jan Feuerbacher";
 "AboutDescriptionText" = "Dimly kayan aiki ne na Swift a macOS don gaggauta duhun allo na waje da sarrafa barci/tashi.";
-"AboutLegacyDescriptionText" = "Dimly kayan aiki ne na Swift a macOS. Wannan gini ya ƙunshi ƙa'ida mai sauƙi tare da tallafin sandar menu, maɓallin shigarwa, da hotkey da za a iya daidaita.";
 "AboutMadeByText" = "An yi a lokacina kyauta - na gode da tallafi.";
 "AboutGitHubRepoTitle" = "Repo GitHub";
 "AboutReportIssueTitle" = "Bayar da rahoton matsala";
 "AboutDonateTitle" = "Ba da gudummawa";
-
-/* Preview/Template */
-"PreviewScaffoldLabel" = "Wannan tsarin SwiftUI ya shirya don ra'ayoyinku.";
-"PreviewIncrementButton" = "Ƙara ƙidaya";
-"PreviewCounterFormat" = "Ƙidaya: %lld";
-"PreviewPlaceholderButton" = "Gudanar da aikin wakili";
 
 /* Hotkey Labels */
 "HotkeyModCmdLabel" = "Cmd";
@@ -262,7 +250,6 @@
 "HotkeyKeyKbdBrightnessToggleLabel" = "Keyboard Brightness Toggle";
 
 "BrightnessSectionLabel" = "Haske";
-"DisplayModeFallbackLabel" = "Madadin";
 "DDC" = "DDC";
 "DisplayModeOverlayLabel" = "Yanayin rufi";
 "BrightnessPercentFormat" = "%lld%%";
@@ -279,11 +266,9 @@
 "BackupExportSaveError" = "Ba a iya adana fayil din ajiyar ba.";
 "ActionExportButton" = "Fitarwa";
 "BackupExportActionTitle" = "Fitar da zababbun saituna";
-"ExportSelectedSettingsDetails" = "Adana rukunai da aka zaba zuwa fayil din ajiya.";
 "BackupGeneralSettingsTitle" = "Saituna na gaba daya";
 "ActionImportButton" = "Shigowa";
 "BackupImportActionTitle" = "Shigo da zababbun saituna";
-"ImportSelectedSettingsDetails" = "Loda rukunai da aka zaba daga fayil din ajiya.";
 "BackupMonitorSettingsTitle" = "Saitunan monitor";
 "BackupSelectCategoryError" = "Zabi akalla rukuni daya na saituna.";
 "GeneralBackupTitle" = "Ajiyar saituna";
@@ -310,10 +295,6 @@
 
 "ActionDecreaseBrightnessHint" = "Rage haske";
 "ActionIncreaseBrightnessHint" = "Ƙara haske";
-"DisplayExcludeFromMenuTitle" = "Cire daga taga sandar menu";
-"DisplayExcludeFromMenuSubtitle" = "Ɓoye wannan na'urar nuni daga jerin nuni na sandar menu.";
-"StatusOnLabel" = "Kunna";
-"StatusOffLabel" = "Kashe";
 
 /* Dimly Display Visibility */
 "MenuMonitorsHeader" = "Alluna";
@@ -362,7 +343,6 @@
 "ProfileReorderTip" = "Shawara: Ja katunan profile don sake tsara su.";
 "ColorVioletLabel" = "Launin violet";
 
-"ProfileAutoApplyTriggerLabel" = "Kunna yayin haɗin monitor";
 "ProfileAutoApplyAnyMonitorLabel" = "Duk wani monitor na waje";
 
 "GeneralQuickActionsVisibilityTitle" = "Bayyanar Ayyuka Masu Sauri";
@@ -436,13 +416,11 @@
 "NightShiftLabel" = "Night Shift";
 "NightShiftLessWarmLabel" = "Ƙarancin Ɗumi";
 "NightShiftMoreWarmLabel" = "Ƙarin Ɗumi";
-"NightShiftUnavailableNote" = "Night Shift ba ya samuwa a wannan Mac.";
 
 /* True Tone */
 "TrueToneLabel" = "True Tone";
 
 /* Contrast */
-"ContrastSectionLabel" = "Bambanci";
 "ContrastPercentFormat" = "%lld%%";
 "ActionDecreaseContrastHint" = "Rage bambanci da 1%";
 "ActionIncreaseContrastHint" = "Ƙara bambanci da 1%";
@@ -451,8 +429,6 @@
 "ResolutionPickerLabel" = "Ƙuduri";
 "RefreshRatePickerLabel" = "Ƙimar Sabuntawa";
 "ResolutionHiDPIBadge" = "HiDPI";
-"ResolutionNativeBadge" = "Na asali";
-"ResolutionDefaultBadge" = "Tsoho";
 
 /* Input Source */
 "InputSourceVGA1Label" = "VGA 1";
@@ -468,7 +444,6 @@
 
 /* Color Profile */
 "ColorProfileSectionLabel" = "Bayanin Launi";
-"ColorProfileDefaultLabel" = "Tsoho";
 
 /* Display Appearance Filter */
 "DisplayFilterLabel" = "Tace Bayyani";
@@ -497,15 +472,11 @@
 "LUTImportButton" = "Shigo da LUT…";
 "LUTEmptyStateLabel" = "Ba a shigo da wani LUT tukuna.";
 "LUTPickerNoneLabel" = "Babu";
-"LUTDimension1DLabel" = "1D";
-"LUTDimension3DLabel" = "3D";
-"LUTApproximationNote" = "Ana ɗaukar samfurin LUT na 3D a kan neutral axis.";
 "LUTDeleteConfirmTitle" = "Cire \"%@\"?";
 "LUTDeleteConfirmSubtitle" = "Wannan yana cire LUT daga laburare kuma yana share shi daga duk wani allon nuni da ke amfani da shi.";
 "LUTRenameAlertTitle" = "Sauya Sunan LUT";
 "LUTRenameAlertSubtitle" = "Shigar da sabon suna ga wannan LUT.";
 "LUTImportErrorTitle" = "Ba a iya shigo da LUT ba";
-"LUTImportErrorSubtitle" = "Ba a iya karanta fayilin ko ba LUT ingantacce ba ne.";
 "LUTRowLabel" = "LUT";
 
 /* Texture Library */

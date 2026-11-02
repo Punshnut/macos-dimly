@@ -18,7 +18,6 @@
 "IntroControlOverlaySubtitle" = "DDC అందుబాటులో లేకపోయినా లేదా నిలిపివేసినా ఉపయోగించే బ్యాకప్ డిమ్మింగ్ పొర.";
 "IntroControlFallbackNote" = "Dimly ముందుగా DDC ను ప్రయత్నించి, ఆపై సురక్షితంగా ఓవర్లే మోడ్‌కి మారుతుంది.";
 "IntroGotItButton" = "ప్రారంభించండి";
-"IntroMenuBarTabLabel" = "మెనూ బార్";
 "IntroInternalMonitorTitle" = "Dimly లో అంతర్నిర్మిత డిస్‌ప్లేని చూపించు";
 "IntroInternalMonitorHint" = "Dimly మీ Mac యొక్క అంతర్నిర్మిత డిస్‌ప్లేను కూడా నియంత్రించగలదు. దీన్ని తర్వాత సెట్టింగ్‌లు → డిస్‌ప్లేలు లో మార్చవచ్చు.";
 
@@ -79,7 +78,6 @@
 "SettingsTabShortcutsLabel" = "షార్ట్‌కట్లు";
 "SettingsTabAboutLabel" = "గురించి";
 
-
 /* Settings Visuals */
 "VisualsTransitionsTitle" = "పరివర్తనలు";
 "VisualsTransitionSpeedTitle" = "పరివర్తన వేగం";
@@ -93,9 +91,7 @@
 /* Settings General */
 "GeneralAutostartTitle" = "స్వయంచాలక ప్రారంభం";
 "GeneralAutostartSubtitle" = "మీరు లాగిన్ అయినప్పుడు Dimly స్వయంచాలకంగా ప్రారంభించండి.";
-"GeneralLaunchAtLoginLabel" = "లాగిన్‌లో ప్రారంభించు";
 "GeneralMenuBarIconTitle" = "మెనూ బార్ ఐకాన్ చూపించు";
-"GeneralMenuBarIconAltTitle" = "మెనూ బార్ ఐకాన్ చూపించు";
 "GeneralHideDockIconTitle" = "డాక్ ఐకాన్ దాచు";
 "GeneralHideDockIconNote" = "డాక్ ఐకాన్ మరియు యాప్ స్విచ్చర్ ఎంట్రీను దాచుతుంది.";
 "GeneralMenuBarIconHiddenNote" = "మెనూ ఐకాన్ దాగి ఉన్నప్పటికీ హాట్‌కీల కోసం Dimly కొనసాగుతుంది.";
@@ -177,7 +173,6 @@
 "DDCServiceUnavailableLabel" = "డిస్ప్లే సేవ అందుబాటులో లేదు";
 "DDCOpenFailedFormat" = "DDC తెరవడంలో విఫలమైంది (0x%@)";
 "DDCRequestFailedFormat" = "DDC అభ్యర్థన విఫలమైంది (0x%@)";
-"DDCConnectionTypeUnsupported" = "ఈ కనెక్షన్ రకం DDC మద్దతు ఇవ్వకపోవచ్చు (DisplayPort ప్రయత్నించండి)";
 "DDCInternalPanelLabel" = "అంతర్గత ప్యానల్";
 
 /* Display Report */
@@ -196,17 +191,10 @@
 "VersionFormat" = "వెర్షన్ %@ (%@)";
 "AboutCopyrightLabel" = "© 2026 Jan Feuerbacher";
 "AboutDescriptionText" = "Dimly అనేది బాహ్య డిస్ప్లేలను త్వరగా బ్లాకౌట్ చేయడానికి మరియు నిద్ర/మేల్కొలుపును నిర్వహించడానికి స్విఫ్ట్ ఆధారిత macOS యుటిలిటీ.";
-"AboutLegacyDescriptionText" = "Dimly ఒక స్విఫ్ట్ స్థానిక macOS యుటిలిటీ. ఈ నిర్మాణంలో మెనూ బార్ మద్దతు, లాగిన్ అంశ టోగుల్, మరియు ఆకృతీకరించగల హాట్‌కీతో సరళమైన కంకాలం ఉంటుంది.";
 "AboutMadeByText" = "నా ఖాళీ సమయంలో తయారు చేశాను - మద్దతుకు ధన్యవాదాలు.";
 "AboutGitHubRepoTitle" = "GitHub రెపో";
 "AboutReportIssueTitle" = "సమస్యను నివేదించండి";
 "AboutDonateTitle" = "దానం చేయండి";
-
-/* Preview/Template */
-"PreviewScaffoldLabel" = "ఈ SwiftUI స్కాఫోల్డ్ మీ ఆలోచనల కోసం సిద్ధంగా ఉంది.";
-"PreviewIncrementButton" = "కౌంటర్ పెంచు";
-"PreviewCounterFormat" = "కౌంటర్: %lld";
-"PreviewPlaceholderButton" = "ప్లేస్‌హోల్డర్ చర్య నడుపు";
 
 /* Hotkey Labels */
 "HotkeyModCmdLabel" = "Cmd";
@@ -262,7 +250,6 @@
 "HotkeyKeyKbdBrightnessToggleLabel" = "Keyboard Brightness Toggle";
 
 "BrightnessSectionLabel" = "ప్రకాశం";
-"DisplayModeFallbackLabel" = "ప్రత్యామ్నాయ మోడ్";
 "DDC" = "DDC";
 "DisplayModeOverlayLabel" = "ఓవర్లే మోడ్";
 "BrightnessPercentFormat" = "%lld%%";
@@ -279,11 +266,9 @@
 "BackupExportSaveError" = "బ్యాకప్ ఫైల్‌ను సేవ్ చేయలేకపోయాము.";
 "ActionExportButton" = "ఎగుమతి";
 "BackupExportActionTitle" = "ఎంచుకున్న సెట్టింగ్స్‌ను ఎగుమతి చేయండి";
-"ExportSelectedSettingsDetails" = "ఎంచుకున్న వర్గాలను బ్యాకప్ ఫైల్‌లో సేవ్ చేయండి.";
 "BackupGeneralSettingsTitle" = "సాధారణ సెట్టింగ్స్";
 "ActionImportButton" = "దిగుమతి";
 "BackupImportActionTitle" = "ఎంచుకున్న సెట్టింగ్స్‌ను దిగుమతి చేయండి";
-"ImportSelectedSettingsDetails" = "బ్యాకప్ ఫైల్ నుండి ఎంచుకున్న వర్గాలను లోడ్ చేయండి.";
 "BackupMonitorSettingsTitle" = "మానిటర్ సెట్టింగ్స్";
 "BackupSelectCategoryError" = "కనీసం ఒక సెట్టింగ్స్ వర్గాన్ని ఎంచుకోండి.";
 "GeneralBackupTitle" = "సెట్టింగ్స్ బ్యాకప్";
@@ -310,10 +295,6 @@
 
 "ActionDecreaseBrightnessHint" = "ప్రకాశాన్ని తగ్గించు";
 "ActionIncreaseBrightnessHint" = "ప్రకాశాన్ని పెంచు";
-"DisplayExcludeFromMenuTitle" = "మెనూ బార్ విండో నుంచి మినహాయించు";
-"DisplayExcludeFromMenuSubtitle" = "ఈ మానిటర్‌ను మెనూ బార్ డిస్ప్లే జాబితా నుండి దాచు.";
-"StatusOnLabel" = "ఆన్";
-"StatusOffLabel" = "ఆఫ్";
 
 /* Dimly Display Visibility */
 "MenuMonitorsHeader" = "డిస్ప్లేలు";
@@ -362,7 +343,6 @@
 "ProfileReorderTip" = "సూచన: ప్రొఫైల్ కార్డులను లాగి మళ్లీ క్రమబద్ధీకరించండి.";
 "ColorVioletLabel" = "వైలెట్";
 
-"ProfileAutoApplyTriggerLabel" = "మానిటర్ కనెక్షన్ ట్రిగ్గర్";
 "ProfileAutoApplyAnyMonitorLabel" = "ఏదైనా బాహ్య మానిటర్";
 
 "GeneralQuickActionsVisibilityTitle" = "వేగవంతమైన చర్యల దర్శనీయత";
@@ -436,13 +416,11 @@
 "NightShiftLabel" = "Night Shift";
 "NightShiftLessWarmLabel" = "తక్కువ వెచ్చదనం";
 "NightShiftMoreWarmLabel" = "ఎక్కువ వెచ్చదనం";
-"NightShiftUnavailableNote" = "ఈ Mac‌లో Night Shift అందుబాటులో లేదు.";
 
 /* True Tone */
 "TrueToneLabel" = "True Tone";
 
 /* Contrast */
-"ContrastSectionLabel" = "కాంట్రాస్ట్";
 "ContrastPercentFormat" = "%lld%%";
 "ActionDecreaseContrastHint" = "కాంట్రాస్ట్‌ను 1% తగ్గించండి";
 "ActionIncreaseContrastHint" = "కాంట్రాస్ట్‌ను 1% పెంచండి";
@@ -451,8 +429,6 @@
 "ResolutionPickerLabel" = "రిజల్యూషన్";
 "RefreshRatePickerLabel" = "రిఫ్రెష్ రేటు";
 "ResolutionHiDPIBadge" = "HiDPI";
-"ResolutionNativeBadge" = "స్థానిక";
-"ResolutionDefaultBadge" = "డిఫాల్ట్";
 
 /* Input Source */
 "InputSourceVGA1Label" = "VGA 1";
@@ -468,7 +444,6 @@
 
 /* Color Profile */
 "ColorProfileSectionLabel" = "రంగు ప్రొఫైల్";
-"ColorProfileDefaultLabel" = "డిఫాల్ట్";
 
 /* Display Appearance Filter */
 "DisplayFilterLabel" = "రూపం ఫిల్టర్";
@@ -497,15 +472,11 @@
 "LUTImportButton" = "LUT దిగుమతి చేయండి…";
 "LUTEmptyStateLabel" = "ఇంకా LUTలు దిగుమతి చేయబడలేదు.";
 "LUTPickerNoneLabel" = "ఏదీ లేదు";
-"LUTDimension1DLabel" = "1D";
-"LUTDimension3DLabel" = "3D";
-"LUTApproximationNote" = "3D LUTలను న్యూట్రల్ యాక్సిస్ వెంట శాంపిల్ చేస్తారు.";
 "LUTDeleteConfirmTitle" = "\"%@\"ని తీసివేయాలా?";
 "LUTDeleteConfirmSubtitle" = "దీనివల్ల LUT లైబ్రరీ నుండి తొలగించబడుతుంది మరియు దాన్ని ఉపయోగిస్తున్న అన్ని డిస్‌ప్లేల నుండి క్లియర్ అవుతుంది.";
 "LUTRenameAlertTitle" = "LUTకి పేరు మార్చండి";
 "LUTRenameAlertSubtitle" = "ఈ LUTకి కొత్త పేరు నమోదు చేయండి.";
 "LUTImportErrorTitle" = "LUT దిగుమతి చేయడం సాధ్యపడలేదు";
-"LUTImportErrorSubtitle" = "ఫైల్ చదవడం సాధ్యపడలేదు లేదా అది చెల్లుబాటు అయ్యే LUT కాదు.";
 "LUTRowLabel" = "LUT";
 
 /* Texture Library */

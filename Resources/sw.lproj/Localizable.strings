@@ -18,7 +18,6 @@
 "IntroControlOverlaySubtitle" = "Safu ya kupunguza mwangaza ya akiba DDC isipopatikana au ikizimwa.";
 "IntroControlFallbackNote" = "Dimly hujaribu DDC kwanza, kisha hurudi kwa usalama kwenye hali ya kufunika.";
 "IntroGotItButton" = "Anza";
-"IntroMenuBarTabLabel" = "Mwambaa wa menyu";
 "IntroInternalMonitorTitle" = "Onyesha skrini ya ndani katika Dimly";
 "IntroInternalMonitorHint" = "Dimly pia inaweza kudhibiti skrini ya ndani ya Mac yako. Unaweza kubadilisha hii baadaye katika Mipangilio → Maonyesho.";
 
@@ -79,7 +78,6 @@
 "SettingsTabShortcutsLabel" = "Vifupisho";
 "SettingsTabAboutLabel" = "Kuhusu";
 
-
 /* Settings Visuals */
 "VisualsTransitionsTitle" = "Mabadiliko";
 "VisualsTransitionSpeedTitle" = "Kasi ya mabadiliko";
@@ -93,9 +91,7 @@
 /* Settings General */
 "GeneralAutostartTitle" = "Anzisho la kiotomatiki";
 "GeneralAutostartSubtitle" = "Anzisha Dimly kiotomatiki unapoingia.";
-"GeneralLaunchAtLoginLabel" = "Anzisha unapoingia";
 "GeneralMenuBarIconTitle" = "Onyesha ikoni kwenye mwambaa";
-"GeneralMenuBarIconAltTitle" = "Onyesha ikoni kwenye mwambaa";
 "GeneralHideDockIconTitle" = "Ficha ikoni ya Dock";
 "GeneralHideDockIconNote" = "Huficha ikoni ya Dock na ingizo la kubadilisha app.";
 "GeneralMenuBarIconHiddenNote" = "Dimly inaendelea kwa hotkey hata ikoni ya mwambaa ikifichwa.";
@@ -177,7 +173,6 @@
 "DDCServiceUnavailableLabel" = "Huduma ya skrini haipatikani";
 "DDCOpenFailedFormat" = "Kufungua DDC kumeharibika (0x%@)";
 "DDCRequestFailedFormat" = "Ombi la DDC limeshindwa (0x%@)";
-"DDCConnectionTypeUnsupported" = "Aina hii ya muunganisho inaweza kutosaidia DDC (jaribu DisplayPort)";
 "DDCInternalPanelLabel" = "Paneli ya ndani";
 
 /* Display Report */
@@ -196,17 +191,10 @@
 "VersionFormat" = "Toleo %@ (%@)";
 "AboutCopyrightLabel" = "© 2026 Jan Feuerbacher";
 "AboutDescriptionText" = "Dimly ni zana asili ya Swift kwa macOS ya kuzima haraka skrini za nje na kudhibiti kulala/kuamka.";
-"AboutLegacyDescriptionText" = "Dimly ni zana asili ya Swift kwa macOS. Ujenzi huu una muundo rahisi wenye msaada wa mwambaa wa menyu, kigeuzi cha kipengee cha kuingia, na hotkey inayoweza kusanidiwa.";
 "AboutMadeByText" = "Imetengenezwa wakati wa mapumziko yangu - asante kwa msaada.";
 "AboutGitHubRepoTitle" = "Hifadhi ya GitHub";
 "AboutReportIssueTitle" = "Ripoti tatizo";
 "AboutDonateTitle" = "Changia";
-
-/* Preview/Template */
-"PreviewScaffoldLabel" = "Mfumo huu wa SwiftUI uko tayari kwa mawazo yako.";
-"PreviewIncrementButton" = "Ongeza kaunta";
-"PreviewCounterFormat" = "Kaunta: %lld";
-"PreviewPlaceholderButton" = "Endesha kitendo cha nafasi";
 
 /* Hotkey Labels */
 "HotkeyModCmdLabel" = "Cmd";
@@ -262,7 +250,6 @@
 "HotkeyKeyKbdBrightnessToggleLabel" = "Keyboard Brightness Toggle";
 
 "BrightnessSectionLabel" = "Mwangaza";
-"DisplayModeFallbackLabel" = "Hali mbadala";
 "DDC" = "DDC";
 "DisplayModeOverlayLabel" = "Hali ya kufunika";
 "BrightnessPercentFormat" = "%lld%%";
@@ -279,11 +266,9 @@
 "BackupExportSaveError" = "Imeshindikana kuhifadhi faili ya chelezo.";
 "ActionExportButton" = "Hamisha";
 "BackupExportActionTitle" = "Hamisha mipangilio iliyochaguliwa";
-"ExportSelectedSettingsDetails" = "Hifadhi kategoria zilizochaguliwa kwenye faili ya chelezo.";
 "BackupGeneralSettingsTitle" = "Mipangilio ya jumla";
 "ActionImportButton" = "Ingiza";
 "BackupImportActionTitle" = "Ingiza mipangilio iliyochaguliwa";
-"ImportSelectedSettingsDetails" = "Pakia kategoria zilizochaguliwa kutoka faili ya chelezo.";
 "BackupMonitorSettingsTitle" = "Mipangilio ya monitor";
 "BackupSelectCategoryError" = "Chagua angalau kategoria moja ya mipangilio.";
 "GeneralBackupTitle" = "Chelezo ya mipangilio";
@@ -310,10 +295,6 @@
 
 "ActionDecreaseBrightnessHint" = "Punguza mwangaza";
 "ActionIncreaseBrightnessHint" = "Ongeza mwangaza";
-"DisplayExcludeFromMenuTitle" = "Ondoa kwenye dirisha la mwambaa wa menyu";
-"DisplayExcludeFromMenuSubtitle" = "Ficha kifuatiliaji hiki kutoka kwenye orodha ya skrini kwenye mwambaa wa menyu.";
-"StatusOnLabel" = "Washa";
-"StatusOffLabel" = "Zima";
 
 /* Dimly Display Visibility */
 "MenuMonitorsHeader" = "Skrini";
@@ -362,7 +343,6 @@
 "ProfileReorderTip" = "Kidokezo: Buruta kadi za profaili ili kubadilisha mpangilio.";
 "ColorVioletLabel" = "Zambarau";
 
-"ProfileAutoApplyTriggerLabel" = "Kichocheo cha muunganisho wa monitor";
 "ProfileAutoApplyAnyMonitorLabel" = "Monitor yoyote ya nje";
 
 "GeneralQuickActionsVisibilityTitle" = "Mwonekano wa Vitendo vya Haraka";
@@ -436,13 +416,11 @@
 "NightShiftLabel" = "Night Shift";
 "NightShiftLessWarmLabel" = "Joto Kidogo";
 "NightShiftMoreWarmLabel" = "Joto Zaidi";
-"NightShiftUnavailableNote" = "Night Shift haipatikani kwenye Mac hii.";
 
 /* True Tone */
 "TrueToneLabel" = "True Tone";
 
 /* Contrast */
-"ContrastSectionLabel" = "Utofauti";
 "ContrastPercentFormat" = "%lld%%";
 "ActionDecreaseContrastHint" = "Punguza utofauti kwa 1%";
 "ActionIncreaseContrastHint" = "Ongeza utofauti kwa 1%";
@@ -451,8 +429,6 @@
 "ResolutionPickerLabel" = "Mwonekano";
 "RefreshRatePickerLabel" = "Kasi ya Kuonyesha Upya";
 "ResolutionHiDPIBadge" = "HiDPI";
-"ResolutionNativeBadge" = "Asilia";
-"ResolutionDefaultBadge" = "Chaguo-msingi";
 
 /* Input Source */
 "InputSourceVGA1Label" = "VGA 1";
@@ -468,7 +444,6 @@
 
 /* Color Profile */
 "ColorProfileSectionLabel" = "Wasifu wa Rangi";
-"ColorProfileDefaultLabel" = "Chaguo-msingi";
 
 /* Display Appearance Filter */
 "DisplayFilterLabel" = "Kichujio cha Mwonekano";
@@ -497,15 +472,11 @@
 "LUTImportButton" = "Ingiza LUT…";
 "LUTEmptyStateLabel" = "Hakuna LUT zilizoingizwa bado.";
 "LUTPickerNoneLabel" = "Hakuna";
-"LUTDimension1DLabel" = "1D";
-"LUTDimension3DLabel" = "3D";
-"LUTApproximationNote" = "LUT za 3D zinasampulwa kwenye mhimili wa neutral axis.";
 "LUTDeleteConfirmTitle" = "Ondoa \"%@\"?";
 "LUTDeleteConfirmSubtitle" = "Hii inaondoa LUT kutoka maktabani na kuifuta kutoka kwa skrini zote zinazoitumia.";
 "LUTRenameAlertTitle" = "Badilisha Jina la LUT";
 "LUTRenameAlertSubtitle" = "Weka jina jipya kwa LUT hii.";
 "LUTImportErrorTitle" = "Haikuweza kuingiza LUT";
-"LUTImportErrorSubtitle" = "Faili haikusomeka au si LUT halali.";
 "LUTRowLabel" = "LUT";
 
 /* Texture Library */

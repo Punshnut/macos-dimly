@@ -19,7 +19,6 @@
 "IntroControlOverlaySubtitle" = "Pansamantalang dimming layer kapag hindi available o naka-disable ang DDC.";
 "IntroControlFallbackNote" = "Susubukan muna ng Dimly ang DDC, pagkatapos ay ligtas na lilipat sa overlay mode.";
 "IntroGotItButton" = "Magsimula";
-"IntroMenuBarTabLabel" = "Bar ng menu";
 "IntroInternalMonitorTitle" = "Ipakita ang built-in display sa Dimly";
 "IntroInternalMonitorHint" = "Maaari ring kontrolin ng Dimly ang built-in display ng iyong Mac. Maaari mong baguhin ito sa ibang pagkakataon sa Mga Setting → Mga Display.";
 
@@ -80,7 +79,6 @@
 "SettingsTabShortcutsLabel" = "Mga shortcut";
 "SettingsTabAboutLabel" = "Tungkol";
 
-
 /* Settings Visuals */
 "VisualsTransitionsTitle" = "Mga Transisyon";
 "VisualsTransitionSpeedTitle" = "Bilis ng transisyon";
@@ -94,9 +92,7 @@
 /* Settings General */
 "GeneralAutostartTitle" = "Awtomatikong pagsisimula";
 "GeneralAutostartSubtitle" = "Awtomatikong buksan ang Dimly kapag nag-login ka.";
-"GeneralLaunchAtLoginLabel" = "Buksan sa pag-login";
 "GeneralMenuBarIconTitle" = "Ipakita ang icon sa menu bar";
-"GeneralMenuBarIconAltTitle" = "Ipakita ang icon sa menu bar";
 "GeneralHideDockIconTitle" = "Itago ang icon sa Dock";
 "GeneralHideDockIconNote" = "Itinatago ang icon sa Dock at entry sa app switcher.";
 "GeneralMenuBarIconHiddenNote" = "Patuloy na tumatakbo ang Dimly para sa hotkeys kahit nakatago ang icon sa menu bar.";
@@ -114,8 +110,6 @@
 "BackupMonitorRowDetails" = "mga pangalan ng display, pagkakasunod-sunod, at mga opsyong partikular sa monitor";
 "BackupImportActionTitle" = "I-import ang napiling settings";
 "BackupExportActionTitle" = "I-export ang napiling settings";
-"ImportSelectedSettingsDetails" = "I-load ang napiling mga kategorya mula sa backup file.";
-"ExportSelectedSettingsDetails" = "I-save ang napiling mga kategorya sa backup file.";
 "ActionImportButton" = "I-import";
 "ActionExportButton" = "I-export";
 "BackupSelectCategoryError" = "Pumili ng kahit isang kategorya ng settings.";
@@ -198,7 +192,6 @@
 "DDCServiceUnavailableLabel" = "Hindi magagamit ang serbisyo ng display";
 "DDCOpenFailedFormat" = "Nabigong buksan ang DDC (0x%@)";
 "DDCRequestFailedFormat" = "Nabigong request ng DDC (0x%@)";
-"DDCConnectionTypeUnsupported" = "Ang uri ng koneksyon ay maaaring hindi sumusuporta sa DDC (subukan ang DisplayPort)";
 "DDCInternalPanelLabel" = "Panloob na panel";
 
 /* Display Report */
@@ -217,17 +210,10 @@
 "VersionFormat" = "Bersyon %@ (%@)";
 "AboutCopyrightLabel" = "© 2026 Jan Feuerbacher";
 "AboutDescriptionText" = "Ang Dimly ay native na Swift na utility sa macOS para mabilis na i-blackout ang panlabas na display at pamahalaan ang sleep/wake.";
-"AboutLegacyDescriptionText" = "Ang Dimly ay native na Swift utility sa macOS. Kasama sa build na ito ang simpleng skeleton na may suporta sa menu bar, toggle ng login item, at nako-configure na hotkey.";
 "AboutMadeByText" = "Ginawa ko sa libreng oras - salamat sa suporta.";
 "AboutGitHubRepoTitle" = "Repo sa GitHub";
 "AboutReportIssueTitle" = "I-report ang isyu";
 "AboutDonateTitle" = "Mag-donate";
-
-/* Preview/Template */
-"PreviewScaffoldLabel" = "Handa na ang SwiftUI scaffold na ito para sa iyong mga ideya.";
-"PreviewIncrementButton" = "Dagdagan ang counter";
-"PreviewCounterFormat" = "Counter: %lld";
-"PreviewPlaceholderButton" = "Patakbuhin ang placeholder action";
 
 /* Hotkey Labels */
 "HotkeyModCmdLabel" = "Cmd";
@@ -283,7 +269,6 @@
 "HotkeyKeyKbdBrightnessToggleLabel" = "Keyboard Brightness Toggle";
 
 "BrightnessSectionLabel" = "Liwanag";
-"DisplayModeFallbackLabel" = "Alternatibo";
 "DDC" = "DDC";
 "DisplayModeOverlayLabel" = "Mode na overlay";
 "BrightnessPercentFormat" = "%lld%%";
@@ -308,10 +293,6 @@
 
 "ActionDecreaseBrightnessHint" = "Bawasan ang liwanag";
 "ActionIncreaseBrightnessHint" = "Taasan ang liwanag";
-"DisplayExcludeFromMenuTitle" = "Ibukod sa window ng menu bar";
-"DisplayExcludeFromMenuSubtitle" = "Itago ang monitor na ito mula sa listahan ng display sa menu bar.";
-"StatusOnLabel" = "Naka-on";
-"StatusOffLabel" = "Naka-off";
 
 /* Dimly Display Visibility */
 "MenuMonitorsHeader" = "Mga display";
@@ -360,7 +341,6 @@
 "ProfileReorderTip" = "Tip: I-drag ang mga profile card para ayusin muli.";
 "ColorVioletLabel" = "Lila";
 
-"ProfileAutoApplyTriggerLabel" = "I-trigger sa koneksyon ng monitor";
 "ProfileAutoApplyAnyMonitorLabel" = "Anumang panlabas na monitor";
 
 "GeneralQuickActionsVisibilityTitle" = "Visibility ng Mabilis na Aksyon";
@@ -434,13 +414,11 @@
 "NightShiftLabel" = "Night Shift";
 "NightShiftLessWarmLabel" = "Hindi Gaanong Mainit";
 "NightShiftMoreWarmLabel" = "Mas Mainit";
-"NightShiftUnavailableNote" = "Hindi available ang Night Shift sa Mac na ito.";
 
 /* True Tone */
 "TrueToneLabel" = "True Tone";
 
 /* Contrast */
-"ContrastSectionLabel" = "Contrast";
 "ContrastPercentFormat" = "%lld%%";
 "ActionDecreaseContrastHint" = "Bawasan ang contrast ng 1%";
 "ActionIncreaseContrastHint" = "Dagdagan ang contrast ng 1%";
@@ -449,8 +427,6 @@
 "ResolutionPickerLabel" = "Resolution";
 "RefreshRatePickerLabel" = "Refresh Rate";
 "ResolutionHiDPIBadge" = "HiDPI";
-"ResolutionNativeBadge" = "Native";
-"ResolutionDefaultBadge" = "Default";
 
 /* Input Source */
 "InputSourceVGA1Label" = "VGA 1";
@@ -466,7 +442,6 @@
 
 /* Color Profile */
 "ColorProfileSectionLabel" = "Color Profile";
-"ColorProfileDefaultLabel" = "Default";
 
 /* Display Appearance Filter */
 "DisplayFilterLabel" = "Filter ng Hitsura";
@@ -495,15 +470,11 @@
 "LUTImportButton" = "Mag-import ng LUT…";
 "LUTEmptyStateLabel" = "Wala pang na-import na LUT.";
 "LUTPickerNoneLabel" = "Wala";
-"LUTDimension1DLabel" = "1D";
-"LUTDimension3DLabel" = "3D";
-"LUTApproximationNote" = "Ang mga 3D LUT ay sinesampol sa neutral axis.";
 "LUTDeleteConfirmTitle" = "Alisin ang \"%@\"?";
 "LUTDeleteConfirmSubtitle" = "Aalisin nito ang LUT mula sa library at iki-clear ito sa lahat ng display na gumagamit nito.";
 "LUTRenameAlertTitle" = "Palitan ang Pangalan ng LUT";
 "LUTRenameAlertSubtitle" = "Maglagay ng bagong pangalan para sa LUT na ito.";
 "LUTImportErrorTitle" = "Hindi ma-import ang LUT";
-"LUTImportErrorSubtitle" = "Hindi mabasa ang file o hindi ito valid na LUT.";
 "LUTRowLabel" = "LUT";
 
 "TextureLibraryTitle" = "Texture Library";

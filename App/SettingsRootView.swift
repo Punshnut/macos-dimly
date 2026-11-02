@@ -398,11 +398,6 @@ struct SettingsRootView: View {
         indexMap(for: displayManager.displays.filter { $0.isBuiltin })
     }
 
-    /// Number of built-in panels currently visible to the app.
-    private var internalDisplayCount: Int {
-        displayManager.displays.filter { $0.isBuiltin }.count
-    }
-
     /// Generates a consistent index map for display numbering.
     private func indexMap(for displays: [DisplayInfo]) -> [String: Int] {
         let ordered = displays.sorted { $0.displayID < $1.displayID }
@@ -684,14 +679,7 @@ struct SettingsRootView: View {
             .padding(.bottom, 14)
         }
         .frame(maxWidth: .infinity, alignment: .leading)
-        .background(
-            RoundedRectangle(cornerRadius: 14, style: .continuous)
-                .fill(.ultraThinMaterial)
-        )
-        .overlay(
-            RoundedRectangle(cornerRadius: 14, style: .continuous)
-                .stroke(Color.primary.opacity(0.13), lineWidth: 1)
-        )
+        .dimlyCard(cornerRadius: DimlyRadius.tile)
     }
 
     // MARK: - Detail Views
@@ -1727,14 +1715,7 @@ struct SettingsRootView: View {
             }
             .padding(10)
             .frame(maxWidth: .infinity, alignment: .leading)
-            .background(
-                RoundedRectangle(cornerRadius: 12, style: .continuous)
-                    .fill(.ultraThinMaterial)
-            )
-            .overlay(
-                RoundedRectangle(cornerRadius: 12, style: .continuous)
-                    .stroke(Color.primary.opacity(0.1), lineWidth: 1)
-            )
+            .dimlyCard(cornerRadius: 12)
         }
 
         /// Confirms profile overwrite before replacing saved values with current settings.
@@ -1941,13 +1922,6 @@ struct SettingsRootView: View {
             }
 
             return strongest.overlap >= overlapThreshold ? strongest.id : nil
-        }
-
-        /// Infers horizontal tile spacing for drag threshold calculations.
-        private func inferredProfileStepX(from frames: [CGRect], fallback: CGFloat) -> CGFloat {
-            let centers = frames.map { $0.center.x }.sorted()
-            let diffs = zip(centers, centers.dropFirst()).map { $1 - $0 }.filter { $0 > 2 }
-            return diffs.median ?? fallback
         }
 
         /// Infers vertical row spacing for drag threshold calculations.
@@ -2910,18 +2884,6 @@ struct SettingsRootView: View {
             externalDisplayOptions(includingMissingTarget: binding.target)
         }
 
-        /// Returns picker options for profile automation trigger target.
-        private func automationDisplayOptions(for target: HotkeyTarget) -> [DisplayOption] {
-            externalDisplayOptions(includingMissingTarget: target)
-                .map { option in
-                    guard option.id == .allExternalDisplays else { return option }
-                    return DisplayOption(
-                        id: option.id,
-                        label: String(localized: "ProfileAutoApplyAnyMonitorLabel")
-                    )
-                }
-        }
-
         /// Returns external display picker options plus stale IDs if the selected target is missing.
         private func externalDisplayOptions(includingMissingTarget target: HotkeyTarget) -> [DisplayOption] {
             var options: [DisplayOption] = [
@@ -3129,58 +3091,6 @@ private final class HotkeyCaptureMonitor {
 
     deinit {
         stop()
-    }
-}
-
-private extension CGRect {
-    /// Convenience initializer used by profile drag previews that are positioned from a center point.
-    init(center: CGPoint, size: CGSize) {
-        self.init(
-            x: center.x - (size.width * 0.5),
-            y: center.y - (size.height * 0.5),
-            width: size.width,
-            height: size.height
-        )
-    }
-
-    var center: CGPoint {
-        CGPoint(x: midX, y: midY)
-    }
-
-    var area: CGFloat {
-        guard isNull == false, isInfinite == false else { return 0 }
-        return max(0, width) * max(0, height)
-    }
-
-    /// Returns how much of the smaller rect is covered by the intersection with another rect.
-    func overlapRatio(with other: CGRect) -> CGFloat {
-        let intersectionArea = intersection(other).area
-        guard intersectionArea > 0 else { return 0 }
-        let referenceArea = min(area, other.area)
-        guard referenceArea > 0 else { return 0 }
-        return intersectionArea / referenceArea
-    }
-}
-
-private extension CGPoint {
-    /// Squared euclidean distance, used for fast nearest-slot comparisons.
-    func distanceSquared(to other: CGPoint) -> CGFloat {
-        let dx = x - other.x
-        let dy = y - other.y
-        return (dx * dx) + (dy * dy)
-    }
-}
-
-private extension Array where Element == CGFloat {
-    /// Median value helper for robust spacing estimates in layout heuristics.
-    var median: CGFloat? {
-        guard isEmpty == false else { return nil }
-        let sorted = self.sorted()
-        let mid = sorted.count / 2
-        if sorted.count.isMultiple(of: 2) {
-            return (sorted[mid - 1] + sorted[mid]) * 0.5
-        }
-        return sorted[mid]
     }
 }
 

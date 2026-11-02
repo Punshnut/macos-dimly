@@ -372,28 +372,7 @@ struct IntroWindowView: View {
         }
         .frame(maxWidth: .infinity, alignment: .leading)
         .padding(14)
-        .background(
-            RoundedRectangle(cornerRadius: 18, style: .continuous)
-                .fill(.regularMaterial)
-        )
-        // Top-edge specular highlight for depth
-        .overlay(alignment: .top) {
-            RoundedRectangle(cornerRadius: 18, style: .continuous)
-                .fill(LinearGradient(
-                    colors: [Color.white.opacity(colorScheme == .dark ? 0.12 : 0.60), .clear],
-                    startPoint: .top,
-                    endPoint: .center
-                ))
-                .frame(height: 32)
-                .allowsHitTesting(false)
-        }
-        .overlay(
-            RoundedRectangle(cornerRadius: 18, style: .continuous)
-                .strokeBorder(
-                    Color.white.opacity(colorScheme == .dark ? 0.10 : 0.55),
-                    lineWidth: 1
-                )
-        )
+        .dimlyCard(cornerRadius: DimlyRadius.card)
         .shadow(color: .black.opacity(0.07), radius: 10, y: 3)
     }
 

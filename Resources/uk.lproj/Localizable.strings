@@ -18,7 +18,6 @@
 "IntroControlOverlaySubtitle" = "Резервний шар затемнення, коли DDC недоступний або вимкнений.";
 "IntroControlFallbackNote" = "Dimly спочатку пробує DDC, а потім безпечно переходить у режим накладання.";
 "IntroGotItButton" = "Почати";
-"IntroMenuBarTabLabel" = "Рядок меню";
 "IntroInternalMonitorTitle" = "Показати вбудований дисплей у Dimly";
 "IntroInternalMonitorHint" = "Dimly також може керувати вбудованим дисплеєм вашого Mac. Ви можете змінити це пізніше в Налаштуваннях → Дисплеї.";
 
@@ -79,7 +78,6 @@
 "SettingsTabShortcutsLabel" = "Ярлики";
 "SettingsTabAboutLabel" = "Про";
 
-
 /* Settings Visuals */
 "VisualsTransitionsTitle" = "Переходи";
 "VisualsTransitionSpeedTitle" = "Швидкість переходу";
@@ -93,9 +91,7 @@
 /* Settings General */
 "GeneralAutostartTitle" = "Автозапуск";
 "GeneralAutostartSubtitle" = "Автоматично запускати Dimly під час входу.";
-"GeneralLaunchAtLoginLabel" = "Запускати при вході";
 "GeneralMenuBarIconTitle" = "Показувати іконку в меню";
-"GeneralMenuBarIconAltTitle" = "Показувати іконку в меню";
 "GeneralHideDockIconTitle" = "Приховати іконку Dock";
 "GeneralHideDockIconNote" = "Приховує іконку Dock та пункт перемикача програм.";
 "GeneralMenuBarIconHiddenNote" = "Dimly продовжує працювати для гарячих клавіш, навіть якщо іконку приховано.";
@@ -177,7 +173,6 @@
 "DDCServiceUnavailableLabel" = "Сервіс дисплея недоступний";
 "DDCOpenFailedFormat" = "Помилка відкриття DDC (0x%@)";
 "DDCRequestFailedFormat" = "Помилка запиту DDC (0x%@)";
-"DDCConnectionTypeUnsupported" = "Цей тип підключення може не підтримувати DDC (спробуйте DisplayPort)";
 "DDCInternalPanelLabel" = "Внутрішня панель";
 
 /* Display Report */
@@ -196,17 +191,10 @@
 "VersionFormat" = "Версія %@ (%@)";
 "AboutCopyrightLabel" = "© 2026 Jan Feuerbacher";
 "AboutDescriptionText" = "Dimly - нативна утиліта Swift для macOS, що швидко затемнює зовнішні дисплеї та керує сном/пробудженням.";
-"AboutLegacyDescriptionText" = "Dimly - нативна утиліта Swift для macOS. У цій збірці є простий каркас із підтримкою рядка меню, перемикачем елемента входу та налаштовуваною гарячою клавішею.";
 "AboutMadeByText" = "Зроблено у вільний час - дякую за підтримку.";
 "AboutGitHubRepoTitle" = "Репозиторій GitHub";
 "AboutReportIssueTitle" = "Повідомити про проблему";
 "AboutDonateTitle" = "Пожертвувати";
-
-/* Preview/Template */
-"PreviewScaffoldLabel" = "Цей каркас SwiftUI готовий до ваших ідей.";
-"PreviewIncrementButton" = "Збільшити лічильник";
-"PreviewCounterFormat" = "Лічильник: %lld";
-"PreviewPlaceholderButton" = "Виконати тестову дію";
 
 /* Hotkey Labels */
 "HotkeyModCmdLabel" = "Cmd";
@@ -262,7 +250,6 @@
 "HotkeyKeyKbdBrightnessToggleLabel" = "Keyboard Brightness Toggle";
 
 "BrightnessSectionLabel" = "Яскравість";
-"DisplayModeFallbackLabel" = "Резервний режим";
 "DDC" = "DDC";
 "DisplayModeOverlayLabel" = "Режим накладання";
 "BrightnessPercentFormat" = "%lld%%";
@@ -279,11 +266,9 @@
 "BackupExportSaveError" = "Не вдалося зберегти файл резервної копії.";
 "ActionExportButton" = "Експорт";
 "BackupExportActionTitle" = "Експортувати вибрані налаштування";
-"ExportSelectedSettingsDetails" = "Зберегти вибрані категорії у файл резервної копії.";
 "BackupGeneralSettingsTitle" = "Загальні налаштування";
 "ActionImportButton" = "Імпорт";
 "BackupImportActionTitle" = "Імпортувати вибрані налаштування";
-"ImportSelectedSettingsDetails" = "Завантажити вибрані категорії з файлу резервної копії.";
 "BackupMonitorSettingsTitle" = "Налаштування монітора";
 "BackupSelectCategoryError" = "Виберіть щонайменше одну категорію налаштувань.";
 "GeneralBackupTitle" = "Резервна копія налаштувань";
@@ -310,10 +295,6 @@
 
 "ActionDecreaseBrightnessHint" = "Зменшити яскравість";
 "ActionIncreaseBrightnessHint" = "Збільшити яскравість";
-"DisplayExcludeFromMenuTitle" = "Виключити з вікна рядка меню";
-"DisplayExcludeFromMenuSubtitle" = "Приховати цей монітор зі списку дисплеїв у рядку меню.";
-"StatusOnLabel" = "Увімкнено";
-"StatusOffLabel" = "Вимкнено";
 
 /* Dimly Display Visibility */
 "MenuMonitorsHeader" = "Дисплеї";
@@ -362,7 +343,6 @@
 "ProfileReorderTip" = "Порада: перетягуйте картки профілів, щоб змінити порядок.";
 "ColorVioletLabel" = "Фіолетовий";
 
-"ProfileAutoApplyTriggerLabel" = "Тригер підключення монітора";
 "ProfileAutoApplyAnyMonitorLabel" = "Будь-який зовнішній монітор";
 
 "GeneralQuickActionsVisibilityTitle" = "Видимість швидких дій";
@@ -436,13 +416,11 @@
 "NightShiftLabel" = "Night Shift";
 "NightShiftLessWarmLabel" = "Менш тепле";
 "NightShiftMoreWarmLabel" = "Тепліше";
-"NightShiftUnavailableNote" = "Night Shift недоступний на цьому Mac.";
 
 /* True Tone */
 "TrueToneLabel" = "True Tone";
 
 /* Contrast */
-"ContrastSectionLabel" = "Контрастність";
 "ContrastPercentFormat" = "%lld%%";
 "ActionDecreaseContrastHint" = "Зменшити контрастність на 1%";
 "ActionIncreaseContrastHint" = "Збільшити контрастність на 1%";
@@ -451,8 +429,6 @@
 "ResolutionPickerLabel" = "Роздільна здатність";
 "RefreshRatePickerLabel" = "Частота оновлення";
 "ResolutionHiDPIBadge" = "HiDPI";
-"ResolutionNativeBadge" = "Рідна";
-"ResolutionDefaultBadge" = "За замовчуванням";
 
 /* Input Source */
 "InputSourceVGA1Label" = "VGA 1";
@@ -468,7 +444,6 @@
 
 /* Color Profile */
 "ColorProfileSectionLabel" = "Профіль кольору";
-"ColorProfileDefaultLabel" = "За замовчуванням";
 
 /* Display Appearance Filter */
 "DisplayFilterLabel" = "Фільтр вигляду";
@@ -497,15 +472,11 @@
 "LUTImportButton" = "Імпортувати LUT…";
 "LUTEmptyStateLabel" = "LUT ще не імпортовано.";
 "LUTPickerNoneLabel" = "Немає";
-"LUTDimension1DLabel" = "1D";
-"LUTDimension3DLabel" = "3D";
-"LUTApproximationNote" = "3D LUT зчитуються вздовж нейтральної осі.";
 "LUTDeleteConfirmTitle" = "Видалити «%@»?";
 "LUTDeleteConfirmSubtitle" = "Це видалить LUT із бібліотеки та прибере його з усіх дисплеїв, де він використовується.";
 "LUTRenameAlertTitle" = "Перейменувати LUT";
 "LUTRenameAlertSubtitle" = "Введіть нову назву для цього LUT.";
 "LUTImportErrorTitle" = "Не вдалося імпортувати LUT";
-"LUTImportErrorSubtitle" = "Не вдалося прочитати файл або він не є дійсним LUT.";
 "LUTRowLabel" = "LUT";
 
 /* Texture Library */

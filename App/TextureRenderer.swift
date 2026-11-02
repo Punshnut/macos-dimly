@@ -76,17 +76,6 @@ enum TextureRenderer {
         return shaded
     }
 
-    /// Clears every cached render (both the shaded bitmap and any tiled variants) for a
-    /// texture - call this whenever a texture's underlying pixels change (e.g. reassigning
-    /// its normal map), so stale shading doesn't keep showing.
-    static func invalidateCache(for textureID: UUID) {
-        shadedImageCache.removeObject(forKey: textureID.uuidString as NSString)
-        // NSCache has no key enumeration, so the tile cache (keyed by texture+scale+backing)
-        // can't be selectively evicted by texture ID alone - clear it entirely. This is cheap:
-        // entries are trivial resize/wrap operations to rebuild, not re-shades.
-        tileCache.removeAllObjects()
-    }
-
     // MARK: - Relief shading
 
     /// Produces a Lambertian-shaded version of `diffuse` using either an explicit normal map

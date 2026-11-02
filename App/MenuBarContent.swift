@@ -97,14 +97,10 @@ struct MenuBarContentView: View {
             )
         )
         .scaleEffect(
-            (presentation == .menuBar && !panelIsPresented && !reduceMotion) ? 0.97 : 1.0,
+            (presentation == .menuBar && !panelIsPresented && !reduceMotion && !Self.systemProvidesGlassWindow) ? 0.97 : 1.0,
             anchor: .top
         )
-        .background {
-            if presentation == .menuBar {
-                Rectangle().fill(.regularMaterial)
-            }
-        }
+        .modifier(MenuBarPanelBackgroundModifier(isMenuBar: presentation == .menuBar))
         .onPreferenceChange(PanelContentSizePreferenceKey.self) { panelContentSize = $0 }
         .onAppear {
             if renderedLayoutMode == nil {
@@ -151,6 +147,12 @@ struct MenuBarContentView: View {
     }
 
     private var sectionSpacing: CGFloat { 12 }
+
+    /// True when the OS supplies Liquid Glass window chrome for the MenuBarExtra window.
+    private static var systemProvidesGlassWindow: Bool {
+        if #available(macOS 26, *) { return true }
+        return false
+    }
 
     private var quickAnimation: Animation? {
         reduceMotion ? nil : DimlyMotion.quickSpring
@@ -381,10 +383,6 @@ struct MenuBarContentView: View {
         colorScheme == .dark ? Color.white.opacity(0.56) : Color.black.opacity(0.46)
     }
 
-    private var neutralCardFill: Color {
-        colorScheme == .dark ? Color.white.opacity(0.1) : Color.white.opacity(0.5)
-    }
-
     private var neutralCardFillStrong: Color {
         colorScheme == .dark ? Color.white.opacity(0.13) : Color.white.opacity(0.62)
     }
@@ -408,9 +406,13 @@ struct MenuBarContentView: View {
                 : NSApp.keyWindow
             if presentation == .menuBar, let window = candidate {
                 window.animationBehavior = .utilityWindow
-                window.isOpaque = false
-                window.backgroundColor = .clear
-                window.hasShadow = true
+                // macOS 26+ draws its own glass chrome, rounding and shadow for the window.
+                // Overriding them produced a second, square frame inside the popover.
+                if !Self.systemProvidesGlassWindow {
+                    window.isOpaque = false
+                    window.backgroundColor = .clear
+                    window.hasShadow = true
+                }
             }
             candidate?.makeKeyAndOrderFront(nil)
         }
@@ -491,7 +493,9 @@ struct MenuBarContentView: View {
             .background(
                 Capsule()
                     .fill(neutralChromeFill)
+                    .opacity(Self.systemProvidesGlassWindow ? 0 : 1)
             )
+            .modifier(ModeSwitchTrackGlass())
         }
     }
 
@@ -506,7 +510,8 @@ struct MenuBarContentView: View {
                 .background(alignment: .center) {
                     if isActive {
                         Capsule()
-                            .fill(Color.accentColor.opacity(0.25))
+                            .fill(Color.accentColor.opacity(Self.systemProvidesGlassWindow ? 0.12 : 0.25))
+                            .dimlyGlassSurface(cornerRadius: 100, tint: .accentColor, fillOpacity: 0.22, strokeOpacity: 0, interactive: false)
                             .matchedGeometryEffect(id: "modeSwitch", in: modeSwitchNamespace)
                     }
                 }
@@ -787,15 +792,7 @@ struct MenuBarContentView: View {
             extendedStatusView
         }
         .padding(10)
-        .background(
-            RoundedRectangle(cornerRadius: 12, style: .continuous)
-                .fill(neutralCardFillStrong)
-        )
-        .overlay(
-            RoundedRectangle(cornerRadius: 12, style: .continuous)
-                .stroke(neutralStroke, lineWidth: 1)
-        )
-        .clipShape(RoundedRectangle(cornerRadius: 12, style: .continuous))
+        .dimlyPlate(RoundedRectangle(cornerRadius: 14, style: .continuous), strong: true)
     }
 
     /// One-line summary of internal vs external display counts.
@@ -859,7 +856,7 @@ struct MenuBarContentView: View {
                 Label(String(localized: "ActionToggleExternalBlackoutLabel"), systemImage: "moon.fill")
                     .frame(maxWidth: .infinity)
             }
-            .buttonStyle(.borderedProminent)
+            .dimlyButtonStyle(prominent: true)
             .controlSize(.large)
 
             suspendAllButtons
@@ -874,7 +871,7 @@ struct MenuBarContentView: View {
                 Label(String(localized: "ActionPanicAllOnLabel"), systemImage: "exclamationmark.triangle.fill")
                     .frame(maxWidth: .infinity)
             }
-            .buttonStyle(.bordered)
+            .dimlyButtonStyle()
             .controlSize(.regular)
             .tint(.red)
 
@@ -901,7 +898,7 @@ struct MenuBarContentView: View {
                     .frame(maxWidth: .infinity)
             }
         }
-        .buttonStyle(.bordered)
+        .dimlyButtonStyle()
         .controlSize(.regular)
         .disabled(visibleExternalDisplays.isEmpty)
     }
@@ -920,15 +917,18 @@ struct MenuBarContentView: View {
         }
         .tint(tint)
         .overlay(
-            RoundedRectangle(cornerRadius: 8, style: .continuous)
-                .stroke(strokeColor, lineWidth: 2)
+            Group {
+                if #available(macOS 26, *) {
+                    Capsule().stroke(strokeColor, lineWidth: 2)
+                } else {
+                    RoundedRectangle(cornerRadius: 8, style: .continuous)
+                        .stroke(strokeColor, lineWidth: 2)
+                }
+            }
         )
         .help(String(localized: "ActionSleepExternalsLabel"))
 
-        if state == .full {
-            return AnyView(button.buttonStyle(BorderedProminentButtonStyle()))
-        }
-        return AnyView(button.buttonStyle(BorderedButtonStyle()))
+        return AnyView(button.dimlyButtonStyle(prominent: state == .full))
     }
 
     /// Quick action for switching the active texture overlay - a single-tap cycle button by
@@ -944,7 +944,7 @@ struct MenuBarContentView: View {
                     Label(String(localized: "TextureMenuBarQuickActionLabel"), systemImage: "square.on.square.dashed")
                         .frame(maxWidth: .infinity)
                 }
-                .buttonStyle(.bordered)
+                .dimlyButtonStyle()
                 .controlSize(.regular)
                 .help(String(localized: "TextureMenuBarCycleHint"))
             case .grid:
@@ -954,7 +954,7 @@ struct MenuBarContentView: View {
                     Label(String(localized: "TextureMenuBarQuickActionLabel"), systemImage: "square.on.square.dashed")
                         .frame(maxWidth: .infinity)
                 }
-                .buttonStyle(.bordered)
+                .dimlyButtonStyle()
                 .controlSize(.regular)
                 .popover(isPresented: $showTextureGridPopover, arrowEdge: .trailing) {
                     TextureGridPopoverView(
@@ -1119,9 +1119,9 @@ struct MenuBarContentView: View {
                         .fill(fillStyle)
                 )
                 .overlay(
-                    RoundedRectangle(cornerRadius: cornerRadius, style: .continuous)
-                        .stroke(strokeColor, lineWidth: 1)
+                    DimlySmartTileEdge(cornerRadius: cornerRadius, fallbackStroke: strokeColor, dark: colorScheme == .dark)
                 )
+                .shadow(color: Color.black.opacity(colorScheme == .dark ? 0.28 : 0.12), radius: 6, x: 0, y: 3)
                 .overlay(
                     RoundedRectangle(cornerRadius: cornerRadius, style: .continuous)
                         .fill(Color.white.opacity(isFlashing ? flashOpacity : 0))
@@ -1286,13 +1286,6 @@ struct MenuBarContentView: View {
         guard reduceMotion == false else { return 0 }
         let divisor: CGFloat = compact ? 22 : 28
         return max(-4, min(4, smartButtonDragTranslation.width / divisor))
-    }
-
-    /// Infers horizontal spacing between smart buttons for drop-distance thresholds.
-    private func inferredStepX(from frames: [CGRect], fallback: CGFloat) -> CGFloat {
-        let centers = frames.map { $0.center.x }.sorted()
-        let diffs = zip(centers, centers.dropFirst()).map { $1 - $0 }.filter { $0 > 2 }
-        return diffs.median ?? fallback
     }
 
     /// Infers vertical row spacing for smart-button drag/drop heuristics.
@@ -1621,7 +1614,7 @@ struct MenuBarContentView: View {
         let labelFontSize: CGFloat   = large ? 7.5  : 6
 
         return VStack(spacing: 0) {
-            // ── Name / drag handle ──────────────────────────────
+            // Name / drag handle
             HStack(alignment: .top, spacing: 3) {
                 Text(name)
                     .font(.system(size: nameFontSize, weight: .semibold))
@@ -1657,7 +1650,7 @@ struct MenuBarContentView: View {
             .contentShape(Rectangle())
             .highPriorityGesture(displayMiniTileReorderGesture(for: display.stableIdentity))
 
-            // ── Action buttons: sleep/wake + brightness pill, grouped and centred ──
+            // Action buttons: sleep/wake + brightness pill, grouped and centered
             HStack(spacing: 0) {
                 Spacer(minLength: 0)
                 HStack(spacing: actionRowSpacing) {
@@ -1722,8 +1715,7 @@ struct MenuBarContentView: View {
             .padding(.bottom, 6)
         }
         .frame(maxWidth: .infinity)
-        .background(neutralCardFill)
-        .overlay(tileShape.stroke(neutralStroke.opacity(0.78), lineWidth: 1))
+        .dimlyPlate(tileShape)
         .clipShape(tileShape)
         .contentShape(tileShape)
     }
@@ -1949,11 +1941,7 @@ struct MenuBarContentView: View {
             }
         }
         .padding(8)
-        .background(neutralCardFill)
-        .overlay(
-            rowShape
-                .stroke(neutralStroke.opacity(0.78), lineWidth: 1)
-        )
+        .dimlyPlate(rowShape)
         .clipShape(rowShape)
         .contentShape(rowShape)
         .contextMenu {
@@ -2396,7 +2384,7 @@ struct MenuBarContentView: View {
                 overwriteProfileMenuButton(maxWidth: .infinity)
                 applyProfileMenuButton(maxWidth: .infinity)
             }
-            .buttonStyle(.bordered)
+            .dimlyButtonStyle()
             .controlSize(.regular)
         }
     }
@@ -2497,7 +2485,7 @@ struct MenuBarContentView: View {
                     }
                 }
             }
-            .buttonStyle(.bordered)
+            .dimlyButtonStyle()
             .controlSize(.small)
             Divider()
             Button(role: .destructive) {
@@ -2543,7 +2531,7 @@ struct MenuBarContentView: View {
                 applyProfileMenuButton()
             }
         }
-        .buttonStyle(.bordered)
+        .dimlyButtonStyle()
         .controlSize(.small)
     }
 
@@ -2569,7 +2557,7 @@ struct MenuBarContentView: View {
                     }
             }
         }
-        .buttonStyle(.bordered)
+        .dimlyButtonStyle()
         .controlSize(.small)
     }
 
@@ -2809,20 +2797,6 @@ struct MenuBarContentView: View {
         orderedMergedDisplays.map(\.stableIdentity)
     }
 
-    /// Swaps two external displays in the saved order list.
-    private func moveExternalDisplay(from draggedID: String, to targetID: String) {
-        var order = orderedExternalIDs()
-        guard let fromIndex = order.firstIndex(of: draggedID),
-              let toIndex = order.firstIndex(of: targetID),
-              fromIndex != toIndex else { return }
-        order.swapAt(fromIndex, toIndex)
-        runMotion(DimlyMotion.standardSpring) {
-            settingsStore.update { settings in
-                settings.externalDisplayOrder = order
-            }
-        }
-    }
-
     /// Moves the given display one slot up in the saved order.
     private func moveExternalDisplayUp(_ id: String) {
         var order = orderedExternalIDs()
@@ -3009,11 +2983,7 @@ struct MenuBarContentView: View {
         }
         .padding(.horizontal, 10)
         .padding(.vertical, 10)
-        .background(neutralCardFillStrong)
-        .overlay(
-            rowShape.fill(Color.white.opacity(colorScheme == .dark ? 0.04 : 0.06))
-        )
-        .overlay(rowShape.stroke(neutralStroke.opacity(0.78), lineWidth: 1))
+        .dimlyPlate(rowShape, strong: true)
         .clipShape(rowShape)
     }
 
@@ -3158,395 +3128,5 @@ struct MenuBarContentView: View {
         static func reduce(value: inout CGSize, nextValue: () -> CGSize) {
             value = nextValue()
         }
-    }
-}
-
-private extension CGRect {
-    /// Convenience initializer used by drag previews that are positioned from a center point.
-    init(center: CGPoint, size: CGSize) {
-        self.init(
-            x: center.x - (size.width * 0.5),
-            y: center.y - (size.height * 0.5),
-            width: size.width,
-            height: size.height
-        )
-    }
-
-    var center: CGPoint {
-        CGPoint(x: midX, y: midY)
-    }
-
-    var area: CGFloat {
-        guard isNull == false, isInfinite == false else { return 0 }
-        return max(0, width) * max(0, height)
-    }
-
-    /// Returns how much of the smaller rect is covered by the intersection with another rect.
-    func overlapRatio(with other: CGRect) -> CGFloat {
-        let intersectionArea = intersection(other).area
-        guard intersectionArea > 0 else { return 0 }
-        let referenceArea = min(area, other.area)
-        guard referenceArea > 0 else { return 0 }
-        return intersectionArea / referenceArea
-    }
-}
-
-private extension CGPoint {
-    /// Returns a translated copy of this point.
-    func offsetBy(dx: CGFloat, dy: CGFloat) -> CGPoint {
-        CGPoint(x: x + dx, y: y + dy)
-    }
-
-    /// Squared euclidean distance, used to compare proximity without extra sqrt calls.
-    func distanceSquared(to other: CGPoint) -> CGFloat {
-        let dx = x - other.x
-        let dy = y - other.y
-        return (dx * dx) + (dy * dy)
-    }
-}
-
-private extension Array where Element == CGFloat {
-    /// Median value used for robust spacing estimates in drag/drop layouts.
-    var median: CGFloat? {
-        guard isEmpty == false else { return nil }
-        let sorted = self.sorted()
-        let mid = sorted.count / 2
-        if sorted.count.isMultiple(of: 2) {
-            return (sorted[mid - 1] + sorted[mid]) * 0.5
-        }
-        return sorted[mid]
-    }
-}
-
-private struct MenuBarWindowAnchorLock: NSViewRepresentable {
-    let isEnabled: Bool
-    let targetContentSize: CGSize
-
-    /// Creates a coordinator that keeps the menu bar window pinned to its original top edge while resizing.
-    func makeCoordinator() -> Coordinator {
-        Coordinator()
-    }
-
-    /// Installs an invisible AppKit hook so SwiftUI can react to the hosting window's resize lifecycle.
-    func makeNSView(context: Context) -> NSView {
-        let view = NSView(frame: .zero)
-        view.postsFrameChangedNotifications = true
-        MainActor.assumeIsolated {
-            context.coordinator.attach(
-                view: view,
-                to: Self.findMenuBarExtraWindow(from: view.window),
-                isEnabled: isEnabled,
-                targetContentSize: targetContentSize
-            )
-        }
-        return view
-    }
-
-    /// Reattaches the coordinator whenever SwiftUI moves this representable into a different window.
-    func updateNSView(_ nsView: NSView, context: Context) {
-        MainActor.assumeIsolated {
-            context.coordinator.attach(
-                view: nsView,
-                to: Self.findMenuBarExtraWindow(from: nsView.window),
-                isEnabled: isEnabled,
-                targetContentSize: targetContentSize
-            )
-        }
-    }
-
-    /// Resolves the real MenuBarExtra window instead of transient SwiftUI hosting windows.
-    private static func findMenuBarExtraWindow(from candidate: NSWindow?) -> NSWindow? {
-        if let candidate, isMenuBarExtraWindow(candidate) {
-            return candidate
-        }
-        return NSApp.windows.first(where: isMenuBarExtraWindow)
-    }
-
-    private static func isMenuBarExtraWindow(_ window: NSWindow) -> Bool {
-        let className = NSStringFromClass(type(of: window))
-        guard className.localizedCaseInsensitiveContains("MenuBarExtra") else {
-            return false
-        }
-        return window.level == .statusBar || window.level == .popUpMenu
-    }
-
-    /// Removes AppKit observers when SwiftUI tears down the backing view.
-    static func dismantleNSView(_ nsView: NSView, coordinator: Coordinator) {
-        coordinator.detach()
-    }
-
-    @MainActor
-    final class Coordinator: NSObject {
-        private weak var anchorView: NSView?
-        private weak var window: NSWindow?
-        private var isEnabled = false
-        private var lockedTopY: CGFloat?
-        private var lockedScreen: NSScreen?
-        private var targetContentSize: CGSize = .zero
-        private var isSyncingWindowFrame = false
-
-        /// Starts observing the current hosting window and captures the top edge to preserve menu bar anchoring.
-        func attach(
-            view: NSView,
-            to window: NSWindow?,
-            isEnabled: Bool,
-            targetContentSize: CGSize
-        ) {
-            let wasEnabled = self.isEnabled
-            let previousLockedTopY = lockedTopY
-            let previousLockedScreen = lockedScreen
-            if anchorView !== view {
-                unregisterViewObservers()
-                anchorView = view
-                registerViewObservers(for: view)
-            }
-            guard let window else { return }
-
-            if self.window !== window {
-                unregisterWindowObservers()
-                self.window = window
-                registerWindowObservers(for: window)
-
-                if let previousLockedTopY,
-                   let previousLockedScreen,
-                   window.screen === previousLockedScreen {
-                    lockedTopY = previousLockedTopY
-                    lockedScreen = previousLockedScreen
-                } else {
-                    lockedTopY = nil
-                    lockedScreen = nil
-                }
-            }
-
-            self.isEnabled = isEnabled
-            self.targetContentSize = targetContentSize
-
-            if isEnabled {
-                // Re-capture when first enabled, after a reset, or when the panel has moved to a
-                // different screen (e.g. opened on a fullscreen monitor after being on another screen).
-                // Never re-capture on repeat calls for the same screen - later SwiftUI animation
-                // frames may fire updateNSView after macOS has already drifted the window upward.
-                if !wasEnabled || lockedTopY == nil || window.screen !== lockedScreen {
-                    lockedTopY = window.frame.maxY
-                    lockedScreen = window.screen
-                }
-                syncWindowFrame(force: true)
-            } else {
-                lockedTopY = nil
-                lockedScreen = nil
-            }
-        }
-
-        /// Stops observing the current window and clears any cached anchor state.
-        func detach() {
-            unregisterWindowObservers()
-            unregisterViewObservers()
-            anchorView = nil
-            window = nil
-            lockedTopY = nil
-            lockedScreen = nil
-            isEnabled = false
-            targetContentSize = .zero
-        }
-
-        @objc
-        private func handleResizeNotification(_ notification: Notification) {
-            syncWindowFrame()
-        }
-
-        @objc
-        private func handleViewFrameDidChange(_ notification: Notification) {
-            syncWindowFrame()
-        }
-
-        private func registerWindowObservers(for window: NSWindow) {
-            NotificationCenter.default.addObserver(
-                self,
-                selector: #selector(handleResizeNotification(_:)),
-                name: NSWindow.didResizeNotification,
-                object: window
-            )
-            NotificationCenter.default.addObserver(
-                self,
-                selector: #selector(handleResizeNotification(_:)),
-                name: NSWindow.didMoveNotification,
-                object: window
-            )
-        }
-
-        private func unregisterWindowObservers() {
-            guard let window else { return }
-            NotificationCenter.default.removeObserver(
-                self,
-                name: NSWindow.didResizeNotification,
-                object: window
-            )
-            NotificationCenter.default.removeObserver(
-                self,
-                name: NSWindow.didMoveNotification,
-                object: window
-            )
-        }
-
-        private func registerViewObservers(for view: NSView) {
-            NotificationCenter.default.addObserver(
-                self,
-                selector: #selector(handleViewFrameDidChange(_:)),
-                name: NSView.frameDidChangeNotification,
-                object: view
-            )
-        }
-
-        private func unregisterViewObservers() {
-            guard let anchorView else { return }
-            NotificationCenter.default.removeObserver(
-                self,
-                name: NSView.frameDidChangeNotification,
-                object: anchorView
-            )
-        }
-
-        /// Keeps the menu bar window frame in sync with the measured SwiftUI content size.
-        private func syncWindowFrame(force: Bool = false) {
-            guard !isSyncingWindowFrame else { return }
-            isSyncingWindowFrame = true
-            defer { isSyncingWindowFrame = false }
-
-            guard isEnabled, let window else { return }
-            guard let targetContentSize = resolvedTargetContentSize(in: window) else { return }
-
-            // If the window moved to a different screen the stored anchor belongs to the old
-            // screen. Adopt the current position as the new anchor and skip any correction so
-            // the panel stays where macOS placed it on the new screen.
-            if window.screen !== lockedScreen {
-                lockedTopY = window.frame.maxY
-                lockedScreen = window.screen
-                return
-            }
-
-            let topY = lockedTopY ?? window.frame.maxY
-            lockedTopY = topY
-
-            let currentFrame = window.frame
-            let currentContentRect = window.contentRect(forFrameRect: currentFrame)
-            let desiredContentRect = CGRect(origin: .zero, size: targetContentSize)
-            let desiredFrameSize = window.frameRect(forContentRect: desiredContentRect).size
-            let targetY = topY - desiredFrameSize.height
-
-            let widthDelta = abs(currentContentRect.width - targetContentSize.width)
-            let heightDelta = abs(currentContentRect.height - targetContentSize.height)
-            let yDelta = abs(currentFrame.origin.y - targetY)
-            guard force || widthDelta > 0.5 || heightDelta > 0.5 || yDelta > 0.5 else { return }
-
-            var frame = currentFrame
-            frame.size = desiredFrameSize
-            frame.origin.y = targetY
-            let isGrowing = desiredFrameSize.width > currentFrame.width + 0.5 || desiredFrameSize.height > currentFrame.height + 0.5
-            window.setFrame(frame, display: isGrowing, animate: false)
-            if isGrowing {
-                window.contentView?.needsLayout = true
-                window.contentView?.layoutSubtreeIfNeeded()
-                window.contentView?.displayIfNeeded()
-            }
-        }
-
-        private func resolvedTargetContentSize(in window: NSWindow) -> CGSize? {
-            if let fittingSubviewSize = window.contentView?.subviews.first?.fittingSize,
-               fittingSubviewSize.width > 0.5,
-               fittingSubviewSize.height > 0.5 {
-                return fittingSubviewSize
-            }
-
-            if let fittingContentViewSize = window.contentView?.fittingSize,
-               fittingContentViewSize.width > 0.5,
-               fittingContentViewSize.height > 0.5 {
-                return fittingContentViewSize
-            }
-
-            let measured = targetContentSize
-            if measured.width > 0.5, measured.height > 0.5 {
-                return measured
-            }
-
-            if let anchorView {
-                let boundsSize = anchorView.bounds.size
-                if boundsSize.width > 0.5, boundsSize.height > 0.5 {
-                    return boundsSize
-                }
-
-                if let superviewSize = anchorView.superview?.bounds.size,
-                   superviewSize.width > 0.5,
-                   superviewSize.height > 0.5 {
-                    return superviewSize
-                }
-            }
-
-            return nil
-        }
-    }
-}
-
-/// Tap fires once via a real `Button` (so it's always hit-tested reliably, even inside the
-/// menu bar's `NSPopover`); holding repeats after 1 s at 0.12 s intervals, driven by a
-/// `simultaneousGesture` so it never gates or delays the primary tap.
-private struct BrightnessHoldButton<Label: View>: View {
-    let action: () -> Void
-    let label: () -> Label
-
-    @State private var repeatTask: Task<Void, Never>?
-    @State private var isHeld = false
-    @Environment(\.accessibilityReduceMotion) private var reduceMotion
-
-    init(action: @escaping () -> Void, @ViewBuilder label: @escaping () -> Label) {
-        self.action = action
-        self.label = label
-    }
-
-    private func beginHold() {
-        guard repeatTask == nil else { return }
-        isHeld = true
-        repeatTask = Task {
-            do {
-                try await Task.sleep(nanoseconds: 1_000_000_000) // 1 s before repeat
-                while !Task.isCancelled {
-                    action()
-                    try await Task.sleep(nanoseconds: 120_000_000) // ~8 steps/s
-                }
-            } catch {}
-        }
-    }
-
-    private func endHold() {
-        isHeld = false
-        repeatTask?.cancel()
-        repeatTask = nil
-    }
-
-    var body: some View {
-        Button(action: action) {
-            label()
-        }
-        .buttonStyle(.plain)
-        .scaleEffect(isHeld && !reduceMotion ? 0.8 : 1)
-        .opacity(isHeld ? 0.78 : 1)
-        .animation(reduceMotion ? nil : DimlyMotion.poppySpring, value: isHeld)
-        .simultaneousGesture(
-            DragGesture(minimumDistance: 0)
-                .onChanged { _ in beginHold() }
-                .onEnded { _ in endHold() }
-        )
-    }
-}
-
-/// Button style that keeps icon colors stable during pressed state (no accent flash).
-private struct StaticIconButtonStyle: ButtonStyle {
-    @Environment(\.accessibilityReduceMotion) private var reduceMotion
-
-    /// Applies press feedback without changing icon tint semantics.
-    func makeBody(configuration: Configuration) -> some View {
-        configuration.label
-            .scaleEffect(configuration.isPressed && !reduceMotion ? 0.9 : 1)
-            .opacity(configuration.isPressed ? 0.84 : 1)
-            .animation(reduceMotion ? nil : DimlyMotion.quickSpring, value: configuration.isPressed)
     }
 }

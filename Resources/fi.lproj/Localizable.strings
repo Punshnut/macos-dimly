@@ -18,7 +18,6 @@
 "IntroControlOverlaySubtitle" = "Vara-himmennyskerros, kun DDC ei ole käytettävissä tai se on poistettu käytöstä.";
 "IntroControlFallbackNote" = "Dimly yrittää ensin DDC:tä ja siirtyy sitten turvallisesti peittotilaan.";
 "IntroGotItButton" = "Aloita";
-"IntroMenuBarTabLabel" = "Valikkorivi";
 "IntroInternalMonitorTitle" = "Näytä sisäänrakennettu näyttö Dimly-sovelluksessa";
 "IntroInternalMonitorHint" = "Dimly voi myös ohjata Macin sisäänrakennettua näyttöä. Voit muuttaa tätä myöhemmin kohdassa Asetukset → Näytöt.";
 
@@ -79,7 +78,6 @@
 "SettingsTabShortcutsLabel" = "Pikanäppäimet";
 "SettingsTabAboutLabel" = "Tietoja";
 
-
 /* Settings Visuals */
 "VisualsTransitionsTitle" = "Siirtymät";
 "VisualsTransitionSpeedTitle" = "Siirtymänopeus";
@@ -93,9 +91,7 @@
 /* Settings General */
 "GeneralAutostartTitle" = "Automaattinen käynnistys";
 "GeneralAutostartSubtitle" = "Käynnistä Dimly automaattisesti kirjautumisen yhteydessä.";
-"GeneralLaunchAtLoginLabel" = "Käynnistä kirjautuessa";
 "GeneralMenuBarIconTitle" = "Näytä valikkorivin kuvake";
-"GeneralMenuBarIconAltTitle" = "Näytä valikkorivin kuvake";
 "GeneralHideDockIconTitle" = "Piilota Dock-kuvake";
 "GeneralHideDockIconNote" = "Piilottaa Dock-kuvakkeen ja sovellusten vaihtajan kohdan.";
 "GeneralMenuBarIconHiddenNote" = "Dimly pysyy käynnissä pikanäppäimiä varten, vaikka kuvake olisi piilossa.";
@@ -177,7 +173,6 @@
 "DDCServiceUnavailableLabel" = "Näyttöpalvelu ei käytettävissä";
 "DDCOpenFailedFormat" = "DDC-avauksen epäonnistuminen (0x%@)";
 "DDCRequestFailedFormat" = "DDC-pyyntö epäonnistui (0x%@)";
-"DDCConnectionTypeUnsupported" = "Tämä yhteystyyppi ei välttämättä tue DDC:tä (kokeile DisplayPortia)";
 "DDCInternalPanelLabel" = "Sisäinen paneeli";
 
 /* Display Report */
@@ -196,17 +191,10 @@
 "VersionFormat" = "Versio %@ (%@)";
 "AboutCopyrightLabel" = "© 2026 Jan Feuerbacher";
 "AboutDescriptionText" = "Dimly on macOS:n Swift-työkalu ulkoisten näyttöjen pikaiseen pimennykseen ja uni/herätys-hallintaan.";
-"AboutLegacyDescriptionText" = "Dimly on macOS:n natiivin Swiftin työkalu. Tämä versio sisältää yksinkertaisen rungon, jossa on valikkorivituki, kirjautumiskohdan kytkin ja muokattava pikanäppäin.";
 "AboutMadeByText" = "Tehty vapaa-ajallani - kiitos tuesta.";
 "AboutGitHubRepoTitle" = "GitHub-repo";
 "AboutReportIssueTitle" = "Ilmoita ongelmasta";
 "AboutDonateTitle" = "Lahjoita";
-
-/* Preview/Template */
-"PreviewScaffoldLabel" = "Tämä SwiftUI-ranka on valmis ideoillesi.";
-"PreviewIncrementButton" = "Lisää laskuria";
-"PreviewCounterFormat" = "Laskuri: %lld";
-"PreviewPlaceholderButton" = "Suorita mallitoiminto";
 
 /* Hotkey Labels */
 "HotkeyModCmdLabel" = "Cmd";
@@ -262,7 +250,6 @@
 "HotkeyKeyKbdBrightnessToggleLabel" = "Keyboard Brightness Toggle";
 
 "BrightnessSectionLabel" = "Kirkkaus";
-"DisplayModeFallbackLabel" = "Varatila";
 "DDC" = "DDC";
 "DisplayModeOverlayLabel" = "Peittotila";
 "BrightnessPercentFormat" = "%lld%%";
@@ -279,11 +266,9 @@
 "BackupExportSaveError" = "Varmuuskopiotiedostoa ei voitu tallentaa.";
 "ActionExportButton" = "Vie";
 "BackupExportActionTitle" = "Vie valitut asetukset";
-"ExportSelectedSettingsDetails" = "Tallenna valitut kategoriat varmuuskopiotiedostoon.";
 "BackupGeneralSettingsTitle" = "Yleiset asetukset";
 "ActionImportButton" = "Tuo";
 "BackupImportActionTitle" = "Tuo valitut asetukset";
-"ImportSelectedSettingsDetails" = "Lataa valitut kategoriat varmuuskopiotiedostosta.";
 "BackupMonitorSettingsTitle" = "Nayton asetukset";
 "BackupSelectCategoryError" = "Valitse vahintaan yksi asetuskategoria.";
 "GeneralBackupTitle" = "Asetusten varmuuskopio";
@@ -310,10 +295,6 @@
 
 "ActionDecreaseBrightnessHint" = "Vähennä kirkkautta";
 "ActionIncreaseBrightnessHint" = "Lisää kirkkautta";
-"DisplayExcludeFromMenuTitle" = "Poista valikkorivin ikkunasta";
-"DisplayExcludeFromMenuSubtitle" = "Piilota tämä näyttö valikkorivin näyttöluettelosta.";
-"StatusOnLabel" = "Päällä";
-"StatusOffLabel" = "Pois";
 
 /* Dimly Display Visibility */
 "MenuMonitorsHeader" = "Näytöt";
@@ -362,7 +343,6 @@
 "ProfileReorderTip" = "Vinkki: Järjestä profiilikortit uudelleen vetämällä.";
 "ColorVioletLabel" = "Violetti";
 
-"ProfileAutoApplyTriggerLabel" = "Laukaise näytön liitännästä";
 "ProfileAutoApplyAnyMonitorLabel" = "Mikä tahansa ulkoinen näyttö";
 
 "GeneralQuickActionsVisibilityTitle" = "Pikatoimintojen nakyvyys";
@@ -436,13 +416,11 @@
 "NightShiftLabel" = "Night Shift";
 "NightShiftLessWarmLabel" = "Vähemmän lämmin";
 "NightShiftMoreWarmLabel" = "Lämpimämpi";
-"NightShiftUnavailableNote" = "Night Shift ei ole käytettävissä tässä Macissa.";
 
 /* True Tone */
 "TrueToneLabel" = "True Tone";
 
 /* Contrast */
-"ContrastSectionLabel" = "Kontrasti";
 "ContrastPercentFormat" = "%lld%%";
 "ActionDecreaseContrastHint" = "Vähennä kontrastia 1%";
 "ActionIncreaseContrastHint" = "Lisää kontrastia 1%";
@@ -451,8 +429,6 @@
 "ResolutionPickerLabel" = "Tarkkuus";
 "RefreshRatePickerLabel" = "Virkistystaajuus";
 "ResolutionHiDPIBadge" = "HiDPI";
-"ResolutionNativeBadge" = "Natiivi";
-"ResolutionDefaultBadge" = "Oletus";
 
 /* Input Source */
 "InputSourceVGA1Label" = "VGA 1";
@@ -468,7 +444,6 @@
 
 /* Color Profile */
 "ColorProfileSectionLabel" = "Väriprofiili";
-"ColorProfileDefaultLabel" = "Oletus";
 
 /* Display Appearance Filter */
 "DisplayFilterLabel" = "Ulkoasusuodatin";
@@ -497,15 +472,11 @@
 "LUTImportButton" = "Tuo LUT…";
 "LUTEmptyStateLabel" = "Ei tuotuja LUT-tiedostoja.";
 "LUTPickerNoneLabel" = "Ei mitään";
-"LUTDimension1DLabel" = "1D";
-"LUTDimension3DLabel" = "3D";
-"LUTApproximationNote" = "3D-LUT-tiedostot näytteistetään neutraaliakselin suunnassa.";
 "LUTDeleteConfirmTitle" = "Poistetaanko „%@\"?";
 "LUTDeleteConfirmSubtitle" = "Tämä poistaa LUT-tiedoston kirjastosta ja tyhjentää sen kaikilta näytöiltä, joissa sitä käytetään.";
 "LUTRenameAlertTitle" = "Nimeä LUT uudelleen";
 "LUTRenameAlertSubtitle" = "Kirjoita tälle LUT-tiedostolle uusi nimi.";
 "LUTImportErrorTitle" = "LUT-tiedoston tuonti epäonnistui";
-"LUTImportErrorSubtitle" = "Tiedostoa ei voitu lukea tai se ei ole kelvollinen LUT-tiedosto.";
 "LUTRowLabel" = "LUT";
 
 /* Texture Library */

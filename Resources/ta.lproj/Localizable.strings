@@ -18,7 +18,6 @@
 "IntroControlOverlaySubtitle" = "DDC கிடைக்கவில்லை அல்லது முடக்கப்பட்டிருக்கும்போது மாற்று மங்கலாக்க அடுக்கு.";
 "IntroControlFallbackNote" = "Dimly முதலில் DDC-ஐ முயற்சித்து, பின்னர் பாதுகாப்பாக மேலடுக்கு முறைக்கு மாறுகிறது.";
 "IntroGotItButton" = "தொடங்குங்கள்";
-"IntroMenuBarTabLabel" = "மெனு பட்டை";
 "IntroInternalMonitorTitle" = "Dimly-ல் உள்ளமைந்த திரையைக் காட்டு";
 "IntroInternalMonitorHint" = "Dimly உங்கள் Mac இன் உள்ளமைந்த திரையையும் கட்டுப்படுத்தலாம். இதை பின்னர் அமைப்புகள் → திரைகள் இல் மாற்றலாம்.";
 
@@ -79,7 +78,6 @@
 "SettingsTabShortcutsLabel" = "குறுக்குவழிகள்";
 "SettingsTabAboutLabel" = "பற்றி";
 
-
 /* Settings Visuals */
 "VisualsTransitionsTitle" = "மாற்றங்கள்";
 "VisualsTransitionSpeedTitle" = "மாற்ற வேகம்";
@@ -93,9 +91,7 @@
 /* Settings General */
 "GeneralAutostartTitle" = "தானியங்கு தொடக்கம்";
 "GeneralAutostartSubtitle" = "நீங்கள் உள்நுழையும் போது Dimly தானாக தொடங்கும்.";
-"GeneralLaunchAtLoginLabel" = "உள்நுழையும் போது துவங்கு";
 "GeneralMenuBarIconTitle" = "மெனு பட்டை ஐகானை காட்டு";
-"GeneralMenuBarIconAltTitle" = "மெனு பட்டை ஐகானை காட்டு";
 "GeneralHideDockIconTitle" = "Dock ஐகானை மறை";
 "GeneralHideDockIconNote" = "Dock ஐகானையும் பயன்பாடு மாறி நுழைவை மறைக்கிறது.";
 "GeneralMenuBarIconHiddenNote" = "மெனு ஐகான் மறைந்திருந்தாலும் Dimly குறுக்குவழிகளுக்காக இயங்கிக் கொண்டே இருக்கும்.";
@@ -177,7 +173,6 @@
 "DDCServiceUnavailableLabel" = "காட்சி சேவை இல்லை";
 "DDCOpenFailedFormat" = "DDC திறக்க தவறியது (0x%@)";
 "DDCRequestFailedFormat" = "DDC கோரிக்கை தோல்வி (0x%@)";
-"DDCConnectionTypeUnsupported" = "இந்த இணைப்பு வகை DDC-ஐ ஆதரிக்காமல் இருக்கலாம் (DisplayPort முயற்சிக்கவும்)";
 "DDCInternalPanelLabel" = "உள்புற பலகை";
 
 /* Display Report */
@@ -196,17 +191,10 @@
 "VersionFormat" = "பதிப்பு %@ (%@)";
 "AboutCopyrightLabel" = "© 2026 Jan Feuerbacher";
 "AboutDescriptionText" = "Dimly என்பது வெளிப்புற காட்சிகளை விரைவாக கருமையாக்கவும் உறக்கம்/எழுச்சியை நிர்வகிக்கவும் பயன்படும் தாய் Swift macOS கருவி.";
-"AboutLegacyDescriptionText" = "Dimly ஒரு தாய் Swift macOS பயன்பாடு. இந்த build மெனு பட்டை ஆதரவு, உள்நுழைவு உருப்படி மாற்றி, மற்றும் அமைக்கக்கூடிய ஹாட்கீ கொண்ட எளிய அமைப்பைக் கொண்டுள்ளது.";
 "AboutMadeByText" = "எனது ஓய்வு நேரத்தில் உருவாக்கப்பட்டது - ஆதரித்ததற்கு நன்றி.";
 "AboutGitHubRepoTitle" = "GitHub சேமிப்பு";
 "AboutReportIssueTitle" = "பிரச்சனையை அறிவிக்கவும்";
 "AboutDonateTitle" = "நன்கொடை";
-
-/* Preview/Template */
-"PreviewScaffoldLabel" = "இந்த SwiftUI மேடை உங்கள் எண்ணங்களுக்கு தயார்.";
-"PreviewIncrementButton" = "எண்ணிக்கையை அதிகரிக்க";
-"PreviewCounterFormat" = "எண்ணிக்கை: %lld";
-"PreviewPlaceholderButton" = "பிளேஸ்ஹோல்டர் செயலை இயக்கு";
 
 /* Hotkey Labels */
 "HotkeyModCmdLabel" = "Cmd";
@@ -262,7 +250,6 @@
 "HotkeyKeyKbdBrightnessToggleLabel" = "Keyboard Brightness Toggle";
 
 "BrightnessSectionLabel" = "ஒளிச்செறிவு";
-"DisplayModeFallbackLabel" = "மாற்று நிலை";
 "DDC" = "DDC";
 "DisplayModeOverlayLabel" = "மேலடுக்கு முறை";
 "BrightnessPercentFormat" = "%lld%%";
@@ -279,11 +266,9 @@
 "BackupExportSaveError" = "காப்புப்பிரதி கோப்பை சேமிக்க முடியவில்லை.";
 "ActionExportButton" = "ஏற்றுமதி";
 "BackupExportActionTitle" = "தேர்ந்தெடுத்த அமைப்புகளை ஏற்றுமதி செய்";
-"ExportSelectedSettingsDetails" = "தேர்ந்தெடுத்த பிரிவுகளை காப்புப்பிரதி கோப்பில் சேமிக்கவும்.";
 "BackupGeneralSettingsTitle" = "பொது அமைப்புகள்";
 "ActionImportButton" = "இறக்குமதி";
 "BackupImportActionTitle" = "தேர்ந்தெடுத்த அமைப்புகளை இறக்குமதி செய்";
-"ImportSelectedSettingsDetails" = "காப்புப்பிரதி கோப்பிலிருந்து தேர்ந்தெடுத்த பிரிவுகளை ஏற்று.";
 "BackupMonitorSettingsTitle" = "மானிட்டர் அமைப்புகள்";
 "BackupSelectCategoryError" = "குறைந்தது ஒரு அமைப்பு பிரிவையாவது தேர்ந்தெடுக்கவும்.";
 "GeneralBackupTitle" = "அமைப்புகள் காப்புப்பிரதி";
@@ -310,10 +295,6 @@
 
 "ActionDecreaseBrightnessHint" = "பிரகாசத்தை குறைக்கவும்";
 "ActionIncreaseBrightnessHint" = "பிரகாசத்தை அதிகரிக்கவும்";
-"DisplayExcludeFromMenuTitle" = "மெனு பட்டி சாளரத்திலிருந்து விலக்கு";
-"DisplayExcludeFromMenuSubtitle" = "இந்த மானிட்டரை மெனு பட்டி காட்சி பட்டியலில் இருந்து மறைக்கவும்.";
-"StatusOnLabel" = "இயக்கு";
-"StatusOffLabel" = "அணை";
 
 /* Dimly Display Visibility */
 "MenuMonitorsHeader" = "காட்சிகள்";
@@ -362,7 +343,6 @@
 "ProfileReorderTip" = "குறிப்பு: சுயவிவர அட்டைகளை இழுத்து மறுவரிசைப்படுத்தவும்.";
 "ColorVioletLabel" = "ஊதா";
 
-"ProfileAutoApplyTriggerLabel" = "மானிட்டர் இணைப்பு தூண்டுதல்";
 "ProfileAutoApplyAnyMonitorLabel" = "எந்த வெளிப்புற மானிட்டரும்";
 
 "GeneralQuickActionsVisibilityTitle" = "விரைவு செயல்களின் காண்பிப்பு";
@@ -436,13 +416,11 @@
 "NightShiftLabel" = "Night Shift";
 "NightShiftLessWarmLabel" = "குறைந்த வெப்பம்";
 "NightShiftMoreWarmLabel" = "அதிக வெப்பம்";
-"NightShiftUnavailableNote" = "இந்த Mac-இல் Night Shift கிடைக்கவில்லை.";
 
 /* True Tone */
 "TrueToneLabel" = "True Tone";
 
 /* Contrast */
-"ContrastSectionLabel" = "வேறுபாடு";
 "ContrastPercentFormat" = "%lld%%";
 "ActionDecreaseContrastHint" = "வேறுபாட்டை 1% குறைக்கவும்";
 "ActionIncreaseContrastHint" = "வேறுபாட்டை 1% அதிகரிக்கவும்";
@@ -451,8 +429,6 @@
 "ResolutionPickerLabel" = "தெளிவுத்திறன்";
 "RefreshRatePickerLabel" = "புதுப்பிப்பு விகிதம்";
 "ResolutionHiDPIBadge" = "HiDPI";
-"ResolutionNativeBadge" = "இயல்பான";
-"ResolutionDefaultBadge" = "இயல்புநிலை";
 
 /* Input Source */
 "InputSourceVGA1Label" = "VGA 1";
@@ -468,7 +444,6 @@
 
 /* Color Profile */
 "ColorProfileSectionLabel" = "வண்ண சுயவிவரம்";
-"ColorProfileDefaultLabel" = "இயல்புநிலை";
 
 /* Display Appearance Filter */
 "DisplayFilterLabel" = "தோற்ற வடிப்பான்";
@@ -497,15 +472,11 @@
 "LUTImportButton" = "LUT இறக்குமதி செய்…";
 "LUTEmptyStateLabel" = "இன்னும் எந்த LUT உம் இறக்குமதி செய்யப்படவில்லை.";
 "LUTPickerNoneLabel" = "எதுவுமில்லை";
-"LUTDimension1DLabel" = "1D";
-"LUTDimension3DLabel" = "3D";
-"LUTApproximationNote" = "3D LUT கள் நடுநிலை அச்சு வழியாக மாதிரியெடுக்கப்படுகின்றன.";
 "LUTDeleteConfirmTitle" = "\"%@\" ஐ நீக்கவா?";
 "LUTDeleteConfirmSubtitle" = "இது LUT ஐ நூலகத்திலிருந்து நீக்கி, அதைப் பயன்படுத்தும் திரைகளிலிருந்தும் அழிக்கும்.";
 "LUTRenameAlertTitle" = "LUT ஐ மறுபெயரிடு";
 "LUTRenameAlertSubtitle" = "இந்த LUT க்கு புதிய பெயரை உள்ளிடவும்.";
 "LUTImportErrorTitle" = "LUT இறக்குமதி செய்ய இயலவில்லை";
-"LUTImportErrorSubtitle" = "கோப்பை படிக்க முடியவில்லை அல்லது அது சரியான LUT அல்ல.";
 "LUTRowLabel" = "LUT";
 
 /* Texture Library */

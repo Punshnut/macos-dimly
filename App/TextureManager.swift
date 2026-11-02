@@ -214,23 +214,6 @@ final class TextureManager: ObservableObject {
         return entry
     }
 
-    /// Assigns or replaces a display texture entry's normal/height map from an imported file.
-    func assignNormalMap(from url: URL, to entry: TextureEntry) throws {
-        guard let index = library.firstIndex(where: { $0.id == entry.id }) else { return }
-        let accessed = url.startAccessingSecurityScopedResource()
-        defer { if accessed { url.stopAccessingSecurityScopedResource() } }
-        try FileManager.default.createDirectory(at: Self.texturesDirectory, withIntermediateDirectories: true)
-        let ext = url.pathExtension.lowercased()
-        let baseName = "\(url.deletingPathExtension().lastPathComponent)_normal"
-        let destFilename = Self.uniqueFilename(baseName: baseName, ext: ext, in: Self.texturesDirectory)
-        let destURL = Self.texturesDirectory.appendingPathComponent(destFilename)
-        try Data(contentsOf: url).write(to: destURL)
-        library[index].normalMapFilename = destFilename
-        library[index].autoGenerateRelief = false
-        persistLibrary()
-        TextureRenderer.invalidateCache(for: entry.id)
-    }
-
     private static func strippingSuffixConvention(_ base: String) -> String {
         for suffix in ["_diffuse", "_normal", "_height"] {
             if base.lowercased().hasSuffix(suffix) {

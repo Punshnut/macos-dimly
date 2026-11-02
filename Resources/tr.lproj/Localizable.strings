@@ -18,7 +18,6 @@
 "IntroControlOverlaySubtitle" = "DDC kullanılamadığında veya devre dışı bırakıldığında yedek karartma katmanı.";
 "IntroControlFallbackNote" = "Dimly önce DDC'yi dener, ardından güvenle kaplama moduna geri döner.";
 "IntroGotItButton" = "Başla";
-"IntroMenuBarTabLabel" = "Menü çubuğu";
 "IntroInternalMonitorTitle" = "Yerleşik ekranı Dimly'de göster";
 "IntroInternalMonitorHint" = "Dimly, Mac'inizin yerleşik ekranını da kontrol edebilir. Bunu daha sonra Ayarlar → Ekranlar bölümünden değiştirebilirsiniz.";
 
@@ -79,7 +78,6 @@
 "SettingsTabShortcutsLabel" = "Kısayollar";
 "SettingsTabAboutLabel" = "Hakkında";
 
-
 /* Settings Visuals */
 "VisualsTransitionsTitle" = "Geçişler";
 "VisualsTransitionSpeedTitle" = "Geçiş hızı";
@@ -93,9 +91,7 @@
 /* Settings General */
 "GeneralAutostartTitle" = "Otomatik başlat";
 "GeneralAutostartSubtitle" = "Giriş yaptığınızda Dimly'yi otomatik başlatın.";
-"GeneralLaunchAtLoginLabel" = "Girişte başlat";
 "GeneralMenuBarIconTitle" = "Menü çubuğu simgesini göster";
-"GeneralMenuBarIconAltTitle" = "Menü çubuğu simgesini göster";
 "GeneralHideDockIconTitle" = "Dock simgesini gizle";
 "GeneralHideDockIconNote" = "Dock simgesini ve uygulama değiştirici girişini gizler.";
 "GeneralMenuBarIconHiddenNote" = "Menü simgesi gizli olsa bile Dimly kısayollar için çalışır.";
@@ -177,7 +173,6 @@
 "DDCServiceUnavailableLabel" = "Ekran servisi kullanılamıyor";
 "DDCOpenFailedFormat" = "DDC açma hatası (0x%@)";
 "DDCRequestFailedFormat" = "DDC isteği başarısız (0x%@)";
-"DDCConnectionTypeUnsupported" = "Bu bağlantı türü DDC'yi desteklemeyebilir (DisplayPort'u deneyin)";
 "DDCInternalPanelLabel" = "Dahili panel";
 
 /* Display Report */
@@ -196,17 +191,10 @@
 "VersionFormat" = "Sürüm %@ (%@)";
 "AboutCopyrightLabel" = "© 2026 Jan Feuerbacher";
 "AboutDescriptionText" = "Dimly, harici ekranları hızla karartmak ve uyku/uyanmayı yönetmek için yerel bir Swift macOS aracıdır.";
-"AboutLegacyDescriptionText" = "Dimly, yerel bir Swift macOS aracıdır. Bu yapı menü çubuğu desteği, giriş öğesi anahtarı ve yapılandırılabilir kısayol içeren basit bir iskelet barındırır.";
 "AboutMadeByText" = "Boş zamanımda yapıldı - destek için teşekkürler.";
 "AboutGitHubRepoTitle" = "GitHub deposu";
 "AboutReportIssueTitle" = "Sorun bildir";
 "AboutDonateTitle" = "Bağış yap";
-
-/* Preview/Template */
-"PreviewScaffoldLabel" = "Bu SwiftUI iskeleti fikirlerinize hazır.";
-"PreviewIncrementButton" = "Sayaç artır";
-"PreviewCounterFormat" = "Sayaç: %lld";
-"PreviewPlaceholderButton" = "Yer tutucu işlemi çalıştır";
 
 /* Hotkey Labels */
 "HotkeyModCmdLabel" = "Cmd";
@@ -262,7 +250,6 @@
 "HotkeyKeyKbdBrightnessToggleLabel" = "Keyboard Brightness Toggle";
 
 "BrightnessSectionLabel" = "Parlaklık";
-"DisplayModeFallbackLabel" = "Yedek mod";
 "DDC" = "DDC";
 "DisplayModeOverlayLabel" = "Kaplama modu";
 "BrightnessPercentFormat" = "%lld%%";
@@ -279,11 +266,9 @@
 "BackupExportSaveError" = "Yedek dosyası kaydedilemedi.";
 "ActionExportButton" = "Dışa aktar";
 "BackupExportActionTitle" = "Seçili ayarları dışa aktar";
-"ExportSelectedSettingsDetails" = "Seçili kategorileri bir yedek dosyasına kaydet.";
 "BackupGeneralSettingsTitle" = "Genel ayarlar";
 "ActionImportButton" = "İçe aktar";
 "BackupImportActionTitle" = "Seçili ayarları içe aktar";
-"ImportSelectedSettingsDetails" = "Seçili kategorileri bir yedek dosyasından yükle.";
 "BackupMonitorSettingsTitle" = "Monitör ayarları";
 "BackupSelectCategoryError" = "En az bir ayar kategorisi seçin.";
 "GeneralBackupTitle" = "Ayarlar yedeği";
@@ -310,10 +295,6 @@
 
 "ActionDecreaseBrightnessHint" = "Parlaklığı azalt";
 "ActionIncreaseBrightnessHint" = "Parlaklığı artır";
-"DisplayExcludeFromMenuTitle" = "Menü çubuğu penceresinden hariç tut";
-"DisplayExcludeFromMenuSubtitle" = "Bu monitörü menü çubuğu ekran listesinden gizle.";
-"StatusOnLabel" = "Açık";
-"StatusOffLabel" = "Kapalı";
 
 /* Dimly Display Visibility */
 "MenuMonitorsHeader" = "Ekranlar";
@@ -362,7 +343,6 @@
 "ProfileReorderTip" = "İpucu: Profil kartlarını sürükleyerek yeniden sıralayın.";
 "ColorVioletLabel" = "Menekşe";
 
-"ProfileAutoApplyTriggerLabel" = "Monitör bağlantı tetikleyicisi";
 "ProfileAutoApplyAnyMonitorLabel" = "Herhangi bir harici monitör";
 
 "GeneralQuickActionsVisibilityTitle" = "Hızlı İşlemler görünürlüğü";
@@ -436,13 +416,11 @@
 "NightShiftLabel" = "Night Shift";
 "NightShiftLessWarmLabel" = "Daha Az Sıcak";
 "NightShiftMoreWarmLabel" = "Daha Sıcak";
-"NightShiftUnavailableNote" = "Night Shift bu Mac'te kullanılamıyor.";
 
 /* True Tone */
 "TrueToneLabel" = "True Tone";
 
 /* Contrast */
-"ContrastSectionLabel" = "Kontrast";
 "ContrastPercentFormat" = "%lld%%";
 "ActionDecreaseContrastHint" = "Kontrastı %1 azalt";
 "ActionIncreaseContrastHint" = "Kontrastı %1 artır";
@@ -451,8 +429,6 @@
 "ResolutionPickerLabel" = "Çözünürlük";
 "RefreshRatePickerLabel" = "Yenileme Hızı";
 "ResolutionHiDPIBadge" = "HiDPI";
-"ResolutionNativeBadge" = "Yerel";
-"ResolutionDefaultBadge" = "Varsayılan";
 
 /* Input Source */
 "InputSourceVGA1Label" = "VGA 1";
@@ -468,7 +444,6 @@
 
 /* Color Profile */
 "ColorProfileSectionLabel" = "Renk Profili";
-"ColorProfileDefaultLabel" = "Varsayılan";
 
 /* Display Appearance Filter */
 "DisplayFilterLabel" = "Görünüm Filtresi";
@@ -497,15 +472,11 @@
 "LUTImportButton" = "LUT İçe Aktar…";
 "LUTEmptyStateLabel" = "Henüz hiç LUT içe aktarılmadı.";
 "LUTPickerNoneLabel" = "Yok";
-"LUTDimension1DLabel" = "1D";
-"LUTDimension3DLabel" = "3D";
-"LUTApproximationNote" = "3D LUT'lar nötr eksen boyunca örneklenir.";
 "LUTDeleteConfirmTitle" = "\"%@\" kaldırılsın mı?";
 "LUTDeleteConfirmSubtitle" = "Bu işlem, LUT'u kütüphaneden kaldırır ve kullanan tüm ekranlardan temizler.";
 "LUTRenameAlertTitle" = "LUT'u Yeniden Adlandır";
 "LUTRenameAlertSubtitle" = "Bu LUT için yeni bir ad girin.";
 "LUTImportErrorTitle" = "LUT içe aktarılamadı";
-"LUTImportErrorSubtitle" = "Dosya okunamadı veya geçerli bir LUT değil.";
 "LUTRowLabel" = "LUT";
 
 /* Texture Library */

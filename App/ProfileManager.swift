@@ -1124,15 +1124,6 @@ final class ProfileManager: ObservableObject {
         persist()
     }
 
-    /// Moves a profile to the end of the saved order.
-    func moveProfileToEnd(_ draggedID: UUID) {
-        guard let fromIndex = profiles.firstIndex(where: { $0.id == draggedID }) else { return }
-        guard fromIndex != (profiles.count - 1) else { return }
-        let profile = profiles.remove(at: fromIndex)
-        profiles.append(profile)
-        persist()
-    }
-
     /// Shows or hides a profile from the menu bar smart buttons section.
     func setSmartButtonVisibility(for profile: DisplayProfile, isVisible: Bool) {
         guard let index = profiles.firstIndex(where: { $0.id == profile.id }) else { return }
@@ -1166,12 +1157,6 @@ final class ProfileManager: ObservableObject {
     /// Removes the connection rule with the given ID.
     func removeConnectionRule(id: UUID) {
         connectionRules.removeAll { $0.id == id }
-    }
-
-    /// Replaces the matching connection rule in-place.
-    func updateConnectionRule(_ rule: DisplayConnectionRule) {
-        guard let index = connectionRules.firstIndex(where: { $0.id == rule.id }) else { return }
-        connectionRules[index] = rule
     }
 
     // MARK: - Automation

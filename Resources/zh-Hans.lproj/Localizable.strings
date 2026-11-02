@@ -18,7 +18,6 @@
 "IntroControlOverlaySubtitle" = "当 DDC 不可用或被禁用时使用的后备调暗层。";
 "IntroControlFallbackNote" = "Dimly 会先尝试 DDC，然后安全回退到覆盖模式。";
 "IntroGotItButton" = "开始使用";
-"IntroMenuBarTabLabel" = "菜单栏";
 "IntroInternalMonitorTitle" = "在 Dimly 中显示内置显示屏";
 "IntroInternalMonitorHint" = "Dimly 还可以控制 Mac 的内置显示屏。您可以稍后在设置 → 显示屏中更改此项。";
 
@@ -79,7 +78,6 @@
 "SettingsTabShortcutsLabel" = "快捷键";
 "SettingsTabAboutLabel" = "关于";
 
-
 /* Settings Visuals */
 "VisualsTransitionsTitle" = "过渡效果";
 "VisualsTransitionSpeedTitle" = "过渡速度";
@@ -93,9 +91,7 @@
 /* Settings General */
 "GeneralAutostartTitle" = "自动启动";
 "GeneralAutostartSubtitle" = "登录时自动启动 Dimly。";
-"GeneralLaunchAtLoginLabel" = "登录时启动";
 "GeneralMenuBarIconTitle" = "显示菜单栏图标";
-"GeneralMenuBarIconAltTitle" = "显示菜单栏图标";
 "GeneralHideDockIconTitle" = "隐藏 Dock 图标";
 "GeneralHideDockIconNote" = "隐藏 Dock 图标和应用切换项。";
 "GeneralMenuBarIconHiddenNote" = "即使菜单栏图标被隐藏，Dimly 仍保持运行以响应快捷键。";
@@ -177,7 +173,6 @@
 "DDCServiceUnavailableLabel" = "显示服务不可用";
 "DDCOpenFailedFormat" = "打开 DDC 失败 (0x%@)";
 "DDCRequestFailedFormat" = "DDC 请求失败 (0x%@)";
-"DDCConnectionTypeUnsupported" = "此连接类型可能不支持 DDC（请尝试 DisplayPort）";
 "DDCInternalPanelLabel" = "内置面板";
 
 /* Display Report */
@@ -196,17 +191,10 @@
 "VersionFormat" = "版本 %@ (%@)";
 "AboutCopyrightLabel" = "© 2026 Jan Feuerbacher";
 "AboutDescriptionText" = "Dimly 是一款原生 Swift macOS 工具，可快速让外接显示器黑屏并管理睡眠/唤醒。";
-"AboutLegacyDescriptionText" = "Dimly 是原生 Swift macOS 工具。本版本包含带菜单栏支持、登录项切换和可配置热键的简单框架。";
 "AboutMadeByText" = "业余时间制作--感谢支持。";
 "AboutGitHubRepoTitle" = "GitHub 仓库";
 "AboutReportIssueTitle" = "报告问题";
 "AboutDonateTitle" = "捐助";
-
-/* Preview/Template */
-"PreviewScaffoldLabel" = "此 SwiftUI 脚手架已为你的创意做好准备。";
-"PreviewIncrementButton" = "增加计数";
-"PreviewCounterFormat" = "计数：%lld";
-"PreviewPlaceholderButton" = "运行占位操作";
 
 /* Hotkey Labels */
 "HotkeyModCmdLabel" = "Cmd";
@@ -262,7 +250,6 @@
 "HotkeyKeyKbdBrightnessToggleLabel" = "Keyboard Brightness Toggle";
 
 "BrightnessSectionLabel" = "亮度";
-"DisplayModeFallbackLabel" = "备用模式";
 "DDC" = "DDC";
 "DisplayModeOverlayLabel" = "覆盖模式";
 "BrightnessPercentFormat" = "%lld%%";
@@ -279,11 +266,9 @@
 "BackupExportSaveError" = "无法保存备份文件。";
 "ActionExportButton" = "导出";
 "BackupExportActionTitle" = "导出所选设置";
-"ExportSelectedSettingsDetails" = "将所选类别保存到备份文件。";
 "BackupGeneralSettingsTitle" = "通用设置";
 "ActionImportButton" = "导入";
 "BackupImportActionTitle" = "导入所选设置";
-"ImportSelectedSettingsDetails" = "从备份文件加载所选类别。";
 "BackupMonitorSettingsTitle" = "显示器设置";
 "BackupSelectCategoryError" = "请至少选择一个设置类别。";
 "GeneralBackupTitle" = "设置备份";
@@ -310,10 +295,6 @@
 
 "ActionDecreaseBrightnessHint" = "降低亮度";
 "ActionIncreaseBrightnessHint" = "提高亮度";
-"DisplayExcludeFromMenuTitle" = "从菜单栏窗口中排除";
-"DisplayExcludeFromMenuSubtitle" = "在菜单栏显示器列表中隐藏此显示器。";
-"StatusOnLabel" = "开";
-"StatusOffLabel" = "关";
 
 /* Dimly Display Visibility */
 "MenuMonitorsHeader" = "显示器";
@@ -362,7 +343,6 @@
 "ProfileReorderTip" = "提示：拖动配置卡片可重新排序。";
 "ColorVioletLabel" = "紫罗兰色";
 
-"ProfileAutoApplyTriggerLabel" = "显示器连接触发条件";
 "ProfileAutoApplyAnyMonitorLabel" = "任意外接显示器";
 
 "GeneralQuickActionsVisibilityTitle" = "快速操作显示";
@@ -436,13 +416,11 @@
 "NightShiftLabel" = "Night Shift";
 "NightShiftLessWarmLabel" = "降低暖色";
 "NightShiftMoreWarmLabel" = "增加暖色";
-"NightShiftUnavailableNote" = "此 Mac 不支持 Night Shift。";
 
 /* True Tone */
 "TrueToneLabel" = "True Tone";
 
 /* Contrast */
-"ContrastSectionLabel" = "对比度";
 "ContrastPercentFormat" = "%lld%%";
 "ActionDecreaseContrastHint" = "降低对比度 1%";
 "ActionIncreaseContrastHint" = "提高对比度 1%";
@@ -451,8 +429,6 @@
 "ResolutionPickerLabel" = "分辨率";
 "RefreshRatePickerLabel" = "刷新率";
 "ResolutionHiDPIBadge" = "HiDPI";
-"ResolutionNativeBadge" = "原生";
-"ResolutionDefaultBadge" = "默认";
 
 /* Input Source */
 "InputSourceVGA1Label" = "VGA 1";
@@ -468,7 +444,6 @@
 
 /* Color Profile */
 "ColorProfileSectionLabel" = "颜色配置文件";
-"ColorProfileDefaultLabel" = "默认";
 
 /* Display Appearance Filter */
 "DisplayFilterLabel" = "外观滤镜";
@@ -497,15 +472,11 @@
 "LUTImportButton" = "导入 LUT…";
 "LUTEmptyStateLabel" = "尚未导入任何 LUT。";
 "LUTPickerNoneLabel" = "无";
-"LUTDimension1DLabel" = "1D";
-"LUTDimension3DLabel" = "3D";
-"LUTApproximationNote" = "3D LUT 沿中性轴采样。";
 "LUTDeleteConfirmTitle" = "移除\"%@\"？";
 "LUTDeleteConfirmSubtitle" = "此操作将从资源库中移除该 LUT，并清除所有正在使用它的显示器上的设置。";
 "LUTRenameAlertTitle" = "重命名 LUT";
 "LUTRenameAlertSubtitle" = "为此 LUT 输入新名称。";
 "LUTImportErrorTitle" = "无法导入 LUT";
-"LUTImportErrorSubtitle" = "无法读取该文件，或该文件不是有效的 LUT。";
 "LUTRowLabel" = "LUT";
 
 /* Texture Library */
